@@ -2,9 +2,11 @@ name: Update NFL DFS Data
 
 on:
   schedule:
-    # Runs every 30 minutes during the season (UTC)
-    - cron: '*/30 * * * *'
-  workflow_dispatch:   # Allows manual "Run workflow" button
+    - cron: '*/30 * * * *'   # every 30 minutes
+  workflow_dispatch:         # manual button
+
+permissions:
+  contents: write            # ← THIS is the key line that was missing
 
 jobs:
   update:
@@ -15,18 +17,16 @@ jobs:
 
       - name: Download Google Sheets data
         run: |
-          # Main player pool
           curl -sL "https://docs.google.com/spreadsheets/d/e/2PACX-1vR5CGYxMTghCulNtsHaMDKjkkbbYKaEWt0tJ2ie7iu-Mx2YpBClXzIZaZeYRdkg7LJlt8r_6nrxdqYa/pub?gid=585863704&single=true&output=csv" -o players.csv
-
-          # Ownership
           curl -sL "https://docs.google.com/spreadsheets/d/e/2PACX-1vRq8JKdc_ZL3H-dp9PafGKIo0bc9dzei1xy70JGDA8L05tnCGedBXFq_6fWoEG5MPLGvkHx_9sgbmKh/pub?gid=1052847186&single=true&output=csv" -o ownership.csv
-
-          # Final / Vegas data
           curl -sL "https://docs.google.com/spreadsheets/d/e/2PACX-1vR5CGYxMTghCulNtsHaMDKjkkbbYKaEWt0tJ2ie7iu-Mx2YpBClXzIZaZeYRdkg7LJlt8r_6nrxdqYa/pub?gid=807849522&single=true&output=csv" -o final.csv
 
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add players.csv ownership.csv final.csv
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update NFL DFS data $(date -u +%Y-%m-%dT%H:%M:%SZ)" && git push)
+          git diff --quiet && git diff --staged --quiet || (
+            git commit -m "Auto-update NFL DFS data $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+          )
