@@ -3,7 +3,7 @@ Jalen Hurts,QB,PHI,,,,,23.1,,0.3,0.5,,27.6,19,1.6,215.5,,,,8.9,0.8,29.5,,,,,,21.
 Lamar Jackson,QB,BAL,,,,,22.4,,0.3,0.4,,29.2,20,1.8,219.5,,,,7.9,0.2,31.5,,,,,,19.63,19.33,19.63,19.63,,,,n/a,n/a,n/a,n/a,n/a,6800,https://dkn.gs/sports/images/nfl/players/50/17173.png, @ ,9/13/2026
 Jayden Daniels,QB,WAS,,,,,21.8,,0.1,0.595,,30.8,21.1,1.6,223.5,,,,8.5,0.4,39.5,,,,,,20.995,20.895,20.995,20.995,,,,n/a,n/a,n/a,n/a,n/a,6500,https://dkn.gs/sports/images/nfl/players/50/779695.png, @ ,9/13/2026
 Josh Allen,QB,BUF,,,,,21.6,,0.2,0.595,,32.5,20.7,1.59,224.17,,,,7.3,0.5,32.5,,,,,,20.7818,20.5818,20.7818,20.7818,,,,BUF @ HOU,Bills @ Texans,Reliant Stadium,retractable_dome,CBS,7000,https://dkn.gs/sports/images/nfl/players/50/11370.png, @ ,9/13/2026
-Joe Burrow,QB,CIN,,,,,20.5,,0.2,0.595,,36.1,24.6,2.2,265.5,,,,3,0.1,5.5,,,,,,19.775,19.575,19.775,19.775,,,,TB @ CIN,Buccaneers @ Bengals,Paycor Stadium,outdoor,FOX,5500,https://dkn.gs/sports/images/nfl/players/50/485441.png, @ ,8/13/2026
+Joe Burrow,QB,CIN,,,,,20.5,,0.2,0.595,,36.1,24.6,2.2,265.5,,,,3,0.1,5.5,,,,,,19.775,19.575,19.775,19.775,,,,DET @ CIN,Lions @ Bengals,Paycor Stadium,outdoor,NFL+,5500,https://dkn.gs/sports/images/nfl/players/50/485441.png, @ ,8/13/2026
 Baker Mayfield,QB,TB,,,,,19.5,,0.2,0.595,,33.4,23.6,2,247,,,,4.1,0.1,16.5,,,,,,19.335,19.135,19.335,19.335,,,,TB @ CIN,Buccaneers @ Bengals,Paycor Stadium,outdoor,FOX,5900,https://dkn.gs/sports/images/nfl/players/50/14690.png, @ ,9/13/2026
 Patrick Mahomes II,QB,KC,,,,,19.4,,0.1,0.595,,35.7,24.2,1.59,240.83,,,,4.5,0.1,22.6,,,,,,18.1582,18.0582,18.1582,18.1582,,,,,,,,,,,,
 Bo Nix,QB,DEN,,,,,19.1,,0.1,0.595,,33.5,22.3,1.7,226.17,,,,5.5,0.2,26.4,,,,,,18.9918,18.8918,18.9918,18.9918,,,,,,,,,,,,
@@ -53,7 +53,7 @@ CLE,DST,CLE,11,,,,15,,,,,,,,,,,,,,,,,,,,15,15,15,15,,,,n/a,n/a,n/a,n/a,n/a,,,,
 WAS,DST,WAS,,1,,,8,0.6,,0.7,19.8,,,,,,,,,,,3.4,0,0.2,,329.4,7.2,7.2,7.2,7.2,,,,n/a,n/a,n/a,n/a,n/a,,,,
 BAL,DST,BAL,13,,,,8,,,,,,,,,,,,,,,,,,,,15,15,15,15,,,,n/a,n/a,n/a,n/a,n/a,,,,
 MIN,DST,MIN,,0.9,,,7.95,0.6,,0.6,20.9,,,,,,,,,,,3.6,0,0.1,,291.7,6.6,6.6,6.6,6.6,,,,GB @ MIN,Packers @ Vikings,U.S. Bank Stadium,dome,CBS,,,,
-CIN,DST,CIN,,1,,,7.2,0.6,,1,20.5,,,,,,,,,,,3,0,0.2,,339.9,6.4,6.4,6.4,6.4,,,,TB @ CIN,Buccaneers @ Bengals,Paycor Stadium,outdoor,FOX,,,,
+CIN,DST,CIN,,1,,,7.2,0.6,,1,20.5,,,,,,,,,,,3,0,0.2,,339.9,6.4,6.4,6.4,6.4,,,,DET @ CIN,Lions @ Bengals,Paycor Stadium,outdoor,NFL+,,,,
 ARI,DST,ARI,,0.8,,,7.2,0.5,,0.8,18.7,,,,,,,,,,,2.6,0,0.2,,313.2,6.4,6.4,6.4,6.4,,,,ARI @ LV,Cardinals @ Raiders,Allegiant Stadium,dome,ESPN App,,,,
 PHI,DST,PHI,,1.5,,,7.1,0.8,,0.8,20.6,,,,,,,,,,,2.7,0,0.2,,332,6.1,6.1,6.1,6.1,,,,n/a,n/a,n/a,n/a,n/a,,,,
 CHI,DST,CHI,,1.1,,,7,0.7,,0.9,21.7,,,,,,,,,,,2.9,0,0.2,,359.4,4.3,4.3,4.3,4.3,,,,n/a,n/a,n/a,n/a,n/a,,,,
