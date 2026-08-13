@@ -3,10 +3,10 @@ name: Update NFL DFS Data
 on:
   schedule:
     - cron: '*/30 * * * *'   # every 30 minutes
-  workflow_dispatch:         # manual button
+  workflow_dispatch:
 
 permissions:
-  contents: write            # ← THIS is the key line that was missing
+  contents: write
 
 jobs:
   update:
@@ -15,17 +15,28 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Download Google Sheets data
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Fetch DraftKings data → drafttable.csv
+        run: python fetch_draftkings.py
+
+      - name: Download existing Google Sheets data (optional)
         run: |
-          curl -sL "https://docs.google.com/spreadsheets/d/e/2PACX-1vR5CGYxMTghCulNtsHaMDKjkkbbYKaEWt0tJ2ie7iu-Mx2YpBClXzIZaZeYRdkg7LJlt8r_6nrxdqYa/pub?gid=585863704&single=true&output=csv" -o players.csv
-          curl -sL "https://docs.google.com/spreadsheets/d/e/2PACX-1vRq8JKdc_ZL3H-dp9PafGKIo0bc9dzei1xy70JGDA8L05tnCGedBXFq_6fWoEG5MPLGvkHx_9sgbmKh/pub?gid=1052847186&single=true&output=csv" -o ownership.csv
-          curl -sL "https://docs.google.com/spreadsheets/d/e/2PACX-1vR5CGYxMTghCulNtsHaMDKjkkbbYKaEWt0tJ2ie7iu-Mx2YpBClXzIZaZeYRdkg7LJlt8r_6nrxdqYa/pub?gid=807849522&single=true&output=csv" -o final.csv
+          curl -sL "https://docs.google.com/spreadsheets/d/e/2PACX-1vR5CGYxMTghCulNtsHaMDKjkkbbYKaEWt0tJ2ie7iu-Mx2YpBClXzIZaZeYRdkg7LJlt8r_6nrxdqYa/pub?gid=585863704&single=true&output=csv" -o players.csv || true
+          curl -sL "https://docs.google.com/spreadsheets/d/e/2PACX-1vRq8JKdc_ZL3H-dp9PafGKIo0bc9dzei1xy70JGDA8L05tnCGedBXFq_6fWoEG5MPLGvkHx_9sgbmKh/pub?gid=1052847186&single=true&output=csv" -o ownership.csv || true
+          curl -sL "https://docs.google.com/spreadsheets/d/e/2PACX-1vR5CGYxMTghCulNtsHaMDKjkkbbYKaEWt0tJ2ie7iu-Mx2YpBClXzIZaZeYRdkg7LJlt8r_6nrxdqYa/pub?gid=807849522&single=true&output=csv" -o final.csv || true
 
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add players.csv ownership.csv final.csv
+          git add drafttable.csv players.csv ownership.csv final.csv || true
           git diff --quiet && git diff --staged --quiet || (
             git commit -m "Auto-update NFL DFS data $(date -u +%Y-%m-%dT%H:%M:%SZ)"
             git push
