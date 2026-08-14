@@ -1,8 +1,8 @@
 import requests
 import csv
-import json
 from datetime import datetime
 from zoneinfo import ZoneInfo
+from collections import defaultdict
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
@@ -137,7 +137,6 @@ def main():
 
         # Slate header
         slate_header = group["slate_type"]
-        slate_date = ""
         if start_times:
             min_start = min(start_times)
             slate_date = min_start.astimezone(ZoneInfo("America/New_York")).strftime("%-m/%-d")
@@ -148,7 +147,9 @@ def main():
             else:
                 slate_header = f"{slate_date} {time_part}, {num_games} Games"
 
-        # Collect players
+        # ---------- Collect all versions of each player ----------
+        player_versions = defaultdict(list)
+
         for p in draftables:
             player_id = str(p.get("playerId") or "")
             draftable_id = str(p.get("draftableId") or "")
@@ -169,35 +170,113 @@ def main():
             if salary <= 0 or not player_id or not draftable_id or name == "Unknown":
                 continue
 
-            date = format_date_only(start)
-            role = "Captain" if pos == "CPT" else "Standard"
-            if "Showdown" in group["slate_type"] and pos != "CPT":
-                role = "Flex"
+            player_versions[player_id].append({
+                "draftable_id": draftable_id,
+                "name": name,
+                "first": first,
+                "last": last,
+                "salary": salary,
+                "pos": pos,
+                "team": team,
+                "image": image,
+                "game": game,
+                "start": start,
+                "tournament": tournament,
+                "date": format_date_only(start)
+            })
 
-            row = [
-                f"{name} - {group['slate_type']}",
-                ";".join(group["contest_ids"][:20]),  # truncate
-                player_id,
-                draftable_id,
-                name,
-                first,
-                last,
-                salary,
-                pos,
-                team,
-                game,
-                format_datetime(start),
-                image,
-                tournament,
-                group["slate_type"],
-                "NFL",
-                date,
-                role,
-                ";".join(group["contest_names"][:10]),
-                ";".join(group["contest_ids"][:20]),
-                slate_header
-            ]
-            rows.append(row)
+        is_showdown = "Showdown" in group["slate_type"]
+
+        for player_id, versions in player_versions.items():
+            # Sort highest salary first
+            versions.sort(key=lambda x: x["salary"], reverse=True)
+
+            if is_showdown and len(versions) >= 2:
+                # Highest salary = CPT, second = FLEX
+                cpt = versions[0]
+                flex = versions[1]
+
+                # Captain row
+                rows.append([
+                    f"{cpt['name']} - {group['slate_type']} (Captain)",
+                    ";".join(group["contest_ids"][:20]),
+                    player_id,
+                    cpt["draftable_id"],
+                    cpt["name"],
+                    cpt["first"],
+                    cpt["last"],
+                    cpt["salary"],
+                    "CPT",
+                    cpt["team"],
+                    cpt["game"],
+                    format_datetime(cpt["start"]),
+                    cpt["image"],
+                    cpt["tournament"],
+                    group["slate_type"],
+                    "NFL",
+                    cpt["date"],
+                    "Captain",
+                    ";".join(group["contest_names"][:10]),
+                    ";".join(group["contest_ids"][:20]),
+                    slate_header
+                ])
+
+                # Flex row
+                rows.append([
+                    f"{flex['name']} - {group['slate_type']} (Flex)",
+                    ";".join(group["contest_ids"][:20]),
+                    player_id,
+                    flex["draftable_id"],
+                    flex["name"],
+                    flex["first"],
+                    flex["last"],
+                    flex["salary"],
+                    flex["pos"],
+                    flex["team"],
+                    flex["game"],
+                    format_datetime(flex["start"]),
+                    flex["image"],
+                    flex["tournament"],
+                    group["slate_type"],
+                    "NFL",
+                    flex["date"],
+                    "Flex",
+                    ";".join(group["contest_names"][:10]),
+                    ";".join(group["contest_ids"][:20]),
+                    slate_header
+                ])
+            else:
+                # Classic (or only one version) → deduplicate
+                seen = {}
+                for v in versions:
+                    key = (v["salary"], v["pos"], v["team"], v["name"])
+                    if key not in seen or int(v["draftable_id"]) < int(seen[key]["draftable_id"]):
+                        seen[key] = v
+
+                for v in seen.values():
+                    rows.append([
+                        f"{v['name']} - {group['slate_type']}",
+                        ";".join(group["contest_ids"][:20]),
+                        player_id,
+                        v["draftable_id"],
+                        v["name"],
+                        v["first"],
+                        v["last"],
+                        v["salary"],
+                        v["pos"],
+                        v["team"],
+                        v["game"],
+                        format_datetime(v["start"]),
+                        v["image"],
+                        v["tournament"],
+                        group["slate_type"],
+                        "NFL",
+                        v["date"],
+                        "Standard",
+                        ";".join(group["contest_names"][:10]),
+                        ";".join(group["contest_ids"][:20]),
+                        slate_header
+                    ])
 
     if not rows:
         print("No player rows generated")
