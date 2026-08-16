@@ -2041,8 +2041,37 @@
                             <input type="checkbox" id="showdownAutoStack"> Force CPT + same-team pass catcher
                         </label>
                     </div>
-                    <div id="configureStacks" style="display:none;">
+                    <div id="configureStacks" style="display:none;" class="span-2">
                         <button class="ghost" data-tip="Set specific QB/CPT + receiver pairs and % of builds for each stack. Stack = these two together in X% of builds." onclick="openStackModal()">Configure specific stacks / groups</button>
+                        <button class="ghost" style="margin-left:0.4rem;" data-tip="Auto-suggest top QB + WR/TE stacks from current pool (projection + salary value). Review and check the ones you want to add." onclick="suggestClassicStacks()">✨ Suggest Stacks (Classic)</button>
+                    </div>
+                </div>
+                <!-- Classic correlation rules (mirrors Showdown CPT rules) -->
+                <div id="classicCorrRules" class="sd-panel" style="margin-top:0.75rem;display:none;">
+                    <div class="sd-panel-title">Classic correlation rules</div>
+                    <p class="sd-panel-hint">Optional hard rules for Main / Classic slates. Similar spirit to Showdown CPT rules. Turn off anything that fights your stacks or ownership band.</p>
+                    <div class="sd-rule-grid">
+                        <label class="sd-rule">
+                            <input type="checkbox" id="classicNoOppDstWithQb" checked>
+                            <span class="sd-rule-text">
+                                <strong>QB → no opposing DST</strong>
+                                <small>Avoid stacking your QB against the defense he faces</small>
+                            </span>
+                        </label>
+                        <label class="sd-rule">
+                            <input type="checkbox" id="classicForcePassStack" >
+                            <span class="sd-rule-text">
+                                <strong>QB → ≥1 same-team WR/TE</strong>
+                                <small>Same as the Force QB + Pass Catcher checkbox (kept in sync)</small>
+                            </span>
+                        </label>
+                        <label class="sd-rule">
+                            <input type="checkbox" id="classicRbDstStack" >
+                            <span class="sd-rule-text">
+                                <strong>Prefer RB + same-team DST</strong>
+                                <small>Soft boost when both appear (positive script lean)</small>
+                            </span>
+                        </label>
                     </div>
                 </div>
                 </div>
@@ -2334,7 +2363,7 @@
                 <div id="generationLog"></div>
 
                 <div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1rem;align-items:center;">
-                    <button class="success" data-tip="Download DraftKings-ready CSV with player IDs for bulk upload." onclick="downloadLineups()">⬇ Download CSV (DK Upload)</button>
+                    <button class="success" data-tip="Download pure DraftKings lineup CSV (exact headers QB,RB,RB… or CPT,FLEX… + unquoted player IDs). Use on the Upload Lineups page. If you use Edit Entries, paste the ID columns into the DK template instead." onclick="downloadLineups()">⬇ Download CSV (DK Upload)</button>
                     <button class="success" data-tip="Export only checked lineups as DraftKings CSV." onclick="exportCheckedLineups()">⬇ Export Checked</button>
                     <button class="ghost" data-tip="Download a readable CSV with names, salary, projected points, and ownership." onclick="downloadLineupsDetailed()">⬇ Detailed CSV</button>
                     <button class="ghost" data-tip="Copy all lineups as plain text for Discord, Twitter, or notes." onclick="copyLineupsAsText()">📋 Copy as Text</button>
@@ -3317,6 +3346,114 @@
             showTab('stacks', document.querySelectorAll('#stackModal .tab-container button')[1]);
         }
         function closeStackModal() { document.getElementById('stackModal').style.display = 'none'; }
+
+        /**
+         * Suggest classic (main slate) stacks: top QBs + their best same-team WR/TE by projection/value.
+         * User reviews the list and chooses which ones to add to stackList.
+         */
+        function suggestClassicStacks() {
+            if (!selectedSlate || isShowdownSlateName(selectedSlate)) {
+                alert('Suggested Stacks is for Classic / Main slates. Switch to a Classic slate first.');
+                return;
+            }
+            const pool = (filteredData || []).filter(p => !deselectedPlayers.has(p.displayName) && (p.projectedFP || 0) > 0);
+            if (pool.length < 10) {
+                alert('Need more players in the pool (with projections) to suggest stacks.');
+                return;
+            }
+            const qbs = pool.filter(p => p.Position === 'QB').sort((a, b) => (b.projectedFP || 0) - (a.projectedFP || 0)).slice(0, 8);
+            const suggestions = [];
+            qbs.forEach(qb => {
+                const passCatchers = pool
+                    .filter(p => p.Team === qb.Team && (p.Position === 'WR' || p.Position === 'TE') && p.displayName !== qb.displayName)
+                    .map(p => {
+                        const value = (p.projectedFP || 0) / Math.max(1, (p.salary || 3000) / 1000);
+                        return { p, score: (p.projectedFP || 0) * 0.7 + value * 0.3 };
+                    })
+                    .sort((a, b) => b.score - a.score)
+                    .slice(0, 3);
+                passCatchers.forEach((item, idx) => {
+                    // Primary stack higher %; secondary lower
+                    const pct = idx === 0 ? 35 : (idx === 1 ? 22 : 12);
+                    suggestions.push({
+                        qb: qb.displayName,
+                        receiver: item.p.displayName,
+                        team: qb.Team,
+                        pct,
+                        qbProj: qb.projectedFP,
+                        recProj: item.p.projectedFP,
+                        score: item.score
+                    });
+                });
+            });
+            // Dedupe and keep top ~8 unique pairs by score
+            const seen = new Set();
+            const unique = [];
+            suggestions.sort((a, b) => b.score - a.score);
+            for (const s of suggestions) {
+                const key = s.qb + '|' + s.receiver;
+                if (seen.has(key)) continue;
+                seen.add(key);
+                unique.push(s);
+                if (unique.length >= 8) break;
+            }
+            if (!unique.length) {
+                alert('No viable QB + WR/TE pairs found in the current pool.');
+                return;
+            }
+
+            // Modal UI
+            const existing = document.getElementById('suggestStacksModal');
+            if (existing) existing.remove();
+            const modal = document.createElement('div');
+            modal.id = 'suggestStacksModal';
+            modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:1rem;';
+            modal.innerHTML = `
+                <div style="background:var(--card-bg);color:var(--text-color);border-radius:12px;max-width:520px;width:100%;padding:1.25rem;border:1px solid var(--border-color);box-shadow:var(--shadow);max-height:85vh;overflow:auto;">
+                    <h3 style="margin:0 0 0.4rem;color:var(--brand-teal);">✨ Suggested Classic Stacks</h3>
+                    <p style="margin:0 0 0.75rem;font-size:0.84rem;color:var(--muted);">Top QB + same-team pass catcher pairs ranked by projection &amp; value. Check the ones you want, then Add selected. You can still edit % in Configure stacks.</p>
+                    <div id="suggestStacksList" style="display:flex;flex-direction:column;gap:0.4rem;margin-bottom:0.9rem;"></div>
+                    <div style="display:flex;gap:0.5rem;justify-content:flex-end;flex-wrap:wrap;">
+                        <button class="ghost" id="ssCancel">Cancel</button>
+                        <button class="primary" id="ssAdd">Add selected to stacks</button>
+                    </div>
+                </div>`;
+            document.body.appendChild(modal);
+            const list = modal.querySelector('#suggestStacksList');
+            unique.forEach((s, i) => {
+                const row = document.createElement('label');
+                row.style.cssText = 'display:flex;align-items:flex-start;gap:0.5rem;padding:0.5rem 0.6rem;border:1px solid var(--border-color);border-radius:8px;cursor:pointer;background:var(--card-bg);';
+                row.innerHTML = `
+                    <input type="checkbox" data-idx="${i}" style="margin-top:0.2rem;" ${i < 4 ? 'checked' : ''}>
+                    <span style="flex:1;min-width:0;">
+                        <strong style="font-size:0.85rem;">${s.qb}</strong> + <strong style="font-size:0.85rem;">${s.receiver}</strong>
+                        <span style="font-size:0.72rem;color:var(--muted);display:block;margin-top:0.15rem;">${s.team} · QB ${s.qbProj?.toFixed(1)} / Rec ${s.recProj?.toFixed(1)} · suggested ${s.pct}%</span>
+                    </span>`;
+                list.appendChild(row);
+            });
+            modal.querySelector('#ssCancel').onclick = () => modal.remove();
+            modal.querySelector('#ssAdd').onclick = () => {
+                const checked = [...list.querySelectorAll('input[type="checkbox"]:checked')];
+                if (!checked.length) {
+                    alert('Check at least one stack.');
+                    return;
+                }
+                let added = 0;
+                checked.forEach(cb => {
+                    const s = unique[parseInt(cb.dataset.idx)];
+                    if (!s) return;
+                    // Avoid exact duplicates already in stackList
+                    if (stackList.some(x => x.captain === s.qb && x.receiver === s.receiver)) return;
+                    stackList.push({ captain: s.qb, receiver: s.receiver, percentage: s.pct });
+                    added++;
+                });
+                updateStackListDisplay();
+                modal.remove();
+                if (typeof saveSession === 'function') saveSession(true);
+                alert(added ? `Added ${added} stack(s). Open Configure stacks to adjust % or remove.` : 'Those stacks were already present.');
+                openStackModal();
+            };
+        }
 
         function addStack() {
             const pct = Math.min(100, Math.max(1, parseInt(document.getElementById('stackLineupsInput').value) || 40));
@@ -4511,6 +4648,16 @@
             document.getElementById('lateSwapContainer').style.display = isShowdown ? 'none' : 'block';
             const sdCtrl = document.getElementById('showdownControls');
             if (sdCtrl) sdCtrl.style.display = isShowdown ? 'block' : 'none';
+            const classicCorr = document.getElementById('classicCorrRules');
+            if (classicCorr) classicCorr.style.display = isShowdown ? 'none' : 'block';
+            // Keep Classic "Force QB + pass" checkbox in sync with the rule
+            const autoStackEl = document.getElementById('autoStack');
+            const classicForceEl = document.getElementById('classicForcePassStack');
+            if (autoStackEl && classicForceEl) {
+                classicForceEl.checked = autoStackEl.checked;
+                classicForceEl.onchange = () => { autoStackEl.checked = classicForceEl.checked; };
+                autoStackEl.onchange = () => { classicForceEl.checked = autoStackEl.checked; };
+            }
             buildAroundCpt = null;
             if (document.getElementById('buildAroundCptDropdown')) {
                 document.getElementById('buildAroundCptDropdown').textContent = 'Any CPT (no lock)';
@@ -5773,7 +5920,8 @@
                 indices.forEach(idx => {
                     const l = generatedLineups[idx];
                     if (!l) return;
-                    csv.push([l.lineup.captain.id, ...l.lineup.flex.map(f => f.id)].map(id => `"${id}"`).join(','));
+                    const ids = [l.lineup.captain?.id, ...(l.lineup.flex || []).map(f => f?.id)].map(id => (id != null && id !== '') ? String(id).replace(/"/g, '') : '');
+                    csv.push(ids.join(','));
                 });
             } else {
                 csv = ['QB,RB,RB,WR,WR,WR,TE,FLEX,DST'];
@@ -5781,11 +5929,11 @@
                     const l = generatedLineups[idx];
                     if (!l) return;
                     const ids = [l.lineup.QB, l.lineup.RB1, l.lineup.RB2, l.lineup.WR1, l.lineup.WR2, l.lineup.WR3, l.lineup.TE, l.lineup.FLEX, l.lineup.DST]
-                        .map(p => p ? p.id : '');
-                    csv.push(ids.map(id => `"${id}"`).join(','));
+                        .map(p => (p && p.id != null && p.id !== '') ? String(p.id).replace(/"/g, '') : '');
+                    csv.push(ids.join(','));
                 });
             }
-            const blob = new Blob([csv.join('\n')], { type: 'text/csv' });
+            const blob = new Blob([csv.join('\n') + '\n'], { type: 'text/csv;charset=utf-8' });
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
             a.download = `nfl_dk_checked_${indices.length}.csv`;
@@ -6188,6 +6336,30 @@
                     }
                 });
             }
+
+            // Classic: QB → no opposing DST (hard exclusion when both selected)
+            if (!isShowdown && document.getElementById('classicNoOppDstWithQb')?.checked !== false) {
+                filteredData.forEach(qb => {
+                    if (qb.Position !== 'QB') return;
+                    const qbVar = `${qb.baseName}_QB`;
+                    if (!model.variables[qbVar]) return;
+                    filteredData.forEach(dst => {
+                        if (dst.Position !== 'DST') return;
+                        // Opponent of the QB's team
+                        const opp = qb.Opponent || '';
+                        if (!opp || dst.Team !== opp) return;
+                        const dstVar = `${dst.baseName}_DST`;
+                        if (!model.variables[dstVar]) return;
+                        const cName = `no_qb_opp_dst_${qb.baseName}_${dst.baseName}`;
+                        model.constraints[cName] = { max: 1 };
+                        model.variables[qbVar][cName] = 1;
+                        model.variables[dstVar][cName] = 1;
+                    });
+                });
+            }
+
+            // Classic soft: RB + same-team DST (boost points slightly when both present — via objective only if we want; for hard rule skip for now)
+            // (Left as soft preference via future exposure tiers; hard min would over-constrain)
 
             if (forceShowdownStack && isShowdown) {
                 const teams = [...new Set(filteredData.map(p => p.Team))];
@@ -7495,21 +7667,25 @@
             markChecklist('export', true);
             setNextStep('CSV downloaded. You can still run Simulation or tweak tiers and re-run.');
             const isShowdown = selectedSlate.includes('Showdown Captain Mode');
+            // Pure DraftKings "Upload Lineups" format: exact position headers + player IDs only.
+            // Unquoted numeric IDs avoid common "headers incorrect" / parse errors on DK.
             let csv;
             if (isShowdown) {
                 csv = ['CPT,FLEX,FLEX,FLEX,FLEX,FLEX'];
                 generatedLineups.forEach(l => {
-                    csv.push([l.lineup.captain.id, ...l.lineup.flex.map(f => f.id)].map(id => `"${id}"`).join(','));
+                    const ids = [l.lineup.captain?.id, ...(l.lineup.flex || []).map(f => f?.id)].map(id => (id != null && id !== '') ? String(id).replace(/"/g, '') : '');
+                    csv.push(ids.join(','));
                 });
             } else {
                 csv = ['QB,RB,RB,WR,WR,WR,TE,FLEX,DST'];
                 generatedLineups.forEach(l => {
                     const ids = [l.lineup.QB, l.lineup.RB1, l.lineup.RB2, l.lineup.WR1, l.lineup.WR2, l.lineup.WR3, l.lineup.TE, l.lineup.FLEX, l.lineup.DST]
-                        .map(p => p ? p.id : '');
-                    csv.push(ids.map(id => `"${id}"`).join(','));
+                        .map(p => (p && p.id != null && p.id !== '') ? String(p.id).replace(/"/g, '') : '');
+                    csv.push(ids.join(','));
                 });
             }
-            const blob = new Blob([csv.join('\n')], { type: 'text/csv' });
+            // Trailing newline helps some DK parsers
+            const blob = new Blob([csv.join('\n') + '\n'], { type: 'text/csv;charset=utf-8' });
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
             a.download = 'nfl_dk_lineups.csv';
@@ -7972,7 +8148,8 @@
                 indices.forEach(idx => {
                     const l = generatedLineups[idx - 1];
                     if (!l) return;
-                    csv.push([l.lineup.captain.id, ...l.lineup.flex.map(f => f.id)].map(id => `"${id}"`).join(','));
+                    const ids = [l.lineup.captain?.id, ...(l.lineup.flex || []).map(f => f?.id)].map(id => (id != null && id !== '') ? String(id).replace(/"/g, '') : '');
+                    csv.push(ids.join(','));
                 });
             } else {
                 csv = ['QB,RB,RB,WR,WR,WR,TE,FLEX,DST'];
@@ -7980,11 +8157,11 @@
                     const l = generatedLineups[idx - 1];
                     if (!l) return;
                     const ids = [l.lineup.QB, l.lineup.RB1, l.lineup.RB2, l.lineup.WR1, l.lineup.WR2, l.lineup.WR3, l.lineup.TE, l.lineup.FLEX, l.lineup.DST]
-                        .map(p => p ? p.id : '');
-                    csv.push(ids.map(id => `"${id}"`).join(','));
+                        .map(p => (p && p.id != null && p.id !== '') ? String(p.id).replace(/"/g, '') : '');
+                    csv.push(ids.join(','));
                 });
             }
-            const blob = new Blob([csv.join('\n')], { type: 'text/csv' });
+            const blob = new Blob([csv.join('\n') + '\n'], { type: 'text/csv;charset=utf-8' });
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
             a.download = `nfl_dk_checked_lineups_${indices.length}.csv`;
