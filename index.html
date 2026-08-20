@@ -1808,7 +1808,7 @@
                         This is especially useful in preseason when base projections are thin or zero — bump players you like so the optimizer naturally lands on them more.
                     </li>
                     <li><strong>Presets</strong> — set global style (Cash vs GPP vs K/DST). Start here, then add only a few player tiers.</li>
-                    <li><strong>Stacks</strong> — force QB/CPT + specific pass catcher in a % of builds. Use for your primary correlations.</li>
+                    <li><strong>Stacks</strong> — force QB/CPT + pass catcher(s) in a % of builds. Recipes: QB+WR+TE, QB+2 PCs, same-game bring-back (RB or PC), and fade both DSTs from that game.</li>
                     <li><strong>Groups</strong> — structural “at least N of these players.” Prefer 1 group, not 4.</li>
                     <li><strong>Min K/DST</strong> (Showdown) — same idea as a group of kickers/DSTs, but simpler. Don’t also Group the same players.</li>
                     <li><strong>CPT / FLEX bulk exposure</strong> (Showdown) — set all Captains or all FLEX rows at once, then tighten favorites with tiers.</li>
@@ -1830,7 +1830,7 @@
                     <li>Select the Showdown slate (or click a Showdown preset — it auto-switches).</li>
                     <li>Pick <em>one</em> structure: team split (3–3 / 4–2) <strong>or</strong> Min K/DST (e.g. 2 for FG/DST-heavy preseason), not both at extremes.</li>
                     <li>Use CPT/FLEX bulk bands if needed, then tier <strong>4–8</strong> favorites (CPT and FLEX rows separately).</li>
-                    <li>Add 2–4 specific stacks (primary + secondary pass catchers per QB).</li>
+                    <li>Add 2–4 specific stacks (QB+WR+TE, QB+2 PCs, optional bring-back). Or flip Classic correlation recipes so every QB used must bring those pieces.</li>
                     <li>Run 20–50, check CPT% vs FLEX% on your QBs and that K/DST count holds.</li>
                 </ol>
 
@@ -1927,6 +1927,9 @@
                     <button type="button" class="ghost" data-tip="Showdown + Min K/DST 2 + wide ownership. Next: stack QBs and tier favorites. Matches HoF-style FG/DST scripts." onclick="applyRecipe('sd_kdst2')">Showdown 2+ K/DST</button>
                     <button type="button" class="ghost" data-tip="Showdown GPP + 4–2 split. Next: Build around CPT or tier two QBs + stacks." onclick="applyRecipe('sd_gpp_simple')">Showdown GPP 4–2</button>
                     <button type="button" class="ghost" data-tip="Showdown Cash + 3–3. Safer single-game builds." onclick="applyRecipe('sd_cash_simple')">Showdown Cash 3–3</button>
+                    <button type="button" class="ghost" data-tip="Classic GPP + QB must have WR+TE. Next: suggest stacks or pick QBs." onclick="applyRecipe('classic_3man')">Classic QB+WR+TE</button>
+                    <button type="button" class="ghost" data-tip="Classic GPP + 2 pass catchers + opponent bring-back + fade both game DSTs." onclick="applyRecipe('classic_game_stack')">Classic game stack</button>
+                    <button type="button" class="ghost" data-tip="Cash-style: force 1 same-team PC, no bring-back, keep opp-DST fade." onclick="applyRecipe('classic_cash_stack')">Classic cash stack</button>
                 </div>
                 </div>
                 </details>
@@ -2072,6 +2075,44 @@
                                 <small>Soft boost when both appear (positive script lean)</small>
                             </span>
                         </label>
+                        <label class="sd-rule">
+                            <input type="checkbox" id="classicQbWrTe">
+                            <span class="sd-rule-text">
+                                <strong>QB → WR + TE</strong>
+                                <small>If a QB is used, require ≥1 same-team WR and ≥1 same-team TE</small>
+                            </span>
+                        </label>
+                        <label class="sd-rule">
+                            <input type="checkbox" id="classicQbTwoPc">
+                            <span class="sd-rule-text">
+                                <strong>QB → 2 pass catchers</strong>
+                                <small>If a QB is used, require ≥2 same-team WR/TE</small>
+                            </span>
+                        </label>
+                        <label class="sd-rule">
+                            <input type="checkbox" id="classicFadeGameDst">
+                            <span class="sd-rule-text">
+                                <strong>QB → fade both game DSTs</strong>
+                                <small>If a QB is used, exclude his DST and the opponent DST (shootout fade)</small>
+                            </span>
+                        </label>
+                    </div>
+                    <div style="margin-top:0.75rem;display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;align-items:end;">
+                        <div>
+                            <label>QB bring-back (same game)</label>
+                            <select id="classicBringBack">
+                                <option value="none">None</option>
+                                <option value="rb">Opponent RB</option>
+                                <option value="pc">Opponent pass catcher</option>
+                                <option value="either">Opponent RB or pass catcher</option>
+                            </select>
+                            <span class="sd-field-hint">If a QB is used, require ≥1 player from the other side of that game</span>
+                        </div>
+                        <div>
+                            <label>Bring-back min</label>
+                            <input type="number" id="classicBringBackMin" min="1" max="2" value="1">
+                            <span class="sd-field-hint">Usually 1. Use 2 only on tiny slates / smash spots</span>
+                        </div>
                     </div>
                 </div>
                 </div>
@@ -2538,8 +2579,20 @@
                 </div>
             </div>
             <div id="stacksSection" style="display:none;">
-                <p style="font-size:0.8rem;color:var(--muted);margin:0 0 0.75rem;">Add as many stacks as you want. Each stack is applied to the chosen % of builds (like Groups).</p>
+                <p style="font-size:0.8rem;color:var(--muted);margin:0 0 0.75rem;">Add named stacks for a % of builds. Use a recipe to require extra same-team pieces, a same-game bring-back, and/or fading both DSTs from that game.</p>
                 <div style="display:grid;gap:0.6rem;">
+                    <div>
+                        <label>Stack recipe</label>
+                        <select id="stackRecipeSelect" onchange="onStackRecipeChange()">
+                            <option value="qb_wr">QB + 1 pass catcher</option>
+                            <option value="qb_te">QB + TE only</option>
+                            <option value="qb_wr_te">QB + 1 WR + TE</option>
+                            <option value="qb_2pc">QB + 2 pass catchers</option>
+                            <option value="qb_2pc_bb">QB + 2 pass catchers + bring-back</option>
+                            <option value="qb_wr_bb">QB + 1 pass catcher + bring-back</option>
+                        </select>
+                        <span class="sd-field-hint" id="stackRecipeHint">Force this QB with one specific WR/TE.</span>
+                    </div>
                     <div>
                         <label id="stackCaptainLabel">Captain / QB</label>
                         <div class="dropdown-container">
@@ -2548,17 +2601,46 @@
                         </div>
                     </div>
                     <div>
-                        <label id="stackReceiverLabel">Receiver / Pass Catcher</label>
+                        <label id="stackReceiverLabel">Primary pass catcher</label>
                         <div class="dropdown-container">
                             <button class="dropdown-button" id="stackReceiverDropdown" onclick="toggleDropdown('stackReceiverMenu')">Select</button>
                             <div id="stackReceiverMenu" class="dropdown-menu"></div>
                         </div>
                     </div>
+                    <div id="stackReceiver2Wrap" style="display:none;">
+                        <label id="stackReceiver2Label">Second pass catcher</label>
+                        <div class="dropdown-container">
+                            <button class="dropdown-button" id="stackReceiver2Dropdown" onclick="toggleDropdown('stackReceiver2Menu')">Select (or leave blank = any extra PC)</button>
+                            <div id="stackReceiver2Menu" class="dropdown-menu"></div>
+                        </div>
+                    </div>
+                    <div id="stackBringWrap" style="display:none;grid-template-columns:1fr 1fr;gap:0.6rem;">
+                        <div>
+                            <label>Bring-back</label>
+                            <select id="stackBringBackSelect" onchange="populateStackBringMenu()">
+                                <option value="rb">Opponent RB</option>
+                                <option value="pc">Opponent pass catcher</option>
+                                <option value="either" selected>Opponent RB or pass catcher</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Specific bring-back (optional)</label>
+                            <div class="dropdown-container">
+                                <button class="dropdown-button" id="stackBringPlayerDropdown" onclick="toggleDropdown('stackBringPlayerMenu')">Any matching player</button>
+                                <div id="stackBringPlayerMenu" class="dropdown-menu"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <label style="display:flex;align-items:center;gap:0.4rem;">
+                        <input type="checkbox" id="stackFadeGameDst">
+                        Fade both DSTs from this game
+                    </label>
                     <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:flex-end;">
                         <div>
                             <label>% of Builds</label>
                             <input type="number" id="stackLineupsInput" min="1" max="100" value="40" style="width:90px;">
                         </div>
+                        <button class="ghost" type="button" onclick="autoFillStackPartners()">Auto-fill partners</button>
                         <button class="primary" onclick="addStack()">Add Stack</button>
                         <button class="ghost" onclick="resetStackFields()">Reset</button>
                     </div>
@@ -2760,7 +2842,9 @@
         let generatedLineups = [];
         let stackCaptain = null;   // draft fields for "Add Stack" form
         let stackReceiver = null;
-        let stackList = [];        // [{ captain, receiver, percentage }]
+        let stackReceiver2 = null;
+        let stackBringPlayer = null;
+        let stackList = [];        // [{ captain, receiver, receiver2, recipe, bringBack, bringPlayer, fadeGameDst, percentage }]
         let groupList = [];
         let mcChecked = new Set(); // lineup indices checked in sim results
         let lastMcResults = [];    // last simulation result rows with lineup index
@@ -3033,6 +3117,49 @@
             } else if (key === 'sd_cash_simple') {
                 applyPreset('sd_cash');
                 setNextStep('Showdown Cash 3–3 applied. High-tier safer CPT options only, light stacks, then Run 20.');
+            } else if (key === 'classic_3man') {
+                applyPreset('classic_gpp');
+                const wrte = document.getElementById('classicQbWrTe');
+                if (wrte) wrte.checked = true;
+                const two = document.getElementById('classicQbTwoPc');
+                if (two) two.checked = false;
+                const fade = document.getElementById('classicFadeGameDst');
+                if (fade) fade.checked = true;
+                const bb = document.getElementById('classicBringBack');
+                if (bb) bb.value = 'none';
+                const noOpp = document.getElementById('classicNoOppDstWithQb');
+                if (noOpp) noOpp.checked = true;
+                setNextStep('Classic 3-man recipe on: QB requires WR+TE, fade both game DSTs. Suggest or add named stacks, then Run.');
+            } else if (key === 'classic_game_stack') {
+                applyPreset('classic_gpp');
+                const wrte = document.getElementById('classicQbWrTe');
+                if (wrte) wrte.checked = false;
+                const two = document.getElementById('classicQbTwoPc');
+                if (two) two.checked = true;
+                const fade = document.getElementById('classicFadeGameDst');
+                if (fade) fade.checked = true;
+                const bb = document.getElementById('classicBringBack');
+                if (bb) bb.value = 'either';
+                const noOpp = document.getElementById('classicNoOppDstWithQb');
+                if (noOpp) noOpp.checked = true;
+                const style = document.getElementById('gameStackStyle');
+                if (style) style.value = 'offense';
+                setNextStep('Game-stack recipe on: QB + 2 PCs + opponent bring-back + fade both DSTs. Pick a game or named stacks, then Run.');
+            } else if (key === 'classic_cash_stack') {
+                applyPreset('classic_cash');
+                const wrte = document.getElementById('classicQbWrTe');
+                if (wrte) wrte.checked = false;
+                const two = document.getElementById('classicQbTwoPc');
+                if (two) two.checked = false;
+                const fade = document.getElementById('classicFadeGameDst');
+                if (fade) fade.checked = false;
+                const bb = document.getElementById('classicBringBack');
+                if (bb) bb.value = 'none';
+                const force = document.getElementById('classicForcePassStack');
+                if (force) { force.checked = true; force.dispatchEvent(new Event('change')); }
+                const noOpp = document.getElementById('classicNoOppDstWithQb');
+                if (noOpp) noOpp.checked = true;
+                setNextStep('Cash stack recipe: every lineup has QB + 1 same-team PC. No bring-back. Core/High your locks, then Run.');
             }
             refreshChecklist();
             updateStickyBar();
@@ -3343,6 +3470,9 @@
             populateStackCaptainMenu();
             populateConditionPlayersMenu();
             populateGroupPlayersMenu();
+            if (typeof onStackRecipeChange === "function") onStackRecipeChange();
+            populateStackReceiver2Menu();
+            populateStackBringMenu();
             showTab('stacks', document.querySelectorAll('#stackModal .tab-container button')[1]);
         }
         function closeStackModal() { document.getElementById('stackModal').style.display = 'none'; }
@@ -3455,17 +3585,75 @@
             };
         }
 
+        const STACK_RECIPE_META = {
+            qb_wr: { label: 'QB + 1 PC', hint: 'Force this QB with one specific WR/TE.', needs2: false, bring: false },
+            qb_te: { label: 'QB + TE', hint: 'Mini-stack: QB with a specific TE.', needs2: false, bring: false },
+            qb_wr_te: { label: 'QB + WR + TE', hint: '3-man: QB + named WR + named (or any) TE.', needs2: true, bring: false },
+            qb_2pc: { label: 'QB + 2 PCs', hint: 'QB + primary PC + a second same-team WR/TE.', needs2: true, bring: false },
+            qb_2pc_bb: { label: 'QB + 2 PCs + BB', hint: 'Pass stack plus a same-game bring-back (RB or PC).', needs2: true, bring: true },
+            qb_wr_bb: { label: 'QB + 1 PC + BB', hint: 'Single pass-catcher stack plus a same-game bring-back.', needs2: false, bring: true }
+        };
+
+        function getStackRecipe() {
+            return document.getElementById('stackRecipeSelect')?.value || 'qb_wr';
+        }
+
+        function onStackRecipeChange() {
+            const rec = getStackRecipe();
+            const meta = STACK_RECIPE_META[rec] || STACK_RECIPE_META.qb_wr;
+            const hint = document.getElementById('stackRecipeHint');
+            if (hint) hint.textContent = meta.hint;
+            const r2 = document.getElementById('stackReceiver2Wrap');
+            if (r2) r2.style.display = meta.needs2 ? 'block' : 'none';
+            const bb = document.getElementById('stackBringWrap');
+            if (bb) bb.style.display = meta.bring ? 'grid' : 'none';
+            if (rec === 'qb_2pc_bb' || rec === 'qb_wr_bb') {
+                const fade = document.getElementById('stackFadeGameDst');
+                if (fade && !fade.checked) fade.checked = true;
+            }
+            populateStackReceiverMenu();
+            populateStackReceiver2Menu();
+            populateStackBringMenu();
+        }
+
+        function formatStackLabel(s) {
+            const parts = [s.captain, s.receiver].filter(Boolean);
+            if (s.receiver2) parts.push(s.receiver2);
+            else if (s.recipe === 'qb_wr_te') parts.push('any TE');
+            else if (s.recipe === 'qb_2pc' || s.recipe === 'qb_2pc_bb') parts.push('any 2nd PC');
+            let extra = [];
+            if (s.bringBack && s.bringBack !== 'none') {
+                extra.push(s.bringPlayer ? ('BB ' + s.bringPlayer) : ('BB ' + s.bringBack));
+            }
+            if (s.fadeGameDst) extra.push('no game DST');
+            const recLabel = (STACK_RECIPE_META[s.recipe] || {}).label || 'stack';
+            return `<strong>${parts.join(' + ')}</strong> · ${recLabel}${extra.length ? ' · ' + extra.join(' · ') : ''} · ${s.percentage}%`;
+        }
+
         function addStack() {
             const pct = Math.min(100, Math.max(1, parseInt(document.getElementById('stackLineupsInput').value) || 40));
+            const recipe = getStackRecipe();
+            const meta = STACK_RECIPE_META[recipe] || STACK_RECIPE_META.qb_wr;
             if (!stackCaptain || !stackReceiver) {
-                alert('Select both a Captain/QB and a Receiver.');
+                alert('Select both a QB/Captain and a primary pass catcher.');
                 return;
             }
-            if (stackCaptain === stackReceiver) {
-                alert('Captain and Receiver must be different players.');
+            if (stackCaptain === stackReceiver || stackCaptain === stackReceiver2 || (stackReceiver2 && stackReceiver === stackReceiver2)) {
+                alert('Stack pieces must be different players.');
                 return;
             }
-            stackList.push({ captain: stackCaptain, receiver: stackReceiver, percentage: pct });
+            const bringSel = document.getElementById('stackBringBackSelect');
+            const fadeEl = document.getElementById('stackFadeGameDst');
+            stackList.push({
+                captain: stackCaptain,
+                receiver: stackReceiver,
+                receiver2: meta.needs2 ? (stackReceiver2 || null) : null,
+                recipe,
+                bringBack: meta.bring ? (bringSel?.value || 'either') : 'none',
+                bringPlayer: meta.bring ? (stackBringPlayer || null) : null,
+                fadeGameDst: !!(fadeEl && fadeEl.checked),
+                percentage: pct
+            });
             resetStackFields();
             updateStackListDisplay();
         }
@@ -3473,10 +3661,21 @@
         function resetStackFields() {
             stackCaptain = null;
             stackReceiver = null;
-            document.getElementById('stackCaptainDropdown').textContent = 'Select';
-            document.getElementById('stackReceiverDropdown').textContent = 'Select';
-            document.getElementById('stackLineupsInput').value = 40;
+            stackReceiver2 = null;
+            stackBringPlayer = null;
+            const cap = document.getElementById('stackCaptainDropdown');
+            const rec = document.getElementById('stackReceiverDropdown');
+            const rec2 = document.getElementById('stackReceiver2Dropdown');
+            const bb = document.getElementById('stackBringPlayerDropdown');
+            if (cap) cap.textContent = 'Select';
+            if (rec) rec.textContent = 'Select';
+            if (rec2) rec2.textContent = 'Select (or leave blank = any extra PC)';
+            if (bb) bb.textContent = 'Any matching player';
+            const pct = document.getElementById('stackLineupsInput');
+            if (pct) pct.value = 40;
             populateStackReceiverMenu();
+            populateStackReceiver2Menu();
+            populateStackBringMenu();
         }
 
         function removeStack(idx) {
@@ -3493,10 +3692,37 @@
             }
             el.innerHTML = stackList.map((s, i) =>
                 `<div style="display:flex;justify-content:space-between;align-items:center;gap:0.5rem;padding:0.4rem 0.5rem;border:1px solid var(--border-color);border-radius:8px;margin-bottom:0.35rem;background:var(--input-bg);">
-                    <span><strong>${s.captain}</strong> + <strong>${s.receiver}</strong> · ${s.percentage}% of builds</span>
+                    <span>${formatStackLabel(s)}</span>
                     <button class="ghost" style="padding:0.2rem 0.45rem;font-size:0.75rem;" onclick="removeStack(${i})">Remove</button>
                 </div>`
             ).join('');
+        }
+
+        function autoFillStackPartners() {
+            if (!stackCaptain) { alert('Select a QB first.'); return; }
+            const qb = (typeof allSlatePlayers !== 'undefined' ? allSlatePlayers : filteredData).find(p => p.displayName === stackCaptain);
+            if (!qb) return;
+            const recipe = getStackRecipe();
+            const pool = (typeof allSlatePlayers !== 'undefined' ? allSlatePlayers : filteredData).filter(p =>
+                p.Team === qb.Team && p.displayName !== qb.displayName && !deselectedPlayers.has(p.displayName)
+            );
+            const wrs = pool.filter(p => String(p.Position).includes('WR')).sort((a,b) => (b.projectedFP||0) - (a.projectedFP||0));
+            const tes = pool.filter(p => String(p.Position).includes('TE')).sort((a,b) => (b.projectedFP||0) - (a.projectedFP||0));
+            const pcs = pool.filter(p => String(p.Position).includes('WR') || String(p.Position).includes('TE')).sort((a,b) => (b.projectedFP||0) - (a.projectedFP||0));
+            if (recipe === 'qb_te') {
+                if (!tes[0]) { alert('No TE found for that team.'); return; }
+                updateStackReceiver(tes[0].displayName);
+            } else {
+                if (!pcs[0]) { alert('No pass catcher found for that team.'); return; }
+                updateStackReceiver(pcs[0].displayName);
+            }
+            if (recipe === 'qb_wr_te') {
+                if (tes[0]) updateStackReceiver2(tes[0].displayName);
+            } else if (recipe === 'qb_2pc' || recipe === 'qb_2pc_bb') {
+                const second = pcs.find(p => p.displayName !== stackReceiver);
+                if (second) updateStackReceiver2(second.displayName);
+            }
+            populateStackBringMenu();
         }
 
         // ========== CLICK-TO-STACK FEATURE ==========
@@ -5434,8 +5660,28 @@
         }
 
         // ====================== STACKS & GROUPS ======================
-        function updateStackCaptain(v) { stackCaptain = v; document.getElementById('stackCaptainDropdown').textContent = v; populateStackReceiverMenu(); }
-        function updateStackReceiver(v) { stackReceiver = v; document.getElementById('stackReceiverDropdown').textContent = v; }
+        function updateStackCaptain(v) {
+            stackCaptain = v;
+            document.getElementById('stackCaptainDropdown').textContent = v;
+            populateStackReceiverMenu();
+            populateStackReceiver2Menu();
+            populateStackBringMenu();
+        }
+        function updateStackReceiver(v) {
+            stackReceiver = v;
+            document.getElementById('stackReceiverDropdown').textContent = v;
+            populateStackReceiver2Menu();
+        }
+        function updateStackReceiver2(v) {
+            stackReceiver2 = v || null;
+            const el = document.getElementById('stackReceiver2Dropdown');
+            if (el) el.textContent = v || 'Select (or leave blank = any extra PC)';
+        }
+        function updateStackBringPlayer(v) {
+            stackBringPlayer = v || null;
+            const el = document.getElementById('stackBringPlayerDropdown');
+            if (el) el.textContent = v || 'Any matching player';
+        }
         function updateConditionPlayer(v) {
             conditionPlayer = v;
             document.getElementById('conditionPlayerDropdown').textContent = v || 'Any Player (Optional)';
@@ -5514,17 +5760,58 @@
                 `<label><input type="radio" name="stackCaptain" value="${c}" onchange="updateStackCaptain(this.value)">${c}</label>`
             ).join('');
         }
-        function populateStackReceiverMenu() {
-            if (!stackCaptain) { document.getElementById('stackReceiverMenu').innerHTML = ''; return; }
-            const team = allSlatePlayers.find(p => p.displayName === stackCaptain)?.Team;
-            if (!team) return;
+        function _stackTeamPlayers(posIncludes) {
+            if (!stackCaptain) return [];
+            const qb = allSlatePlayers.find(p => p.displayName === stackCaptain);
+            if (!qb) return [];
             const isShowdown = selectedSlate?.includes('Showdown Captain Mode');
-            const filter = isShowdown ? (p => p.slotType === 'FLEX') : (() => true);
-            const receivers = allSlatePlayers.filter(p => filter(p) && p.Team === team && (p.Position.includes('WR') || p.Position.includes('TE')))
-                .sort((a,b) => b.projectedFP - a.projectedFP).map(p => p.displayName);
-            document.getElementById('stackReceiverMenu').innerHTML = receivers.map(r =>
-                `<label><input type="radio" name="stackReceiver" value="${r}" onchange="updateStackReceiver(this.value)">${r}</label>`
+            return allSlatePlayers
+                .filter(p => p.Team === qb.Team && p.displayName !== stackCaptain && (!isShowdown || p.slotType === 'FLEX')
+                    && posIncludes.some(pos => String(p.Position).includes(pos)))
+                .sort((a,b) => (b.projectedFP||0) - (a.projectedFP||0));
+        }
+        function populateStackReceiverMenu() {
+            const menu = document.getElementById('stackReceiverMenu');
+            if (!menu) return;
+            if (!stackCaptain) { menu.innerHTML = ''; return; }
+            const recipe = getStackRecipe();
+            const recs = recipe === 'qb_te' ? _stackTeamPlayers(['TE']) : _stackTeamPlayers(['WR','TE']);
+            menu.innerHTML = recs.map(p =>
+                `<label><input type="radio" name="stackReceiver" value="${p.displayName}" onchange="updateStackReceiver(this.value)">${p.displayName}</label>`
             ).join('');
+        }
+        function populateStackReceiver2Menu() {
+            const menu = document.getElementById('stackReceiver2Menu');
+            if (!menu) return;
+            if (!stackCaptain) { menu.innerHTML = ''; return; }
+            const recipe = getStackRecipe();
+            const recs = recipe === 'qb_wr_te' ? _stackTeamPlayers(['TE']) : _stackTeamPlayers(['WR','TE']);
+            menu.innerHTML = `<label><input type="radio" name="stackReceiver2" value="" onchange="updateStackReceiver2('')" checked>Any extra matching PC</label>` +
+                recs.filter(p => p.displayName !== stackReceiver).map(p =>
+                    `<label><input type="radio" name="stackReceiver2" value="${p.displayName}" onchange="updateStackReceiver2(this.value)">${p.displayName}</label>`
+                ).join('');
+        }
+        function populateStackBringMenu() {
+            const menu = document.getElementById('stackBringPlayerMenu');
+            if (!menu) return;
+            if (!stackCaptain) { menu.innerHTML = ''; return; }
+            const qb = allSlatePlayers.find(p => p.displayName === stackCaptain);
+            if (!qb) return;
+            const kind = document.getElementById('stackBringBackSelect')?.value || 'either';
+            const opp = qb.Opponent;
+            const isShowdown = selectedSlate?.includes('Showdown Captain Mode');
+            const okPos = (p) => {
+                const pos = String(p.Position);
+                if (kind === 'rb') return pos.includes('RB');
+                if (kind === 'pc') return pos.includes('WR') || pos.includes('TE');
+                return pos.includes('RB') || pos.includes('WR') || pos.includes('TE');
+            };
+            const recs = allSlatePlayers.filter(p => p.Team === opp && (!isShowdown || p.slotType === 'FLEX') && okPos(p))
+                .sort((a,b) => (b.projectedFP||0) - (a.projectedFP||0));
+            menu.innerHTML = `<label><input type="radio" name="stackBringPlayer" value="" onchange="updateStackBringPlayer('')" checked>Any matching player</label>` +
+                recs.map(p =>
+                    `<label><input type="radio" name="stackBringPlayer" value="${p.displayName}" onchange="updateStackBringPlayer(this.value)">${p.displayName}</label>`
+                ).join('');
         }
         function populateConditionPlayersMenu() {
             const players = [...new Set(allSlatePlayers.map(p => p.displayName))]
@@ -6126,7 +6413,7 @@
         function createModel(enforceStack = false, enforceGroup = false, playerCounts = {}, currentGenerated = 0,
             stackCap = null, stackRec = null, group = null, tempMinSalary = minSalary, relaxedMax = maxExposure,
             previousLineups = [], randomnessFactor = 0.3, forceQBStack = false, forceShowdownStack = false,
-            forcedInclude = [], forcedExclude = []) {
+            forcedInclude = [], forcedExclude = [], stackSpec = null) {
 
             const model = {
                 optimize: 'points',
@@ -6234,16 +6521,68 @@
                 model.constraints.gameStack = { min: gameStackMinPlayers };
             }
 
-            // Enforce specific stack
+            const boostStackVars = (base) => {
+                if (!base) return;
+                Object.keys(model.variables).forEach(v => {
+                    if (v.startsWith(base + '_')) model.variables[v].points *= 2.8;
+                });
+            };
+            const forceNamed = (displayName) => {
+                if (!displayName) return;
+                const base = displayName.split(' (')[0];
+                if (model.constraints[base]) model.constraints[base].min = 1;
+                boostStackVars(base);
+            };
+            const addSetMinIf = (anchorVars, memberVars, minN, cName) => {
+                if (!anchorVars.length || !memberVars.length) return;
+                model.constraints[cName] = { min: 0 };
+                anchorVars.forEach(v => { if (model.variables[v]) model.variables[v][cName] = -minN; });
+                memberVars.forEach(v => { if (model.variables[v]) model.variables[v][cName] = 1; });
+            };
+            const varsFor = (pred) => Object.keys(model.variables).filter(v => {
+                const base = v.replace(/_Captain$|_FLEX$|_QB$|_RB$|_WR$|_TE$|_DST$/, '');
+                const p = filteredData.find(x => x.baseName === base);
+                return p && pred(p, v);
+            });
+
+            // Enforce specific stack (pair or recipe)
             if (enforceStack && stackCap && stackRec) {
-                const capBase = stackCap.split(' (')[0];
-                const recBase = stackRec.split(' (')[0];
-                if (model.constraints[capBase] && model.constraints[recBase]) {
-                    model.constraints[capBase].min = 1;
-                    model.constraints[recBase].min = 1;
-                    Object.keys(model.variables).forEach(v => {
-                        if (v.startsWith(capBase + '_')) model.variables[v].points *= 2.8;
-                        if (v.startsWith(recBase + '_')) model.variables[v].points *= 2.8;
+                forceNamed(stackCap);
+                forceNamed(stackRec);
+                const spec = stackSpec || {};
+                if (spec.receiver2) forceNamed(spec.receiver2);
+                const qbRow = filteredData.find(p => p.displayName === stackCap) ||
+                    filteredData.find(p => p.baseName === stackCap.split(' (')[0]);
+                const team = qbRow?.Team;
+                const opp = qbRow?.Opponent;
+                const qbVars = varsFor(p => p.displayName === stackCap || p.baseName === (stackCap||'').split(' (')[0]);
+                if (team && (spec.recipe === 'qb_2pc' || spec.recipe === 'qb_2pc_bb') && !spec.receiver2) {
+                    const pcVars = varsFor(p => p.Team === team && (p.Position === 'WR' || p.Position === 'TE'));
+                    addSetMinIf(qbVars, pcVars, 2, 'stack_2pc');
+                }
+                if (team && spec.recipe === 'qb_wr_te' && !spec.receiver2) {
+                    const teVars = varsFor(p => p.Team === team && p.Position === 'TE');
+                    addSetMinIf(qbVars, teVars, 1, 'stack_need_te');
+                }
+                if (spec.bringPlayer) forceNamed(spec.bringPlayer);
+                else if (spec.bringBack && spec.bringBack !== 'none' && opp) {
+                    const bbVars = varsFor(p => {
+                        if (p.Team !== opp) return false;
+                        const pos = p.Position;
+                        if (spec.bringBack === 'rb') return pos === 'RB';
+                        if (spec.bringBack === 'pc') return pos === 'WR' || pos === 'TE';
+                        return pos === 'RB' || pos === 'WR' || pos === 'TE';
+                    });
+                    addSetMinIf(qbVars, bbVars, 1, 'stack_bringback');
+                }
+                if (spec.fadeGameDst && team) {
+                    filteredData.filter(p => p.Position === 'DST' && (p.Team === team || p.Team === opp)).forEach(dst => {
+                        const vn = `${dst.baseName}_DST`;
+                        if (model.variables[vn]) {
+                            const cName = `stack_fade_dst_${dst.baseName}`;
+                            model.constraints[cName] = { max: 0 };
+                            model.variables[vn][cName] = 1;
+                        }
                     });
                 }
             }
@@ -6360,6 +6699,83 @@
 
             // Classic soft: RB + same-team DST (boost points slightly when both present — via objective only if we want; for hard rule skip for now)
             // (Left as soft preference via future exposure tiers; hard min would over-constrain)
+
+            // Classic recipe rules: if QB is used, require extra same-team / same-game pieces
+            if (!isShowdown) {
+                const wantWrTe = document.getElementById('classicQbWrTe')?.checked;
+                const wantTwoPc = document.getElementById('classicQbTwoPc')?.checked;
+                const fadeGame = document.getElementById('classicFadeGameDst')?.checked;
+                const bringKind = document.getElementById('classicBringBack')?.value || 'none';
+                const bringMin = Math.max(1, Math.min(2, parseInt(document.getElementById('classicBringBackMin')?.value) || 1));
+                if (wantWrTe || wantTwoPc || fadeGame || (bringKind && bringKind !== 'none')) {
+                    const teams = [...new Set(filteredData.map(p => p.Team))];
+                    teams.forEach(team => {
+                        const qbVars = Object.keys(model.variables).filter(v => {
+                            const p = filteredData.find(x => x.baseName === v.replace(/_QB$|_FLEX$|_Captain$/, ''));
+                            return p && p.Team === team && p.Position === 'QB' && model.variables[v];
+                        });
+                        if (!qbVars.length) return;
+                        const wrVars = Object.keys(model.variables).filter(v => {
+                            const p = filteredData.find(x => x.baseName === v.replace(/_WR$|_FLEX$|_TE$|_RB$|_QB$|_DST$|_Captain$/, ''));
+                            return p && p.Team === team && p.Position === 'WR' && model.variables[v];
+                        });
+                        const teVars = Object.keys(model.variables).filter(v => {
+                            const p = filteredData.find(x => x.baseName === v.replace(/_WR$|_FLEX$|_TE$|_RB$|_QB$|_DST$|_Captain$/, ''));
+                            return p && p.Team === team && p.Position === 'TE' && model.variables[v];
+                        });
+                        const pcVars = wrVars.concat(teVars);
+                        const qbRow = filteredData.find(p => p.Team === team && p.Position === 'QB');
+                        const opp = qbRow?.Opponent;
+                        if (wantTwoPc && pcVars.length >= 2) {
+                            const cName = `classic_2pc_${team}`;
+                            model.constraints[cName] = { min: 0 };
+                            qbVars.forEach(v => model.variables[v][cName] = -2);
+                            pcVars.forEach(v => model.variables[v][cName] = 1);
+                        }
+                        if (wantWrTe) {
+                            if (wrVars.length) {
+                                const cName = `classic_need_wr_${team}`;
+                                model.constraints[cName] = { min: 0 };
+                                qbVars.forEach(v => model.variables[v][cName] = -1);
+                                wrVars.forEach(v => model.variables[v][cName] = 1);
+                            }
+                            if (teVars.length) {
+                                const cName = `classic_need_te_${team}`;
+                                model.constraints[cName] = { min: 0 };
+                                qbVars.forEach(v => model.variables[v][cName] = -1);
+                                teVars.forEach(v => model.variables[v][cName] = 1);
+                            }
+                        }
+                        if (bringKind !== 'none' && opp) {
+                            const bbVars = Object.keys(model.variables).filter(v => {
+                                const p = filteredData.find(x => x.baseName === v.replace(/_WR$|_FLEX$|_TE$|_RB$|_QB$|_DST$|_Captain$/, ''));
+                                if (!p || p.Team !== opp) return false;
+                                if (bringKind === 'rb') return p.Position === 'RB';
+                                if (bringKind === 'pc') return p.Position === 'WR' || p.Position === 'TE';
+                                return p.Position === 'RB' || p.Position === 'WR' || p.Position === 'TE';
+                            });
+                            if (bbVars.length) {
+                                const cName = `classic_bb_${team}`;
+                                model.constraints[cName] = { min: 0 };
+                                qbVars.forEach(v => model.variables[v][cName] = -bringMin);
+                                bbVars.forEach(v => model.variables[v][cName] = 1);
+                            }
+                        }
+                        if (fadeGame) {
+                            filteredData.filter(p => p.Position === 'DST' && (p.Team === team || p.Team === opp)).forEach(dst => {
+                                const dstVar = `${dst.baseName}_DST`;
+                                if (!model.variables[dstVar]) return;
+                                qbVars.forEach(qv => {
+                                    const cName = `classic_fade_dst_${team}_${dst.baseName}`;
+                                    model.constraints[cName] = { max: 1 };
+                                    model.variables[qv][cName] = 1;
+                                    model.variables[dstVar][cName] = 1;
+                                });
+                            });
+                        }
+                    });
+                }
+            }
 
             if (forceShowdownStack && isShowdown) {
                 const teams = [...new Set(filteredData.map(p => p.Team))];
@@ -7091,12 +7507,17 @@
             const stacks = [];
             stackList.forEach((s, si) => {
                 if (!s.captain || !s.receiver || !s.percentage) return;
-                const capOk = availablePlayers.find(p => p.displayName === s.captain && (isShowdown ? p.slotType === 'Captain' : p.positions.includes('QB')));
+                const capOk = availablePlayers.find(p => p.displayName === s.captain && (isShowdown ? p.slotType === 'Captain' : (p.positions || []).includes('QB') || p.Position === 'QB'));
                 const recOk = availablePlayers.find(p => p.displayName === s.receiver && (isShowdown ? p.slotType === 'FLEX' : true));
                 if (capOk && recOk) {
                     stacks.push({
                         captain: s.captain,
                         receiver: s.receiver,
+                        receiver2: s.receiver2 || null,
+                        recipe: s.recipe || 'qb_wr',
+                        bringBack: s.bringBack || 'none',
+                        bringPlayer: s.bringPlayer || null,
+                        fadeGameDst: !!s.fadeGameDst,
                         num: Math.floor(numLineups * s.percentage / 100),
                         generated: 0
                     });
@@ -7153,6 +7574,7 @@
                 const {
                     enforceStack = false, enforceGroup = false,
                     stackCap = null, stackRec = null, group = null,
+                    stackSpec = null,
                     label = 'Building'
                 } = opts || {};
                 try {
@@ -7160,17 +7582,19 @@
                         enforceStack, enforceGroup, playerCounts, generatedLineups.length,
                         stackCap, stackRec, group,
                         globalTempMin, globalRelaxed, generatedLineups, globalRand,
-                        forceQBStack, forceShowdownStack, globalForcedInclude, []
+                        forceQBStack, forceShowdownStack, globalForcedInclude, [],
+                        stackSpec
                     );
                     // Soft boost incomplete stack pieces during fill phase
                     if (!enforceStack && stacks.length) {
                         stacks.forEach(stack => {
                             if (stack.generated < stack.num) {
-                                const cb = stack.captain.split(' (')[0];
-                                const rb = stack.receiver.split(' (')[0];
-                                Object.keys(model.variables).forEach(v => {
-                                    if (v.startsWith(cb + '_')) model.variables[v].points *= 1.25;
-                                    if (v.startsWith(rb + '_')) model.variables[v].points *= 1.25;
+                                const names = [stack.captain, stack.receiver, stack.receiver2, stack.bringPlayer].filter(Boolean);
+                                names.forEach(nm => {
+                                    const b = nm.split(' (')[0];
+                                    Object.keys(model.variables).forEach(v => {
+                                        if (v.startsWith(b + '_')) model.variables[v].points *= 1.25;
+                                    });
                                 });
                             }
                         });
@@ -7186,11 +7610,13 @@
                     const lineup = buildLineup(result, lineupSet, isShowdown);
                     if (!validLineup(lineup)) return null;
                     if (enforceStack && stackCap && stackRec) {
-                        const hasStack = isShowdown
-                            ? (lineup.lineup.captain.name === stackCap && lineup.lineup.flex.some(f => f.name === stackRec))
-                            : (Object.values(lineup.lineup).some(p => p?.name === stackCap) &&
-                               Object.values(lineup.lineup).some(p => p?.name === stackRec));
-                        if (!hasStack) return null;
+                        const names = isShowdown
+                            ? [lineup.lineup.captain?.name, ...(lineup.lineup.flex || []).map(f => f.name)]
+                            : Object.values(lineup.lineup).map(p => p?.name);
+                        const has = (nm) => names.includes(nm);
+                        if (!has(stackCap) || !has(stackRec)) return null;
+                        if (stackSpec?.receiver2 && !has(stackSpec.receiver2)) return null;
+                        if (stackSpec?.bringPlayer && !has(stackSpec.bringPlayer)) return null;
                     }
                     generatedLineups.push(lineup);
                     updatePlayerCounts(lineup, playerCounts, isShowdown);
@@ -7214,12 +7640,13 @@
             for (let si = 0; si < stacks.length && stillHaveBudget(); si++) {
                 const stack = stacks[si];
                 let fails = 0;
-                updateProgress((generatedLineups.length / numLineups) * 100, `Stack ${si + 1}: ${stack.captain} + ${stack.receiver}`);
+                updateProgress((generatedLineups.length / numLineups) * 100, `Stack ${si + 1}: ${stack.captain} + ${stack.receiver}${stack.receiver2 ? ' + ' + stack.receiver2 : ''}`);
                 while (stack.generated < stack.num && fails < MAX_CONSEC_FAIL && stillHaveBudget()) {
                     const got = await trySolve({
                         enforceStack: true,
                         stackCap: stack.captain,
                         stackRec: stack.receiver,
+                        stackSpec: stack,
                         label: `Stack ${si + 1}`
                     });
                     if (got) { stack.generated++; fails = 0; }
