@@ -11,7 +11,7 @@ Jayden Daniels,QB,WAS,,,,,17.5,,0.2,0.595,,31.9,20.4,1.2,221.83,,,,7.3,0.2,39.5,
 Trevor Lawrence,QB,JAC,,,,,16.9,,0.2,0.595,,31.5,19.5,0,232.5,,,,4.2,0.3,19.5,,,,,,12.26,12.06,12.26,12.26,,,,CLE @ JAX,Browns @ Jaguars,EverBank Stadium,outdoor,CBS,5800,https://dkn.gs/sports/images/nfl/players/50/542787.png, @ ,9/13/2026
 Michael Penix Jr.,QB,ATL,PIT,,,,2.68,,,,,,,,37,,,0,,,1,,,,,,1.58,1.58,1.58,1.58,,,,n/a,n/a,n/a,n/a,n/a,4800,https://dkn.gs/sports/images/nfl/players/50/787659.png, @ ,
 Jahmyr Gibbs,RB,DET,,,,,17.5,,0.1,,,,,,,3.9,0.2,32.5,16.8,0.9,76.5,,,,,,21.3,19.25,21.3,21.3,,,,n/a,n/a,n/a,n/a,n/a,8000,https://dkn.gs/sports/images/nfl/players/50/693115.png, @ ,9/13/2026
-Bijan Robinson,RB,ATL,,,,,16,,0.1,,,,,,,4.585,0.2,38.5,17.8,0.5,83.5,,,,,,20.89,18.49,20.89,20.89,,,,n/a,n/a,n/a,n/a,n/a,7700,https://dkn.gs/sports/images/nfl/players/50/693112.png, @ ,9/13/2026
+Bijan Robinson,RB,ATL,,,,,16,,0.1,,,,,,,4.585,0.2,38.5,17.9,0.5,83.5,,,,,,20.89,18.49,20.89,20.89,,,,n/a,n/a,n/a,n/a,n/a,7700,https://dkn.gs/sports/images/nfl/players/50/693112.png, @ ,9/13/2026
 Jonathan Taylor,RB,IND,,,,,14.8,,0.1,,,,,,,3,0.1,14.17,17.8,0.7,74.5,,,,,,16.57,14.97,16.57,16.57,,,,n/a,n/a,n/a,n/a,n/a,7300,https://dkn.gs/sports/images/nfl/players/50/468700.png, @ ,9/13/2026
 Derrick Henry,RB,BAL,,,,,14.1,,0.1,,,,,,,1.2,0.1,4.5,17.3,0.8,86.5,,,,,,15.6,14.9,15.6,15.6,,,,n/a,n/a,n/a,n/a,n/a,6700,https://dkn.gs/sports/images/nfl/players/50/19898.png, @ ,9/13/2026
 Christian McCaffrey,RB,SF,,,,,14.1,,0.1,,,,,,,4.925,0.3,40.5,14.8,0.5,63.5,,,,,,20.03,17.46,20.03,20.03,,,,SF @ LAR,49ers @ Rams,Melbourne Cricket Ground,outdoor,Netflix,11400,https://dkn.gs/sports/images/nfl/players/50/20415.png, @ ,9/10/2026
@@ -65,16 +65,16 @@ Chris Boswell,K,PIT,,,1.8,2.2,7.6,,,,,,,,,,,,,,,,,,2.3,,7.7,7.7,7.7,7.7,,,,ATL @
 CLE,DST,CLE,11,,,,16,,,,,,,,,,,,,,,,,,,,1,1,1,1,,,,n/a,n/a,n/a,n/a,n/a,,,,
 MIN,DST,MIN,6,,,,9,,,,,,,,,,,,,,,,,,,,1,1,1,1,,,,GB @ MIN,Packers @ Vikings,U.S. Bank Stadium,dome,CBS,,,,
 BAL,DST,BAL,13,,,,8,,,,,,,,,,,,,,,,,,,,1,1,1,1,,,,BAL @ IND,Ravens @ Colts,Lucas Oil Stadium,retractable_dome,CBS,,,,
-JAX,DST,JAX,,0.8,,,7.8,0.5,,0.9,16.8,,,,,,,,,,,2.9,0,0.2,,304.2,6.9,6.9,6.9,6.9,,,,CLE @ JAX,Browns @ Jaguars,EverBank Stadium,outdoor,CBS,,,,
-LAC,DST,LAC,,0.4,,,7.6,0.6,,0.8,18.5,,,,,,,,,,,3,0,0.2,,321.2,7,7,7,7,,,,n/a,n/a,n/a,n/a,n/a,,,,
+JAX,DST,JAX,,0.8,,,7.8,0.5,,0.9,16.8,,,,,,,,,,,2.9,0,0.2,,301.7,6.9,6.9,6.9,6.9,,,,CLE @ JAX,Browns @ Jaguars,EverBank Stadium,outdoor,CBS,,,,
+LAC,DST,LAC,,0.4,,,7.6,0.6,,0.8,18.5,,,,,,,,,,,3,0,0.2,,320.7,7,7,7,7,,,,n/a,n/a,n/a,n/a,n/a,,,,
 TEN,DST,TEN,,0.7,,,7.4,0.5,,0.8,19.5,,,,,,,,,,,3,0,0.1,,328.3,6.2,6.2,6.2,6.2,,,,NYJ @ TEN,Jets @ Titans,Nissan Stadium,outdoor,CBS,,,,
 NE,DST,NE,11,,,,7,,,,,,,,,,,,,,,,,,,,1,1,1,1,,,,NE @ SEA,Patriots @ Seahawks,Lumen Field,outdoor,NBC/Peacock,,,,
-LV,DST,LV,,0.7,,,6.7,0.5,,0.6,18.1,,,,,,,,,,,2.8,0,0.1,,348.7,5.6,5.6,5.6,5.6,,,,n/a,n/a,n/a,n/a,n/a,,,,
-PIT,DST,PIT,,0.8,,,6.65,0.6,,0.9,19.2,,,,,,,,,,,2.6,0,0.1,,334.6,6.2,6.2,6.2,6.2,,,,ATL @ PIT,Falcons @ Steelers,Acrisure Stadium,outdoor,FOX,,,,
-DET,DST,DET,,0.8,,,6.4,0.6,,0.8,20.1,,,,,,,,,,,2.8,0,0.2,,335.1,5.8,5.8,5.8,5.8,,,,n/a,n/a,n/a,n/a,n/a,,,,
-NYJ,DST,NYJ,,0.7,,,6.3,0.5,,0.6,19.9,,,,,,,,,,,2.6,0,0.1,,331.8,5.4,5.4,5.4,5.4,,,,n/a,n/a,n/a,n/a,n/a,,,,
-PHI,DST,PHI,,0.7,,,6.3,0.5,,0.7,21,,,,,,,,,,,2.6,0,0.2,,334.8,5.2,5.2,5.2,5.2,,,,WAS @ PHI,Commanders @ Eagles,Lincoln Financial Field,outdoor,FOX,,,,
-SEA,DST,SEA,,0.7,,,5.35,0.5,,0.8,20,,,,,,,,,,,2.9,0,0.2,,354.1,4.7,4.7,4.7,4.7,,,,NE @ SEA,Patriots @ Seahawks,Lumen Field,outdoor,NBC/Peacock,,,,
-DEN,DST,DEN,,0.7,,,4.15,0.4,,0.8,22,,,,,,,,,,,2.8,0,0.2,,345.2,5.4,5.4,5.4,5.4,,,,,,,,,,,,
+LV,DST,LV,,0.7,,,6.7,0.5,,0.6,18.1,,,,,,,,,,,2.8,0,0.1,,338.2,5.6,5.6,5.6,5.6,,,,n/a,n/a,n/a,n/a,n/a,,,,
+PIT,DST,PIT,,0.8,,,6.65,0.6,,0.9,19.2,,,,,,,,,,,2.6,0,0.1,,336.2,6.2,6.2,6.2,6.2,,,,ATL @ PIT,Falcons @ Steelers,Acrisure Stadium,outdoor,FOX,,,,
+DET,DST,DET,,0.8,,,6.4,0.6,,0.8,20.1,,,,,,,,,,,2.8,0,0.2,,329.7,5.8,5.8,5.8,5.8,,,,n/a,n/a,n/a,n/a,n/a,,,,
+NYJ,DST,NYJ,,0.7,,,6.3,0.5,,0.6,19.9,,,,,,,,,,,2.6,0,0.1,,319.7,5.4,5.4,5.4,5.4,,,,n/a,n/a,n/a,n/a,n/a,,,,
+PHI,DST,PHI,,0.7,,,6.3,0.5,,0.7,21,,,,,,,,,,,2.6,0,0.2,,332.2,5.2,5.2,5.2,5.2,,,,WAS @ PHI,Commanders @ Eagles,Lincoln Financial Field,outdoor,FOX,,,,
+SEA,DST,SEA,,0.7,,,5.35,0.5,,0.8,20,,,,,,,,,,,2.9,0,0.2,,348.7,6.7,6.7,6.7,6.7,,,,NE @ SEA,Patriots @ Seahawks,Lumen Field,outdoor,NBC/Peacock,,,,
+DEN,DST,DEN,,0.7,,,4.15,0.4,,0.8,22,,,,,,,,,,,2.8,0,0.2,,337.8,5.4,5.4,5.4,5.4,,,,,,,,,,,,
 LAR,DST,LAR,11,,,,3,,,,,,,,,,,,,,,,,,,,1,1,1,1,,,,,,,,,,,,
 HOU,DST,HOU,8,,,,1,,,,,,,,,,,,,,,,,,,,1,1,1,1,,,,n/a,n/a,n/a,n/a,n/a,,,,
