@@ -34,7 +34,7 @@ Justin Jefferson,WR,MIN,,,,,10.6,,0,,,,,,,5.585,0.4,76.5,0.1,0,0.6,,,,,,15.7,12.
 Nico Collins,WR,HOU,,,,,10.4,,0,,,,,,,4.585,0.4,71,0.1,0,0.9,,,,,,14.18,11.88,14.18,14.18,,,,n/a,n/a,n/a,n/a,n/a,11400,https://dkn.gs/sports/images/nfl/players/50/560761.png, @ ,9/13/2026
 George Pickens,WR,DAL,,,,,10.3,,0,,,,,,,4.975,0.5,65.83,0,0,0.2,,,,,,14.58,12.09,14.58,14.58,,,,n/a,n/a,n/a,n/a,n/a,,,,9/13/2026
 Zay Flowers,WR,BAL,,,,,10,,0,,,,,,,4.585,0.4,65.83,0.5,0,0.5,,,,,,13.62,11.33,13.62,13.62,,,,BAL @ IND,Ravens @ Colts,Lucas Oil Stadium,retractable_dome,CBS,6400,https://dkn.gs/sports/images/nfl/players/50/706447.png, @ ,9/13/2026
-Drake London,WR,ATL,,,,,9.9,,0,,,,,,,5.585,0.4,72.5,0,0,0.1,,,,,,15.25,12.45,15.25,15.25,,,,ATL @ PIT,Falcons @ Steelers,Acrisure Stadium,outdoor,FOX,6500,https://dkn.gs/sports/images/nfl/players/50/630530.png, @ ,9/13/2026
+Drake London,WR,ATL,,,,,9.9,,0,,,,,,,5.585,0.4,72.5,0,0,0.1,,,,,,15.25,12.45,15.25,15.25,,,,n/a,n/a,n/a,n/a,n/a,6500,https://dkn.gs/sports/images/nfl/players/50/630530.png, @ ,9/13/2026
 Brian Thomas Jr.,WR,JAC,CLE,,,,7.91,,,,,,,,0,,,48.83,,,2,,,,,,5.08,5.08,5.08,5.08,,,,n/a,n/a,n/a,n/a,n/a,5500,https://dkn.gs/sports/images/nfl/players/50/787676.png, @ ,9/13/2026
 Marvin Harrison Jr.,WR,ARI,LAC,,,,7.78,,,,,,,,0,,,50.83,,,0,,,,,,5.08,5.08,5.08,5.08,,,,n/a,n/a,n/a,n/a,n/a,5000,https://dkn.gs/sports/images/nfl/players/50/779700.png, @ ,9/13/2026
 Michael Pittman Jr.,WR,PIT,ATL,,,,6.68,,,,,,,,0,,,42.5,,,0,,,,,,4.25,4.25,4.25,4.25,,,,n/a,n/a,n/a,n/a,n/a,4900,https://dkn.gs/sports/images/nfl/players/50/477191.png, @ ,9/13/2026
@@ -57,7 +57,7 @@ Brandon Aubrey,K,DAL,,,1.9,2.4,8.3,,,,,,,,,,,,,,,,,,2.7,,8.4,8.4,8.4,8.4,,,,DAL 
 Jake Bates,K,DET,,,1.7,2.1,8.2,,,,,,,,,,,,,,,,,,3,,8.1,8.1,8.1,8.1,,,,n/a,n/a,n/a,n/a,n/a,,,,9/13/2026
 Harrison Mevis,K,LAR,,,1.7,2.1,8.1,,,,,,,,,,,,,,,,,,2.9,,8,8,8,8,,,,SF @ LAR,49ers @ Rams,Melbourne Cricket Ground,outdoor,Netflix,,,,9/10/2026
 Jason Myers,K,SEA,,,1.8,2.3,8,,,,,,,,,,,,,,,,,,2.6,,8,8,8,8,,,,n/a,n/a,n/a,n/a,n/a,8100,https://dkn.gs/sports/images/nfl/players/50/19936.png, @ ,9/9/2026
-Ka'imi Fairbairn,K,HOU,,,1.9,2.4,8,,,,,,,,,,,,,,,,,,2.3,,8,8,8,8,,,,n/a,n/a,n/a,n/a,n/a,11400,https://dkn.gs/sports/images/nfl/players/50/17717.png, @ ,
+Ka'imi Fairbairn,K,HOU,,,1.9,2.4,8,,,,,,,,,,,,,,,,,,2.3,,8,8,8,8,,,,LV @ HOU,Raiders @ Texans,Reliant Stadium,retractable_dome,ESPN,11400,https://dkn.gs/sports/images/nfl/players/50/17717.png, @ ,
 Cam Little,K,JAC,,,1.8,2.2,7.9,,,,,,,,,,,,,,,,,,2.5,,7.9,7.9,7.9,7.9,,,,,,,,,,,,
 Tyler Loop,K,BAL,,,1.7,2.1,7.9,,,,,,,,,,,,,,,,,,2.7,,7.8,7.8,7.8,7.8,,,,n/a,n/a,n/a,n/a,n/a,,,,9/13/2026
 Evan McPherson,K,CIN,,,1.7,2.1,7.7,,,,,,,,,,,,,,,,,,2.7,,7.8,7.8,7.8,7.8,,,,n/a,n/a,n/a,n/a,n/a,,,,9/13/2026
@@ -77,4 +77,4 @@ PHI,DST,PHI,,0.7,,,6.3,0.5,,0.7,21,,,,,,,,,,,2.6,0,0.2,,332.2,5.2,5.2,5.2,5.2,,,
 SEA,DST,SEA,,0.7,,,5.35,0.5,,0.8,20,,,,,,,,,,,2.9,0,0.2,,348.7,6.7,6.7,6.7,6.7,,,,NE @ SEA,Patriots @ Seahawks,Lumen Field,outdoor,NBC/Peacock,,,,
 DEN,DST,DEN,,0.7,,,4.15,0.4,,0.8,22,,,,,,,,,,,2.8,0,0.2,,337.8,5.4,5.4,5.4,5.4,,,,,,,,,,,,
 LAR,DST,LAR,11,,,,3,,,,,,,,,,,,,,,,,,,,1,1,1,1,,,,,,,,,,,,
-HOU,DST,HOU,8,,,,1,,,,,,,,,,,,,,,,,,,,1,1,1,1,,,,n/a,n/a,n/a,n/a,n/a,,,,
+HOU,DST,HOU,8,,,,1,,,,,,,,,,,,,,,,,,,,1,1,1,1,,,,LV @ HOU,Raiders @ Texans,Reliant Stadium,retractable_dome,ESPN,,,,
