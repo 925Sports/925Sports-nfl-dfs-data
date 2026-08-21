@@ -4,7 +4,7 @@ Josh Allen,QB,BUF,,,,,19.4,,0.2,0.595,,30.6,19.9,1.59,223.5,,,,6.2,0.5,32.5,,,,,
 Lamar Jackson,QB,BAL,,,,,19.1,,0.2,0.6,,27.5,18.1,1.6,219.5,,,,7,0.2,31.5,,,,,,18.73,18.53,18.73,18.73,,,,BAL @ IND,Ravens @ Colts,Lucas Oil Stadium,retractable_dome,CBS,6800,https://dkn.gs/sports/images/nfl/players/50/17173.png, @ ,9/13/2026
 Jaxson Dart,QB,NYG,,,,,18.8,,0.2,0.595,,30.3,19.3,1.4,219.5,,,,5.7,0.4,31.5,,,,,,19.14,18.94,19.14,19.14,,,,DAL @ NYG,Cowboys @ Giants,MetLife Stadium,outdoor,NBC/Peacock,,,,9/13/2026
 Joe Burrow,QB,CIN,,,,,18.5,,0.2,0.595,,34.2,23.1,2,265.5,,,,2.7,0.1,5.5,,,,,,18.98,18.78,18.98,18.98,,,,TB @ CIN,Buccaneers @ Bengals,Paycor Stadium,outdoor,FOX,6900,https://dkn.gs/sports/images/nfl/players/50/485441.png, @ ,9/13/2026
-Justin Herbert,QB,LAC,,,,,18.1,,0.2,0.7,,30,19.9,1.59,246.5,,,,4.5,0.2,22.5,,,,,,18.77,18.57,18.77,18.77,,,,n/a,n/a,n/a,n/a,n/a,6100,https://dkn.gs/sports/images/nfl/players/50/468527.png, @ ,9/13/2026
+Justin Herbert,QB,LAC,,,,,18.1,,0.2,0.7,,30,19.9,1.59,246.5,,,,4.5,0.2,22.5,,,,,,18.77,18.57,18.77,18.77,,,,ARI @ LAC,Cardinals @ Chargers,SoFi Stadium,outdoor,CBS,6100,https://dkn.gs/sports/images/nfl/players/50/468527.png, @ ,9/13/2026
 Caleb Williams,QB,CHI,,,,,17.7,,0.2,0.595,,32.8,20,1.59,238.5,,,,4.2,0.1,19.5,,,,,,17.66,17.46,17.66,17.66,,,,CHI @ CAR,Bears @ Panthers,Bank of America Stadium,outdoor,FOX,6300,https://dkn.gs/sports/images/nfl/players/50/779692.png, @ ,9/13/2026
 Dak Prescott,QB,DAL,,,,,17.5,,0.2,0.595,,33.5,22.2,1.59,256.5,,,,2.6,0.1,6.5,,,,,,17.08,16.88,17.08,17.08,,,,DAL @ NYG,Cowboys @ Giants,MetLife Stadium,outdoor,NBC/Peacock,,,,9/13/2026
 Jayden Daniels,QB,WAS,,,,,17.5,,0.2,0.595,,31.9,20.4,1.2,221,,,,7.3,0.2,39.5,,,,,,18,17.8,18,18,,,,n/a,n/a,n/a,n/a,n/a,6500,https://dkn.gs/sports/images/nfl/players/50/779695.png, @ ,9/13/2026
@@ -66,7 +66,7 @@ CLE,DST,CLE,11,,,,17,,,,,,,,,,,,,,,,,,,,1,1,1,1,,,,n/a,n/a,n/a,n/a,n/a,,,,
 MIN,DST,MIN,6,,,,9,,,,,,,,,,,,,,,,,,,,1,1,1,1,,,,GB @ MIN,Packers @ Vikings,U.S. Bank Stadium,dome,CBS,,,,
 BAL,DST,BAL,13,,,,8,,,,,,,,,,,,,,,,,,,,1,1,1,1,,,,BAL @ IND,Ravens @ Colts,Lucas Oil Stadium,retractable_dome,CBS,,,,
 JAX,DST,JAX,,0.8,,,7.8,0.5,,0.9,16.8,,,,,,,,,,,2.9,0,0.2,,301.7,6.9,6.9,6.9,6.9,,,,CLE @ JAX,Browns @ Jaguars,EverBank Stadium,outdoor,CBS,,,,
-LAC,DST,LAC,,0.4,,,7.6,0.6,,0.8,18.5,,,,,,,,,,,3,0,0.2,,320.7,7,7,7,7,,,,n/a,n/a,n/a,n/a,n/a,,,,
+LAC,DST,LAC,,0.4,,,7.6,0.6,,0.8,18.5,,,,,,,,,,,3,0,0.2,,320.7,7,7,7,7,,,,ARI @ LAC,Cardinals @ Chargers,SoFi Stadium,outdoor,CBS,,,,
 TEN,DST,TEN,,0.7,,,7.4,0.5,,0.8,19.5,,,,,,,,,,,3,0,0.1,,328.3,6.2,6.2,6.2,6.2,,,,NYJ @ TEN,Jets @ Titans,Nissan Stadium,outdoor,CBS,,,,
 NE,DST,NE,11,,,,7,,,,,,,,,,,,,,,,,,,,1,1,1,1,,,,NE @ SEA,Patriots @ Seahawks,Lumen Field,outdoor,NBC/Peacock,,,,
 LV,DST,LV,,0.7,,,6.7,0.5,,0.6,18.1,,,,,,,,,,,2.8,0,0.1,,338.2,5.6,5.6,5.6,5.6,,,,n/a,n/a,n/a,n/a,n/a,,,,
@@ -77,4 +77,4 @@ PHI,DST,PHI,,0.7,,,6.3,0.5,,0.7,21,,,,,,,,,,,2.6,0,0.2,,332.2,5.2,5.2,5.2,5.2,,,
 SEA,DST,SEA,,0.7,,,5.35,0.5,,0.8,20,,,,,,,,,,,2.9,0,0.2,,348.7,6.7,6.7,6.7,6.7,,,,NE @ SEA,Patriots @ Seahawks,Lumen Field,outdoor,NBC/Peacock,,,,
 DEN,DST,DEN,,0.7,,,4.15,0.4,,0.8,22,,,,,,,,,,,2.8,0,0.2,,337.8,5.4,5.4,5.4,5.4,,,,GB @ DEN,Packers @ Broncos,Empower Field at Mile High,outdoor,NFL Network,,,,
 LAR,DST,LAR,11,,,,3,,,,,,,,,,,,,,,,,,,,1,1,1,1,,,,,,,,,,,,
-HOU,DST,HOU,8,,,,1,,,,,,,,,,,,,,,,,,,,1,1,1,1,,,,n/a,n/a,n/a,n/a,n/a,,,,
+HOU,DST,HOU,8,,,,1,,,,,,,,,,,,,,,,,,,,1,1,1,1,,,,BUF @ HOU,Bills @ Texans,Reliant Stadium,retractable_dome,CBS,,,,
