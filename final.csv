@@ -2,7 +2,7 @@ Player,Position,Team,Opp,FF Avg,FG Avg,FGA Avg,FPTS Avg,FR Avg,FUM_LOST Avg,INT 
 Jalen Hurts,QB,PHI,,,,,19.9,,0.2,0.5,,27.9,18.5,1.5,215.5,,,,6.6,0.6,29.5,,,,,,20.47,20.27,20.47,20.47,,,,WAS @ PHI,Commanders @ Eagles,Lincoln Financial Field,outdoor,FOX,6600,https://dkn.gs/sports/images/nfl/players/50/479300.png, @ ,9/13/2026
 Josh Allen,QB,BUF,,,,,19.4,,0.2,0.595,,30.6,19.9,1.59,223.5,,,,6.2,0.5,32.5,,,,,,20.76,20.56,20.76,20.76,,,,BUF @ HOU,Bills @ Texans,Reliant Stadium,retractable_dome,CBS,7000,https://dkn.gs/sports/images/nfl/players/50/11370.png, @ ,9/13/2026
 Lamar Jackson,QB,BAL,,,,,19.1,,0.2,0.6,,27.5,18.1,1.6,219.5,,,,7,0.2,31.5,,,,,,18.73,18.53,18.73,18.73,,,,BAL @ IND,Ravens @ Colts,Lucas Oil Stadium,retractable_dome,CBS,6800,https://dkn.gs/sports/images/nfl/players/50/17173.png, @ ,9/13/2026
-Jaxson Dart,QB,NYG,,,,,18.8,,0.2,0.595,,30.3,19.3,1.4,219.5,,,,5.7,0.4,31.5,,,,,,19.14,18.94,19.14,19.14,,,,DAL @ NYG,Cowboys @ Giants,MetLife Stadium,outdoor,NBC/Peacock,,,,9/13/2026
+Jaxson Dart,QB,NYG,,,,,18.8,,0.2,0.595,,30.3,19.3,1.4,220,,,,5.7,0.4,31.5,,,,,,19.16,18.96,19.16,19.16,,,,DAL @ NYG,Cowboys @ Giants,MetLife Stadium,outdoor,NBC/Peacock,,,,9/13/2026
 Joe Burrow,QB,CIN,,,,,18.6,,0.2,0.595,,34.2,23.1,2,265.5,,,,2.7,0.1,5.5,,,,,,18.98,18.78,18.98,18.98,,,,TB @ CIN,Buccaneers @ Bengals,Paycor Stadium,outdoor,FOX,6900,https://dkn.gs/sports/images/nfl/players/50/485441.png, @ ,9/13/2026
 Justin Herbert,QB,LAC,,,,,18.1,,0.2,0.7,,30,19.9,1.59,246.5,,,,4.5,0.2,22.5,,,,,,18.77,18.57,18.77,18.77,,,,ARI @ LAC,Cardinals @ Chargers,SoFi Stadium,outdoor,CBS,6100,https://dkn.gs/sports/images/nfl/players/50/468527.png, @ ,9/13/2026
 Caleb Williams,QB,CHI,,,,,17.7,,0.2,0.595,,32.8,20,1.59,238.5,,,,4.2,0.1,19.5,,,,,,17.66,17.46,17.66,17.66,,,,CHI @ CAR,Bears @ Panthers,Bank of America Stadium,outdoor,FOX,6300,https://dkn.gs/sports/images/nfl/players/50/779692.png, @ ,9/13/2026
@@ -32,7 +32,7 @@ Amon-Ra St. Brown,WR,DET,,,,,12.29,,0,,,,,,0,7.585,0.6,78.5,0.2,0,0.5,,,,,,19.09
 CeeDee Lamb,WR,DAL,,,,,11.1,,0,,,,,,,6,0.5,74.5,0.2,0,0.9,,,,,,16.54,13.54,16.54,16.54,,,,DAL @ NYG,Cowboys @ Giants,MetLife Stadium,outdoor,NBC/Peacock,,,,9/13/2026
 Justin Jefferson,WR,MIN,,,,,10.6,,0,,,,,,,5.585,0.4,76.5,0.1,0,0.6,,,,,,15.7,12.9,15.7,15.7,,,,n/a,n/a,n/a,n/a,n/a,7300,https://dkn.gs/sports/images/nfl/players/50/485454.png, @ ,9/13/2026
 Nico Collins,WR,HOU,,,,,10.4,,0,,,,,,,4.585,0.4,70.5,0.1,0,0.9,,,,,,14.13,11.83,14.13,14.13,,,,n/a,n/a,n/a,n/a,n/a,7000,https://dkn.gs/sports/images/nfl/players/50/560761.png, @ ,9/13/2026
-George Pickens,WR,DAL,,,,,10.3,,0,,,,,,,4.975,0.5,66.5,0,0,0.2,,,,,,14.65,12.16,14.65,14.65,,,,n/a,n/a,n/a,n/a,n/a,,,,9/13/2026
+George Pickens,WR,DAL,,,,,10.3,,0,,,,,,,4.975,0.5,66,0,0,0.2,,,,,,14.6,12.11,14.6,14.6,,,,n/a,n/a,n/a,n/a,n/a,,,,9/13/2026
 Zay Flowers,WR,BAL,,,,,10,,0,,,,,,,4.585,0.4,66,0.5,0,0.5,,,,,,13.64,11.34,13.64,13.64,,,,n/a,n/a,n/a,n/a,n/a,6400,https://dkn.gs/sports/images/nfl/players/50/706447.png, @ ,9/13/2026
 Drake London,WR,ATL,,,,,9.9,,0,,,,,,,5.585,0.4,72.5,0,0,0.1,,,,,,15.25,12.45,15.25,15.25,,,,n/a,n/a,n/a,n/a,n/a,6500,https://dkn.gs/sports/images/nfl/players/50/630530.png, @ ,9/13/2026
 Brian Thomas Jr.,WR,JAC,CLE,,,,7.85,,,,,,,,0,,,48.5,,,2,,,,,,5.05,5.05,5.05,5.05,,,,n/a,n/a,n/a,n/a,n/a,11400,https://dkn.gs/sports/images/nfl/players/50/787676.png, @ ,9/13/2026
@@ -71,7 +71,7 @@ TEN,DST,TEN,,0.7,,,7.4,0.5,,0.8,19.5,,,,,,,,,,,3,0,0.1,,328.3,6.2,6.2,6.2,6.2,,,
 NE,DST,NE,11,,,,7,,,,,,,,,,,,,,,,,,,,1,1,1,1,,,,NE @ SEA,Patriots @ Seahawks,Lumen Field,outdoor,NBC/Peacock,,,,
 LV,DST,LV,,0.7,,,6.7,0.5,,0.6,18.1,,,,,,,,,,,2.8,0,0.1,,338.2,5.6,5.6,5.6,5.6,,,,n/a,n/a,n/a,n/a,n/a,,,,
 PIT,DST,PIT,,0.8,,,6.65,0.6,,0.9,19.2,,,,,,,,,,,2.6,0,0.1,,336.2,6.2,6.2,6.2,6.2,,,,ATL @ PIT,Falcons @ Steelers,Acrisure Stadium,outdoor,FOX,,,,
-DET,DST,DET,,0.8,,,6.4,0.6,,0.8,20.1,,,,,,,,,,,2.8,0,0.2,,329.7,5.8,5.8,5.8,5.8,,,,n/a,n/a,n/a,n/a,n/a,,,,
+DET,DST,DET,,0.8,,,6.4,0.6,,0.8,20.1,,,,,,,,,,,2.8,0,0.2,,329.7,5.8,5.8,5.8,5.8,,,,NO @ DET,Saints @ Lions,Ford Field,dome,FOX,,,,
 NYJ,DST,NYJ,,0.7,,,6.3,0.5,,0.6,19.9,,,,,,,,,,,2.6,0,0.1,,319.7,5.4,5.4,5.4,5.4,,,,n/a,n/a,n/a,n/a,n/a,,,,
 PHI,DST,PHI,,0.7,,,6.3,0.5,,0.7,21,,,,,,,,,,,2.6,0,0.2,,332.2,5.2,5.2,5.2,5.2,,,,WAS @ PHI,Commanders @ Eagles,Lincoln Financial Field,outdoor,FOX,,,,
 SEA,DST,SEA,,0.7,,,5.35,0.5,,0.8,20,,,,,,,,,,,2.9,0,0.2,,348.7,6.7,6.7,6.7,6.7,,,,NE @ SEA,Patriots @ Seahawks,Lumen Field,outdoor,NBC/Peacock,,,,
