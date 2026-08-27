@@ -2404,7 +2404,7 @@
                 <div id="generationLog"></div>
 
                 <div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1rem;align-items:center;">
-                    <button class="success" data-tip="Download pure DraftKings lineup CSV (exact headers QB,RB,RB… or CPT,FLEX… + unquoted player IDs). Use on the Upload Lineups page. If you use Edit Entries, paste the ID columns into the DK template instead." onclick="downloadLineups()">⬇ Download CSV (DK Upload)</button>
+                    <button class="success" data-tip="Download DraftKings Upload Lineups CSV. Classic header is QB,RB,RB,WR,WR,WR,TE,FLEX,DST. Showdown is CPT,FLEX,FLEX,FLEX,FLEX,FLEX. Cells are Name (Draftable ID). Use Lineups → Upload Lineups and pick the matching NFL slate. For Edit Entries, paste these player columns into the DK template (leave Entry ID / Contest columns alone)." onclick="downloadLineups()">⬇ Download CSV (DK Upload)</button>
                     <button class="success" data-tip="Export only checked lineups as DraftKings CSV." onclick="exportCheckedLineups()">⬇ Export Checked</button>
                     <button class="ghost" data-tip="Download a readable CSV with names, salary, projected points, and ownership." onclick="downloadLineupsDetailed()">⬇ Detailed CSV</button>
                     <button class="ghost" data-tip="Copy all lineups as plain text for Discord, Twitter, or notes." onclick="copyLineupsAsText()">📋 Copy as Text</button>
@@ -6199,32 +6199,9 @@
                 alert('Check at least one lineup in the results table.');
                 return;
             }
-            const isShowdown = selectedSlate.includes('Showdown Captain Mode');
             const indices = [...lineupChecked].sort((a, b) => a - b);
-            let csv;
-            if (isShowdown) {
-                csv = ['CPT,FLEX,FLEX,FLEX,FLEX,FLEX'];
-                indices.forEach(idx => {
-                    const l = generatedLineups[idx];
-                    if (!l) return;
-                    const ids = [l.lineup.captain?.id, ...(l.lineup.flex || []).map(f => f?.id)].map(id => (id != null && id !== '') ? String(id).replace(/"/g, '') : '');
-                    csv.push(ids.join(','));
-                });
-            } else {
-                csv = ['QB,RB,RB,WR,WR,WR,TE,FLEX,DST'];
-                indices.forEach(idx => {
-                    const l = generatedLineups[idx];
-                    if (!l) return;
-                    const ids = [l.lineup.QB, l.lineup.RB1, l.lineup.RB2, l.lineup.WR1, l.lineup.WR2, l.lineup.WR3, l.lineup.TE, l.lineup.FLEX, l.lineup.DST]
-                        .map(p => (p && p.id != null && p.id !== '') ? String(p.id).replace(/"/g, '') : '');
-                    csv.push(ids.join(','));
-                });
-            }
-            const blob = new Blob([csv.join('\n') + '\n'], { type: 'text/csv;charset=utf-8' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = `nfl_dk_checked_${indices.length}.csv`;
-            a.click();
+            const lineups = indices.map(idx => generatedLineups[idx]).filter(Boolean);
+            downloadDkCsv(lineups, 'DK_NFL_checked');
         }
 
         function openSwapModal(lineupIndex, slot) {
@@ -8090,33 +8067,96 @@
             updateExposureComparison(counts, [], groupList, selectedSlate.includes('Showdown Captain Mode'), pos);
         }
 
-        function downloadLineups() {
-            markChecklist('export', true);
-            setNextStep('CSV downloaded. You can still run Simulation or tweak tiers and re-run.');
-            const isShowdown = selectedSlate.includes('Showdown Captain Mode');
-            // Pure DraftKings "Upload Lineups" format: exact position headers + player IDs only.
-            // Unquoted numeric IDs avoid common "headers incorrect" / parse errors on DK.
-            let csv;
-            if (isShowdown) {
-                csv = ['CPT,FLEX,FLEX,FLEX,FLEX,FLEX'];
-                generatedLineups.forEach(l => {
-                    const ids = [l.lineup.captain?.id, ...(l.lineup.flex || []).map(f => f?.id)].map(id => (id != null && id !== '') ? String(id).replace(/"/g, '') : '');
-                    csv.push(ids.join(','));
-                });
-            } else {
-                csv = ['QB,RB,RB,WR,WR,WR,TE,FLEX,DST'];
-                generatedLineups.forEach(l => {
-                    const ids = [l.lineup.QB, l.lineup.RB1, l.lineup.RB2, l.lineup.WR1, l.lineup.WR2, l.lineup.WR3, l.lineup.TE, l.lineup.FLEX, l.lineup.DST]
-                        .map(p => (p && p.id != null && p.id !== '') ? String(p.id).replace(/"/g, '') : '');
-                    csv.push(ids.join(','));
-                });
-            }
-            // Trailing newline helps some DK parsers
-            const blob = new Blob([csv.join('\n') + '\n'], { type: 'text/csv;charset=utf-8' });
+        function isDkShowdownSlate(slate) {
+            const s = String(slate || selectedSlate || '');
+            return /showdown|captain mode/i.test(s);
+        }
+
+        function dkPlayerName(p) {
+            if (!p) return '';
+            return String(p.baseName || p.name || '')
+                .replace(/\s*\([^)]*\)\s*$/, '')
+                .replace(/^"+|"+$/g, '')
+                .trim();
+        }
+
+        function dkPlayerId(p) {
+            if (!p) return '';
+            const raw = p.id != null ? p.id : '';
+            return String(raw).replace(/[^0-9]/g, '');
+        }
+
+        function dkCell(p) {
+            const id = dkPlayerId(p);
+            const name = dkPlayerName(p);
+            if (!id) return '';
+            // Official DK upload cell: Name (DraftableID)
+            const cell = name ? (name + ' (' + id + ')') : id;
+            return '"' + cell.replace(/"/g, '""') + '"';
+        }
+
+        function classicPlayersFromLineup(l) {
+            const lu = l && l.lineup ? l.lineup : {};
+            return [lu.QB, lu.RB1, lu.RB2, lu.WR1, lu.WR2, lu.WR3, lu.TE, lu.FLEX, lu.DST];
+        }
+
+        function showdownPlayersFromLineup(l) {
+            const lu = l && l.lineup ? l.lineup : {};
+            const flex = Array.isArray(lu.flex) ? lu.flex.slice(0, 5) : [];
+            while (flex.length < 5) flex.push(null);
+            return [lu.captain, ...flex];
+        }
+
+        function buildDkUploadCsv(lineups, forceShowdown) {
+            const isShowdown = forceShowdown == null ? isDkShowdownSlate(selectedSlate) : !!forceShowdown;
+            const header = isShowdown
+                ? 'CPT,FLEX,FLEX,FLEX,FLEX,FLEX'
+                : 'QB,RB,RB,WR,WR,WR,TE,FLEX,DST';
+            const rows = [header];
+            let missing = 0;
+            (lineups || []).forEach(l => {
+                if (!l) return;
+                const players = isShowdown ? showdownPlayersFromLineup(l) : classicPlayersFromLineup(l);
+                if (players.some(p => !dkPlayerId(p))) missing++;
+                rows.push(players.map(dkCell).join(','));
+            });
+            return { csv: rows.join('\r\n') + '\r\n', isShowdown, missing, count: rows.length - 1 };
+        }
+
+        function downloadTextFile(content, filename) {
+            // BOM + CRLF so Excel / DK's parser see the position headers correctly
+            const blob = new Blob(['\uFEFF' + content], { type: 'text/csv;charset=utf-8;' });
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
-            a.download = 'nfl_dk_lineups.csv';
+            a.download = filename;
             a.click();
+            setTimeout(() => URL.revokeObjectURL(a.href), 1500);
+        }
+
+        function downloadDkCsv(lineups, filenamePrefix) {
+            if (!lineups || !lineups.length) {
+                alert('No lineups to export. Run the optimizer first.');
+                return false;
+            }
+            const built = buildDkUploadCsv(lineups);
+            if (built.missing) {
+                const proceed = confirm(
+                    built.missing + ' lineup(s) are missing a DraftKings player ID.\n\n' +
+                    'Those rows may fail on upload. Download anyway?'
+                );
+                if (!proceed) return false;
+            }
+            const kind = built.isShowdown ? 'Showdown' : 'Classic';
+            const fname = (filenamePrefix || 'DK_NFL') + '_' + kind + '_' + built.count + '.csv';
+            downloadTextFile(built.csv, fname);
+            return true;
+        }
+
+        function downloadLineups() {
+            markChecklist('export', true);
+            if (downloadDkCsv(generatedLineups, 'DK_NFL_lineups')) {
+                setNextStep('CSV downloaded. Upload at draftkings.com/lineup/upload — pick NFL + the matching Classic or Showdown slate/time.');
+            }
         }
 
         function downloadLineupsDetailed() {
@@ -8567,32 +8607,9 @@
                 alert('Check at least one lineup in the Simulation Results table.');
                 return;
             }
-            const isShowdown = selectedSlate.includes('Showdown Captain Mode');
             const indices = [...mcChecked].sort((a, b) => a - b);
-            let csv;
-            if (isShowdown) {
-                csv = ['CPT,FLEX,FLEX,FLEX,FLEX,FLEX'];
-                indices.forEach(idx => {
-                    const l = generatedLineups[idx - 1];
-                    if (!l) return;
-                    const ids = [l.lineup.captain?.id, ...(l.lineup.flex || []).map(f => f?.id)].map(id => (id != null && id !== '') ? String(id).replace(/"/g, '') : '');
-                    csv.push(ids.join(','));
-                });
-            } else {
-                csv = ['QB,RB,RB,WR,WR,WR,TE,FLEX,DST'];
-                indices.forEach(idx => {
-                    const l = generatedLineups[idx - 1];
-                    if (!l) return;
-                    const ids = [l.lineup.QB, l.lineup.RB1, l.lineup.RB2, l.lineup.WR1, l.lineup.WR2, l.lineup.WR3, l.lineup.TE, l.lineup.FLEX, l.lineup.DST]
-                        .map(p => (p && p.id != null && p.id !== '') ? String(p.id).replace(/"/g, '') : '');
-                    csv.push(ids.join(','));
-                });
-            }
-            const blob = new Blob([csv.join('\n') + '\n'], { type: 'text/csv;charset=utf-8' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = `nfl_dk_checked_lineups_${indices.length}.csv`;
-            a.click();
+            const lineups = indices.map(idx => generatedLineups[idx - 1]).filter(Boolean);
+            downloadDkCsv(lineups, 'DK_NFL_sim_checked');
         }
     </script>
 </body>
