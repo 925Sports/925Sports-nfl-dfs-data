@@ -1,61 +1,61 @@
 Player,Position,Team,Opp,FF Avg,FG Avg,FGA Avg,FPTS Avg,FR Avg,FUM_LOST Avg,INT Avg,PA Avg,PASS_ATT Avg,PASS_CMP Avg,PASS_TD Avg,PASS_YDS Avg,REC Avg,REC_TD Avg,REC_YDS Avg,RUSH_ATT Avg,RUSH_TD Avg,RUSH_YDS Avg,SACK Avg,SAFETY Avg,TD Avg,XPT Avg,YDS_AGN Avg,DraftKings,FanDuel,PrizePicks,Underdog,Fav,Spread,O/U,Match Title (Underdog),Game Short Title (Underdog),Venue Name (Underdog),Venue Type (Underdog),Broadcasts (Underdog),Player Salary,Player Image,Tournament,Game Start Time
-Jalen Hurts,QB,PHI,,,,,20.3,,0.2,0.6,,29.585,19.1,1.515,214,,,,6.6,0.51,27.975,,,,,,19.68,19.48,19.68,19.68,,,,WAS @ PHI,Commanders @ Eagles,Lincoln Financial Field,outdoor,FOX,6600,https://dkn.gs/sports/images/nfl/players/50/479300.png, @ ,9/13/2026
-Lamar Jackson,QB,BAL,,,,,19.6,,0.2,0.6,,28.1,18.5,1.515,216.76,,,,7.4,0.4,33.995,,,,,,19.73,19.53,19.73,19.73,,,,BAL @ IND,Ravens @ Colts,Lucas Oil Stadium,retractable_dome,CBS,6800,https://dkn.gs/sports/images/nfl/players/50/17173.png, @ ,9/13/2026
-Josh Allen,QB,BUF,,,,,19.6,,0.2,0.595,,31,20.1,1.405,220.59,,,,6.2,0.5,27.215,,,,,,19.37,19.17,19.37,19.37,,,,n/a,n/a,n/a,n/a,n/a,7000,https://dkn.gs/sports/images/nfl/players/50/11370.png, @ ,9/13/2026
-Jaxson Dart,QB,NYG,,,,,19.2,,0.2,0.595,,29.585,20,1.455,218.39,,,,5.8,0.415,27.605,,,,,,19.01,18.81,19.01,19.01,,,,DAL @ NYG,Cowboys @ Giants,MetLife Stadium,outdoor,NBC/Peacock,,,,9/13/2026
-Joe Burrow,QB,CIN,,,,,19,,0.2,0.595,,35.3,23.8,1.825,268.24,,,,2.7,0.305,5.5,,,,,,19.61,19.41,19.61,19.61,,,,TB @ CIN,Buccaneers @ Bengals,Paycor Stadium,outdoor,FOX,6900,https://dkn.gs/sports/images/nfl/players/50/485441.png, @ ,9/13/2026
-Justin Herbert,QB,LAC,,,,,18.4,,0.2,0.7,,30.8,20.5,1.735,242.24,,,,4.5,0.36,22.5,,,,,,20.14,19.94,20.14,20.14,,,,ARI @ LAC,Cardinals @ Chargers,SoFi Stadium,outdoor,CBS,6100,https://dkn.gs/sports/images/nfl/players/50/468527.png, @ ,9/13/2026
-Dak Prescott,QB,DAL,,,,,17.8,,0.2,0.595,,34.585,21.585,1.655,259.27,,,,2.585,0.325,6.5,,,,,,18.8,18.6,18.8,18.8,,,,DAL @ NYG,Cowboys @ Giants,MetLife Stadium,outdoor,NBC/Peacock,,,,9/13/2026
-Caleb Williams,QB,CHI,,,,,17.7,,0.2,0.595,,33.1,20.1,1.595,235.43,,,,4.1,0.34,20.675,,,,,,19.11,18.91,19.11,19.11,,,,CHI @ CAR,Bears @ Panthers,Bank of America Stadium,outdoor,FOX,6300,https://dkn.gs/sports/images/nfl/players/50/779692.png, @ ,9/13/2026
-Jayden Daniels,QB,WAS,,,,,17.6,,0.2,0.595,,31.585,18.585,0.885,202.79,,,,7.585,0.41,36.63,,,,,,16.98,16.78,16.98,16.98,,,,WAS @ PHI,Commanders @ Eagles,Lincoln Financial Field,outdoor,FOX,6500,https://dkn.gs/sports/images/nfl/players/50/779695.png, @ ,9/13/2026
-Drake Maye,QB,NE,,,,,17.2,,0.2,0.595,,31.585,18.585,1.41,229.98,,,,5,0.355,24.05,,,,,,18.58,18.38,18.58,18.58,,,,NE @ SEA,Patriots @ Seahawks,Lumen Field,outdoor,NBC/Peacock,15000,https://dkn.gs/sports/images/nfl/players/50/779819.png, @ ,9/9/2026
+Jalen Hurts,QB,PHI,,,,,20.3,,0.2,0.6,,29.585,19.1,1.515,214.07,,,,6.6,0.51,27.975,,,,,,19.68,19.48,19.68,19.68,,,,WAS @ PHI,Commanders @ Eagles,Lincoln Financial Field,outdoor,FOX,6600,https://dkn.gs/sports/images/nfl/players/50/479300.png, @ ,9/13/2026
+Lamar Jackson,QB,BAL,,,,,19.6,,0.2,0.6,,28.1,18.5,1.515,215.43,,,,7.4,0.4,33.995,,,,,,19.68,19.48,19.68,19.68,,,,BAL @ IND,Ravens @ Colts,Lucas Oil Stadium,retractable_dome,CBS,6800,https://dkn.gs/sports/images/nfl/players/50/17173.png, @ ,9/13/2026
+Josh Allen,QB,BUF,,,,,19.6,,0.2,0.595,,31,20.1,1.405,220.75,,,,6.2,0.495,28.825,,,,,,19.51,19.31,19.51,19.51,,,,n/a,n/a,n/a,n/a,n/a,7000,https://dkn.gs/sports/images/nfl/players/50/11370.png, @ ,9/13/2026
+Jaxson Dart,QB,NYG,,,,,19.2,,0.2,0.595,,29.585,20,1.45,218.02,,,,5.8,0.415,27.555,,,,,,18.97,18.77,18.97,18.97,,,,DAL @ NYG,Cowboys @ Giants,MetLife Stadium,outdoor,NBC/Peacock,,,,9/13/2026
+Joe Burrow,QB,CIN,,,,,19,,0.2,0.595,,35.3,23.8,1.825,269.57,,,,2.7,0.305,5.5,,,,,,19.67,19.47,19.67,19.67,,,,TB @ CIN,Buccaneers @ Bengals,Paycor Stadium,outdoor,FOX,6900,https://dkn.gs/sports/images/nfl/players/50/485441.png, @ ,9/13/2026
+Justin Herbert,QB,LAC,,,,,18.4,,0.2,0.7,,30.8,20.5,1.735,238.3,,,,4.5,0.36,22.5,,,,,,19.98,19.78,19.98,19.98,,,,ARI @ LAC,Cardinals @ Chargers,SoFi Stadium,outdoor,CBS,6100,https://dkn.gs/sports/images/nfl/players/50/468527.png, @ ,9/13/2026
+Dak Prescott,QB,DAL,,,,,17.8,,0.2,0.595,,34.4,22.8,1.66,258.97,,,,2.6,0.32,6.5,,,,,,18.77,18.57,18.77,18.77,,,,DAL @ NYG,Cowboys @ Giants,MetLife Stadium,outdoor,NBC/Peacock,,,,9/13/2026
+Caleb Williams,QB,CHI,,,,,17.7,,0.2,0.595,,33.1,20.1,1.595,235.43,,,,4.1,0.34,22.345,,,,,,19.28,19.08,19.28,19.28,,,,CHI @ CAR,Bears @ Panthers,Bank of America Stadium,outdoor,FOX,6300,https://dkn.gs/sports/images/nfl/players/50/779692.png, @ ,9/13/2026
+Jayden Daniels,QB,WAS,,,,,17.6,,0.2,0.595,,31.585,18.585,0.885,203,,,,7.585,0.405,36.92,,,,,,16.99,16.79,16.99,16.99,,,,WAS @ PHI,Commanders @ Eagles,Lincoln Financial Field,outdoor,FOX,6500,https://dkn.gs/sports/images/nfl/players/50/779695.png, @ ,9/13/2026
+Drake Maye,QB,NE,,,,,17.2,,0.2,0.595,,31.585,21.3,1.41,228.75,,,,5,0.35,24.05,,,,,,18.5,18.3,18.5,18.5,,,,NE @ SEA,Patriots @ Seahawks,Lumen Field,outdoor,NBC/Peacock,15000,https://dkn.gs/sports/images/nfl/players/50/779819.png, @ ,9/9/2026
 Michael Penix Jr.,QB,ATL,PIT,,,,9.47,,,,,,,,132,,,0,,,4,,,,,,5.68,5.68,5.68,5.68,,,,ATL @ PIT,Falcons @ Steelers,Acrisure Stadium,outdoor,FOX,4800,https://dkn.gs/sports/images/nfl/players/50/787659.png, @ ,
-Jahmyr Gibbs,RB,DET,,,,,17.5,,0.1,,,,,,,3.9,0.1409090909,32.5,16.8,0.6340909091,81.83,,,,,,19.88,17.83,19.88,19.88,,,,n/a,n/a,n/a,n/a,n/a,8000,https://dkn.gs/sports/images/nfl/players/50/693115.png, @ ,9/13/2026
-Bijan Robinson,RB,ATL,,,,,15.9,,0.1,,,,,,,4.585,0.1857142857,38.08,17.585,0.4642857143,77.82,,,,,,19.97,17.58,19.97,19.97,,,,ATL @ PIT,Falcons @ Steelers,Acrisure Stadium,outdoor,FOX,7700,https://dkn.gs/sports/images/nfl/players/50/693112.png, @ ,9/13/2026
-Jonathan Taylor,RB,IND,,,,,14.8,,0.1,,,,,,,3,0.083125,14,17.8,0.581875,76.11,,,,,,15.9,14.3,15.9,15.9,,,,n/a,n/a,n/a,n/a,n/a,7300,https://dkn.gs/sports/images/nfl/players/50/468700.png, @ ,9/13/2026
-Christian McCaffrey,RB,SF,,,,,14.6,,0.1,,,,,,,4.505,0.2475,37.25,15.8,0.4125,59.135,,,,,,18,15.65,18,18,,,,SF @ LAR,49ers @ Rams,Melbourne Cricket Ground,outdoor,Netflix,,,,9/10/2026
-Derrick Henry,RB,BAL,,,,,14.2,,0.1,,,,,,,1.2,0.08,5,17.4,0.64,84.26,,,,,,14.35,13.65,14.35,14.35,,,,n/a,n/a,n/a,n/a,n/a,6700,https://dkn.gs/sports/images/nfl/players/50/19898.png, @ ,9/13/2026
-De'Von Achane,RB,MIA,,,,,13.8,,0.1,,,,,,,3.6,0.19,35.11,14.6,0.38,72.25,,,,,,17.66,15.76,17.66,17.66,,,,MIA @ LV,Dolphins @ Raiders,Allegiant Stadium,dome,FOX,7000,https://dkn.gs/sports/images/nfl/players/50/706555.png, @ ,9/13/2026
-Saquon Barkley,RB,PHI,,,,,13.2,,0.1,,,,,,,2.455,0.1041666667,15.07,17,0.5208333333,75.455,,,,,,15.16,13.83,15.16,15.16,,,,WAS @ PHI,Commanders @ Eagles,Lincoln Financial Field,outdoor,FOX,6900,https://dkn.gs/sports/images/nfl/players/50/18972.png, @ ,9/13/2026
-James Cook III,RB,BUF,,,,,13.1,,0.1,,,,,,,2.3,0.08214285714,15,15.9,0.4928571429,74.545,,,,,,14.6,13.35,14.6,14.6,,,,n/a,n/a,n/a,n/a,n/a,7200,https://dkn.gs/sports/images/nfl/players/50/640895.png, @ ,9/13/2026
-Omarion Hampton,RB,LAC,,,,,12.5,,0.1,,,,,,,3.2,0.09142857143,20.4,14.8,0.5485714286,63.57,,,,,,15.34,13.64,15.34,15.34,,,,n/a,n/a,n/a,n/a,n/a,6800,https://dkn.gs/sports/images/nfl/players/50/886062.png, @ ,9/13/2026
-Javonte Williams,RB,DAL,,,,,12.5,,0.1,,,,,,,2.2,0.09571428571,10.5,15.585,0.5742857143,69.98,,,,,,14.17,12.97,14.17,14.17,,,,DAL @ NYG,Cowboys @ Giants,MetLife Stadium,outdoor,NBC/Peacock,,,,9/13/2026
-Kenneth Walker III,RB,KC,DEN,,,,10.48,,,,,,,,0,2.42,0,14.1,,0.605,59.575,,,,,,13.42,12.21,13.42,13.42,,,,n/a,n/a,n/a,n/a,n/a,,,,9/14/2026
+Jahmyr Gibbs,RB,DET,,,,,17.5,,0.1,,,,,,,3.9,0.1409090909,32.5,16.8,0.6340909091,84.5,,,,,,20.15,18.1,20.15,20.15,,,,n/a,n/a,n/a,n/a,n/a,8000,https://dkn.gs/sports/images/nfl/players/50/693115.png, @ ,9/13/2026
+Bijan Robinson,RB,ATL,,,,,15.9,,0.1,,,,,,,4.585,0.1857142857,38.08,17.585,0.4642857143,72.82,,,,,,19.47,17.08,19.47,19.47,,,,ATL @ PIT,Falcons @ Steelers,Acrisure Stadium,outdoor,FOX,7700,https://dkn.gs/sports/images/nfl/players/50/693112.png, @ ,9/13/2026
+Jonathan Taylor,RB,IND,,,,,14.8,,0.1,,,,,,,3,0.083125,14,17.8,0.581875,76.86,,,,,,15.98,14.38,15.98,15.98,,,,n/a,n/a,n/a,n/a,n/a,7300,https://dkn.gs/sports/images/nfl/players/50/468700.png, @ ,9/13/2026
+Christian McCaffrey,RB,SF,,,,,14.6,,0.1,,,,,,,4.505,0.249375,37.545,15.8,0.415625,59.13,,,,,,18.06,15.71,18.06,18.06,,,,SF @ LAR,49ers @ Rams,Melbourne Cricket Ground,outdoor,Netflix,,,,9/10/2026
+Derrick Henry,RB,BAL,,,,,14.2,,0.1,,,,,,,1.2,0.08,5,17.4,0.64,83.26,,,,,,14.25,13.55,14.25,14.25,,,,n/a,n/a,n/a,n/a,n/a,6700,https://dkn.gs/sports/images/nfl/players/50/19898.png, @ ,9/13/2026
+De'Von Achane,RB,MIA,,,,,13.8,,0.1,,,,,,,3.6,0.19,35.11,14.6,0.38,69.5,,,,,,17.38,15.48,17.38,17.38,,,,MIA @ LV,Dolphins @ Raiders,Allegiant Stadium,dome,FOX,7000,https://dkn.gs/sports/images/nfl/players/50/706555.png, @ ,9/13/2026
+Saquon Barkley,RB,PHI,,,,,13.2,,0.1,,,,,,,2.45,0.1041666667,15.07,17,0.5208333333,74.75,,,,,,15.08,13.76,15.08,15.08,,,,WAS @ PHI,Commanders @ Eagles,Lincoln Financial Field,outdoor,FOX,6900,https://dkn.gs/sports/images/nfl/players/50/18972.png, @ ,9/13/2026
+James Cook III,RB,BUF,,,,,13.1,,0.1,,,,,,,2.3,0.08,15,15.9,0.48,74.545,,,,,,14.51,13.26,14.51,14.51,,,,n/a,n/a,n/a,n/a,n/a,7200,https://dkn.gs/sports/images/nfl/players/50/640895.png, @ ,9/13/2026
+Omarion Hampton,RB,LAC,,,,,12.5,,0.1,,,,,,,3.2,0.09142857143,20.4,14.8,0.5485714286,63.13,,,,,,15.29,13.59,15.29,15.29,,,,n/a,n/a,n/a,n/a,n/a,6800,https://dkn.gs/sports/images/nfl/players/50/886062.png, @ ,9/13/2026
+Javonte Williams,RB,DAL,,,,,12.5,,0.1,,,,,,,2.2,0.09714285714,10.5,16.1,0.5828571429,70.5,,,,,,14.28,13.08,14.28,14.28,,,,DAL @ NYG,Cowboys @ Giants,MetLife Stadium,outdoor,NBC/Peacock,,,,9/13/2026
+Kenneth Walker III,RB,KC,DEN,,,,10.48,,,,,,,,0,2.405,0,14.1,,0.605,59.575,,,,,,13.4,12.2,13.4,13.4,,,,n/a,n/a,n/a,n/a,n/a,,,,9/14/2026
 Mike Washington Jr.,RB,LV,MIA,,,,8.23,,,,,,,,0,,0,15,,0.555,40,,,,,,8.83,8.83,8.83,8.83,,,,n/a,n/a,n/a,n/a,n/a,4600,https://dkn.gs/sports/images/nfl/teams/50/18388.png, @ ,9/13/2026
-Tyrone Tracy Jr.,RB,NYG,DAL,,,,7.05,,,,,,,,0,,0,16,,0.38,37,,,,,,7.58,7.58,7.58,7.58,,,,n/a,n/a,n/a,n/a,n/a,,,,9/13/2026
-Chris Rodriguez Jr.,RB,JAC,CLE,,,,7.03,,,,,,,,0,,0,1,,0.425,38,,,,,,6.45,6.45,6.45,6.45,,,,n/a,n/a,n/a,n/a,n/a,5100,https://dkn.gs/sports/images/nfl/players/50/706670.png, @ ,9/13/2026
+Tyrone Tracy Jr.,RB,NYG,DAL,,,,7.05,,,,,,,,0,,0,16,,0.37,37,,,,,,7.52,7.52,7.52,7.52,,,,n/a,n/a,n/a,n/a,n/a,,,,9/13/2026
+Chris Rodriguez Jr.,RB,JAC,CLE,,,,7.03,,,,,,,,0,,0,1,,0.42,38,,,,,,6.42,6.42,6.42,6.42,,,,n/a,n/a,n/a,n/a,n/a,5100,https://dkn.gs/sports/images/nfl/players/50/706670.png, @ ,9/13/2026
 Brian Robinson Jr.,RB,ATL,PIT,,,,4.29,,,,,,,,0,,0,1,,0.35,30,,,,,,5.2,5.2,5.2,5.2,,,,n/a,n/a,n/a,n/a,n/a,4700,https://dkn.gs/sports/images/nfl/players/50/640926.png, @ ,9/13/2026
-Puka Nacua,WR,LAR,,,,,13.1,,0,,,,,,,7.405,0.52,90.55,0.7,0,0.5,,,,,,19.63,15.93,19.63,19.63,,,,SF @ LAR,49ers @ Rams,Melbourne Cricket Ground,outdoor,Netflix,,,,9/10/2026
+Puka Nacua,WR,LAR,,,,,13.1,,0,,,,,,,7.4,0.52,91.06,0.7,0,0.5,,,,,,19.68,15.98,19.68,19.68,,,,SF @ LAR,49ers @ Rams,Melbourne Cricket Ground,outdoor,Netflix,,,,9/10/2026
 Ja'Marr Chase,WR,CIN,,,,,12.8,,0,,,,,,,6.79,0.56,87.57,0.2,0,1.1,,,,,,19.02,15.62,19.02,19.02,,,,n/a,n/a,n/a,n/a,n/a,7800,https://dkn.gs/sports/images/nfl/players/50/557826.png, @ ,9/13/2026
-Amon-Ra St. Brown,WR,DET,,,,,12.39,,0,,,,,,0,6.225,0.555,78.43,0.2,0,0.5,,,,,,17.45,14.34,17.45,17.45,,,,n/a,n/a,n/a,n/a,n/a,7500,https://dkn.gs/sports/images/nfl/players/50/560800.png, @ ,9/13/2026
+Amon-Ra St. Brown,WR,DET,,,,,12.39,,0,,,,,,0,6.225,0.56,78.43,0.2,0,0.5,,,,,,17.48,14.37,17.48,17.48,,,,n/a,n/a,n/a,n/a,n/a,7500,https://dkn.gs/sports/images/nfl/players/50/560800.png, @ ,9/13/2026
 Jaxon Smith-Njigba,WR,SEA,,,,,12.3,,0,,,,,,,6.535,0.54,84.78,0.4,0,1.8,,,,,,18.43,15.17,18.43,18.43,,,,NE @ SEA,Patriots @ Seahawks,Lumen Field,outdoor,NBC/Peacock,15900,https://dkn.gs/sports/images/nfl/players/50/686189.png, @ ,9/9/2026
-CeeDee Lamb,WR,DAL,,,,,11,,0,,,,,,,6.415,0.51,75.585,0.2,0,0.9,,,,,,17.12,13.92,17.12,17.12,,,,n/a,n/a,n/a,n/a,n/a,,,,9/13/2026
-Nico Collins,WR,HOU,,,,,10.7,,0,,,,,,,4.985,0.45,63.4,0.1,0,0.9,,,,,,14.11,11.62,14.11,14.11,,,,n/a,n/a,n/a,n/a,n/a,7000,https://dkn.gs/sports/images/nfl/players/50/560761.png, @ ,9/13/2026
+CeeDee Lamb,WR,DAL,,,,,11,,0,,,,,,,6.445,0.51,75.695,0.2,0,0.9,,,,,,17.16,13.94,17.16,17.16,,,,DAL @ NYG,Cowboys @ Giants,MetLife Stadium,outdoor,NBC/Peacock,,,,9/13/2026
+Nico Collins,WR,HOU,,,,,10.7,,0,,,,,,,4.985,0.45,62.99,0.1,0,0.9,,,,,,14.07,11.58,14.07,14.07,,,,n/a,n/a,n/a,n/a,n/a,7000,https://dkn.gs/sports/images/nfl/players/50/560761.png, @ ,9/13/2026
 Justin Jefferson,WR,MIN,,,,,10.6,,0,,,,,,,6.2,0.4,81.3,0.1,0,0.6,,,,,,16.79,13.69,16.79,16.79,,,,GB @ MIN,Packers @ Vikings,U.S. Bank Stadium,dome,CBS,7300,https://dkn.gs/sports/images/nfl/players/50/485454.png, @ ,9/13/2026
-Drake London,WR,ATL,,,,,10.1,,0,,,,,,,5.57,0.435,70.205,0,0,0.1,,,,,,15.21,12.43,15.21,15.21,,,,ATL @ PIT,Falcons @ Steelers,Acrisure Stadium,outdoor,FOX,6500,https://dkn.gs/sports/images/nfl/players/50/630530.png, @ ,9/13/2026
-Zay Flowers,WR,BAL,,,,,9.8,,0,,,,,,,4.585,0.46,63,0.4,0,0.5,,,,,,13.7,11.4,13.7,13.7,,,,n/a,n/a,n/a,n/a,n/a,6400,https://dkn.gs/sports/images/nfl/players/50/706447.png, @ ,9/13/2026
-George Pickens,WR,DAL,,,,,9.8,,0,,,,,,,5.14,0.47,67.595,0,0,0.2,,,,,,14.74,12.17,14.74,14.74,,,,DAL @ NYG,Cowboys @ Giants,MetLife Stadium,outdoor,NBC/Peacock,,,,9/13/2026
-Marvin Harrison Jr.,WR,ARI,LAC,,,,8.04,,,,,,,,0,3.7,0.37,48.795,,0,0,,,,,,10.8,8.95,10.8,10.8,,,,n/a,n/a,n/a,n/a,n/a,5000,https://dkn.gs/sports/images/nfl/players/50/779700.png, @ ,9/13/2026
-Brian Thomas Jr.,WR,JAC,CLE,,,,7.91,,,,,,,,0,2.625,0.4,45.1,,0,2,,,,,,9.74,8.42,9.74,9.74,,,,n/a,n/a,n/a,n/a,n/a,5500,https://dkn.gs/sports/images/nfl/players/50/787676.png, @ ,9/13/2026
+Drake London,WR,ATL,,,,,10.1,,0,,,,,,,5.57,0.435,69.205,0,0,0.1,,,,,,15.11,12.33,15.11,15.11,,,,ATL @ PIT,Falcons @ Steelers,Acrisure Stadium,outdoor,FOX,6500,https://dkn.gs/sports/images/nfl/players/50/630530.png, @ ,9/13/2026
+Zay Flowers,WR,BAL,,,,,9.8,,0,,,,,,,4.585,0.465,63.435,0.4,0,0.5,,,,,,13.77,11.48,13.77,13.77,,,,n/a,n/a,n/a,n/a,n/a,6400,https://dkn.gs/sports/images/nfl/players/50/706447.png, @ ,9/13/2026
+George Pickens,WR,DAL,,,,,9.8,,0,,,,,,,5.1,0.475,67.6,0,0,0.2,,,,,,14.73,12.18,14.73,14.73,,,,DAL @ NYG,Cowboys @ Giants,MetLife Stadium,outdoor,NBC/Peacock,,,,9/13/2026
+Marvin Harrison Jr.,WR,ARI,LAC,,,,8.04,,,,,,,,0,3.72,0.37,48.795,,0,0,,,,,,10.82,8.96,10.82,10.82,,,,n/a,n/a,n/a,n/a,n/a,5000,https://dkn.gs/sports/images/nfl/players/50/779700.png, @ ,9/13/2026
+Brian Thomas Jr.,WR,JAC,CLE,,,,7.91,,,,,,,,0,2.61,0.4,45.1,,0,2,,,,,,9.72,8.42,9.72,9.72,,,,n/a,n/a,n/a,n/a,n/a,5500,https://dkn.gs/sports/images/nfl/players/50/787676.png, @ ,9/13/2026
 Michael Pittman Jr.,WR,PIT,ATL,,,,6.6,,,,,,,,0,4.385,0.395,46.865,,0,0,,,,,,11.44,9.25,11.44,11.44,,,,n/a,n/a,n/a,n/a,n/a,4900,https://dkn.gs/sports/images/nfl/players/50/477191.png, @ ,9/13/2026
 Omar Cooper Jr.,WR,NYJ,TEN,,,,5.38,,,,,,,,0,,,37,,,1,,,,,,3.8,3.8,3.8,3.8,,,,n/a,n/a,n/a,n/a,n/a,4100,https://dkn.gs/sports/images/nfl/teams/50/18441.png, @ ,9/13/2026
 Luther Burden III,WR,CHI,CAR,,,,5,,,,,,,,0,,0.42,54.5,,0,0.5,,,,,,8.02,8.02,8.02,8.02,,,,n/a,n/a,n/a,n/a,n/a,5500,https://dkn.gs/sports/images/nfl/players/50/886103.png, @ ,9/13/2026
 Odell Beckham Jr.,WR,NYG,DAL,,,,2.34,,,,,,,,0,,0.31,17,,0,0,,,,,,3.56,3.56,3.56,3.56,,,,n/a,n/a,n/a,n/a,n/a,,,,9/13/2026
 Brock Bowers,TE,LV,,,,,9.1,,0,,,,,,,5.585,0.43,61.9,,0,,,,,,,14.36,11.56,14.36,14.36,,,,MIA @ LV,Dolphins @ Raiders,Allegiant Stadium,dome,FOX,6900,https://dkn.gs/sports/images/nfl/players/50/781453.png, @ ,9/13/2026
-Trey McBride,TE,ARI,,,,,8.2,,0,,,,,,,6.53,0.43,60.445,,0,,,,,,,15.15,11.89,15.15,15.15,,,,ARI @ LAC,Cardinals @ Chargers,SoFi Stadium,outdoor,CBS,6800,https://dkn.gs/sports/images/nfl/players/50/640885.png, @ ,9/13/2026
+Trey McBride,TE,ARI,,,,,8.2,,0,,,,,,,6.53,0.43,61.07,,0,,,,,,,15.22,11.95,15.22,15.22,,,,ARI @ LAC,Cardinals @ Chargers,SoFi Stadium,outdoor,CBS,6800,https://dkn.gs/sports/images/nfl/players/50/640885.png, @ ,9/13/2026
 Colston Loveland,TE,CHI,,,,,8,,0,,,,,,,4.7,0.455,56.5,,0,,,,,,,13.08,10.73,13.08,13.08,,,,n/a,n/a,n/a,n/a,n/a,5300,https://dkn.gs/sports/images/nfl/players/50/877803.png, @ ,9/13/2026
 Tyler Warren,TE,IND,,,,,7.6,,0,,,,,,,4.9,0.435,47,,0,,,,,,,12.21,9.76,12.21,12.21,,,,n/a,n/a,n/a,n/a,n/a,4900,https://dkn.gs/sports/images/nfl/players/50/886165.png, @ ,9/13/2026
-Harold Fannin Jr.,TE,CLE,,,,,7.21,,0,,,,,,0,3.745,0.36,44.17,,0,1,,,,,,10.42,8.55,10.42,10.42,,,,n/a,n/a,n/a,n/a,n/a,4200,https://dkn.gs/sports/images/nfl/players/50/886166.png, @ ,9/13/2026
-Sam LaPorta,TE,DET,,,,,6.7,,0,,,,,,,3.79,0.42,45.395,,0,,,,,,,10.85,8.95,10.85,10.85,,,,n/a,n/a,n/a,n/a,n/a,4400,https://dkn.gs/sports/images/nfl/players/50/706508.png, @ ,9/13/2026
-Tucker Kraft,TE,GB,,,,,6.6,,0,,,,,,,3.73,0.415,42.5,,0,,,,,,,10.47,8.61,10.47,10.47,,,,n/a,n/a,n/a,n/a,n/a,4500,https://dkn.gs/sports/images/nfl/players/50/706550.png, @ ,9/13/2026
+Harold Fannin Jr.,TE,CLE,,,,,7.21,,0,,,,,,0,4.595,0.365,45.16,,0,1,,,,,,11.4,9.1,11.4,11.4,,,,n/a,n/a,n/a,n/a,n/a,4200,https://dkn.gs/sports/images/nfl/players/50/886166.png, @ ,9/13/2026
+Sam LaPorta,TE,DET,,,,,6.7,,0,,,,,,,3.81,0.415,45.395,,0,,,,,,,10.84,8.93,10.84,10.84,,,,n/a,n/a,n/a,n/a,n/a,4400,https://dkn.gs/sports/images/nfl/players/50/706508.png, @ ,9/13/2026
+Tucker Kraft,TE,GB,,,,,6.6,,0,,,,,,,3.73,0.41,41.795,,0,,,,,,,10.37,8.5,10.37,10.37,,,,n/a,n/a,n/a,n/a,n/a,4500,https://dkn.gs/sports/images/nfl/players/50/706550.png, @ ,9/13/2026
 Mark Andrews,TE,BAL,,,,,6.5,,0,,,,,,,3.7,0.415,32.445,,0,,,,,,,9.43,7.58,9.43,9.43,,,,n/a,n/a,n/a,n/a,n/a,3900,https://dkn.gs/sports/images/nfl/players/50/16963.png, @ ,9/13/2026
-Dallas Goedert,TE,PHI,,,,,6.3,,0,,,,,,,3.55,0.405,33.45,,0,,,,,,,9.33,7.55,9.33,9.33,,,,n/a,n/a,n/a,n/a,n/a,4100,https://dkn.gs/sports/images/nfl/players/50/17055.png, @ ,9/13/2026
-Kyle Pitts Sr.,TE,ATL,,,,,6.3,,0,,,,,,,3.765,0.375,48.275,,0,,,,,,,10.84,8.96,10.84,10.84,,,,n/a,n/a,n/a,n/a,n/a,4700,https://dkn.gs/sports/images/nfl/players/50/557862.png, @ ,9/13/2026
+Dallas Goedert,TE,PHI,,,,,6.3,,0,,,,,,,3.555,0.4,33.45,,0,,,,,,,9.3,7.52,9.3,9.3,,,,WAS @ PHI,Commanders @ Eagles,Lincoln Financial Field,outdoor,FOX,4100,https://dkn.gs/sports/images/nfl/players/50/17055.png, @ ,9/13/2026
+Kyle Pitts Sr.,TE,ATL,,,,,6.3,,0,,,,,,,3.765,0.375,46.275,,0,,,,,,,10.64,8.76,10.64,10.64,,,,n/a,n/a,n/a,n/a,n/a,4700,https://dkn.gs/sports/images/nfl/players/50/557862.png, @ ,9/13/2026
 Cameron Dicker,K,LAC,,,1.9,2.3,8.7,,,,,,,,,,,,,,,,,,2.9,,8.6,8.6,8.6,8.6,,,,n/a,n/a,n/a,n/a,n/a,,,,9/13/2026
 Harrison Mevis,K,LAR,,,1.8,2.2,8.4,,,,,,,,,,,,,,,,,,3,,8.4,8.4,8.4,8.4,,,,n/a,n/a,n/a,n/a,n/a,,,,9/10/2026
 Brandon Aubrey,K,DAL,,,1.9,2.4,8.3,,,,,,,,,,,,,,,,,,2.7,,8.4,8.4,8.4,8.4,,,,n/a,n/a,n/a,n/a,n/a,,,,9/13/2026
 Jake Bates,K,DET,,,1.7,2.1,8.2,,,,,,,,,,,,,,,,,,3,,8.1,8.1,8.1,8.1,,,,n/a,n/a,n/a,n/a,n/a,,,,9/13/2026
-Jason Myers,K,SEA,,,1.8,2.3,8,,,,,,,,,,,,,,,,,,2.6,,8,8,8,8,,,,n/a,n/a,n/a,n/a,n/a,8100,https://dkn.gs/sports/images/nfl/players/50/19936.png, @ ,9/9/2026
+Jason Myers,K,SEA,,,1.8,2.3,8,,,,,,,,,,,,,,,,,,2.6,,8,8,8,8,,,,NE @ SEA,Patriots @ Seahawks,Lumen Field,outdoor,NBC/Peacock,8100,https://dkn.gs/sports/images/nfl/players/50/19936.png, @ ,
 Ka'imi Fairbairn,K,HOU,,,1.9,2.4,8,,,,,,,,,,,,,,,,,,2.3,,8,8,8,8,,,,n/a,n/a,n/a,n/a,n/a,,,,9/13/2026
 Cam Little,K,JAC,,,1.8,2.2,7.9,,,,,,,,,,,,,,,,,,2.5,,7.9,7.9,7.9,7.9,,,,n/a,n/a,n/a,n/a,n/a,,,,9/13/2026
 Tyler Loop,K,BAL,,,1.7,2.1,7.9,,,,,,,,,,,,,,,,,,2.7,,7.8,7.8,7.8,7.8,,,,n/a,n/a,n/a,n/a,n/a,,,,9/13/2026
