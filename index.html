@@ -1584,6 +1584,93 @@
             padding: 0.35rem 0.6rem;
             border-radius: 999px;
         }
+        .recipe-group-label {
+            width: 100%;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin: 0.35rem 0 0.1rem;
+        }
+
+        /* Workspace tabs (Builder / Stacks Lab) */
+        .workspace-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin: 0 0 0.85rem;
+            padding: 0.35rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        .workspace-tab {
+            background: transparent;
+            color: var(--text-color);
+            border: 1px solid transparent;
+            padding: 0.5rem 0.95rem;
+            font-weight: 600;
+            font-size: 0.88rem;
+        }
+        .workspace-tab:hover { background: var(--input-bg); }
+        .workspace-tab.active {
+            background: var(--brand-teal);
+            color: #fff;
+            border-color: var(--brand-teal);
+        }
+        body[data-theme="dark"] .workspace-tab.active {
+            background: var(--brand-aqua);
+            color: #0C2627;
+            border-color: var(--brand-aqua);
+        }
+        .workspace-panel[hidden] { display: none !important; }
+
+        .sl-toolbar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 0.85rem;
+        }
+        @media (max-width: 800px) {
+            .sl-toolbar { grid-template-columns: 1fr 1fr; }
+        }
+        .sl-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.65rem;
+            margin-bottom: 1rem;
+        }
+        .sl-note {
+            font-size: 0.8rem;
+            color: var(--muted);
+            line-height: 1.45;
+            margin: 0 0 0.85rem;
+        }
+        .sl-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            margin: 0.45rem 0 0.75rem;
+        }
+        .sl-rank { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--muted); }
+        .sl-pill {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 0.12rem 0.4rem;
+            border-radius: 999px;
+            margin-left: 0.25rem;
+            vertical-align: middle;
+        }
+        .sl-pill.chalk { background: var(--mid-rank); color: var(--mid-rank-dark); }
+        .sl-pill.mid { background: var(--brand-light-teal); color: var(--brand-ink); }
+        .sl-pill.unique { background: var(--low-rank); color: var(--low-rank-dark); }
+        body[data-theme="dark"] .sl-pill.chalk { color: #fde68a; }
+        body[data-theme="dark"] .sl-pill.unique { color: #6ee7b7; }
+        #stacksLabCard td { text-align: left; }
+        #stacksLabCard td.num { text-align: center; }
         body.quick-build .advanced-only { display: none !important; }
         .quick-hint {
             font-size: 0.8rem;
@@ -1780,6 +1867,12 @@
     </header>
 
     <div class="main">
+        <div class="workspace-tabs" id="workspaceTabs" role="tablist">
+            <button type="button" class="workspace-tab active" id="tabBtnBuilder" onclick="switchWorkspace('builder')">⚙️ Builder</button>
+            <button type="button" class="workspace-tab" id="tabBtnStacks" onclick="switchWorkspace('stacks')">🔗 Stacks Lab</button>
+        </div>
+
+        <div id="panelBuilder" class="workspace-panel">
         <!-- HOW TO USE (collapsible) -->
         <div class="card collapsed" id="howtoCard">
             <div class="card-header" onclick="toggleCard('howtoCard')">
@@ -1817,9 +1910,9 @@
 
                 <h3>Classic / main slate — recommended flow</h3>
                 <ol>
-                    <li>Pick the <strong>Classic</strong> slate. Use a preset: <em>Classic Cash</em>, <em>Classic GPP</em>, <em>3 RBs</em>, or <em>925 Favorite</em>.</li>
+                    <li>Pick the <strong>Classic</strong> slate. Cash: <em>Cash Floor Lock</em>, <em>Eat the Chalk</em>, or <em>Cash 3RB Floor</em>. GPP: <em>Milly Winner</em>, <em>Four Uniques</em>, or <em>GPP Mini-Stack</em>.</li>
                     <li>Tag <strong>6–12 players</strong> with exposure tiers (your cores, values, fades via Lower).</li>
-                    <li>Optional: 1–2 QB–receiver <strong>stacks</strong> at 20–40% each. Optional: one game stack.</li>
+                    <li>Open the <strong>Stacks Lab</strong> tab to rank pairs, 3-mans, and opposing-RB bring-backs, then add 1–2 stacks at 20–40%.</li>
                     <li>Leave Min Projected FP at 0 unless you intentionally want to cut the pool.</li>
                     <li>Run 20–150 lineups depending on multi-entry size. Review exposure table + leverage board.</li>
                 </ol>
@@ -1906,6 +1999,12 @@
                     <button class="preset-btn contest-classic" data-tip="Classic Leverage: aggressively fades chalk for large-field GPPs." onclick="applyPreset('leverage')">Classic Leverage</button>
                     <button class="preset-btn contest-classic" data-tip="3 RBs: forces FLEX to be RB only so every lineup has three running backs." onclick="applyPreset('classic_3rb')">3 RBs</button>
                     <button class="preset-btn contest-classic" data-tip="925 Favorite: cheapest DST ≥2 FP, 3 RBs, value QB &amp; TE under $5K targeting 3x, chalk/stud RBs &amp; WRs." onclick="applyPreset('favorite')">925 Favorite</button>
+                    <button class="preset-btn contest-classic" data-tip="Cash Floor Lock: one lineup everywhere. Highest floor, eat chalk, leftover ≤$500, stacks off. 50/50 · Double-Up · H2H." onclick="applyPreset('cash_floor')">Cash Floor Lock</button>
+                    <button class="preset-btn contest-classic" data-tip="Cash 3RB Floor: FLEX locked to RB. Matches the cash FLEX tree when 3 live RBs exist." onclick="applyPreset('cash_3rb')">Cash 3RB Floor</button>
+                    <button class="preset-btn contest-classic" data-tip="Eat the Chalk: cash knobs + min-exposure on the highest-owned skill players. Ownership is not a fade in cash." onclick="applyPreset('cash_eat_chalk')">Eat the Chalk</button>
+                    <button class="preset-btn contest-classic" data-tip="Milly Winner: 150-max GPP. Unique 5, stacks on (QB+2 PCs + opposing RB bring-back), fade game DSTs, leverage on." onclick="applyPreset('gpp_milly')">Milly Winner</button>
+                    <button class="preset-btn contest-classic" data-tip="GPP Mini-Stack: QB + 1 PC only (22% of 2025 Milly winners). Lower correlation, more room for uniques." onclick="applyPreset('gpp_mini')">GPP Mini-Stack</button>
+                    <button class="preset-btn contest-classic" data-tip="Four Uniques: GPP mix — cap chalk at ~40% and boost &lt;10% owned pieces so builds can land 4+ contrarian names." onclick="applyPreset('gpp_uniques')">Four Uniques</button>
                     <span class="preset-group-label">Showdown</span>
                     <button class="preset-btn contest-showdown" data-tip="Showdown Cash: Cash settings + 3–3 team split. Safer CPT builds for single-game cash." onclick="applyPreset('sd_cash')">Showdown Cash</button>
                     <button class="preset-btn contest-showdown" data-tip="Showdown GPP: GPP settings + 4–2 split. Pair with Build around a leverage CPT for upside." onclick="applyPreset('sd_gpp')">Showdown GPP</button>
@@ -1922,14 +2021,24 @@
                 <summary class="settings-section-title">One-click recipes</summary>
                 <div class="settings-section-body">
                 <div class="recipe-row">
-                    <button type="button" class="ghost" data-tip="Classic GPP style + max exp ~40%. Next: tag 6–12 players with High/Mid tiers." onclick="applyRecipe('classic_gpp_simple')">Classic GPP starter</button>
+                    <span class="recipe-group-label">Cash (50/50 · Double-Up · H2H)</span>
                     <button type="button" class="ghost" data-tip="Classic Cash ownership band. Next: Core/High tier your locks only." onclick="applyRecipe('classic_cash_simple')">Classic Cash starter</button>
+                    <button type="button" class="ghost" data-tip="One lineup · highest floor · leftover ≤$500 · stacks off · eat chalk. Fire into 30 H2Hs." onclick="applyRecipe('cash_floor_lock')">Cash floor lock</button>
+                    <button type="button" class="ghost" data-tip="Cash + FLEX = RB. Use when 3 live RBs have 15+ opportunities." onclick="applyRecipe('cash_3rb_floor')">Cash 3RB floor</button>
+                    <button type="button" class="ghost" data-tip="Cash + raise min% on the chalkiest skill players. Do not fade a lock because he is chalk." onclick="applyRecipe('cash_eat_chalk')">Eat the chalk</button>
+                    <button type="button" class="ghost" data-tip="Cash-style: force 1 same-team PC, no bring-back, keep opp-DST fade." onclick="applyRecipe('classic_cash_stack')">Classic cash stack</button>
+                    <span class="recipe-group-label">GPP (Milly · large field)</span>
+                    <button type="button" class="ghost" data-tip="Classic GPP style + max exp ~40%. Next: tag 6–12 players with High/Mid tiers." onclick="applyRecipe('classic_gpp_simple')">Classic GPP starter</button>
+                    <button type="button" class="ghost" data-tip="150-max Milly shape: unique 5, QB+2 PCs, opposing RB bring-back, fade both game DSTs." onclick="applyRecipe('gpp_milly_winner')">Milly winner shape</button>
+                    <button type="button" class="ghost" data-tip="GPP + QB + 2 PCs + opposing RB bring-back. Default 2025 game-stack winner." onclick="applyRecipe('gpp_qb2_bb_rb')">QB+2 + RB bring-back</button>
+                    <button type="button" class="ghost" data-tip="GPP + QB + 1 PC only (mini-stack). More room for 4 uniques." onclick="applyRecipe('gpp_mini_stack')">GPP mini-stack</button>
+                    <button type="button" class="ghost" data-tip="Cap chalk ~40% and boost &lt;10% owned names so the pool can produce 4+ uniques." onclick="applyRecipe('gpp_four_uniques')">Four uniques mix</button>
+                    <button type="button" class="ghost" data-tip="Classic GPP + QB must have WR+TE. Next: suggest stacks or pick QBs." onclick="applyRecipe('classic_3man')">Classic QB+WR+TE</button>
+                    <button type="button" class="ghost" data-tip="Classic GPP + 2 pass catchers + opponent bring-back + fade both game DSTs." onclick="applyRecipe('classic_game_stack')">Classic game stack</button>
+                    <span class="recipe-group-label">Showdown</span>
                     <button type="button" class="ghost" data-tip="Showdown + Min K/DST 2 + wide ownership. Next: stack QBs and tier favorites. Matches HoF-style FG/DST scripts." onclick="applyRecipe('sd_kdst2')">Showdown 2+ K/DST</button>
                     <button type="button" class="ghost" data-tip="Showdown GPP + 4–2 split. Next: Build around CPT or tier two QBs + stacks." onclick="applyRecipe('sd_gpp_simple')">Showdown GPP 4–2</button>
                     <button type="button" class="ghost" data-tip="Showdown Cash + 3–3. Safer single-game builds." onclick="applyRecipe('sd_cash_simple')">Showdown Cash 3–3</button>
-                    <button type="button" class="ghost" data-tip="Classic GPP + QB must have WR+TE. Next: suggest stacks or pick QBs." onclick="applyRecipe('classic_3man')">Classic QB+WR+TE</button>
-                    <button type="button" class="ghost" data-tip="Classic GPP + 2 pass catchers + opponent bring-back + fade both game DSTs." onclick="applyRecipe('classic_game_stack')">Classic game stack</button>
-                    <button type="button" class="ghost" data-tip="Cash-style: force 1 same-team PC, no bring-back, keep opp-DST fade." onclick="applyRecipe('classic_cash_stack')">Classic cash stack</button>
                 </div>
                 </div>
                 </details>
@@ -2047,6 +2156,7 @@
                     <div id="configureStacks" style="display:none;" class="span-2">
                         <button class="ghost" data-tip="Set specific QB/CPT + receiver pairs and % of builds for each stack. Stack = these two together in X% of builds." onclick="openStackModal()">Configure specific stacks / groups</button>
                         <button class="ghost" style="margin-left:0.4rem;" data-tip="Auto-suggest top QB + WR/TE stacks from current pool (projection + salary value). Review and check the ones you want to add." onclick="suggestClassicStacks()">✨ Suggest Stacks (Classic)</button>
+                        <button class="ghost" style="margin-left:0.4rem;" data-tip="Open the Stacks Lab tab — ranked pairs, 3-mans, games, and RB bring-backs from this slate." onclick="switchWorkspace('stacks')">🔗 Stacks Lab</button>
                     </div>
                 </div>
                 <!-- Classic correlation rules (mirrors Showdown CPT rules) -->
@@ -2495,6 +2605,118 @@
                         <div id="lockedTeamsMenu" class="dropdown-menu"></div>
                     </div>
                     <button data-tip="Re-optimize unlocked players while keeping locked teams fixed (Classic only)." onclick="lateSwapLineups()">Run Late Swap</button>
+                </div>
+            </div>
+        </div>
+        </div><!-- /panelBuilder -->
+
+        <div id="panelStacks" class="workspace-panel" hidden>
+            <div class="card" id="stacksLabCard">
+                <div class="card-header" style="cursor:default;">
+                    <span>🔗 Stacks Lab</span>
+                    <span style="font-size:0.78rem;font-weight:500;color:var(--muted);">Ranked from this slate’s projections + ownership</span>
+                </div>
+                <div class="card-body">
+                    <p class="sl-note">
+                        Built from the 2025 cash / GPP research: cash wants optional mini-stacks and the highest floor;
+                        GPP winners stacked 81% of the time, usually QB + 1–2 teammates, with the default bring-back being the <strong>opposing RB</strong>.
+                        Scores update when you change slate, projections, or exclusions.
+                    </p>
+                    <div class="sl-toolbar">
+                        <div>
+                            <label>Rank for</label>
+                            <select id="slStyle" onchange="refreshStacksLab()">
+                                <option value="gpp" selected>GPP / tournaments</option>
+                                <option value="cash">Cash / 50-50s</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Min partner FP</label>
+                            <input type="number" id="slMinFp" value="6" min="0" max="40" step="0.5" onchange="refreshStacksLab()">
+                        </div>
+                        <div>
+                            <label>Unique own cutoff</label>
+                            <input type="number" id="slUniqueOwn" value="10" min="3" max="25" step="1" onchange="refreshStacksLab()">
+                        </div>
+                        <div>
+                            <label>Top N per list</label>
+                            <input type="number" id="slTopN" value="12" min="5" max="30" step="1" onchange="refreshStacksLab()">
+                        </div>
+                    </div>
+                    <div class="sl-actions">
+                        <button type="button" class="primary" onclick="refreshStacksLab()">↻ Recalculate</button>
+                        <button type="button" class="ghost" onclick="applyRecipe('gpp_milly_winner')">Apply Milly recipe</button>
+                        <button type="button" class="ghost" onclick="applyRecipe('gpp_qb2_bb_rb')">Apply QB+2 + RB BB</button>
+                        <button type="button" class="ghost" onclick="applyRecipe('classic_cash_stack')">Apply cash mini-stack</button>
+                        <button type="button" class="ghost" onclick="slAddCheckedStacks()">＋ Add checked rows as stacks</button>
+                        <button type="button" class="ghost" onclick="openStackModal()">Open stack config</button>
+                    </div>
+                    <div class="sl-stat-grid" id="slStatGrid"></div>
+
+                    <h3 style="font-size:0.95rem;margin:1.1rem 0 0.35rem;">Games to stack</h3>
+                    <p class="sl-note">Combined QB + pass-catcher projection on both sidelines. GPP leans to total ceiling; cash leans to floor and chalk.</p>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th><th>Game</th><th>Total Proj</th><th>QB Proj</th><th>Own sum</th><th>Best pair</th><th>Best bring-back</th><th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="slGamesBody"></tbody>
+                        </table>
+                    </div>
+
+                    <h3 style="font-size:0.95rem;margin:1.25rem 0 0.35rem;">Best QB + pass-catcher pairs</h3>
+                    <p class="sl-note">Primary stack. GPP score = projection + value + leverage (lower own helps). Cash score = projection + value + chalk (higher own helps).</p>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th><th>QB</th><th>Pass catcher</th><th>Team</th><th>Combo FP</th><th>Salary</th><th>Own</th><th>Score</th><th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="slPairsBody"></tbody>
+                        </table>
+                    </div>
+
+                    <h3 style="font-size:0.95rem;margin:1.25rem 0 0.35rem;">Best 3-man stacks (QB + WR + TE)</h3>
+                    <p class="sl-note">2025 Milly: QB + 2 teammates (with or without bring-back) was a common winning shape.</p>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th><th>QB</th><th>WR</th><th>TE</th><th>Team</th><th>Combo FP</th><th>Own</th><th>Score</th><th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="slThreeBody"></tbody>
+                        </table>
+                    </div>
+
+                    <h3 style="font-size:0.95rem;margin:1.25rem 0 0.35rem;">Game stacks with bring-back</h3>
+                    <p class="sl-note">Among 2025 game-stack winners the default bring-back was the <strong>opposing RB</strong> (4 of 8). A lone opposing WR as the only bring-back did not win.</p>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th><th>Offense stack</th><th>Bring-back</th><th>Type</th><th>Combo FP</th><th>Own</th><th>Score</th><th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="slBringBody"></tbody>
+                        </table>
+                    </div>
+
+                    <h3 style="font-size:0.95rem;margin:1.25rem 0 0.35rem;">Contrarian / unique pieces</h3>
+                    <p class="sl-note">GPP checklist: count players under 10% owned — Milly builds want four-plus. These are the best low-own names still worth a slot (injury WR, cheap RB with a job, stack TE).</p>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Player</th><th>Pos</th><th>Team</th><th>Proj</th><th>Own%</th><th>Salary</th><th>Value</th><th>Role</th>
+                                </tr>
+                            </thead>
+                            <tbody id="slUniqueBody"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -3160,9 +3382,387 @@
                 const noOpp = document.getElementById('classicNoOppDstWithQb');
                 if (noOpp) noOpp.checked = true;
                 setNextStep('Cash stack recipe: every lineup has QB + 1 same-team PC. No bring-back. Core/High your locks, then Run.');
+            } else if (key === 'cash_floor_lock') {
+                applyPreset('cash_floor');
+                setNextStep('Cash floor lock on. One lineup everywhere. Core/High only defined-role locks. FLEX = highest remaining floor. Run.');
+            } else if (key === 'cash_3rb_floor') {
+                applyPreset('cash_3rb');
+                setNextStep('Cash 3RB floor on. High-tier three live backs, cheap DST, leftover ≤$500, then Run.');
+            } else if (key === 'cash_eat_chalk') {
+                applyPreset('cash_eat_chalk');
+                setNextStep('Eat the chalk on. Highest-owned skill players have min exposure. Do not fade a lock because he is popular. Run 1 lineup.');
+            } else if (key === 'gpp_milly_winner') {
+                applyPreset('gpp_milly');
+                setNextStep('Milly winner shape on. Open Stacks Lab, add 2–4 stacks (QB+2 + opp RB), tag 4+ players under 10% own, Run 20–150.');
+            } else if (key === 'gpp_qb2_bb_rb') {
+                applyPreset('classic_gpp');
+                resetClassicCorr({ forcePc: true, twoPc: true, wrte: false, fadeDst: true, bring: 'rb', noOppDst: true });
+                setNextStep('QB + 2 PCs + opposing RB bring-back. Name the game in Stacks Lab, add that stack, then Run.');
+            } else if (key === 'gpp_mini_stack') {
+                applyPreset('gpp_mini');
+                setNextStep('GPP mini-stack (QB+1 PC). Add the primary pair from Stacks Lab at 25–40%, keep 4 uniques, then Run.');
+            } else if (key === 'gpp_four_uniques') {
+                applyPreset('gpp_uniques');
+                setNextStep('Four uniques mix on. Confirm 4+ names under 10% own in Stacks Lab, add one game stack, Run.');
             }
             refreshChecklist();
             updateStickyBar();
+        }
+
+        function switchWorkspace(which) {
+            const builder = document.getElementById('panelBuilder');
+            const stacks = document.getElementById('panelStacks');
+            const btnB = document.getElementById('tabBtnBuilder');
+            const btnS = document.getElementById('tabBtnStacks');
+            const showStacks = which === 'stacks';
+            if (builder) builder.hidden = showStacks;
+            if (stacks) stacks.hidden = !showStacks;
+            if (btnB) btnB.classList.toggle('active', !showStacks);
+            if (btnS) btnS.classList.toggle('active', showStacks);
+            const sticky = document.getElementById('stickyRunBar');
+            if (sticky) sticky.style.display = showStacks ? 'none' : '';
+            if (showStacks) refreshStacksLab();
+        }
+
+        function slOwnBand(own) {
+            const o = Number(own) || 0;
+            if (o >= 20) return '<span class="sl-pill chalk">chalk</span>';
+            if (o >= 10) return '<span class="sl-pill mid">mid</span>';
+            return '<span class="sl-pill unique">unique</span>';
+        }
+
+        function slPool() {
+            const minFp = parseFloat(document.getElementById('slMinFp')?.value) || 0;
+            const isSd = selectedSlate && String(selectedSlate).includes('Showdown');
+            return (filteredData || []).filter(p => {
+                if (deselectedPlayers.has(p.displayName)) return false;
+                if ((p.projectedFP || 0) < minFp && slPos(p) !== 'DST') return false;
+                if (isSd && p.slotType === 'Captain' && slPos(p) !== 'QB' && slPos(p) !== 'CPT') return false;
+                return true;
+            });
+        }
+
+        function slPairScore(qb, rec, style) {
+            const combo = (qb.projectedFP || 0) + (rec.projectedFP || 0);
+            const sal = ((qb.salary || 0) + (rec.salary || 0)) / 1000;
+            const val = sal > 0 ? combo / sal : 0;
+            const own = (qb.ownership || 0) + (rec.ownership || 0);
+            if (style === 'cash') {
+                return combo * 1.15 + val * 1.4 + own * 0.08;
+            }
+            const lev = Math.max(0, 28 - (rec.ownership || 0)) * 0.35 + Math.max(0, 22 - (qb.ownership || 0)) * 0.2;
+            return combo * 1.05 + val * 1.1 + lev;
+        }
+
+        function slBestBringBack(qb, pool) {
+            const opp = qb.Opponent;
+            if (!opp) return null;
+            const cands = pool.filter(p => p.Team === opp && p.displayName !== qb.displayName);
+            const rbs = cands.filter(p => slPos(p) === 'RB')
+                .sort((a, b) => (b.projectedFP || 0) - (a.projectedFP || 0));
+            const tes = cands.filter(p => slPos(p) === 'TE')
+                .sort((a, b) => (b.projectedFP || 0) - (a.projectedFP || 0));
+            if (rbs[0]) return { player: rbs[0], type: 'Opp RB' };
+            if (tes[0]) return { player: tes[0], type: 'Opp TE' };
+            return null;
+        }
+
+        let _slCache = { pairs: [], threes: [], brings: [], games: [] };
+
+        function refreshStacksLab() {
+            const gamesBody = document.getElementById('slGamesBody');
+            if (!gamesBody) return;
+            const style = document.getElementById('slStyle')?.value || 'gpp';
+            const topN = Math.max(5, Math.min(30, parseInt(document.getElementById('slTopN')?.value) || 12));
+            const uniqueCut = parseFloat(document.getElementById('slUniqueOwn')?.value) || 10;
+            const pool = slPool();
+            const qbs = pool.filter(p => slPos(p) === 'QB' || (p.slotType === 'Captain' && slPos(p) === 'QB'))
+                .sort((a, b) => (b.projectedFP || 0) - (a.projectedFP || 0));
+
+            const pairs = [];
+            qbs.forEach(qb => {
+                pool.filter(p => p.Team === qb.Team && p.displayName !== qb.displayName && (slPos(p) === 'WR' || slPos(p) === 'TE'))
+                    .forEach(rec => {
+                        pairs.push({
+                            qb, rec,
+                            team: qb.Team,
+                            combo: (qb.projectedFP || 0) + (rec.projectedFP || 0),
+                            salary: (qb.salary || 0) + (rec.salary || 0),
+                            own: (qb.ownership || 0) + (rec.ownership || 0),
+                            score: slPairScore(qb, rec, style)
+                        });
+                    });
+            });
+            pairs.sort((a, b) => b.score - a.score);
+            const seenPair = new Set();
+            const topPairs = [];
+            for (const p of pairs) {
+                const key = p.qb.displayName + '|' + p.rec.displayName;
+                if (seenPair.has(key)) continue;
+                seenPair.add(key);
+                topPairs.push(p);
+                if (topPairs.length >= topN) break;
+            }
+
+            const threes = [];
+            qbs.forEach(qb => {
+                const wrs = pool.filter(p => p.Team === qb.Team && slPos(p) === 'WR')
+                    .sort((a, b) => slPairScore(qb, b, style) - slPairScore(qb, a, style));
+                const tes = pool.filter(p => p.Team === qb.Team && slPos(p) === 'TE')
+                    .sort((a, b) => (b.projectedFP || 0) - (a.projectedFP || 0));
+                if (!wrs[0] || !tes[0]) return;
+                const wr = wrs[0];
+                const te = tes[0];
+                const combo = (qb.projectedFP || 0) + (wr.projectedFP || 0) + (te.projectedFP || 0);
+                const own = (qb.ownership || 0) + (wr.ownership || 0) + (te.ownership || 0);
+                const score = slPairScore(qb, wr, style) + (te.projectedFP || 0) * 0.85 + (style === 'gpp' ? Math.max(0, 16 - (te.ownership || 0)) * 0.25 : (te.ownership || 0) * 0.05);
+                threes.push({ qb, wr, te, team: qb.Team, combo, own, score });
+            });
+            threes.sort((a, b) => b.score - a.score);
+
+            const brings = [];
+            topPairs.slice(0, Math.max(topN, 8)).forEach(pair => {
+                const bb = slBestBringBack(pair.qb, pool);
+                if (!bb) return;
+                const combo = pair.combo + (bb.player.projectedFP || 0);
+                const own = pair.own + (bb.player.ownership || 0);
+                const rbBonus = bb.type === 'Opp RB' ? 8 : 2;
+                brings.push({
+                    qb: pair.qb, rec: pair.rec, bb: bb.player, bbType: bb.type,
+                    combo, own,
+                    score: pair.score + (bb.player.projectedFP || 0) * 0.7 + rbBonus
+                });
+            });
+            brings.sort((a, b) => b.score - a.score);
+
+            const gameMap = {};
+            pool.forEach(p => {
+                const t = p.Team, o = p.Opponent;
+                if (!t || !o) return;
+                const key = [t, o].sort().join('|');
+                if (!gameMap[key]) gameMap[key] = { key, teams: [t, o], players: [] };
+                gameMap[key].players.push(p);
+            });
+            const games = Object.values(gameMap).map(g => {
+                const qbsG = g.players.filter(p => slPos(p) === 'QB').sort((a, b) => (b.projectedFP || 0) - (a.projectedFP || 0));
+                const pcs = g.players.filter(p => slPos(p) === 'WR' || slPos(p) === 'TE');
+                const qbProj = qbsG.reduce((s, p) => s + (p.projectedFP || 0), 0);
+                const topPcs = pcs.slice().sort((a, b) => (b.projectedFP || 0) - (a.projectedFP || 0)).slice(0, 4);
+                const total = qbProj + topPcs.reduce((s, p) => s + (p.projectedFP || 0), 0);
+                const own = g.players.reduce((s, p) => s + (p.ownership || 0), 0);
+                const bestPair = pairs.find(x => g.teams.includes(x.team));
+                const bestBb = bestPair ? slBestBringBack(bestPair.qb, pool) : null;
+                const score = style === 'cash' ? total + own * 0.04 : total + Math.max(0, 80 - own * 0.15);
+                return {
+                    label: g.teams.join(' vs '),
+                    total, qbProj, own, score,
+                    bestPair, bestBb,
+                    primaryQb: qbsG[0]
+                };
+            }).sort((a, b) => b.score - a.score);
+
+            const uniques = pool.filter(p =>
+                ['RB', 'WR', 'TE'].includes(slPos(p)) &&
+                (p.ownership || 0) > 0 && (p.ownership || 0) < uniqueCut &&
+                (p.projectedFP || 0) >= 6
+            ).sort((a, b) => {
+                const va = (a.projectedFP || 0) / Math.max(1, (a.salary || 3000) / 1000);
+                const vb = (b.projectedFP || 0) / Math.max(1, (b.salary || 3000) / 1000);
+                return (b.projectedFP + va) - (a.projectedFP + vb);
+            }).slice(0, topN);
+
+            _slCache = { pairs: topPairs, threes: threes.slice(0, topN), brings: brings.slice(0, topN), games };
+
+            const esc = (s) => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+
+            document.getElementById('slStatGrid').innerHTML = [
+                { v: qbs.length, l: 'QBs ranked' },
+                { v: topPairs.length, l: 'Viable pairs' },
+                { v: games.length, l: 'Games on slate' },
+                { v: uniques.length, l: 'Uniques <' + uniqueCut + '%' }
+            ].map(s => `<div class="summary-card"><div class="value">${s.v}</div><div class="label">${s.l}</div></div>`).join('');
+
+            gamesBody.innerHTML = games.slice(0, 10).map((g, i) => {
+                const pair = g.bestPair ? `${esc(g.bestPair.qb.displayName)} + ${esc(g.bestPair.rec.displayName)}` : '—';
+                const bb = g.bestBb ? `${esc(g.bestBb.player.displayName)} (${g.bestBb.type})` : '—';
+                return `<tr>
+                    <td class="num sl-rank">${i + 1}</td>
+                    <td><strong>${esc(g.label)}</strong></td>
+                    <td class="num">${g.total.toFixed(1)}</td>
+                    <td class="num">${g.qbProj.toFixed(1)}</td>
+                    <td class="num">${g.own.toFixed(0)}%</td>
+                    <td>${pair}</td>
+                    <td>${bb}</td>
+                    <td class="num"><button class="ghost" style="padding:0.2rem 0.45rem;font-size:0.72rem;" onclick="slAddGameStack(${i})">Stack game</button></td>
+                </tr>`;
+            }).join('') || '<tr><td colspan="8" style="color:var(--muted);">Load a slate with Team + Opponent to rank games.</td></tr>';
+
+            document.getElementById('slPairsBody').innerHTML = topPairs.map((p, i) => `<tr>
+                <td class="num"><input type="checkbox" class="sl-pair-cb" data-idx="${i}" ${i < 3 ? 'checked' : ''}></td>
+                <td>${esc(p.qb.displayName)} ${slOwnBand(p.qb.ownership)}</td>
+                <td>${esc(p.rec.displayName)} ${slOwnBand(p.rec.ownership)}</td>
+                <td>${esc(p.team)}</td>
+                <td class="num">${p.combo.toFixed(1)}</td>
+                <td class="num">$${p.salary.toLocaleString()}</td>
+                <td class="num">${p.own.toFixed(0)}%</td>
+                <td class="num"><strong>${p.score.toFixed(1)}</strong></td>
+                <td class="num"><button class="ghost" style="padding:0.2rem 0.45rem;font-size:0.72rem;" onclick="slAddPair(${i}, 'qb_wr')">Add</button></td>
+            </tr>`).join('') || '<tr><td colspan="9" style="color:var(--muted);">No pairs yet — load Classic data.</td></tr>';
+
+            document.getElementById('slThreeBody').innerHTML = threes.slice(0, topN).map((p, i) => `<tr>
+                <td class="num"><input type="checkbox" class="sl-three-cb" data-idx="${i}"></td>
+                <td>${esc(p.qb.displayName)}</td>
+                <td>${esc(p.wr.displayName)}</td>
+                <td>${esc(p.te.displayName)}</td>
+                <td>${esc(p.team)}</td>
+                <td class="num">${p.combo.toFixed(1)}</td>
+                <td class="num">${p.own.toFixed(0)}%</td>
+                <td class="num"><strong>${p.score.toFixed(1)}</strong></td>
+                <td class="num"><button class="ghost" style="padding:0.2rem 0.45rem;font-size:0.72rem;" onclick="slAddThree(${i})">Add</button></td>
+            </tr>`).join('') || '<tr><td colspan="9" style="color:var(--muted);">Need QB + WR + TE on the same team.</td></tr>';
+
+            document.getElementById('slBringBody').innerHTML = brings.slice(0, topN).map((p, i) => `<tr>
+                <td class="num"><input type="checkbox" class="sl-bring-cb" data-idx="${i}" ${i < 2 ? 'checked' : ''}></td>
+                <td>${esc(p.qb.displayName)} + ${esc(p.rec.displayName)}</td>
+                <td>${esc(p.bb.displayName)} ${slOwnBand(p.bb.ownership)}</td>
+                <td>${esc(p.bbType)}</td>
+                <td class="num">${p.combo.toFixed(1)}</td>
+                <td class="num">${p.own.toFixed(0)}%</td>
+                <td class="num"><strong>${p.score.toFixed(1)}</strong></td>
+                <td class="num"><button class="ghost" style="padding:0.2rem 0.45rem;font-size:0.72rem;" onclick="slAddBring(${i})">Add</button></td>
+            </tr>`).join('') || '<tr><td colspan="8" style="color:var(--muted);">Need Opponent listed on players to rank bring-backs.</td></tr>';
+
+            document.getElementById('slUniqueBody').innerHTML = uniques.map(p => {
+                const val = p.salary > 0 ? ((p.projectedFP || 0) / (p.salary / 1000)).toFixed(2) : '—';
+                const role = slPos(p) === 'RB' ? 'Job / bring-back RB' : slPos(p) === 'TE' ? 'Punt or stack TE' : 'Injury / cheap WR';
+                return `<tr>
+                    <td>${esc(p.displayName)}</td>
+                    <td>${esc(slPos(p))}</td>
+                    <td>${esc(p.Team)}</td>
+                    <td class="num">${(p.projectedFP || 0).toFixed(1)}</td>
+                    <td class="num">${(p.ownership || 0).toFixed(1)}%</td>
+                    <td class="num">$${(p.salary || 0).toLocaleString()}</td>
+                    <td class="num">${val}x</td>
+                    <td>${role}</td>
+                </tr>`;
+            }).join('') || '<tr><td colspan="8" style="color:var(--muted);">No low-own pieces above the FP cutoff.</td></tr>';
+        }
+
+        function slPushStack(obj) {
+            if (!obj.captain || !obj.receiver) return false;
+            const exists = stackList.some(s =>
+                s.captain === obj.captain && s.receiver === obj.receiver &&
+                (s.receiver2 || '') === (obj.receiver2 || '') &&
+                (s.recipe || 'qb_wr') === (obj.recipe || 'qb_wr')
+            );
+            if (exists) return false;
+            stackList.push(Object.assign({
+                receiver2: null,
+                recipe: 'qb_wr',
+                bringBack: 'none',
+                bringPlayer: null,
+                fadeGameDst: false,
+                percentage: 35
+            }, obj));
+            return true;
+        }
+
+        function slAddPair(idx, recipe) {
+            const p = _slCache.pairs[idx];
+            if (!p) return;
+            const ok = slPushStack({
+                captain: p.qb.displayName,
+                receiver: p.rec.displayName,
+                recipe: recipe || 'qb_wr',
+                percentage: 35,
+                fadeGameDst: true
+            });
+            updateStackListDisplay();
+            if (typeof saveSession === 'function') saveSession(true);
+            alert(ok ? `Added ${p.qb.displayName} + ${p.rec.displayName}. Open stack config to edit %.` : 'That pair is already in your stack list.');
+        }
+
+        function slAddThree(idx) {
+            const p = _slCache.threes[idx];
+            if (!p) return;
+            const ok = slPushStack({
+                captain: p.qb.displayName,
+                receiver: p.wr.displayName,
+                receiver2: p.te.displayName,
+                recipe: 'qb_wr_te',
+                percentage: 28,
+                fadeGameDst: true
+            });
+            updateStackListDisplay();
+            if (typeof saveSession === 'function') saveSession(true);
+            alert(ok ? `Added 3-man ${p.qb.displayName} + ${p.wr.displayName} + ${p.te.displayName}.` : 'Already in your stack list.');
+        }
+
+        function slAddBring(idx) {
+            const p = _slCache.brings[idx];
+            if (!p) return;
+            const ok = slPushStack({
+                captain: p.qb.displayName,
+                receiver: p.rec.displayName,
+                recipe: 'qb_wr_bb',
+                bringBack: p.bbType === 'Opp RB' ? 'rb' : 'pc',
+                bringPlayer: p.bb.displayName,
+                fadeGameDst: true,
+                percentage: 30
+            });
+            updateStackListDisplay();
+            if (typeof saveSession === 'function') saveSession(true);
+            alert(ok ? `Added ${p.qb.displayName} + ${p.rec.displayName} with ${p.bb.displayName} bring-back.` : 'Already in your stack list.');
+        }
+
+        function slAddGameStack(idx) {
+            const g = _slCache.games[idx];
+            if (!g || !g.bestPair) {
+                alert('No viable pair found for that game.');
+                return;
+            }
+            const bb = g.bestBb;
+            slPushStack({
+                captain: g.bestPair.qb.displayName,
+                receiver: g.bestPair.rec.displayName,
+                recipe: bb ? 'qb_wr_bb' : 'qb_wr',
+                bringBack: bb ? (bb.type === 'Opp RB' ? 'rb' : 'pc') : 'none',
+                bringPlayer: bb ? bb.player.displayName : null,
+                fadeGameDst: true,
+                percentage: 32
+            });
+            updateStackListDisplay();
+            if (typeof saveSession === 'function') saveSession(true);
+            alert(`Stacked ${g.label}: ${g.bestPair.qb.displayName} + ${g.bestPair.rec.displayName}` +
+                (bb ? ` + ${bb.player.displayName}` : '') +
+                '.\nOpen stack config to set %.');
+        }
+
+        function slAddCheckedStacks() {
+            let added = 0;
+            document.querySelectorAll('.sl-pair-cb:checked').forEach(cb => {
+                const p = _slCache.pairs[parseInt(cb.dataset.idx, 10)];
+                if (p && slPushStack({ captain: p.qb.displayName, receiver: p.rec.displayName, recipe: 'qb_wr', percentage: 32, fadeGameDst: true })) added++;
+            });
+            document.querySelectorAll('.sl-three-cb:checked').forEach(cb => {
+                const p = _slCache.threes[parseInt(cb.dataset.idx, 10)];
+                if (p && slPushStack({ captain: p.qb.displayName, receiver: p.wr.displayName, receiver2: p.te.displayName, recipe: 'qb_wr_te', percentage: 25, fadeGameDst: true })) added++;
+            });
+            document.querySelectorAll('.sl-bring-cb:checked').forEach(cb => {
+                const p = _slCache.brings[parseInt(cb.dataset.idx, 10)];
+                if (p && slPushStack({
+                    captain: p.qb.displayName,
+                    receiver: p.rec.displayName,
+                    recipe: 'qb_wr_bb',
+                    bringBack: p.bbType === 'Opp RB' ? 'rb' : 'pc',
+                    bringPlayer: p.bb.displayName,
+                    fadeGameDst: true,
+                    percentage: 28
+                })) added++;
+            });
+            updateStackListDisplay();
+            if (typeof saveSession === 'function') saveSession(true);
+            alert(added ? `Added ${added} stack(s) from checked rows.` : 'Nothing new to add — check rows first (or they are already stacked).');
         }
 
         function showPostRunReview(count) {
@@ -5282,6 +5882,77 @@
             }
         }
 
+        function resetClassicCorr(opts) {
+            opts = opts || {};
+            const setChk = (id, on) => {
+                const el = document.getElementById(id);
+                if (el) el.checked = !!on;
+            };
+            const setVal = (id, v) => {
+                const el = document.getElementById(id);
+                if (el) el.value = v;
+            };
+            setChk('classicNoOppDstWithQb', opts.noOppDst !== false);
+            setChk('classicForcePassStack', !!opts.forcePc);
+            setChk('classicRbDstStack', !!opts.rbDst);
+            setChk('classicQbWrTe', !!opts.wrte);
+            setChk('classicQbTwoPc', !!opts.twoPc);
+            setChk('classicFadeGameDst', !!opts.fadeDst);
+            setVal('classicBringBack', opts.bring || 'none');
+            const auto = document.getElementById('autoStack');
+            if (auto) auto.checked = !!opts.forcePc;
+            if (opts.forcePc) {
+                const force = document.getElementById('classicForcePassStack');
+                if (force) force.dispatchEvent(new Event('change'));
+            }
+        }
+
+        function slPos(p) {
+            return String((p && p.Position) || '').split('/')[0].toUpperCase();
+        }
+
+        function tagChalkForCash() {
+            const pool = (filteredData || []).filter(p =>
+                !deselectedPlayers.has(p.displayName) &&
+                ['QB', 'RB', 'WR', 'TE'].includes(slPos(p))
+            ).sort((a, b) => (b.ownership || 0) - (a.ownership || 0));
+            pool.slice(0, 8).forEach((p, i) => {
+                const floor = (p.ownership || 0) >= 25 ? 35 : (p.ownership || 0) >= 15 ? 22 : 12;
+                minExposures[p.displayName] = Math.max(minExposures[p.displayName] || 0, floor);
+                maxExposures[p.displayName] = Math.max(maxExposures[p.displayName] || 0, 85);
+                p.minExposure = minExposures[p.displayName];
+                p.maxExposure = maxExposures[p.displayName];
+                if (typeof playerPriority !== 'undefined' && !playerPriority[p.displayName] && i < 5) {
+                    playerPriority[p.displayName] = 'high';
+                }
+            });
+            if (typeof updateCoreBar === 'function') updateCoreBar();
+            if (typeof updateTable === 'function') updateTable();
+        }
+
+        function tagGppOwnershipMix() {
+            const pool = (filteredData || []).filter(p => !deselectedPlayers.has(p.displayName));
+            pool.forEach(p => {
+                if (['QB', 'RB', 'WR', 'TE'].includes(slPos(p)) && (p.ownership || 0) >= 20) {
+                    maxExposures[p.displayName] = Math.min(maxExposures[p.displayName] ?? 100, 42);
+                    p.maxExposure = maxExposures[p.displayName];
+                }
+            });
+            pool.filter(p =>
+                ['RB', 'WR', 'TE'].includes(slPos(p)) &&
+                (p.ownership || 0) > 0 && (p.ownership || 0) < 10 &&
+                (p.projectedFP || 0) >= 7
+            ).sort((a, b) => (b.projectedFP || 0) - (a.projectedFP || 0))
+            .slice(0, 10)
+            .forEach(p => {
+                if (typeof playerPriority !== 'undefined' && !playerPriority[p.displayName]) {
+                    playerPriority[p.displayName] = 'mid';
+                }
+            });
+            if (typeof updateCoreBar === 'function') updateCoreBar();
+            if (typeof updateTable === 'function') updateTable();
+        }
+
         function applyPreset(type) {
             const btn = event && event.target && event.target.closest ? event.target.closest('.preset-btn') : (event && event.target);
             // Toggle off if same preset clicked again
@@ -5319,7 +5990,7 @@
 
             // Reset flex & favorite forces when switching presets
             clearFavoriteForces();
-            if (type !== 'classic_3rb' && type !== 'favorite') {
+            if (type !== 'classic_3rb' && type !== 'favorite' && type !== 'cash_3rb') {
                 setFlexEligible(['RB', 'WR', 'TE']);
             }
             if (type !== 'sd_kdst') {
@@ -5390,6 +6061,36 @@
                 if (document.getElementById('showdownAutoStack')) document.getElementById('showdownAutoStack').checked = false;
                 const excl = document.getElementById('excludeOppDstWithOffenseCpt');
                 if (excl) excl.checked = false;
+            } else if (type === 'cash_floor') {
+                ensureClassicSlate();
+                setExp(80); setOwn(160, 300); setLev(0); setRand(6); setUnique(1); setMulti(1);
+                setSalaryLeftover(500);
+                resetClassicCorr({ forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none' });
+            } else if (type === 'cash_3rb') {
+                ensureClassicSlate();
+                setExp(75); setOwn(150, 290); setLev(5); setRand(8); setUnique(1); setMulti(1);
+                setFlexEligible(['RB']);
+                setSalaryLeftover(500);
+                resetClassicCorr({ forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none' });
+            } else if (type === 'cash_eat_chalk') {
+                ensureClassicSlate();
+                setExp(80); setOwn(170, 310); setLev(0); setRand(5); setUnique(1); setMulti(1);
+                setSalaryLeftover(500);
+                resetClassicCorr({ forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none' });
+                tagChalkForCash();
+            } else if (type === 'gpp_milly') {
+                ensureClassicSlate();
+                setExp(32); setOwn(0, 200); setLev(55); setRand(45); setUnique(5); setMulti(150);
+                resetClassicCorr({ forcePc: true, twoPc: true, wrte: false, fadeDst: true, bring: 'rb', noOppDst: true });
+            } else if (type === 'gpp_mini') {
+                ensureClassicSlate();
+                setExp(38); setOwn(0, 210); setLev(42); setRand(38); setUnique(4); setMulti(20);
+                resetClassicCorr({ forcePc: true, twoPc: false, wrte: false, fadeDst: true, bring: 'none', noOppDst: true });
+            } else if (type === 'gpp_uniques') {
+                ensureClassicSlate();
+                setExp(30); setOwn(0, 190); setLev(60); setRand(48); setUnique(5); setMulti(150);
+                resetClassicCorr({ forcePc: true, twoPc: false, wrte: false, fadeDst: true, bring: 'rb', noOppDst: true });
+                tagGppOwnershipMix();
             } else if (type === 'balanced') {
                 setExp(55); setOwn(0, 200); setLev(25); setRand(30); setUnique(3); setMulti(20);
             } else if (type === 'stackheavy') {
@@ -5444,7 +6145,26 @@
                     'Stay on Quick Build unless you need stacks or uniqueness fine-tuning.',
                 stackheavy:
                     'Stack-heavy on (forces QB/CPT + pass catcher correlation). ' +
-                    'Do this next: (1) Switch to Advanced (2) Configure 1–2 specific stacks at 30–40% (3) Tier those players (4) Run.'
+                    'Do this next: (1) Switch to Advanced (2) Configure 1–2 specific stacks at 30–40% (3) Tier those players (4) Run.',
+                cash_floor:
+                    'Cash Floor Lock on — one lineup for every H2H / 50/50 / SE Double-Up. ' +
+                    'Highest floor, leftover ≤$500, stacks off, low randomness. ' +
+                    'Next: Core/High only true locks (defined roles), FLEX = next-best floor, then Run 1–20 identical cash builds.',
+                cash_3rb:
+                    'Cash 3RB Floor on (FLEX = RB). Use when three RBs have jobs / 15+ opportunities. ' +
+                    'Next: High-tier the three backs, cheap DST, almost the full $50K, then Run.',
+                cash_eat_chalk:
+                    'Eat the Chalk on — min exposure raised on the highest-owned skill players. ' +
+                    'Ownership is not a fade in cash. Next: glance at the pool badges, then Run one lineup everywhere.',
+                gpp_milly:
+                    'Milly Winner shape on — max exp ~32%, 5 uniques, 150-max, QB+2 PCs + opposing RB bring-back, fade game DSTs. ' +
+                    'Next: open Stacks Lab, check 2–4 stacks, tag 4+ players under 10% own, then Run.',
+                gpp_mini:
+                    'GPP Mini-Stack on — QB + 1 pass catcher only (room for four uniques). ' +
+                    'Next: pick the stack QB in Stacks Lab, boost 4 low-own pieces, then Run.',
+                gpp_uniques:
+                    'Four Uniques mix on — chalk capped ~40%, low-own names Mid-tiered. ' +
+                    'Next: confirm 4+ players under 10% still in the pool, add one game stack, Run 20–150.'
             };
             setNextStep(nextMap[type] || 'Preset applied. Tag a few players with exposure tiers in the Player Pool, then Run.');
             refreshChecklist();
@@ -5995,6 +6715,10 @@
             updateCoreBar();
 
             document.getElementById('poolCount').textContent = `(${filteredData.filter(p => !deselectedPlayers.has(p.displayName)).length} active)`;
+            const stacksPanel = document.getElementById('panelStacks');
+            if (stacksPanel && !stacksPanel.hidden && typeof refreshStacksLab === 'function') {
+                refreshStacksLab();
+            }
         }
 
         function toggleDeselect(name) {
