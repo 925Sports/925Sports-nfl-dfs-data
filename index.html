@@ -1837,12 +1837,397 @@
                 justify-content: space-between;
             }
         }
+
+        /* ===== Modern 925 chrome ===== */
+        html { color-scheme: light dark; }
+        body {
+            background-image:
+                radial-gradient(1200px 500px at 10% -10%, rgba(35,115,116,0.16), transparent 55%),
+                radial-gradient(900px 420px at 100% 0%, rgba(71,198,200,0.10), transparent 50%);
+        }
+        body[data-theme="dark"] {
+            background-image:
+                radial-gradient(1100px 520px at 0% -20%, rgba(71,198,200,0.12), transparent 55%),
+                radial-gradient(800px 380px at 100% 0%, rgba(0,210,170,0.08), transparent 50%);
+        }
+        .app-header {
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 0 0 16px 16px;
+        }
+        .brand-mark {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            background: linear-gradient(135deg, #237374, #00D2AA);
+            color: #fff;
+            padding: 0.22rem 0.45rem;
+            border-radius: 7px;
+            margin-right: 0.35rem;
+        }
+        body[data-theme="dark"] .brand-mark {
+            background: linear-gradient(135deg, #47C6C8, #00D2AA);
+            color: #0C2627;
+        }
+        .workspace-tabs {
+            background: color-mix(in srgb, var(--card-bg) 88%, transparent);
+            backdrop-filter: blur(10px);
+            padding: 0.4rem;
+            gap: 0.35rem;
+        }
+        .workspace-tab {
+            border-radius: 999px;
+            padding: 0.48rem 0.95rem;
+        }
+        .card { border-radius: 14px; }
+        .primary-settings { border-radius: 16px; }
+
+        /* Cheat Sheet + Game Preview + Slate Preview */
+        .cs-hero, .gp-hero {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 0.75rem;
+            align-items: flex-end;
+            margin-bottom: 0.85rem;
+        }
+        .cs-hero h2, .gp-hero h2 { margin: 0 0 0.2rem; font-size: 1.15rem; }
+        .cs-note { font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
+        .cs-kpis, .gp-kpis {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(110px, 1fr));
+            gap: 0.5rem;
+            margin: 0 0 0.9rem;
+        }
+        @media (max-width: 800px) {
+            .cs-kpis, .gp-kpis { grid-template-columns: 1fr 1fr; }
+        }
+        .cs-kpi {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.55rem 0.7rem;
+        }
+        .cs-kpi .k { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+        .cs-kpi .v { font-size: 1.05rem; font-weight: 700; margin-top: 0.15rem; }
+        .cs-toolbar, .gp-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: flex-end;
+            margin-bottom: 0.75rem;
+        }
+        .cs-toolbar label, .gp-toolbar label { font-size: 0.72rem; }
+        .cs-toolbar input, .cs-toolbar select, .gp-toolbar select, .gp-toolbar input { min-width: 130px; }
+        .cs-seg {
+            display: inline-flex;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            padding: 0.18rem;
+            gap: 0.15rem;
+        }
+        .cs-seg button {
+            background: transparent;
+            color: var(--muted);
+            border: none;
+            border-radius: 999px;
+            padding: 0.32rem 0.7rem;
+            font-size: 0.78rem;
+        }
+        .cs-seg button.active, .cs-seg button:hover {
+            background: var(--brand-teal);
+            color: #fff;
+        }
+        body[data-theme="dark"] .cs-seg button.active {
+            background: var(--brand-aqua);
+            color: #0C2627;
+        }
+        .cs-table-wrap { overflow-x: auto; }
+        #cheatSheetTable { width: 100%; border-collapse: collapse; }
+        #cheatSheetTable th {
+            text-align: left;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            padding: 0.5rem 0.55rem;
+            background: var(--table-head-bg);
+        }
+        #cheatSheetTable td {
+            padding: 0.45rem 0.55rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        #cheatSheetTable tbody tr:hover { background: rgba(35,115,116,0.07); }
+        #cheatSheetTable td.num { text-align: right; font-variant-numeric: tabular-nums; }
+        .cs-name-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-weight: 650;
+            padding: 0;
+            cursor: pointer;
+            font-size: 0.84rem;
+        }
+        .cs-name-btn:hover { text-decoration: underline; }
+        .cs-sub { color: var(--muted); font-size: 0.72rem; font-weight: 500; }
+        .cs-top-board {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 0.65rem;
+            margin-bottom: 0.9rem;
+        }
+        .cs-top-col {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.65rem 0.7rem;
+            background: var(--input-bg);
+        }
+        .cs-top-col .k { font-size: 0.72rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--brand-teal); }
+        body[data-theme="dark"] .cs-top-col .k { color: var(--brand-mint); }
+        .cs-top-col .chips { display: flex; flex-direction: column; gap: 0.28rem; }
+        .cs-top-col button {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            width: 100%;
+            text-align: left;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 8px;
+            padding: 0.35rem 0.45rem;
+        }
+        .cs-top-col button .n { font-size: 0.68rem; color: var(--muted); min-width: 1.1rem; }
+        .cs-top-col button .nm { font-weight: 650; font-size: 0.8rem; }
+        .cs-top-col button .meta { margin-left: auto; font-size: 0.68rem; color: var(--muted); }
+        .cs-pos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 0.75rem;
+        }
+        .val-hot { color: #059669; font-weight: 700; }
+        .val-meh { color: var(--muted); }
+        .val-cold { color: #dc2626; }
+
+        .gp-shell {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 0.85rem;
+            min-height: 68vh;
+            align-items: stretch;
+        }
+        @media (max-width: 900px) {
+            .gp-shell { grid-template-columns: 1fr; }
+        }
+        .gp-rail {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            overflow: auto;
+            max-height: 78vh;
+        }
+        .gp-rail button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: transparent;
+            color: var(--text-color);
+            border: none;
+            border-bottom: 1px solid var(--border-color);
+            border-radius: 0;
+            padding: 0.7rem 0.8rem;
+        }
+        .gp-rail button.active {
+            background: rgba(35,115,116,0.14);
+            box-shadow: inset 3px 0 0 var(--brand-teal);
+        }
+        .gp-rail .g-name { font-weight: 700; font-size: 0.86rem; }
+        .gp-rail .g-meta { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; }
+        .gp-desk { min-width: 0; }
+        .gp-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 0.9rem 1rem 1rem;
+            box-shadow: var(--shadow);
+        }
+        .gp-match {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.75rem;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+        .gp-match h3 { margin: 0 0 0.2rem; font-size: 1.15rem; }
+        .gp-side {
+            flex: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.65rem 0.7rem;
+            background: var(--input-bg);
+        }
+        .gp-sides { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; }
+        @media (max-width: 720px) { .gp-sides { grid-template-columns: 1fr; } }
+        .gp-player {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+            padding: 0.22rem 0;
+            border-bottom: 1px solid color-mix(in srgb, var(--border-color) 70%, transparent);
+        }
+        .gp-actions { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.65rem; }
+
+        .sp-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding: 0.45rem 0.15rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.82rem;
+        }
+        .sp-tag {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 0.1rem 0.4rem;
+            border-radius: 999px;
+            margin-left: 0.3rem;
+            text-transform: uppercase;
+        }
+        .sp-tag.pass { background: #dbeafe; color: #1e40af; }
+        .sp-tag.run { background: #d1fae5; color: #065f46; }
+        .sp-tag.boom { background: #fee2e2; color: #991b1b; }
+        .sp-tag.shoot { background: #ccfbf1; color: #0f766e; }
+        body[data-theme="dark"] .sp-tag.pass { background: #1e3a5f; color: #93c5fd; }
+        body[data-theme="dark"] .sp-tag.run { background: #064e3b; color: #6ee7b7; }
+        body[data-theme="dark"] .sp-tag.boom { background: #3f1d24; color: #fda4af; }
+        body[data-theme="dark"] .sp-tag.shoot { background: #134e4a; color: #5eead4; }
+        .sp-note { font-size: 0.75rem; color: var(--muted); margin: 0 0 0.5rem; }
+        #slatePreviewRoot .settings-section { margin: 0.45rem 0; }
+        #slatePreviewRoot .settings-section-body { padding-top: 0.15rem; }
+
+        .heat-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 3.2rem;
+            padding: 0.22rem 0.5rem;
+            border-radius: 9px;
+            font-weight: 800;
+            font-variant-numeric: tabular-nums;
+            font-size: 0.78rem;
+            border: 1px solid transparent;
+        }
+        .heat-pill.elite { background: #dbeafe; color: #1d4ed8; border-color: #93c5fd; }
+        .heat-pill.great { background: #d1fae5; color: #047857; border-color: #6ee7b7; }
+        .heat-pill.average { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
+        .heat-pill.below { background: #ffedd5; color: #9a3412; border-color: #fdba74; }
+        .heat-pill.poor { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+        .heat-pill.empty { color: var(--muted); background: transparent; }
+        body[data-theme="dark"] .heat-pill.elite { background: rgba(37,99,235,0.22); color: #93c5fd; border-color: rgba(59,130,246,0.45); }
+        body[data-theme="dark"] .heat-pill.great { background: rgba(16,185,129,0.18); color: #6ee7b7; border-color: rgba(52,211,153,0.4); }
+        body[data-theme="dark"] .heat-pill.average { background: rgba(234,179,8,0.14); color: #fde68a; border-color: rgba(250,204,21,0.35); }
+        body[data-theme="dark"] .heat-pill.below { background: rgba(249,115,22,0.16); color: #fdba74; border-color: rgba(251,146,60,0.38); }
+        body[data-theme="dark"] .heat-pill.poor { background: rgba(239,68,68,0.16); color: #fca5a5; border-color: rgba(248,113,113,0.38); }
+
+
+        .cs-drawer-backdrop {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(12,38,39,0.45);
+            z-index: 1200;
+        }
+        .cs-drawer-backdrop.show { display: block; }
+        .cs-drawer {
+            position: fixed;
+            top: 0; right: 0; bottom: 0;
+            width: min(420px, 96vw);
+            background: var(--card-bg);
+            color: var(--text-color);
+            border-left: 1px solid var(--border-color);
+            box-shadow: -12px 0 40px rgba(0,0,0,0.18);
+            z-index: 1201;
+            transform: translateX(110%);
+            transition: transform 0.22s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .cs-drawer.open { transform: translateX(0); }
+        .cs-drawer-head {
+            padding: 0.9rem 1rem 0.7rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            gap: 0.6rem;
+            align-items: flex-start;
+        }
+        .cs-drawer-body { padding: 0.85rem 1rem 1.4rem; overflow: auto; }
+        .cs-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.45rem;
+            margin: 0.55rem 0 0.85rem;
+        }
+        .cs-stat {
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.45rem 0.5rem;
+        }
+        .cs-stat .k { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+        .cs-stat .v { font-size: 0.95rem; font-weight: 700; margin-top: 0.12rem; }
+        .cs-log-row {
+            display: grid;
+            grid-template-columns: 2.2rem 2.4rem 1fr 3.2rem;
+            gap: 0.35rem;
+            font-size: 0.78rem;
+            padding: 0.28rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .dvp-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 2.4rem;
+            padding: 0.12rem 0.4rem;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 800;
+        }
+        .dvp-soft { background: #d1fae5; color: #065f46; }
+        .dvp-mid { background: #fef3c7; color: #92400e; }
+        .dvp-tough { background: #fee2e2; color: #991b1b; }
+        body[data-theme="dark"] .dvp-soft { background: #064e3b; color: #6ee7b7; }
+        body[data-theme="dark"] .dvp-mid { background: #3d3420; color: #fde68a; }
+        body[data-theme="dark"] .dvp-tough { background: #3d1f1f; color: #fca5a5; }
+        .gp-callouts {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            margin-bottom: 0.75rem;
+        }
+        .gp-callout {
+            border: 1px solid var(--border-color);
+            background: var(--input-bg);
+            border-radius: 10px;
+            padding: 0.5rem 0.65rem;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+        .gp-callout strong { color: var(--brand-teal); }
+        body[data-theme="dark"] .gp-callout strong { color: var(--brand-mint); }
+        .gp-dvp { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; }
+
     </style>
 </head>
 <body data-theme="light">
     <!-- Header -->
     <header class="app-header">
-        <h1>NFL DFS Lineup Builder <span class="info-icon" onclick="openModal()" title="How to use">ℹ️</span></h1>
+        <h1><span class="brand-mark">925</span> NFL DFS Lineup Builder <span class="info-icon" onclick="openModal()" title="How to use">ℹ️</span></h1>
         <div class="header-actions">
             <div class="data-status" id="dataStatus">
                 <span class="dot"></span>
@@ -1869,6 +2254,9 @@
     <div class="main">
         <div class="workspace-tabs" id="workspaceTabs" role="tablist">
             <button type="button" class="workspace-tab active" id="tabBtnBuilder" onclick="switchWorkspace('builder')">⚙️ Builder</button>
+            <button type="button" class="workspace-tab" id="tabBtnCheat" onclick="switchWorkspace('cheat')">📋 Cheat Sheet</button>
+            <button type="button" class="workspace-tab" id="tabBtnPreview" onclick="switchWorkspace('preview')">🏈 Game Preview</button>
+            <button type="button" class="workspace-tab" id="tabBtnSlate" onclick="switchWorkspace('slate')">🛰️ Slate Preview</button>
             <button type="button" class="workspace-tab" id="tabBtnStacks" onclick="switchWorkspace('stacks')">🔗 Stacks Lab</button>
         </div>
 
@@ -2610,7 +2998,113 @@
         </div>
         </div><!-- /panelBuilder -->
 
-        <div id="panelStacks" class="workspace-panel" hidden>
+
+        <div id="panelCheat" class="workspace-panel" hidden>
+            <div class="card">
+                <div class="card-body">
+                    <div class="cs-hero">
+                        <div>
+                            <h2>Cheat Sheet</h2>
+                            <p class="cs-note" style="margin:0;" id="csSlateLabel">Select a slate in Builder to load rankings.</p>
+                        </div>
+                        <div class="cs-seg" id="csViewSeg">
+                            <button type="button" class="active" onclick="setCsView('rank')">Rankings</button>
+                            <button type="button" onclick="setCsView('pos')">By position</button>
+                            <button type="button" onclick="setCsView('value')">Top values</button>
+                        </div>
+                    </div>
+                    <div class="cs-kpis" id="csKpis"></div>
+                    <div class="cs-toolbar">
+                        <div>
+                            <label>Search</label>
+                            <input type="text" id="csSearch" placeholder="Player, team, opponent…" oninput="renderCheatSheet()">
+                        </div>
+                        <div>
+                            <label>Position</label>
+                            <select id="csPos" onchange="renderCheatSheet()">
+                                <option value="">All skill</option>
+                                <option value="QB">QB</option>
+                                <option value="RB">RB</option>
+                                <option value="WR">WR</option>
+                                <option value="TE">TE</option>
+                                <option value="DST">DST</option>
+                                <option value="CPT">Showdown CPT</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Min Proj</label>
+                            <input type="number" id="csMinFp" value="5" min="0" step="0.5" onchange="renderCheatSheet()">
+                        </div>
+                        <div>
+                            <label>Min value</label>
+                            <input type="number" id="csMinVal" value="0" min="0" step="0.1" onchange="renderCheatSheet()">
+                        </div>
+                        <label style="display:flex;align-items:center;gap:0.35rem;font-weight:600;">
+                            <input type="checkbox" id="csHideZero" checked onchange="renderCheatSheet()"> Hide 0-proj
+                        </label>
+                        <button type="button" class="ghost" onclick="csExportCsv()">Export CSV</button>
+                    </div>
+                    <p class="cs-note" style="margin:0 0 0.65rem;">Click a name for the full week projection, DVP, and game log. DVP rank 1 = easiest defense vs that position (2025 logs).</p>
+                    <div id="csMain"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="cs-drawer-backdrop" id="csDrawerBackdrop" onclick="closeCsDrawer()"></div>
+        <div class="cs-drawer" id="csPlayerDrawer" aria-hidden="true">
+            <div class="cs-drawer-head">
+                <div>
+                    <h3 style="margin:0;" id="csDrawerTitle">Player</h3>
+                    <p class="cs-note" style="margin:0.2rem 0 0;" id="csDrawerSub"></p>
+                </div>
+                <button type="button" class="ghost" onclick="closeCsDrawer()">✕</button>
+            </div>
+            <div class="cs-drawer-body" id="csDrawerBody"></div>
+        </div>
+
+                <div id="panelPreview" class="workspace-panel" hidden>
+            <div class="card" style="background:transparent;border:none;box-shadow:none;padding:0;">
+                <div class="card-body" style="padding:0;">
+                    <div class="gp-toolbar" style="margin-bottom:0.65rem;">
+                        <div>
+                            <label>Sort games</label>
+                            <select id="gpSort" onchange="renderGamePreview()">
+                                <option value="total">Highest implied totals</option>
+                                <option value="proj">Highest combined proj</option>
+                                <option value="time">Start time</option>
+                                <option value="value">Best values</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Search</label>
+                            <input type="text" id="gpSearch" placeholder="Team or player…" oninput="renderGamePreview()">
+                        </div>
+                        <div style="margin-left:auto;font-size:0.75rem;color:var(--muted);" id="gpSlateLabel"></div>
+                    </div>
+                    <div class="gp-shell">
+                        <aside class="gp-rail" id="gpRail"></aside>
+                        <div class="gp-desk" id="gamePreviewGrid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="panelSlate" class="workspace-panel" hidden>
+            <div class="card" style="background:transparent;border:none;box-shadow:none;">
+                <div class="card-body" style="padding:0;">
+                    <div class="cs-hero">
+                        <div>
+                            <h2>Slate Preview</h2>
+                            <p class="cs-note" style="margin:0;" id="spSlateLabel">Pick a slate in Builder to load the script board.</p>
+                        </div>
+                    </div>
+                    <div id="slatePreviewRoot"></div>
+                </div>
+            </div>
+        </div>
+
+                <div id="panelStacks" class="workspace-panel" hidden>
             <div class="card" id="stacksLabCard">
                 <div class="card-header" style="cursor:default;">
                     <span>🔗 Stacks Lab</span>
@@ -2998,7 +3492,9 @@
         const DATA_SOURCES = {
             main: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/players.csv',
             ownership: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/ownership.csv',
-            final: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/final.csv'
+            final: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/final.csv',
+            drafttable: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/drafttable.csv',
+            gamelogs: 'https://raw.githubusercontent.com/925Sports/NFL-Player-Log/main/data/gamelogs.csv'
         };
 
         // Normalize every team to a single nickname so chips/filters never show both "GB" and "Packers"
@@ -3045,6 +3541,9 @@
         let rawData = [];
         let filteredData = [];
         let allSlatePlayers = [];
+        let gameLogIndex = new Map(); // normName -> compact games
+        let dvpTable = {}; // `${oppAbbr}|${pos}` -> { avg, rank, n, season }
+        let dvpReady = false;
         let selectedPositions = [];
         let selectedTeams = [];
         let poolSearchQuery = '';
@@ -3410,18 +3909,33 @@
         }
 
         function switchWorkspace(which) {
-            const builder = document.getElementById('panelBuilder');
-            const stacks = document.getElementById('panelStacks');
-            const btnB = document.getElementById('tabBtnBuilder');
-            const btnS = document.getElementById('tabBtnStacks');
-            const showStacks = which === 'stacks';
-            if (builder) builder.hidden = showStacks;
-            if (stacks) stacks.hidden = !showStacks;
-            if (btnB) btnB.classList.toggle('active', !showStacks);
-            if (btnS) btnS.classList.toggle('active', showStacks);
+            const panels = {
+                builder: 'panelBuilder',
+                cheat: 'panelCheat',
+                preview: 'panelPreview',
+                slate: 'panelSlate',
+                stacks: 'panelStacks'
+            };
+            const buttons = {
+                builder: 'tabBtnBuilder',
+                cheat: 'tabBtnCheat',
+                preview: 'tabBtnPreview',
+                slate: 'tabBtnSlate',
+                stacks: 'tabBtnStacks'
+            };
+            if (!panels[which]) which = 'builder';
+            Object.keys(panels).forEach(k => {
+                const el = document.getElementById(panels[k]);
+                if (el) el.hidden = k !== which;
+                const btn = document.getElementById(buttons[k]);
+                if (btn) btn.classList.toggle('active', k === which);
+            });
             const sticky = document.getElementById('stickyRunBar');
-            if (sticky) sticky.style.display = showStacks ? 'none' : '';
-            if (showStacks) refreshStacksLab();
+            if (sticky) sticky.style.display = which === 'builder' ? '' : 'none';
+            if (which === 'stacks' && typeof refreshStacksLab === 'function') refreshStacksLab();
+            if (which === 'cheat' && typeof renderCheatSheet === 'function') renderCheatSheet();
+            if (which === 'preview' && typeof renderGamePreview === 'function') renderGamePreview();
+            if (which === 'slate' && typeof renderSlatePreview === 'function') renderSlatePreview();
         }
 
         function slOwnBand(own) {
@@ -4876,10 +5390,12 @@
                     const lt = document.getElementById('loadingText');
                     if (lt) lt.textContent = 'Downloading slate CSVs…';
                 }
-                const [mainRes, ownRes, finalRes] = await Promise.all([
+                const [mainRes, ownRes, finalRes, draftRes, logsRes] = await Promise.all([
                     fetchWithRetry(DATA_SOURCES.main),
                     fetchWithRetry(DATA_SOURCES.ownership).catch(() => null),
-                    fetchWithRetry(DATA_SOURCES.final).catch(() => null)
+                    fetchWithRetry(DATA_SOURCES.final).catch(() => null),
+                    fetchWithRetry(DATA_SOURCES.drafttable).catch(() => null),
+                    fetchWithRetry(DATA_SOURCES.gamelogs, 2, 25000).catch(() => null)
                 ]);
                 if (!mainRes.ok) throw new Error('Main data failed: ' + mainRes.status);
                 if (!silent) {
@@ -4892,39 +5408,99 @@
                 const csvText = await mainRes.text();
                 const ownershipCsv = ownRes ? await ownRes.text() : '';
                 const finalCsv = finalRes ? await finalRes.text() : '';
+                const draftCsv = draftRes ? await draftRes.text() : '';
+                const logsCsv = logsRes ? await logsRes.text() : '';
                 if (!silent) {
                     const pf = document.getElementById('progressFill');
                     if (pf) pf.style.width = '70%';
                 }
 
                 const ownershipMap = new Map();
+                const ownershipByTeam = new Map();
                 if (ownershipCsv) {
                     Papa.parse(ownershipCsv, {
                         header: true, skipEmptyLines: true, dynamicTyping: true,
                         complete: (r) => {
                             r.data.forEach(row => {
-                                if (row.PLAYER) ownershipMap.set(normalizeName(row.PLAYER), row['RST%'] || 0);
+                                if (!row.PLAYER) return;
+                                const rec = {
+                                    own: row['RST%'] != null ? row['RST%'] : 0,
+                                    opp: row.OPP || row.Opp || '',
+                                    spread: row.SPRD != null && row.SPRD !== '' ? row.SPRD : (row.Spread != null ? row.Spread : ''),
+                                    ou: row['O/U'] != null && row['O/U'] !== '' ? row['O/U'] : '',
+                                    implied: row['TM/P'] != null && row['TM/P'] !== '' ? row['TM/P'] : (row['TM/P '] != null ? row['TM/P '] : '')
+                                };
+                                ownershipMap.set(normalizeName(row.PLAYER), rec);
+                                const tm = normalizeTeam(row.TEAM || row.Team || '');
+                                if (tm && !ownershipByTeam.has(tm)) ownershipByTeam.set(tm, rec);
                             });
                         }
                     });
                 }
 
                 const finalMap = new Map();
+                const finalByTeam = new Map();
                 if (finalCsv) {
                     Papa.parse(finalCsv, {
                         header: true, skipEmptyLines: true, dynamicTyping: true,
                         complete: (r) => {
                             r.data.forEach(row => {
-                                if (row.Player) {
-                                    finalMap.set(normalizeName(row.Player), {
-                                        spread: row.Spread || '',
-                                        ou: row['O/U'] || '',
-                                        opponent: row.Opp || ''
-                                    });
+                                if (!row.Player) return;
+                                let opponent = row.Opp || row.OPP || '';
+                                const matchTitle = row['Match Title (Underdog)'] || row.Tournament || row.Game || '';
+                                const rec = {
+                                    spread: row.Spread != null && row.Spread !== '' ? row.Spread : '',
+                                    ou: row['O/U'] != null && row['O/U'] !== '' ? row['O/U'] : '',
+                                    opponent,
+                                    matchTitle
+                                };
+                                finalMap.set(normalizeName(row.Player), rec);
+                                const tm = normalizeTeam(row.Team || '');
+                                if (tm && !finalByTeam.has(tm)) finalByTeam.set(tm, rec);
+                            });
+                        }
+                    });
+                }
+
+                const draftGameByName = new Map();
+                const draftGameByTeam = new Map();
+                if (draftCsv) {
+                    Papa.parse(draftCsv, {
+                        header: true, skipEmptyLines: true, dynamicTyping: true,
+                        complete: (r) => {
+                            r.data.forEach(row => {
+                                const name = row['Player Name'] || row.Player || '';
+                                const rawGame = row.Tournament || row.Game || row['Match Title (Underdog)'] || '';
+                                const game = String(rawGame).trim();
+                                const usable = game.includes('@') && game.replace('@','').trim().length > 0;
+                                if (name && usable) {
+                                    draftGameByName.set(normalizeName(name), game);
+                                }
+                                const tm = normalizeTeam(row.Team || '');
+                                if (tm && usable && !draftGameByTeam.has(tm)) {
+                                    draftGameByTeam.set(tm, game);
                                 }
                             });
                         }
                     });
+                }
+
+                function oppFromMatchup(team, matchup) {
+                    if (!team || !matchup) return '';
+                    const parts = String(matchup).split('@').map(s => normalizeTeam(s.trim())).filter(Boolean);
+                    if (parts.length !== 2) return '';
+                    const away = parts[0], home = parts[1];
+                    const tm = normalizeTeam(team);
+                    if (tm === home) return away;
+                    if (tm === away) return home;
+                    return '';
+                }
+                function computeImplied(ou, spread, preset) {
+                    const pre = Number(preset);
+                    if (Number.isFinite(pre) && pre > 0) return Math.round(pre * 10) / 10;
+                    const ouN = Number(ou), sprN = Number(spread);
+                    if (Number.isFinite(ouN) && ouN > 0 && Number.isFinite(sprN)) return Math.round((ouN / 2 - sprN / 2) * 10) / 10;
+                    return null;
                 }
 
                 Papa.parse(csvText, {
@@ -4938,7 +5514,7 @@
                             availableSlates = [];
                             setDataStatus('error', 'No valid data from source');
                             if (!silent) alert('No valid player data returned from the live source. Check the GitHub CSV or try Refresh.');
-                            document.getElementById('tableBody').innerHTML = '<tr><td colspan="13">No data loaded</td></tr>';
+                            document.getElementById('tableBody').innerHTML = '<tr><td colspan="12">No data loaded</td></tr>';
                         } else {
                             rawData = results.data.map(row => {
                                 let gameStartTimeStr = row['Game Start Time (PLAYER_DATA2)'] || 'n/a';
@@ -4951,34 +5527,42 @@
                                 } else gameStartTime = new Date(0);
 
                                 const norm = normalizeName(row['Player Name']);
-                                const finalData = finalMap.get(norm) || { spread: '', ou: '', opponent: '' };
-                                let opponent = finalData.opponent;
-                                const matchTitle = row['Match Title (Underdog)'] || '';
-                                if (!opponent && matchTitle) {
-                                    const parts = matchTitle.split(' @ ');
-                                    if (parts.length === 2) {
-                                        const away = parts[0], home = parts[1];
-                                        opponent = (row['Team'] === home) ? away : (row['Team'] === away) ? home : '';
-                                    }
-                                }
                                 if (row['Position'] === 'DST' || row['Team'] === 'DST') {
                                     row['Team'] = normalizeTeam(row['Player Name'] || row['Team']);
                                 }
+                                const team = normalizeTeam(row['Team'] || '');
+                                const ownRow = ownershipMap.get(norm) || ownershipByTeam.get(team) || {};
+                                const finalData = finalMap.get(norm) || finalByTeam.get(team) || { spread: '', ou: '', opponent: '', matchTitle: '' };
+                                let opponent = ownRow.opp || finalData.opponent || '';
+                                const matchTitle = row['Match Title (Underdog)'] || row.Tournament || finalData.matchTitle || draftGameByName.get(norm) || draftGameByTeam.get(team) || '';
+                                if (!opponent) opponent = oppFromMatchup(team, matchTitle);
+                                if (!opponent && matchTitle) {
+                                    const parts = String(matchTitle).split(' @ ').map(s => s.trim());
+                                    if (parts.length === 2) {
+                                        const away = normalizeTeam(parts[0]), home = normalizeTeam(parts[1]);
+                                        opponent = (team === home) ? away : (team === away) ? home : '';
+                                    }
+                                }
+                                if (opponent) opponent = normalizeTeam(opponent);
 
                                 // Keep original source projection so Reset can restore it
                                 const sourceProj = parseFloat(row['Projected FP']) || 0;
                                 // Apply custom projections if present
                                 let proj = sourceProj;
-                                let own = ownershipMap.get(norm) || 0;
+                                let own = (ownRow && ownRow.own != null) ? ownRow.own : 0;
+                                if (typeof own !== 'number') own = parseFloat(own) || 0;
                                 if (customProjections[norm]) {
                                     if (customProjections[norm].proj != null) proj = customProjections[norm].proj;
                                     if (customProjections[norm].ownership != null) own = customProjections[norm].ownership;
                                 }
+                                const spread = (ownRow.spread !== '' && ownRow.spread != null) ? ownRow.spread : finalData.spread;
+                                const ou = (ownRow.ou !== '' && ownRow.ou != null) ? ownRow.ou : finalData.ou;
+                                const impliedTotal = computeImplied(ou, spread, ownRow.implied);
 
                                 return {
                                     'Player Name': row['Player Name'] || '',
                                     'Position': row['Position'] || '',
-                                    'Team': normalizeTeam(row['Team'] || ''),
+                                    'Team': team,
                                     'Opponent': opponent,
                                     'Projected FP': proj,
                                     sourceProjectedFP: sourceProj,
@@ -4987,16 +5571,53 @@
                                     id: row['Draftable ID'] || '',
                                     gameStartTime,
                                     ownership: own,
-                                    spread: finalData.spread,
-                                    ou: finalData.ou
+                                    spread,
+                                    ou,
+                                    impliedTotal,
+                                    passYds: parseFloat(row['Passing Yards']) || 0,
+                                    rushYds: parseFloat(row['Rushing Yards']) || 0,
+                                    recYds: parseFloat(row['Receiving Yards']) || 0,
+                                    rushRecYds: parseFloat(row['Rush+Rec Yards']) || 0,
+                                    passTds: parseFloat(row['Passing TDs']) || 0,
+                                    passAtt: parseFloat(row['Passing Attempts']) || 0,
+                                    atd: parseFloat(row['Anytime TD']) || 0,
+                                    combinedFP: parseFloat(row['Combined FP']) || 0,
+                                    impliedFP: parseFloat(row['Implied FP']) || 0
                                 };
                             }).filter(row => row['Player Name']);
+
+                            // Backfill Opp / lines / implied total from teammates on the same team
+                            const teamMeta = new Map();
+                            rawData.forEach(r => {
+                                if (!r.Team) return;
+                                if (!teamMeta.has(r.Team)) teamMeta.set(r.Team, { opp: '', spread: '', ou: '', implied: null });
+                                const m = teamMeta.get(r.Team);
+                                if (!m.opp && r.Opponent) m.opp = r.Opponent;
+                                if ((m.spread === '' || m.spread == null) && r.spread !== '' && r.spread != null) m.spread = r.spread;
+                                if ((m.ou === '' || m.ou == null) && r.ou !== '' && r.ou != null) m.ou = r.ou;
+                                if (m.implied == null && r.impliedTotal != null) m.implied = r.impliedTotal;
+                            });
+                            rawData.forEach(r => {
+                                const m = teamMeta.get(r.Team);
+                                if (!m) return;
+                                if (!r.Opponent && m.opp) r.Opponent = normalizeTeam(m.opp);
+                                if ((r.spread === '' || r.spread == null) && m.spread !== '' && m.spread != null) r.spread = m.spread;
+                                if ((r.ou === '' || r.ou == null) && m.ou !== '' && m.ou != null) r.ou = m.ou;
+                                if (r.impliedTotal == null) {
+                                    if (m.implied != null) r.impliedTotal = m.implied;
+                                    else {
+                                        const ouN = Number(r.ou), sprN = Number(r.spread);
+                                        if (Number.isFinite(ouN) && ouN > 0 && Number.isFinite(sprN)) r.impliedTotal = Math.round((ouN / 2 - sprN / 2) * 10) / 10;
+                                    }
+                                }
+                            });
 
                             adjustedProjections = {};
                             rawData.forEach(row => {
                                 if (!adjustedProjections[row['Role']]) adjustedProjections[row['Role']] = {};
                                 adjustedProjections[row['Role']][row['Player Name']] = row['Projected FP'];
                             });
+                            try { ingestGameLogs(logsCsv); } catch (e) { console.warn('Game logs parse failed', e); }
                             // Keep any user-edited projections that were already in memory / localStorage
                             try {
                                 const sess = JSON.parse(localStorage.getItem('nflOptimizerSession') || '{}');
@@ -5535,7 +6156,10 @@
                     Position: row.Position, Team: normalizeTeam(row.Team), Opponent: row.Opponent,
                     salary: row.salary, id: row.id, projectedFP, slotType, positions,
                     gameStartTime: row.gameStartTime, ownership: row.ownership,
-                    spread: row.spread, ou: row.ou
+                    spread: row.spread, ou: row.ou, impliedTotal: row.impliedTotal,
+                    passYds: row.passYds, rushYds: row.rushYds, recYds: row.recYds,
+                    rushRecYds: row.rushRecYds, passTds: row.passTds, passAtt: row.passAtt,
+                    atd: row.atd, combinedFP: row.combinedFP, impliedFP: row.impliedFP
                 };
             });
 
@@ -5557,14 +6181,14 @@
                             Opponent: dstRow.Opponent, salary: dstRow.salary, id: dstRow.id,
                             projectedFP: baseProj * 1.5, slotType: 'Captain', positions: ['CPT'],
                             gameStartTime: dstRow.gameStartTime, ownership: dstRow.ownership,
-                            spread: dstRow.spread, ou: dstRow.ou
+                            spread: dstRow.spread, ou: dstRow.ou, impliedTotal: dstRow.impliedTotal
                         });
                         allSlatePlayers.push({
                             displayName: `${base} (FLEX)`, baseName: base, Position: 'DST', Team: normalizeTeam(team),
                             Opponent: dstRow.Opponent, salary: dstRow.salary, id: dstRow.id,
                             projectedFP: baseProj, slotType: 'FLEX', positions: ['DST'],
                             gameStartTime: dstRow.gameStartTime, ownership: dstRow.ownership,
-                            spread: dstRow.spread, ou: dstRow.ou
+                            spread: dstRow.spread, ou: dstRow.ou, impliedTotal: dstRow.impliedTotal
                         });
                     }
                 });
@@ -6557,7 +7181,7 @@
 
         function updateTable() {
             if (!selectedSlate) {
-                document.getElementById('tableBody').innerHTML = '<tr><td colspan="13">No slate selected</td></tr>';
+                document.getElementById('tableBody').innerHTML = '<tr><td colspan="12">No slate selected</td></tr>';
                 return;
             }
             const isShowdown = selectedSlate.includes('Showdown Captain Mode');
@@ -6596,7 +7220,7 @@
                     minExposure: minExposures[displayName], maxExposure: maxExposures[displayName],
                     slotType, positions, gameStartTime: row.gameStartTime,
                     ownership: (custom && custom.ownership != null) ? custom.ownership : row.ownership,
-                    spread: row.spread, ou: row.ou,
+                    spread: row.spread, ou: row.ou, impliedTotal: row.impliedTotal,
                     _userEditedFP: !!(custom && custom._userEdited && custom.proj != null),
                     _userEditedOwn: !!(custom && custom._userEdited && custom.ownership != null)
                 };
@@ -6629,6 +7253,7 @@
                         case 'Opp': valA = (a.Opponent||'').toLowerCase(); valB = (b.Opponent||'').toLowerCase(); break;
                         case 'Spread': valA = parseFloat(a.spread)||0; valB = parseFloat(b.spread)||0; break;
                         case 'O/U': valA = parseFloat(a.ou)||0; valB = parseFloat(b.ou)||0; break;
+                        case 'Impl Tot': valA = Number(a.impliedTotal)||0; valB = Number(b.impliedTotal)||0; break;
                         case 'Position': valA = a.Position.toLowerCase(); valB = b.Position.toLowerCase(); break;
                         case 'Salary': valA = a.salary; valB = b.salary; break;
                         case 'Projected FP': valA = a.projectedFP; valB = b.projectedFP; break;
@@ -6643,7 +7268,10 @@
                 });
             }
 
-            const headers = [' ', 'Player', 'Team', 'Opp', 'Spread', 'O/U', 'Position', 'Salary', 'Projected FP', 'Value', 'Projected Ownership', 'Min Exposure', 'Max Exposure'];
+            var _heatImpl = (typeof heatRange === 'function')
+                ? heatRange(filteredData, r => Number(r.impliedTotal))
+                : { min: 0, max: 0 };
+            const headers = [' ', 'Player', 'Team', 'Opp', 'Impl Tot', 'Position', 'Salary', 'Projected FP', 'Value', 'Projected Ownership', 'Min Exposure', 'Max Exposure'];
             document.getElementById('tableHeader').innerHTML = headers.map(h => {
                 const active = h === sortColumn ? ` class="${sortDirection}"` : '';
                 const tip = h === ' ' ? '' : ' title="Click to sort"';
@@ -6695,8 +7323,7 @@
                     </td>
                     <td>${row.Team}</td>
                     <td>${row.Opponent || ''}</td>
-                    <td>${row.spread || ''}</td>
-                    <td>${row.ou || ''}</td>
+                    <td title="${(row.spread!=null && row.spread!=='') ? ('Spread '+row.spread) : ''} ${(row.ou!=null && row.ou!=='') ? ('O/U '+row.ou) : ''}">${typeof heatPill==='function' ? heatPill(row.impliedTotal, _heatImpl, row.impliedTotal!=null ? Number(row.impliedTotal).toFixed(1) : '') : (row.impliedTotal!=null ? Number(row.impliedTotal).toFixed(1) : '')}</td>
                     <td>${row.Position}</td>
                     <td>${row.salary}</td>
                     <td style="${row._userEditedFP ? 'background:rgba(245,158,11,0.15);' : ''}">
@@ -6719,6 +7346,12 @@
             if (stacksPanel && !stacksPanel.hidden && typeof refreshStacksLab === 'function') {
                 refreshStacksLab();
             }
+            const cheatPanel = document.getElementById('panelCheat');
+            if (cheatPanel && !cheatPanel.hidden && typeof renderCheatSheet === 'function') renderCheatSheet();
+            const previewPanel = document.getElementById('panelPreview');
+            if (previewPanel && !previewPanel.hidden && typeof renderGamePreview === 'function') renderGamePreview();
+            const slatePanel = document.getElementById('panelSlate');
+            if (slatePanel && !slatePanel.hidden && typeof renderSlatePreview === 'function') renderSlatePreview();
         }
 
         function toggleDeselect(name) {
@@ -9335,6 +9968,714 @@
             const lineups = indices.map(idx => generatedLineups[idx - 1]).filter(Boolean);
             downloadDkCsv(lineups, 'DK_NFL_sim_checked');
         }
+
+        // ====================== CHEAT SHEET / GAME PREVIEW / SLATE PREVIEW ======================
+        let csView = 'rank';
+        let csSortKey = 'fp';
+        let csSortDir = 'desc';
+        let csStackPick = null;
+        let gpSelectedKey = null;
+        let gpTeamFilter = null;
+
+
+        function teamAbbr(val) {
+            const s = String(val || '').trim();
+            if (!s) return '';
+            if (!teamAbbr._rev) {
+                teamAbbr._rev = {};
+                Object.entries(TEAM_NICKNAMES || {}).forEach(([k, v]) => {
+                    if (String(k).length <= 3) teamAbbr._rev[v] = String(k).toUpperCase();
+                });
+            }
+            if (TEAM_NICKNAMES[s] && s.length <= 3) return s.toUpperCase();
+            if (TEAM_NICKNAMES[s.toUpperCase()] && s.length <= 3) return s.toUpperCase();
+            const nick = TEAM_NICKNAMES[s] || TEAM_NICKNAMES[s.toUpperCase()] || s;
+            return teamAbbr._rev[nick] || teamAbbr._rev[s] || s.toUpperCase();
+        }
+        function logDkFp(row, pos) {
+            const p = String(pos || row.position || '').toUpperCase();
+            const std = Number(row.fantasy_points) || 0;
+            const ppr = Number(row.fantasy_points_ppr) || 0;
+            return (p === 'QB' || p === 'K' || p === 'DST' || p === 'DEF') ? std : (ppr || std);
+        }
+        function ingestGameLogs(csvText) {
+            gameLogIndex = new Map();
+            dvpTable = {};
+            dvpReady = false;
+            if (!csvText) return;
+            const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true, dynamicTyping: true });
+            const skill = new Set(['QB','RB','WR','TE','K']);
+            const dvpAcc = {}; // opp|pos -> {sum,n}
+            (parsed.data || []).forEach(row => {
+                const pos = String(row.position || '').toUpperCase();
+                if (!skill.has(pos)) return;
+                const name = row.player_display_name || row.player_name || '';
+                if (!name) return;
+                const week = Number(row.week) || 0;
+                const season = Number(row.season) || 0;
+                const stype = String(row.season_type || 'REG');
+                const rec = {
+                    name,
+                    pos,
+                    week,
+                    season,
+                    type: stype,
+                    team: String(row.team || '').toUpperCase(),
+                    opp: String(row.opponent_team || '').toUpperCase(),
+                    passYds: Number(row.passing_yards) || 0,
+                    passTd: Number(row.passing_tds) || 0,
+                    passAtt: Number(row.attempts) || 0,
+                    rushYds: Number(row.rushing_yards) || 0,
+                    rushTd: Number(row.rushing_tds) || 0,
+                    recYds: Number(row.receiving_yards) || 0,
+                    recTd: Number(row.receiving_tds) || 0,
+                    rec: Number(row.receptions) || 0,
+                    tgt: Number(row.targets) || 0,
+                    fp: logDkFp(row, pos)
+                };
+                const key = normalizeName(name);
+                if (!gameLogIndex.has(key)) gameLogIndex.set(key, []);
+                gameLogIndex.get(key).push(rec);
+                if (stype === 'REG' && week >= 1 && week <= 18 && rec.opp) {
+                    const dk = rec.opp + '|' + pos;
+                    if (!dvpAcc[dk]) dvpAcc[dk] = { sum: 0, n: 0, season };
+                    dvpAcc[dk].sum += rec.fp;
+                    dvpAcc[dk].n += 1;
+                }
+            });
+            gameLogIndex.forEach(list => list.sort((a,b) => (a.season - b.season) || (a.week - b.week)));
+            // ranks by position (1 = easiest = most FP allowed)
+            const byPos = {};
+            Object.entries(dvpAcc).forEach(([k, v]) => {
+                const pos = k.split('|')[1];
+                const avg = v.n ? v.sum / v.n : 0;
+                if (!byPos[pos]) byPos[pos] = [];
+                byPos[pos].push({ k, avg, n: v.n, season: v.season });
+            });
+            Object.values(byPos).forEach(arr => {
+                arr.sort((a,b) => b.avg - a.avg);
+                arr.forEach((row, i) => {
+                    dvpTable[row.k] = { avg: row.avg, rank: i + 1, n: row.n, season: row.season, of: arr.length };
+                });
+            });
+            dvpReady = true;
+        }
+        function playerLogs(p) {
+            if (!p) return [];
+            const keys = [normalizeName(csName(p)), normalizeName(p.baseName || ''), normalizeName(p.displayName || '')];
+            for (const k of keys) {
+                if (k && gameLogIndex.has(k)) return gameLogIndex.get(k);
+            }
+            return [];
+        }
+        function lastNLogs(p, n) {
+            const logs = playerLogs(p).filter(g => g.type === 'REG' || g.type === 'POST');
+            return logs.slice(-1 * (n || 5));
+        }
+        function vsOppLogs(p) {
+            const opp = teamAbbr(csOpp(p) || p.Opponent);
+            if (!opp) return [];
+            return playerLogs(p).filter(g => g.opp === opp);
+        }
+        function dvpFor(p) {
+            const opp = teamAbbr(csOpp(p) || p.Opponent);
+            const pos = csPos(p);
+            if (!opp || !pos) return null;
+            return dvpTable[opp + '|' + pos] || null;
+        }
+        function dvpPill(info) {
+            if (!info) return '<span class="cs-sub">—</span>';
+            const cls = info.rank <= 10 ? 'dvp-soft' : info.rank <= 20 ? 'dvp-mid' : 'dvp-tough';
+            return `<span class="dvp-pill ${cls}" title="${info.avg.toFixed(1)} DK FP allowed · ${info.n} games">#${info.rank}</span>`;
+        }
+        function attachLogInsights(list) {
+            (list || []).forEach(p => {
+                const last3 = lastNLogs(p, 3);
+                p.last3Avg = last3.length ? last3.reduce((s,g)=>s+g.fp,0)/last3.length : null;
+                p.last3N = last3.length;
+                const vs = vsOppLogs(p);
+                p.vsOppAvg = vs.length ? vs.reduce((s,g)=>s+g.fp,0)/vs.length : null;
+                p.vsOppN = vs.length;
+                const d = dvpFor(p);
+                p.dvpRank = d ? d.rank : null;
+                p.dvpAvg = d ? d.avg : null;
+            });
+        }
+        function openCsDrawer(displayName) {
+            const p = csSourcePool().find(x => x.displayName === displayName || csName(x) === displayName)
+                || (filteredData||[]).find(x => x.displayName === displayName);
+            const drawer = document.getElementById('csPlayerDrawer');
+            const back = document.getElementById('csDrawerBackdrop');
+            const body = document.getElementById('csDrawerBody');
+            if (!drawer || !body || !p) return;
+            document.getElementById('csDrawerTitle').textContent = csName(p);
+            document.getElementById('csDrawerSub').textContent = `${csPos(p)} · ${p.Team||''} vs ${csOpp(p)||'—'} · $${csSal(p)}`;
+            const dvp = dvpFor(p);
+            const last = lastNLogs(p, 6).slice().reverse();
+            const vs = vsOppLogs(p).slice().reverse();
+            const projBits = [
+                ['Proj FP', csFp(p).toFixed(1)],
+                ['Combined', p.combinedFP ? Number(p.combinedFP).toFixed(1) : '—'],
+                ['Impl FP', p.impliedFP ? Number(p.impliedFP).toFixed(1) : '—'],
+                ['Pass Yds', p.passYds || 0],
+                ['Pass TD', p.passTds || 0],
+                ['Pass Att', p.passAtt || 0],
+                ['Rush Yds', p.rushYds || 0],
+                ['Rec Yds', p.recYds || 0],
+                ['Ru+Rec', p.rushRecYds || ((p.rushYds||0)+(p.recYds||0))],
+                ['ATD %', p.atd ? Number(p.atd).toFixed(1) : '—'],
+                ['Own', (Number(p.ownership)||0).toFixed(1)+'%'],
+                ['Value', csPtsPerK(p).toFixed(2)]
+            ];
+            const logLine = (g) => `<div class="cs-log-row"><span>W${g.week}</span><span>${csEsc(g.opp)}</span><span>${g.pos==='QB' ? `${g.passYds} pass / ${g.passTd} TD` : `${g.rushYds} ru / ${g.recYds} rec / ${g.rec} recs`}</span><span style="text-align:right;font-weight:700;">${g.fp.toFixed(1)}</span></div>`;
+            body.innerHTML = `
+                <div class="cs-stat-grid">${projBits.map(([k,v]) => `<div class="cs-stat"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('')}</div>
+                <p class="cs-note">${dvp ? `DVP vs ${csPos(p)}: <strong>#${dvp.rank} of ${dvp.of}</strong> (${dvp.avg.toFixed(1)} DK FP allowed, ${dvp.n} games, ${dvp.season} season). 1 = easiest.` : 'DVP unavailable for this matchup.'}</p>
+                <div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin:0.4rem 0 0.8rem;">
+                    <button type="button" class="ghost" onclick="jumpToBuilderPlayer('${csArg(csName(p))}');closeCsDrawer();">Open in pool</button>
+                    ${csPos(p)==='QB' ? `<button type="button" class="ghost" onclick="csStartStack('${csArg(p.displayName)}','${csArg(p.Team)}');closeCsDrawer();">Start stack</button>` : ''}
+                </div>
+                <h4 style="margin:0.4rem 0 0.3rem;">Recent games</h4>
+                ${last.length ? last.map(logLine).join('') : '<p class="cs-note">No game logs matched this name yet.</p>'}
+                <h4 style="margin:0.85rem 0 0.3rem;">Vs ${csEsc(csOpp(p)||'opp')}</h4>
+                ${vs.length ? vs.map(logLine).join('') + `<p class="cs-note">Avg ${ (vs.reduce((s,g)=>s+g.fp,0)/vs.length).toFixed(1) } DK FP in ${vs.length} game(s).</p>` : '<p class="cs-note">No logged games against this opponent.</p>'}
+            `;
+            drawer.classList.add('open');
+            drawer.setAttribute('aria-hidden', 'false');
+            if (back) back.classList.add('show');
+        }
+        function closeCsDrawer() {
+            document.getElementById('csPlayerDrawer')?.classList.remove('open');
+            document.getElementById('csDrawerBackdrop')?.classList.remove('show');
+            const d = document.getElementById('csPlayerDrawer');
+            if (d) d.setAttribute('aria-hidden', 'true');
+        }
+
+        function csSourcePool() {
+            const src = (allSlatePlayers && allSlatePlayers.length) ? allSlatePlayers : (filteredData || []);
+            return src.filter(p => p && (p.baseName || p['Player Name'] || p.displayName));
+        }
+        function csFp(p) { return Number(p.projectedFP || p['Projected FP'] || 0) || 0; }
+        function csSal(p) { return Number(p.salary || 0) || 0; }
+        function csPtsPerK(p) { const s = csSal(p); return s > 0 ? csFp(p) / (s / 1000) : 0; }
+        function csName(p) { return String(p.displayName || p['Player Name'] || p.baseName || '').replace(/\s*\([^)]*\)\s*$/, ''); }
+        function csOpp(p) { return p.Opponent || p.Opp || ''; }
+        function csPos(p) {
+            const slot = p.slotType || '';
+            if (slot === 'Captain' || String(p.Position).includes('CPT')) return 'CPT';
+            const pos = String(p.Position || '').split('/')[0];
+            return pos || 'FLEX';
+        }
+        function csEsc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+        function csArg(s) { return String(s ?? '').replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
+        function heatRange(arr, fn) {
+            const vals = (arr || []).map(fn).filter(n => Number.isFinite(n));
+            if (!vals.length) return { min: 0, max: 0 };
+            return { min: Math.min(...vals), max: Math.max(...vals) };
+        }
+        function heatPill(val, range, label) {
+            if (val == null || val === '' || !Number.isFinite(Number(val))) {
+                return `<span class="heat-pill empty">${label || '—'}</span>`;
+            }
+            const n = Number(val);
+            const min = range && Number.isFinite(range.min) ? range.min : n;
+            const max = range && Number.isFinite(range.max) ? range.max : n;
+            let cls = 'average';
+            if (max > min) {
+                const t = (n - min) / (max - min);
+                cls = t >= 0.8 ? 'elite' : t >= 0.6 ? 'great' : t >= 0.4 ? 'average' : t >= 0.2 ? 'below' : 'poor';
+            }
+            return `<span class="heat-pill ${cls}">${label != null ? label : n.toFixed(1)}</span>`;
+        }
+        function valClass(v) {
+            if (v >= 2.4) return 'val-hot';
+            if (v >= 1.6) return '';
+            if (v >= 1.1) return 'val-meh';
+            return 'val-cold';
+        }
+        function setCsView(v) {
+            csView = v || 'rank';
+            document.querySelectorAll('#csViewSeg button').forEach(btn => {
+                btn.classList.toggle('active', (btn.getAttribute('onclick') || '').includes("'" + csView + "'"));
+            });
+            renderCheatSheet();
+        }
+        function cheatPool() {
+            const q = String(document.getElementById('csSearch')?.value || '').trim().toLowerCase();
+            const pos = document.getElementById('csPos')?.value || '';
+            const minFp = parseFloat(document.getElementById('csMinFp')?.value) || 0;
+            const minVal = parseFloat(document.getElementById('csMinVal')?.value) || 0;
+            const hideZero = document.getElementById('csHideZero')?.checked !== false;
+            return csSourcePool().filter(p => {
+                if (deselectedPlayers.has(p.displayName)) return false;
+                const fp = csFp(p);
+                if (hideZero && fp <= 0) return false;
+                if (fp < minFp) return false;
+                if (csPtsPerK(p) < minVal) return false;
+                const ppos = csPos(p);
+                if (pos === 'WR' && !(ppos === 'WR' || ppos === 'TE')) return false;
+                else if (pos && pos !== 'WR' && ppos !== pos) return false;
+                if (q) {
+                    const blob = [csName(p), p.Team, csOpp(p), ppos].join(' ').toLowerCase();
+                    if (!blob.includes(q)) return false;
+                }
+                return true;
+            });
+        }
+        function csSort(rows) {
+            const key = csSortKey;
+            const dir = csSortDir === 'asc' ? 1 : -1;
+            return rows.slice().sort((a, b) => {
+                let va, vb;
+                if (key === 'name') { va = csName(a); vb = csName(b); return va.localeCompare(vb) * dir; }
+                if (key === 'team') { va = a.Team || ''; vb = b.Team || ''; return String(va).localeCompare(String(vb)) * dir; }
+                if (key === 'opp') { va = csOpp(a); vb = csOpp(b); return String(va).localeCompare(String(vb)) * dir; }
+                if (key === 'pos') { va = csPos(a); vb = csPos(b); return String(va).localeCompare(String(vb)) * dir; }
+                if (key === 'sal') { va = csSal(a); vb = csSal(b); }
+                else if (key === 'val') { va = csPtsPerK(a); vb = csPtsPerK(b); }
+                else if (key === 'own') { va = Number(a.ownership)||0; vb = Number(b.ownership)||0; }
+                else if (key === 'impl') { va = Number(a.impliedTotal)||0; vb = Number(b.impliedTotal)||0; }
+                else if (key === 'dvp') { va = Number(a.dvpRank)||99; vb = Number(b.dvpRank)||99; }
+                else if (key === 'l3') { va = Number(a.last3Avg)||0; vb = Number(b.last3Avg)||0; }
+                else { va = csFp(a); vb = csFp(b); }
+                return (va - vb) * dir;
+            });
+        }
+        function jumpToBuilderPlayer(name) {
+            switchWorkspace('builder');
+            const box = document.getElementById('poolSearchInput') || document.getElementById('playerSearch');
+            if (box) {
+                box.value = String(name || '').split(' (')[0];
+                if (typeof onPoolSearchInput === 'function') onPoolSearchInput(box.value);
+                else box.dispatchEvent(new Event('input'));
+            }
+            document.getElementById('poolCard')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        function csApplyTier(name, tier) {
+            if (typeof setPlayerPriority === 'function') setPlayerPriority(name, tier);
+            else if (typeof playerPriority === 'object') playerPriority[name] = tier;
+            renderCheatSheet();
+        }
+        function csStartStack(displayName, team) {
+            csStackPick = { qbDisplay: displayName, team };
+            renderCheatSheet();
+        }
+        function csCancelStack() { csStackPick = null; renderCheatSheet(); }
+        function csFinishStack(wrDisplay, asBring) {
+            if (!csStackPick) return;
+            stackList.push({
+                captain: csStackPick.qbDisplay,
+                receiver: wrDisplay,
+                receiver2: null,
+                recipe: 'qb_wr',
+                bringBack: asBring ? 'rb' : 'none',
+                bringPlayer: asBring ? wrDisplay : null,
+                percentage: 20,
+                num: 0,
+                generated: 0
+            });
+            csStackPick = null;
+            if (typeof updateStackList === 'function') updateStackList();
+            if (typeof queueSessionSave === 'function') queueSessionSave();
+            renderCheatSheet();
+        }
+        function csGameCount(pool) {
+            const keys = new Set();
+            (pool || []).forEach(p => {
+                const a = p.Team || '', b = p.Opponent || '';
+                if (!a) return;
+                keys.add([a, b].sort().join('|'));
+            });
+            return keys.size || 1;
+        }
+        function renderCsKpis(rows) {
+            const el = document.getElementById('csKpis');
+            if (!el) return;
+            const games = csGameCount(csSourcePool());
+            const avgImpl = rows.length ? rows.reduce((s,p)=>s+(Number(p.impliedTotal)||0),0)/rows.filter(p=>p.impliedTotal!=null).length : 0;
+            const top = rows.slice().sort((a,b)=>csFp(b)-csFp(a))[0];
+            el.innerHTML = `
+                <div class="cs-kpi"><div class="k">Pool</div><div class="v">${rows.length}</div></div>
+                <div class="cs-kpi"><div class="k">Games</div><div class="v">${games}</div></div>
+                <div class="cs-kpi"><div class="k">Avg implied</div><div class="v">${Number.isFinite(avgImpl)&&avgImpl?avgImpl.toFixed(1):'—'}</div></div>
+                <div class="cs-kpi"><div class="k">Top proj</div><div class="v">${top ? csEsc(csName(top)) : '—'}</div></div>`;
+        }
+        function renderCsTopBoard(rows) {
+            const games = csGameCount(csSourcePool());
+            const want = ['QB','RB','WR','TE'];
+            return `<div class="cs-top-board">${want.map(pos => {
+                const list = rows.filter(p => pos === 'WR' ? (csPos(p)==='WR'||csPos(p)==='TE') : csPos(p)===pos)
+                    .sort((a,b)=>csFp(b)-csFp(a)).slice(0,8);
+                const items = list.map((p,i) => `<button type="button" onclick="jumpToBuilderPlayer('${csArg(csName(p))}')">
+                    <span class="n">${i+1}</span><span class="nm">${csEsc(csName(p))}</span>
+                    <span class="meta">${csEsc(p.Team||'')}${p.impliedTotal!=null?' · '+Number(p.impliedTotal).toFixed(1):''} · ${csFp(p).toFixed(1)}</span>
+                </button>`).join('') || '<span class="cs-sub">No players</span>';
+                return `<div class="cs-top-col"><div class="k">Top ${pos}s · ${games}-game slate</div><div class="chips">${items}</div></div>`;
+            }).join('')}</div>`;
+        }
+        function renderCsBoard(rows) {
+            const heatI = heatRange(rows, p => Number(p.impliedTotal));
+            const heatV = heatRange(rows, p => csPtsPerK(p));
+            const sorted = csSort(rows);
+            const th = (key, label) => `<th style="cursor:pointer;" onclick="csSortKey='${key}';csSortDir=csSortKey==='${key}'&&csSortDir==='desc'?'asc':'desc';renderCheatSheet();">${label}</th>`;
+            const body = sorted.map((p, i) => {
+                const impl = p.impliedTotal != null ? Number(p.impliedTotal).toFixed(1) : '';
+                const stackBtn = csPos(p)==='QB'
+                    ? `<button type="button" class="ghost" style="padding:0.15rem 0.4rem;font-size:0.7rem;" onclick="csStartStack('${csArg(p.displayName)}','${csArg(p.Team)}')">Stack</button>`
+                    : (csStackPick && p.Team === csStackPick.team && csPos(p)!=='QB'
+                        ? `<button type="button" class="ghost" style="padding:0.15rem 0.4rem;font-size:0.7rem;" onclick="csFinishStack('${csArg(p.displayName)}', false)">Add</button>`
+                        : '');
+                const dvp = dvpFor(p);
+                const line = csPos(p)==='QB'
+                    ? `${Number(p.passYds||0).toFixed(0)} pyd / ${Number(p.passTds||0).toFixed(1)} pTD`
+                    : `${Number(p.rushYds||0).toFixed(0)} ru / ${Number(p.recYds||0).toFixed(0)} rec`;
+                const last3 = p.last3Avg != null ? p.last3Avg.toFixed(1) : '—';
+                return `<tr>
+                    <td class="num">${i+1}</td>
+                    <td><button type="button" class="cs-name-btn" onclick="openCsDrawer('${csArg(p.displayName)}')">${csEsc(csName(p))}</button> ${stackBtn}</td>
+                    <td>${csEsc(csPos(p))}</td>
+                    <td>${csEsc(p.Team||'')}</td>
+                    <td>${csEsc(csOpp(p))}</td>
+                    <td>${heatPill(p.impliedTotal, heatI, impl)}</td>
+                    <td>${dvpPill(dvp)}</td>
+                    <td class="num">$${csSal(p)}</td>
+                    <td class="num">${csFp(p).toFixed(1)}</td>
+                    <td class="num" title="Pass / rush / rec projection">${csEsc(line)}</td>
+                    <td class="num">${last3}</td>
+                    <td class="num"><span class="${valClass(csPtsPerK(p))}">${csPtsPerK(p).toFixed(2)}</span></td>
+                    <td class="num">${(Number(p.ownership)||0).toFixed(1)}%</td>
+                </tr>`;
+            }).join('');
+            const banner = csStackPick ? `<p class="cs-note">Stacking from <strong>${csEsc(csStackPick.qbDisplay)}</strong> — click Add on a teammate. <button type="button" class="ghost" onclick="csCancelStack()">Cancel</button></p>` : '';
+            return banner + `<div class="cs-table-wrap"><table id="cheatSheetTable">
+                <thead><tr>${th('fp','#')}${th('name','Player')}${th('pos','Pos')}${th('team','Team')}${th('opp','Opp')}${th('impl','Impl Tot')}${th('dvp','DVP')}${th('sal','Salary')}${th('fp','Proj')}${th('line','Week line')}${th('l3','L3')}${th('val','Val')}${th('own','Own')}</tr></thead>
+                <tbody>${body || '<tr><td colspan="13">No players match filters.</td></tr>'}</tbody>
+            </table></div>`;
+        }
+        function renderCheatSheet() {
+            const root = document.getElementById('csMain');
+            const lab = document.getElementById('csSlateLabel');
+            if (!root) return;
+            try { enrichPlayerMatchups(allSlatePlayers); } catch (e) {}
+            try { attachLogInsights(csSourcePool()); } catch (e) {}
+            const rows = cheatPool();
+            if (lab) lab.textContent = (selectedSlate || 'No slate') + ' · implied totals from team O/U and spread (TM/P).';
+            renderCsKpis(rows);
+            if (csView === 'pos') {
+                const groups = ['QB','RB','WR','TE','DST'];
+                root.innerHTML = `<div class="cs-pos-grid">${groups.map(pos => {
+                    const list = csSort(rows.filter(p => pos==='WR' ? (csPos(p)==='WR') : csPos(p)===pos)).slice(0, 20);
+                    return `<div class="cs-top-col"><div class="k">${pos}</div>${list.map((p,i)=>`<div class="gp-player"><span>${i+1}. ${csEsc(csName(p))} <span class="cs-sub">${csEsc(p.Team||'')}</span></span><span>${csFp(p).toFixed(1)}</span></div>`).join('')||'<span class="cs-sub">None</span>'}</div>`;
+                }).join('')}</div>`;
+                return;
+            }
+            if (csView === 'value') {
+                const vals = csSort(rows.slice().sort((a,b)=>csPtsPerK(b)-csPtsPerK(a))).slice(0, 40);
+                csSortKey = 'val';
+                root.innerHTML = renderCsBoard(vals);
+                return;
+            }
+            root.innerHTML = renderCsTopBoard(rows) + renderCsBoard(rows);
+        }
+        function csExportCsv() {
+            const rows = csSort(cheatPool());
+            const headers = ['Rank','Player','Pos','Team','Opp','Impl Tot','DVP','PassYds','RushYds','RecYds','ATD','Proj FP','L3','PtsPerK','Own'];
+            const lines = [headers.join(',')];
+            rows.forEach((p,i) => {
+                lines.push([i+1, '"'+csName(p).replace(/"/g,'')+'"', csPos(p), p.Team||'', csOpp(p), p.impliedTotal??'', p.dvpRank??'', p.passYds||0, p.rushYds||0, p.recYds||0, p.atd||'', csFp(p).toFixed(2), p.last3Avg!=null?p.last3Avg.toFixed(1):'', csPtsPerK(p).toFixed(2), (Number(p.ownership)||0).toFixed(1)].join(','));
+            });
+            const blob = new Blob([lines.join('\n')], { type: 'text/csv' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'nfl_cheat_sheet.csv';
+            a.click();
+        }
+
+        function gameKeyFromPlayer(p) {
+            const a = p.Team || '', b = p.Opponent || '';
+            return [a, b].filter(Boolean).sort().join('|') || a;
+        }
+        function prettyMatch(p) {
+            if (p.Team && p.Opponent) return p.Opponent + ' @ ' + p.Team;
+            return p.Team || 'Game';
+        }
+        function gpBuildGames() {
+            const q = String(document.getElementById('gpSearch')?.value || '').trim().toLowerCase();
+            const sort = document.getElementById('gpSort')?.value || 'total';
+            const map = new Map();
+            csSourcePool().forEach(p => {
+                if (deselectedPlayers.has(p.displayName)) return;
+                if (!p.Team) return;
+                const key = gameKeyFromPlayer(p);
+                if (!map.has(key)) {
+                    map.set(key, {
+                        key, teams: new Set(), players: [], impliedSum: 0, proj: 0, value: 0, time: p.gameStartTime || 0
+                    });
+                }
+                const g = map.get(key);
+                g.teams.add(p.Team);
+                if (p.Opponent) g.teams.add(p.Opponent);
+                g.players.push(p);
+                g.proj += csFp(p);
+                g.value += csPtsPerK(p);
+                if (p.impliedTotal != null) g.impliedSum = Math.max(g.impliedSum, Number(p.impliedTotal) + (Number(p.ou)||0 ? Number(p.ou) - Number(p.impliedTotal) : Number(p.impliedTotal)));
+            });
+            let games = [...map.values()].map(g => {
+                const teams = [...g.teams];
+                const byTeam = {};
+                teams.forEach(tm => {
+                    const plist = g.players.filter(p => p.Team === tm);
+                    const sample = plist.find(p => p.impliedTotal != null) || plist[0];
+                    byTeam[tm] = {
+                        team: tm,
+                        opp: sample?.Opponent || teams.find(x => x !== tm) || '',
+                        implied: sample?.impliedTotal,
+                        spread: sample?.spread,
+                        ou: sample?.ou,
+                        players: plist.slice().sort((a,b)=>csFp(b)-csFp(a))
+                    };
+                });
+                return { ...g, teams, byTeam, label: teams.join(' vs ') };
+            });
+            if (q) games = games.filter(g => {
+                const blob = [g.label, ...g.players.map(csName)].join(' ').toLowerCase();
+                return blob.includes(q);
+            });
+            games.sort((a,b) => {
+                if (sort === 'time') return (a.time||0) - (b.time||0);
+                if (sort === 'proj') return b.proj - a.proj;
+                if (sort === 'value') return b.value - a.value;
+                return (b.impliedSum||0) - (a.impliedSum||0) || b.proj - a.proj;
+            });
+            return games;
+        }
+        function selectGamePreview(key) {
+            gpSelectedKey = key;
+            gpTeamFilter = null;
+            renderGamePreview();
+        }
+        function gpSetTeam(tm) { gpTeamFilter = tm || null; renderGamePreview(); }
+        function gpAddStack(qbName, wrName) {
+            if (!qbName || !wrName) return;
+            const qb = csSourcePool().find(p => csName(p) === qbName && csPos(p) === 'QB') || csSourcePool().find(p => csName(p) === qbName);
+            const wr = csSourcePool().find(p => csName(p) === wrName);
+            if (!qb || !wr) { jumpToBuilderPlayer(qbName); return; }
+            stackList.push({
+                captain: qb.displayName,
+                receiver: wr.displayName,
+                receiver2: null,
+                recipe: 'qb_wr',
+                bringBack: 'none',
+                bringPlayer: null,
+                percentage: 20,
+                num: 0,
+                generated: 0
+            });
+            if (typeof updateStackList === 'function') updateStackList();
+            if (typeof queueSessionSave === 'function') queueSessionSave();
+        }
+        function renderGamePreview() {
+            const rail = document.getElementById('gpRail');
+            const desk = document.getElementById('gamePreviewGrid');
+            const lab = document.getElementById('gpSlateLabel');
+            if (!rail || !desk) return;
+            try { enrichPlayerMatchups(allSlatePlayers); } catch (e) {}
+            try { attachLogInsights(csSourcePool()); } catch (e) {}
+            const games = gpBuildGames();
+            if (lab) lab.textContent = (selectedSlate || 'No slate') + ' · ' + games.length + ' games';
+            if (!games.length) {
+                rail.innerHTML = '<p class="cs-note" style="padding:0.8rem;">Load a slate with Team + Opponent to preview games.</p>';
+                desk.innerHTML = '';
+                return;
+            }
+            if (!gpSelectedKey || !games.some(g => g.key === gpSelectedKey)) gpSelectedKey = games[0].key;
+            rail.innerHTML = games.map(g => {
+                const sample = g.players.find(p => p.ou != null && p.ou !== '') || g.players[0];
+                const ou = sample?.ou != null && sample.ou !== '' ? sample.ou : '—';
+                const impls = g.teams.map(tm => g.byTeam[tm]?.implied).filter(v => v != null);
+                return `<button type="button" class="${g.key===gpSelectedKey?'active':''}" onclick="selectGamePreview('${csArg(g.key)}')">
+                    <div class="g-name">${csEsc(g.label)}</div>
+                    <div class="g-meta">O/U ${csEsc(ou)}${impls.length? ' · Impl '+impls.map(n=>Number(n).toFixed(1)).join(' / '):''}</div>
+                </button>`;
+            }).join('');
+            const g = games.find(x => x.key === gpSelectedKey) || games[0];
+            const gamePlayers = g.players || [];
+            attachLogInsights(gamePlayers);
+            const hot = gamePlayers.filter(p => p.last3N >= 2 && p.last3Avg >= 12)
+                .sort((a,b) => b.last3Avg - a.last3Avg).slice(0, 4);
+            const matchupHits = gamePlayers.filter(p => p.vsOppN >= 1 && p.vsOppAvg >= 12)
+                .sort((a,b) => b.vsOppAvg - a.vsOppAvg).slice(0, 4);
+            const softDvp = gamePlayers.filter(p => p.dvpRank && p.dvpRank <= 10 && ['QB','RB','WR','TE'].includes(csPos(p)))
+                .sort((a,b) => a.dvpRank - b.dvpRank).slice(0, 4);
+            const callouts = [];
+            if (hot.length) callouts.push(`<div class="gp-callout"><strong>Playing well recently</strong> — last 3 logged games: ${hot.map(p => `${csEsc(csName(p))} ${p.last3Avg.toFixed(1)} FP`).join(' · ')}</div>`);
+            if (matchupHits.length) callouts.push(`<div class="gp-callout"><strong>Likes this matchup</strong> — vs current opponent: ${matchupHits.map(p => `${csEsc(csName(p))} ${p.vsOppAvg.toFixed(1)} FP (${p.vsOppN}g)`).join(' · ')}</div>`);
+            if (softDvp.length) callouts.push(`<div class="gp-callout"><strong>Soft DVP spots</strong> — easiest 10 defenses vs position: ${softDvp.map(p => `${csEsc(csName(p))} ${csPos(p)} #${p.dvpRank}`).join(' · ')}</div>`);
+            if (!dvpReady) callouts.push(`<div class="gp-callout">Game logs still loading or unavailable — DVP / recent form will appear after the NFL-Player-Log file loads.</div>`);
+            const sides = g.teams.map(tm => {
+                const side = g.byTeam[tm];
+                const list = (side.players || []).filter(p => ['QB','RB','WR','TE','DST','CPT'].includes(csPos(p))).slice(0, 10);
+                const qb = side.players.find(p => csPos(p)==='QB');
+                const wr = side.players.find(p => csPos(p)==='WR' || csPos(p)==='TE');
+                const spr = side.spread != null && side.spread !== '' ? (Number(side.spread)>0?'+':'') + side.spread : '—';
+                const impl = side.implied != null ? Number(side.implied).toFixed(1) : '—';
+                const oppAbbr = teamAbbr(side.opp || (g.teams.find(x => x !== tm) || ''));
+                const dvpBits = ['QB','RB','WR','TE'].map(pos => {
+                    const info = dvpTable[oppAbbr + '|' + pos];
+                    return info ? `${pos} ${dvpPill(info)}` : '';
+                }).filter(Boolean).join(' ');
+                return `<div class="gp-side">
+                    <div style="display:flex;justify-content:space-between;gap:0.5rem;align-items:baseline;">
+                        <strong>${csEsc(tm)}</strong>
+                        <span class="cs-sub">${spr} · Impl ${impl}${side.ou!=null && side.ou!=='' ? ' · O/U '+side.ou : ''}</span>
+                    </div>
+                    <div class="gp-dvp">Opp DVP ${dvpBits || '—'}</div>
+                    ${list.map(p => `<div class="gp-player"><span><button type="button" class="cs-name-btn" onclick="openCsDrawer('${csArg(p.displayName)}')">${csEsc(csName(p))}</button> <span class="cs-sub">${csPos(p)}${p.last3Avg!=null? ' · L3 '+p.last3Avg.toFixed(1):''}</span></span><span>$${csSal(p)} · ${csFp(p).toFixed(1)}</span></div>`).join('')}
+                    <div class="gp-actions">
+                        ${qb && wr ? `<button type="button" class="ghost" onclick="gpAddStack('${csArg(csName(qb))}','${csArg(csName(wr))}')">Stack ${csEsc(csName(qb).split(' ').slice(-1)[0])} + ${csEsc(csName(wr).split(' ').slice(-1)[0])}</button>` : ''}
+                    </div>
+                </div>`;
+            }).join('');
+            desk.innerHTML = `<div class="gp-card">
+                <div class="gp-match">
+                    <div><h3>${csEsc(g.label)}</h3><p class="cs-note" style="margin:0;">Implied total = O/U ÷ 2 − spread ÷ 2. DVP is 2025 DK FP allowed by that defense vs position (1 = easiest).</p></div>
+                </div>
+                <div class="gp-callouts">${callouts.join('') || '<div class="gp-callout">No recent-form or matchup flags on this game yet.</div>'}</div>
+                <div class="gp-sides">${sides}</div>
+            </div>`;
+        }
+
+        function enrichPlayerMatchups(list) {
+            const players = list || allSlatePlayers || [];
+            if (!players.length) return;
+            const byTeam = new Map();
+            players.forEach(p => {
+                if (!p.Team) return;
+                if (!byTeam.has(p.Team)) byTeam.set(p.Team, { opp: '', spread: '', ou: '', implied: null });
+                const m = byTeam.get(p.Team);
+                if (!m.opp && p.Opponent) m.opp = p.Opponent;
+                if ((m.spread===''||m.spread==null) && p.spread!=='' && p.spread!=null) m.spread = p.spread;
+                if ((m.ou===''||m.ou==null) && p.ou!=='' && p.ou!=null) m.ou = p.ou;
+                if (m.implied==null && p.impliedTotal!=null) m.implied = p.impliedTotal;
+            });
+            const apply = (p) => {
+                const m = byTeam.get(p.Team);
+                if (!m) return;
+                if (!p.Opponent && m.opp) p.Opponent = normalizeTeam(m.opp);
+                if ((p.spread===''||p.spread==null) && m.spread!=='' && m.spread!=null) p.spread = m.spread;
+                if ((p.ou===''||p.ou==null) && m.ou!=='' && m.ou!=null) p.ou = m.ou;
+                if (p.impliedTotal==null) {
+                    if (m.implied!=null) p.impliedTotal = m.implied;
+                    else {
+                        const ouN = Number(p.ou), sprN = Number(p.spread);
+                        if (Number.isFinite(ouN) && ouN>0 && Number.isFinite(sprN)) p.impliedTotal = Math.round((ouN/2 - sprN/2)*10)/10;
+                    }
+                }
+            };
+            players.forEach(apply);
+            if (Array.isArray(rawData)) rawData.forEach(apply);
+        }
+
+        function renderSlatePreview() {
+            const root = document.getElementById('slatePreviewRoot');
+            const lab = document.getElementById('spSlateLabel');
+            if (!root) return;
+            try { enrichPlayerMatchups(allSlatePlayers); } catch (e) {}
+            const isSd = selectedSlate && String(selectedSlate).includes('Showdown');
+            const pool = (filteredData && filteredData.length ? filteredData : allSlatePlayers || []).filter(p => {
+                if (deselectedPlayers.has(p.displayName)) return false;
+                if (p.slotType === 'Captain') return false;
+                return true;
+            });
+            if (lab) lab.textContent = (selectedSlate || 'No slate') + (isSd ? ' · Showdown is CPT + 5 FLEX (1.5x CPT)' : ' · Classic 9: QB / RB / RB / WR / WR / WR / TE / FLEX / DST');
+            if (!pool.length) {
+                root.innerHTML = '<p class="cs-note">Pick a slate in Builder first.</p>';
+                return;
+            }
+            const byTeam = new Map();
+            pool.forEach(p => {
+                if (!p.Team) return;
+                if (!byTeam.has(p.Team)) byTeam.set(p.Team, { team: p.Team, opp: p.Opponent, implied: p.impliedTotal, spread: p.spread, ou: p.ou, fp: 0, players: [] });
+                const g = byTeam.get(p.Team);
+                if (g.implied == null && p.impliedTotal != null) g.implied = p.impliedTotal;
+                if (g.spread == null || g.spread === '') g.spread = p.spread;
+                if (g.ou == null || g.ou === '') g.ou = p.ou;
+                if (!g.opp && p.Opponent) g.opp = p.Opponent;
+                g.fp += Number(p.projectedFP) || 0;
+                g.players.push(p);
+            });
+            const teams = [...byTeam.values()].sort((a,b) => (b.implied||0) - (a.implied||0) || b.fp - a.fp);
+            const teamRows = teams.map(tm => {
+                const line = Number(tm.spread);
+                const ou = Number(tm.ou);
+                let tag = '', tagCls = '';
+                if (Number.isFinite(line) && Math.abs(line) >= 10) { tag = 'Blowout risk'; tagCls = 'boom'; }
+                else if (Number.isFinite(line) && line <= -7) { tag = 'Run script'; tagCls = 'run'; }
+                else if (Number.isFinite(line) && line >= 3 && ou >= 47) { tag = 'Pass script'; tagCls = 'pass'; }
+                else if (ou >= 48) { tag = 'Shootout'; tagCls = 'shoot'; }
+                const impl = tm.implied != null ? Number(tm.implied).toFixed(1) : '—';
+                const spr = Number.isFinite(line) ? ((line>0?'+':'') + Number(line).toFixed(1)) : '—';
+                return `<div class="sp-row"><span><strong>${tm.team}</strong> vs ${tm.opp||'—'} ${tag?`<span class="sp-tag ${tagCls}">${tag}</span>`:''}</span><span>Impl ${impl} · ${spr} · O/U ${Number.isFinite(ou)?ou:'—'}</span></div>`;
+            }).join('');
+            const blow = teams.filter(tm => Number.isFinite(Number(tm.spread)) && Math.abs(Number(tm.spread)) >= 10);
+            const blowHtml = blow.length ? blow.map(tm => {
+                const cheap = tm.players.filter(p => ['RB','WR','TE'].includes(p.Position) && (p.salary||0) <= 4500)
+                    .sort((a,b)=>(b.projectedFP||0)-(a.projectedFP||0)).slice(0,3)
+                    .map(p => String(p.displayName||'').split(' (')[0]).join(', ');
+                return `<div class="sp-row"><span><strong>${tm.team}</strong> ${Number(tm.spread)>0?'+':''}${Number(tm.spread).toFixed(1)} — backup / cheap skill volatility</span><span>${cheap || 'no cheap pieces'}</span></div>`;
+            }).join('') : '<div class="sp-row">No 10+ spreads on this slate.</div>';
+            const passTeams = teams.filter(tm => Number(tm.spread) >= 3 && Number(tm.ou) >= 47);
+            const runTeams = teams.filter(tm => Number(tm.spread) <= -7);
+            const passHtml = (passTeams.length ? passTeams : teams.filter(tm => Number(tm.implied) >= 24).slice(0,3))
+                .map(tm => `<div class="sp-row"><span>${tm.team} <span class="sp-tag pass">pass</span></span><span>dog/shootout · target WR1 / TE</span></div>`).join('') || '<div class="sp-row">No clear pass scripts.</div>';
+            const runHtml = runTeams.map(tm => `<div class="sp-row"><span>${tm.team} <span class="sp-tag run">run</span></span><span>favored ${Math.abs(Number(tm.spread)).toFixed(1)} · RB volume</span></div>`).join('') || '<div class="sp-row">No −7 or bigger favorites.</div>';
+            const topBlock = (pos) => {
+                const list = pool.filter(p => p.Position===pos).sort((a,b)=>(b.projectedFP||0)-(a.projectedFP||0)).slice(0,8);
+                return list.map((p,i) => `<div class="sp-row"><span>${i+1}. ${String(p.displayName||'').split(' (')[0]} <span class="cs-sub">${p.Team||''}${p.impliedTotal!=null?' · '+Number(p.impliedTotal).toFixed(1):''}</span></span><span>${(p.projectedFP||0).toFixed(1)} FP</span></div>`).join('') || '<div class="sp-row">No players</div>';
+            };
+            const qbs = pool.filter(p => p.Position==='QB').sort((a,b)=>(b.projectedFP||0)-(a.projectedFP||0));
+            const stacks = [];
+            qbs.slice(0, 10).forEach(qb => {
+                pool.filter(p => p.Team===qb.Team && (p.Position==='WR' || p.Position==='TE') && p.displayName !== qb.displayName)
+                    .sort((a,b)=>(b.projectedFP||0)-(a.projectedFP||0))
+                    .slice(0, 3)
+                    .forEach(wr => {
+                        const fp = (qb.projectedFP||0)+(wr.projectedFP||0);
+                        const sal = (qb.salary||0)+(wr.salary||0);
+                        const val = sal > 0 ? fp / (sal / 1000) : 0;
+                        stacks.push({ qb, wr, fp, sal, val });
+                    });
+            });
+            const nm = (p) => String(p.displayName||'').split(' (')[0];
+            const stackHtml = stacks.slice().sort((a,b)=>b.fp-a.fp).slice(0, 8).map((s,i) =>
+                `<div class="sp-row"><span>${i+1}. ${nm(s.qb)} + ${nm(s.wr)} <span class="cs-sub">${s.qb.Team}</span></span><span>${s.fp.toFixed(1)} FP</span></div>`
+            ).join('');
+            const valueStackHtml = stacks.slice().sort((a,b)=>b.val-a.val).slice(0, 8).map((s,i) =>
+                `<div class="sp-row"><span>${i+1}. ${nm(s.qb)} + ${nm(s.wr)} <span class="cs-sub">${s.qb.Team}</span></span><span>${s.val.toFixed(2)}x · ${s.fp.toFixed(1)} FP</span></div>`
+            ).join('');
+            const rulesBody = isSd
+                ? `<p class="sp-note">NFL Showdown is CPT + 5 FLEX, $50k, CPT at 1.5x. Stack the CPT with a teammate and bring back an opposing RB or pass catcher unless it is a blowout.</p>`
+                : `<p class="sp-note">Classic NFL is QB, RB, RB, WR, WR, WR, TE, FLEX, DST. Fade the opponent DST with your QB. Game stacks: QB + 2 pass catchers + bring-back.</p>`;
+            const sec = (title, body, open) =>
+                `<details class="settings-section sp-sec"${open ? ' open' : ''}>
+                    <summary class="settings-section-title">${title}</summary>
+                    <div class="settings-section-body">${body}</div>
+                </details>`;
+            root.innerHTML = [
+                sec(isSd ? 'Showdown rules' : 'Classic NFL rules', rulesBody, false),
+                sec('Highest implied team totals', `<p class="sp-note">From ownership TM/P or O/U ÷ 2 − spread ÷ 2. Highest = more scoring chances.</p>${teamRows}`, true),
+                sec('Blowouts / volatility', `<p class="sp-note">|Spread| 10+ — starters sit late, cheap skill can swing.</p>${blowHtml}`, false),
+                sec('Pass-heavy scripts', passHtml, false),
+                sec('Run-heavy scripts', runHtml, false),
+                sec('Top QBs', topBlock('QB'), false),
+                sec('Top RBs', topBlock('RB'), false),
+                sec('Top WRs', topBlock('WR'), false),
+                sec('Top TEs', topBlock('TE'), false),
+                sec('Best potential stacks', `<p class="sp-note">QB + WR/TE by combined projection.</p>${stackHtml}`, false),
+                sec('Best value stacks', `<p class="sp-note">QB + WR/TE by combined points per $1K.</p>${valueStackHtml}`, false)
+            ].join('');
+        }
+
     </script>
 
 <script>
