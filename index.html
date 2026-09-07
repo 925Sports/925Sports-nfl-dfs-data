@@ -56,23 +56,23 @@
             --muted: #5a7a7a;
         }
         body[data-theme="dark"] {
-            --bg-color: #0a1e1e;
-            --text-color: #eef9f8;
-            --card-bg: #102c2c;
-            --border-color: #2a5c5c;
-            --button-bg: #2f8f8f;
-            --button-text: #ffffff;
-            --button-hover: #47C6C8;
-            --input-bg: #0d2424;
-            --table-head-bg: #153838;
-            --table-even-bg: #0d2424;
-            --shadow: 0 4px 16px rgba(0,0,0,0.45);
-            --low-rank: #0d3d32;
+            --bg-color: #0b1020;
+            --text-color: #e8edf7;
+            --card-bg: #141a2c;
+            --border-color: #2a3350;
+            --button-bg: #1f2a44;
+            --button-text: #e8edf7;
+            --button-hover: #2b3a5c;
+            --input-bg: #101628;
+            --table-head-bg: #12182a;
+            --table-even-bg: #101626;
+            --shadow: 0 8px 28px rgba(0,0,0,0.35);
+            --low-rank: #123c32;
             --mid-rank: #3d3420;
             --high-rank: #3d1f1f;
-            --muted: #8eb8b8;
-            --accent: #47C6C8;
-            --accent-hover: #A5FFEE;
+            --muted: #8b93a7;
+            --accent: #3ee0b4;
+            --accent-hover: #7ff0d0;
         }
         body[data-theme="dark"] .primary-settings label { color: #A5FFEE; }
         body[data-theme="dark"] .card { border-color: #2a5c5c; }
@@ -1453,6 +1453,7 @@
         @media (max-width: 480px) {
             .filter-grid { grid-template-columns: 1fr; }
             .filter-grid .span-2, .filter-grid .span-3, .filter-grid .span-4 { grid-column: span 1; }
+        }
 
         /* ===== UX chrome: mode, checklist, next step, sticky run, recipes ===== */
         .ux-mode-bar {
@@ -2222,9 +2223,204 @@
         body[data-theme="dark"] .gp-callout strong { color: var(--brand-mint); }
         .gp-dvp { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; }
 
+
+        /* ===== +EV-style dashboard chrome ===== */
+        body[data-theme="dark"] { background: var(--bg-color); }
+        body[data-theme="dark"] .app-header,
+        body[data-theme="dark"] .top-bar {
+            background: #0e1424;
+            border: 1px solid #232b44;
+            box-shadow: none;
+        }
+        body[data-theme="dark"] .workspace-tabs button,
+        body[data-theme="dark"] .ws-tab {
+            background: #171e32;
+            border: 1px solid #2a3350;
+            color: #c9d0e3;
+            border-radius: 999px;
+        }
+        body[data-theme="dark"] .workspace-tabs button.active,
+        body[data-theme="dark"] .ws-tab.active {
+            background: #243056;
+            border-color: #3ee0b4;
+            color: #fff;
+            box-shadow: inset 0 0 0 1px rgba(62,224,180,0.35);
+        }
+        body[data-theme="dark"] .card {
+            background: #141a2c;
+            border: 1px solid #2a3350;
+            box-shadow: none;
+        }
+        body[data-theme="dark"] .primary,
+        body[data-theme="dark"] button.primary,
+        body[data-theme="dark"] .generate-btn {
+            background: #3ee0b4;
+            color: #06241b;
+            border: none;
+        }
+        body[data-theme="dark"] .ghost {
+            background: #171e32;
+            border: 1px solid #2a3350;
+            color: #c9d0e3;
+        }
+        body[data-theme="dark"] table thead th {
+            background: #12182a;
+            color: #8b93a7;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            font-size: 0.68rem;
+        }
+        body[data-theme="dark"] tbody tr:hover { background: #1a2238; }
+        .cs-toolbar, .gp-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem 0.7rem;
+            align-items: flex-end;
+            padding: 0.7rem 0.8rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+        }
+        .cs-toolbar > div, .gp-toolbar > div { min-width: 140px; max-width: 220px; flex: 0 1 auto; }
+        .cs-toolbar input, .cs-toolbar select, .gp-toolbar input, .gp-toolbar select {
+            width: 100%;
+            min-width: 0;
+            border-radius: 10px;
+        }
+        .cs-kpis, .gp-kpis {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(120px, 1fr));
+            gap: 0.6rem;
+        }
+        .cs-kpi {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 0.65rem 0.75rem;
+        }
+        .gp-shell {
+            display: grid !important;
+            grid-template-columns: 280px minmax(0, 1fr);
+            gap: 0.85rem;
+            min-height: 64vh;
+        }
+        @media (max-width: 900px) {
+            .gp-shell { grid-template-columns: 1fr; }
+            .cs-kpis, .gp-kpis { grid-template-columns: 1fr 1fr; }
+        }
+        .gp-rail {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: auto;
+            max-height: 78vh;
+        }
+        .gp-rail button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: transparent;
+            color: var(--text-color);
+            border: none;
+            border-bottom: 1px solid var(--border-color);
+            border-radius: 0;
+            padding: 0.72rem 0.85rem;
+        }
+        .gp-rail button.active {
+            background: rgba(62,224,180,0.12);
+            box-shadow: inset 3px 0 0 #3ee0b4;
+        }
+        .gp-player {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 3.2rem 4.2rem 3.6rem 3.2rem;
+            gap: 0.4rem;
+            align-items: center;
+            font-size: 0.8rem;
+            padding: 0.38rem 0.1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .gp-player .cs-name-btn {
+            background: transparent;
+            border: 0;
+            color: var(--text-color);
+            font-weight: 650;
+            padding: 0;
+            text-align: left;
+        }
+        body[data-theme="dark"] .gp-player .cs-name-btn { color: #e8edf7; }
+        .gp-player .meta { color: var(--muted); font-size: 0.72rem; }
+        .gp-player .sal { text-align: right; color: var(--muted); }
+        .gp-player .fp { text-align: right; font-weight: 700; }
+        .gp-sides {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+        @media (max-width: 800px) { .gp-sides { grid-template-columns: 1fr; } }
+        .gp-side, .gp-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 0.85rem;
+        }
+        .gp-callout {
+            background: #101628;
+            border: 1px solid #2a3350;
+            border-radius: 12px;
+            padding: 0.55rem 0.7rem;
+            font-size: 0.8rem;
+        }
+        body[data-theme="light"] .gp-callout { background: #f7fffe; }
+        .cs-top-board { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 0.85rem; }
+        .cs-top-row { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+        .cs-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: #171e32;
+            color: #e8edf7;
+            border: 1px solid #2a3350;
+            border-radius: 999px;
+            padding: 0.28rem 0.6rem;
+            font-size: 0.75rem;
+        }
+        body[data-theme="light"] .cs-chip { background: #237374; color: #fff; border-color: #237374; }
+        #cheatSheetTable { width: 100%; border-collapse: collapse; }
+        #cheatSheetTable th, #cheatSheetTable td { padding: 0.45rem 0.4rem; }
+
+
+        .workspace-tabs {
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+        .workspace-tab {
+            background: #171e32;
+            border: 1px solid #2a3350;
+            color: #c9d0e3;
+            border-radius: 999px;
+            padding: 0.45rem 0.9rem;
+            font-weight: 600;
+        }
+        body[data-theme="light"] .workspace-tab {
+            background: #ffffff;
+            border-color: #c5e8e8;
+            color: #0C2627;
+        }
+        .workspace-tab.active {
+            background: #243056;
+            border-color: #3ee0b4;
+            color: #fff;
+        }
+        body[data-theme="light"] .workspace-tab.active {
+            background: #237374;
+            border-color: #237374;
+            color: #fff;
+        }
+
     </style>
 </head>
-<body data-theme="light">
+<body data-theme="dark">
     <!-- Header -->
     <header class="app-header">
         <h1><span class="brand-mark">925</span> NFL DFS Lineup Builder <span class="info-icon" onclick="openModal()" title="How to use">ℹ️</span></h1>
@@ -3622,7 +3818,7 @@
             // Start data load immediately while loading screen is visible
             fetchData(false);
 
-            const savedTheme = localStorage.getItem('theme') || 'light';
+            const savedTheme = localStorage.getItem('theme') || 'dark';
             document.body.setAttribute('data-theme', savedTheme);
             document.getElementById('darkModeSwitch').checked = (savedTheme === 'dark');
 
@@ -10152,8 +10348,9 @@
         }
 
         function csSourcePool() {
-            const src = (allSlatePlayers && allSlatePlayers.length) ? allSlatePlayers : (filteredData || []);
-            return src.filter(p => p && (p.baseName || p['Player Name'] || p.displayName));
+            const src = (filteredData && filteredData.length) ? filteredData
+                : ((allSlatePlayers && allSlatePlayers.length) ? allSlatePlayers : []);
+            return src.filter(p => p && (p.baseName || p['Player Name'] || p.displayName) && p.slotType !== 'Captain');
         }
         function csFp(p) { return Number(p.projectedFP || p['Projected FP'] || 0) || 0; }
         function csSal(p) { return Number(p.salary || 0) || 0; }
@@ -10280,13 +10477,15 @@
             renderCheatSheet();
         }
         function csGameCount(pool) {
+            const oppMap = consensusOppMap(pool);
             const keys = new Set();
             (pool || []).forEach(p => {
-                const a = p.Team || '', b = p.Opponent || '';
-                if (!a) return;
-                keys.add([a, b].sort().join('|'));
+                const team = normalizeTeam(p.Team || '');
+                const opp = oppMap.get(team) || normalizeTeam(p.Opponent || '');
+                if (!team || !opp || team === opp) return;
+                keys.add([team, opp].sort().join('|'));
             });
-            return keys.size || 1;
+            return keys.size;
         }
         function renderCsKpis(rows) {
             const el = document.getElementById('csKpis');
@@ -10391,9 +10590,43 @@
             a.click();
         }
 
-        function gameKeyFromPlayer(p) {
-            const a = p.Team || '', b = p.Opponent || '';
-            return [a, b].filter(Boolean).sort().join('|') || a;
+        function consensusOppMap(players) {
+            const votes = new Map();
+            (players || []).forEach(p => {
+                const team = normalizeTeam(p.Team || '');
+                const opp = normalizeTeam(p.Opponent || '');
+                if (!team || !opp || team === opp) return;
+                if (!votes.has(team)) votes.set(team, new Map());
+                const m = votes.get(team);
+                m.set(opp, (m.get(opp) || 0) + 1);
+            });
+            const best = new Map();
+            votes.forEach((m, team) => {
+                const top = [...m.entries()].sort((a,b) => b[1]-a[1] || a[0].localeCompare(b[0]))[0];
+                if (top && top[1] > 0) best.set(team, top[0]);
+            });
+            best.forEach((opp, team) => {
+                if (!best.has(opp)) best.set(opp, team);
+            });
+            return best;
+        }
+        function majorityTeamField(players, team, field) {
+            const counts = new Map();
+            (players || []).forEach(p => {
+                if (normalizeTeam(p.Team || '') !== team) return;
+                const v = p[field];
+                if (v == null || v === '') return;
+                const k = String(v);
+                counts.set(k, (counts.get(k) || 0) + 1);
+            });
+            if (!counts.size) return null;
+            return [...counts.entries()].sort((a,b) => b[1]-a[1])[0][0];
+        }
+        function gameKeyFromPlayer(p, oppMap) {
+            const team = normalizeTeam(p.Team || '');
+            const opp = (oppMap && team && oppMap.get(team)) || normalizeTeam(p.Opponent || '');
+            if (team && opp && team !== opp) return [team, opp].sort().join('|');
+            return team || 'unknown';
         }
         function prettyMatch(p) {
             if (p.Team && p.Opponent) return p.Opponent + ' @ ' + p.Team;
@@ -10402,39 +10635,44 @@
         function gpBuildGames() {
             const q = String(document.getElementById('gpSearch')?.value || '').trim().toLowerCase();
             const sort = document.getElementById('gpSort')?.value || 'total';
+            const pool = csSourcePool().filter(p => p.Team && !deselectedPlayers.has(p.displayName));
+            const oppMap = consensusOppMap(pool);
             const map = new Map();
-            csSourcePool().forEach(p => {
-                if (deselectedPlayers.has(p.displayName)) return;
-                if (!p.Team) return;
-                const key = gameKeyFromPlayer(p);
+            pool.forEach(p => {
+                const team = normalizeTeam(p.Team);
+                const opp = oppMap.get(team) || normalizeTeam(p.Opponent || '');
+                if (!team || !opp || team === opp) return;
+                const key = [team, opp].sort().join('|');
                 if (!map.has(key)) {
                     map.set(key, {
-                        key, teams: new Set(), players: [], impliedSum: 0, proj: 0, value: 0, time: p.gameStartTime || 0
+                        key, teams: new Set([team, opp]), players: [], impliedSum: 0, proj: 0, value: 0, time: p.gameStartTime || 0
                     });
                 }
                 const g = map.get(key);
-                g.teams.add(p.Team);
-                if (p.Opponent) g.teams.add(p.Opponent);
                 g.players.push(p);
                 g.proj += csFp(p);
                 g.value += csPtsPerK(p);
-                if (p.impliedTotal != null) g.impliedSum = Math.max(g.impliedSum, Number(p.impliedTotal) + (Number(p.ou)||0 ? Number(p.ou) - Number(p.impliedTotal) : Number(p.impliedTotal)));
+                if (p.gameStartTime && (!g.time || p.gameStartTime < g.time)) g.time = p.gameStartTime;
             });
             let games = [...map.values()].map(g => {
                 const teams = [...g.teams];
                 const byTeam = {};
                 teams.forEach(tm => {
-                    const plist = g.players.filter(p => p.Team === tm);
-                    const sample = plist.find(p => p.impliedTotal != null) || plist[0];
+                    const plist = g.players.filter(p => normalizeTeam(p.Team) === tm);
+                    const implRaw = majorityTeamField(plist, tm, 'impliedTotal');
+                    const sprRaw = majorityTeamField(plist, tm, 'spread');
+                    const ouRaw = majorityTeamField(plist, tm, 'ou');
                     byTeam[tm] = {
                         team: tm,
-                        opp: sample?.Opponent || teams.find(x => x !== tm) || '',
-                        implied: sample?.impliedTotal,
-                        spread: sample?.spread,
-                        ou: sample?.ou,
+                        opp: teams.find(x => x !== tm) || oppMap.get(tm) || '',
+                        implied: implRaw != null ? Number(implRaw) : null,
+                        spread: sprRaw,
+                        ou: ouRaw != null ? Number(ouRaw) : null,
                         players: plist.slice().sort((a,b)=>csFp(b)-csFp(a))
                     };
                 });
+                const impls = teams.map(tm => byTeam[tm].implied).filter(v => v != null);
+                g.impliedSum = impls.length ? impls.reduce((a,b)=>a+b,0) : 0;
                 return { ...g, teams, byTeam, label: teams.join(' vs ') };
             });
             if (q) games = games.filter(g => {
@@ -10530,7 +10768,7 @@
                         <span class="cs-sub">${spr} · Impl ${impl}${side.ou!=null && side.ou!=='' ? ' · O/U '+side.ou : ''}</span>
                     </div>
                     <div class="gp-dvp">Opp DVP ${dvpBits || '—'}</div>
-                    ${list.map(p => `<div class="gp-player"><span><button type="button" class="cs-name-btn" onclick="openCsDrawer('${csArg(p.displayName)}')">${csEsc(csName(p))}</button> <span class="cs-sub">${csPos(p)}${p.last3Avg!=null? ' · L3 '+p.last3Avg.toFixed(1):''}</span></span><span>$${csSal(p)} · ${csFp(p).toFixed(1)}</span></div>`).join('')}
+                    ${list.map(p => `<div class="gp-player"><span><button type="button" class="cs-name-btn" onclick="openCsDrawer('${csArg(p.displayName)}')">${csEsc(csName(p))}</button></span><span class="meta">${csEsc(csPos(p))}</span><span class="meta">${p.last3Avg!=null? 'L3 '+p.last3Avg.toFixed(1):'—'}</span><span class="sal">$${csSal(p)}</span><span class="fp">${csFp(p).toFixed(1)}</span></div>`).join('')}
                     <div class="gp-actions">
                         ${qb && wr ? `<button type="button" class="ghost" onclick="gpAddStack('${csArg(csName(qb))}','${csArg(csName(wr))}')">Stack ${csEsc(csName(qb).split(' ').slice(-1)[0])} + ${csEsc(csName(wr).split(' ').slice(-1)[0])}</button>` : ''}
                     </div>
@@ -10592,11 +10830,14 @@
                 root.innerHTML = '<p class="cs-note">Pick a slate in Builder first.</p>';
                 return;
             }
+            const oppMap = consensusOppMap(pool);
             const byTeam = new Map();
             pool.forEach(p => {
                 if (!p.Team) return;
-                if (!byTeam.has(p.Team)) byTeam.set(p.Team, { team: p.Team, opp: p.Opponent, implied: p.impliedTotal, spread: p.spread, ou: p.ou, fp: 0, players: [] });
-                const g = byTeam.get(p.Team);
+                const team = normalizeTeam(p.Team);
+                if (!byTeam.has(team)) byTeam.set(team, { team, opp: oppMap.get(team) || p.Opponent, implied: p.impliedTotal, spread: p.spread, ou: p.ou, fp: 0, players: [] });
+                const g = byTeam.get(team);
+                if (!g.opp) g.opp = oppMap.get(team) || p.Opponent;
                 if (g.implied == null && p.impliedTotal != null) g.implied = p.impliedTotal;
                 if (g.spread == null || g.spread === '') g.spread = p.spread;
                 if (g.ou == null || g.ou === '') g.ou = p.ou;
