@@ -1963,6 +1963,31 @@
         }
         #cheatSheetTable tbody tr:hover { background: rgba(35,115,116,0.07); }
         #cheatSheetTable td.num { text-align: right; font-variant-numeric: tabular-nums; }
+        .cs-tag-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.15rem 0 0.45rem; }
+        .cs-reason {
+            margin: 0 0 0.45rem;
+            font-size: 0.82rem;
+            line-height: 1.35;
+            color: var(--text-color);
+        }
+        .cs-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.12rem 0.42rem;
+            border-radius: 999px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            white-space: nowrap;
+            border: 1px solid transparent;
+        }
+        .tag-extreme { background: #f5d76e; color: #1b1403; }
+        .tag-core { background: #7dffa3; color: #062214; }
+        .tag-safe { background: #7db7ff; color: #041428; }
+        .tag-value { background: #c9a6ff; color: #1a0d2c; }
+        .tag-play { background: #2a3b4d; color: #d5e4f3; border-color: #3d5166; }
+        .tag-fade { background: #5a2430; color: #ffd0d6; }
+        .tag-exp { background: transparent; color: var(--text-color); border-color: var(--border-color); font-weight: 650; }
         .cs-name-btn {
             background: none;
             border: none;
@@ -3264,6 +3289,19 @@
                                 <option value="TE">TE</option>
                                 <option value="DST">DST</option>
                                 <option value="CPT">Showdown CPT</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Tag</label>
+                            <select id="csTag" onchange="renderCheatSheet()">
+                                <option value="">All tags</option>
+                                <option value="coreish">Extreme / Core</option>
+                                <option value="Extreme Core">Extreme Core</option>
+                                <option value="Core Play">Core Play</option>
+                                <option value="Safe">Safe</option>
+                                <option value="Core Value">Core Value</option>
+                                <option value="Playable">Playable</option>
+                                <option value="Fade">Fade</option>
                             </select>
                         </div>
                         <div>
@@ -10220,7 +10258,7 @@
 
         // ====================== CHEAT SHEET / GAME PREVIEW / SLATE PREVIEW ======================
         let csView = 'rank';
-        let csSortKey = 'fp';
+        let csSortKey = 'tag';
         let csSortDir = 'desc';
         let csStackPick = null;
         let gpSelectedKey = null;
@@ -10436,6 +10474,206 @@
                 p.dvpAvg = d ? d.avg : null;
             });
         }
+
+        const CASH_TAG_RANK = {
+            'Extreme Core': 0,
+            'Core Play': 1,
+            'Safe': 2,
+            'Core Value': 3,
+            'Playable': 4,
+            'Fade': 5
+        };
+        const CASH_EXP_RANK = {
+            'High Exposure': 0,
+            'Mid Exposure': 1,
+            'Low Exposure': 2,
+            'Zero / Fade': 3
+        };
+        function cashN(v) {
+            const n = Number(v);
+            return Number.isFinite(n) ? n : 0;
+        }
+        function cashMetrics(p) {
+            const x = p.proj || {};
+            const pos = csPos(p);
+            const sal = csSal(p);
+            const proj = csFp(p);
+            const valueX = sal > 0 ? proj / (sal / 1000) : 0;
+            const passAtt = cashN(x.passAtt != null ? x.passAtt : p.passAtt);
+            const rushAtt = cashN(x.rushAtt);
+            const rushYds = cashN(x.rushYds != null ? x.rushYds : p.rushYds);
+            const rec = cashN(x.rec);
+            const tgt = cashN(x.tgt != null ? x.tgt : rec);
+            const rushTd = cashN(x.rushTd);
+            const recTd = cashN(x.recTd);
+            const passTd = cashN(x.passTd != null ? x.passTd : p.passTds);
+            const atd = x.atd != null ? cashN(x.atd) : null;
+            const xTD = rushTd + recTd;
+            const pTD = atd != null ? atd : (xTD > 0 ? 1 - Math.exp(-xTD) : 0);
+            const opps = rushAtt + tgt;
+            const effVol = passAtt + (rushAtt * 1.5);
+            const dual = rushAtt >= 6 || rushYds >= 28;
+            const spread = p.spread != null && Number.isFinite(Number(p.spread)) ? Number(p.spread) : null;
+            const fav = spread != null && spread < 0 ? Math.abs(spread) : 0;
+            const ou = p.ou != null && Number.isFinite(Number(p.ou)) ? Number(p.ou) : null;
+            const impl = p.impliedTotal != null && Number.isFinite(Number(p.impliedTotal)) ? Number(p.impliedTotal) : null;
+            return { pos, sal, proj, valueX, passAtt, rushAtt, rushYds, rec, tgt, rushTd, recTd, passTd, atd, xTD, pTD, opps, effVol, dual, spread, fav, ou, impl };
+        }
+        function cashTagPlayer(p) {
+            const m = cashMetrics(p);
+            const pos = m.pos;
+            if (p.cashTag && p.cashReason && p._cashLocked) return p.cashTagPack;
+            let primary = 'Playable';
+            let exposure = 'Mid Exposure';
+            let reason = '';
+            let role = '';
+
+            if (pos === 'DST' || pos === 'K' || pos === 'CPT') {
+                if (m.valueX >= 3) { primary = 'Core Value'; exposure = 'Mid Exposure'; reason = `CORE VALUE: ${m.valueX.toFixed(2)}x at $${m.sal}`; }
+                else if (m.proj < 5) { primary = 'Fade'; exposure = 'Zero / Fade'; reason = 'FADE: thin DST/K projection'; }
+                else { primary = 'Playable'; exposure = 'Low Exposure'; reason = `PLAYABLE: ${m.proj.toFixed(1)} pts, ${m.valueX.toFixed(2)}x`; }
+            } else if (pos === 'QB') {
+                role = m.dual ? 'dual-threat' : 'pocket';
+                const volCore = m.dual ? (m.passAtt >= 28 || m.effVol >= 36) : (m.passAtt >= 32);
+                const volSafe = m.dual ? (m.passAtt >= 26 || m.effVol >= 32 || m.rushAtt >= 6) : (m.passAtt >= 30);
+                let scriptVeto = false;
+                if (!m.dual && m.fav >= 9) scriptVeto = true;
+                if (!m.dual && m.fav >= 7 && m.passAtt < 34) scriptVeto = true;
+                const hitsValue = m.valueX >= 2.5;
+                if (scriptVeto && !m.dual && m.fav >= 9) {
+                    primary = volSafe ? 'Safe' : 'Fade';
+                    exposure = primary === 'Safe' ? 'Mid Exposure' : 'Zero / Fade';
+                    reason = `FADE as Core: pocket QB, ${p.Team || ''} -${m.fav.toFixed(1)}`;
+                } else if (volCore && hitsValue && !scriptVeto) {
+                    primary = 'Core Play';
+                    exposure = 'High Exposure';
+                    reason = `CORE: ${m.passAtt.toFixed(0)} att${m.dual ? ', ' + m.rushAtt.toFixed(0) + ' ru att' : ''}, ${m.valueX.toFixed(2)}x`;
+                } else if (volSafe) {
+                    primary = 'Safe';
+                    exposure = 'Mid Exposure';
+                    reason = `SAFE: ${role} ${m.passAtt.toFixed(0)} att / ${m.effVol.toFixed(0)} EV, ${m.valueX.toFixed(2)}x`;
+                } else if (m.sal <= 5500 && m.valueX >= 2.3 && (m.passAtt >= 28 || m.dual)) {
+                    primary = 'Core Value';
+                    exposure = 'Low Exposure';
+                    reason = `CORE VALUE: $${m.sal}, ${m.passAtt.toFixed(0)} att, ${m.valueX.toFixed(2)}x`;
+                } else if (m.passAtt < 30 && !m.dual) {
+                    primary = 'Fade';
+                    exposure = 'Zero / Fade';
+                    reason = `FADE: ${m.passAtt.toFixed(0)} att, no rushing`;
+                } else {
+                    primary = 'Playable';
+                    exposure = 'Low Exposure';
+                    reason = `PLAYABLE: ${m.passAtt.toFixed(0)} att, ${m.valueX.toFixed(2)}x`;
+                }
+            } else if (pos === 'RB') {
+                const committee = m.rushAtt > 0 && m.rushAtt < 14 && m.tgt < 4;
+                const tdLikely = m.pTD >= 0.50 || m.xTD >= 0.60;
+                const hitsValue = m.valueX >= 2.5;
+                const baseCore = m.opps >= 19.5 && hitsValue && !committee;
+                role = committee ? 'committee' : (m.tgt >= 4 ? 'three-down' : 'lead back');
+                if (baseCore && tdLikely && m.fav >= 6) {
+                    primary = 'Extreme Core';
+                    exposure = 'High Exposure';
+                    reason = `CORE: ${m.opps.toFixed(0)} opps, ${m.valueX.toFixed(2)}x, ${m.xTD.toFixed(2)} xTD, ${p.Team || ''} -${m.fav.toFixed(1)}`;
+                } else if (baseCore && tdLikely) {
+                    primary = 'Core Play';
+                    exposure = 'High Exposure';
+                    reason = `CORE: ${m.opps.toFixed(0)} opps, ${m.valueX.toFixed(2)}x, ${m.pTD.toFixed(2)} P(TD)`;
+                } else if (baseCore) {
+                    primary = 'Core Play';
+                    exposure = 'Mid Exposure';
+                    reason = `CORE: ${m.opps.toFixed(0)} opps, ${m.valueX.toFixed(2)}x`;
+                } else if (m.opps >= 16 && !committee) {
+                    primary = 'Safe';
+                    exposure = 'Mid Exposure';
+                    reason = `SAFE: ${m.opps.toFixed(0)} opps, ${m.valueX.toFixed(2)}x${tdLikely ? '' : ', <50% TD'}`;
+                } else if ((m.opps >= 14 && m.opps <= 18 && (hitsValue || m.valueX >= 2.0) && m.sal <= 5600) || (m.sal <= 4800 && m.opps >= 12 && m.valueX >= 2.0)) {
+                    primary = 'Core Value';
+                    exposure = m.opps >= 16 ? 'Mid Exposure' : 'Low Exposure';
+                    reason = `CORE VALUE: $${m.sal}, ${m.opps.toFixed(0)} opps, ${m.valueX.toFixed(2)}x`;
+                } else if (m.opps < 16 || committee || (!hitsValue && m.xTD < 0.4 && m.pTD < 0.4)) {
+                    primary = 'Fade';
+                    exposure = 'Zero / Fade';
+                    reason = committee ? 'FADE: committee / split work' : `FADE: ${m.opps.toFixed(0)} opps, needs a TD to pay`;
+                } else {
+                    primary = 'Playable';
+                    exposure = 'Low Exposure';
+                    reason = `PLAYABLE: ${m.opps.toFixed(0)} opps, ${m.valueX.toFixed(2)}x`;
+                }
+            } else if (pos === 'WR') {
+                const usableTotal = m.ou == null || m.ou > 41;
+                const tgtCore = m.tgt >= 7;
+                const recFloor = m.rec >= 4 || m.tgt >= 7;
+                role = m.tgt >= 8 ? 'WR1' : (m.tgt >= 6 ? 'WR2' : 'complement');
+                if (tgtCore && m.valueX >= 2.5 && usableTotal) {
+                    primary = 'Core Play';
+                    exposure = 'High Exposure';
+                    reason = `CORE: ${m.tgt.toFixed(1)} tgt, ${m.valueX.toFixed(2)}x`;
+                } else if (tgtCore && recFloor) {
+                    primary = 'Safe';
+                    exposure = 'Mid Exposure';
+                    reason = `SAFE: ${m.tgt.toFixed(1)} tgt, ${m.valueX.toFixed(2)}x${usableTotal ? '' : ', ' + (m.ou != null ? m.ou.toFixed(1) + ' total' : 'capped total')}`;
+                } else if (m.sal <= 4200 && (m.valueX >= 2.0 || (m.tgt >= 4 && m.proj >= 7))) {
+                    primary = 'Core Value';
+                    exposure = 'Low Exposure';
+                    reason = `CORE VALUE: $${m.sal}, ${m.tgt.toFixed(1)} tgt, ${m.proj.toFixed(1)} pts`;
+                } else if (m.tgt < 5 || (m.sal >= 6500 && m.tgt < 7)) {
+                    primary = 'Fade';
+                    exposure = 'Zero / Fade';
+                    reason = `FADE: ${m.tgt.toFixed(1)} tgt at $${m.sal}`;
+                } else {
+                    primary = 'Playable';
+                    exposure = 'Low Exposure';
+                    reason = `PLAYABLE: ${m.tgt.toFixed(1)} tgt, ${m.valueX.toFixed(2)}x`;
+                }
+            } else if (pos === 'TE') {
+                role = m.tgt >= 6 ? 'TE1' : 'secondary TE';
+                const usableTotal = m.ou == null || m.ou > 41;
+                if (m.tgt >= 6 && m.valueX >= 2.5 && usableTotal) {
+                    primary = 'Core Play';
+                    exposure = 'High Exposure';
+                    reason = `CORE: ${m.tgt.toFixed(1)} tgt, ${m.valueX.toFixed(2)}x`;
+                } else if (m.sal >= 3000 && m.sal <= 4500 && m.tgt >= 4) {
+                    primary = 'Core Value';
+                    exposure = 'Mid Exposure';
+                    reason = `CORE VALUE: $${m.sal}, ${m.tgt.toFixed(1)} tgt, ${m.proj.toFixed(1)} pts`;
+                } else if (m.tgt >= 6) {
+                    primary = 'Safe';
+                    exposure = 'Mid Exposure';
+                    reason = `SAFE: ${m.tgt.toFixed(1)} tgt, ${m.valueX.toFixed(2)}x`;
+                } else if (m.tgt <= 3) {
+                    primary = 'Fade';
+                    exposure = 'Zero / Fade';
+                    reason = `FADE: ${m.tgt.toFixed(1)} tgt${m.ou != null ? ', ' + m.ou.toFixed(1) + ' total' : ''}`;
+                } else {
+                    primary = 'Playable';
+                    exposure = 'Low Exposure';
+                    reason = `PLAYABLE: ${m.tgt.toFixed(1)} tgt, ${m.valueX.toFixed(2)}x`;
+                }
+            }
+
+            const pack = { primary, exposure, reason, role, metrics: m };
+            p.cashTag = primary;
+            p.cashExposure = exposure;
+            p.cashReason = reason;
+            p.cashRole = role;
+            p.cashValueX = m.valueX;
+            p.cashOpps = m.opps;
+            p.cashPack = pack;
+            return pack;
+        }
+        function cashTagClass(tag) {
+            if (tag === 'Extreme Core') return 'tag-extreme';
+            if (tag === 'Core Play') return 'tag-core';
+            if (tag === 'Safe') return 'tag-safe';
+            if (tag === 'Core Value') return 'tag-value';
+            if (tag === 'Fade') return 'tag-fade';
+            return 'tag-play';
+        }
+        function cashPills(p) {
+            const pack = cashTagPlayer(p);
+            return `<span class="cs-tag ${cashTagClass(pack.primary)}">${pack.primary}</span><span class="cs-tag tag-exp">${pack.exposure}</span>`;
+        }
         function csPosProjGroups(p) {
             const pos = csPos(p);
             const x = p.proj || {};
@@ -10503,6 +10741,9 @@
             const body = document.getElementById('csDrawerBody');
             if (!drawer || !body || !p) return;
             document.getElementById('csDrawerTitle').textContent = csName(p);
+            const pack = cashTagPlayer(p);
+            const m = pack.metrics;
+            const pos = csPos(p);
             document.getElementById('csDrawerSub').textContent = `${csPos(p)} · ${p.Team||''} vs ${csOpp(p)||'—'} · $${csSal(p)}`;
             const shot = document.getElementById('csDrawerHeadshot');
             if (shot) {
@@ -10522,7 +10763,24 @@
             const vs = vsOppLogs(p).slice().reverse();
             const groups = csPosProjGroups(p);
             const logLine = (g) => `<div class="cs-log-row"><span>W${g.week}</span><span>${csEsc(g.opp)}</span><span>${g.pos==='QB' ? `${g.passYds} pass / ${g.passTd} TD` : `${g.rushYds} ru / ${g.recYds} rec / ${g.rec} recs`}</span><span style="text-align:right;font-weight:700;">${g.fp.toFixed(1)}</span></div>`;
+            const metricBits = [
+                ['Val', m.valueX.toFixed(2) + 'x'],
+                pos === 'QB' ? ['Pass Att', m.passAtt.toFixed(1)] : null,
+                pos === 'QB' ? ['Rush Att', m.rushAtt.toFixed(1)] : null,
+                pos === 'QB' ? ['Eff Vol', m.effVol.toFixed(1)] : null,
+                pos === 'RB' ? ['Opps', m.opps.toFixed(1)] : null,
+                (pos === 'WR' || pos === 'TE' || pos === 'RB') ? ['Targets', m.tgt.toFixed(1)] : null,
+                pos === 'RB' ? ['xTD', m.xTD.toFixed(2)] : null,
+                pos === 'RB' ? ['P(TD)', m.pTD.toFixed(2)] : null,
+                ['Spread', m.spread != null ? (m.spread > 0 ? '+' : '') + m.spread.toFixed(1) : '—'],
+                ['O/U', m.ou != null ? m.ou.toFixed(1) : '—'],
+                ['Impl Tot', m.impl != null ? m.impl.toFixed(1) : '—']
+            ].filter(Boolean);
             body.innerHTML = `
+                <div class="cs-tag-row">${cashPills(p)}</div>
+                <p class="cs-reason">${csEsc(pack.reason)}</p>
+                ${pack.role ? `<p class="cs-note">Role: ${csEsc(pack.role)}</p>` : ''}
+                <div class="cs-stat-grid">${metricBits.map(([k,v]) => `<div class="cs-stat"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('')}</div>
                 ${groups.map(([title, bits]) => `
                     <div class="cs-proj-block">
                         <h4>${title}</h4>
@@ -10605,8 +10863,14 @@
             const minFp = parseFloat(document.getElementById('csMinFp')?.value) || 0;
             const minVal = parseFloat(document.getElementById('csMinVal')?.value) || 0;
             const hideZero = document.getElementById('csHideZero')?.checked !== false;
+            const tagWant = document.getElementById('csTag')?.value || '';
             return csSourcePool().filter(p => {
                 if (deselectedPlayers.has(p.displayName)) return false;
+                if (tagWant) {
+                    const pack = cashTagPlayer(p);
+                    if (tagWant === 'coreish' && !['Extreme Core','Core Play'].includes(pack.primary)) return false;
+                    else if (tagWant !== 'coreish' && pack.primary !== tagWant) return false;
+                }
                 const fp = csFp(p);
                 if (hideZero && fp <= 0) return false;
                 if (fp < minFp) return false;
@@ -10626,6 +10890,16 @@
             const dir = csSortDir === 'asc' ? 1 : -1;
             return rows.slice().sort((a, b) => {
                 let va, vb;
+                if (key === 'tag') {
+                    const pa = cashTagPlayer(a), pb = cashTagPlayer(b);
+                    const ra = (CASH_TAG_RANK[pa.primary] ?? 9);
+                    const rb = (CASH_TAG_RANK[pb.primary] ?? 9);
+                    if (ra !== rb) return (ra - rb) * (csSortDir === 'asc' ? -1 : 1);
+                    const ea = CASH_EXP_RANK[pa.exposure] ?? 9;
+                    const eb = CASH_EXP_RANK[pb.exposure] ?? 9;
+                    if (ea !== eb) return (ea - eb) * (csSortDir === 'asc' ? -1 : 1);
+                    return (csFp(b) - csFp(a));
+                }
                 if (key === 'name') { va = csName(a); vb = csName(b); return va.localeCompare(vb) * dir; }
                 if (key === 'team') { va = a.Team || ''; vb = b.Team || ''; return String(va).localeCompare(String(vb)) * dir; }
                 if (key === 'opp') { va = csOpp(a); vb = csOpp(b); return String(va).localeCompare(String(vb)) * dir; }
@@ -10735,6 +11009,7 @@
                     <td class="num">${i+1}</td>
                     <td><button type="button" class="cs-name-btn" onclick="openCsDrawer('${csArg(p.displayName)}')">${csEsc(csName(p))}</button> ${stackBtn}</td>
                     <td>${csEsc(csPos(p))}</td>
+                    <td>${cashPills(p)}</td>
                     <td>${csEsc(p.Team||'')}</td>
                     <td>${csEsc(csOpp(p))}</td>
                     <td>${heatPill(p.impliedTotal, heatI, impl)}</td>
@@ -10749,8 +11024,8 @@
             }).join('');
             const banner = csStackPick ? `<p class="cs-note">Stacking from <strong>${csEsc(csStackPick.qbDisplay)}</strong> — click Add on a teammate. <button type="button" class="ghost" onclick="csCancelStack()">Cancel</button></p>` : '';
             return banner + `<div class="cs-table-wrap"><table id="cheatSheetTable">
-                <thead><tr>${th('fp','#')}${th('name','Player')}${th('pos','Pos')}${th('team','Team')}${th('opp','Opp')}${th('impl','Impl Tot')}${th('dvp','DVP')}${th('sal','Salary')}${th('fp','Proj')}${th('line','Week line')}${th('l3','L3')}${th('val','Val')}${th('own','Own')}</tr></thead>
-                <tbody>${body || '<tr><td colspan="13">No players match filters.</td></tr>'}</tbody>
+                <thead><tr>${th('fp','#')}${th('name','Player')}${th('pos','Pos')}${th('tag','Tag')}${th('team','Team')}${th('opp','Opp')}${th('impl','Impl Tot')}${th('dvp','DVP')}${th('sal','Salary')}${th('fp','Proj')}${th('val','Val')}${th('line','Week line')}${th('l3','L3')}${th('own','Own')}</tr></thead>
+                <tbody>${body || '<tr><td colspan="14">No players match filters.</td></tr>'}</tbody>
             </table></div>`;
         }
         function renderCheatSheet() {
