@@ -3349,7 +3349,7 @@
                     <div class="cs-hero">
                         <div>
                             <h2>Ownership Leverage</h2>
-                            <p class="cs-note" style="margin:0;">Proj vs salary-implied FP vs what ownership at the position says they should score. Floor = expected FP given that own%.</p>
+                            <p class="cs-note" style="margin:0;">Rank leverage inside the position: own rank vs proj rank. Chalk (25%+ or top-2 owned) cannot be Under-owned. Own-exp FP = the projection that ownership rank usually buys.</p>
                         </div>
                     </div>
                     <div class="cs-kpis" id="levKpis"></div>
@@ -3486,6 +3486,7 @@
                             <tbody id="slGamesBody"></tbody>
                         </table>
                     </div>
+                    <div id="slLevBoards"></div>
 
                     <h3 style="font-size:0.95rem;margin:1.25rem 0 0.35rem;">Best QB + pass-catcher pairs</h3>
                     <p class="sl-note">Primary stack. GPP score = projection + value + leverage (lower own helps). Cash score = projection + value + chalk (higher own helps).</p>
@@ -4265,14 +4266,22 @@
             });
             const sticky = document.getElementById('stickyRunBar');
             if (sticky) sticky.style.display = which === 'builder' ? '' : 'none';
-            try {
-                if (which === 'stacks' && typeof refreshStacksLab === 'function') refreshStacksLab();
-                if (which === 'cheat' && typeof renderCheatSheet === 'function') renderCheatSheet();
-                if (which === 'leverage' && typeof renderLeverage === 'function') renderLeverage();
-                if (which === 'preview' && typeof renderGamePreview === 'function') renderGamePreview();
-                if (which === 'slate' && typeof renderSlatePreview === 'function') renderSlatePreview();
-            } catch (err) {
-                console.warn('Workspace render failed', which, err);
+            try { window.scrollTo(0, 0); } catch (e) {}
+            const paint = {
+                stacks: refreshStacksLab,
+                cheat: renderCheatSheet,
+                leverage: renderLeverage,
+                preview: renderGamePreview,
+                slate: renderSlatePreview
+            };
+            const fn = paint[which];
+            if (typeof fn === 'function') {
+                const rootId = { cheat: 'csMain', leverage: 'levMain', preview: 'gamePreviewGrid', slate: 'slatePreviewRoot' }[which];
+                const root = rootId ? document.getElementById(rootId) : null;
+                if (root && !root.innerHTML) root.innerHTML = '<p class="cs-note">Loading…</p>';
+                requestAnimationFrame(() => {
+                    try { fn(); } catch (err) { console.warn('Workspace render failed', which, err); }
+                });
             }
         }
 
@@ -4498,6 +4507,56 @@
                     <td>${role}</td>
                 </tr>`;
             }).join('') || '<tr><td colspan="8" style="color:var(--muted);">No low-own pieces above the FP cutoff.</td></tr>';
+            try { renderStackLeverageBoards(); } catch (e) { console.warn(e); }
+        }
+
+        function renderStackLeverageBoards() {
+            const root = document.getElementById('slLevBoards');
+            if (!root) return;
+            buildLeverageRows(csSourcePool());
+            const pool = slPool();
+            const qbs = pool.filter(p => slPos(p) === 'QB').sort((a,b) => csFp(b) - csFp(a));
+            const stacks = [];
+            qbs.forEach(qb => {
+                pool.filter(p => p.Team === qb.Team && p.displayName !== qb.displayName && (slPos(p) === 'WR' || slPos(p) === 'TE'))
+                    .forEach(rec => {
+                        const qL = levFor(qb) || {};
+                        const rL = levFor(rec) || {};
+                        stacks.push({
+                            qb, rec,
+                            ownSum: (Number(qb.ownership)||0) + (Number(rec.ownership)||0),
+                            projSum: csFp(qb) + csFp(rec),
+                            levSum: (qL.levScore || 0) + (rL.levScore || 0)
+                        });
+                    });
+            });
+            const bestLev = stacks.slice().sort((a,b) => b.levSum - a.levSum || b.projSum - a.projSum).slice(0, 8);
+            const chalkiest = stacks.slice().sort((a,b) => b.ownSum - a.ownSum).slice(0, 8);
+            const runbacks = [];
+            qbs.forEach(qb => {
+                const opp = normalizeTeam(qb.Opponent || csOpp(qb) || '');
+                if (!opp) return;
+                const rb = pool.filter(p => normalizeTeam(p.Team) === opp && slPos(p) === 'RB')
+                    .sort((a,b) => (Number(b.ownership)||0) - (Number(a.ownership)||0))[0];
+                const rec = pool.filter(p => p.Team === qb.Team && (slPos(p)==='WR'||slPos(p)==='TE'))
+                    .sort((a,b) => (Number(b.ownership)||0) - (Number(a.ownership)||0))[0];
+                if (!rb || !rec) return;
+                runbacks.push({
+                    qb, rec, rb,
+                    ownSum: (Number(qb.ownership)||0)+(Number(rec.ownership)||0)+(Number(rb.ownership)||0),
+                    projSum: csFp(qb)+csFp(rec)+csFp(rb)
+                });
+            });
+            runbacks.sort((a,b) => b.ownSum - a.ownSum);
+            const line = (left, meta) => `<div class="gp-player"><span>${left}</span><span>${meta}</span></div>`;
+            root.innerHTML = `
+                <details class="cs-best" style="margin-top:0.9rem;"><summary>Ownership leverage stacks</summary>
+                    <div class="cs-top-board">
+                        <div class="cs-top-col"><div class="k">Best leverage stacks</div><div class="chips">${bestLev.map((s,i)=>line(`${i+1}. ${csEsc(csName(s.qb))} + ${csEsc(csName(s.rec))}`, `lev ${s.levSum>0?'+':''}${s.levSum} · ${s.ownSum.toFixed(0)}% own`)).join('')||'<span class="cs-sub">Need ownership + QBs</span>'}</div></div>
+                        <div class="cs-top-col"><div class="k">Chalkiest stacks</div><div class="chips">${chalkiest.map((s,i)=>line(`${i+1}. ${csEsc(csName(s.qb))} + ${csEsc(csName(s.rec))}`, `${s.ownSum.toFixed(0)}% own · ${s.projSum.toFixed(1)} fp`)).join('')||'<span class="cs-sub">None</span>'}</div></div>
+                        <div class="cs-top-col"><div class="k">Chalkiest runbacks</div><div class="chips">${runbacks.slice(0,8).map((s,i)=>line(`${i+1}. ${csEsc(csName(s.qb))}+${csEsc(csName(s.rec))} / ${csEsc(csName(s.rb))}`, `${s.ownSum.toFixed(0)}% own`)).join('')||'<span class="cs-sub">Need opponents</span>'}</div></div>
+                    </div>
+                </details>`;
         }
 
         function slPushStack(obj) {
@@ -10787,7 +10846,7 @@
         function buildLeverageRows(pool) {
             levCache = new Map();
             const groups = {};
-            pool.forEach(p => {
+            (pool || []).forEach(p => {
                 const pos = csPos(p);
                 if (!groups[pos]) groups[pos] = [];
                 groups[pos].push(p);
@@ -10795,36 +10854,48 @@
             const out = [];
             Object.keys(groups).forEach(pos => {
                 const rows = groups[pos].filter(p => csFp(p) > 0 || (Number(p.ownership) || 0) > 0);
+                if (!rows.length) return;
                 const posOwn = rows.reduce((s, p) => s + (Number(p.ownership) || 0), 0);
-                const fit = fitOwnToFp(rows);
-                const edges = [];
                 const tmp = rows.map(p => {
                     const own = Number(p.ownership) || 0;
                     const proj = csFp(p);
+                    const sal = csSal(p);
+                    const valueX = sal > 0 ? proj / (sal / 1000) : 0;
                     const impl = levImplFp(p);
                     const price = levPriceFp(p);
-                    const expected = fit ? (fit.a + fit.b * own) : quantileFp(rows, own);
-                    const floor = Math.max(0, expected);
-                    const edge = proj - floor;
-                    const vsImpl = proj - impl;
+                    const cashFloor = sal > 0 ? (sal / 1000) * 2.5 : 0;
                     const ownShare = posOwn > 0 ? (own / posOwn) * 100 : 0;
-                    edges.push(edge);
-                    return { p, pos, own, proj, impl, price, expected: floor, edge, vsImpl, ownShare, posOwn };
+                    return { p, pos, own, proj, impl, price, cashFloor, valueX, ownShare, posOwn };
                 });
-                const mean = edges.length ? edges.reduce((s, v) => s + v, 0) / edges.length : 0;
-                const sd = Math.sqrt(edges.reduce((s, v) => s + (v - mean) * (v - mean), 0) / Math.max(1, edges.length)) || 1;
+                const byProj = tmp.slice().sort((a, b) => b.proj - a.proj);
+                const byOwn = tmp.slice().sort((a, b) => b.own - a.own);
+                byProj.forEach((r, i) => { r.projRank = i + 1; });
+                byOwn.forEach((r, i) => { r.ownRank = i + 1; });
                 tmp.forEach(rec => {
-                    const z = rec.edge / sd;
+                    const peer = byProj[rec.ownRank - 1] || rec;
+                    rec.expected = peer.proj;
+                    rec.edge = rec.proj - rec.expected;
+                    rec.levScore = rec.ownRank - rec.projRank;
                     let tag = 'Properly owned';
-                    if (z >= 0.75) tag = 'Under-owned';
-                    else if (z >= 0.25) tag = 'Slightly under-valued';
-                    else if (z <= -0.75) tag = 'Over-valued';
-                    else if (z <= -0.25) tag = 'Slightly over-valued';
-                    if (tag === 'Properly owned' && rec.own >= 20 && rec.vsImpl <= -1.5) tag = 'Slightly over-valued';
-                    if (tag === 'Properly owned' && rec.own < 8 && rec.edge >= 1.2) tag = 'Slightly under-valued';
-                    rec.z = z;
+                    const chalk = rec.own >= 25 || rec.ownRank <= 2;
+                    if (chalk) {
+                        if (rec.projRank <= 2 && rec.valueX >= 2.2) tag = 'Properly owned';
+                        else if (rec.projRank >= 5 || rec.levScore <= -4 || rec.valueX < 2.1) tag = 'Over-valued';
+                        else if (rec.levScore <= -2 || rec.projRank >= 3) tag = 'Slightly over-valued';
+                        else tag = 'Properly owned';
+                    } else if (rec.levScore >= 6 && rec.own < 18 && rec.valueX >= 2.0 && rec.projRank <= 8) {
+                        tag = 'Under-owned';
+                    } else if (rec.levScore >= 3 && rec.own < 22 && rec.valueX >= 1.8) {
+                        tag = 'Slightly under-valued';
+                    } else if (rec.levScore <= -5 || (rec.own >= 18 && rec.projRank >= 8)) {
+                        tag = 'Over-valued';
+                    } else if (rec.levScore <= -2) {
+                        tag = 'Slightly over-valued';
+                    } else if (rec.own < 8 && rec.projRank <= 6 && rec.valueX >= 2.0) {
+                        tag = 'Slightly under-valued';
+                    }
                     rec.tag = tag;
-                    rec.reason = `${tag}: proj ${rec.proj.toFixed(1)} vs own-expected ${rec.expected.toFixed(1)} (${rec.edge >= 0 ? '+' : ''}${rec.edge.toFixed(1)}) · impl ${rec.impl.toFixed(1)} · ${rec.own.toFixed(1)}% of ${rec.pos} pool ${rec.ownShare.toFixed(1)}%`;
+                    rec.reason = `${tag}: proj #${rec.projRank} vs own #${rec.ownRank} at ${pos} (${rec.own.toFixed(1)}%) · ${rec.valueX.toFixed(2)}x · own-exp ${rec.expected.toFixed(1)}`;
                     levCache.set(rec.p.displayName, rec);
                     out.push(rec);
                 });
@@ -10855,7 +10926,7 @@
             const pos = document.getElementById('levPos')?.value || '';
             const tagWant = document.getElementById('levTag')?.value || '';
             const minOwn = parseFloat(document.getElementById('levMinOwn')?.value) || 0;
-            const rows = recs.filter(r => {
+            let rows = recs.filter(r => {
                 if (pos && r.pos !== pos) return false;
                 if (tagWant && r.tag !== tagWant) return false;
                 if (r.own < minOwn) return false;
@@ -10866,9 +10937,14 @@
                 if (['K'].includes(r.pos) && !pos) return false;
                 return ['QB','RB','WR','TE','DST'].includes(r.pos) || !!pos;
             }).sort((a, b) => b.edge - a.edge);
-            const under = recs.filter(r => r.tag === 'Under-owned').sort((a,b)=>b.edge-a.edge)[0];
-            const over = recs.filter(r => r.tag === 'Over-valued').sort((a,b)=>a.edge-b.edge)[0];
-            const chalk = recs.slice().sort((a,b)=>b.own-a.own)[0];
+            const allRows = rows.slice();
+            const cap = Number(window.levRowCap) > 0 ? Number(window.levRowCap) : 80;
+            rows = rows.slice(0, cap);
+            const skill = recs.filter(r => ['QB','RB','WR','TE'].includes(r.pos));
+            const under = skill.filter(r => r.own < 20 && r.valueX >= 2).sort((a,b)=>b.levScore-a.levScore || b.edge-a.edge)[0];
+            const chalkTraps = skill.filter(r => r.own >= 15).sort((a,b)=>a.levScore-b.levScore || a.edge-b.edge);
+            const over = chalkTraps[0];
+            const chalk = skill.slice().sort((a,b)=>b.own-a.own)[0];
             if (kpis) {
                 kpis.innerHTML = `
                     <div class="cs-kpi"><div class="k">Players</div><div class="v">${rows.length}</div></div>
@@ -10883,23 +10959,39 @@
                 <td>${csEsc(r.p.Team || '')}</td>
                 <td><span class="cs-tag ${levTagClass(r.tag)}">${r.tag}</span></td>
                 <td class="num">${r.own.toFixed(1)}%</td>
-                <td class="num">${r.ownShare.toFixed(1)}%</td>
+                <td class="num">${r.ownRank}</td>
+                <td class="num">${r.projRank}</td>
+                <td class="num" style="font-weight:700;color:${r.levScore>=3?'#7dffa3':r.levScore<=-3?'#ff8a96':'inherit'}">${r.levScore>0?'+':''}${r.levScore}</td>
                 <td class="num">${r.proj.toFixed(1)}</td>
-                <td class="num">${r.impl.toFixed(1)}</td>
-                <td class="num">${r.price.toFixed(1)}</td>
+                <td class="num">${r.cashFloor.toFixed(1)}</td>
                 <td class="num">${r.expected.toFixed(1)}</td>
-                <td class="num" style="font-weight:700;color:${r.edge>=0.25?'#7dffa3':r.edge<=-0.25?'#ff8a96':'inherit'}">${r.edge>=0?'+':''}${r.edge.toFixed(1)}</td>
-                <td class="num">${r.vsImpl>=0?'+':''}${r.vsImpl.toFixed(1)}</td>
+                <td class="num">${r.edge>=0?'+':''}${r.edge.toFixed(1)}</td>
             </tr>`).join('');
-            root.innerHTML = `<div class="cs-table-wrap"><table id="levTable">
+            const chalkBoard = skill.filter(r => r.own >= 15).sort((a,b)=>a.levScore-b.levScore).slice(0, 8);
+            const valueBoard = skill.filter(r => r.valueX >= 2 && r.own < 25).sort((a,b)=>b.levScore-a.levScore).slice(0, 8);
+            const boardRow = (r, i) => `<button type="button" onclick="openCsDrawer('${csArg(r.p.displayName)}')">
+                <span class="n">${i+1}</span><span class="nm">${csEsc(csName(r.p))}</span>
+                <span class="meta">${r.pos} · ${r.own.toFixed(1)}% own · proj #${r.projRank} · lev ${r.levScore>0?'+':''}${r.levScore}</span>
+            </button>`;
+            rows = rows.slice().sort((a,b) => (b.levScore - a.levScore) || (b.edge - a.edge));
+            root.innerHTML = `
+            <details class="cs-best"><summary>Most over-valued among chalk (15%+ own)</summary>
+                <div class="cs-top-board"><div class="cs-top-col"><div class="k">Chalk traps</div><div class="chips">${chalkBoard.map(boardRow).join('') || '<span class="cs-sub">No 15%+ names</span>'}</div></div></div>
+            </details>
+            <details class="cs-best"><summary>Most under-valued among 2x+ projections</summary>
+                <div class="cs-top-board"><div class="cs-top-col"><div class="k">2x value + low own rank</div><div class="chips">${valueBoard.map(boardRow).join('') || '<span class="cs-sub">None</span>'}</div></div></div>
+            </details>
+            <div class="cs-table-wrap"><table id="levTable">
                 <thead><tr>
                     <th>#</th><th>Player</th><th>Pos</th><th>Team</th><th>Tag</th>
-                    <th>Own</th><th>Pos share</th><th>Proj</th><th>Impl FP</th><th>3x Sal</th>
-                    <th>Own-exp FP</th><th>Edge</th><th>vs Impl</th>
+                    <th>Own</th><th>Own rk</th><th>Proj rk</th><th>Lev</th>
+                    <th>Proj</th><th>2.5x</th><th>Own-exp</th><th>Edge</th>
                 </tr></thead>
-                <tbody>${body || '<tr><td colspan="13">No players match. Ownership must be loaded for this slate.</td></tr>'}</tbody>
+                <tbody>${body || '<tr><td colspan="13">No players match. Ownership must be loaded for this slate.</td></tr>'}
+                ${allRows.length > rows.length ? `<tr><td colspan="13"><button type="button" class="ghost" onclick="window.levRowCap=${rows.length+80};renderLeverage();">Show more (${rows.length} of ${allRows.length})</button></td></tr>` : ''}
+                </tbody>
             </table></div>
-            <p class="cs-note">Own-exp FP is the position regression of Proj ~ Ownership (fallback: ownership quantile). Floor to pay off that own% is Own-exp FP. Impl FP is the Cheat Sheet implied column when present, else 3× salary. Pos share = player own / sum of own at that position.</p>`;
+            <p class="cs-note">Lev = ownership rank − projection rank at that position. Positive = owned less than the projection deserves. Own-exp is the Nth-best projection, where N is the player’s ownership rank. 25%+ or top-2 owned names are chalk and cannot be tagged Under-owned. Stacks live in Stacks Lab.</p>`;
             } catch (err) {
                 console.warn('Leverage render failed', err);
                 root.innerHTML = '<p class="cs-note">Ownership Leverage hit an error: ' + String(err && err.message || err) + '</p>';
@@ -11228,7 +11320,9 @@
         function renderCsBoard(rows) {
             const heatI = heatRange(rows, p => Number(p.impliedTotal));
             const heatV = heatRange(rows, p => csPtsPerK(p));
-            const sorted = csSort(rows);
+            const sortedAll = csSort(rows);
+            const cap = Number(window.csRowCap) > 0 ? Number(window.csRowCap) : 80;
+            const sorted = sortedAll.slice(0, cap);
             const th = (key, label) => `<th style="cursor:pointer;" onclick="csSortKey='${key}';csSortDir=csSortKey==='${key}'&&csSortDir==='desc'?'asc':'desc';renderCheatSheet();">${label}</th>`;
             const body = sorted.map((p, i) => {
                 const impl = p.impliedTotal != null ? Number(p.impliedTotal).toFixed(1) : '';
@@ -11262,7 +11356,9 @@
             const banner = csStackPick ? `<p class="cs-note">Stacking from <strong>${csEsc(csStackPick.qbDisplay)}</strong> — click Add on a teammate. <button type="button" class="ghost" onclick="csCancelStack()">Cancel</button></p>` : '';
             return banner + `<div class="cs-table-wrap"><table id="cheatSheetTable">
                 <thead><tr>${th('fp','#')}${th('name','Player')}${th('pos','Pos')}${th('tag','Tag')}${th('team','Team')}${th('opp','Opp')}${th('impl','Impl Tot')}${th('dvp','DVP')}${th('sal','Salary')}${th('fp','Proj')}${th('val','Val')}${th('line','Week line')}${th('l3','L3')}${th('own','Own')}</tr></thead>
-                <tbody>${body || '<tr><td colspan="14">No players match filters.</td></tr>'}</tbody>
+                <tbody>${body || '<tr><td colspan="14">No players match filters.</td></tr>'}
+                ${sortedAll.length > sorted.length ? `<tr><td colspan="14"><button type="button" class="ghost" onclick="window.csRowCap=${sorted.length+80};renderCheatSheet();">Show more (${sorted.length} of ${sortedAll.length})</button></td></tr>` : ''}
+                </tbody>
             </table></div>`;
         }
         function renderCheatSheet() {
