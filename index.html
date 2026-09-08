@@ -3240,7 +3240,7 @@
                         </label>
                         <button type="button" class="ghost" onclick="csExportCsv()">Export CSV</button>
                     </div>
-                    <p class="cs-note" style="margin:0 0 0.65rem;">Click a name for the full week projection, DVP, and game log. DVP rank 1 = easiest defense vs that position (2025 logs).</p>
+                    <p class="cs-note" style="margin:0 0 0.65rem;">Click a name for the full week projection (pass/rush/rec lines from the Cheat Sheet), DVP, and game log.</p>
                     <div id="csMain"></div>
                 </div>
             </div>
@@ -3686,11 +3686,14 @@
     <script>
         // ====================== CONFIG & STATE ======================
         const DATA_SOURCES = {
-            main: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/players.csv',
+            main: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR5CGYxMTghCulNtsHaMDKjkkbbYKaEWt0tJ2ie7iu-Mx2YpBClXzIZaZeYRdkg7LJlt8r_6nrxdqYa/pub?gid=585863704&single=true&output=csv',
+            mainFallback: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/players.csv',
             ownership: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/ownership.csv',
             final: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/final.csv',
             drafttable: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/drafttable.csv',
-            gamelogs: 'https://raw.githubusercontent.com/925Sports/NFL-Player-Log/main/data/gamelogs.csv'
+            gamelogs: 'https://raw.githubusercontent.com/925Sports/NFL-Player-Log/main/data/gamelogs.csv',
+            espnScoreboard: 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard',
+            espnScoreboardProxy: 'https://corsproxy.io/?https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'
         };
 
         // Normalize every team to a single nickname so chips/filters never show both "GB" and "Packers"
@@ -3740,6 +3743,7 @@
         let gameLogIndex = new Map(); // normName -> compact games
         let dvpTable = {}; // `${oppAbbr}|${pos}` -> { avg, rank, n, season }
         let dvpReady = false;
+        let nflOddsByTeam = new Map();
         let selectedPositions = [];
         let selectedTeams = [];
         let poolSearchQuery = '';
@@ -5586,12 +5590,15 @@
                     const lt = document.getElementById('loadingText');
                     if (lt) lt.textContent = 'Downloading slate CSVs…';
                 }
-                const [mainRes, ownRes, finalRes, draftRes, logsRes] = await Promise.all([
-                    fetchWithRetry(DATA_SOURCES.main),
+                const [mainRes, ownRes, finalRes, draftRes, logsRes, espnRes] = await Promise.all([
+                    fetchWithRetry(DATA_SOURCES.main).catch(() => fetchWithRetry(DATA_SOURCES.mainFallback)),
                     fetchWithRetry(DATA_SOURCES.ownership).catch(() => null),
                     fetchWithRetry(DATA_SOURCES.final).catch(() => null),
                     fetchWithRetry(DATA_SOURCES.drafttable).catch(() => null),
-                    fetchWithRetry(DATA_SOURCES.gamelogs, 2, 25000).catch(() => null)
+                    fetchWithRetry(DATA_SOURCES.gamelogs, 2, 25000).catch(() => null),
+                    fetchWithRetry(DATA_SOURCES.espnScoreboard, 1, 12000).catch(() =>
+                        fetchWithRetry(DATA_SOURCES.espnScoreboardProxy, 1, 12000).catch(() => null)
+                    )
                 ]);
                 if (!mainRes.ok) throw new Error('Main data failed: ' + mainRes.status);
                 if (!silent) {
@@ -5606,6 +5613,9 @@
                 const finalCsv = finalRes ? await finalRes.text() : '';
                 const draftCsv = draftRes ? await draftRes.text() : '';
                 const logsCsv = logsRes ? await logsRes.text() : '';
+                try {
+                    if (espnRes && espnRes.ok) ingestEspnOdds(await espnRes.json());
+                } catch (e) { console.warn('ESPN odds failed', e); }
                 if (!silent) {
                     const pf = document.getElementById('progressFill');
                     if (pf) pf.style.width = '70%';
@@ -5770,15 +5780,16 @@
                                     spread,
                                     ou,
                                     impliedTotal,
-                                    passYds: parseFloat(row['Passing Yards']) || 0,
-                                    rushYds: parseFloat(row['Rushing Yards']) || 0,
-                                    recYds: parseFloat(row['Receiving Yards']) || 0,
-                                    rushRecYds: parseFloat(row['Rush+Rec Yards']) || 0,
-                                    passTds: parseFloat(row['Passing TDs']) || 0,
-                                    passAtt: parseFloat(row['Passing Attempts']) || 0,
-                                    atd: parseFloat(row['Anytime TD']) || 0,
                                     combinedFP: parseFloat(row['Combined FP']) || 0,
-                                    impliedFP: parseFloat(row['Implied FP']) || 0
+                                    impliedFP: parseFloat(row['Implied FP']) || 0,
+                                    proj: parseCheatProj(row),
+                                    passYds: pickNum(row, ['Proj Pass Yds','Passing Yards']) || 0,
+                                    rushYds: pickNum(row, ['Proj Rush Yds','Rushing Yards']) || 0,
+                                    recYds: pickNum(row, ['Proj Rec Yds','Receiving Yards']) || 0,
+                                    rushRecYds: parseFloat(row['Rush+Rec Yards']) || 0,
+                                    passTds: pickNum(row, ['Proj Pass TDs','Passing TDs']) || 0,
+                                    passAtt: pickNum(row, ['Proj Pass Att','Passing Attempts']) || 0,
+                                    atd: pickNum(row, ['Proj Anytime TD','Anytime TD']) || 0
                                 };
                             }).filter(row => row['Player Name']);
 
@@ -5814,6 +5825,7 @@
                                 adjustedProjections[row['Role']][row['Player Name']] = row['Projected FP'];
                             });
                             try { ingestGameLogs(logsCsv); } catch (e) { console.warn('Game logs parse failed', e); }
+                            try { overlayEspnOddsOnRows(rawData, { requireOppOnSameRows: false }); } catch (e) {}
                             // Keep any user-edited projections that were already in memory / localStorage
                             try {
                                 const sess = JSON.parse(localStorage.getItem('nflOptimizerSession') || '{}');
@@ -6355,9 +6367,11 @@
                     spread: row.spread, ou: row.ou, impliedTotal: row.impliedTotal,
                     passYds: row.passYds, rushYds: row.rushYds, recYds: row.recYds,
                     rushRecYds: row.rushRecYds, passTds: row.passTds, passAtt: row.passAtt,
-                    atd: row.atd, combinedFP: row.combinedFP, impliedFP: row.impliedFP
+                    atd: row.atd, combinedFP: row.combinedFP, impliedFP: row.impliedFP,
+                    proj: row.proj || parseCheatProj(row)
                 };
             });
+            try { applySlateMatchups(allSlatePlayers); } catch (e) { console.warn(e); }
 
             // Showdown DST CPT/FLEX injection
             if (isShowdown) {
@@ -10174,6 +10188,78 @@
         let gpTeamFilter = null;
 
 
+
+        function pickNum(row, keys) {
+            for (const k of keys) {
+                if (!row || row[k] == null || row[k] === '') continue;
+                const n = parseFloat(row[k]);
+                if (Number.isFinite(n)) return n;
+            }
+            return null;
+        }
+        function parseCheatProj(row) {
+            return {
+                passCmp: pickNum(row, ['Proj Pass Comp']),
+                passAtt: pickNum(row, ['Proj Pass Att', 'Passing Attempts']),
+                passPct: pickNum(row, ['Proj Comp %']),
+                passYds: pickNum(row, ['Proj Pass Yds', 'Passing Yards']),
+                passAvg: pickNum(row, ['Proj Pass AVG']),
+                passLong: pickNum(row, ['Proj Pass Long']),
+                passTd: pickNum(row, ['Proj Pass TDs', 'Passing TDs']),
+                int: pickNum(row, ['Proj INT']),
+                rating: pickNum(row, ['Proj Passer Rating']),
+                rushAtt: pickNum(row, ['Proj Rush Att']),
+                rushYds: pickNum(row, ['Proj Rush Yds', 'Rushing Yards']),
+                rushAvg: pickNum(row, ['Proj Rush AVG']),
+                rushLong: pickNum(row, ['Proj Rush Long']),
+                rushTd: pickNum(row, ['Proj Rush TDs']),
+                rec: pickNum(row, ['Proj Rec']),
+                tgt: pickNum(row, ['Proj Targets']),
+                recYds: pickNum(row, ['Proj Rec Yds', 'Receiving Yards']),
+                recAvg: pickNum(row, ['Proj Rec AVG']),
+                recLong: pickNum(row, ['Proj Rec Long']),
+                recTd: pickNum(row, ['Proj Rec TDs']),
+                atd: pickNum(row, ['Proj Anytime TD', 'Anytime TD']),
+                fum: pickNum(row, ['Proj Fumbles']),
+                fumL: pickNum(row, ['Proj Fumbles Lost']),
+                fg: pickNum(row, ['Proj FG']),
+                pat: pickNum(row, ['Proj PAT']),
+                kick: pickNum(row, ['Proj Kick Pts'])
+            };
+        }
+        function fmtProj(v, d) {
+            if (v == null || v === '') return '';
+            const n = Number(v);
+            if (!Number.isFinite(n)) return '';
+            const dec = d != null ? d : (Math.abs(n) >= 20 ? 0 : 1);
+            return n.toFixed(dec).replace(/\.0$/, '');
+        }
+        function weekLine(p) {
+            const x = p.proj || {};
+            const pos = csPos(p);
+            if (pos === 'QB') {
+                const bits = [];
+                if (x.passCmp != null && x.passAtt != null) bits.push(fmtProj(x.passCmp) + '/' + fmtProj(x.passAtt));
+                else if (x.passAtt != null) bits.push(fmtProj(x.passAtt) + ' att');
+                if (x.passYds != null) bits.push(fmtProj(x.passYds) + ' yds');
+                if (x.passTd != null) bits.push(fmtProj(x.passTd) + ' TD');
+                if (x.int != null) bits.push(fmtProj(x.int) + ' INT');
+                if (x.rushYds) bits.push(fmtProj(x.rushYds) + ' ru');
+                return bits.join(' · ');
+            }
+            if (pos === 'K') {
+                return [x.fg != null ? fmtProj(x.fg) + ' FG' : '', x.pat != null ? fmtProj(x.pat) + ' PAT' : '', x.kick != null ? fmtProj(x.kick) + ' pts' : ''].filter(Boolean).join(' · ');
+            }
+            if (pos === 'DST') return '';
+            const bits = [];
+            if (x.rushAtt != null || x.rushYds != null) {
+                bits.push((x.rushAtt != null ? fmtProj(x.rushAtt) + ' att' : '') + (x.rushYds != null ? (x.rushAtt != null ? ' / ' : '') + fmtProj(x.rushYds) + ' ru' : ''));
+            }
+            if (x.rec != null || x.tgt != null) bits.push((fmtProj(x.rec) || '—') + '/' + (fmtProj(x.tgt) || '—') + ' tgt');
+            if (x.recYds != null) bits.push(fmtProj(x.recYds) + ' rec');
+            if (x.atd != null) bits.push(fmtProj(x.atd, 2) + ' ATD');
+            return bits.filter(Boolean).join(' · ');
+        }
         function teamAbbr(val) {
             const s = String(val || '').trim();
             if (!s) return '';
@@ -10309,20 +10395,32 @@
             const dvp = dvpFor(p);
             const last = lastNLogs(p, 6).slice().reverse();
             const vs = vsOppLogs(p).slice().reverse();
+            const x = p.proj || {};
+            const show = (v, d) => (v == null || v === '' ? '—' : fmtProj(v, d));
             const projBits = [
-                ['Proj FP', csFp(p).toFixed(1)],
-                ['Combined', p.combinedFP ? Number(p.combinedFP).toFixed(1) : '—'],
+                ['Proj FP', csFp(p).toFixed(2)],
+                ['Combined', p.combinedFP ? Number(p.combinedFP).toFixed(2) : '—'],
                 ['Impl FP', p.impliedFP ? Number(p.impliedFP).toFixed(1) : '—'],
-                ['Pass Yds', p.passYds || 0],
-                ['Pass TD', p.passTds || 0],
-                ['Pass Att', p.passAtt || 0],
-                ['Rush Yds', p.rushYds || 0],
-                ['Rec Yds', p.recYds || 0],
-                ['Ru+Rec', p.rushRecYds || ((p.rushYds||0)+(p.recYds||0))],
-                ['ATD %', p.atd ? Number(p.atd).toFixed(1) : '—'],
-                ['Own', (Number(p.ownership)||0).toFixed(1)+'%'],
-                ['Value', csPtsPerK(p).toFixed(2)]
-            ];
+                ['Cmp/Att', (x.passCmp != null || x.passAtt != null) ? `${show(x.passCmp)}/${show(x.passAtt)}` : '—'],
+                ['Pass Yds', show(x.passYds)],
+                ['Pass TD', show(x.passTd)],
+                ['INT', show(x.int)],
+                ['Rating', show(x.rating)],
+                ['Rush Att', show(x.rushAtt)],
+                ['Rush Yds', show(x.rushYds)],
+                ['Rush TD', show(x.rushTd)],
+                ['YPC', show(x.rushAvg)],
+                ['Rec', show(x.rec)],
+                ['Targets', show(x.tgt)],
+                ['Rec Yds', show(x.recYds)],
+                ['Rec TD', show(x.recTd)],
+                ['ATD', show(x.atd, 2)],
+                ['Fum Lost', show(x.fumL)],
+                ['FG', show(x.fg)],
+                ['PAT', show(x.pat)],
+                ['Kick Pts', show(x.kick)],
+                ['Own', (Number(p.ownership)||0).toFixed(1)+'%']
+            ].filter(pair => pair[1] !== '—');
             const logLine = (g) => `<div class="cs-log-row"><span>W${g.week}</span><span>${csEsc(g.opp)}</span><span>${g.pos==='QB' ? `${g.passYds} pass / ${g.passTd} TD` : `${g.rushYds} ru / ${g.recYds} rec / ${g.rec} recs`}</span><span style="text-align:right;font-weight:700;">${g.fp.toFixed(1)}</span></div>`;
             body.innerHTML = `
                 <div class="cs-stat-grid">${projBits.map(([k,v]) => `<div class="cs-stat"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('')}</div>
@@ -10525,9 +10623,9 @@
                         ? `<button type="button" class="ghost" style="padding:0.15rem 0.4rem;font-size:0.7rem;" onclick="csFinishStack('${csArg(p.displayName)}', false)">Add</button>`
                         : '');
                 const dvp = dvpFor(p);
-                const line = csPos(p)==='QB'
-                    ? `${Number(p.passYds||0).toFixed(0)} pyd / ${Number(p.passTds||0).toFixed(1)} pTD`
-                    : `${Number(p.rushYds||0).toFixed(0)} ru / ${Number(p.recYds||0).toFixed(0)} rec`;
+                const line = weekLine(p) || (csPos(p)==='QB'
+                    ? `${Number(p.passYds||0).toFixed(0)} pyd`
+                    : `${Number(p.rushYds||0).toFixed(0)} ru / ${Number(p.recYds||0).toFixed(0)} rec`);
                 const last3 = p.last3Avg != null ? p.last3Avg.toFixed(1) : '—';
                 return `<tr>
                     <td class="num">${i+1}</td>
@@ -10578,10 +10676,11 @@
         }
         function csExportCsv() {
             const rows = csSort(cheatPool());
-            const headers = ['Rank','Player','Pos','Team','Opp','Impl Tot','DVP','PassYds','RushYds','RecYds','ATD','Proj FP','L3','PtsPerK','Own'];
+            const headers = ['Rank','Player','Pos','Team','Opp','Impl Tot','DVP','Proj FP','Pass Cmp','Pass Att','Pass Yds','Pass TD','INT','Rush Att','Rush Yds','Rush TD','Rec','Targets','Rec Yds','Rec TD','ATD','L3','PtsPerK','Own'];
             const lines = [headers.join(',')];
             rows.forEach((p,i) => {
-                lines.push([i+1, '"'+csName(p).replace(/"/g,'')+'"', csPos(p), p.Team||'', csOpp(p), p.impliedTotal??'', p.dvpRank??'', p.passYds||0, p.rushYds||0, p.recYds||0, p.atd||'', csFp(p).toFixed(2), p.last3Avg!=null?p.last3Avg.toFixed(1):'', csPtsPerK(p).toFixed(2), (Number(p.ownership)||0).toFixed(1)].join(','));
+                const x = p.proj || {};
+                lines.push([i+1, '"'+csName(p).replace(/"/g,'')+'"', csPos(p), p.Team||'', csOpp(p), p.impliedTotal??'', p.dvpRank??'', csFp(p).toFixed(2), x.passCmp??'', x.passAtt??'', x.passYds??'', x.passTd??'', x.int??'', x.rushAtt??'', x.rushYds??'', x.rushTd??'', x.rec??'', x.tgt??'', x.recYds??'', x.recTd??'', x.atd??'', p.last3Avg!=null?p.last3Avg.toFixed(1):'', csPtsPerK(p).toFixed(2), (Number(p.ownership)||0).toFixed(1)].join(','));
             });
             const blob = new Blob([lines.join('\n')], { type: 'text/csv' });
             const a = document.createElement('a');
@@ -10590,15 +10689,88 @@
             a.click();
         }
 
+
+        function ingestEspnOdds(json) {
+            nflOddsByTeam = new Map();
+            const events = (json && json.events) || [];
+            events.forEach(ev => {
+                const comp = (ev.competitions || [])[0];
+                if (!comp) return;
+                const homeC = (comp.competitors || []).find(c => c.homeAway === 'home');
+                const awayC = (comp.competitors || []).find(c => c.homeAway === 'away');
+                if (!homeC || !awayC) return;
+                const home = normalizeTeam(homeC.team?.abbreviation || homeC.team?.name || '');
+                const away = normalizeTeam(awayC.team?.abbreviation || awayC.team?.name || '');
+                if (!home || !away) return;
+                const o = (comp.odds || [])[0] || {};
+                const ou = Number(o.overUnder);
+                let homeSpread = Number(o.spread);
+                if (!Number.isFinite(homeSpread)) {
+                    const det = String(o.details || '');
+                    const m = det.match(/^([A-Za-z]{2,4})\s+([+-]?\d+(?:\.\d+)?)/);
+                    if (m) {
+                        const fav = normalizeTeam(m[1]);
+                        const line = Number(m[2]);
+                        homeSpread = (fav === home) ? line : -line;
+                    }
+                }
+                const awaySpread = Number.isFinite(homeSpread) ? -homeSpread : null;
+                const start = Date.parse(ev.date || comp.date || '') || 0;
+                const put = (team, opp, spread) => {
+                    const implied = (Number.isFinite(ou) && Number.isFinite(spread)) ? (ou / 2 - spread / 2) : null;
+                    nflOddsByTeam.set(team, { team, opp, spread: Number.isFinite(spread) ? spread : null, ou: Number.isFinite(ou) ? ou : null, implied, home: team === home, start });
+                };
+                put(home, away, homeSpread);
+                put(away, home, awaySpread);
+            });
+        }
+        function overlayEspnOddsOnRows(rows, opts = {}) {
+            if (!nflOddsByTeam.size || !rows) return;
+            const require = !!opts.requireOppOnSameRows;
+            const present = new Set(rows.map(r => normalizeTeam(r.Team || '')).filter(Boolean));
+            rows.forEach(r => {
+                const team = normalizeTeam(r.Team || '');
+                const g = nflOddsByTeam.get(team);
+                if (!g) return;
+                if (require && g.opp && !present.has(g.opp)) return;
+                r.Opponent = g.opp;
+                r.spread = g.spread;
+                r.ou = g.ou;
+                r.impliedTotal = g.implied;
+            });
+        }
+        function applySlateMatchups(players) {
+            if (!players || !players.length) return;
+            const slateTeams = new Set(players.map(p => normalizeTeam(p.Team || '')).filter(Boolean));
+            players.forEach(p => {
+                const team = normalizeTeam(p.Team || '');
+                const g = nflOddsByTeam.get(team);
+                if (g && g.opp && slateTeams.has(g.opp)) {
+                    p.Opponent = g.opp;
+                    p.spread = g.spread;
+                    p.ou = g.ou;
+                    p.impliedTotal = g.implied;
+                    return;
+                }
+                const opp = normalizeTeam(p.Opponent || '');
+                if (!opp || !slateTeams.has(opp) || opp === team) {
+                    p.Opponent = '';
+                    p.spread = '';
+                    p.ou = '';
+                    p.impliedTotal = null;
+                }
+            });
+        }
         function consensusOppMap(players) {
             const votes = new Map();
             (players || []).forEach(p => {
                 const team = normalizeTeam(p.Team || '');
-                const opp = normalizeTeam(p.Opponent || '');
+                const espn = nflOddsByTeam.get(team);
+                const opp = (espn && espn.opp) ? espn.opp : normalizeTeam(p.Opponent || '');
                 if (!team || !opp || team === opp) return;
                 if (!votes.has(team)) votes.set(team, new Map());
                 const m = votes.get(team);
-                m.set(opp, (m.get(opp) || 0) + 1);
+                m.set(opp, (m.get(opp) || 0) + 1000); // ESPN / slate-locked opp wins
             });
             const best = new Map();
             votes.forEach((m, team) => {
