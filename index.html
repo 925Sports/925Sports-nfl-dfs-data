@@ -2180,16 +2180,16 @@
             z-index: 1200;
         }
         .cs-drawer-backdrop.show { display: block; background: rgba(6,10,20,0.72); backdrop-filter: blur(6px); }
-        .cs-dk-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.4rem; margin: 0 0 0.7rem; }
-        .cs-dk-kpi { background: #10182a; border: 1px solid var(--border-color); border-radius: 10px; padding: 0.45rem 0.3rem; text-align: center; }
+        .cs-dk-kpis { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0.35rem; margin: 0 0 0.75rem; }
+        .cs-dk-kpi { background: #151c2e; border: 1px solid #2a3350; border-radius: 12px; padding: 0.55rem 0.25rem; text-align: center; }
         .cs-dk-kpi .v { font-size: 1rem; font-weight: 800; }
         .cs-dk-kpi .k { font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-top: 0.15rem; }
-        .cs-dk-tabs { display: flex; gap: 0.35rem; margin: 0.55rem 0 0.75rem; }
+        .cs-dk-tabs { display: flex; gap: 0; margin: 0.35rem 0 0.85rem; border-bottom: 1px solid #2a3350; }
         .cs-dk-tabs button {
-            background: #171e32; border: 1px solid #2a3350; color: #c9d0e3;
-            border-radius: 999px; padding: 0.32rem 0.7rem; font-weight: 650; cursor: pointer;
+            background: transparent; border: 0; border-bottom: 2px solid transparent;
+            color: #9aa6c3; border-radius: 0; padding: 0.55rem 0.85rem; font-weight: 700; cursor: pointer;
         }
-        .cs-dk-tabs button.active { background: #3ee0b4; color: #0C2627; border-color: #3ee0b4; }
+        .cs-dk-tabs button.active { background: transparent; color: #fff; border-bottom-color: #3ee0b4; }
         .cs-drawer {
             position: fixed;
             top: 50%; left: 50%;
@@ -2211,16 +2211,21 @@
         }
         .cs-drawer.open { transform: translate(-50%, -50%) scale(1); opacity: 1; pointer-events: auto; }
         .cs-drawer-head {
-            padding: 0.9rem 1rem 0.7rem;
-            border-bottom: 1px solid var(--border-color);
+            padding: 1.15rem 1.15rem 1rem;
+            background:
+                radial-gradient(circle at 12% 20%, rgba(62,224,180,0.18), transparent 42%),
+                linear-gradient(180deg, #16325f 0%, #0b1220 78%);
+            border-bottom: 1px solid #2a3350;
             display: flex;
             justify-content: space-between;
-            gap: 0.7rem;
+            gap: 0.85rem;
             align-items: center;
         }
+        .cs-drawer-head h3 { font-size: 1.35rem; letter-spacing: -0.02em; }
         .cs-avatar {
-            width: 72px; height: 72px;
-            border-radius: 14px;
+            width: 108px; height: 108px;
+            border-radius: 18px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.35);
             object-fit: cover;
             object-position: top center;
             background: var(--input-bg);
@@ -6043,7 +6048,8 @@
                                 const ou = (ownRow.ou !== '' && ownRow.ou != null) ? ownRow.ou : ((teamOdds.ou !== '' && teamOdds.ou != null) ? teamOdds.ou : finalData.ou);
                                 const impliedTotal = computeImplied(ou, spread, ownRow.implied);
 
-                                return {
+                                const rec = {
+                                    ...row,
                                     'Player Name': row['Player Name'] || '',
                                     'Position': row['Position'] || '',
                                     'Team': team,
@@ -6076,6 +6082,8 @@
                                     recTd: pickNum(row, ['Proj Rec TDs']),
                                     sheetValue: pickNum(row, ['Value'])
                                 };
+                                hydrateCheatRow(rec);
+                                return rec;
                             }).filter(row => row['Player Name']);
 
                             // Backfill Opp / lines / implied total from teammates on the same team
@@ -6656,9 +6664,16 @@
                     rushAtt: row.rushAtt, tgt: row.tgt, rec: row.rec,
                     rushTd: row.rushTd, recTd: row.recTd, sheetValue: row.sheetValue,
                     headshot: playerHeadshot(row) || row.headshot || '',
-                    proj: parseCheatProj(row)
+                    proj: parseCheatProj(row),
+                    'Proj Rush Att': row['Proj Rush Att'] != null ? row['Proj Rush Att'] : row.rushAtt,
+                    'Proj Targets': row['Proj Targets'] != null ? row['Proj Targets'] : row.tgt,
+                    'Proj Rec': row['Proj Rec'] != null ? row['Proj Rec'] : row.rec,
+                    'Proj Pass Att': row['Proj Pass Att'] != null ? row['Proj Pass Att'] : row.passAtt,
+                    'Proj Anytime TD': row['Proj Anytime TD'] != null ? row['Proj Anytime TD'] : row.atd,
+                    'Headshot URL': row['Headshot URL'] || row.headshot,
+                    Value: row.Value != null ? row.Value : row.sheetValue
                 };
-            });
+            }).map(hydrateCheatRow);
             try { applySlateMatchups(allSlatePlayers); } catch (e) { console.warn(e); }
 
             // Showdown DST CPT/FLEX injection
@@ -10485,6 +10500,29 @@
 
 
 
+        function hydrateCheatRow(row) {
+            if (!row) return row;
+            const proj = parseCheatProj(row);
+            row.proj = proj;
+            const stamp = (key, val) => {
+                if (val == null || val === '') return;
+                if (row[key] == null || row[key] === '') row[key] = val;
+            };
+            stamp('rushAtt', proj.rushAtt);
+            stamp('tgt', proj.tgt);
+            stamp('rec', proj.rec);
+            stamp('passAtt', proj.passAtt);
+            stamp('passYds', proj.passYds);
+            stamp('rushYds', proj.rushYds);
+            stamp('recYds', proj.recYds);
+            stamp('rushTd', proj.rushTd);
+            stamp('recTd', proj.recTd);
+            stamp('passTd', proj.passTd);
+            stamp('atd', proj.atd);
+            if (row.sheetValue == null) row.sheetValue = pickNum(row, ['Value']);
+            if (!row.headshot) row.headshot = playerHeadshot(row);
+            return row;
+        }
         function playerHeadshot(row) {
             if (!row) return '';
             const keys = ['headshot', 'Headshot URL', 'HeadshotURL', 'Player Image', 'Image', 'photo', 'Photo'];
@@ -10509,33 +10547,38 @@
             return null;
         }
         function parseCheatProj(row) {
+            if (!row) return {};
+            const prev = (row.proj && typeof row.proj === 'object') ? row.proj : {};
+            const n = (...keys) => firstNum(
+                ...keys.map(k => typeof k === 'number' || k == null ? k : pickNum(row, Array.isArray(k) ? k : [k])),
+            );
             return {
-                passCmp: pickNum(row, ['Proj Pass Comp']),
-                passAtt: pickNum(row, ['Proj Pass Att', 'Passing Attempts']),
-                passPct: pickNum(row, ['Proj Comp %']),
-                passYds: pickNum(row, ['Proj Pass Yds', 'Passing Yards']),
-                passAvg: pickNum(row, ['Proj Pass AVG']),
-                passLong: pickNum(row, ['Proj Pass Long']),
-                passTd: pickNum(row, ['Proj Pass TDs', 'Passing TDs']),
-                int: pickNum(row, ['Proj INT']),
-                rating: pickNum(row, ['Proj Passer Rating']),
-                rushAtt: pickNum(row, ['Proj Rush Att']),
-                rushYds: pickNum(row, ['Proj Rush Yds', 'Rushing Yards']),
-                rushAvg: pickNum(row, ['Proj Rush AVG']),
-                rushLong: pickNum(row, ['Proj Rush Long']),
-                rushTd: pickNum(row, ['Proj Rush TDs']),
-                rec: pickNum(row, ['Proj Rec']),
-                tgt: pickNum(row, ['Proj Targets']),
-                recYds: pickNum(row, ['Proj Rec Yds', 'Receiving Yards']),
-                recAvg: pickNum(row, ['Proj Rec AVG']),
-                recLong: pickNum(row, ['Proj Rec Long']),
-                recTd: pickNum(row, ['Proj Rec TDs']),
-                atd: pickNum(row, ['Proj Anytime TD', 'Anytime TD']),
-                fum: pickNum(row, ['Proj Fumbles']),
-                fumL: pickNum(row, ['Proj Fumbles Lost']),
-                fg: pickNum(row, ['Proj FG']),
-                pat: pickNum(row, ['Proj PAT']),
-                kick: pickNum(row, ['Proj Kick Pts'])
+                passCmp: firstNum(pickNum(row, ['Proj Pass Comp']), prev.passCmp),
+                passAtt: firstNum(pickNum(row, ['Proj Pass Att', 'Passing Attempts']), row.passAtt, prev.passAtt),
+                passPct: firstNum(pickNum(row, ['Proj Comp %']), prev.passPct),
+                passYds: firstNum(pickNum(row, ['Proj Pass Yds', 'Passing Yards']), row.passYds, prev.passYds),
+                passAvg: firstNum(pickNum(row, ['Proj Pass AVG']), prev.passAvg),
+                passLong: firstNum(pickNum(row, ['Proj Pass Long']), prev.passLong),
+                passTd: firstNum(pickNum(row, ['Proj Pass TDs', 'Passing TDs']), row.passTds, row.passTd, prev.passTd),
+                int: firstNum(pickNum(row, ['Proj INT']), prev.int),
+                rating: firstNum(pickNum(row, ['Proj Passer Rating']), prev.rating),
+                rushAtt: firstNum(pickNum(row, ['Proj Rush Att']), row.rushAtt, prev.rushAtt),
+                rushYds: firstNum(pickNum(row, ['Proj Rush Yds', 'Rushing Yards']), row.rushYds, prev.rushYds),
+                rushAvg: firstNum(pickNum(row, ['Proj Rush AVG']), prev.rushAvg),
+                rushLong: firstNum(pickNum(row, ['Proj Rush Long']), prev.rushLong),
+                rushTd: firstNum(pickNum(row, ['Proj Rush TDs']), row.rushTd, prev.rushTd),
+                rec: firstNum(pickNum(row, ['Proj Rec']), row.rec, prev.rec),
+                tgt: firstNum(pickNum(row, ['Proj Targets']), row.tgt, prev.tgt),
+                recYds: firstNum(pickNum(row, ['Proj Rec Yds', 'Receiving Yards']), row.recYds, prev.recYds),
+                recAvg: firstNum(pickNum(row, ['Proj Rec AVG']), prev.recAvg),
+                recLong: firstNum(pickNum(row, ['Proj Rec Long']), prev.recLong),
+                recTd: firstNum(pickNum(row, ['Proj Rec TDs']), row.recTd, prev.recTd),
+                atd: firstNum(pickNum(row, ['Proj Anytime TD', 'Anytime TD']), row.atd, prev.atd),
+                fum: firstNum(pickNum(row, ['Proj Fumbles']), prev.fum),
+                fumLost: firstNum(pickNum(row, ['Proj Fumbles Lost']), prev.fumLost),
+                fg: firstNum(pickNum(row, ['Proj FG']), prev.fg),
+                pat: firstNum(pickNum(row, ['Proj PAT']), prev.pat),
+                kick: firstNum(pickNum(row, ['Proj Kick Pts']), prev.kick)
             };
         }
         function fmtProj(v, d) {
@@ -11033,10 +11076,11 @@
                     rec.ownShare = rec.own;
                     const chalk = rec.adjOwn >= 25 || rec.own >= 25;
                     let tag = 'Properly owned';
-                    if (chalk && rec.edge <= -8) tag = 'Over-valued';
-                    else if (chalk && rec.edge <= -4) tag = 'Slightly over-valued';
-                    else if (rec.edge <= -8) tag = 'Over-valued';
-                    else if (rec.edge <= -3) tag = 'Slightly over-valued';
+                    const canOver = rec.own >= 5;
+                    if (canOver && chalk && rec.edge <= -8) tag = 'Over-valued';
+                    else if (canOver && chalk && rec.edge <= -4) tag = 'Slightly over-valued';
+                    else if (canOver && rec.edge <= -8) tag = 'Over-valued';
+                    else if (canOver && rec.edge <= -3) tag = 'Slightly over-valued';
                     else if (rec.edge >= 4 && rec.adjOwn < 18 && rec.valueX >= 2) tag = 'Under-owned';
                     else if (rec.edge >= 2 && rec.adjOwn < 22) tag = 'Slightly under-valued';
                     else tag = 'Properly owned';
@@ -11596,6 +11640,7 @@
             try {
             try { enrichPlayerMatchups(allSlatePlayers); } catch (e) {}
             try { attachLogInsights(csSourcePool()); } catch (e) {}
+            csSourcePool().forEach(hydrateCheatRow);
             const rows = cheatPool();
             if (lab) lab.textContent = (selectedSlate || 'No slate') + ' · implied totals from team O/U and spread (TM/P).';
             const teamSel = document.getElementById('csTeam');
