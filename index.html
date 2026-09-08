@@ -1995,7 +1995,7 @@
         .tag-over { background: #5a2430; color: #ffd0d6; }
         .cs-player-cell { display: flex; align-items: center; gap: 0.55rem; min-width: 0; }
         .cs-mini-shot {
-            width: 36px; height: 36px; border-radius: 8px;
+            width: 42px; height: 42px; border-radius: 10px;
             object-fit: cover; object-position: top center;
             background: var(--input-bg); border: 1px solid var(--border-color);
             flex: 0 0 36px;
@@ -2179,7 +2179,7 @@
             background: rgba(12,38,39,0.45);
             z-index: 1200;
         }
-        .cs-drawer-backdrop.show { display: block; }
+        .cs-drawer-backdrop.show { display: block; background: rgba(6,10,20,0.72); backdrop-filter: blur(6px); }
         .cs-dk-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.4rem; margin: 0 0 0.7rem; }
         .cs-dk-kpi { background: #10182a; border: 1px solid var(--border-color); border-radius: 10px; padding: 0.45rem 0.3rem; text-align: center; }
         .cs-dk-kpi .v { font-size: 1rem; font-weight: 800; }
@@ -2192,19 +2192,24 @@
         .cs-dk-tabs button.active { background: #3ee0b4; color: #0C2627; border-color: #3ee0b4; }
         .cs-drawer {
             position: fixed;
-            top: 0; right: 0; bottom: 0;
-            width: min(460px, 96vw);
-            background: var(--card-bg);
+            top: 50%; left: 50%;
+            width: min(760px, 94vw);
+            max-height: 88vh;
+            background: #0b1220;
             color: var(--text-color);
-            border-left: 1px solid var(--border-color);
-            box-shadow: -12px 0 40px rgba(0,0,0,0.18);
+            border: 1px solid #2a3350;
+            border-radius: 18px;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.45);
             z-index: 1201;
-            transform: translateX(110%);
-            transition: transform 0.22s ease;
+            transform: translate(-50%, -46%) scale(0.96);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.2s ease, opacity 0.2s ease;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
-        .cs-drawer.open { transform: translateX(0); }
+        .cs-drawer.open { transform: translate(-50%, -50%) scale(1); opacity: 1; pointer-events: auto; }
         .cs-drawer-head {
             padding: 0.9rem 1rem 0.7rem;
             border-bottom: 1px solid var(--border-color);
@@ -6063,7 +6068,13 @@
                                     rushRecYds: parseFloat(row['Rush+Rec Yards']) || 0,
                                     passTds: pickNum(row, ['Proj Pass TDs','Passing TDs']) || 0,
                                     passAtt: pickNum(row, ['Proj Pass Att','Passing Attempts']) || 0,
-                                    atd: pickNum(row, ['Proj Anytime TD','Anytime TD']) || 0
+                                    atd: pickNum(row, ['Proj Anytime TD','Anytime TD']),
+                                    rushAtt: pickNum(row, ['Proj Rush Att']),
+                                    tgt: pickNum(row, ['Proj Targets']),
+                                    rec: pickNum(row, ['Proj Rec']),
+                                    rushTd: pickNum(row, ['Proj Rush TDs']),
+                                    recTd: pickNum(row, ['Proj Rec TDs']),
+                                    sheetValue: pickNum(row, ['Value'])
                                 };
                             }).filter(row => row['Player Name']);
 
@@ -6642,6 +6653,8 @@
                     passYds: row.passYds, rushYds: row.rushYds, recYds: row.recYds,
                     rushRecYds: row.rushRecYds, passTds: row.passTds, passAtt: row.passAtt,
                     atd: row.atd, combinedFP: row.combinedFP, impliedFP: row.impliedFP,
+                    rushAtt: row.rushAtt, tgt: row.tgt, rec: row.rec,
+                    rushTd: row.rushTd, recTd: row.recTd, sheetValue: row.sheetValue,
                     headshot: playerHeadshot(row) || row.headshot || '',
                     proj: parseCheatProj(row)
                 };
@@ -10720,6 +10733,14 @@
             'Low Exposure': 2,
             'Zero / Fade': 3
         };
+        function firstNum(...vals) {
+            for (const v of vals) {
+                if (v == null || v === '') continue;
+                const n = Number(v);
+                if (Number.isFinite(n)) return n;
+            }
+            return null;
+        }
         function cashN(v) {
             const n = Number(v);
             return Number.isFinite(n) ? n : 0;
@@ -10732,17 +10753,17 @@
             const pos = csPos(p);
             const sal = csSal(p);
             const proj = csFp(p);
-            const sheetVal = pickNum(p, ['Value', 'value']);
-            const valueX = sheetVal != null ? sheetVal : (sal > 0 ? proj / (sal / 1000) : 0);
-            const passAtt = cashN(x.passAtt != null ? x.passAtt : p.passAtt);
-            const rushAtt = cashN(x.rushAtt != null ? x.rushAtt : pickNum(p, ['Proj Rush Att', 'Rush Att']));
-            const rushYds = cashN(x.rushYds != null ? x.rushYds : p.rushYds);
-            const rec = cashN(x.rec != null ? x.rec : pickNum(p, ['Proj Rec']));
-            const tgt = cashN(x.tgt != null ? x.tgt : pickNum(p, ['Proj Targets', 'Targets']));
-            const rushTd = cashN(x.rushTd != null ? x.rushTd : pickNum(p, ['Proj Rush TDs']));
-            const recTd = cashN(x.recTd != null ? x.recTd : pickNum(p, ['Proj Rec TDs']));
-            const passTd = cashN(x.passTd != null ? x.passTd : p.passTds);
-            const atdRaw = x.atd != null ? x.atd : (p.atd != null ? p.atd : pickNum(p, ['Proj Anytime TD', 'Anytime TD']));
+            const sheetVal = p.sheetValue != null ? p.sheetValue : pickNum(p, ['Value', 'value']);
+            const valueX = sheetVal != null ? Number(sheetVal) : (sal > 0 ? proj / (sal / 1000) : 0);
+            const passAtt = cashN(firstNum(x.passAtt, p.passAtt));
+            const rushAtt = cashN(firstNum(x.rushAtt, p.rushAtt, pickNum(p, ['Proj Rush Att'])));
+            const rushYds = cashN(firstNum(x.rushYds, p.rushYds));
+            const rec = cashN(firstNum(x.rec, p.rec, pickNum(p, ['Proj Rec'])));
+            const tgt = cashN(firstNum(x.tgt, p.tgt, pickNum(p, ['Proj Targets'])));
+            const rushTd = cashN(firstNum(x.rushTd, p.rushTd));
+            const recTd = cashN(firstNum(x.recTd, p.recTd));
+            const passTd = cashN(firstNum(x.passTd, p.passTds));
+            const atdRaw = firstNum(x.atd, p.atd, pickNum(p, ['Proj Anytime TD','Anytime TD']));
             const atd = atdRaw != null ? cashN(atdRaw) : null;
             const xTD = rushTd + recTd;
             const pTD = atd != null ? atd : (xTD > 0 ? 1 - Math.exp(-xTD) : 0);
@@ -10760,7 +10781,6 @@
             try {
             const m = cashMetrics(p);
             const pos = m.pos;
-            if (p.cashTag && p.cashReason && p._cashLocked) return p.cashTagPack;
             let primary = 'Playable';
             let exposure = 'Mid Exposure';
             let reason = '';
@@ -10982,7 +11002,7 @@
             });
             const out = [];
             Object.keys(groups).forEach(pos => {
-                const rows = groups[pos].filter(p => csFp(p) > 0);
+                const rows = groups[pos].filter(p => csFp(p) > 0 && (Number(p.ownership) || 0) > 0);
                 if (!rows.length) return;
                 const slots = posSlots(pos);
                 const tmp = rows.map(p => {
@@ -11238,7 +11258,7 @@
             document.getElementById('csDrawerSub').textContent = `${p.Team||''} | ${pos} | $${csSal(p)}`;
             const img = document.getElementById('csDrawerHeadshot');
             if (img) {
-                if (shot) { img.src = shot; img.alt = csName(p); img.hidden = false; img.onerror = () => { img.hidden = true; }; }
+                if (shot) { img.referrerPolicy = 'no-referrer'; img.src = shot; img.alt = csName(p); img.hidden = false; img.onerror = () => { img.hidden = true; }; }
                 else { img.removeAttribute('src'); img.hidden = true; }
             }
             const kpi = (k,v) => `<div class="cs-dk-kpi"><div class="v">${v}</div><div class="k">${k}</div></div>`;
@@ -11540,7 +11560,7 @@
                     <td class="num">${i+1}</td>
                     <td>
                         <div class="cs-player-cell">
-                            ${(playerHeadshot(p)||p.headshot) ? `<img class="cs-mini-shot" src="${csEsc(playerHeadshot(p)||p.headshot)}" alt="" onerror="this.style.display='none'">` : ''}
+                            ${(playerHeadshot(p)||p.headshot) ? `<img class="cs-mini-shot" src="${csEsc(playerHeadshot(p)||p.headshot)}" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">` : ''}
                             <div>
                                 <button type="button" class="cs-name-btn" onclick="openCsDrawer('${csArg(p.displayName)}')">${csEsc(csName(p))}</button>
                                 <div class="cs-tag-row">${cashPills(p)}</div>
