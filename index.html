@@ -2163,9 +2163,48 @@
             border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
-            gap: 0.6rem;
-            align-items: flex-start;
+            gap: 0.7rem;
+            align-items: center;
         }
+        .cs-avatar {
+            width: 56px; height: 56px;
+            border-radius: 12px;
+            object-fit: cover;
+            object-position: top center;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            flex: 0 0 56px;
+        }
+        .cs-proj-block { margin: 0.15rem 0 0.85rem; }
+        .cs-proj-block h4 {
+            margin: 0 0 0.35rem;
+            font-size: 0.72rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--brand-mint, #7dffa3);
+        }
+        .cs-best {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background: var(--input-bg);
+            margin-bottom: 0.9rem;
+            padding: 0.2rem 0.75rem 0.35rem;
+        }
+        .cs-best > summary {
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.6rem;
+            padding: 0.55rem 0.1rem;
+            font-weight: 700;
+            font-size: 0.92rem;
+        }
+        .cs-best > summary::-webkit-details-marker { display: none; }
+        .cs-best > summary::after { content: '▸'; color: var(--brand-mint, #7dffa3); font-size: 0.9rem; }
+        .cs-best[open] > summary::after { content: '▾'; }
+        .cs-best .cs-top-board { margin: 0.15rem 0 0.55rem; }
         .cs-drawer-body { padding: 0.85rem 1rem 1.4rem; overflow: auto; }
         .cs-stat-grid {
             display: grid;
@@ -3250,7 +3289,8 @@
         <div class="cs-drawer-backdrop" id="csDrawerBackdrop" onclick="closeCsDrawer()"></div>
         <div class="cs-drawer" id="csPlayerDrawer" aria-hidden="true">
             <div class="cs-drawer-head">
-                <div>
+                <img id="csDrawerHeadshot" class="cs-avatar" alt="" hidden>
+                <div style="min-width:0;flex:1;">
                     <h3 style="margin:0;" id="csDrawerTitle">Player</h3>
                     <p class="cs-note" style="margin:0.2rem 0 0;" id="csDrawerSub"></p>
                 </div>
@@ -5779,6 +5819,7 @@
                                     impliedTotal,
                                     combinedFP: parseFloat(row['Combined FP']) || 0,
                                     impliedFP: parseFloat(row['Implied FP']) || 0,
+                                    headshot: row['Headshot URL'] || row['Player Image'] || row['Image'] || '',
                                     proj: parseCheatProj(row),
                                     passYds: pickNum(row, ['Proj Pass Yds','Passing Yards']) || 0,
                                     rushYds: pickNum(row, ['Proj Rush Yds','Rushing Yards']) || 0,
@@ -6365,6 +6406,7 @@
                     passYds: row.passYds, rushYds: row.rushYds, recYds: row.recYds,
                     rushRecYds: row.rushRecYds, passTds: row.passTds, passAtt: row.passAtt,
                     atd: row.atd, combinedFP: row.combinedFP, impliedFP: row.impliedFP,
+                    headshot: row.headshot || '',
                     proj: row.proj || parseCheatProj(row)
                 };
             });
@@ -10394,6 +10436,65 @@
                 p.dvpAvg = d ? d.avg : null;
             });
         }
+        function csPosProjGroups(p) {
+            const pos = csPos(p);
+            const x = p.proj || {};
+            const show = (v, d) => (v == null || v === '' ? '' : fmtProj(v, d));
+            const pair = (label, value) => value ? [label, value] : null;
+            const scoring = [
+                pair('Proj FP', csFp(p) ? csFp(p).toFixed(2) : ''),
+                pair('Combined', p.combinedFP ? Number(p.combinedFP).toFixed(2) : ''),
+                pair('Own', (Number(p.ownership)||0) ? (Number(p.ownership).toFixed(1)+'%') : ''),
+                pair('ATD', show(x.atd, 2)),
+                pair('Fum Lost', show(x.fumL))
+            ].filter(Boolean);
+            const passing = [
+                pair('Cmp/Att', (x.passCmp != null || x.passAtt != null) ? `${show(x.passCmp)||'—'}/${show(x.passAtt)||'—'}` : ''),
+                pair('Pass Yds', show(x.passYds)),
+                pair('YPA', show(x.passAvg)),
+                pair('Long', show(x.passLong)),
+                pair('Pass TD', show(x.passTd)),
+                pair('INT', show(x.int)),
+                pair('Rating', show(x.rating))
+            ].filter(Boolean);
+            const rushing = [
+                pair('Rush Att', show(x.rushAtt)),
+                pair('Rush Yds', show(x.rushYds)),
+                pair('YPC', show(x.rushAvg)),
+                pair('Long', show(x.rushLong)),
+                pair('Rush TD', show(x.rushTd))
+            ].filter(Boolean);
+            const receiving = [
+                pair('Receptions', show(x.rec)),
+                pair('Targets', show(x.tgt)),
+                pair('Rec Yds', show(x.recYds)),
+                pair('YPR', show(x.recAvg)),
+                pair('Long', show(x.recLong)),
+                pair('Rec TD', show(x.recTd))
+            ].filter(Boolean);
+            const kicking = [
+                pair('FG', show(x.fg)),
+                pair('PAT', show(x.pat)),
+                pair('Kick Pts', show(x.kick))
+            ].filter(Boolean);
+            const groups = [['Scoring', scoring]];
+            if (pos === 'QB') {
+                if (passing.length) groups.push(['Passing', passing]);
+                if (rushing.length) groups.push(['Rushing', rushing]);
+            } else if (pos === 'RB') {
+                if (rushing.length) groups.push(['Rushing', rushing]);
+                if (receiving.length) groups.push(['Receiving', receiving]);
+            } else if (pos === 'WR' || pos === 'TE') {
+                if (receiving.length) groups.push(['Receiving', receiving]);
+            } else if (pos === 'K') {
+                if (kicking.length) groups.push(['Kicking', kicking]);
+            } else {
+                if (passing.length) groups.push(['Passing', passing]);
+                if (rushing.length) groups.push(['Rushing', rushing]);
+                if (receiving.length) groups.push(['Receiving', receiving]);
+            }
+            return groups.filter(([, bits]) => bits.length);
+        }
         function openCsDrawer(displayName) {
             const p = csSourcePool().find(x => x.displayName === displayName || csName(x) === displayName)
                 || (filteredData||[]).find(x => x.displayName === displayName);
@@ -10403,38 +10504,30 @@
             if (!drawer || !body || !p) return;
             document.getElementById('csDrawerTitle').textContent = csName(p);
             document.getElementById('csDrawerSub').textContent = `${csPos(p)} · ${p.Team||''} vs ${csOpp(p)||'—'} · $${csSal(p)}`;
+            const shot = document.getElementById('csDrawerHeadshot');
+            if (shot) {
+                const url = p.headshot || '';
+                if (url) {
+                    shot.src = url;
+                    shot.alt = csName(p);
+                    shot.hidden = false;
+                    shot.onerror = () => { shot.hidden = true; };
+                } else {
+                    shot.removeAttribute('src');
+                    shot.hidden = true;
+                }
+            }
             const dvp = dvpFor(p);
             const last = lastNLogs(p, 6).slice().reverse();
             const vs = vsOppLogs(p).slice().reverse();
-            const x = p.proj || {};
-            const show = (v, d) => (v == null || v === '' ? '—' : fmtProj(v, d));
-            const projBits = [
-                ['Proj FP', csFp(p).toFixed(2)],
-                ['Combined', p.combinedFP ? Number(p.combinedFP).toFixed(2) : '—'],
-                ['Impl FP', p.impliedFP ? Number(p.impliedFP).toFixed(1) : '—'],
-                ['Cmp/Att', (x.passCmp != null || x.passAtt != null) ? `${show(x.passCmp)}/${show(x.passAtt)}` : '—'],
-                ['Pass Yds', show(x.passYds)],
-                ['Pass TD', show(x.passTd)],
-                ['INT', show(x.int)],
-                ['Rating', show(x.rating)],
-                ['Rush Att', show(x.rushAtt)],
-                ['Rush Yds', show(x.rushYds)],
-                ['Rush TD', show(x.rushTd)],
-                ['YPC', show(x.rushAvg)],
-                ['Rec', show(x.rec)],
-                ['Targets', show(x.tgt)],
-                ['Rec Yds', show(x.recYds)],
-                ['Rec TD', show(x.recTd)],
-                ['ATD', show(x.atd, 2)],
-                ['Fum Lost', show(x.fumL)],
-                ['FG', show(x.fg)],
-                ['PAT', show(x.pat)],
-                ['Kick Pts', show(x.kick)],
-                ['Own', (Number(p.ownership)||0).toFixed(1)+'%']
-            ].filter(pair => pair[1] !== '—');
+            const groups = csPosProjGroups(p);
             const logLine = (g) => `<div class="cs-log-row"><span>W${g.week}</span><span>${csEsc(g.opp)}</span><span>${g.pos==='QB' ? `${g.passYds} pass / ${g.passTd} TD` : `${g.rushYds} ru / ${g.recYds} rec / ${g.rec} recs`}</span><span style="text-align:right;font-weight:700;">${g.fp.toFixed(1)}</span></div>`;
             body.innerHTML = `
-                <div class="cs-stat-grid">${projBits.map(([k,v]) => `<div class="cs-stat"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('')}</div>
+                ${groups.map(([title, bits]) => `
+                    <div class="cs-proj-block">
+                        <h4>${title}</h4>
+                        <div class="cs-stat-grid">${bits.map(([k,v]) => `<div class="cs-stat"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('')}</div>
+                    </div>`).join('')}
                 <p class="cs-note">${dvp ? `DVP vs ${csPos(p)}: <strong>#${dvp.rank} of ${dvp.of}</strong> (${dvp.avg.toFixed(1)} DK FP allowed, ${dvp.n} games, ${dvp.season} season). 1 = easiest.` : 'DVP unavailable for this matchup.'}</p>
                 <div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin:0.4rem 0 0.8rem;">
                     <button type="button" class="ghost" onclick="jumpToBuilderPlayer('${csArg(csName(p))}');closeCsDrawer();">Open in pool</button>
@@ -10611,15 +10704,15 @@
         function renderCsTopBoard(rows) {
             const games = csGameCount(csSourcePool());
             const want = ['QB','RB','WR','TE'];
-            return `<div class="cs-top-board">${want.map(pos => {
+            return `<details class="cs-best" id="csBestPlays"><summary>Best plays by position</summary><div class="cs-top-board">${want.map(pos => {
                 const list = rows.filter(p => pos === 'WR' ? (csPos(p)==='WR'||csPos(p)==='TE') : csPos(p)===pos)
                     .sort((a,b)=>csFp(b)-csFp(a)).slice(0,8);
-                const items = list.map((p,i) => `<button type="button" onclick="jumpToBuilderPlayer('${csArg(csName(p))}')">
+                const items = list.map((p,i) => `<button type="button" onclick="openCsDrawer('${csArg(csName(p))}')">
                     <span class="n">${i+1}</span><span class="nm">${csEsc(csName(p))}</span>
                     <span class="meta">${csEsc(p.Team||'')}${p.impliedTotal!=null?' · '+Number(p.impliedTotal).toFixed(1):''} · ${csFp(p).toFixed(1)}</span>
                 </button>`).join('') || '<span class="cs-sub">No players</span>';
                 return `<div class="cs-top-col"><div class="k">Top ${pos}s · ${games}-game slate</div><div class="chips">${items}</div></div>`;
-            }).join('')}</div>`;
+            }).join('')}</div></details>`;
         }
         function renderCsBoard(rows) {
             const heatI = heatRange(rows, p => Number(p.impliedTotal));
