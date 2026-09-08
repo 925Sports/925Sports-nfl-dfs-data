@@ -2036,7 +2036,10 @@
         .tag-proper { background: #7db7ff; color: #041428; }
         .tag-sover { background: #f5d76e; color: #1b1403; }
         .tag-over { background: #5a2430; color: #ffd0d6; }
-        .cs-player-cell { display: flex; align-items: center; gap: 0.55rem; min-width: 0; }
+        .cs-player-cell { display: flex; align-items: center; gap: 0.45rem; }
+        .cs-player-cell .cs-player-meta { min-width: 0; flex: 1; }
+        .cs-player-cell .lu-add { margin-left: auto; flex: 0 0 26px; }
+        .cs-player-cell-x { display: flex; align-items: center; gap: 0.55rem; min-width: 0; }
         .cs-mini-shot {
             width: 42px; height: 42px; border-radius: 10px;
             object-fit: cover; object-position: top center;
@@ -6053,7 +6056,7 @@
 
                 Papa.parse(csvText, {
                     header: true, skipEmptyLines: true, dynamicTyping: true,
-                    complete: (results) => {
+                    complete: async (results) => {
                         try {
                         if (results.errors.length > 0 || results.data.length === 0) {
                             rawData = [];
@@ -6065,7 +6068,8 @@
                             document.getElementById('tableBody').innerHTML = '<tr><td colspan="12">No data loaded</td></tr>';
                         } else {
                             cheatIndex = new Map();
-                            rawData = results.data.map(row => {
+                            const parsedRows = results.data;
+                            const mapRow = (row) => {
                                 let gameStartTimeStr = row['Game Start Time (PLAYER_DATA2)'] || 'n/a';
                                 let gameStartTime;
                                 if (gameStartTimeStr !== 'n/a') {
@@ -6144,9 +6148,18 @@
                                     sheetValue: pickNum(row, ['Value'])
                                 };
                                 try { indexCheatSource(row); } catch (e) {}
-                                hydrateCheatRow(rec);
                                 return rec;
-                            }).filter(row => row['Player Name']);
+                            };
+                            rawData = [];
+                            for (let i = 0; i < parsedRows.length; i++) {
+                                const rec = mapRow(parsedRows[i]);
+                                if (rec && rec['Player Name']) rawData.push(rec);
+                                if (i % 80 === 0) {
+                                    const lt = document.getElementById('loadingText');
+                                    if (lt) lt.textContent = 'Parsing player pool… ' + (i + 1) + '/' + parsedRows.length;
+                                    await new Promise(r => setTimeout(r, 0));
+                                }
+                            }
 
                             // Backfill Opp / lines / implied total from teammates on the same team
                             const teamMeta = new Map();
@@ -7381,7 +7394,7 @@
                 return;
             }
 
-            const pool = (filteredData.length ? filteredData : allSlatePlayers)
+            const pool = (allSlatePlayers || filteredData || [])
                 .filter(p => !deselectedPlayers.has(p.displayName));
             if (!pool.length) {
                 alert('Load a Classic slate first, then click 925 Favorite again.');
@@ -9379,7 +9392,7 @@
             const forceShowdownStack = isShowdown && document.getElementById('showdownAutoStack').checked;
             updateLineupTableHeaders(isShowdown);
 
-            const availablePlayers = filteredData.filter(r => !deselectedPlayers.has(r.displayName)).map(r => ({
+            const availablePlayers = (allSlatePlayers || []).filter(r => !deselectedPlayers.has(r.displayName)).map(r => ({
                 name: r.baseName, baseName: r.baseName, displayName: r.displayName, id: r.id,
                 salary: r.salary, points: r.projectedFP, maxExposure: r.maxExposure, minExposure: r.minExposure,
                 slotType: isShowdown ? (r.displayName.endsWith(' (CPT)') ? 'Captain' : 'FLEX') : null,
@@ -11429,7 +11442,16 @@
             return !!(typeof selectedSlate === 'string' && selectedSlate.includes('Showdown'));
         }
         function luSlotList() {
-            return luIsShowdown() ? ['CPT','FLEX','FLEX','FLEX','FLEX','FLEX'] : ['QB','RB','RB','WR','WR','WR','TE','FLEX','DST'];
+            return luIsShowdown()
+                ? ['CPT','FLEX1','FLEX2','FLEX3','FLEX4','FLEX5']
+                : ['QB','RB1','RB2','WR1','WR2','WR3','TE','FLEX','DST'];
+        }
+        function luSlotPos(slot) {
+            const s = String(slot || '');
+            if (s.startsWith('RB')) return 'RB';
+            if (s.startsWith('WR')) return 'WR';
+            if (s.startsWith('FLEX')) return 'FLEX';
+            return s;
         }
         let luState = { open: false, slots: {} };
         try { luState = Object.assign(luState, JSON.parse(localStorage.getItem('nflCsLineup') || '{}')); } catch (e) {}
@@ -11451,12 +11473,12 @@
             const p = luFindPlayer(name);
             if (!p) return;
             const pos = csPos(p);
-            const used = new Set(Object.values(luState.slots || {}).map(x => x && x.displayName));
-            if (used.has(p.displayName)) { luRender(); luOpen(true); return; }
+            const used = new Set(Object.values(luState.slots || {}).map(x => x && (x.displayName || x.name)));
+            if (used.has(p.displayName) || used.has(csName(p))) { luRender(); luOpen(true); return; }
             const slots = luSlotList();
-            let target = slots.find(s => !luState.slots[s] && s === pos);
-            if (!target && luCanFlex(pos)) target = slots.find(s => !luState.slots[s] && s === 'FLEX');
-            if (!target && luIsShowdown() && pos !== 'DST') target = slots.find(s => !luState.slots[s] && (s === 'FLEX' || (s === 'CPT' && pos)));
+            let target = slots.find(s => !luState.slots[s] && luSlotPos(s) === pos);
+            if (!target && luCanFlex(pos)) target = slots.find(s => !luState.slots[s] && luSlotPos(s) === 'FLEX');
+            if (!target && luIsShowdown() && pos !== 'DST') target = slots.find(s => !luState.slots[s] && (luSlotPos(s) === 'FLEX' || s === 'CPT'));
             if (!target) { alert('No empty ' + pos + ' / FLEX slot'); luOpen(true); return; }
             if (!luState.slots) luState.slots = {};
             luState.slots[target] = {
@@ -11493,7 +11515,15 @@
             if (fab) fab.hidden = luState.open;
             luRender();
         }
+        function luMigrateSlots() {
+            const s = luState.slots || {};
+            if (s.RB && !s.RB1) { s.RB1 = s.RB; delete s.RB; }
+            if (s.WR && !s.WR1) { s.WR1 = s.WR; delete s.WR; }
+            if (s.FLEX && luIsShowdown() && !s.FLEX1) { s.FLEX1 = s.FLEX; delete s.FLEX; }
+            luState.slots = s;
+        }
         function luRender() {
+            luMigrateSlots();
             const slots = luSlotList();
             const body = document.getElementById('luDockBody');
             const fab = document.getElementById('luFab');
@@ -11901,13 +11931,11 @@
                     <td>
                         <div class="cs-player-cell">
                             ${(playerHeadshot(p)||p.headshot) ? `<img class="cs-mini-shot" src="${csEsc(playerHeadshot(p)||p.headshot)}" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">` : ''}
-                            <div>
-                                <div style="display:flex;align-items:center;gap:0.35rem;">
-                                    <button type="button" class="cs-name-btn" onclick="openCsDrawer('${csArg(p.displayName)}')">${csEsc(csName(p))}</button>
-                                    <button type="button" class="lu-add" title="Add to lineup" onclick="event.stopPropagation();luAddPlayer('${csArg(p.displayName)}')">+</button>
-                                </div>
+                            <div class="cs-player-meta">
+                                <button type="button" class="cs-name-btn" onclick="openCsDrawer('${csArg(p.displayName)}')">${csEsc(csName(p))}</button>
                                 <div class="cs-tag-row">${cashPills(p)}</div>
                             </div>
+                            <button type="button" class="lu-add" title="Add to lineup" onclick="event.stopPropagation();luAddPlayer('${csArg(p.displayName)}')">+</button>
                         </div>
                         ${stackBtn}
                     </td>
@@ -12293,7 +12321,7 @@
             if (!root) return;
             try { enrichPlayerMatchups(allSlatePlayers); } catch (e) {}
             const isSd = selectedSlate && String(selectedSlate).includes('Showdown');
-            const pool = (filteredData && filteredData.length ? filteredData : allSlatePlayers || []).filter(p => {
+            const pool = (allSlatePlayers || filteredData || []).filter(p => {
                 if (deselectedPlayers.has(p.displayName)) return false;
                 if (p.slotType === 'Captain') return false;
                 return true;
