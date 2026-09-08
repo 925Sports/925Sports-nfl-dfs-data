@@ -2190,6 +2190,10 @@
             color: #9aa6c3; border-radius: 0; padding: 0.55rem 0.85rem; font-weight: 700; cursor: pointer;
         }
         .cs-dk-tabs button.active { background: transparent; color: #fff; border-bottom-color: #3ee0b4; }
+        .cs-log-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+        .cs-log-table th { text-align: left; color: var(--muted); font-size: 0.65rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.35rem 0.4rem; border-bottom: 1px solid var(--border-color); white-space: nowrap; }
+        .cs-log-table td { padding: 0.38rem 0.4rem; border-bottom: 1px solid rgba(42,51,80,0.55); }
+        .cs-log-table tr:hover td { background: rgba(36,48,86,0.35); }
         .cs-drawer {
             position: fixed;
             top: 50%; left: 50%;
@@ -3933,6 +3937,7 @@
         let rawData = [];
         let filteredData = [];
         let allSlatePlayers = [];
+        let cheatIndex = new Map();
         let gameLogIndex = new Map(); // normName -> compact games
         let dvpTable = {}; // `${oppAbbr}|${pos}` -> { avg, rank, n, season }
         let dvpReady = false;
@@ -6004,6 +6009,7 @@
                             if (!silent) alert('No valid player data returned from the live source. Check the GitHub CSV or try Refresh.');
                             document.getElementById('tableBody').innerHTML = '<tr><td colspan="12">No data loaded</td></tr>';
                         } else {
+                            cheatIndex = new Map();
                             rawData = results.data.map(row => {
                                 let gameStartTimeStr = row['Game Start Time (PLAYER_DATA2)'] || 'n/a';
                                 let gameStartTime;
@@ -6082,6 +6088,7 @@
                                     recTd: pickNum(row, ['Proj Rec TDs']),
                                     sheetValue: pickNum(row, ['Value'])
                                 };
+                                try { indexCheatSource(row); } catch (e) {}
                                 hydrateCheatRow(rec);
                                 return rec;
                             }).filter(row => row['Player Name']);
@@ -10500,6 +10507,73 @@
 
 
 
+        function cheatLookupKeys(p) {
+            const id = String((p && (p.id || p['Draftable ID'])) || '');
+            const nm = normalizeName((p && (p.baseName || p['Player Name'] || p.displayName)) || '');
+            const team = normalizeTeam((p && p.Team) || '');
+            const role = String((p && (p.Role || p.role)) || '');
+            const keys = [];
+            if (id) keys.push('id:' + id);
+            if (nm && role) keys.push('nr:' + nm + '|' + role);
+            if (nm && team) keys.push('nt:' + nm + '|' + team);
+            if (nm) keys.push('n:' + nm);
+            return keys;
+        }
+        function indexCheatSource(row) {
+            if (!row) return;
+            const pack = {
+                proj: parseCheatProj(row),
+                rushAtt: pickNum(row, ['Proj Rush Att']),
+                tgt: pickNum(row, ['Proj Targets']),
+                rec: pickNum(row, ['Proj Rec']),
+                passAtt: pickNum(row, ['Proj Pass Att', 'Passing Attempts']),
+                passYds: pickNum(row, ['Proj Pass Yds', 'Passing Yards']),
+                rushYds: pickNum(row, ['Proj Rush Yds', 'Rushing Yards']),
+                recYds: pickNum(row, ['Proj Rec Yds', 'Receiving Yards']),
+                rushTd: pickNum(row, ['Proj Rush TDs']),
+                recTd: pickNum(row, ['Proj Rec TDs']),
+                passTd: pickNum(row, ['Proj Pass TDs', 'Passing TDs']),
+                atd: pickNum(row, ['Proj Anytime TD', 'Anytime TD']),
+                rushAvg: pickNum(row, ['Proj Rush AVG']),
+                recAvg: pickNum(row, ['Proj Rec AVG']),
+                passAvg: pickNum(row, ['Proj Pass AVG']),
+                sheetValue: pickNum(row, ['Value']),
+                headshot: playerHeadshot(row)
+            };
+            cheatLookupKeys({
+                id: row['Draftable ID'] || row.id,
+                baseName: row['Player Name'],
+                'Player Name': row['Player Name'],
+                Team: row.Team || row['Team'],
+                Role: row.Role || row['Role']
+            }).forEach(k => cheatIndex.set(k, pack));
+        }
+        function applyCheatLookup(p) {
+            if (!p) return p;
+            let pack = null;
+            for (const k of cheatLookupKeys(p)) {
+                if (cheatIndex.has(k)) { pack = cheatIndex.get(k); break; }
+            }
+            if (!pack) return p;
+            p.proj = Object.assign({}, pack.proj || {}, p.proj || {});
+            const fill = (key, val) => {
+                if (val == null) return;
+                const cur = p[key];
+                if (cur == null || cur === '' || Number(cur) === 0) p[key] = val;
+            };
+            fill('rushAtt', pack.rushAtt); fill('tgt', pack.tgt); fill('rec', pack.rec);
+            fill('passAtt', pack.passAtt); fill('passYds', pack.passYds);
+            fill('rushYds', pack.rushYds); fill('recYds', pack.recYds);
+            fill('rushTd', pack.rushTd); fill('recTd', pack.recTd); fill('passTd', pack.passTd);
+            fill('atd', pack.atd); fill('sheetValue', pack.sheetValue);
+            if (!p.headshot && pack.headshot) p.headshot = pack.headshot;
+            if (pack.proj) {
+                Object.keys(pack.proj).forEach(k => {
+                    if (p.proj[k] == null || p.proj[k] === 0) p.proj[k] = pack.proj[k];
+                });
+            }
+            return p;
+        }
         function hydrateCheatRow(row) {
             if (!row) return row;
             const proj = parseCheatProj(row);
@@ -10789,6 +10863,7 @@
             return Number.isFinite(n) ? n : 0;
         }
         function cashMetrics(p) {
+            applyCheatLookup(p);
             if (p && (!p.proj || (p.proj.rushAtt == null && p.proj.tgt == null && p.proj.passAtt == null))) {
                 p.proj = parseCheatProj(p);
             }
@@ -11286,6 +11361,7 @@
             const body = document.getElementById('csDrawerBody');
             if (!drawer || !body || !p) return;
             p.proj = parseCheatProj(p);
+            applyCheatLookup(p);
             if (!p.headshot) p.headshot = playerHeadshot(p);
             const pack = cashTagPlayer(p);
             const m = pack.metrics;
@@ -11299,7 +11375,8 @@
             const line = weekLine(p) || '';
             const shot = playerHeadshot(p) || p.headshot || '';
             document.getElementById('csDrawerTitle').textContent = csName(p);
-            document.getElementById('csDrawerSub').textContent = `${p.Team||''} | ${pos} | $${csSal(p)}`;
+            const subEl = document.getElementById('csDrawerSub');
+            if (subEl) subEl.innerHTML = `${csEsc(p.Team||'')} | ${csEsc(pos)} | $${csSal(p)}<div class="cs-tag-row" style="margin-top:0.35rem;">${cashPills(p)}</div>${pack.role ? `<div class="cs-note" style="margin:0.2rem 0 0;">Role: ${csEsc(pack.role)}</div>` : ''}`;
             const img = document.getElementById('csDrawerHeadshot');
             if (img) {
                 if (shot) { img.referrerPolicy = 'no-referrer'; img.src = shot; img.alt = csName(p); img.hidden = false; img.onerror = () => { img.hidden = true; }; }
@@ -11323,7 +11400,18 @@
                 ypg = x.recAvg != null ? fmtProj(x.recAvg, 2) : '—';
                 td = x.recTd != null ? fmtProj(x.recTd, 2) : (m.pTD ? m.pTD.toFixed(2) : '—');
             }
-            const logLine = (g) => `<div class="cs-log-row"><span>W${g.week}</span><span>${csEsc(g.opp)}</span><span>${g.pos==='QB' ? `${g.passYds} pass / ${g.passTd} TD` : `${g.rushYds} ru / ${g.recYds} rec / ${g.rec} recs`}</span><span style="text-align:right;font-weight:700;">${g.fp.toFixed(1)}</span></div>`;
+            const logTable = (games) => {
+                if (!games.length) return '<p class="cs-note">No game logs matched this name yet.</p>';
+                const qb = pos === 'QB';
+                const head = qb
+                    ? '<tr><th>Wk</th><th>Opp</th><th>Att</th><th>Pass Yds</th><th>Pass TD</th><th>Rush Yds</th><th>Rush TD</th><th>FP</th></tr>'
+                    : '<tr><th>Wk</th><th>Opp</th><th>Rush Yds</th><th>Rush TD</th><th>Rec</th><th>Tgt</th><th>Rec Yds</th><th>Rec TD</th><th>FP</th></tr>';
+                const body = games.map(g => qb
+                    ? `<tr><td>W${g.week}</td><td>${csEsc(g.opp)}</td><td class="num">${g.passAtt||0}</td><td class="num">${g.passYds||0}</td><td class="num">${g.passTd||0}</td><td class="num">${g.rushYds||0}</td><td class="num">${g.rushTd||0}</td><td class="num">${Number(g.fp).toFixed(1)}</td></tr>`
+                    : `<tr><td>W${g.week}</td><td>${csEsc(g.opp)}</td><td class="num">${g.rushYds||0}</td><td class="num">${g.rushTd||0}</td><td class="num">${g.rec||0}</td><td class="num">${g.tgt||0}</td><td class="num">${g.recYds||0}</td><td class="num">${g.recTd||0}</td><td class="num">${Number(g.fp).toFixed(1)}</td></tr>`
+                ).join('');
+                return `<div class="cs-table-wrap"><table class="cs-log-table"><thead>${head}</thead><tbody>${body}</tbody></table></div>`;
+            };
             const l3 = p.last3Avg != null ? p.last3Avg.toFixed(1) : '—';
             const dvpTxt = dvp ? `#${dvp.rank} of ${dvp.of} vs ${pos} (${dvp.avg.toFixed(1)} DK FP allowed)` : 'DVP n/a';
             const lv = (typeof levFor === 'function') ? levFor(p) : null;
@@ -11332,7 +11420,6 @@
                     ${kpi('ATT', att)}${kpi('YDS', yds)}${kpi('YDS/G', ypg)}${kpi('TD', td)}${kpi('FPPG', csFp(p).toFixed(1))}
                     ${kpi('OWN', (Number(p.ownership)||0).toFixed(1)+'%')}${kpi('POS RK', rk.rank + ' / ' + rk.of)}
                 </div>
-                <div class="cs-tag-row">${cashPills(p)}</div>
                 <p class="cs-reason">${csEsc(pack.reason)}</p>
                 <div class="cs-dk-tabs">
                     <button type="button" class="active" data-tab="ov" onclick="setCsDrawerTab('ov')">Overview</button>
@@ -11360,7 +11447,7 @@
                 </div>
                 <div id="csTab-log" hidden>
                     <h4 style="margin:0.2rem 0 0.3rem;">Recent games</h4>
-                    ${last.length ? last.map(logLine).join('') : '<p class="cs-note">No game logs matched this name yet.</p>'}
+                    ${logTable(last)}
                 </div>
                 <div id="csTab-mu" hidden>
                     <div class="cs-stat-grid">
@@ -11373,7 +11460,7 @@
                     <p class="cs-note">${dvpTxt}. 1 = easiest matchup.</p>
                     ${lv ? `<p class="cs-reason">${csEsc(lv.reason)}</p>` : ''}
                     <h4 style="margin:0.7rem 0 0.3rem;">Vs ${csEsc(csOpp(p)||'opp')}</h4>
-                    ${vs.length ? vs.map(logLine).join('') + `<p class="cs-note">Avg ${(vs.reduce((s,g)=>s+g.fp,0)/vs.length).toFixed(1)} DK FP in ${vs.length} game(s).</p>` : '<p class="cs-note">No logged games against this opponent.</p>'}
+                    ${vs.length ? logTable(vs) + `<p class="cs-note">Avg ${(vs.reduce((s,g)=>s+g.fp,0)/vs.length).toFixed(1)} DK FP in ${vs.length} game(s).</p>` : '<p class="cs-note">No logged games against this opponent.</p>'}
                 </div>
             `;
             drawer.classList.add('open');
@@ -11594,6 +11681,7 @@
                         ? `<button type="button" class="ghost" style="padding:0.15rem 0.4rem;font-size:0.7rem;" onclick="csFinishStack('${csArg(p.displayName)}', false)">Add</button>`
                         : '');
                 const dvp = dvpFor(p);
+                applyCheatLookup(p);
                 if (!p.proj || (p.proj.rushAtt == null && p.proj.tgt == null && p.proj.passAtt == null && p.proj.rec == null)) {
                     p.proj = parseCheatProj(p);
                 }
