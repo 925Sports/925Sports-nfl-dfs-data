@@ -3686,8 +3686,8 @@
     <script>
         // ====================== CONFIG & STATE ======================
         const DATA_SOURCES = {
-            main: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR5CGYxMTghCulNtsHaMDKjkkbbYKaEWt0tJ2ie7iu-Mx2YpBClXzIZaZeYRdkg7LJlt8r_6nrxdqYa/pub?gid=585863704&single=true&output=csv',
-            mainFallback: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/players.csv',
+            main: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/players.csv',
+            sheet: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR5CGYxMTghCulNtsHaMDKjkkbbYKaEWt0tJ2ie7iu-Mx2YpBClXzIZaZeYRdkg7LJlt8r_6nrxdqYa/pub?gid=585863704&single=true&output=csv',
             ownership: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/ownership.csv',
             final: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/final.csv',
             drafttable: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/drafttable.csv',
@@ -5544,15 +5544,16 @@
         let _fetchLoadingTimer = null;
         let _fetchInFlight = false;
 
-        async function fetchWithRetry(url, attempts = 3, timeoutMs = 15000) {
+        async function fetchWithRetry(url, attempts = 3, timeoutMs = 15000, allowCache = false) {
             let lastErr;
             for (let i = 0; i < attempts; i++) {
                 try {
                     const controller = new AbortController();
                     const abortTimer = setTimeout(() => controller.abort(), timeoutMs);
-                    const res = await fetch(url + (url.includes('?') ? '&' : '?') + 't=' + Date.now() + '&r=' + i, {
+                    const bust = allowCache ? '' : ((url.includes('?') ? '&' : '?') + 't=' + Date.now() + '&r=' + i);
+                    const res = await fetch(url + bust, {
                         signal: controller.signal,
-                        cache: 'no-store'
+                        cache: allowCache ? 'force-cache' : 'no-store'
                     });
                     clearTimeout(abortTimer);
                     if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -5590,14 +5591,12 @@
                     const lt = document.getElementById('loadingText');
                     if (lt) lt.textContent = 'Downloading slate CSVs…';
                 }
-                const [mainRes, ownRes, finalRes, draftRes, logsRes, espnRes] = await Promise.all([
-                    fetchWithRetry(DATA_SOURCES.main).catch(() => fetchWithRetry(DATA_SOURCES.mainFallback)),
-                    fetchWithRetry(DATA_SOURCES.ownership).catch(() => null),
-                    fetchWithRetry(DATA_SOURCES.final).catch(() => null),
-                    fetchWithRetry(DATA_SOURCES.drafttable).catch(() => null),
-                    fetchWithRetry(DATA_SOURCES.gamelogs, 2, 25000).catch(() => null),
-                    fetchWithRetry(DATA_SOURCES.espnScoreboard, 1, 12000).catch(() =>
-                        fetchWithRetry(DATA_SOURCES.espnScoreboardProxy, 1, 12000).catch(() => null)
+                const [mainRes, ownRes, finalRes, espnRes] = await Promise.all([
+                    fetchWithRetry(DATA_SOURCES.main, 2, 12000, true),
+                    fetchWithRetry(DATA_SOURCES.ownership, 2, 8000, true).catch(() => null),
+                    fetchWithRetry(DATA_SOURCES.final, 2, 8000, true).catch(() => null),
+                    fetchWithRetry(DATA_SOURCES.espnScoreboard, 1, 8000, true).catch(() =>
+                        fetchWithRetry(DATA_SOURCES.espnScoreboardProxy, 1, 8000).catch(() => null)
                     )
                 ]);
                 if (!mainRes.ok) throw new Error('Main data failed: ' + mainRes.status);
@@ -5611,8 +5610,6 @@
                 const csvText = await mainRes.text();
                 const ownershipCsv = ownRes ? await ownRes.text() : '';
                 const finalCsv = finalRes ? await finalRes.text() : '';
-                const draftCsv = draftRes ? await draftRes.text() : '';
-                const logsCsv = logsRes ? await logsRes.text() : '';
                 try {
                     if (espnRes && espnRes.ok) ingestEspnOdds(await espnRes.json());
                 } catch (e) { console.warn('ESPN odds failed', e); }
@@ -5824,8 +5821,8 @@
                                 if (!adjustedProjections[row['Role']]) adjustedProjections[row['Role']] = {};
                                 adjustedProjections[row['Role']][row['Player Name']] = row['Projected FP'];
                             });
-                            try { ingestGameLogs(logsCsv); } catch (e) { console.warn('Game logs parse failed', e); }
                             try { overlayEspnOddsOnRows(rawData, { requireOppOnSameRows: false }); } catch (e) {}
+                            setTimeout(loadGameLogsDeferred, 50);
                             // Keep any user-edited projections that were already in memory / localStorage
                             try {
                                 const sess = JSON.parse(localStorage.getItem('nflOptimizerSession') || '{}');
@@ -10279,6 +10276,20 @@
             const std = Number(row.fantasy_points) || 0;
             const ppr = Number(row.fantasy_points_ppr) || 0;
             return (p === 'QB' || p === 'K' || p === 'DST' || p === 'DEF') ? std : (ppr || std);
+        }
+        let logsLoadStarted = false;
+        async function loadGameLogsDeferred() {
+            if (logsLoadStarted || dvpReady) return;
+            logsLoadStarted = true;
+            try {
+                const res = await fetchWithRetry(DATA_SOURCES.gamelogs, 1, 20000, true);
+                const txt = await res.text();
+                ingestGameLogs(txt);
+                try { if (document.getElementById('panelCheat') && !document.getElementById('panelCheat').hidden) renderCheatSheet(); } catch (e) {}
+                try { if (document.getElementById('panelPreview') && !document.getElementById('panelPreview').hidden) renderGamePreview(); } catch (e) {}
+            } catch (e) {
+                console.warn('Game logs deferred load failed', e);
+            }
         }
         function ingestGameLogs(csvText) {
             gameLogIndex = new Map();
