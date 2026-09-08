@@ -1993,6 +1993,13 @@
         .tag-proper { background: #7db7ff; color: #041428; }
         .tag-sover { background: #f5d76e; color: #1b1403; }
         .tag-over { background: #5a2430; color: #ffd0d6; }
+        .cs-player-cell { display: flex; align-items: center; gap: 0.55rem; min-width: 0; }
+        .cs-mini-shot {
+            width: 36px; height: 36px; border-radius: 8px;
+            object-fit: cover; object-position: top center;
+            background: var(--input-bg); border: 1px solid var(--border-color);
+            flex: 0 0 36px;
+        }
         .cs-name-btn {
             background: none;
             border: none;
@@ -2173,10 +2180,20 @@
             z-index: 1200;
         }
         .cs-drawer-backdrop.show { display: block; }
+        .cs-dk-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.4rem; margin: 0 0 0.7rem; }
+        .cs-dk-kpi { background: #10182a; border: 1px solid var(--border-color); border-radius: 10px; padding: 0.45rem 0.3rem; text-align: center; }
+        .cs-dk-kpi .v { font-size: 1rem; font-weight: 800; }
+        .cs-dk-kpi .k { font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-top: 0.15rem; }
+        .cs-dk-tabs { display: flex; gap: 0.35rem; margin: 0.55rem 0 0.75rem; }
+        .cs-dk-tabs button {
+            background: #171e32; border: 1px solid #2a3350; color: #c9d0e3;
+            border-radius: 999px; padding: 0.32rem 0.7rem; font-weight: 650; cursor: pointer;
+        }
+        .cs-dk-tabs button.active { background: #3ee0b4; color: #0C2627; border-color: #3ee0b4; }
         .cs-drawer {
             position: fixed;
             top: 0; right: 0; bottom: 0;
-            width: min(420px, 96vw);
+            width: min(460px, 96vw);
             background: var(--card-bg);
             color: var(--text-color);
             border-left: 1px solid var(--border-color);
@@ -10708,20 +10725,25 @@
             return Number.isFinite(n) ? n : 0;
         }
         function cashMetrics(p) {
-            const x = p.proj || {};
+            if (p && (!p.proj || (p.proj.rushAtt == null && p.proj.tgt == null && p.proj.passAtt == null))) {
+                p.proj = parseCheatProj(p);
+            }
+            const x = (p && p.proj) || {};
             const pos = csPos(p);
             const sal = csSal(p);
             const proj = csFp(p);
-            const valueX = sal > 0 ? proj / (sal / 1000) : 0;
+            const sheetVal = pickNum(p, ['Value', 'value']);
+            const valueX = sheetVal != null ? sheetVal : (sal > 0 ? proj / (sal / 1000) : 0);
             const passAtt = cashN(x.passAtt != null ? x.passAtt : p.passAtt);
-            const rushAtt = cashN(x.rushAtt);
+            const rushAtt = cashN(x.rushAtt != null ? x.rushAtt : pickNum(p, ['Proj Rush Att', 'Rush Att']));
             const rushYds = cashN(x.rushYds != null ? x.rushYds : p.rushYds);
-            const rec = cashN(x.rec);
-            const tgt = cashN(x.tgt != null ? x.tgt : rec);
-            const rushTd = cashN(x.rushTd);
-            const recTd = cashN(x.recTd);
+            const rec = cashN(x.rec != null ? x.rec : pickNum(p, ['Proj Rec']));
+            const tgt = cashN(x.tgt != null ? x.tgt : pickNum(p, ['Proj Targets', 'Targets']));
+            const rushTd = cashN(x.rushTd != null ? x.rushTd : pickNum(p, ['Proj Rush TDs']));
+            const recTd = cashN(x.recTd != null ? x.recTd : pickNum(p, ['Proj Rec TDs']));
             const passTd = cashN(x.passTd != null ? x.passTd : p.passTds);
-            const atd = x.atd != null ? cashN(x.atd) : null;
+            const atdRaw = x.atd != null ? x.atd : (p.atd != null ? p.atd : pickNum(p, ['Proj Anytime TD', 'Anytime TD']));
+            const atd = atdRaw != null ? cashN(atdRaw) : null;
             const xTD = rushTd + recTd;
             const pTD = atd != null ? atd : (xTD > 0 ? 1 - Math.exp(-xTD) : 0);
             const opps = rushAtt + tgt;
@@ -10755,7 +10777,7 @@
                 let scriptVeto = false;
                 if (!m.dual && m.fav >= 9) scriptVeto = true;
                 if (!m.dual && m.fav >= 7 && m.passAtt < 34) scriptVeto = true;
-                const hitsValue = m.valueX >= 2.5;
+                const hitsValue = m.valueX >= 2.45;
                 if (scriptVeto && !m.dual && m.fav >= 9) {
                     primary = volSafe ? 'Safe' : 'Fade';
                     exposure = primary === 'Safe' ? 'Mid Exposure' : 'Zero / Fade';
@@ -10784,7 +10806,7 @@
             } else if (pos === 'RB') {
                 const committee = m.rushAtt > 0 && m.rushAtt < 14 && m.tgt < 4;
                 const tdLikely = m.pTD >= 0.50 || m.xTD >= 0.60;
-                const hitsValue = m.valueX >= 2.5;
+                const hitsValue = m.valueX >= 2.45;
                 const baseCore = m.opps >= 19.5 && hitsValue && !committee;
                 role = committee ? 'committee' : (m.tgt >= 4 ? 'three-down' : 'lead back');
                 if (baseCore && tdLikely && m.fav >= 6) {
@@ -10821,7 +10843,7 @@
                 const tgtCore = m.tgt >= 7;
                 const recFloor = m.rec >= 4 || m.tgt >= 7;
                 role = m.tgt >= 8 ? 'WR1' : (m.tgt >= 6 ? 'WR2' : 'complement');
-                if (tgtCore && m.valueX >= 2.5 && usableTotal) {
+                if (tgtCore && m.valueX >= 2.45 && usableTotal) {
                     primary = 'Core Play';
                     exposure = 'High Exposure';
                     reason = `CORE: ${m.tgt.toFixed(1)} tgt, ${m.valueX.toFixed(2)}x`;
@@ -10845,7 +10867,7 @@
             } else if (pos === 'TE') {
                 role = m.tgt >= 6 ? 'TE1' : 'secondary TE';
                 const usableTotal = m.ou == null || m.ou > 41;
-                if (m.tgt >= 6 && m.valueX >= 2.5 && usableTotal) {
+                if (m.tgt >= 6 && m.valueX >= 2.45 && usableTotal) {
                     primary = 'Core Play';
                     exposure = 'High Exposure';
                     reason = `CORE: ${m.tgt.toFixed(1)} tgt, ${m.valueX.toFixed(2)}x`;
@@ -11176,6 +11198,22 @@
             }
             return groups.filter(([, bits]) => bits.length);
         }
+        function posRankFor(p) {
+            const pos = csPos(p);
+            const peers = csSourcePool().filter(x => csPos(x) === pos && csFp(x) > 0)
+                .sort((a,b) => csFp(b) - csFp(a));
+            const idx = peers.findIndex(x => x.displayName === p.displayName);
+            return { rank: idx >= 0 ? idx + 1 : '—', of: peers.length || '—' };
+        }
+        function setCsDrawerTab(tab) {
+            ['ov','log','mu'].forEach(id => {
+                const el = document.getElementById('csTab-' + id);
+                if (el) el.hidden = id !== tab;
+            });
+            document.querySelectorAll('.cs-dk-tabs button').forEach(b => {
+                b.classList.toggle('active', b.getAttribute('data-tab') === tab);
+            });
+        }
         function openCsDrawer(displayName) {
             const p = csSourcePool().find(x => x.displayName === displayName || csName(x) === displayName)
                 || (filteredData||[]).find(x => x.displayName === displayName);
@@ -11183,73 +11221,102 @@
             const back = document.getElementById('csDrawerBackdrop');
             const body = document.getElementById('csDrawerBody');
             if (!drawer || !body || !p) return;
-            if (!p.proj || (p.proj.rushAtt == null && p.proj.tgt == null && p.proj.passAtt == null && p.proj.rec == null)) {
-                p.proj = parseCheatProj(p);
-            }
+            p.proj = parseCheatProj(p);
             if (!p.headshot) p.headshot = playerHeadshot(p);
-            document.getElementById('csDrawerTitle').textContent = csName(p);
             const pack = cashTagPlayer(p);
             const m = pack.metrics;
             const pos = csPos(p);
-            document.getElementById('csDrawerSub').textContent = `${csPos(p)} · ${p.Team||''} vs ${csOpp(p)||'—'} · $${csSal(p)}`;
-            const shot = document.getElementById('csDrawerHeadshot');
-            if (shot) {
-                const url = playerHeadshot(p) || p.headshot || '';
-                if (url) {
-                    shot.src = url;
-                    shot.alt = csName(p);
-                    shot.hidden = false;
-                    shot.onerror = () => { shot.hidden = true; };
-                } else {
-                    shot.removeAttribute('src');
-                    shot.hidden = true;
-                }
-            }
+            const x = p.proj || {};
+            const rk = posRankFor(p);
             const dvp = dvpFor(p);
-            const last = lastNLogs(p, 6).slice().reverse();
+            const last = lastNLogs(p, 8).slice().reverse();
             const vs = vsOppLogs(p).slice().reverse();
             const groups = csPosProjGroups(p);
-            const logLine = (g) => `<div class="cs-log-row"><span>W${g.week}</span><span>${csEsc(g.opp)}</span><span>${g.pos==='QB' ? `${g.passYds} pass / ${g.passTd} TD` : `${g.rushYds} ru / ${g.recYds} rec / ${g.rec} recs`}</span><span style="text-align:right;font-weight:700;">${g.fp.toFixed(1)}</span></div>`;
-            const metricBits = [
-                ['Val', m.valueX.toFixed(2) + 'x'],
-                pos === 'QB' ? ['Pass Att', m.passAtt.toFixed(1)] : null,
-                pos === 'QB' ? ['Rush Att', m.rushAtt.toFixed(1)] : null,
-                pos === 'QB' ? ['Eff Vol', m.effVol.toFixed(1)] : null,
-                pos === 'RB' ? ['Opps', m.opps.toFixed(1)] : null,
-                (pos === 'WR' || pos === 'TE' || pos === 'RB') ? ['Targets', m.tgt.toFixed(1)] : null,
-                pos === 'RB' ? ['xTD', m.xTD.toFixed(2)] : null,
-                pos === 'RB' ? ['P(TD)', m.pTD.toFixed(2)] : null,
-                ['Spread', m.spread != null ? (m.spread > 0 ? '+' : '') + m.spread.toFixed(1) : '—'],
-                ['O/U', m.ou != null ? m.ou.toFixed(1) : '—'],
-                ['Impl Tot', m.impl != null ? m.impl.toFixed(1) : '—']
-            ].filter(Boolean);
             const line = weekLine(p) || '';
+            const shot = playerHeadshot(p) || p.headshot || '';
+            document.getElementById('csDrawerTitle').textContent = csName(p);
+            document.getElementById('csDrawerSub').textContent = `${p.Team||''} | ${pos} | $${csSal(p)}`;
+            const img = document.getElementById('csDrawerHeadshot');
+            if (img) {
+                if (shot) { img.src = shot; img.alt = csName(p); img.hidden = false; img.onerror = () => { img.hidden = true; }; }
+                else { img.removeAttribute('src'); img.hidden = true; }
+            }
+            const kpi = (k,v) => `<div class="cs-dk-kpi"><div class="v">${v}</div><div class="k">${k}</div></div>`;
+            let att = '—', yds = '—', ypg = '—', td = '—';
+            if (pos === 'QB') {
+                att = m.passAtt ? m.passAtt.toFixed(1) : '—';
+                yds = x.passYds != null ? fmtProj(x.passYds) : '—';
+                ypg = x.passAvg != null ? fmtProj(x.passAvg, 2) : '—';
+                td = x.passTd != null ? fmtProj(x.passTd, 2) : '—';
+            } else if (pos === 'RB') {
+                att = m.rushAtt ? m.rushAtt.toFixed(1) : '—';
+                yds = x.rushYds != null ? fmtProj(x.rushYds) : '—';
+                ypg = x.rushAvg != null ? fmtProj(x.rushAvg, 2) : '—';
+                td = (m.xTD || m.pTD) ? (m.xTD ? m.xTD.toFixed(2) : m.pTD.toFixed(2)) : '—';
+            } else if (pos === 'WR' || pos === 'TE') {
+                att = m.tgt ? m.tgt.toFixed(1) : (x.rec != null ? fmtProj(x.rec) : '—');
+                yds = x.recYds != null ? fmtProj(x.recYds) : '—';
+                ypg = x.recAvg != null ? fmtProj(x.recAvg, 2) : '—';
+                td = x.recTd != null ? fmtProj(x.recTd, 2) : (m.pTD ? m.pTD.toFixed(2) : '—');
+            }
+            const logLine = (g) => `<div class="cs-log-row"><span>W${g.week}</span><span>${csEsc(g.opp)}</span><span>${g.pos==='QB' ? `${g.passYds} pass / ${g.passTd} TD` : `${g.rushYds} ru / ${g.recYds} rec / ${g.rec} recs`}</span><span style="text-align:right;font-weight:700;">${g.fp.toFixed(1)}</span></div>`;
+            const l3 = p.last3Avg != null ? p.last3Avg.toFixed(1) : '—';
+            const dvpTxt = dvp ? `#${dvp.rank} of ${dvp.of} vs ${pos} (${dvp.avg.toFixed(1)} DK FP allowed)` : 'DVP n/a';
+            const lv = (typeof levFor === 'function') ? levFor(p) : null;
             body.innerHTML = `
+                <div class="cs-dk-kpis">
+                    ${kpi('ATT', att)}${kpi('YDS', yds)}${kpi('YDS/G', ypg)}${kpi('TD', td)}${kpi('FPPG', csFp(p).toFixed(1))}
+                    ${kpi('OWN', (Number(p.ownership)||0).toFixed(1)+'%')}${kpi('POS RK', rk.rank + ' / ' + rk.of)}
+                </div>
                 <div class="cs-tag-row">${cashPills(p)}</div>
                 <p class="cs-reason">${csEsc(pack.reason)}</p>
-                ${line ? `<p class="cs-note">Week line: ${csEsc(line)}</p>` : ''}
-                ${(() => { const lv = levFor(p); return lv ? `<div class="cs-tag-row"><span class="cs-tag ${levTagClass(lv.tag)}">${lv.tag}</span></div><p class="cs-reason">${csEsc(lv.reason)}</p>` : ''; })()}
-                ${pack.role ? `<p class="cs-note">Role: ${csEsc(pack.role)}</p>` : ''}
-                <div class="cs-stat-grid">${metricBits.map(([k,v]) => `<div class="cs-stat"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('')}</div>
-                ${groups.map(([title, bits]) => `
-                    <div class="cs-proj-block">
-                        <h4>${title}</h4>
-                        <div class="cs-stat-grid">${bits.map(([k,v]) => `<div class="cs-stat"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('')}</div>
-                    </div>`).join('')}
-                <p class="cs-note">${dvp ? `DVP vs ${csPos(p)}: <strong>#${dvp.rank} of ${dvp.of}</strong> (${dvp.avg.toFixed(1)} DK FP allowed, ${dvp.n} games, ${dvp.season} season). 1 = easiest.` : 'DVP unavailable for this matchup.'}</p>
-                <div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin:0.4rem 0 0.8rem;">
-                    <button type="button" class="ghost" onclick="jumpToBuilderPlayer('${csArg(csName(p))}');closeCsDrawer();">Open in pool</button>
-                    ${csPos(p)==='QB' ? `<button type="button" class="ghost" onclick="csStartStack('${csArg(p.displayName)}','${csArg(p.Team)}');closeCsDrawer();">Start stack</button>` : ''}
+                <div class="cs-dk-tabs">
+                    <button type="button" class="active" data-tab="ov" onclick="setCsDrawerTab('ov')">Overview</button>
+                    <button type="button" data-tab="log" onclick="setCsDrawerTab('log')">Game Log</button>
+                    <button type="button" data-tab="mu" onclick="setCsDrawerTab('mu')">Matchup</button>
                 </div>
-                <h4 style="margin:0.4rem 0 0.3rem;">Recent games</h4>
-                ${last.length ? last.map(logLine).join('') : '<p class="cs-note">No game logs matched this name yet.</p>'}
-                <h4 style="margin:0.85rem 0 0.3rem;">Vs ${csEsc(csOpp(p)||'opp')}</h4>
-                ${vs.length ? vs.map(logLine).join('') + `<p class="cs-note">Avg ${ (vs.reduce((s,g)=>s+g.fp,0)/vs.length).toFixed(1) } DK FP in ${vs.length} game(s).</p>` : '<p class="cs-note">No logged games against this opponent.</p>'}
+                <div id="csTab-ov">
+                    ${line ? `<p class="cs-note">Week line: ${csEsc(line)}</p>` : ''}
+                    ${pack.role ? `<p class="cs-note">Role: ${csEsc(pack.role)}</p>` : ''}
+                    <div class="cs-stat-grid">
+                        <div class="cs-stat"><div class="k">Proj</div><div class="v">${csFp(p).toFixed(1)}</div></div>
+                        <div class="cs-stat"><div class="k">Val</div><div class="v">${m.valueX.toFixed(2)}x</div></div>
+                        <div class="cs-stat"><div class="k">L3 avg</div><div class="v">${l3}</div></div>
+                        <div class="cs-stat"><div class="k">Matchup</div><div class="v">${dvp ? '#'+dvp.rank : '—'}</div></div>
+                    </div>
+                    ${groups.map(([title, bits]) => `
+                        <div class="cs-proj-block">
+                            <h4>${title}</h4>
+                            <div class="cs-stat-grid">${bits.map(([k,v]) => `<div class="cs-stat"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('')}</div>
+                        </div>`).join('')}
+                    <div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin:0.6rem 0 0.2rem;">
+                        <button type="button" class="ghost" onclick="jumpToBuilderPlayer('${csArg(csName(p))}');closeCsDrawer();">Open in pool</button>
+                        ${pos==='QB' ? `<button type="button" class="ghost" onclick="csStartStack('${csArg(p.displayName)}','${csArg(p.Team)}');closeCsDrawer();">Start stack</button>` : ''}
+                    </div>
+                </div>
+                <div id="csTab-log" hidden>
+                    <h4 style="margin:0.2rem 0 0.3rem;">Recent games</h4>
+                    ${last.length ? last.map(logLine).join('') : '<p class="cs-note">No game logs matched this name yet.</p>'}
+                </div>
+                <div id="csTab-mu" hidden>
+                    <div class="cs-stat-grid">
+                        <div class="cs-stat"><div class="k">Opp</div><div class="v">${csEsc(csOpp(p)||'—')}</div></div>
+                        <div class="cs-stat"><div class="k">Spread</div><div class="v">${m.spread != null ? (m.spread>0?'+':'')+m.spread.toFixed(1) : '—'}</div></div>
+                        <div class="cs-stat"><div class="k">O/U</div><div class="v">${m.ou != null ? m.ou.toFixed(1) : '—'}</div></div>
+                        <div class="cs-stat"><div class="k">Impl Tot</div><div class="v">${m.impl != null ? m.impl.toFixed(1) : '—'}</div></div>
+                        <div class="cs-stat"><div class="k">DVP</div><div class="v">${dvp ? '#'+dvp.rank+' / '+dvp.of : '—'}</div></div>
+                    </div>
+                    <p class="cs-note">${dvpTxt}. 1 = easiest matchup.</p>
+                    ${lv ? `<p class="cs-reason">${csEsc(lv.reason)}</p>` : ''}
+                    <h4 style="margin:0.7rem 0 0.3rem;">Vs ${csEsc(csOpp(p)||'opp')}</h4>
+                    ${vs.length ? vs.map(logLine).join('') + `<p class="cs-note">Avg ${(vs.reduce((s,g)=>s+g.fp,0)/vs.length).toFixed(1)} DK FP in ${vs.length} game(s).</p>` : '<p class="cs-note">No logged games against this opponent.</p>'}
+                </div>
             `;
             drawer.classList.add('open');
             drawer.setAttribute('aria-hidden', 'false');
             if (back) back.classList.add('show');
         }
+
         function closeCsDrawer() {
             document.getElementById('csPlayerDrawer')?.classList.remove('open');
             document.getElementById('csDrawerBackdrop')?.classList.remove('show');
@@ -11472,12 +11539,16 @@
                 return `<tr>
                     <td class="num">${i+1}</td>
                     <td>
-                        <button type="button" class="cs-name-btn" onclick="openCsDrawer('${csArg(p.displayName)}')">${csEsc(csName(p))}</button>
-                        <div class="cs-tag-row">${cashPills(p)}</div>
+                        <div class="cs-player-cell">
+                            ${(playerHeadshot(p)||p.headshot) ? `<img class="cs-mini-shot" src="${csEsc(playerHeadshot(p)||p.headshot)}" alt="" onerror="this.style.display='none'">` : ''}
+                            <div>
+                                <button type="button" class="cs-name-btn" onclick="openCsDrawer('${csArg(p.displayName)}')">${csEsc(csName(p))}</button>
+                                <div class="cs-tag-row">${cashPills(p)}</div>
+                            </div>
+                        </div>
                         ${stackBtn}
                     </td>
                     <td>${csEsc(csPos(p))}</td>
-                    <td>${cashPills(p)}</td>
                     <td>${csEsc(p.Team||'')}</td>
                     <td>${csEsc(csOpp(p))}</td>
                     <td>${heatPill(p.impliedTotal, heatI, impl)}</td>
@@ -11492,9 +11563,9 @@
             }).join('');
             const banner = csStackPick ? `<p class="cs-note">Stacking from <strong>${csEsc(csStackPick.qbDisplay)}</strong> — click Add on a teammate. <button type="button" class="ghost" onclick="csCancelStack()">Cancel</button></p>` : '';
             return banner + `<div class="cs-table-wrap"><table id="cheatSheetTable">
-                <thead><tr>${th('fp','#','Row number after current sort')}${th('name','Player','Name plus cash tag and exposure')}${th('pos','Pos','DraftKings position')}${th('tag','Tag','Cash tag from volume, 2.5x, and script')}${th('team','Team','Player team')}${th('opp','Opp','Opponent on this slate')}${th('impl','Impl Tot','Implied team total from O/U and spread')}${th('dvp','DVP','Defense vs this position. 1 = easiest')}${th('sal','Salary','DraftKings salary')}${th('fp','Proj','Cheat Sheet projected fantasy points')}${th('val','Val','Proj divided by salary per 1000. 2.5x is the cash bar')}${th('line','Week line','Position-specific projection line from the Cheat Sheet')}${th('l3','L3','Average DraftKings FP over the last 3 logged games')}${th('own','Own','Projected ownership percent')}</tr></thead>
-                <tbody>${body || '<tr><td colspan="14">No players match filters.</td></tr>'}
-                ${sortedAll.length > sorted.length ? `<tr><td colspan="14"><button type="button" class="ghost" onclick="window.csRowCap=${sorted.length+80};renderCheatSheet();">Show more (${sorted.length} of ${sortedAll.length})</button></td></tr>` : ''}
+                <thead><tr>${th('fp','#','Row number after current sort')}${th('name','Player','Name plus cash tag and exposure')}${th('pos','Pos','DraftKings position')}${th('team','Team','Player team')}${th('opp','Opp','Opponent on this slate')}${th('impl','Impl Tot','Implied team total from O/U and spread')}${th('dvp','DVP','Defense vs this position. 1 = easiest')}${th('sal','Salary','DraftKings salary')}${th('fp','Proj','Cheat Sheet projected fantasy points')}${th('val','Val','Proj divided by salary per 1000. 2.5x is the cash bar')}${th('line','Week line','Position-specific projection line from the Cheat Sheet')}${th('l3','L3','Average DraftKings FP over the last 3 logged games')}${th('own','Own','Projected ownership percent')}</tr></thead>
+                <tbody>${body || '<tr><td colspan="13">No players match filters.</td></tr>'}
+                ${sortedAll.length > sorted.length ? `<tr><td colspan="13"><button type="button" class="ghost" onclick="window.csRowCap=${sorted.length+80};renderCheatSheet();">Show more (${sorted.length} of ${sortedAll.length})</button></td></tr>` : ''}
                 </tbody>
             </table></div>`;
         }
