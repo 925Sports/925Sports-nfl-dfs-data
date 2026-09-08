@@ -1988,6 +1988,11 @@
         .tag-play { background: #2a3b4d; color: #d5e4f3; border-color: #3d5166; }
         .tag-fade { background: #5a2430; color: #ffd0d6; }
         .tag-exp { background: transparent; color: var(--text-color); border-color: var(--border-color); font-weight: 650; }
+        .tag-under { background: #7dffa3; color: #062214; }
+        .tag-sunder { background: #b8ffd0; color: #062214; }
+        .tag-proper { background: #7db7ff; color: #041428; }
+        .tag-sover { background: #f5d76e; color: #1b1403; }
+        .tag-over { background: #5a2430; color: #ffd0d6; }
         .cs-name-btn {
             background: none;
             border: none;
@@ -2515,6 +2520,7 @@
         <div class="workspace-tabs" id="workspaceTabs" role="tablist">
             <button type="button" class="workspace-tab active" id="tabBtnBuilder" onclick="switchWorkspace('builder')">⚙️ Builder</button>
             <button type="button" class="workspace-tab" id="tabBtnCheat" onclick="switchWorkspace('cheat')">📋 Cheat Sheet</button>
+            <button type="button" class="workspace-tab" id="tabBtnLev" onclick="switchWorkspace('leverage')">⚖️ Ownership Leverage</button>
             <button type="button" class="workspace-tab" id="tabBtnPreview" onclick="switchWorkspace('preview')">🏈 Game Preview</button>
             <button type="button" class="workspace-tab" id="tabBtnSlate" onclick="switchWorkspace('slate')">🛰️ Slate Preview</button>
             <button type="button" class="workspace-tab" id="tabBtnStacks" onclick="switchWorkspace('stacks')">🔗 Stacks Lab</button>
@@ -3335,6 +3341,53 @@
                 <button type="button" class="ghost" onclick="closeCsDrawer()">✕</button>
             </div>
             <div class="cs-drawer-body" id="csDrawerBody"></div>
+        </div>
+
+        <div id="panelLeverage" class="workspace-panel" hidden>
+            <div class="card">
+                <div class="card-body">
+                    <div class="cs-hero">
+                        <div>
+                            <h2>Ownership Leverage</h2>
+                            <p class="cs-note" style="margin:0;">Proj vs salary-implied FP vs what ownership at the position says they should score. Floor = expected FP given that own%.</p>
+                        </div>
+                    </div>
+                    <div class="cs-kpis" id="levKpis"></div>
+                    <div class="cs-toolbar">
+                        <div>
+                            <label>Search</label>
+                            <input type="text" id="levSearch" placeholder="Player or team…" oninput="renderLeverage()">
+                        </div>
+                        <div>
+                            <label>Position</label>
+                            <select id="levPos" onchange="renderLeverage()">
+                                <option value="">All skill</option>
+                                <option value="QB">QB</option>
+                                <option value="RB">RB</option>
+                                <option value="WR">WR</option>
+                                <option value="TE">TE</option>
+                                <option value="DST">DST</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Tag</label>
+                            <select id="levTag" onchange="renderLeverage()">
+                                <option value="">All</option>
+                                <option value="Under-owned">Under-owned</option>
+                                <option value="Slightly under-valued">Slightly under-valued</option>
+                                <option value="Properly owned">Properly owned</option>
+                                <option value="Slightly over-valued">Slightly over-valued</option>
+                                <option value="Over-valued">Over-valued</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Min Own %</label>
+                            <input type="number" id="levMinOwn" value="0" step="1" oninput="renderLeverage()">
+                        </div>
+                    </div>
+                    <div id="levMain"></div>
+                </div>
+            </div>
         </div>
 
                 <div id="panelPreview" class="workspace-panel" hidden>
@@ -4190,6 +4243,7 @@
             const panels = {
                 builder: 'panelBuilder',
                 cheat: 'panelCheat',
+                leverage: 'panelLeverage',
                 preview: 'panelPreview',
                 slate: 'panelSlate',
                 stacks: 'panelStacks'
@@ -4197,6 +4251,7 @@
             const buttons = {
                 builder: 'tabBtnBuilder',
                 cheat: 'tabBtnCheat',
+                leverage: 'tabBtnLev',
                 preview: 'tabBtnPreview',
                 slate: 'tabBtnSlate',
                 stacks: 'tabBtnStacks'
@@ -4210,10 +4265,15 @@
             });
             const sticky = document.getElementById('stickyRunBar');
             if (sticky) sticky.style.display = which === 'builder' ? '' : 'none';
-            if (which === 'stacks' && typeof refreshStacksLab === 'function') refreshStacksLab();
-            if (which === 'cheat' && typeof renderCheatSheet === 'function') renderCheatSheet();
-            if (which === 'preview' && typeof renderGamePreview === 'function') renderGamePreview();
-            if (which === 'slate' && typeof renderSlatePreview === 'function') renderSlatePreview();
+            try {
+                if (which === 'stacks' && typeof refreshStacksLab === 'function') refreshStacksLab();
+                if (which === 'cheat' && typeof renderCheatSheet === 'function') renderCheatSheet();
+                if (which === 'leverage' && typeof renderLeverage === 'function') renderLeverage();
+                if (which === 'preview' && typeof renderGamePreview === 'function') renderGamePreview();
+                if (which === 'slate' && typeof renderSlatePreview === 'function') renderSlatePreview();
+            } catch (err) {
+                console.warn('Workspace render failed', which, err);
+            }
         }
 
         function slOwnBand(own) {
@@ -7631,15 +7691,23 @@
 
             document.getElementById('poolCount').textContent = `(${filteredData.filter(p => !deselectedPlayers.has(p.displayName)).length} active)`;
             const stacksPanel = document.getElementById('panelStacks');
-            if (stacksPanel && !stacksPanel.hidden && typeof refreshStacksLab === 'function') {
-                refreshStacksLab();
-            }
-            const cheatPanel = document.getElementById('panelCheat');
-            if (cheatPanel && !cheatPanel.hidden && typeof renderCheatSheet === 'function') renderCheatSheet();
-            const previewPanel = document.getElementById('panelPreview');
-            if (previewPanel && !previewPanel.hidden && typeof renderGamePreview === 'function') renderGamePreview();
-            const slatePanel = document.getElementById('panelSlate');
-            if (slatePanel && !slatePanel.hidden && typeof renderSlatePreview === 'function') renderSlatePreview();
+            try { if (stacksPanel && !stacksPanel.hidden && typeof refreshStacksLab === 'function') refreshStacksLab(); } catch (e) { console.warn(e); }
+            try {
+                const cheatPanel = document.getElementById('panelCheat');
+                if (cheatPanel && !cheatPanel.hidden && typeof renderCheatSheet === 'function') renderCheatSheet();
+            } catch (e) { console.warn(e); }
+            try {
+                const levPanel = document.getElementById('panelLeverage');
+                if (levPanel && !levPanel.hidden && typeof renderLeverage === 'function') renderLeverage();
+            } catch (e) { console.warn(e); }
+            try {
+                const previewPanel = document.getElementById('panelPreview');
+                if (previewPanel && !previewPanel.hidden && typeof renderGamePreview === 'function') renderGamePreview();
+            } catch (e) { console.warn(e); }
+            try {
+                const slatePanel = document.getElementById('panelSlate');
+                if (slatePanel && !slatePanel.hidden && typeof renderSlatePreview === 'function') renderSlatePreview();
+            } catch (e) { console.warn(e); }
         }
 
         function toggleDeselect(name) {
@@ -10521,6 +10589,8 @@
             return { pos, sal, proj, valueX, passAtt, rushAtt, rushYds, rec, tgt, rushTd, recTd, passTd, atd, xTD, pTD, opps, effVol, dual, spread, fav, ou, impl };
         }
         function cashTagPlayer(p) {
+            if (!p) return { primary: 'Playable', exposure: 'Mid Exposure', reason: '', role: '', metrics: cashMetrics({}) };
+            try {
             const m = cashMetrics(p);
             const pos = m.pos;
             if (p.cashTag && p.cashReason && p._cashLocked) return p.cashTagPack;
@@ -10662,6 +10732,10 @@
             p.cashOpps = m.opps;
             p.cashPack = pack;
             return pack;
+            } catch (err) {
+                console.warn('cashTagPlayer', err);
+                return { primary: 'Playable', exposure: 'Mid Exposure', reason: '', role: '', metrics: cashMetrics(p || {}) };
+            }
         }
         function cashTagClass(tag) {
             if (tag === 'Extreme Core') return 'tag-extreme';
@@ -10670,6 +10744,166 @@
             if (tag === 'Core Value') return 'tag-value';
             if (tag === 'Fade') return 'tag-fade';
             return 'tag-play';
+        }
+        let levCache = new Map();
+        function levImplFp(p) {
+            const sheet = Number(p.impliedFP);
+            if (Number.isFinite(sheet) && sheet > 0) return sheet;
+            const sal = csSal(p);
+            return sal > 0 ? (sal / 1000) * 3 : 0;
+        }
+        function levPriceFp(p) {
+            const sal = csSal(p);
+            return sal > 0 ? (sal / 1000) * 3 : 0;
+        }
+        function fitOwnToFp(rows) {
+            const pts = rows.map(p => ({ o: Number(p.ownership) || 0, f: csFp(p) }));
+            const n = pts.length;
+            if (n < 3) return null;
+            let sumO = 0, sumF = 0, sumOO = 0, sumOF = 0;
+            pts.forEach(pt => { sumO += pt.o; sumF += pt.f; sumOO += pt.o * pt.o; sumOF += pt.o * pt.f; });
+            const den = n * sumOO - sumO * sumO;
+            if (Math.abs(den) < 1e-6) return null;
+            const b = (n * sumOF - sumO * sumF) / den;
+            const a = (sumF / n) - b * (sumO / n);
+            if (!Number.isFinite(a) || !Number.isFinite(b) || b < 0) return null;
+            return { a, b };
+        }
+        function quantileFp(rows, own) {
+            const sorted = rows.slice().sort((a, b) => (Number(a.ownership) || 0) - (Number(b.ownership) || 0));
+            if (!sorted.length) return 0;
+            if (own <= (Number(sorted[0].ownership) || 0)) return csFp(sorted[0]);
+            if (own >= (Number(sorted[sorted.length - 1].ownership) || 0)) return csFp(sorted[sorted.length - 1]);
+            for (let i = 1; i < sorted.length; i++) {
+                const o0 = Number(sorted[i - 1].ownership) || 0;
+                const o1 = Number(sorted[i].ownership) || 0;
+                if (own <= o1) {
+                    const t = o1 === o0 ? 1 : (own - o0) / (o1 - o0);
+                    return csFp(sorted[i - 1]) + t * (csFp(sorted[i]) - csFp(sorted[i - 1]));
+                }
+            }
+            return csFp(sorted[sorted.length - 1]);
+        }
+        function buildLeverageRows(pool) {
+            levCache = new Map();
+            const groups = {};
+            pool.forEach(p => {
+                const pos = csPos(p);
+                if (!groups[pos]) groups[pos] = [];
+                groups[pos].push(p);
+            });
+            const out = [];
+            Object.keys(groups).forEach(pos => {
+                const rows = groups[pos].filter(p => csFp(p) > 0 || (Number(p.ownership) || 0) > 0);
+                const posOwn = rows.reduce((s, p) => s + (Number(p.ownership) || 0), 0);
+                const fit = fitOwnToFp(rows);
+                const edges = [];
+                const tmp = rows.map(p => {
+                    const own = Number(p.ownership) || 0;
+                    const proj = csFp(p);
+                    const impl = levImplFp(p);
+                    const price = levPriceFp(p);
+                    const expected = fit ? (fit.a + fit.b * own) : quantileFp(rows, own);
+                    const floor = Math.max(0, expected);
+                    const edge = proj - floor;
+                    const vsImpl = proj - impl;
+                    const ownShare = posOwn > 0 ? (own / posOwn) * 100 : 0;
+                    edges.push(edge);
+                    return { p, pos, own, proj, impl, price, expected: floor, edge, vsImpl, ownShare, posOwn };
+                });
+                const mean = edges.length ? edges.reduce((s, v) => s + v, 0) / edges.length : 0;
+                const sd = Math.sqrt(edges.reduce((s, v) => s + (v - mean) * (v - mean), 0) / Math.max(1, edges.length)) || 1;
+                tmp.forEach(rec => {
+                    const z = rec.edge / sd;
+                    let tag = 'Properly owned';
+                    if (z >= 0.75) tag = 'Under-owned';
+                    else if (z >= 0.25) tag = 'Slightly under-valued';
+                    else if (z <= -0.75) tag = 'Over-valued';
+                    else if (z <= -0.25) tag = 'Slightly over-valued';
+                    if (tag === 'Properly owned' && rec.own >= 20 && rec.vsImpl <= -1.5) tag = 'Slightly over-valued';
+                    if (tag === 'Properly owned' && rec.own < 8 && rec.edge >= 1.2) tag = 'Slightly under-valued';
+                    rec.z = z;
+                    rec.tag = tag;
+                    rec.reason = `${tag}: proj ${rec.proj.toFixed(1)} vs own-expected ${rec.expected.toFixed(1)} (${rec.edge >= 0 ? '+' : ''}${rec.edge.toFixed(1)}) · impl ${rec.impl.toFixed(1)} · ${rec.own.toFixed(1)}% of ${rec.pos} pool ${rec.ownShare.toFixed(1)}%`;
+                    levCache.set(rec.p.displayName, rec);
+                    out.push(rec);
+                });
+            });
+            return out;
+        }
+        function levTagClass(tag) {
+            if (tag === 'Under-owned') return 'tag-under';
+            if (tag === 'Slightly under-valued') return 'tag-sunder';
+            if (tag === 'Properly owned') return 'tag-proper';
+            if (tag === 'Slightly over-valued') return 'tag-sover';
+            return 'tag-over';
+        }
+        function levFor(p) {
+            if (!p) return null;
+            if (levCache.has(p.displayName)) return levCache.get(p.displayName);
+            buildLeverageRows(csSourcePool());
+            return levCache.get(p.displayName) || null;
+        }
+        function renderLeverage() {
+            const root = document.getElementById('levMain');
+            const kpis = document.getElementById('levKpis');
+            if (!root) return;
+            try {
+            const pool = csSourcePool().filter(p => !deselectedPlayers.has(p.displayName));
+            const recs = buildLeverageRows(pool);
+            const q = String(document.getElementById('levSearch')?.value || '').trim().toLowerCase();
+            const pos = document.getElementById('levPos')?.value || '';
+            const tagWant = document.getElementById('levTag')?.value || '';
+            const minOwn = parseFloat(document.getElementById('levMinOwn')?.value) || 0;
+            const rows = recs.filter(r => {
+                if (pos && r.pos !== pos) return false;
+                if (tagWant && r.tag !== tagWant) return false;
+                if (r.own < minOwn) return false;
+                if (q) {
+                    const blob = (csName(r.p) + ' ' + (r.p.Team || '') + ' ' + r.tag).toLowerCase();
+                    if (!blob.includes(q)) return false;
+                }
+                if (['K'].includes(r.pos) && !pos) return false;
+                return ['QB','RB','WR','TE','DST'].includes(r.pos) || !!pos;
+            }).sort((a, b) => b.edge - a.edge);
+            const under = recs.filter(r => r.tag === 'Under-owned').sort((a,b)=>b.edge-a.edge)[0];
+            const over = recs.filter(r => r.tag === 'Over-valued').sort((a,b)=>a.edge-b.edge)[0];
+            const chalk = recs.slice().sort((a,b)=>b.own-a.own)[0];
+            if (kpis) {
+                kpis.innerHTML = `
+                    <div class="cs-kpi"><div class="k">Players</div><div class="v">${rows.length}</div></div>
+                    <div class="cs-kpi"><div class="k">Best leverage</div><div class="v">${under ? csEsc(csName(under.p)) : '—'}</div><div class="cs-sub">${under ? '+' + under.edge.toFixed(1) + ' vs own-exp' : ''}</div></div>
+                    <div class="cs-kpi"><div class="k">Most over-valued</div><div class="v">${over ? csEsc(csName(over.p)) : '—'}</div><div class="cs-sub">${over ? over.edge.toFixed(1) + ' vs own-exp' : ''}</div></div>
+                    <div class="cs-kpi"><div class="k">Highest own</div><div class="v">${chalk ? csEsc(csName(chalk.p)) : '—'}</div><div class="cs-sub">${chalk ? chalk.own.toFixed(1) + '%' : ''}</div></div>`;
+            }
+            const body = rows.map((r, i) => `<tr>
+                <td class="num">${i+1}</td>
+                <td><button type="button" class="cs-name-btn" onclick="openCsDrawer('${csArg(r.p.displayName)}')">${csEsc(csName(r.p))}</button></td>
+                <td>${r.pos}</td>
+                <td>${csEsc(r.p.Team || '')}</td>
+                <td><span class="cs-tag ${levTagClass(r.tag)}">${r.tag}</span></td>
+                <td class="num">${r.own.toFixed(1)}%</td>
+                <td class="num">${r.ownShare.toFixed(1)}%</td>
+                <td class="num">${r.proj.toFixed(1)}</td>
+                <td class="num">${r.impl.toFixed(1)}</td>
+                <td class="num">${r.price.toFixed(1)}</td>
+                <td class="num">${r.expected.toFixed(1)}</td>
+                <td class="num" style="font-weight:700;color:${r.edge>=0.25?'#7dffa3':r.edge<=-0.25?'#ff8a96':'inherit'}">${r.edge>=0?'+':''}${r.edge.toFixed(1)}</td>
+                <td class="num">${r.vsImpl>=0?'+':''}${r.vsImpl.toFixed(1)}</td>
+            </tr>`).join('');
+            root.innerHTML = `<div class="cs-table-wrap"><table id="levTable">
+                <thead><tr>
+                    <th>#</th><th>Player</th><th>Pos</th><th>Team</th><th>Tag</th>
+                    <th>Own</th><th>Pos share</th><th>Proj</th><th>Impl FP</th><th>3x Sal</th>
+                    <th>Own-exp FP</th><th>Edge</th><th>vs Impl</th>
+                </tr></thead>
+                <tbody>${body || '<tr><td colspan="13">No players match. Ownership must be loaded for this slate.</td></tr>'}</tbody>
+            </table></div>
+            <p class="cs-note">Own-exp FP is the position regression of Proj ~ Ownership (fallback: ownership quantile). Floor to pay off that own% is Own-exp FP. Impl FP is the Cheat Sheet implied column when present, else 3× salary. Pos share = player own / sum of own at that position.</p>`;
+            } catch (err) {
+                console.warn('Leverage render failed', err);
+                root.innerHTML = '<p class="cs-note">Ownership Leverage hit an error: ' + String(err && err.message || err) + '</p>';
+            }
         }
         function cashPills(p) {
             const pack = cashTagPlayer(p);
@@ -10780,6 +11014,7 @@
             body.innerHTML = `
                 <div class="cs-tag-row">${cashPills(p)}</div>
                 <p class="cs-reason">${csEsc(pack.reason)}</p>
+                ${(() => { const lv = levFor(p); return lv ? `<div class="cs-tag-row"><span class="cs-tag ${levTagClass(lv.tag)}">${lv.tag}</span></div><p class="cs-reason">${csEsc(lv.reason)}</p>` : ''; })()}
                 ${pack.role ? `<p class="cs-note">Role: ${csEsc(pack.role)}</p>` : ''}
                 <div class="cs-stat-grid">${metricBits.map(([k,v]) => `<div class="cs-stat"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('')}</div>
                 ${groups.map(([title, bits]) => `
@@ -10968,7 +11203,8 @@
             const el = document.getElementById('csKpis');
             if (!el) return;
             const games = csGameCount(csSourcePool());
-            const avgImpl = rows.length ? rows.reduce((s,p)=>s+(Number(p.impliedTotal)||0),0)/rows.filter(p=>p.impliedTotal!=null).length : 0;
+            const implRows = rows.filter(p => p.impliedTotal != null);
+            const avgImpl = implRows.length ? implRows.reduce((s,p)=>s+(Number(p.impliedTotal)||0),0)/implRows.length : 0;
             const top = rows.slice().sort((a,b)=>csFp(b)-csFp(a))[0];
             el.innerHTML = `
                 <div class="cs-kpi"><div class="k">Pool</div><div class="v">${rows.length}</div></div>
@@ -11033,6 +11269,7 @@
             const root = document.getElementById('csMain');
             const lab = document.getElementById('csSlateLabel');
             if (!root) return;
+            try {
             try { enrichPlayerMatchups(allSlatePlayers); } catch (e) {}
             try { attachLogInsights(csSourcePool()); } catch (e) {}
             const rows = cheatPool();
@@ -11053,6 +11290,10 @@
                 return;
             }
             root.innerHTML = renderCsTopBoard(rows) + renderCsBoard(rows);
+            } catch (err) {
+                console.warn('Cheat sheet render failed', err);
+                root.innerHTML = '<p class="cs-note">Cheat Sheet hit an error: ' + String(err && err.message || err) + '</p>';
+            }
         }
         function csExportCsv() {
             const rows = csSort(cheatPool());
@@ -11269,6 +11510,7 @@
             const desk = document.getElementById('gamePreviewGrid');
             const lab = document.getElementById('gpSlateLabel');
             if (!rail || !desk) return;
+            try {
             try { enrichPlayerMatchups(allSlatePlayers); } catch (e) {}
             try { attachLogInsights(csSourcePool()); } catch (e) {}
             const games = gpBuildGames();
@@ -11333,6 +11575,10 @@
                 <div class="gp-callouts">${callouts.join('') || '<div class="gp-callout">No recent-form or matchup flags on this game yet.</div>'}</div>
                 <div class="gp-sides">${sides}</div>
             </div>`;
+            } catch (err) {
+                console.warn('Game preview render failed', err);
+                desk.innerHTML = '<p class="cs-note">Game Preview hit an error: ' + String(err && err.message || err) + '</p>';
+            }
         }
 
         function enrichPlayerMatchups(list) {
