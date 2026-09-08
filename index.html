@@ -2197,8 +2197,8 @@
             align-items: center;
         }
         .cs-avatar {
-            width: 56px; height: 56px;
-            border-radius: 12px;
+            width: 72px; height: 72px;
+            border-radius: 14px;
             object-fit: cover;
             object-position: top center;
             background: var(--input-bg);
@@ -3305,13 +3305,19 @@
                         <div>
                             <label>Position</label>
                             <select id="csPos" onchange="renderCheatSheet()">
-                                <option value="">All skill</option>
+                                <option value="">All positions</option>
                                 <option value="QB">QB</option>
                                 <option value="RB">RB</option>
                                 <option value="WR">WR</option>
                                 <option value="TE">TE</option>
                                 <option value="DST">DST</option>
                                 <option value="CPT">Showdown CPT</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Team</label>
+                            <select id="csTeam" onchange="renderCheatSheet()">
+                                <option value="">All teams</option>
                             </select>
                         </div>
                         <div>
@@ -3341,6 +3347,17 @@
                         <button type="button" class="ghost" onclick="csExportCsv()">Export CSV</button>
                     </div>
                     <p class="cs-note" style="margin:0 0 0.65rem;">Click a name for the full week projection (pass/rush/rec lines from the Cheat Sheet), DVP, and game log.</p>
+                    <details class="cs-best" id="csTagHelp"><summary>What the cash tags mean</summary>
+                        <div class="cs-note" style="padding:0.65rem 0.2rem 0.15rem;">
+                            <p><strong>Extreme Core</strong> — highest-confidence cash piece. Usually a workhorse RB with ~20+ opportunities, 2.5x, 50%+ TD chance, and a 6+ point favorite.</p>
+                            <p><strong>Core Play</strong> — safe and projects to pay. Volume bar + 2.5x + script OK.</p>
+                            <p><strong>Safe</strong> — role/volume locked, dud risk low, but may miss 2.5x or sit in a capped script.</p>
+                            <p><strong>Core Value</strong> — cheap enough that a modest line already hits value. Fills salary; not a true core.</p>
+                            <p><strong>Playable</strong> — fine, no special tag.</p>
+                            <p><strong>Fade</strong> — needs a TD, role change, or script flip. Avoid in cash.</p>
+                            <p>Exposure (High / Mid / Low / Zero) is how often you would actually roster him in cash.</p>
+                        </div>
+                    </details>
                     <div id="csMain"></div>
                 </div>
             </div>
@@ -3366,7 +3383,7 @@
                     <div class="cs-hero">
                         <div>
                             <h2>Ownership Leverage</h2>
-                            <p class="cs-note" style="margin:0;">Rank leverage inside the position: own rank vs proj rank. Chalk (25%+ or top-2 owned) cannot be Under-owned. Own-exp FP = the projection that ownership rank usually buys.</p>
+                            <p class="cs-note" style="margin:0;">DK slots: QB 1 · RB 2–3 (FLEX) · WR 3–4 (FLEX) · TE 1–2 (FLEX). Ownership is scaled to an RB-equivalent chalk rate, then priced into FP. 60% RB ≈ 35 own-price. Same raw own% is more expensive at QB than at WR.</p>
                         </div>
                     </div>
                     <div class="cs-kpis" id="levKpis"></div>
@@ -6021,7 +6038,7 @@
                                     impliedTotal,
                                     combinedFP: parseFloat(row['Combined FP']) || 0,
                                     impliedFP: parseFloat(row['Implied FP']) || 0,
-                                    headshot: row['Headshot URL'] || row['Player Image'] || row['Image'] || '',
+                                    headshot: playerHeadshot(row),
                                     proj: parseCheatProj(row),
                                     passYds: pickNum(row, ['Proj Pass Yds','Passing Yards']) || 0,
                                     rushYds: pickNum(row, ['Proj Rush Yds','Rushing Yards']) || 0,
@@ -6608,8 +6625,8 @@
                     passYds: row.passYds, rushYds: row.rushYds, recYds: row.recYds,
                     rushRecYds: row.rushRecYds, passTds: row.passTds, passAtt: row.passAtt,
                     atd: row.atd, combinedFP: row.combinedFP, impliedFP: row.impliedFP,
-                    headshot: row.headshot || '',
-                    proj: row.proj || parseCheatProj(row)
+                    headshot: playerHeadshot(row) || row.headshot || '',
+                    proj: parseCheatProj(row)
                 };
             });
             try { applySlateMatchups(allSlatePlayers); } catch (e) { console.warn(e); }
@@ -10438,10 +10455,25 @@
 
 
 
-        function pickNum(row, keys) {
+        function playerHeadshot(row) {
+            if (!row) return '';
+            const keys = ['headshot', 'Headshot URL', 'HeadshotURL', 'Player Image', 'Image', 'photo', 'Photo'];
             for (const k of keys) {
-                if (!row || row[k] == null || row[k] === '') continue;
-                const n = parseFloat(row[k]);
+                const v = row[k];
+                if (v && String(v).trim().startsWith('http')) return String(v).trim();
+            }
+            const hit = Object.keys(row).find(k => /headshot|player image/i.test(k) && String(row[k]||'').startsWith('http'));
+            return hit ? String(row[hit]).trim() : '';
+        }
+        function pickNum(row, keys) {
+            if (!row) return null;
+            const norm = k => String(k || '').toLowerCase().replace(/[%]/g, 'pct').replace(/[^a-z0-9]+/g, ' ').trim();
+            const map = {};
+            Object.keys(row).forEach(k => { map[norm(k)] = row[k]; });
+            for (const k of keys) {
+                const v = (row[k] != null && row[k] !== '') ? row[k] : map[norm(k)];
+                if (v == null || v === '') continue;
+                const n = parseFloat(v);
                 if (Number.isFinite(n)) return n;
             }
             return null;
@@ -10897,6 +10929,27 @@
             }
             return csFp(sorted[sorted.length - 1]);
         }
+        const DK_POS_SLOTS = {
+            QB: { min: 1, max: 1, budget: 100 },
+            RB: { min: 2, max: 3, budget: 250 },
+            WR: { min: 3, max: 4, budget: 340 },
+            TE: { min: 1, max: 2, budget: 130 },
+            DST: { min: 1, max: 1, budget: 100 },
+            K: { min: 1, max: 1, budget: 100 }
+        };
+        function posSlots(pos) {
+            return DK_POS_SLOTS[pos] || { min: 1, max: 1, budget: 100 };
+        }
+        function slotAdjOwn(own, pos) {
+            const max = posSlots(pos).max || 1;
+            return (Number(own) || 0) * (3 / max);
+        }
+        function ownPayoffFp(own, pos) {
+            const adj = Math.min(80, slotAdjOwn(own, pos));
+            const offset = { QB: 3, RB: 0, WR: -1.5, TE: -3.5, DST: -5, K: -4 }[pos] || 0;
+            const raw = 12 + 0.20 * adj + 0.0030 * adj * adj;
+            return Math.round((raw + offset) * 10) / 10;
+        }
         function buildLeverageRows(pool) {
             levCache = new Map();
             const groups = {};
@@ -10909,6 +10962,7 @@
             Object.keys(groups).forEach(pos => {
                 const rows = groups[pos].filter(p => csFp(p) > 0);
                 if (!rows.length) return;
+                const slots = posSlots(pos);
                 const tmp = rows.map(p => {
                     const own = Number(p.ownership) || 0;
                     const proj = csFp(p);
@@ -10917,42 +10971,35 @@
                     const impl = levImplFp(p);
                     const price = levPriceFp(p);
                     const cashFloor = sal > 0 ? (sal / 1000) * 2.5 : 0;
-                    return { p, pos, own, proj, impl, price, cashFloor, valueX };
+                    const adjOwn = slotAdjOwn(own, pos);
+                    const payoff = ownPayoffFp(own, pos);
+                    const budgetShare = slots.budget > 0 ? (own / slots.budget) * 100 : own;
+                    return { p, pos, own, adjOwn, proj, impl, price, cashFloor, valueX, payoff, slots, budgetShare };
                 });
                 const n = tmp.length;
                 const byProj = tmp.slice().sort((a, b) => b.proj - a.proj || csSal(b.p) - csSal(a.p));
                 const byOwn = tmp.slice().sort((a, b) => b.own - a.own || b.proj - a.proj);
-                byProj.forEach((r, i) => { r.projRank = i + 1; r.projPct = n === 1 ? 1 : 1 - (i / (n - 1)); });
-                byOwn.forEach((r, i) => { r.ownRank = i + 1; r.ownPct = n === 1 ? 1 : 1 - (i / (n - 1)); });
-                const owns = tmp.map(r => r.own);
-                const maxOwn = Math.max(...owns);
-                const minOwn = Math.min(...owns);
+                byProj.forEach((r, i) => { r.projRank = i + 1; });
+                byOwn.forEach((r, i) => { r.ownRank = i + 1; });
                 tmp.forEach(rec => {
-                    rec.expOwn = minOwn + rec.projPct * (maxOwn - minOwn);
-                    rec.ownGap = rec.own - rec.expOwn;
-                    rec.expected = rec.proj;
-                    const peer = byProj[Math.min(n, rec.ownRank) - 1];
-                    rec.expected = peer ? peer.proj : rec.proj;
-                    rec.edge = rec.proj - rec.expected;
-                    rec.levScore = Math.round((rec.projPct - rec.ownPct) * 100);
+                    rec.expected = rec.payoff;
+                    rec.expOwn = rec.payoff;
+                    rec.ownGap = rec.proj - rec.payoff;
+                    rec.edge = rec.proj - rec.payoff;
+                    rec.vsImpl = rec.proj - rec.impl;
+                    rec.levScore = Math.round(rec.edge * 10) / 10;
                     rec.ownShare = rec.own;
+                    const chalk = rec.adjOwn >= 25 || rec.own >= 25;
                     let tag = 'Properly owned';
-                    const chalk = rec.own >= 25 || rec.ownRank <= 2;
-                    if (chalk) {
-                        if (rec.ownGap >= 8 || rec.projRank >= 5) tag = 'Over-valued';
-                        else if (rec.ownGap >= 3 || rec.projRank >= 3) tag = 'Slightly over-valued';
-                        else tag = 'Properly owned';
-                    } else if (rec.ownGap <= -12 && rec.valueX >= 2 && rec.projRank <= Math.max(6, Math.round(n * 0.25))) {
-                        tag = 'Under-owned';
-                    } else if (rec.ownGap <= -6 && rec.valueX >= 1.8) {
-                        tag = 'Slightly under-valued';
-                    } else if (rec.ownGap >= 10 || (rec.own >= 15 && rec.projRank >= 8)) {
-                        tag = 'Over-valued';
-                    } else if (rec.ownGap >= 4) {
-                        tag = 'Slightly over-valued';
-                    }
+                    if (chalk && rec.edge <= -8) tag = 'Over-valued';
+                    else if (chalk && rec.edge <= -4) tag = 'Slightly over-valued';
+                    else if (rec.edge <= -8) tag = 'Over-valued';
+                    else if (rec.edge <= -3) tag = 'Slightly over-valued';
+                    else if (rec.edge >= 4 && rec.adjOwn < 18 && rec.valueX >= 2) tag = 'Under-owned';
+                    else if (rec.edge >= 2 && rec.adjOwn < 22) tag = 'Slightly under-valued';
+                    else tag = 'Properly owned';
                     rec.tag = tag;
-                    rec.reason = `${tag}: proj #${rec.projRank} (${rec.proj.toFixed(1)}) should own ~${rec.expOwn.toFixed(1)}%, actual ${rec.own.toFixed(1)}% (${rec.ownGap >= 0 ? '+' : ''}${rec.ownGap.toFixed(1)}) · ${rec.valueX.toFixed(2)}x`;
+                    rec.reason = `${tag}: ${rec.own.toFixed(1)}% own on ${rec.slots.min}–${rec.slots.max} ${rec.pos} slots (adj ${rec.adjOwn.toFixed(0)}%) prices ${rec.payoff.toFixed(1)} FP · proj ${rec.proj.toFixed(1)} · impl ${rec.impl.toFixed(1)} (${rec.edge >= 0 ? '+' : ''}${rec.edge.toFixed(1)} vs own-price)`;
                     levCache.set(rec.p.displayName, rec);
                     out.push(rec);
                 });
@@ -10998,8 +11045,8 @@
             const cap = Number(window.levRowCap) > 0 ? Number(window.levRowCap) : 80;
             rows = rows.slice(0, cap);
             const skill = recs.filter(r => ['QB','RB','WR','TE'].includes(r.pos));
-            const under = skill.filter(r => r.own < 20 && r.valueX >= 2).sort((a,b)=>b.levScore-a.levScore || b.edge-a.edge)[0];
-            const chalkTraps = skill.filter(r => r.own >= 15).sort((a,b)=>a.levScore-b.levScore || a.edge-b.edge);
+            const under = skill.filter(r => r.own < 20 && r.valueX >= 2).sort((a,b)=>b.edge-a.edge)[0];
+            const chalkTraps = skill.filter(r => r.own >= 15).sort((a,b)=>a.edge-b.edge);
             const over = chalkTraps[0];
             const chalk = skill.slice().sort((a,b)=>b.own-a.own)[0];
             if (kpis) {
@@ -11016,13 +11063,13 @@
                 <td>${csEsc(r.p.Team || '')}</td>
                 <td><span class="cs-tag ${levTagClass(r.tag)}">${r.tag}</span></td>
                 <td class="num">${r.own.toFixed(1)}%</td>
-                <td class="num">${(r.expOwn||0).toFixed(1)}%</td>
-                <td class="num" style="font-weight:700;color:${(r.ownGap||-0)<=-6?'#7dffa3':(r.ownGap||0)>=6?'#ff8a96':'inherit'}">${(r.ownGap||0)>0?'+':''}${(r.ownGap||0).toFixed(1)}</td>
-                <td class="num">${r.ownRank}</td>
-                <td class="num">${r.projRank}</td>
-                <td class="num">${r.levScore>0?'+':''}${r.levScore}</td>
+                <td class="num">${(r.adjOwn||0).toFixed(1)}%</td>
+                <td class="num">${r.slots.min}–${r.slots.max}</td>
+                <td class="num">${r.payoff.toFixed(1)}</td>
                 <td class="num">${r.proj.toFixed(1)}</td>
-                <td class="num">${r.cashFloor.toFixed(1)}</td>
+                <td class="num">${r.impl.toFixed(1)}</td>
+                <td class="num" style="font-weight:700;color:${r.edge>=2?'#7dffa3':r.edge<=-4?'#ff8a96':'inherit'}">${r.edge>=0?'+':''}${r.edge.toFixed(1)}</td>
+                <td class="num">${r.vsImpl>=0?'+':''}${Number(r.vsImpl||0).toFixed(1)}</td>
                 <td class="num">${r.valueX.toFixed(2)}x</td>
             </tr>`).join('');
             const chalkBoard = skill.filter(r => r.own >= 15).sort((a,b)=>a.levScore-b.levScore).slice(0, 8);
@@ -11031,7 +11078,7 @@
                 <span class="n">${i+1}</span><span class="nm">${csEsc(csName(r.p))}</span>
                 <span class="meta">${r.pos} · ${r.own.toFixed(1)}% own · proj #${r.projRank} · lev ${r.levScore>0?'+':''}${r.levScore}</span>
             </button>`;
-            rows = rows.slice().sort((a,b) => (a.ownGap - b.ownGap) || (b.levScore - a.levScore));
+            rows = rows.slice().sort((a,b) => (a.edge - b.edge));
             root.innerHTML = `
             <details class="cs-best"><summary>Most over-valued among chalk (15%+ own)</summary>
                 <div class="cs-top-board"><div class="cs-top-col"><div class="k">Chalk traps</div><div class="chips">${chalkBoard.map(boardRow).join('') || '<span class="cs-sub">No 15%+ names</span>'}</div></div></div>
@@ -11041,15 +11088,26 @@
             </details>
             <div class="cs-table-wrap"><table id="levTable">
                 <thead><tr>
-                    <th>#</th><th>Player</th><th>Pos</th><th>Team</th><th>Tag</th>
-                    <th>Own</th><th>Exp own</th><th>Gap</th><th>Own rk</th><th>Proj rk</th><th>Lev</th>
-                    <th>Proj</th><th>2.5x</th><th>Val</th>
+                    <th title="Row number">#</th>
+                    <th title="Player name">Player</th>
+                    <th title="DraftKings position">Pos</th>
+                    <th title="Team">Team</th>
+                    <th title="Leverage tag from own-price vs projection">Tag</th>
+                    <th title="Projected ownership percent">Own</th>
+                    <th title="Ownership scaled to RB baseline: raw own times 3 / max slots">Adj own</th>
+                    <th title="Dedicated to max roster spots including FLEX">Slots</th>
+                    <th title="Fantasy points this ownership is paying for. RB 60 percent is about 35">Own-price</th>
+                    <th title="Cheat Sheet projected fantasy points">Proj</th>
+                    <th title="Implied or salary-based FP">Impl</th>
+                    <th title="Proj minus own-price. Negative means cannot pay off that own percent">vs Own</th>
+                    <th title="Proj minus implied FP">vs Impl</th>
+                    <th title="Proj divided by salary per 1000">Val</th>
                 </tr></thead>
                 <tbody>${body || '<tr><td colspan="13">No players match. Ownership must be loaded for this slate.</td></tr>'}
                 ${allRows.length > rows.length ? `<tr><td colspan="13"><button type="button" class="ghost" onclick="window.levRowCap=${rows.length+80};renderLeverage();">Show more (${rows.length} of ${allRows.length})</button></td></tr>` : ''}
                 </tbody>
             </table></div>
-            <p class="cs-note">Lev = ownership rank − projection rank at that position. Positive = owned less than the projection deserves. Own-exp is the Nth-best projection, where N is the player’s ownership rank. 25%+ or top-2 owned names are chalk and cannot be tagged Under-owned. Stacks live in Stacks Lab.</p>`;
+            <p class="cs-note">Adj own = raw own × (3 / max slots) so RB is the baseline. QB 20% ≈ RB 60% chalk. Own-price uses that adjusted rate (RB 60% ≈ 35 FP). vs Own = Proj − own-price. Field budgets assume FLEX split ~RB 50% / WR 40% / TE 10%. Stacks live in Stacks Lab.</p>`;
             } catch (err) {
                 console.warn('Leverage render failed', err);
                 root.innerHTML = '<p class="cs-note">Ownership Leverage hit an error: ' + String(err && err.message || err) + '</p>';
@@ -11125,6 +11183,10 @@
             const back = document.getElementById('csDrawerBackdrop');
             const body = document.getElementById('csDrawerBody');
             if (!drawer || !body || !p) return;
+            if (!p.proj || (p.proj.rushAtt == null && p.proj.tgt == null && p.proj.passAtt == null && p.proj.rec == null)) {
+                p.proj = parseCheatProj(p);
+            }
+            if (!p.headshot) p.headshot = playerHeadshot(p);
             document.getElementById('csDrawerTitle').textContent = csName(p);
             const pack = cashTagPlayer(p);
             const m = pack.metrics;
@@ -11132,7 +11194,7 @@
             document.getElementById('csDrawerSub').textContent = `${csPos(p)} · ${p.Team||''} vs ${csOpp(p)||'—'} · $${csSal(p)}`;
             const shot = document.getElementById('csDrawerHeadshot');
             if (shot) {
-                const url = p.headshot || '';
+                const url = playerHeadshot(p) || p.headshot || '';
                 if (url) {
                     shot.src = url;
                     shot.alt = csName(p);
@@ -11161,9 +11223,11 @@
                 ['O/U', m.ou != null ? m.ou.toFixed(1) : '—'],
                 ['Impl Tot', m.impl != null ? m.impl.toFixed(1) : '—']
             ].filter(Boolean);
+            const line = weekLine(p) || '';
             body.innerHTML = `
                 <div class="cs-tag-row">${cashPills(p)}</div>
                 <p class="cs-reason">${csEsc(pack.reason)}</p>
+                ${line ? `<p class="cs-note">Week line: ${csEsc(line)}</p>` : ''}
                 ${(() => { const lv = levFor(p); return lv ? `<div class="cs-tag-row"><span class="cs-tag ${levTagClass(lv.tag)}">${lv.tag}</span></div><p class="cs-reason">${csEsc(lv.reason)}</p>` : ''; })()}
                 ${pack.role ? `<p class="cs-note">Role: ${csEsc(pack.role)}</p>` : ''}
                 <div class="cs-stat-grid">${metricBits.map(([k,v]) => `<div class="cs-stat"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('')}</div>
@@ -11250,8 +11314,10 @@
             const minVal = parseFloat(document.getElementById('csMinVal')?.value) || 0;
             const hideZero = document.getElementById('csHideZero')?.checked !== false;
             const tagWant = document.getElementById('csTag')?.value || '';
+            const teamWant = document.getElementById('csTeam')?.value || '';
             const list = csSourcePool().filter(p => {
                 if (deselectedPlayers.has(p.displayName)) return false;
+                if (teamWant && String(p.Team || '') !== teamWant) return false;
                 if (tagWant) {
                     const pack = cashTagPlayer(p);
                     if (tagWant === 'coreish' && !['Extreme Core','Core Play'].includes(pack.primary)) return false;
@@ -11388,7 +11454,7 @@
             const sortedAll = csSort(rows);
             const cap = Number(window.csRowCap) > 0 ? Number(window.csRowCap) : 80;
             const sorted = sortedAll.slice(0, cap);
-            const th = (key, label) => `<th style="cursor:pointer;" onclick="csSortKey='${key}';csSortDir=csSortKey==='${key}'&&csSortDir==='desc'?'asc':'desc';renderCheatSheet();">${label}</th>`;
+            const th = (key, label, tip) => `<th style="cursor:pointer;" title="${String(tip||'').replace(/"/g,'&quot;')}" onclick="csSortKey='${key}';csSortDir=csSortKey==='${key}'&&csSortDir==='desc'?'asc':'desc';renderCheatSheet();">${label}</th>`;
             const body = sorted.map((p, i) => {
                 const impl = p.impliedTotal != null ? Number(p.impliedTotal).toFixed(1) : '';
                 const stackBtn = csPos(p)==='QB'
@@ -11397,13 +11463,19 @@
                         ? `<button type="button" class="ghost" style="padding:0.15rem 0.4rem;font-size:0.7rem;" onclick="csFinishStack('${csArg(p.displayName)}', false)">Add</button>`
                         : '');
                 const dvp = dvpFor(p);
-                const line = weekLine(p) || (csPos(p)==='QB'
-                    ? `${Number(p.passYds||0).toFixed(0)} pyd`
-                    : `${Number(p.rushYds||0).toFixed(0)} ru / ${Number(p.recYds||0).toFixed(0)} rec`);
+                if (!p.proj || (p.proj.rushAtt == null && p.proj.tgt == null && p.proj.passAtt == null && p.proj.rec == null)) {
+                    p.proj = parseCheatProj(p);
+                }
+                const line = weekLine(p) || '';
                 const last3 = p.last3Avg != null ? p.last3Avg.toFixed(1) : '—';
+                const pack = cashTagPlayer(p);
                 return `<tr>
                     <td class="num">${i+1}</td>
-                    <td><button type="button" class="cs-name-btn" onclick="openCsDrawer('${csArg(p.displayName)}')">${csEsc(csName(p))}</button> ${stackBtn}</td>
+                    <td>
+                        <button type="button" class="cs-name-btn" onclick="openCsDrawer('${csArg(p.displayName)}')">${csEsc(csName(p))}</button>
+                        <div class="cs-tag-row">${cashPills(p)}</div>
+                        ${stackBtn}
+                    </td>
                     <td>${csEsc(csPos(p))}</td>
                     <td>${cashPills(p)}</td>
                     <td>${csEsc(p.Team||'')}</td>
@@ -11412,15 +11484,15 @@
                     <td>${dvpPill(dvp)}</td>
                     <td class="num">$${csSal(p)}</td>
                     <td class="num">${csFp(p).toFixed(1)}</td>
-                    <td class="num" title="Pass / rush / rec projection">${csEsc(line)}</td>
-                    <td class="num">${last3}</td>
                     <td class="num"><span class="${valClass(csPtsPerK(p))}">${csPtsPerK(p).toFixed(2)}</span></td>
+                    <td class="num" title="${csEsc(pack.reason || line || '')}">${csEsc(line || '—')}</td>
+                    <td class="num">${last3}</td>
                     <td class="num">${(Number(p.ownership)||0).toFixed(1)}%</td>
                 </tr>`;
             }).join('');
             const banner = csStackPick ? `<p class="cs-note">Stacking from <strong>${csEsc(csStackPick.qbDisplay)}</strong> — click Add on a teammate. <button type="button" class="ghost" onclick="csCancelStack()">Cancel</button></p>` : '';
             return banner + `<div class="cs-table-wrap"><table id="cheatSheetTable">
-                <thead><tr>${th('fp','#')}${th('name','Player')}${th('pos','Pos')}${th('tag','Tag')}${th('team','Team')}${th('opp','Opp')}${th('impl','Impl Tot')}${th('dvp','DVP')}${th('sal','Salary')}${th('fp','Proj')}${th('val','Val')}${th('line','Week line')}${th('l3','L3')}${th('own','Own')}</tr></thead>
+                <thead><tr>${th('fp','#','Row number after current sort')}${th('name','Player','Name plus cash tag and exposure')}${th('pos','Pos','DraftKings position')}${th('tag','Tag','Cash tag from volume, 2.5x, and script')}${th('team','Team','Player team')}${th('opp','Opp','Opponent on this slate')}${th('impl','Impl Tot','Implied team total from O/U and spread')}${th('dvp','DVP','Defense vs this position. 1 = easiest')}${th('sal','Salary','DraftKings salary')}${th('fp','Proj','Cheat Sheet projected fantasy points')}${th('val','Val','Proj divided by salary per 1000. 2.5x is the cash bar')}${th('line','Week line','Position-specific projection line from the Cheat Sheet')}${th('l3','L3','Average DraftKings FP over the last 3 logged games')}${th('own','Own','Projected ownership percent')}</tr></thead>
                 <tbody>${body || '<tr><td colspan="14">No players match filters.</td></tr>'}
                 ${sortedAll.length > sorted.length ? `<tr><td colspan="14"><button type="button" class="ghost" onclick="window.csRowCap=${sorted.length+80};renderCheatSheet();">Show more (${sorted.length} of ${sortedAll.length})</button></td></tr>` : ''}
                 </tbody>
@@ -11435,6 +11507,13 @@
             try { attachLogInsights(csSourcePool()); } catch (e) {}
             const rows = cheatPool();
             if (lab) lab.textContent = (selectedSlate || 'No slate') + ' · implied totals from team O/U and spread (TM/P).';
+            const teamSel = document.getElementById('csTeam');
+            if (teamSel) {
+                const cur = teamSel.value;
+                const teams = [...new Set(csSourcePool().map(p => p.Team).filter(Boolean))].sort();
+                teamSel.innerHTML = '<option value="">All teams</option>' + teams.map(tm => '<option value="'+csEsc(tm)+'">'+csEsc(tm)+'</option>').join('');
+                if (teams.includes(cur)) teamSel.value = cur;
+            }
             renderCsKpis(rows);
             if (csView === 'pos') {
                 const groups = ['QB','RB','WR','TE','DST'];
