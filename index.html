@@ -8194,7 +8194,7 @@
             } else {
                 tr.innerHTML += '<th>QB</th><th>RB1</th><th>RB2</th><th>WR1</th><th>WR2</th><th>WR3</th><th>TE</th><th>FLEX</th><th>DST</th>';
             }
-            tr.innerHTML += '<th>Total Salary</th><th>Total Projected Points</th><th>Total Projected Ownership</th><th title="GPP shape vs 2025 Milly traits">Grade</th>';
+            tr.innerHTML += '<th>Total Salary</th><th>Total Projected Points</th><th>Total Projected Ownership</th>';
         }
 
         function updateLineupTable() {
@@ -8224,7 +8224,7 @@
                     });
                 }
                 const checked = lineupChecked.has(origIdx) ? 'checked' : '';
-                return `<tr data-lineup-idx="${origIdx}"><td><input type="checkbox" class="lineup-check" data-idx="${origIdx}" ${checked} onchange="onLineupCheckChange()"></td><td>${i+1}</td>${cells}<td>${l.totalSalary}</td><td>${l.totalPoints.toFixed(2)}</td><td>${l.totalOwnership.toFixed(1)}%</td><td title="${(l.gppNotes||'').replace(/"/g,'')}">${l.gppGrade || '—'}</td></tr>`;
+                return `<tr data-lineup-idx="${origIdx}"><td><input type="checkbox" class="lineup-check" data-idx="${origIdx}" ${checked} onchange="onLineupCheckChange()"></td><td>${i+1}</td>${cells}<td>${l.totalSalary}</td><td>${l.totalPoints.toFixed(2)}</td><td>${l.totalOwnership.toFixed(1)}%</td></tr>`;
             }).join('');
             updateLineupCheckedCount();
         }
@@ -8445,54 +8445,6 @@
             return Array.from(slots);
         }
 
-        function ownershipQuality() {
-            const src = (filteredData && filteredData.length) ? filteredData : (allSlatePlayers || []);
-            const skill = src.filter(p => p && !deselectedPlayers.has(p.displayName) && (Number(p.projectedFP)||0) > 0 && ['QB','RB','WR','TE','DST'].includes(String(p.Position||'').split('/')[0]));
-            const withOwn = skill.filter(p => (Number(p.ownership)||0) > 0);
-            const pct = skill.length ? withOwn.length / skill.length : 0;
-            return { ready: pct >= 0.4 && withOwn.length >= 12, pct, n: withOwn.length, total: skill.length };
-        }
-        function classicPlayersOf(lineupObj) {
-            if (!lineupObj) return [];
-            if (lineupObj.captain) return [lineupObj.captain, ...(lineupObj.flex || [])].filter(Boolean);
-            return ['QB','RB1','RB2','WR1','WR2','WR3','TE','FLEX','DST'].map(k => lineupObj[k]).filter(Boolean);
-        }
-        function gradeGeneratedLineup(entry, isShowdown) {
-            const players = classicPlayersOf(entry && entry.lineup);
-            const rows = players.map(p => {
-                const raw = (filteredData || []).find(x => x.displayName === p.name || x.baseName === p.baseName || x.id === p.id);
-                return {
-                    name: p.name, pos: raw ? String(raw.Position||'').split('/')[0] : '',
-                    salary: Number(p.salary)||0, own: Number((raw && raw.ownership) != null ? raw.ownership : p.ownership)||0,
-                    team: raw ? raw.Team : '', opp: raw ? raw.Opponent : ''
-                };
-            });
-            const oq = ownershipQuality();
-            const low = rows.filter(r => r.own > 0 && r.own < 10).length;
-            const chalk = rows.filter(r => r.own >= 20).length;
-            const paidRb = rows.some(r => r.pos === 'RB' && r.salary >= 7000);
-            const paidDst = rows.some(r => r.pos === 'DST' && r.salary >= 3000);
-            const qb = rows.find(r => r.pos === 'QB');
-            const dst = rows.find(r => r.pos === 'DST');
-            const destack = !!(qb && dst && qb.opp && dst.team === qb.opp);
-            let score = 0;
-            const notes = [];
-            if (oq.ready) {
-                if (low >= 4) score += 2; else notes.push(low + ' uniques <10%');
-                if (chalk <= 4) score += 1; else notes.push(chalk + ' chalk 20%+');
-                if (chalk >= 1 && chalk <= 4) score += 1;
-            }
-            if (paidRb) score += 1; else notes.push('no $7k RB');
-            if (paidDst) score += 1; else notes.push('DST <$3k');
-            if (!destack) score += 1; else notes.push('QB vs opp DST');
-            const leftover = Math.max(0, (typeof maxSalary === 'number' ? maxSalary : 50000) - (entry.totalSalary || 0));
-            if (leftover <= 500) score += 1;
-            const maxScore = oq.ready ? 8 : 4;
-            const letter = score >= maxScore - 1 ? 'A' : score >= maxScore - 3 ? 'B' : 'C';
-            entry.gppGrade = letter;
-            entry.gppNotes = notes.join(' · ');
-            return entry;
-        }
         function buildGenPool(isShowdown) {
             const must = new Set();
             try {
@@ -8560,19 +8512,13 @@
                 variables: {},
                 ints: {}
             };
-            const oq = ownershipQuality();
-            const gppMixWanted = !!document.getElementById('gppOwnMix')?.checked;
-            const gppMixOn = gppMixWanted && oq.ready;
-            if (gppMixWanted && !oq.ready) {
-                try { if (typeof logMessages !== 'undefined') logMessages.push('GPP mix skipped — ownership still too sparse (' + Math.round(oq.pct*100) + '% of pool has a number).'); } catch (e) {}
-            }
+            const gppMixOn = !!document.getElementById('gppOwnMix')?.checked;
             if (gppMixOn) {
                 const poolForMix = (typeof genPool === 'function' ? genPool() : (filteredData || []));
                 const lowN = poolForMix.filter(p => p && !deselectedPlayers.has(p.displayName) && (Number(p.ownership)||0) < 10 && (Number(p.projectedFP)||0) > 0).length;
                 model.constraints.uniqueLow = { min: Math.min(4, Math.max(0, lowN)) };
                 model.constraints.chalkHigh = { max: 4 };
             }
-            const gppShapeOn = gppMixWanted || !!(document.getElementById('classicQbTwoPc')?.checked) || !!(document.getElementById('classicFadeGameDst')?.checked);
             const isShowdown = selectedSlate.includes('Showdown Captain Mode');
             const slotRequirements = isShowdown
                 ? { Captain: 1, FLEX: 5 }
@@ -8661,29 +8607,6 @@
                 if (!model.constraints[name]) model.constraints[name] = {};
                 model.constraints[name].max = 1;
             });
-
-            if (!isShowdown && gppShapeOn) {
-                Object.keys(model.variables).forEach(v => {
-                    if (!v.endsWith('_RB') && !v.endsWith('_FLEX')) return;
-                    const base = v.replace(/_RB$|_FLEX$/, '');
-                    const p = genPool().find(x => x.baseName === base);
-                    if (p && String(p.Position||'').split('/')[0] === 'RB' && (Number(p.salary)||0) >= 7000) {
-                        model.variables[v].paidRb7k = 1;
-                    }
-                });
-                if (Object.values(model.variables).some(v => v.paidRb7k)) {
-                    model.constraints.paidRb7k = { min: 1 };
-                }
-                Object.keys(model.variables).forEach(v => {
-                    if (!v.endsWith('_DST')) return;
-                    const base = v.replace(/_DST$/, '');
-                    const p = genPool().find(x => x.baseName === base);
-                    if (p && (Number(p.salary)||0) >= 3000) model.variables[v].paidDst3k = 1;
-                });
-                if (Object.values(model.variables).some(v => v.paidDst3k)) {
-                    model.constraints.paidDst3k = { min: 1 };
-                }
-            }
 
             // Game stack: at least N players from selected game(s)
             if (selectedGames.length && gameStackMinPlayers > 0) {
@@ -9950,7 +9873,6 @@
                         if (stackSpec?.receiver2 && !has(stackSpec.receiver2)) return null;
                         if (stackSpec?.bringPlayer && !has(stackSpec.bringPlayer)) return null;
                     }
-                    try { gradeGeneratedLineup(lineup, isShowdown); } catch (e) {}
                     generatedLineups.push(lineup);
                     updatePlayerCounts(lineup, playerCounts, isShowdown);
                     // Slight re-tighten after success so we don't stay fully relaxed forever
