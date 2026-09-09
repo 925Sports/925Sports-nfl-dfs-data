@@ -1,72 +1,72 @@
 Player,Position,Team,Opp,FF Avg,FG Avg,FGA Avg,FPTS Avg,FR Avg,FUM_LOST Avg,INT Avg,PA Avg,PASS_ATT Avg,PASS_CMP Avg,PASS_TD Avg,PASS_YDS Avg,REC Avg,REC_TD Avg,REC_YDS Avg,RUSH_ATT Avg,RUSH_TD Avg,RUSH_YDS Avg,SACK Avg,SAFETY Avg,TD Avg,XPT Avg,YDS_AGN Avg,DraftKings,FanDuel,PrizePicks,Underdog,Fav,Spread,O/U,Match Title (Underdog),Game Short Title (Underdog),Venue Name (Underdog),Venue Type (Underdog),Broadcasts (Underdog),Player Salary,Player Image,Tournament,Game Start Time
-Jalen Hurts,QB,PHI,,,,,20.6,,0.2,0.54,,28.56,18.655,1.42,212.71,,,,6.9,0.455,28.58,,,,,,19.04,18.84,19.04,19.04,,,,n/a,n/a,n/a,n/a,n/a,6600,https://dkn.gs/sports/images/nfl/players/50/479300.png, @ ,
-Justin Herbert,QB,LAC,,,,,20.1,,0.2,0.475,,29.655,20.74,1.85,236.26,,,,4.815,0.34,21.655,,,,,,20.38,20.18,20.38,20.38,,,,n/a,n/a,n/a,n/a,n/a,6100,https://dkn.gs/sports/images/nfl/players/50/468527.png, @ ,
-Lamar Jackson,QB,BAL,,,,,19.7,,0.2,0.52,,26.635,17.53,1.45,220.93,,,,6.65,0.39,37.57,,,,,,20.01,19.81,20.01,20.01,,,,n/a,n/a,n/a,n/a,n/a,16200,https://dkn.gs/sports/images/nfl/players/50/17173.png, @ ,
-Joe Burrow,QB,CIN,,,,,19.6,,0.2,0.525,,34.62,24.585,2.045,267.46,,,,2.58,0.305,6.675,,,,,,20.65,20.45,20.65,20.65,,,,n/a,n/a,n/a,n/a,n/a,15000,https://dkn.gs/sports/images/nfl/players/50/485441.png, @ ,
-Josh Allen,QB,BUF,,,,,19.6,,0.2,0.61,,30.545,19.76,1.32,221.6,,,,6.58,0.455,31.025,,,,,,19.17,18.97,19.17,19.17,,,,n/a,n/a,n/a,n/a,n/a,16500,https://dkn.gs/sports/images/nfl/players/50/11370.png, @ ,
-Jaxson Dart,QB,NYG,,,,,18.9,,0.2,0.555,,29.21,18.645,1.36,217.23,,,,6.55,0.4,29.615,,,,,,18.74,18.54,18.74,18.74,,,,n/a,n/a,n/a,n/a,n/a,5600,https://dkn.gs/sports/images/nfl/players/50/886040.png, @ ,
-Dak Prescott,QB,DAL,,,,,18.8,,0.2,0.58,,33.495,22.915,1.58,260.87,,,,2.585,0.315,7.625,,,,,,18.63,18.43,18.63,18.63,,,,n/a,n/a,n/a,n/a,n/a,6400,https://dkn.gs/sports/images/nfl/players/50/18078.png, @ ,
-Caleb Williams,QB,CHI,,,,,18.2,,0.2,0.545,,32.535,19.705,1.48,226.57,,,,4.075,0.34,19.52,,,,,,18.23,18.03,18.23,18.23,,,,n/a,n/a,n/a,n/a,n/a,16200,https://dkn.gs/sports/images/nfl/players/50/779692.png, @ ,
-Trevor Lawrence,QB,JAC,,,,,18,,0.2,0.58,,32.505,20.575,1.49,235.51,,,,4.67,0.38,17.13,,,,,,18.59,18.39,18.59,18.59,,,,n/a,n/a,n/a,n/a,n/a,14700,https://dkn.gs/sports/images/nfl/players/50/542787.png, @ ,
-Jared Goff,QB,DET,,,,,17.8,,0.2,0.52,,33.56,23.54,1.68,261.52,,,,1.5,0.28,-6.67,,,,,,17.47,17.27,17.47,17.47,,,,n/a,n/a,n/a,n/a,n/a,15000,https://dkn.gs/sports/images/nfl/players/50/13631.png, @ ,
-Jahmyr Gibbs,RB,DET,,,,,18.4,,0.1,,,,,,,4.415,0.1090909091,30.55,17.67,0.4909090909,83.195,,,,,,19.29,16.98,19.29,19.29,,,,n/a,n/a,n/a,n/a,n/a,18000,https://dkn.gs/sports/images/nfl/players/50/693115.png, @ ,
-Bijan Robinson,RB,ATL,,,,,16,,0.1,,,,,,,4.47,0.1542857143,36.765,18.515,0.3857142857,76.285,,,,,,18.92,16.58,18.92,18.92,,,,n/a,n/a,n/a,n/a,n/a,17700,https://dkn.gs/sports/images/nfl/players/50/693112.png, @ ,
-Jonathan Taylor,RB,IND,,,,,15.1,,0.1,,,,,,,2.74,0.07,15.97,18.56,0.49,76.545,,,,,,15.25,13.78,15.25,15.25,,,,n/a,n/a,n/a,n/a,n/a,17700,https://dkn.gs/sports/images/nfl/players/50/468700.png, @ ,
-Derrick Henry,RB,BAL,,,,,14.8,,0.1,,,,,,,1.345,0.06166666667,6.275,17.66,0.4933333333,79.75,,,,,,13.18,12.41,13.18,13.18,,,,n/a,n/a,n/a,n/a,n/a,16800,https://dkn.gs/sports/images/nfl/players/50/19898.png, @ ,
-Christian McCaffrey,RB,SF,,,,,14.4,,0.1,,,,,,,4.565,0.196875,39.115,15.54,0.328125,59.6,,,,,,17.49,15.1,17.49,17.49,,,,n/a,n/a,n/a,n/a,n/a,15900,https://dkn.gs/sports/images/nfl/players/50/20415.png, @ ,
-Saquon Barkley,RB,PHI,,,,,13.8,,0.1,,,,,,,2.54,0.085,15.59,17.955,0.425,76.575,,,,,,14.72,13.35,14.72,14.72,,,,n/a,n/a,n/a,n/a,n/a,6900,https://dkn.gs/sports/images/nfl/players/50/18972.png, @ ,
-De'Von Achane,RB,MIA,,,,,13.7,,0.1,,,,,,,4.36,0.16,28.37,14.515,0.32,67.17,,,,,,16.69,14.41,16.69,16.69,,,,n/a,n/a,n/a,n/a,n/a,7000,https://dkn.gs/sports/images/nfl/players/50/706555.png, @ ,
-James Cook III,RB,BUF,,,,,13.3,,0.1,,,,,,,2.435,0.0825,14.57,17.42,0.4125,74.515,,,,,,14.21,12.9,14.21,14.21,,,,n/a,n/a,n/a,n/a,n/a,15900,https://dkn.gs/sports/images/nfl/players/50/640895.png, @ ,
-Chase Brown,RB,CIN,,,,,13.1,,0.1,,,,,,,3.585,0.1485714286,23.605,14.645,0.3714285714,57.995,,,,,,14.77,12.87,14.77,14.77,,,,n/a,n/a,n/a,n/a,n/a,16500,https://dkn.gs/sports/images/nfl/players/50/706641.png, @ ,
-Omarion Hampton,RB,LAC,,,,,13,,0.1,,,,,,,2.435,0.07857142857,12.695,15.09,0.4714285714,66.645,,,,,,13.57,12.25,13.57,13.57,,,,n/a,n/a,n/a,n/a,n/a,6800,https://dkn.gs/sports/images/nfl/players/50/886062.png, @ ,
-Kenneth Walker III,RB,KC,DEN,,,,11.5,,,,,,,,0,2.68,0,16.29,16.44,0.51,60.915,,,,,,13.46,12.12,13.46,13.46,,,,n/a,n/a,n/a,n/a,n/a,6500,https://dkn.gs/sports/images/nfl/players/50/640873.png, @ ,
-Mike Washington Jr.,RB,LV,MIA,,,,8.25,,,,,,,,0,,0,15,,0.505,40,,,,,,8.53,8.53,8.53,8.53,,,,n/a,n/a,n/a,n/a,n/a,4600,https://dkn.gs/sports/images/nfl/players/50/957852.png, @ ,
-Chris Rodriguez Jr.,RB,JAC,CLE,,,,6.93,,,,,,,,0,,0,1.5,8.545,0.42,34.12,,,,,,6.08,6.08,6.08,6.08,,,,n/a,n/a,n/a,n/a,n/a,6600,https://dkn.gs/sports/images/nfl/players/50/706670.png, @ ,
-Tyrone Tracy Jr.,RB,NYG,DAL,,,,5.49,,,,,,,,0,,0,9,,0.345,33,,,,,,6.27,6.27,6.27,6.27,,,,n/a,n/a,n/a,n/a,n/a,4800,https://dkn.gs/sports/images/nfl/players/50/787929.png, @ ,
-Brian Robinson Jr.,RB,ATL,PIT,,,,4.35,,,,,,,,0,,0,1,6.48,0.345,22.155,,,,,,4.39,4.39,4.39,4.39,,,,n/a,n/a,n/a,n/a,n/a,6000,https://dkn.gs/sports/images/nfl/players/50/640926.png, @ ,
-Puka Nacua,WR,LAR,,,,,13.1,,0,,,,,,,7.365,0.45,90.59,0.7,0,1.78,,,,,,19.3,15.62,19.3,19.3,,,,n/a,n/a,n/a,n/a,n/a,16800,https://dkn.gs/sports/images/nfl/players/50/706654.png, @ ,
-Ja'Marr Chase,WR,CIN,,,,,13,,0,,,,,,,7.39,0.51,86.085,0.2,0,0.9,,,,,,19.15,15.45,19.15,19.15,,,,n/a,n/a,n/a,n/a,n/a,17700,https://dkn.gs/sports/images/nfl/players/50/557826.png, @ ,
-Jaxon Smith-Njigba,WR,SEA,,,,,12.7,,0,,,,,,,6.5,0.45,82.085,0.4,0,1.9,,,,,,17.6,14.35,17.6,17.6,,,,n/a,n/a,n/a,n/a,n/a,15900,https://dkn.gs/sports/images/nfl/players/50/686189.png, @ ,
-Amon-Ra St. Brown,WR,DET,,,,,12.55,,0,,,,,,0,6.575,0.485,77.475,0.2,0,0.55,,,,,,17.29,14,17.29,17.29,,,,n/a,n/a,n/a,n/a,n/a,16500,https://dkn.gs/sports/images/nfl/players/50/560800.png, @ ,
-CeeDee Lamb,WR,DAL,,,,,11.1,,0,,,,,,,6.38,0.455,76.5,0.3,0,1.4,,,,,,16.9,13.71,16.9,16.9,,,,n/a,n/a,n/a,n/a,n/a,7400,https://dkn.gs/sports/images/nfl/players/50/485450.png, @ ,
-Chris Olave,WR,NO,,,,,10.7,,0,,,,,,,6.48,0.435,76.37,0.1,0,0.4,,,,,,16.77,13.53,16.77,16.77,,,,n/a,n/a,n/a,n/a,n/a,15900,https://dkn.gs/sports/images/nfl/players/50/640762.png, @ ,
-George Pickens,WR,DAL,,,,,10.7,,0,,,,,,,5.05,0.43,69.555,0,0,0.1,,,,,,14.6,12.07,14.6,14.6,,,,n/a,n/a,n/a,n/a,n/a,6400,https://dkn.gs/sports/images/nfl/players/50/624741.png, @ ,
-Nico Collins,WR,HOU,,,,,10.3,,0,,,,,,,5.455,0.425,69.57,0.1,0,0.7,,,,,,15.03,12.3,15.03,15.03,,,,n/a,n/a,n/a,n/a,n/a,15000,https://dkn.gs/sports/images/nfl/players/50/560761.png, @ ,
-Justin Jefferson,WR,MIN,,,,,10.1,,0,,,,,,,5.77,0.425,74.1,0.1,0,0.4,,,,,,15.77,12.88,15.77,15.77,,,,n/a,n/a,n/a,n/a,n/a,7300,https://dkn.gs/sports/images/nfl/players/50/485454.png, @ ,
-Zay Flowers,WR,BAL,,,,,10.1,,0,,,,,,,4.77,0.415,64.175,0.6,0,0.5,,,,,,13.73,11.34,13.73,13.73,,,,n/a,n/a,n/a,n/a,n/a,13200,https://dkn.gs/sports/images/nfl/players/50/706447.png, @ ,
-Luther Burden III,WR,CHI,CAR,,,,9.48,,,,,,,,0,4.685,0.415,55.94,,0,0.5,,,,,,12.82,10.48,12.82,12.82,,,,n/a,n/a,n/a,n/a,n/a,12000,https://dkn.gs/sports/images/nfl/players/50/886103.png, @ ,
-Brian Thomas Jr.,WR,JAC,CLE,,,,7.87,,,,,,,,0,2.765,0.375,36.385,,0,2,,,,,,8.85,7.47,8.85,8.85,,,,n/a,n/a,n/a,n/a,n/a,11400,https://dkn.gs/sports/images/nfl/players/50/787676.png, @ ,
-Marvin Harrison Jr.,WR,ARI,LAC,,,,7.74,,,,,,,,0,4.07,0.375,48.29,,0,0,,,,,,11.15,9.11,11.15,11.15,,,,n/a,n/a,n/a,n/a,n/a,5000,https://dkn.gs/sports/images/nfl/players/50/779700.png, @ ,
-Michael Pittman Jr.,WR,PIT,ATL,,,,6.58,,,,,,,,0,4.18,0.385,39.18,,0,0,,,,,,10.41,8.32,10.41,10.41,,,,n/a,n/a,n/a,n/a,n/a,12000,https://dkn.gs/sports/images/nfl/players/50/477191.png, @ ,
-Omar Cooper Jr.,WR,NYJ,TEN,,,,5.24,,,,,,,,0,1.425,0.295,9.5,,0,1,,,,,,4.25,3.53,4.25,4.25,,,,n/a,n/a,n/a,n/a,n/a,9300,https://dkn.gs/sports/images/nfl/players/50/957911.png, @ ,
-Odell Beckham Jr.,WR,NYG,DAL,,,,2.22,,,,,,,,0,1.525,0.31,11.21,,0,0,,,,,,4.51,3.74,4.51,4.51,,,,n/a,n/a,n/a,n/a,n/a,3200,https://dkn.gs/sports/images/nfl/players/50/14359.png, @ ,
-Brock Bowers,TE,LV,,,,,9.4,,0,,,,,,,5.765,0.435,64.505,,0,,,,,,,14.83,11.94,14.83,14.83,,,,n/a,n/a,n/a,n/a,n/a,6900,https://dkn.gs/sports/images/nfl/players/50/781453.png, @ ,
-Colston Loveland,TE,CHI,,,,,8.3,,0,,,,,,,4.605,0.41,51.89,,0,,,,,,,12.25,9.95,12.25,12.25,,,,n/a,n/a,n/a,n/a,n/a,12600,https://dkn.gs/sports/images/nfl/players/50/877803.png, @ ,
-Trey McBride,TE,ARI,,,,,8.2,,0,,,,,,,6.355,0.405,56.52,,0,,,,,,,14.44,11.26,14.44,14.44,,,,n/a,n/a,n/a,n/a,n/a,6800,https://dkn.gs/sports/images/nfl/players/50/640885.png, @ ,
-Tyler Warren,TE,IND,,,,,7.7,,0,,,,,,,4.675,0.39,46.725,,0,,,,,,,11.69,9.35,11.69,11.69,,,,n/a,n/a,n/a,n/a,n/a,11100,https://dkn.gs/sports/images/nfl/players/50/886165.png, @ ,
-Harold Fannin Jr.,TE,CLE,,,,,7.51,,0,,,,,,0,4.175,0.35,35.13,,0,1,,,,,,9.89,7.8,9.89,9.89,,,,n/a,n/a,n/a,n/a,n/a,10800,https://dkn.gs/sports/images/nfl/players/50/886166.png, @ ,
-Sam LaPorta,TE,DET,,,,,7.5,,0,,,,,,,3.93,0.405,41.68,,0,,,,,,,10.53,8.56,10.53,10.53,,,,n/a,n/a,n/a,n/a,n/a,9600,https://dkn.gs/sports/images/nfl/players/50/706508.png, @ ,
-Dallas Goedert,TE,PHI,,,,,7.1,,0,,,,,,,3.525,0.395,34.64,,0,,,,,,,9.36,7.6,9.36,9.36,,,,n/a,n/a,n/a,n/a,n/a,4100,https://dkn.gs/sports/images/nfl/players/50/17055.png, @ ,
-Mark Andrews,TE,BAL,,,,,6.6,,0,,,,,,,3.45,0.415,34.465,,0,,,,,,,9.39,7.66,9.39,9.39,,,,n/a,n/a,n/a,n/a,n/a,8700,https://dkn.gs/sports/images/nfl/players/50/16963.png, @ ,
-Tucker Kraft,TE,GB,,,,,6.5,,0,,,,,,,4,0.405,45.54,,0,,,,,,,10.98,8.98,10.98,10.98,,,,n/a,n/a,n/a,n/a,n/a,4500,https://dkn.gs/sports/images/nfl/players/50/706550.png, @ ,
-Kyle Pitts Sr.,TE,ATL,,,,,6.2,,0,,,,,,,4.46,0.36,43.42,,0,,,,,,,10.96,8.73,10.96,10.96,,,,n/a,n/a,n/a,n/a,n/a,11700,https://dkn.gs/sports/images/nfl/players/50/557862.png, @ ,
-Brandon Aubrey,K,DAL,,,2,2.3,8.6,,,,,,,,,,,,,,,,,,2.7,,8.7,8.7,8.7,8.7,,,,n/a,n/a,n/a,n/a,n/a,,,,
-Jake Bates,K,DET,,,1.9,2.3,8.6,,,,,,,,,,,,,,,,,,3,,8.7,8.7,8.7,8.7,,,,n/a,n/a,n/a,n/a,n/a,8100,https://dkn.gs/sports/images/nfl/players/50/722655.png, @ ,
-Jason Myers,K,SEA,,,1.9,2.3,8.3,,,,,,,,,,,,,,,,,,2.6,,8.3,8.3,8.3,8.3,,,,n/a,n/a,n/a,n/a,n/a,8100,https://dkn.gs/sports/images/nfl/players/50/19936.png, @ ,
-Harrison Mevis,K,LAR,,,1.7,2,8.1,,,,,,,,,,,,,,,,,,3,,8.1,8.1,8.1,8.1,,,,n/a,n/a,n/a,n/a,n/a,7500,https://dkn.gs/sports/images/nfl/players/50/789433.png, @ ,
-Ka'imi Fairbairn,K,HOU,,,2,2.4,8.1,,,,,,,,,,,,,,,,,,2.2,,8.2,8.2,8.2,8.2,,,,n/a,n/a,n/a,n/a,n/a,7800,https://dkn.gs/sports/images/nfl/players/50/17717.png, @ ,
-Evan McPherson,K,CIN,,,1.8,2.2,8,,,,,,,,,,,,,,,,,,2.7,,8.1,8.1,8.1,8.1,,,,n/a,n/a,n/a,n/a,n/a,7500,https://dkn.gs/sports/images/nfl/players/50/560845.png, @ ,
-Will Reichard,K,MIN,,,1.9,2.3,8,,,,,,,,,,,,,,,,,,2.2,,7.9,7.9,7.9,7.9,,,,n/a,n/a,n/a,n/a,n/a,,,,
-Cam Little,K,JAC,,,1.8,2.1,7.9,,,,,,,,,,,,,,,,,,2.5,,7.9,7.9,7.9,7.9,,,,n/a,n/a,n/a,n/a,n/a,7800,https://dkn.gs/sports/images/nfl/players/50/787974.png, @ ,
-Chris Boswell,K,PIT,,,1.8,2.2,7.8,,,,,,,,,,,,,,,,,,2.3,,7.7,7.7,7.7,7.7,,,,n/a,n/a,n/a,n/a,n/a,7500,https://dkn.gs/sports/images/nfl/players/50/18389.png, @ ,
-Cairo Santos,K,CHI,,,1.7,2.1,7.8,,,,,,,,,,,,,,,,,,2.6,,7.7,7.7,7.7,7.7,,,,n/a,n/a,n/a,n/a,n/a,7800,https://dkn.gs/sports/images/nfl/players/50/19999.png, @ ,
-SEA,DST,SEA,,0.8,,,8.1,0.6,,0.7,19.8,,,,,,,,,,,3.2,0,0.2,,333.3,7,7,7,7,,,,n/a,n/a,n/a,n/a,n/a,,,,
-JAX,DST,JAX,,0.8,,,8,0.5,,0.8,16.7,,,,,,,,,,,3.2,0,0.2,,283.6,8,8,8,8,,,,n/a,n/a,n/a,n/a,n/a,,,,
-LAC,DST,LAC,,0.6,,,7.9,0.5,,0.7,18.8,,,,,,,,,,,3.4,0,0.2,,312.6,7,7,7,7,,,,n/a,n/a,n/a,n/a,n/a,,,,
-PHI,DST,PHI,,0.9,,,7.5,0.5,,0.8,19.5,,,,,,,,,,,2.7,0.1,0.2,,315,6.7,6.7,6.7,6.7,,,,n/a,n/a,n/a,n/a,n/a,,,,
-PIT,DST,PIT,,1,,,7.4,0.6,,0.8,18.7,,,,,,,,,,,2.6,0,0.2,,331.9,6.6,6.6,6.6,6.6,,,,n/a,n/a,n/a,n/a,n/a,,,,
-LV,DST,LV,,0.8,,,7.3,0.6,,0.7,19,,,,,,,,,,,2.9,0,0.1,,316.6,6.1,6.1,6.1,6.1,,,,n/a,n/a,n/a,n/a,n/a,,,,
-TEN,DST,TEN,,0.9,,,6.9,0.6,,0.8,20.8,,,,,,,,,,,3.4,0,0.1,,319.6,5.8,5.8,5.8,5.8,,,,n/a,n/a,n/a,n/a,n/a,,,,
-DET,DST,DET,,0.9,,,6.6,0.6,,0.8,20.7,,,,,,,,,,,3,0,0.2,,326.5,6,6,6,6,,,,n/a,n/a,n/a,n/a,n/a,,,,
-DEN,DST,DEN,,0.7,,,6.4,0.4,,0.8,22.1,,,,,,,,,,,3.1,0,0.2,,315.1,5.7,5.7,5.7,5.7,,,,n/a,n/a,n/a,n/a,n/a,,,,
+Jalen Hurts,QB,PHI,,,,,20.5,,0.2,0.54,,28.56,18.665,1.42,212.91,,,,6.865,0.455,28.555,,,,,,19.04,18.84,19.04,19.04,,,,n/a,n/a,n/a,n/a,n/a,6600,https://dkn.gs/sports/images/nfl/players/50/479300.png, @ ,9/13/2026
+Justin Herbert,QB,LAC,,,,,20.1,,0.2,0.475,,29.645,20.725,1.845,235.91,,,,4.815,0.335,21.655,,,,,,20.32,20.12,20.32,20.32,,,,n/a,n/a,n/a,n/a,n/a,6100,https://dkn.gs/sports/images/nfl/players/50/468527.png, @ ,9/13/2026
+Lamar Jackson,QB,BAL,,,,,19.7,,0.2,0.515,,26.785,17.55,1.45,220.93,,,,6.655,0.39,37.565,,,,,,20.02,19.82,20.02,20.02,,,,n/a,n/a,n/a,n/a,n/a,16200,https://dkn.gs/sports/images/nfl/players/50/17173.png, @ ,9/13/2026
+Joe Burrow,QB,CIN,,,,,19.6,,0.2,0.525,,34.615,24.585,2.06,267.71,,,,2.58,0.305,6.675,,,,,,20.72,20.52,20.72,20.72,,,,n/a,n/a,n/a,n/a,n/a,15000,https://dkn.gs/sports/images/nfl/players/50/485441.png, @ ,9/13/2026
+Josh Allen,QB,BUF,,,,,19.6,,0.2,0.61,,30.54,19.855,1.32,221.35,,,,6.57,0.455,31.05,,,,,,19.16,18.96,19.16,19.16,,,,n/a,n/a,n/a,n/a,n/a,16500,https://dkn.gs/sports/images/nfl/players/50/11370.png, @ ,9/13/2026
+Jaxson Dart,QB,NYG,,,,,18.8,,0.2,0.55,,29.275,18.65,1.36,216.94,,,,6.555,0.4,29.645,,,,,,18.73,18.53,18.73,18.73,,,,n/a,n/a,n/a,n/a,n/a,5600,https://dkn.gs/sports/images/nfl/players/50/886040.png, @ ,9/13/2026
+Dak Prescott,QB,DAL,,,,,18.7,,0.2,0.575,,33.505,23.025,1.58,259.65,,,,2.585,0.315,7.615,,,,,,18.58,18.38,18.58,18.58,,,,n/a,n/a,n/a,n/a,n/a,6400,https://dkn.gs/sports/images/nfl/players/50/18078.png, @ ,9/13/2026
+Caleb Williams,QB,CHI,,,,,18.2,,0.2,0.545,,32.495,19.695,1.48,226.74,,,,4.075,0.34,19.52,,,,,,18.24,18.04,18.24,18.24,,,,n/a,n/a,n/a,n/a,n/a,16200,https://dkn.gs/sports/images/nfl/players/50/779692.png, @ ,9/13/2026
+Trevor Lawrence,QB,JAC,,,,,17.9,,0.2,0.575,,32.505,20.57,1.49,235.38,,,,4.67,0.38,17.13,,,,,,18.59,18.39,18.59,18.59,,,,n/a,n/a,n/a,n/a,n/a,14700,https://dkn.gs/sports/images/nfl/players/50/542787.png, @ ,9/13/2026
+Jared Goff,QB,DET,,,,,17.8,,0.2,0.515,,33.56,23.54,1.68,261.52,,,,1.5,0.28,-6.67,,,,,,17.48,17.28,17.48,17.48,,,,n/a,n/a,n/a,n/a,n/a,15000,https://dkn.gs/sports/images/nfl/players/50/13631.png, @ ,9/13/2026
+Jahmyr Gibbs,RB,DET,,,,,18.4,,0.1,,,,,,,4.42,0.11,30.465,17.67,0.495,83.195,,,,,,19.32,17.01,19.32,19.32,,,,n/a,n/a,n/a,n/a,n/a,18000,https://dkn.gs/sports/images/nfl/players/50/693115.png, @ ,9/13/2026
+Bijan Robinson,RB,ATL,,,,,15.9,,0.1,,,,,,,4.475,0.1542857143,36.72,18.13,0.3857142857,76.325,,,,,,18.92,16.58,18.92,18.92,,,,n/a,n/a,n/a,n/a,n/a,17700,https://dkn.gs/sports/images/nfl/players/50/693112.png, @ ,9/13/2026
+Jonathan Taylor,RB,IND,,,,,15.1,,0.1,,,,,,,2.75,0.07,16.23,18.565,0.49,76.525,,,,,,15.29,13.81,15.29,15.29,,,,n/a,n/a,n/a,n/a,n/a,17700,https://dkn.gs/sports/images/nfl/players/50/468700.png, @ ,9/13/2026
+Derrick Henry,RB,BAL,,,,,14.8,,0.1,,,,,,,1.355,0.06166666667,6.3,17.84,0.4933333333,79.64,,,,,,13.18,12.4,13.18,13.18,,,,n/a,n/a,n/a,n/a,n/a,16800,https://dkn.gs/sports/images/nfl/players/50/19898.png, @ ,9/13/2026
+Christian McCaffrey,RB,SF,,,,,14.4,,0.1,,,,,,,4.565,0.196875,39.06,15.535,0.328125,59.425,,,,,,17.46,15.08,17.46,17.46,,,,n/a,n/a,n/a,n/a,n/a,15900,https://dkn.gs/sports/images/nfl/players/50/20415.png, @ ,9/10/2026
+Saquon Barkley,RB,PHI,,,,,13.8,,0.1,,,,,,,2.545,0.08666666667,15.77,17.955,0.4333333333,76.56,,,,,,14.8,13.43,14.8,14.8,,,,n/a,n/a,n/a,n/a,n/a,6900,https://dkn.gs/sports/images/nfl/players/50/18972.png, @ ,9/13/2026
+De'Von Achane,RB,MIA,,,,,13.7,,0.1,,,,,,,4.36,0.16,28.37,14.53,0.32,67.57,,,,,,16.73,14.45,16.73,16.73,,,,n/a,n/a,n/a,n/a,n/a,7000,https://dkn.gs/sports/images/nfl/players/50/706555.png, @ ,9/13/2026
+James Cook III,RB,BUF,,,,,13.3,,0.1,,,,,,,2.43,0.0825,14.535,17.455,0.4125,74.485,,,,,,14.2,12.89,14.2,14.2,,,,n/a,n/a,n/a,n/a,n/a,15900,https://dkn.gs/sports/images/nfl/players/50/640895.png, @ ,9/13/2026
+Chase Brown,RB,CIN,,,,,13.1,,0.1,,,,,,,3.58,0.1485714286,23.49,14.63,0.3714285714,58.09,,,,,,14.76,12.87,14.76,14.76,,,,n/a,n/a,n/a,n/a,n/a,16500,https://dkn.gs/sports/images/nfl/players/50/706641.png, @ ,9/13/2026
+Omarion Hampton,RB,LAC,,,,,13,,0.1,,,,,,,2.43,0.07857142857,12.815,15.09,0.4714285714,66.645,,,,,,13.58,12.26,13.58,13.58,,,,n/a,n/a,n/a,n/a,n/a,6800,https://dkn.gs/sports/images/nfl/players/50/886062.png, @ ,9/13/2026
+Kenneth Walker III,RB,KC,DEN,,,,11.48,,,,,,,,0,2.68,0,16.645,16.445,0.51,60.825,,,,,,13.49,12.15,13.49,13.49,,,,n/a,n/a,n/a,n/a,n/a,6500,https://dkn.gs/sports/images/nfl/players/50/640873.png, @ ,9/14/2026
+Mike Washington Jr.,RB,LV,MIA,,,,8.18,,,,,,,,0,,0,15,,0.53,40,,,,,,8.68,8.68,8.68,8.68,,,,n/a,n/a,n/a,n/a,n/a,4600,https://dkn.gs/sports/images/nfl/players/50/957852.png, @ ,9/13/2026
+Chris Rodriguez Jr.,RB,JAC,CLE,,,,6.88,,,,,,,,0,,0,1.5,8.57,0.42,34.215,,,,,,6.09,6.09,6.09,6.09,,,,n/a,n/a,n/a,n/a,n/a,6600,https://dkn.gs/sports/images/nfl/players/50/706670.png, @ ,9/13/2026
+Tyrone Tracy Jr.,RB,NYG,DAL,,,,5.48,,,,,,,,0,,0,9,,0.345,33,,,,,,6.27,6.27,6.27,6.27,,,,n/a,n/a,n/a,n/a,n/a,4800,https://dkn.gs/sports/images/nfl/players/50/787929.png, @ ,9/13/2026
+Brian Robinson Jr.,RB,ATL,PIT,,,,4.33,,,,,,,,0,,0,1,5.74,0.345,22.325,,,,,,4.4,4.4,4.4,4.4,,,,n/a,n/a,n/a,n/a,n/a,6000,https://dkn.gs/sports/images/nfl/players/50/640926.png, @ ,9/13/2026
+Puka Nacua,WR,LAR,,,,,13.1,,0,,,,,,,7.37,0.45,90.505,0.7,0,1.75,,,,,,19.3,15.61,19.3,19.3,,,,n/a,n/a,n/a,n/a,n/a,16800,https://dkn.gs/sports/images/nfl/players/50/706654.png, @ ,9/10/2026
+Ja'Marr Chase,WR,CIN,,,,,13,,0,,,,,,,7.39,0.51,86.07,0.2,0,0.9,,,,,,19.15,15.45,19.15,19.15,,,,n/a,n/a,n/a,n/a,n/a,17700,https://dkn.gs/sports/images/nfl/players/50/557826.png, @ ,9/13/2026
+Jaxon Smith-Njigba,WR,SEA,,,,,12.7,,0,,,,,,,6.505,0.445,81.855,0.4,0,1.9,,,,,,17.55,14.3,17.55,17.55,,,,n/a,n/a,n/a,n/a,n/a,15900,https://dkn.gs/sports/images/nfl/players/50/686189.png, @ ,9/9/2026
+Amon-Ra St. Brown,WR,DET,,,,,12.58,,0,,,,,,0,6.59,0.49,77.705,0.2,0,0.55,,,,,,17.36,14.06,17.36,17.36,,,,n/a,n/a,n/a,n/a,n/a,16500,https://dkn.gs/sports/images/nfl/players/50/560800.png, @ ,9/13/2026
+CeeDee Lamb,WR,DAL,,,,,11.1,,0,,,,,,,6.395,0.46,76.595,0.3,0,1.4,,,,,,16.95,13.76,16.95,16.95,,,,n/a,n/a,n/a,n/a,n/a,7400,https://dkn.gs/sports/images/nfl/players/50/485450.png, @ ,9/13/2026
+Chris Olave,WR,NO,,,,,10.7,,0,,,,,,,6.48,0.435,76.615,0.1,0,0.4,,,,,,16.79,13.55,16.79,16.79,,,,n/a,n/a,n/a,n/a,n/a,15900,https://dkn.gs/sports/images/nfl/players/50/640762.png, @ ,9/13/2026
+George Pickens,WR,DAL,,,,,10.7,,0,,,,,,,5.11,0.44,69.565,0,0,0.1,,,,,,14.72,12.16,14.72,14.72,,,,n/a,n/a,n/a,n/a,n/a,6400,https://dkn.gs/sports/images/nfl/players/50/624741.png, @ ,9/13/2026
+Nico Collins,WR,HOU,,,,,10.3,,0,,,,,,,5.465,0.425,69.57,0.1,0,0.7,,,,,,15.04,12.31,15.04,15.04,,,,n/a,n/a,n/a,n/a,n/a,15000,https://dkn.gs/sports/images/nfl/players/50/560761.png, @ ,9/13/2026
+Justin Jefferson,WR,MIN,,,,,10.2,,0,,,,,,,5.77,0.425,73.995,0.1,0,0.4,,,,,,15.76,12.87,15.76,15.76,,,,n/a,n/a,n/a,n/a,n/a,7300,https://dkn.gs/sports/images/nfl/players/50/485454.png, @ ,9/13/2026
+Zay Flowers,WR,BAL,,,,,10.1,,0,,,,,,,4.78,0.42,64.255,0.6,0,0.5,,,,,,13.78,11.39,13.78,13.78,,,,n/a,n/a,n/a,n/a,n/a,13200,https://dkn.gs/sports/images/nfl/players/50/706447.png, @ ,9/13/2026
+Luther Burden III,WR,CHI,CAR,,,,9.48,,,,,,,,0,4.69,0.415,56.04,,0,0.5,,,,,,12.83,10.49,12.83,12.83,,,,n/a,n/a,n/a,n/a,n/a,12000,https://dkn.gs/sports/images/nfl/players/50/886103.png, @ ,9/13/2026
+Marvin Harrison Jr.,WR,ARI,LAC,,,,7.87,,,,,,,,0,4.07,0.375,48.31,,0,0,,,,,,11.15,9.12,11.15,11.15,,,,n/a,n/a,n/a,n/a,n/a,5000,https://dkn.gs/sports/images/nfl/players/50/779700.png, @ ,9/13/2026
+Brian Thomas Jr.,WR,JAC,CLE,,,,7.84,,,,,,,,0,2.76,0.375,36.435,,0,2,,,,,,8.85,7.47,8.85,8.85,,,,n/a,n/a,n/a,n/a,n/a,11400,https://dkn.gs/sports/images/nfl/players/50/787676.png, @ ,9/13/2026
+Michael Pittman Jr.,WR,PIT,ATL,,,,6.58,,,,,,,,0,4.15,0.385,39.205,,0,0,,,,,,10.38,8.31,10.38,10.38,,,,n/a,n/a,n/a,n/a,n/a,12000,https://dkn.gs/sports/images/nfl/players/50/477191.png, @ ,9/13/2026
+Omar Cooper Jr.,WR,NYJ,TEN,,,,5.22,,,,,,,,0,1.425,0.295,9.5,,0,1,,,,,,4.25,3.53,4.25,4.25,,,,n/a,n/a,n/a,n/a,n/a,9300,https://dkn.gs/sports/images/nfl/players/50/957911.png, @ ,9/13/2026
+Odell Beckham Jr.,WR,NYG,DAL,,,,2.22,,,,,,,,0,1.525,0.31,11.195,,0,0,,,,,,4.5,3.74,4.5,4.5,,,,n/a,n/a,n/a,n/a,n/a,3200,https://dkn.gs/sports/images/nfl/players/50/14359.png, @ ,9/13/2026
+Brock Bowers,TE,LV,,,,,9.4,,0,,,,,,,5.77,0.445,64.64,,0,,,,,,,14.9,12.02,14.9,14.9,,,,n/a,n/a,n/a,n/a,n/a,6900,https://dkn.gs/sports/images/nfl/players/50/781453.png, @ ,9/13/2026
+Colston Loveland,TE,CHI,,,,,8.3,,0,,,,,,,4.605,0.41,52.03,,0,,,,,,,12.27,9.97,12.27,12.27,,,,n/a,n/a,n/a,n/a,n/a,12600,https://dkn.gs/sports/images/nfl/players/50/877803.png, @ ,9/13/2026
+Trey McBride,TE,ARI,,,,,8.3,,0,,,,,,,6.35,0.4,56.595,,0,,,,,,,14.41,11.23,14.41,14.41,,,,n/a,n/a,n/a,n/a,n/a,6800,https://dkn.gs/sports/images/nfl/players/50/640885.png, @ ,9/13/2026
+Tyler Warren,TE,IND,,,,,7.7,,0,,,,,,,4.69,0.395,46.595,,0,,,,,,,11.72,9.37,11.72,11.72,,,,n/a,n/a,n/a,n/a,n/a,11100,https://dkn.gs/sports/images/nfl/players/50/886165.png, @ ,9/13/2026
+Harold Fannin Jr.,TE,CLE,,,,,7.53,,0,,,,,,0,4.26,0.35,35.185,,0,1,,,,,,9.98,7.85,9.98,9.98,,,,n/a,n/a,n/a,n/a,n/a,10800,https://dkn.gs/sports/images/nfl/players/50/886166.png, @ ,9/13/2026
+Sam LaPorta,TE,DET,,,,,7.5,,0,,,,,,,3.81,0.405,41.555,,0,,,,,,,10.4,8.49,10.4,10.4,,,,n/a,n/a,n/a,n/a,n/a,9600,https://dkn.gs/sports/images/nfl/players/50/706508.png, @ ,9/13/2026
+Dallas Goedert,TE,PHI,,,,,7.1,,0,,,,,,,3.52,0.395,34.735,,0,,,,,,,9.36,7.6,9.36,9.36,,,,n/a,n/a,n/a,n/a,n/a,4100,https://dkn.gs/sports/images/nfl/players/50/17055.png, @ ,9/13/2026
+Mark Andrews,TE,BAL,,,,,6.6,,0,,,,,,,3.45,0.41,34.52,,0,,,,,,,9.36,7.64,9.36,9.36,,,,n/a,n/a,n/a,n/a,n/a,8700,https://dkn.gs/sports/images/nfl/players/50/16963.png, @ ,9/13/2026
+Tucker Kraft,TE,GB,,,,,6.5,,0,,,,,,,3.985,0.4,45.55,,0,,,,,,,10.94,8.95,10.94,10.94,,,,n/a,n/a,n/a,n/a,n/a,4500,https://dkn.gs/sports/images/nfl/players/50/706550.png, @ ,9/13/2026
+Kyle Pitts Sr.,TE,ATL,,,,,6.2,,0,,,,,,,4.455,0.36,43.25,,0,,,,,,,10.94,8.71,10.94,10.94,,,,n/a,n/a,n/a,n/a,n/a,11700,https://dkn.gs/sports/images/nfl/players/50/557862.png, @ ,9/13/2026
+Brandon Aubrey,K,DAL,,,2,2.3,8.6,,,,,,,,,,,,,,,,,,2.7,,8.7,8.7,8.7,8.7,,,,n/a,n/a,n/a,n/a,n/a,,,,9/13/2026
+Jake Bates,K,DET,,,1.9,2.3,8.6,,,,,,,,,,,,,,,,,,3,,8.7,8.7,8.7,8.7,,,,n/a,n/a,n/a,n/a,n/a,8100,https://dkn.gs/sports/images/nfl/players/50/722655.png, @ ,9/13/2026
+Jason Myers,K,SEA,,,1.9,2.3,8.3,,,,,,,,,,,,,,,,,,2.6,,8.3,8.3,8.3,8.3,,,,n/a,n/a,n/a,n/a,n/a,8100,https://dkn.gs/sports/images/nfl/players/50/19936.png, @ ,9/9/2026
+Harrison Mevis,K,LAR,,,1.7,2,8.2,,,,,,,,,,,,,,,,,,3,,8.1,8.1,8.1,8.1,,,,n/a,n/a,n/a,n/a,n/a,7500,https://dkn.gs/sports/images/nfl/players/50/789433.png, @ ,9/10/2026
+Ka'imi Fairbairn,K,HOU,,,2,2.4,8.1,,,,,,,,,,,,,,,,,,2.2,,8.2,8.2,8.2,8.2,,,,n/a,n/a,n/a,n/a,n/a,7800,https://dkn.gs/sports/images/nfl/players/50/17717.png, @ ,9/13/2026
+Evan McPherson,K,CIN,,,1.8,2.2,8,,,,,,,,,,,,,,,,,,2.7,,8.1,8.1,8.1,8.1,,,,n/a,n/a,n/a,n/a,n/a,7500,https://dkn.gs/sports/images/nfl/players/50/560845.png, @ ,9/13/2026
+Will Reichard,K,MIN,,,1.9,2.2,8,,,,,,,,,,,,,,,,,,2.2,,7.9,7.9,7.9,7.9,,,,n/a,n/a,n/a,n/a,n/a,,,,9/13/2026
+Cam Little,K,JAC,,,1.8,2.1,7.9,,,,,,,,,,,,,,,,,,2.5,,7.9,7.9,7.9,7.9,,,,n/a,n/a,n/a,n/a,n/a,7800,https://dkn.gs/sports/images/nfl/players/50/787974.png, @ ,9/13/2026
+Chris Boswell,K,PIT,,,1.9,2.2,7.9,,,,,,,,,,,,,,,,,,2.3,,8,8,8,8,,,,n/a,n/a,n/a,n/a,n/a,7500,https://dkn.gs/sports/images/nfl/players/50/18389.png, @ ,9/13/2026
+Cairo Santos,K,CHI,,,1.7,2.1,7.8,,,,,,,,,,,,,,,,,,2.6,,7.7,7.7,7.7,7.7,,,,n/a,n/a,n/a,n/a,n/a,7800,https://dkn.gs/sports/images/nfl/players/50/19999.png, @ ,9/13/2026
+SEA,DST,SEA,,0.8,,,8,0.6,,0.7,19.8,,,,,,,,,,,3.2,0,0.2,,333.3,7,7,7,7,,,,n/a,n/a,n/a,n/a,n/a,,,,
+JAX,DST,JAX,,0.8,,,8,0.5,,0.8,16.7,,,,,,,,,,,3.2,0,0.2,,284.1,8,8,8,8,,,,n/a,n/a,n/a,n/a,n/a,,,,
+LAC,DST,LAC,,0.6,,,7.9,0.5,,0.7,18.8,,,,,,,,,,,3.4,0,0.2,,312.8,7,7,7,7,,,,n/a,n/a,n/a,n/a,n/a,,,,
+PHI,DST,PHI,,0.9,,,7.5,0.6,,0.7,19.5,,,,,,,,,,,2.7,0.1,0.2,,314.8,6.7,6.7,6.7,6.7,,,,n/a,n/a,n/a,n/a,n/a,,,,
+PIT,DST,PIT,,1,,,7.4,0.6,,0.8,18.7,,,,,,,,,,,2.6,0,0.2,,331.4,6.6,6.6,6.6,6.6,,,,n/a,n/a,n/a,n/a,n/a,,,,
+LV,DST,LV,,0.8,,,7.3,0.6,,0.7,19.1,,,,,,,,,,,2.9,0,0.1,,316.6,6.1,6.1,6.1,6.1,,,,n/a,n/a,n/a,n/a,n/a,,,,
+TEN,DST,TEN,,0.9,,,6.9,0.6,,0.8,20.7,,,,,,,,,,,3.4,0,0.1,,319.4,5.8,5.8,5.8,5.8,,,,n/a,n/a,n/a,n/a,n/a,,,,
+DET,DST,DET,,0.9,,,6.6,0.6,,0.8,20.7,,,,,,,,,,,3,0,0.2,,326.2,6,6,6,6,,,,n/a,n/a,n/a,n/a,n/a,,,,
 HOU,DST,HOU,,1,,,6.4,0.6,,0.8,22.3,,,,,,,,,,,2.6,0,0.2,,346.2,5.6,5.6,5.6,5.6,,,,n/a,n/a,n/a,n/a,n/a,,,,
+DEN,DST,DEN,,0.7,,,6.4,0.4,,0.7,22.1,,,,,,,,,,,3.2,0,0.2,,314.9,5.6,5.6,5.6,5.6,,,,n/a,n/a,n/a,n/a,n/a,,,,
