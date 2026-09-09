@@ -1585,6 +1585,16 @@
             padding: 0.35rem 0.6rem;
             border-radius: 999px;
         }
+        .recipe-row button.active {
+            background: var(--accent);
+            color: #0b1020;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(62,224,180,0.35);
+            font-weight: 700;
+        }
+        body[data-theme="light"] .recipe-row button.active {
+            color: #fff;
+        }
         .recipe-group-label {
             width: 100%;
             font-size: 0.7rem;
@@ -3236,6 +3246,7 @@
                     <button type="button" class="ghost" style="font-size:0.78rem;" onclick="selectAllSuggestedFP(true)" data-tip="Check Apply on every player with a suggested FP boost.">Select all suggestions</button>
                     <button type="button" class="ghost" style="font-size:0.78rem;" onclick="selectAllSuggestedFP(false)">Clear selection</button>
                     <button type="button" class="primary" style="font-size:0.78rem;padding:0.35rem 0.7rem;" onclick="applySelectedSuggestedFP()" data-tip="Update Projected FP for checked players to the suggested values, then re-run the optimizer to chase min exposure.">Apply selected suggested FP</button>
+                    <button type="button" class="primary" onclick="runLineupGeneration()" data-tip="Run the optimizer again with current settings, exposures, and recipes.">Re-run lineups</button>
                 </div>
                 <p style="font-size:0.75rem;color:var(--muted);margin:0.25rem 0 0.5rem;">Suggested FP estimates a higher projection to help hit Min % when a player is under-exposed. Check the box and Apply, then Run again.</p>
                 <div class="table-wrapper">
@@ -4360,6 +4371,11 @@
                 applyPreset('gpp_uniques');
                 setNextStep('Four uniques mix on. Confirm 4+ names under 10% own in Stacks Lab, add one game stack, Run.');
             }
+            document.querySelectorAll('.recipe-row button').forEach(b => b.classList.remove('active'));
+            const recBtn = (typeof event !== 'undefined' && event && event.target && event.target.closest)
+                ? event.target.closest('.recipe-row button')
+                : null;
+            if (recBtn) recBtn.classList.add('active');
             refreshChecklist();
             updateStickyBar();
         }
@@ -8355,9 +8371,10 @@
                 if (!(Number(p.projectedFP) > 0) && !keepZero) return false;
                 return true;
             });
+            const big = (typeof numLineups === 'number' && numLineups > 40);
             const caps = isShowdown
-                ? { Captain: 16, CPT: 16, FLEX: 32 }
-                : { QB: 12, RB: 20, WR: 28, TE: 12, DST: 10 };
+                ? { Captain: big ? 24 : 16, CPT: big ? 24 : 16, FLEX: big ? 48 : 32 }
+                : { QB: big ? 18 : 12, RB: big ? 28 : 20, WR: big ? 40 : 28, TE: big ? 18 : 12, DST: big ? 16 : 10 };
             const byPos = {};
             src.forEach(p => {
                 const pos = isShowdown
@@ -9062,7 +9079,10 @@
                 ? [lineup.lineup.captain, ...lineup.lineup.flex]
                 : Object.values(lineup.lineup);
             players.forEach(p => {
-                if (p) playerCounts[p.name] = (playerCounts[p.name] || 0) + 1;
+                if (!p) return;
+                const keys = [...new Set([p.name, p.displayName, p.baseName].filter(Boolean))];
+                const bump = 1;
+                keys.forEach(k => { playerCounts[k] = (playerCounts[k] || 0) + bump; });
             });
         }
 
@@ -9425,86 +9445,149 @@
         function cloneLuPlayer(p) {
             return p ? { name: p.name, id: p.id, baseName: p.baseName, salary: p.salary, projectedFP: p.projectedFP, ownership: p.ownership } : null;
         }
-        function swapFillLineup(isShowdown, lineupSet, playerCounts) {
-            if (!generatedLineups.length) return null;
-            const pool = genPool().filter(p => (Number(p.projectedFP) || 0) > 0 && (Number(p.salary) || 0) > 0 && !deselectedPlayers.has(p.displayName));
-            if (!pool.length) return null;
-            const src = generatedLineups[Math.floor(Math.random() * Math.min(generatedLineups.length, 8))];
-            const used = new Set();
-            const maxFor = (dn) => {
+        function genEligible(isShowdown, playerCounts) {
+            const src = (filteredData && filteredData.length) ? filteredData : genPool();
+            return src.filter(p => {
+                if (!p || deselectedPlayers.has(p.displayName)) return false;
+                if (!(Number(p.projectedFP) > 0) || !(Number(p.salary) > 0)) return false;
+                const dn = p.displayName;
+                const count = playerCounts[dn] || playerCounts[p.baseName] || playerCounts[p.name] || 0;
                 const effectiveMax = Math.max(minExposures[dn] || 0, Math.min(maxExposures[dn] || 100, maxExposure * 100));
-                return Math.floor(effectiveMax / 100 * Math.max(1, numLineups));
+                let maxAllowed = Math.max(1, Math.floor(effectiveMax / 100 * Math.max(1, numLineups)));
+                return count < maxAllowed;
+            });
+        }
+        function packClassicLineup(slots, lineupSet) {
+            const keys = ['QB','RB1','RB2','WR1','WR2','WR3','TE','FLEX','DST'];
+            if (keys.some(k => !slots[k])) return null;
+            const players = keys.map(k => slots[k]);
+            const names = players.map(p => p.name);
+            if (new Set(names).size !== 9) return null;
+            const totalSalary = players.reduce((s,p) => s + p.salary, 0);
+            if (totalSalary > maxSalary) return null;
+            const signature = names.slice().sort().join(',');
+            if (lineupSet.has(signature)) return null;
+            lineupSet.add(signature);
+            return {
+                lineup: slots,
+                totalSalary,
+                totalPoints: players.reduce((s,p) => s + p.projectedFP, 0),
+                totalOwnership: players.reduce((s,p) => s + (p.ownership || 0), 0)
             };
-            const canUse = (p) => {
-                if (!p || used.has(p.displayName) || used.has(p.baseName)) return false;
-                if ((playerCounts[p.displayName] || 0) >= maxFor(p.displayName)) return false;
-                return true;
-            };
-            const pick = (pos, slotType) => {
-                const cand = pool.filter(p => {
-                    if (!canUse(p)) return false;
-                    if (isShowdown) return (p.slotType || '') === slotType || (slotType === 'Captain' && (p.displayName || '').endsWith(' (CPT)'));
-                    const pp = String(p.Position || '').split('/')[0];
-                    if (pos === 'FLEX') return pp === 'RB' || pp === 'WR' || pp === 'TE';
-                    return pp === pos;
-                }).sort((a,b) => (Number(b.projectedFP)||0) * (0.85 + Math.random()*0.3) - (Number(a.projectedFP)||0));
+        }
+        function toLu(p) {
+            return { name: p.displayName, id: p.id, baseName: p.baseName, salary: p.salary, projectedFP: p.projectedFP, ownership: p.ownership || 0 };
+        }
+        function pickWeighted(list, used) {
+            const cand = list.filter(p => !used.has(p.displayName) && !used.has(p.baseName));
+            if (!cand.length) return null;
+            cand.sort((a,b) => ((Number(b.projectedFP)||0) * (0.7 + Math.random() * 0.6)) - ((Number(a.projectedFP)||0)));
+            return cand[Math.floor(Math.random() * Math.min(6, cand.length))];
+        }
+        function greedyBuildLineup(isShowdown, lineupSet, playerCounts) {
+            const pool = genEligible(isShowdown, playerCounts);
+            if (!pool.length) return null;
+            const used = new Set();
+            const jitter = (p) => (Number(p.projectedFP) || 0) * (0.65 + Math.random() * 0.7);
+            const take = (list, maxSal, minSal) => {
+                const cand = list.filter(p => {
+                    if (used.has(p.displayName) || used.has(p.baseName)) return false;
+                    const sal = Number(p.salary) || 0;
+                    if (sal > maxSal) return false;
+                    if (minSal && sal < minSal) return false;
+                    return true;
+                }).sort((a,b) => jitter(b) - jitter(a));
                 return cand[0] || null;
             };
-            const toP = (p) => ({ name: p.displayName, id: p.id, baseName: p.baseName, salary: p.salary, projectedFP: p.projectedFP, ownership: p.ownership || 0 });
             if (isShowdown) {
-                let cap = src.lineup.captain ? pool.find(p => p.displayName === src.lineup.captain.name) : pick(null, 'Captain');
-                const flex = (src.lineup.flex || []).map(f => pool.find(p => p.displayName === f.name)).filter(Boolean);
-                if (cap) used.add(cap.displayName);
-                flex.forEach(p => used.add(p.displayName));
-                const swapsN = 1 + Math.floor(Math.random() * 3);
-                for (let i = 0; i < swapsN && flex.length; i++) {
-                    const idx = Math.floor(Math.random() * flex.length);
-                    const nxt = pick(null, 'FLEX');
-                    if (nxt && nxt.baseName !== cap?.baseName) { used.delete(flex[idx].displayName); flex[idx] = nxt; used.add(nxt.displayName); }
+                const caps = pool.filter(p => p.slotType === 'Captain' || (p.displayName||'').endsWith(' (CPT)'));
+                const flexes = pool.filter(p => p.slotType === 'FLEX' || (p.displayName||'').endsWith(' (FLEX)'));
+                const cap = take(caps, 18000, 0);
+                if (!cap) return null;
+                used.add(cap.displayName); used.add(cap.baseName);
+                const flex = [];
+                let left = maxSalary - cap.salary;
+                for (let i = 0; i < 5; i++) {
+                    const need = 4 - i;
+                    const f = take(flexes, left - need * 2500, 0);
+                    if (!f || f.baseName === cap.baseName) return null;
+                    used.add(f.displayName); used.add(f.baseName);
+                    flex.push(f);
+                    left -= f.salary;
                 }
-                if (Math.random() < 0.25) {
-                    const nxt = pick(null, 'Captain');
-                    if (nxt) { used.delete(cap?.displayName); cap = nxt; used.add(nxt.displayName); }
-                }
-                if (!cap || flex.length < 5) return null;
-                const lineup = { captain: toP(cap), flex: flex.map(toP) };
                 const totalSalary = cap.salary + flex.reduce((s,p)=>s+p.salary,0);
-                if (totalSalary > maxSalary || totalSalary < Math.max(0, minSalary - 2500)) return null;
+                if (totalSalary > maxSalary) return null;
                 const signature = `${cap.displayName}|${flex.map(p=>p.displayName).sort().join(',')}`;
                 if (lineupSet.has(signature)) return null;
                 lineupSet.add(signature);
-                return { lineup, totalSalary, totalPoints: cap.projectedFP + flex.reduce((s,p)=>s+p.projectedFP,0), totalOwnership: (cap.ownership||0)+flex.reduce((s,p)=>s+(p.ownership||0),0) };
+                return {
+                    lineup: { captain: toLu(cap), flex: flex.map(toLu) },
+                    totalSalary,
+                    totalPoints: cap.projectedFP + flex.reduce((s,p)=>s+p.projectedFP,0),
+                    totalOwnership: (cap.ownership||0) + flex.reduce((s,p)=>s+(p.ownership||0),0)
+                };
             }
+            const byPos = (pos) => pool.filter(p => String(p.Position||'').split('/')[0] === pos);
+            const order = [
+                { key: 'QB', pos: 'QB' },
+                { key: 'WR1', pos: 'WR' },
+                { key: 'RB1', pos: 'RB' },
+                { key: 'WR2', pos: 'WR' },
+                { key: 'RB2', pos: 'RB' },
+                { key: 'WR3', pos: 'WR' },
+                { key: 'TE', pos: 'TE' },
+                { key: 'FLEX', pos: 'FLEX' },
+                { key: 'DST', pos: 'DST' }
+            ];
+            const slots = {};
+            let left = maxSalary;
+            const remainAfter = { QB:8, WR1:7, RB1:6, WR2:5, RB2:4, WR3:3, TE:2, FLEX:1, DST:0 };
+            for (const step of order) {
+                const floor = 2200 * remainAfter[step.key];
+                const maxThis = left - floor;
+                const list = step.pos === 'FLEX'
+                    ? pool.filter(p => ['RB','WR','TE'].includes(String(p.Position||'').split('/')[0]))
+                    : byPos(step.pos);
+                const pick = take(list, maxThis, 0);
+                if (!pick) return null;
+                used.add(pick.displayName); used.add(pick.baseName);
+                slots[step.key] = toLu(pick);
+                left -= pick.salary;
+            }
+            return packClassicLineup(slots, lineupSet);
+        }
+                function swapFillLineup(isShowdown, lineupSet, playerCounts) {
+            if (!generatedLineups.length) return greedyBuildLineup(isShowdown, lineupSet, playerCounts);
+            const pool = genEligible(isShowdown, playerCounts);
+            if (!pool.length) return null;
+            const src = generatedLineups[Math.floor(Math.random() * generatedLineups.length)];
+            if (isShowdown) return greedyBuildLineup(isShowdown, lineupSet, playerCounts);
             const keys = ['QB','RB1','RB2','WR1','WR2','WR3','TE','FLEX','DST'];
             const posOf = { QB:'QB', RB1:'RB', RB2:'RB', WR1:'WR', WR2:'WR', WR3:'WR', TE:'TE', FLEX:'FLEX', DST:'DST' };
-            const lineup = {};
+            const slots = {};
+            const used = new Set();
             keys.forEach(k => {
-                lineup[k] = cloneLuPlayer(src.lineup[k]);
-                if (lineup[k]) used.add(lineup[k].name);
+                slots[k] = cloneLuPlayer(src.lineup[k]);
+                if (slots[k]) used.add(slots[k].name);
             });
-            const nSwap = 2 + Math.floor(Math.random() * 3);
+            const nSwap = 1 + Math.floor(Math.random() * 5);
             const order = keys.slice().sort(() => Math.random() - 0.5);
             let changed = 0;
             for (const k of order) {
                 if (changed >= nSwap) break;
-                const nxt = pick(posOf[k]);
+                const pred = (p) => {
+                    const pp = String(p.Position || '').split('/')[0];
+                    return posOf[k] === 'FLEX' ? ['RB','WR','TE'].includes(pp) : pp === posOf[k];
+                };
+                const nxt = pickWeighted(pool.filter(pred), used);
                 if (!nxt) continue;
-                used.delete(lineup[k]?.name);
-                lineup[k] = toP(nxt);
+                used.delete(slots[k]?.name);
+                slots[k] = toLu(nxt);
                 used.add(nxt.displayName);
                 changed++;
             }
-            if (changed < 2) return null;
-            const players = keys.map(k => lineup[k]).filter(Boolean);
-            if (players.length !== 9) return null;
-            const names = new Set(players.map(p => p.name));
-            if (names.size !== 9) return null;
-            const totalSalary = players.reduce((s,p)=>s+p.salary,0);
-            if (totalSalary > maxSalary || totalSalary < Math.max(0, minSalary - 2500)) return null;
-            const signature = players.map(p => p.name).slice().sort().join(',');
-            if (lineupSet.has(signature)) return null;
-            lineupSet.add(signature);
-            return { lineup, totalSalary, totalPoints: players.reduce((s,p)=>s+p.projectedFP,0), totalOwnership: players.reduce((s,p)=>s+(p.ownership||0),0) };
+            if (!changed) return greedyBuildLineup(isShowdown, lineupSet, playerCounts);
+            return packClassicLineup(slots, lineupSet) || greedyBuildLineup(isShowdown, lineupSet, playerCounts);
         }
                 const runLineupGeneration = async () => {
             if (!selectedSlate) { alert('Please select a slate'); return; }
@@ -9773,9 +9856,11 @@
             if (generatedLineups.length < numLineups && !abortLineupGeneration) {
                 updateProgress((generatedLineups.length / numLineups) * 100, 'Diversifying lineups…');
                 let swaps = 0;
-                while (generatedLineups.length < numLineups && swaps < numLineups * 12 && !abortLineupGeneration) {
+                while (generatedLineups.length < numLineups && swaps < numLineups * 200 && !abortLineupGeneration) {
                     swaps++;
-                    const extra = swapFillLineup(isShowdown, lineupSet, playerCounts);
+                    const extra = (swaps % 5 === 0)
+                        ? (greedyBuildLineup(isShowdown, lineupSet, playerCounts) || swapFillLineup(isShowdown, lineupSet, playerCounts))
+                        : (swapFillLineup(isShowdown, lineupSet, playerCounts) || greedyBuildLineup(isShowdown, lineupSet, playerCounts));
                     if (!extra) continue;
                     generatedLineups.push(extra);
                     updatePlayerCounts(extra, playerCounts, isShowdown);
