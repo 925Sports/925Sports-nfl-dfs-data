@@ -479,9 +479,9 @@
         button[data-tip]:hover::after {
             content: attr(data-tip);
             position: absolute;
-            left: 50%;
+            left: 0;
             bottom: calc(100% + 8px);
-            transform: translateX(-50%);
+            transform: none;
             background: #0f172a;
             color: #f1f5f9;
             font-size: 0.72rem;
@@ -489,13 +489,63 @@
             padding: 0.45rem 0.65rem;
             border-radius: 8px;
             white-space: normal;
-            width: 210px;
-            z-index: 60;
+            width: min(260px, calc(100vw - 48px));
+            max-width: 280px;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            z-index: 800;
             box-shadow: 0 8px 20px rgba(0,0,0,0.25);
             pointer-events: none;
             text-align: left;
         }
         button[data-tip] { position: relative; }
+        #settingsCard { overflow: visible; }
+        .presets-row, .recipe-row { overflow: visible; position: relative; }
+        .sd-guide {
+            display: inline-flex;
+            align-items: center;
+            position: relative;
+            margin-left: 0.35rem;
+            vertical-align: middle;
+        }
+        .sd-guide-btn {
+            width: 18px;
+            height: 18px;
+            padding: 0;
+            border-radius: 50%;
+            font-size: 0.72rem;
+            font-weight: 800;
+            line-height: 1;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--muted);
+        }
+        .sd-guide-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .sd-guide-pop {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: calc(100% + 8px);
+            width: min(340px, calc(100vw - 32px));
+            background: #0f172a;
+            color: #e8edf7;
+            border: 1px solid #2a3350;
+            border-radius: 10px;
+            padding: 0.7rem 0.8rem;
+            z-index: 900;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+            font-size: 0.75rem;
+            line-height: 1.45;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0;
+            white-space: normal;
+        }
+        .sd-guide:hover .sd-guide-pop,
+        .sd-guide:focus-within .sd-guide-pop { display: block; }
+        .sd-guide-pop strong { color: #7ff0d0; display: block; margin: 0.35rem 0 0.1rem; }
+        .sd-guide-pop strong:first-child { margin-top: 0; }
+        .preset-group-label, .recipe-group-label { display: flex; align-items: center; flex-wrap: wrap; gap: 0.15rem; }
         .settings-section {
             margin: 0.65rem 0 0.85rem;
             border: 1px solid var(--border-color);
@@ -2745,7 +2795,7 @@
                     <li><strong>Presets</strong> — set global style (Cash vs GPP vs K/DST). Start here, then add only a few player tiers.</li>
                     <li><strong>Stacks</strong> — force QB/CPT + pass catcher(s) in a % of builds. Recipes: QB+WR+TE, QB+2 PCs, same-game bring-back (RB or PC), and fade both DSTs from that game.</li>
                     <li><strong>Groups</strong> — structural “at least N of these players.” Prefer 1 group, not 4.</li>
-                    <li><strong>Min K/DST</strong> (Showdown) — same idea as a group of kickers/DSTs, but simpler. Don’t also Group the same players.</li>
+                    <li><strong>Min / max K+DST</strong> (Showdown) — keep kickers and DSTs eligible as FLEX. Regular season cap is max 2. Min 2 is preseason-only. Don’t also Group the same players.</li>
                     <li><strong>CPT / FLEX bulk exposure</strong> (Showdown) — set all Captains or all FLEX rows at once, then tighten favorites with tiers.</li>
                 </ul>
                 <p style="font-size:0.88rem;"><strong>Don’t stack everything:</strong> one preset + a handful of tiers + optional stacks beats Groups + tight ownership + K/DST + 15 min-exposures. The tool warns before Run if it detects overlap.</p>
@@ -2847,11 +2897,27 @@
                     <button class="preset-btn contest-classic" data-tip="Milly Winner: 150-max GPP. Unique 5, stacks on (QB+2 PCs + opposing RB bring-back), fade game DSTs, leverage on." onclick="applyPreset('gpp_milly')">Milly Winner</button>
                     <button class="preset-btn contest-classic" data-tip="GPP Mini-Stack: QB + 1 PC only (22% of 2025 Milly winners). Lower correlation, more room for uniques." onclick="applyPreset('gpp_mini')">GPP Mini-Stack</button>
                     <button class="preset-btn contest-classic" data-tip="Four Uniques: GPP mix — cap chalk at ~40% and boost &lt;10% owned pieces so builds can land 4+ contrarian names." onclick="applyPreset('gpp_uniques')">Four Uniques</button>
-                    <span class="preset-group-label">Showdown</span>
-                    <button class="preset-btn contest-showdown" data-tip="Showdown Cash: Cash settings + 3–3 team split. Safer CPT builds for single-game cash." onclick="applyPreset('sd_cash')">Showdown Cash</button>
-                    <button class="preset-btn contest-showdown" data-tip="Showdown GPP: GPP settings + 4–2 split. Pair with Build around a leverage CPT for upside." onclick="applyPreset('sd_gpp')">Showdown GPP</button>
-                    <button class="preset-btn contest-showdown" data-tip="Showdown GPP smash: 5–1 team split for one-sided game scripts." onclick="applyPreset('sd_gpp_smash')">Showdown GPP 5–1</button>
-                    <button class="preset-btn contest-showdown" data-tip="K/DST Focus: require at least 3 Kickers + DSTs combined. Strong for preseason when scoring is low and K/DST hold extra value." onclick="applyPreset('sd_kdst')">Showdown K/DST Focus</button>
+                    <span class="preset-group-label">Showdown <span class="sd-guide">
+                        <button type="button" class="sd-guide-btn" aria-label="Best Showdown option by contest">?</button>
+                        <div class="sd-guide-pop">
+                            <strong>Best by contest</strong>
+                            Cash / 50-50 / H2H: <b>Showdown Cash</b> or recipe <b>Cash 3–3</b>. Floor CPT (RB / dual-QB), ignore ownership.
+                            <strong>Single-entry GPP</strong>
+                            Recipe <b>Single-entry GPP</b>. CPT WR or RB in the 8–18% own band. Do not CPT TE/K.
+                            <strong>20-max / featured GPP</strong>
+                            Preset <b>Showdown GPP</b> or recipe <b>GPP 4–2</b>. Change the CPT across the pool; leave $1k–$2.5k.
+                            <strong>Shootout (O/U 49+)</strong>
+                            Recipe <b>Shootout</b>. WR CPT + his QB, cap extra same-team WRs.
+                            <strong>Grind / big favorite (O/U ≤42 or spread 7+)</strong>
+                            Recipe <b>Grind / favorite</b> or preset <b>Favorite smash</b> (5–1 + RB CPT + same-team DST).
+                            <strong>Preseason only</strong>
+                            <b>Preseason K/DST</b>. Regular season: keep K/DST eligible, max 2 combined — do not force 3.
+                        </div>
+                    </span></span>
+                    <button class="preset-btn contest-showdown" data-tip="Best for 50/50s and H2H. 3–3 split, leftover ≤$800, floor CPT, K/DST allowed as FLEX (max 2)." onclick="applyPreset('sd_cash')">Showdown Cash</button>
+                    <button class="preset-btn contest-showdown" data-tip="Best default for 20-max GPPs. 4–2 split, leftover $1k–$2.5k, WR/QB stacks, max 2 K+DST." onclick="applyPreset('sd_gpp')">Showdown GPP</button>
+                    <button class="preset-btn contest-showdown" data-tip="Use only on a big-spread favorite: 5–1 + RB CPT lean + same-team DST. Not a default GPP." onclick="applyPreset('sd_gpp_smash')">Favorite smash</button>
+                    <button class="preset-btn contest-showdown" data-tip="Preseason / low-scoring only. Min 2 and max 2 K+DST. Do not use this on regular-season GPPs." onclick="applyPreset('sd_kdst')">Preseason K/DST</button>
                     <span class="preset-group-label">General</span>
                     <button class="preset-btn" data-tip="Balanced: middle ground between cash safety and GPP upside." onclick="applyPreset('balanced')">Balanced</button>
                     <button class="preset-btn" data-tip="Stack Heavy: force QB/CPT + pass catcher stacking with lower uniqueness." onclick="applyPreset('stackheavy')">Stack Heavy</button>
@@ -2877,10 +2943,29 @@
                     <button type="button" class="ghost" data-tip="Cap chalk ~40% and boost &lt;10% owned names so the pool can produce 4+ uniques." onclick="applyRecipe('gpp_four_uniques')">Four uniques mix</button>
                     <button type="button" class="ghost" data-tip="Classic GPP + QB must have WR+TE. Next: suggest stacks or pick QBs." onclick="applyRecipe('classic_3man')">Classic QB+WR+TE</button>
                     <button type="button" class="ghost" data-tip="Classic GPP + 2 pass catchers + opponent bring-back + fade both game DSTs." onclick="applyRecipe('classic_game_stack')">Classic game stack</button>
-                    <span class="recipe-group-label">Showdown</span>
-                    <button type="button" class="ghost" data-tip="Showdown + Min K/DST 2 + wide ownership. Next: stack QBs and tier favorites. Matches HoF-style FG/DST scripts." onclick="applyRecipe('sd_kdst2')">Showdown 2+ K/DST</button>
-                    <button type="button" class="ghost" data-tip="Showdown GPP + 4–2 split. Next: Build around CPT or tier two QBs + stacks." onclick="applyRecipe('sd_gpp_simple')">Showdown GPP 4–2</button>
-                    <button type="button" class="ghost" data-tip="Showdown Cash + 3–3. Safer single-game builds." onclick="applyRecipe('sd_cash_simple')">Showdown Cash 3–3</button>
+                    <span class="recipe-group-label">Showdown <span class="sd-guide">
+                        <button type="button" class="sd-guide-btn" aria-label="Best Showdown option by contest">?</button>
+                        <div class="sd-guide-pop">
+                            <strong>Best by contest</strong>
+                            Cash / 50-50 / H2H: <b>Showdown Cash</b> or recipe <b>Cash 3–3</b>. Floor CPT (RB / dual-QB), ignore ownership.
+                            <strong>Single-entry GPP</strong>
+                            Recipe <b>Single-entry GPP</b>. CPT WR or RB in the 8–18% own band. Do not CPT TE/K.
+                            <strong>20-max / featured GPP</strong>
+                            Preset <b>Showdown GPP</b> or recipe <b>GPP 4–2</b>. Change the CPT across the pool; leave $1k–$2.5k.
+                            <strong>Shootout (O/U 49+)</strong>
+                            Recipe <b>Shootout</b>. WR CPT + his QB, cap extra same-team WRs.
+                            <strong>Grind / big favorite (O/U ≤42 or spread 7+)</strong>
+                            Recipe <b>Grind / favorite</b> or preset <b>Favorite smash</b> (5–1 + RB CPT + same-team DST).
+                            <strong>Preseason only</strong>
+                            <b>Preseason K/DST</b>. Regular season: keep K/DST eligible, max 2 combined — do not force 3.
+                        </div>
+                    </span></span>
+                    <button type="button" class="ghost" data-tip="Best cash recipe. 3–3, leftover ≤$800, floor CPT, no RB-DST force." onclick="applyRecipe('sd_cash_simple')">Cash 3–3</button>
+                    <button type="button" class="ghost" data-tip="Best 20-max GPP recipe. 4–2, $1k–$2.5k leftover, WR/QB stacks + one bring-back." onclick="applyRecipe('sd_gpp_simple')">GPP 4–2</button>
+                    <button type="button" class="ghost" data-tip="One-ticket GPP. CPT WR/RB in the 8–18% band, 3–3 or 4–2, no CPT TE/K." onclick="applyRecipe('sd_single')">Single-entry GPP</button>
+                    <button type="button" class="ghost" data-tip="O/U 49+: WR CPT + his QB, cap extra same-team WRs, optional both QBs." onclick="applyRecipe('sd_shootout')">Shootout</button>
+                    <button type="button" class="ghost" data-tip="O/U ≤42 or spread 7+: RB CPT lean, same-team DST, 4–2 or 5–1." onclick="applyRecipe('sd_grind')">Grind / favorite</button>
+                    <button type="button" class="ghost" data-tip="Preseason only. Force exactly 2 K+DST. Skip on regular slates." onclick="applyRecipe('sd_kdst2')">Preseason K/DST</button>
                 </div>
                 </div>
                 </details>
@@ -3107,9 +3192,13 @@
                                 <span class="sd-field-hint">Always ≥1 from each team</span>
                             </div>
                             <div class="sd-field">
-                                <label>Min Kickers + DSTs</label>
-                                <input type="number" id="sdMinKDst" min="0" max="6" value="0" onchange="showdownMinKDst=Math.max(0,Math.min(6,parseInt(this.value)||0))" title="At least this many K and/or DST on each Showdown lineup">
-                                <span class="sd-field-hint">Strong for preseason</span>
+                                <label>Min / max K+DST</label>
+                                <div class="sd-inline-inputs">
+                                    <input type="number" id="sdMinKDst" min="0" max="6" value="0" onchange="showdownMinKDst=Math.max(0,Math.min(6,parseInt(this.value)||0))" title="At least this many K and/or DST">
+                                    <span>/</span>
+                                    <input type="number" id="sdMaxKDst" min="0" max="6" value="2" onchange="showdownMaxKDst=Math.max(0,Math.min(6,parseInt(this.value)||0))" title="At most this many K and/or DST. 2 is the regular-season cap.">
+                                </div>
+                                <span class="sd-field-hint">Regular season: min 0 / max 2. Winners almost never play 3+.</span>
                             </div>
                         </div>
 
@@ -3135,14 +3224,42 @@
                                     <input type="checkbox" id="sdCptQbStackPass" checked>
                                     <span class="sd-rule-text">
                                         <strong>QB CPT → same-team WR/TE</strong>
-                                        <small>QB captain stacks with a pass catcher</small>
+                                        <small>Pocket QB wants 2 PCs; rusher can use 1</small>
                                     </span>
                                 </label>
                                 <label class="sd-rule">
-                                    <input type="checkbox" id="sdCptRbStackDst" checked>
+                                    <input type="checkbox" id="sdCptWrCapExtra" checked>
+                                    <span class="sd-rule-text">
+                                        <strong>WR/TE CPT → max 1 extra WR/TE</strong>
+                                        <small>Stops double-stack chops on one script</small>
+                                    </span>
+                                </label>
+                                <label class="sd-rule">
+                                    <input type="checkbox" id="sdCptPassBringBack">
+                                    <span class="sd-rule-text">
+                                        <strong>Pass CPT → one opposing skill</strong>
+                                        <small>GPP bring-back: opp QB/WR/TE</small>
+                                    </span>
+                                </label>
+                                <label class="sd-rule">
+                                    <input type="checkbox" id="sdCptRbStackDst">
                                     <span class="sd-rule-text">
                                         <strong>RB CPT → same-team DST</strong>
-                                        <small>Run-game / positive script lean</small>
+                                        <small>On for grind / favorite smash only</small>
+                                    </span>
+                                </label>
+                                <label class="sd-rule">
+                                    <input type="checkbox" id="sdCptQbFadeK" checked>
+                                    <span class="sd-rule-text">
+                                        <strong>QB CPT → no same-team K</strong>
+                                        <small>TD script ≠ FG script</small>
+                                    </span>
+                                </label>
+                                <label class="sd-rule">
+                                    <input type="checkbox" id="sdDstMaxOppSkill" checked>
+                                    <span class="sd-rule-text">
+                                        <strong>DST in lineup → max 3 opp skill</strong>
+                                        <small>Do not fade a DST vs 4+ opposing skill</small>
                                     </span>
                                 </label>
                                 <label class="sd-rule">
@@ -4176,6 +4293,20 @@
                     adjustedProjections[r.Role][r['Player Name']] = base;
                 }
             });
+            rows.forEach(r => {
+                const pos = String(r.Position || r['Position'] || '').toUpperCase();
+                const isK = pos === 'K' || (String(r.baseName || r['Player Name'] || '').toLowerCase().includes('kicker'));
+                if (!isK) return;
+                if (r._userEditedFP) return;
+                const cur = Number(r.projectedFP != null ? r.projectedFP : r['Projected FP']);
+                if (Number.isFinite(cur) && cur > 0) return;
+                const isCpt = r.slotType === 'Captain' || String(r.displayName || '').endsWith(' (CPT)') || pos === 'CPT';
+                const fp = isCpt ? 10.5 : 7.0;
+                r.projectedFP = fp;
+                r['Projected FP'] = isCpt ? 7.0 : fp;
+                r._kBaseline = true;
+                applied++;
+            });
             return applied;
         }
 
@@ -4255,6 +4386,7 @@
         let showdownMinTeamA = 0;
         let showdownMinTeamB = 0;
         let showdownMinKDst = 0; // min Kickers + DSTs combined (Showdown / preseason)
+        let showdownMaxKDst = 2; // regular-season cap; 3+ is a 1.1% top-1% event
         let lineupChecked = new Set();      // checked lineup indices for export
         let abortLineupGeneration = false;  // user cancelled mid-run
         let lineupGenerationRunning = false;
@@ -4468,16 +4600,22 @@
                 setNextStep('Classic Cash applied. Core/High tier your locks (safer chalk), then Run 20 lineups.');
             } else if (key === 'sd_kdst2') {
                 applyPreset('sd_kdst');
-                showdownMinKDst = 2;
-                const kd = document.getElementById('sdMinKDst');
-                if (kd) kd.value = 2;
-                setNextStep('Showdown + Min K/DST = 2. Add 2–4 QB stacks and tier your favorites (CPT + FLEX), then Run. Do not add heavy Groups on top.');
+                setNextStep('Preseason K/DST on (min 2 / max 2). Tier a couple skill pieces, then Run. Skip this on regular-season slates.');
             } else if (key === 'sd_gpp_simple') {
                 applyPreset('sd_gpp');
-                setNextStep('Showdown GPP 4–2 applied. Tier two QBs or use Build around CPT, add primary stacks, then Run.');
+                setNextStep('Showdown GPP 4–2 applied. CPT WR or RB first (not default QB), attach stacks, Run 20–150. Move the CPT across the pool.');
             } else if (key === 'sd_cash_simple') {
                 applyPreset('sd_cash');
-                setNextStep('Showdown Cash 3–3 applied. High-tier safer CPT options only, light stacks, then Run 20.');
+                setNextStep('Showdown Cash 3–3 applied. High-tier floor CPTs (RB / dual-QB), ignore ownership, Run 20.');
+            } else if (key === 'sd_single') {
+                applyPreset('sd_single');
+                setNextStep('Single-entry GPP: one ticket. CPT a WR or RB in the 8–18% own band. Do not CPT TE or K. Run 1–20.');
+            } else if (key === 'sd_shootout') {
+                applyPreset('sd_shootout');
+                setNextStep('Shootout recipe: WR CPT + his QB, max 1 extra same-team WR/TE, one opposing skill. Tier the alpha WRs, then Run.');
+            } else if (key === 'sd_grind') {
+                applyPreset('sd_grind');
+                setNextStep('Grind / favorite: lean RB CPT + same-team DST. Use Favorite smash (5–1) only if the spread is 7+. Tier the lead back, then Run.');
             } else if (key === 'classic_3man') {
                 applyPreset('classic_gpp');
                 const wrte = document.getElementById('classicQbWrTe');
@@ -6560,7 +6698,7 @@
                     minExposures: {...minExposures},
                     maxExposures: {...maxExposures},
                     buildAroundCpt,
-                    showdownMinTeamA, showdownMinTeamB, showdownMinKDst,
+                    showdownMinTeamA, showdownMinTeamB, showdownMinKDst, showdownMaxKDst,
                     customProjections: {...customProjections},
                     projOverrides,
                     activePreset
@@ -6703,6 +6841,11 @@
                 showdownMinKDst = session.showdownMinKDst;
                 const kd = document.getElementById('sdMinKDst');
                 if (kd) kd.value = showdownMinKDst;
+            }
+            if (session.showdownMaxKDst != null) {
+                showdownMaxKDst = session.showdownMaxKDst;
+                const mx = document.getElementById('sdMaxKDst');
+                if (mx) mx.value = showdownMaxKDst;
             }
             if (session.customProjections) {
                 customProjections = { ...customProjections, ...session.customProjections };
@@ -7369,6 +7512,44 @@
             if (typeof updateTable === 'function') updateTable();
         }
 
+        function setSdRule(id, on) {
+            const el = document.getElementById(id);
+            if (el) el.checked = !!on;
+        }
+        function setShowdownKDst(minV, maxV) {
+            showdownMinKDst = Math.max(0, Math.min(6, minV == null ? 0 : minV));
+            showdownMaxKDst = Math.max(0, Math.min(6, maxV == null ? 2 : maxV));
+            const a = document.getElementById('sdMinKDst');
+            const b = document.getElementById('sdMaxKDst');
+            if (a) a.value = showdownMinKDst;
+            if (b) b.value = showdownMaxKDst;
+        }
+        function applyShowdownCorrProfile(kind) {
+            // Cheap checkbox flips only — no extra solver work until Run.
+            const cash = kind === 'cash';
+            const smash = kind === 'smash' || kind === 'grind';
+            const pre = kind === 'preseason';
+            const gpp = !cash && !pre;
+            setSdRule('showdownAutoStack', gpp && !smash ? true : (smash ? true : false));
+            setSdRule('sdCptWrStackQb', true);
+            setSdRule('sdCptQbStackPass', true);
+            setSdRule('sdCptWrCapExtra', true);
+            setSdRule('sdCptPassBringBack', gpp && !smash);
+            setSdRule('sdCptRbStackDst', smash);
+            setSdRule('sdCptDstStackRb', false);
+            setSdRule('sdCptKFadeQb', true);
+            setSdRule('sdCptQbFadeK', true);
+            setSdRule('excludeOppDstWithOffenseCpt', true);
+            setSdRule('sdDstMaxOppSkill', gpp || smash);
+            if (pre) {
+                setShowdownKDst(2, 2);
+                setSdRule('showdownAutoStack', false);
+                setSdRule('sdCptPassBringBack', false);
+                setSdRule('sdCptRbStackDst', false);
+            } else {
+                setShowdownKDst(0, 2);
+            }
+        }
         function applyPreset(type) {
             const btn = event && event.target && event.target.closest ? event.target.closest('.preset-btn') : (event && event.target);
             // Toggle off if same preset clicked again
@@ -7410,9 +7591,7 @@
                 setFlexEligible(['RB', 'WR', 'TE']);
             }
             if (type !== 'sd_kdst') {
-                showdownMinKDst = 0;
-                const kd = document.getElementById('sdMinKDst');
-                if (kd) kd.value = 0;
+                setShowdownKDst(0, 2);
             }
 
             // Aliases
@@ -7444,26 +7623,44 @@
                 }
                 setExp(70); setOwn(80, 250); setLev(5); setRand(12); setUnique(1); setMulti(1);
                 setSplit('3-3');
-                if (document.getElementById('showdownAutoStack')) document.getElementById('showdownAutoStack').checked = false;
+                setSalaryLeftover(800);
+                applyShowdownCorrProfile('cash');
                 setBuildAroundCpt('');
-            } else if (type === 'sd_gpp') {
+            } else if (type === 'sd_gpp' || type === 'sd_single' || type === 'sd_shootout') {
                 if (!ensureShowdownSlate()) {
                     alert('No Showdown slate found in the data. Load Showdown player data first.');
                     return;
                 }
-                setExp(40); setOwn(0, 200); setLev(40); setRand(35); setUnique(3); setMulti(20);
-                setSplit('4-2');
-                if (document.getElementById('showdownAutoStack')) document.getElementById('showdownAutoStack').checked = true;
+                applyShowdownCorrProfile('gpp');
+                setSalaryLeftover(2500);
+                if (type === 'sd_single') {
+                    setExp(50); setOwn(90, 210); setLev(25); setRand(22); setUnique(2); setMulti(1);
+                    setSplit('3-3');
+                    setSalaryLeftover(1800);
+                    setSdRule('sdCptPassBringBack', true);
+                    setSdRule('sdCptRbStackDst', false);
+                } else if (type === 'sd_shootout') {
+                    setExp(40); setOwn(0, 200); setLev(40); setRand(35); setUnique(3); setMulti(20);
+                    setSplit('3-3');
+                    setSdRule('sdCptWrStackQb', true);
+                    setSdRule('sdCptWrCapExtra', true);
+                    setSdRule('sdCptPassBringBack', true);
+                    setSdRule('sdCptRbStackDst', false);
+                } else {
+                    setExp(40); setOwn(0, 200); setLev(40); setRand(35); setUnique(3); setMulti(20);
+                    setSplit('4-2');
+                }
                 const dd = document.getElementById('buildAroundCptDropdown');
-                if (dd && !buildAroundCpt) dd.textContent = 'Pick a leverage CPT →';
-            } else if (type === 'sd_gpp_smash') {
+                if (dd && !buildAroundCpt) dd.textContent = 'Pick a ceiling CPT →';
+            } else if (type === 'sd_gpp_smash' || type === 'sd_grind') {
                 if (!ensureShowdownSlate()) {
                     alert('No Showdown slate found in the data. Load Showdown player data first.');
                     return;
                 }
                 setExp(35); setOwn(0, 180); setLev(50); setRand(40); setUnique(3); setMulti(20);
-                setSplit('5-1');
-                if (document.getElementById('showdownAutoStack')) document.getElementById('showdownAutoStack').checked = true;
+                setSplit(type === 'sd_grind' ? '4-2' : '5-1');
+                setSalaryLeftover(2000);
+                applyShowdownCorrProfile('smash');
             } else if (type === 'sd_kdst') {
                 if (!ensureShowdownSlate()) {
                     alert('No Showdown slate found in the data. Load Showdown player data first.');
@@ -7471,12 +7668,8 @@
                 }
                 setExp(55); setOwn(60, 220); setLev(15); setRand(20); setUnique(2); setMulti(20);
                 setSplit('any');
-                showdownMinKDst = 3;
-                const kd = document.getElementById('sdMinKDst');
-                if (kd) kd.value = 3;
-                if (document.getElementById('showdownAutoStack')) document.getElementById('showdownAutoStack').checked = false;
-                const excl = document.getElementById('excludeOppDstWithOffenseCpt');
-                if (excl) excl.checked = false;
+                setSalaryLeftover(1200);
+                applyShowdownCorrProfile('preseason');
             } else if (type === 'cash_floor') {
                 ensureClassicSlate();
                 setExp(80); setOwn(160, 300); setLev(0); setRand(6); setUnique(1); setMulti(1);
@@ -7540,21 +7733,21 @@
                     'Do this next: (1) Review any auto-forced names in the pool (2) Override tiers if you disagree (3) Run 20. ' +
                     'This is a Classic main-slate recipe, not Showdown.',
                 sd_cash:
-                    'Showdown Cash + 3–3 team split (already ≥1 per team). ' +
-                    'Do this next: (1) High-tier safer CPT options only (2) Light stacks at most (3) Lineups = 20 (4) Run. ' +
-                    'Leave Min K/DST at 0 unless you specifically want FG/DST-heavy builds.',
+                    'Showdown Cash + 3–3. Leftover ≤$800, max 2 K+DST, RB→DST off. ' +
+                    'Next: High-tier floor CPTs (RB / dual-QB), ignore ownership, Run 20.',
                 sd_gpp:
-                    'Showdown GPP + 4–2 split. ' +
-                    'Do this next: (1) High-tier your 2 QBs on both CPT and FLEX rows (2) Advanced → 2–4 primary stacks (3) Run 20–50. ' +
-                    'Split is already set — don’t add Min K/DST 3 + Groups on top.',
+                    'Showdown GPP + 4–2. Leftover $1k–$2.5k, WR/QB stacks, one bring-back, max 2 K+DST. ' +
+                    'Next: CPT WR or RB first (not default QB), move the CPT across 20–150 builds.',
+                sd_single:
+                    'Single-entry GPP. One ticket, 3–3, CPT WR/RB in the 8–18% band. Do not CPT TE or K.',
+                sd_shootout:
+                    'Shootout GPP. WR CPT + his QB, cap extra same-team WRs, bring back one opposing skill.',
                 sd_gpp_smash:
-                    '5–1 smash split on. ' +
-                    'Do this next: (1) Tier the heavy-side offense (2) Run. ' +
-                    'Extreme structure — skip extra Groups and high Min K/DST.',
+                    'Favorite smash 5–1. Only when the spread is 7+: RB CPT + same-team DST. Not a default GPP.',
+                sd_grind:
+                    'Grind / favorite. RB CPT + same-team DST, 4–2. Flip to 5–1 if it is a blowout script.',
                 sd_kdst:
-                    'K/DST Focus on (min 3 Kickers+DSTs every lineup). ' +
-                    'Do this next: (1) Lightly tier skill favorites only (2) Optional 1–2 stacks (3) Run. ' +
-                    'Do not also Group “at least 2 K/DST” — that duplicates this rule and often returns 0 lineups.',
+                    'Preseason K/DST (min 2 / max 2). Regular season: leave min at 0 and keep the max at 2.',
                 balanced:
                     'Balanced preset on (middle of cash/GPP). ' +
                     'Do this next: (1) Tag 4–8 players with tiers (2) Run 20. ' +
@@ -8633,7 +8826,10 @@
                 const displayName = player.displayName;
                 if (deselectedPlayers.has(displayName)) return;
                 const hasMin = (minExposures[displayName] || 0) > 0;
-                if (!(Number(player.projectedFP) > 0) && !forcedSet.has(player.baseName) && !hasMin && !isDefensePlayer(player)) return;
+                const pos0 = String(player.Position || '').toUpperCase();
+                const keepKDst = isDefensePlayer(player) || pos0 === 'K' || pos0 === 'DST' || pos0 === 'DEF';
+                if (!(Number(player.projectedFP) > 0) && !forcedSet.has(player.baseName) && !hasMin && !keepKDst) return;
+                if (keepKDst && !(Number(player.projectedFP) > 0)) player.projectedFP = player.projectedFP || 6.5;
 
                 const minReq = Math.ceil((minExposures[displayName] || 0) / 100 * numLineups);
                 const effectiveMax = Math.max(minExposures[displayName] || 0, Math.min(maxExposures[displayName] || 100, relaxedMax * 100));
@@ -9004,8 +9200,8 @@
                 model.constraints.sdTeamB = { min: minB };
             }
 
-            // Min Kickers + DSTs (Showdown / preseason)
-            if (isShowdown && showdownMinKDst > 0) {
+            // Min / max Kickers + DSTs (one tagged constraint — cheap)
+            if (isShowdown && ((showdownMinKDst || 0) > 0 || (showdownMaxKDst || 0) > 0 && showdownMaxKDst < 6)) {
                 const isKOrDst = (p) => {
                     if (!p) return false;
                     let pos = p.Position;
@@ -9023,7 +9219,9 @@
                     )) || genPool().find(x => x.baseName === base);
                     if (isKOrDst(p)) model.variables[v].sdKDst = 1;
                 });
-                model.constraints.sdKDst = { min: showdownMinKDst };
+                model.constraints.sdKDst = {};
+                if ((showdownMinKDst || 0) > 0) model.constraints.sdKDst.min = showdownMinKDst;
+                if ((showdownMaxKDst || 0) > 0 && showdownMaxKDst < 6) model.constraints.sdKDst.max = showdownMaxKDst;
             }
 
             // Build around CPT: force that player into Captain slot
@@ -9094,7 +9292,7 @@
                 });
             }
 
-            // CPT QB → require ≥1 same-team WR or TE in FLEX
+            // CPT QB → same-team WR/TE (pocket wants 2, rusher 1). One constraint per QB CPT.
             if (isShowdown && document.getElementById('sdCptQbStackPass')?.checked) {
                 genPool().forEach(cpt => {
                     if (cpt.slotType !== 'Captain') return;
@@ -9107,9 +9305,13 @@
                         && model.variables[`${p.baseName}_FLEX`]
                     ).map(p => `${p.baseName}_FLEX`);
                     if (!passVars.length) return;
+                    const rushAtt = Number(cpt.rushAtt || cpt['Proj Rush Att'] || 0);
+                    const rushYds = Number(cpt.rushYds || 0);
+                    const rusher = rushAtt >= 5.5 || rushYds >= 25;
+                    const need = (!rusher && passVars.length >= 2) ? 2 : 1;
                     const cName = `cpt_qb_stack_pass_${cpt.baseName}`;
                     model.constraints[cName] = { min: 0 };
-                    model.variables[cptVar][cName] = -1;
+                    model.variables[cptVar][cName] = -need;
                     passVars.forEach(v => { model.variables[v][cName] = 1; });
                 });
             }
@@ -9171,7 +9373,87 @@
                 });
             }
 
-            // Uniqueness vs recent lineups only (keep window small — large windows freeze the solver)
+            // WR/TE CPT → max 1 extra same-team WR/TE (cheap: 1 constraint per WR/TE CPT)
+            if (isShowdown && document.getElementById('sdCptWrCapExtra')?.checked) {
+                genPool().forEach(cpt => {
+                    if (cpt.slotType !== 'Captain') return;
+                    if (!['WR', 'TE'].includes(getUnderlyingPos(cpt))) return;
+                    const cptVar = `${cpt.baseName}_Captain`;
+                    if (!model.variables[cptVar]) return;
+                    const extra = genPool().filter(p =>
+                        p.slotType === 'FLEX' && p.Team === cpt.Team && p.baseName !== cpt.baseName
+                        && ['WR', 'TE'].includes(getUnderlyingPos(p))
+                        && model.variables[`${p.baseName}_FLEX`]
+                    ).map(p => `${p.baseName}_FLEX`);
+                    if (!extra.length) return;
+                    const cName = `cpt_wr_cap_extra_${cpt.baseName}`;
+                    model.constraints[cName] = { max: 11 };
+                    model.variables[cptVar][cName] = 10;
+                    extra.forEach(v => { model.variables[v][cName] = 1; });
+                });
+            }
+
+            // Pass-game CPT → one opposing QB/WR/TE
+            if (isShowdown && document.getElementById('sdCptPassBringBack')?.checked) {
+                genPool().forEach(cpt => {
+                    if (cpt.slotType !== 'Captain') return;
+                    if (!['QB', 'WR', 'TE'].includes(getUnderlyingPos(cpt))) return;
+                    const cptVar = `${cpt.baseName}_Captain`;
+                    if (!model.variables[cptVar]) return;
+                    const opp = normalizeTeam(cpt.Opponent || '');
+                    const backs = genPool().filter(p =>
+                        p.slotType === 'FLEX' && normalizeTeam(p.Team) === opp
+                        && ['QB', 'WR', 'TE'].includes(getUnderlyingPos(p))
+                        && model.variables[`${p.baseName}_FLEX`]
+                    ).map(p => `${p.baseName}_FLEX`);
+                    if (!backs.length) return;
+                    const cName = `cpt_pass_bb_${cpt.baseName}`;
+                    model.constraints[cName] = { min: 0 };
+                    model.variables[cptVar][cName] = -1;
+                    backs.forEach(v => { model.variables[v][cName] = 1; });
+                });
+            }
+
+            // QB CPT → fade same-team K
+            if (isShowdown && document.getElementById('sdCptQbFadeK')?.checked) {
+                genPool().forEach(cpt => {
+                    if (cpt.slotType !== 'Captain' || getUnderlyingPos(cpt) !== 'QB') return;
+                    const cptVar = `${cpt.baseName}_Captain`;
+                    if (!model.variables[cptVar]) return;
+                    genPool().forEach(k => {
+                        if (k.slotType !== 'FLEX' || k.Team !== cpt.Team) return;
+                        if (getUnderlyingPos(k) !== 'K' && k.Position !== 'K') return;
+                        const kVar = `${k.baseName}_FLEX`;
+                        if (!model.variables[kVar]) return;
+                        const cName = `cpt_qb_fade_k_${cpt.baseName}`;
+                        model.constraints[cName] = { max: 1 };
+                        model.variables[cptVar][cName] = 1;
+                        model.variables[kVar][cName] = 1;
+                    });
+                });
+            }
+
+            // If a DST is used, max 3 opposing skill (usually 2 DST vars on the slate)
+            if (isShowdown && document.getElementById('sdDstMaxOppSkill')?.checked) {
+                genPool().forEach(dst => {
+                    if (dst.slotType !== 'FLEX' || (dst.Position !== 'DST' && getUnderlyingPos(dst) !== 'DST')) return;
+                    const dstVar = `${dst.baseName}_FLEX`;
+                    if (!model.variables[dstVar]) return;
+                    const opp = normalizeTeam(dst.Opponent || '');
+                    const oppSkill = genPool().filter(p =>
+                        p.slotType === 'FLEX' && normalizeTeam(p.Team) === opp
+                        && ['QB', 'RB', 'WR', 'TE'].includes(getUnderlyingPos(p))
+                        && model.variables[`${p.baseName}_FLEX`]
+                    ).map(p => `${p.baseName}_FLEX`);
+                    if (!oppSkill.length) return;
+                    const cName = `dst_max_opp_skill_${dst.baseName}`;
+                    model.constraints[cName] = { max: 13 };
+                    model.variables[dstVar][cName] = 10;
+                    oppSkill.forEach(v => { model.variables[v][cName] = 1; });
+                });
+            }
+
+                        // Uniqueness vs recent lineups only (keep window small — large windows freeze the solver)
             const uniqN = minUniquePlayers > 0
                 ? (isShowdown ? Math.min(2, previousLineups.length) : Math.min(3, previousLineups.length))
                 : 0;
@@ -10158,7 +10440,8 @@
                     if (showdownMinTeamA + showdownMinTeamB > 6) tips.push('Team split mins exceed 6 roster spots');
                     if (buildAroundCpt) tips.push('Build-around CPT + other constraints may be infeasible together');
                     if (showdownMinTeamA >= 5 || showdownMinTeamB >= 5) tips.push('Extreme team split (5-1) leaves little flexibility');
-                    if (showdownMinKDst >= 3) tips.push('Min K/DST may be hard if few kickers/DSTs are in the pool — lower Min Kickers + DSTs');
+                    if (showdownMinKDst >= 3) tips.push('Min K/DST of 3 almost never wins regular-season Showdown — drop to max 2');
+                    if ((showdownMaxKDst || 2) >= 3) tips.push('Max K+DST above 2 is a 1% top-1% shape — cap at 2 for GPPs');
                 }
                 if (minTotalOwnership > 100) tips.push('Lower min total ownership');
                 logMessages.push(`Generated ${generatedLineups.length} of ${numLineups}. Constraints may be too tight.`);
