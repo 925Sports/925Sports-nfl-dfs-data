@@ -1932,16 +1932,100 @@
             margin-bottom: 0.75rem;
         }
         .cs-toolbar label, .gp-toolbar label { font-size: 0.72rem; }
-        .cs-multitag { position: relative; }
+        .cs-multitag { position: relative; min-width: 220px; }
+        .cs-tag-filters {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            min-width: 0;
+            flex: 1 1 100%;
+        }
+        .cs-tag-filters-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--muted);
+        }
+        .cs-tag-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            align-items: center;
+        }
+        .cs-tag-chips label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin: 0;
+            padding: 0.28rem 0.65rem;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-color);
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            line-height: 1.2;
+            white-space: nowrap;
+            cursor: pointer;
+            user-select: none;
+        }
+        .cs-tag-chips label:hover { border-color: var(--brand-teal, #237374); }
+        .cs-tag-chips label:has(input:checked),
+        .cs-tag-chips label.active {
+            background: var(--brand-teal, #237374);
+            border-color: var(--brand-teal, #237374);
+            color: #fff;
+        }
+        body[data-theme="dark"] .cs-tag-chips label:has(input:checked),
+        body[data-theme="dark"] .cs-tag-chips label.active {
+            background: var(--brand-aqua, #47C6C8);
+            border-color: var(--brand-aqua, #47C6C8);
+            color: #0C2627;
+        }
+        .cs-tag-chips input[type="checkbox"] {
+            width: 14px;
+            height: 14px;
+            margin: 0;
+            flex-shrink: 0;
+            accent-color: var(--brand-aqua, #47C6C8);
+        }
         .cs-multitag-menu {
-            position: absolute; z-index: 30; top: calc(100% + 4px); left: 0;
-            min-width: 180px; padding: 0.45rem;
+            position: absolute; z-index: 80; top: calc(100% + 4px); left: 0;
+            min-width: 240px; width: max-content; max-width: min(280px, 80vw);
+            padding: 0.5rem;
             background: var(--card-bg); border: 1px solid var(--border-color);
             border-radius: 10px; box-shadow: 0 10px 24px rgba(0,0,0,0.18);
-            display: flex; flex-direction: column; gap: 0.28rem;
+            display: flex; flex-direction: column; gap: 0.15rem;
         }
         .cs-multitag-menu[hidden] { display: none; }
-        .cs-multitag-menu label { display: flex; gap: 0.4rem; align-items: center; font-size: 0.8rem; cursor: pointer; }
+        .cs-multitag-menu .cs-tag-menu-title {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--muted);
+            padding: 0.15rem 0.4rem 0.35rem;
+        }
+        .cs-multitag-menu label {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            gap: 0.5rem;
+            align-items: center;
+            font-size: 0.8rem;
+            cursor: pointer;
+            white-space: nowrap;
+            padding: 0.32rem 0.45rem;
+            border-radius: 6px;
+            color: var(--text-color);
+            margin: 0;
+        }
+        .cs-multitag-menu label:hover { background: rgba(71,198,200,0.16); }
+        .cs-multitag-menu input[type="checkbox"] {
+            flex-shrink: 0;
+            width: 15px;
+            height: 15px;
+            margin: 0;
+        }
         .lu-fab {
             position: fixed; right: 16px; bottom: 16px; z-index: 1100;
             background: #12325c; color: #fff; border: 1px solid #2a3350;
@@ -3408,19 +3492,17 @@
                                 <option value="">All teams</option>
                             </select>
                         </div>
-                        <div>
-                            <label>Tag</label>
-                            <div class="cs-multitag">
-                                <button type="button" class="ghost" id="csTagBtn" onclick="toggleCsTagMenu()">All tags</button>
-                                <div id="csTagMenu" class="cs-multitag-menu" hidden>
-                                    <label><input type="checkbox" value="coreish" onchange="onCsTagChange()"> Extreme / Core</label>
-                                    <label><input type="checkbox" value="Extreme Core" onchange="onCsTagChange()"> Extreme Core</label>
-                                    <label><input type="checkbox" value="Core Play" onchange="onCsTagChange()"> Core Play</label>
-                                    <label><input type="checkbox" value="Safe" onchange="onCsTagChange()"> Safe</label>
-                                    <label><input type="checkbox" value="Core Value" onchange="onCsTagChange()"> Core Value</label>
-                                    <label><input type="checkbox" value="Playable" onchange="onCsTagChange()"> Playable</label>
-                                    <label><input type="checkbox" value="Fade" onchange="onCsTagChange()"> Fade</label>
-                                </div>
+                        <div class="cs-tag-filters">
+                            <span class="cs-tag-filters-label">Tags</span>
+                            <div class="cs-tag-chips" id="csTagMenu">
+                                <label><input type="checkbox" value="coreish" onchange="onCsTagChange()"> Extreme / Core</label>
+                                <label><input type="checkbox" value="Extreme Core" onchange="onCsTagChange()"> Extreme Core</label>
+                                <label><input type="checkbox" value="Core Play" onchange="onCsTagChange()"> Core Play</label>
+                                <label><input type="checkbox" value="Safe" onchange="onCsTagChange()"> Safe</label>
+                                <label><input type="checkbox" value="Core Value" onchange="onCsTagChange()"> Core Value</label>
+                                <label><input type="checkbox" value="Playable" onchange="onCsTagChange()"> Playable</label>
+                                <label><input type="checkbox" value="Fade" onchange="onCsTagChange()"> Fade</label>
+                                <button type="button" class="ghost pool-clear-btn" onclick="clearCsTags()">Clear</button>
                             </div>
                         </div>
                         <div>
@@ -4004,6 +4086,97 @@
             if (!t) return '';
             const s = String(t).trim();
             return TEAM_NICKNAMES[s] || TEAM_NICKNAMES[s.toUpperCase()] || s;
+        }
+
+        function dstBareName(p) {
+            return String(p && (p.baseName || p['Player Name'] || p.displayName) || '')
+                .replace(/\s*\(.*\)\s*$/, '').trim();
+        }
+        function isDefensePlayer(p) {
+            if (!p) return false;
+            const pos = String(p.Position || p['Position'] || '').toUpperCase();
+            if (pos === 'DST' || pos === 'DEF' || pos === 'D/ST') return true;
+            const raw = dstBareName(p);
+            if (!raw) return false;
+            const nick = TEAM_NICKNAMES[raw] || TEAM_NICKNAMES[raw.toUpperCase()];
+            if (!nick) return false;
+            const team = normalizeTeam(p.Team || '');
+            return !team || nick === team || normalizeTeam(raw) === team;
+        }
+        function opponentImpliedTotal(p, rows) {
+            if (!p) return null;
+            const ou = Number(p.ou);
+            const own = Number(p.impliedTotal);
+            if (Number.isFinite(ou) && ou > 0 && Number.isFinite(own) && own > 0) {
+                return Math.round((ou - own) * 10) / 10;
+            }
+            const spr = Number(p.spread);
+            if (Number.isFinite(ou) && ou > 0 && Number.isFinite(spr)) {
+                return Math.round((ou / 2 + spr / 2) * 10) / 10;
+            }
+            const opp = normalizeTeam(p.Opponent || '');
+            if (opp && rows && rows.length) {
+                const mate = rows.find(r => normalizeTeam(r.Team || '') === opp && Number(r.impliedTotal) > 0);
+                if (mate) return Number(mate.impliedTotal);
+            }
+            return null;
+        }
+        function dstBaselineFromOppImplied(oppImplied) {
+            // DK DST approx: points-allowed bucket + sack/TO peripherals.
+            // Centered so giving up ~22.5 implied points sits near 7 FP.
+            if (oppImplied == null || !Number.isFinite(Number(oppImplied))) return 6.5;
+            const pts = Number(oppImplied);
+            let pa = 1;
+            if (pts <= 6) pa = 5;
+            else if (pts <= 13) pa = 4;
+            else if (pts <= 20) pa = 3;
+            else if (pts <= 27) pa = 1;
+            else if (pts <= 34) pa = 0;
+            else pa = -1;
+            const peripherals = 5.5;
+            const script = (22.5 - pts) * 0.2;
+            return Math.round(Math.max(2, Math.min(15.5, pa + peripherals + script)) * 10) / 10;
+        }
+        function applyDstBaselineProjections(rows) {
+            if (!rows || !rows.length) return 0;
+            const teamImpl = new Map();
+            rows.forEach(r => {
+                const tm = normalizeTeam(r.Team || '');
+                const impl = Number(r.impliedTotal);
+                if (tm && Number.isFinite(impl) && impl > 0 && !teamImpl.has(tm)) teamImpl.set(tm, impl);
+            });
+            let applied = 0;
+            rows.forEach(r => {
+                if (!isDefensePlayer(r)) return;
+                const keyName = dstBareName(r);
+                let userEdited = !!r._userEditedFP;
+                try {
+                    const norm = (typeof normalizeName === 'function') ? normalizeName(keyName) : String(keyName || '').toLowerCase();
+                    if (customProjections && customProjections[norm] && customProjections[norm]._userEdited) userEdited = true;
+                } catch (e) {}
+                if (userEdited) return;
+                const cur = Number(r.projectedFP != null ? r.projectedFP : r['Projected FP']);
+                const alreadyReal = Number.isFinite(cur) && cur > 0 && !r._dstBaseline;
+                if (alreadyReal) return;
+                const opp = normalizeTeam(r.Opponent || '');
+                let oppImpl = opp ? teamImpl.get(opp) : null;
+                if (oppImpl == null) oppImpl = opponentImpliedTotal(r, rows);
+                const base = dstBaselineFromOppImplied(oppImpl);
+                const isCpt = r.slotType === 'Captain'
+                    || String(r.displayName || '').endsWith(' (CPT)')
+                    || String(r.Position || '') === 'CPT';
+                const fp = isCpt ? Math.round(base * 15) / 10 : base;
+                r.projectedFP = fp;
+                r['Projected FP'] = isCpt ? base : fp;
+                r._dstBaseline = true;
+                r._dstOppImplied = oppImpl;
+                r.dstBaselineNote = 'Baseline DST from opp implied ' + (oppImpl != null ? oppImpl : 'n/a') + ' pts allowed';
+                applied++;
+                if (r.Role && r['Player Name'] && typeof adjustedProjections === 'object' && adjustedProjections[r.Role]) {
+                    adjustedProjections[r.Role][r['Player Name']] = base;
+                }
+            });
+            return applied;
         }
 
         let rawData = [];
@@ -6209,6 +6382,7 @@
                                 adjustedProjections[row['Role']][row['Player Name']] = row['Projected FP'];
                             });
                             try { overlayEspnOddsOnRows(rawData, { requireOppOnSameRows: false }); } catch (e) {}
+                            try { applyDstBaselineProjections(rawData); } catch (e) { console.warn('DST baseline ingest', e); }
                             setTimeout(loadGameLogsDeferred, 50);
                             // Keep any user-edited projections that were already in memory / localStorage
                             try {
@@ -6595,8 +6769,11 @@
             (rawData || []).forEach(row => {
                 if (row.sourceProjectedFP != null) {
                     row['Projected FP'] = row.sourceProjectedFP;
+                    row.projectedFP = row.sourceProjectedFP;
                 }
+                row._dstBaseline = false;
             });
+            try { applyDstBaselineProjections(rawData); } catch (e) {}
 
             // Rebuild the current slate so the table reflects source numbers
             if (selectedSlate) {
@@ -6764,10 +6941,14 @@
                     'Proj Pass Att': row['Proj Pass Att'] != null ? row['Proj Pass Att'] : row.passAtt,
                     'Proj Anytime TD': row['Proj Anytime TD'] != null ? row['Proj Anytime TD'] : row.atd,
                     'Headshot URL': row['Headshot URL'] || row.headshot,
-                    Value: row.Value != null ? row.Value : row.sheetValue
+                    Value: row.Value != null ? row.Value : row.sheetValue,
+                    _dstBaseline: !!row._dstBaseline,
+                    _dstOppImplied: row._dstOppImplied,
+                    dstBaselineNote: row.dstBaselineNote || ''
                 };
             }).map(hydrateCheatRow);
             try { applySlateMatchups(allSlatePlayers); } catch (e) { console.warn(e); }
+            try { applyDstBaselineProjections(allSlatePlayers); } catch (e) { console.warn(e); }
 
             // Showdown DST CPT/FLEX injection
             if (isShowdown) {
@@ -6778,10 +6959,14 @@
                     if (parts.length === 2) teams = parts;
                 }
                 teams.forEach(team => {
-                    const dstRow = rawData.find(r => r.Position === 'DST' && r.Team === team && r.Role === value);
+                    const dstRow = rawData.find(r => r.Position === 'DST' && normalizeTeam(r.Team) === normalizeTeam(team) && r.Role === value)
+                        || rawData.find(r => r.Position === 'DST' && normalizeTeam(r.Team) === normalizeTeam(team));
                     if (dstRow) {
                         const base = dstRow['Player Name'];
-                        const baseProj = dstRow['Projected FP'];
+                        const already = allSlatePlayers.some(p => p.baseName === base && (p.Position === 'DST' || p.Position === 'CPT' || (p.positions || []).includes('DST')));
+                        if (already) return;
+                        try { applyDstBaselineProjections([dstRow]); } catch (e) {}
+                        const baseProj = Number(dstRow.projectedFP || dstRow['Projected FP']) || 0;
                         allSlatePlayers.push({
                             displayName: `${base} (CPT)`, baseName: base, Position: 'CPT', Team: normalizeTeam(team),
                             Opponent: dstRow.Opponent, salary: dstRow.salary, id: dstRow.id,
@@ -6799,6 +6984,7 @@
                     }
                 });
             }
+            try { applyDstBaselineProjections(allSlatePlayers); } catch (e) { console.warn(e); }
 
             const slateTeams = [...new Set(allSlatePlayers.map(p => p.Team))].sort();
             document.getElementById('teamMenu').innerHTML = slateTeams.map(t =>
@@ -8447,7 +8633,7 @@
                 const displayName = player.displayName;
                 if (deselectedPlayers.has(displayName)) return;
                 const hasMin = (minExposures[displayName] || 0) > 0;
-                if (!(Number(player.projectedFP) > 0) && !forcedSet.has(player.baseName) && !hasMin) return;
+                if (!(Number(player.projectedFP) > 0) && !forcedSet.has(player.baseName) && !hasMin && !isDefensePlayer(player)) return;
 
                 const minReq = Math.ceil((minExposures[displayName] || 0) / 100 * numLineups);
                 const effectiveMax = Math.max(minExposures[displayName] || 0, Math.min(maxExposures[displayName] || 100, relaxedMax * 100));
@@ -9509,7 +9695,13 @@
                 let left = maxSalary - cap.salary;
                 for (let i = 0; i < 5; i++) {
                     const need = 4 - i;
-                    const f = take(flexes, left - need * 2500, 0);
+                    const floorSal = Math.max(1500, Math.min(2500, Math.floor(left / (need + 1))));
+                    let f = take(flexes, left - need * floorSal, 0);
+                    if (f && f.baseName === cap.baseName) {
+                        used.add(f.displayName); used.add(f.baseName);
+                        f = take(flexes, left - need * floorSal, 0);
+                    }
+                    if (!f) f = take(flexes, left, 0);
                     if (!f || f.baseName === cap.baseName) return null;
                     used.add(f.displayName); used.add(f.baseName);
                     flex.push(f);
@@ -9700,9 +9892,11 @@
 
             // ---- Performance guards (prevent main-thread freeze) ----
             // Failed solves used to loop 180–220 times with ZERO yields → page lockup.
-            const MAX_CONSEC_FAIL = isShowdown ? 18 : 22;
-            const MAX_TOTAL_ATTEMPTS = Math.max(40, numLineups * 8);
-            const RUN_TIME_BUDGET_MS = Math.min(180000, 20000 + numLineups * 800);
+            // Larger Showdown runs (150) need more attempts + a greedy fallback so we
+            // don't hitch on an infeasible LP and then quit short of the target.
+            const MAX_CONSEC_FAIL = isShowdown ? Math.max(28, Math.ceil(numLineups / 4)) : 28;
+            const MAX_TOTAL_ATTEMPTS = Math.max(80, numLineups * (isShowdown ? 16 : 10));
+            const RUN_TIME_BUDGET_MS = Math.min(240000, 25000 + numLineups * (isShowdown ? 1100 : 800));
             const runStartedAt = Date.now();
             let totalAttempts = 0;
             let globalTempMin = minSalary;
@@ -9755,11 +9949,22 @@
                         });
                     }
                     const result = solver.Solve(model);
-                    if (totalAttempts % 4 === 0) await yieldToUI();
+                    if (totalAttempts % 2 === 0) await yieldToUI();
                     if (!result || !result.feasible) {
                         globalTempMin = Math.max(0, globalTempMin - 2000);
                         globalRelaxed = Math.min(1, globalRelaxed + 0.06);
                         globalRand = Math.min(0.95, globalRand + 0.08);
+                        if (isShowdown && (totalAttempts % 3 === 0)) {
+                            const fb = (typeof swapFillLineup === 'function' ? swapFillLineup(true, lineupSet, playerCounts) : null)
+                                || greedyBuildLineup(true, lineupSet, playerCounts);
+                            if (fb && validLineup(fb)) {
+                                generatedLineups.push(fb);
+                                updatePlayerCounts(fb, playerCounts, true);
+                                updateProgress((generatedLineups.length / numLineups) * 100, `${label} · ${generatedLineups.length}/${numLineups}`);
+                                await yieldToUI();
+                                return fb;
+                            }
+                        }
                         return null;
                     }
                     const lineup = buildLineup(result, lineupSet, isShowdown);
@@ -9842,12 +10047,40 @@
                 globalTempMin = Math.max(0, globalTempMin - 1500);
                 fails = 0;
                 updateProgress((generatedLineups.length / numLineups) * 100, 'Soft fill…');
-                while (generatedLineups.length < numLineups && fails < 16 && stillHaveBudget()) {
+                while (generatedLineups.length < numLineups && fails < Math.max(24, Math.ceil(numLineups / 5)) && stillHaveBudget()) {
                     const got = await trySolve({ label: 'Soft fill' });
                     if (got) fails = 0;
-                    else fails++;
+                    else {
+                        fails++;
+                        const fb = greedyBuildLineup(isShowdown, lineupSet, playerCounts);
+                        if (fb && validLineup(fb)) {
+                            generatedLineups.push(fb);
+                            updatePlayerCounts(fb, playerCounts, isShowdown);
+                            fails = 0;
+                            updateProgress((generatedLineups.length / numLineups) * 100, `Greedy fill · ${generatedLineups.length}/${numLineups}`);
+                        }
+                    }
                 }
                 minUniquePlayers = savedUnique;
+            }
+
+            // Last-resort Showdown fill so 150-max runs don't die on a solver hitch
+            if (isShowdown && generatedLineups.length < numLineups && !abortLineupGeneration) {
+                let guard = 0;
+                const hardCap = Math.min(400, (numLineups - generatedLineups.length) * 8);
+                updateProgress((generatedLineups.length / numLineups) * 100, 'Greedy finish…');
+                while (generatedLineups.length < numLineups && guard < hardCap && !abortLineupGeneration) {
+                    guard++;
+                    if (guard % 8 === 0) await yieldToUI();
+                    const fb = greedyBuildLineup(true, lineupSet, playerCounts);
+                    if (!fb || !validLineup(fb)) continue;
+                    generatedLineups.push(fb);
+                    updatePlayerCounts(fb, playerCounts, true);
+                    updateProgress((generatedLineups.length / numLineups) * 100, `Greedy finish · ${generatedLineups.length}/${numLineups}`);
+                }
+                if (generatedLineups.length < numLineups) {
+                    logMessages.push(`Filled ${generatedLineups.length}/${numLineups} after solver hitch — pool/constraints may be too tight for a full 150.`);
+                }
             }
 
             if (!stillHaveBudget() && !abortLineupGeneration) {
@@ -10969,7 +11202,13 @@
             if (pos === 'K') {
                 return [x.fg != null ? fmtProj(x.fg) + ' FG' : '', x.pat != null ? fmtProj(x.pat) + ' PAT' : '', x.kick != null ? fmtProj(x.kick) + ' pts' : ''].filter(Boolean).join(' · ');
             }
-            if (pos === 'DST') return '';
+            if (pos === 'DST') {
+                const bits = [];
+                const oppI = p._dstOppImplied != null ? p._dstOppImplied : opponentImpliedTotal(p, allSlatePlayers || rawData || []);
+                if (oppI != null) bits.push('opp impl ' + Number(oppI).toFixed(1));
+                if (p._dstBaseline) bits.push('DST baseline');
+                return bits.join(' · ');
+            }
             const bits = [];
             if (pos === 'RB') {
                 if (x.rushAtt != null || x.rushYds != null) bits.push((x.rushAtt != null ? fmtProj(x.rushAtt) + ' att' : '') + (x.rushYds != null ? ((x.rushAtt != null ? ' / ' : '') + fmtProj(x.rushYds) + ' ru') : ''));
@@ -11196,7 +11435,11 @@
             let role = '';
 
             if (pos === 'DST' || pos === 'K' || pos === 'CPT') {
-                if (m.valueX >= 3) { primary = 'Core Value'; exposure = 'Mid Exposure'; reason = `CORE VALUE: ${m.valueX.toFixed(2)}x at $${m.sal}`; }
+                const oppI = p._dstOppImplied != null ? Number(p._dstOppImplied) : null;
+                if (pos === 'DST' && oppI != null && oppI <= 18 && m.proj >= 7) {
+                    primary = 'Core Play'; exposure = 'Mid Exposure';
+                    reason = `CORE DST: opp implied ${oppI.toFixed(1)} pts allowed, ${m.proj.toFixed(1)} FP`;
+                } else if (m.valueX >= 3) { primary = 'Core Value'; exposure = 'Mid Exposure'; reason = `CORE VALUE: ${m.valueX.toFixed(2)}x at $${m.sal}`; }
                 else if (m.proj < 5) { primary = 'Fade'; exposure = 'Zero / Fade'; reason = 'FADE: thin DST/K projection'; }
                 else { primary = 'Playable'; exposure = 'Low Exposure'; reason = `PLAYABLE: ${m.proj.toFixed(1)} pts, ${m.valueX.toFixed(2)}x`; }
             } else if (pos === 'QB') {
@@ -11948,12 +12191,20 @@
         }
         function toggleCsTagMenu() {
             const menu = document.getElementById('csTagMenu');
-            if (menu) menu.hidden = !menu.hidden;
+            if (menu && menu.classList.contains('cs-multitag-menu')) menu.hidden = !menu.hidden;
+        }
+        function clearCsTags() {
+            document.querySelectorAll('#csTagMenu input[type="checkbox"]').forEach(el => { el.checked = false; });
+            onCsTagChange();
         }
         function onCsTagChange() {
             const tags = csSelectedTags();
             const btn = document.getElementById('csTagBtn');
             if (btn) btn.textContent = tags.length ? tags.join(', ') : 'All tags';
+            document.querySelectorAll('#csTagMenu label').forEach(lab => {
+                const cb = lab.querySelector('input[type="checkbox"]');
+                lab.classList.toggle('active', !!(cb && cb.checked));
+            });
             renderCheatSheet();
         }
         function heatPill(val, range, label) {
@@ -12003,8 +12254,9 @@
                     if (!hit) return false;
                 }
                 const fp = csFp(p);
-                if (hideZero && fp <= 0) return false;
-                if (fp < minFp) return false;
+                const isDst = csPos(p) === 'DST';
+                if (hideZero && fp <= 0 && !isDst) return false;
+                if (fp < minFp && !isDst) return false;
                 if (csPtsPerK(p) < minVal) return false;
                 const ppos = csPos(p);
                 if (pos === 'WR' && !(ppos === 'WR' || ppos === 'TE')) return false;
@@ -12536,6 +12788,7 @@
             };
             players.forEach(apply);
             if (Array.isArray(rawData)) rawData.forEach(apply);
+            try { applyDstBaselineProjections(players); } catch (e) {}
         }
 
         function renderSlatePreview() {
