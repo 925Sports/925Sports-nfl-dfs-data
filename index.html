@@ -8374,9 +8374,12 @@
                 });
             }
 
+            const forcedSet = new Set(forcedInclude || []);
             filteredData.forEach(player => {
                 const displayName = player.displayName;
                 if (deselectedPlayers.has(displayName)) return;
+                const hasMin = (minExposures[displayName] || 0) > 0;
+                if (!(Number(player.projectedFP) > 0) && !forcedSet.has(player.baseName) && !hasMin) return;
 
                 const minReq = Math.ceil((minExposures[displayName] || 0) / 100 * numLineups);
                 const effectiveMax = Math.max(minExposures[displayName] || 0, Math.min(maxExposures[displayName] || 100, relaxedMax * 100));
@@ -9394,7 +9397,7 @@
             const forceShowdownStack = isShowdown && document.getElementById('showdownAutoStack').checked;
             updateLineupTableHeaders(isShowdown);
 
-            const availablePlayers = filteredData.filter(r => !deselectedPlayers.has(r.displayName)).map(r => ({
+            const availablePlayers = filteredData.filter(r => !deselectedPlayers.has(r.displayName) && Number(r.projectedFP) > 0).map(r => ({
                 name: r.baseName, baseName: r.baseName, displayName: r.displayName, id: r.id,
                 salary: r.salary, points: r.projectedFP, maxExposure: r.maxExposure, minExposure: r.minExposure,
                 slotType: isShowdown ? (r.displayName.endsWith(' (CPT)') ? 'Captain' : 'FLEX') : null,
