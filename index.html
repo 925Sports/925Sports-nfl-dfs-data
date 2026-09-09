@@ -2873,6 +2873,10 @@
                             <div id="ownershipRangeTrack" class="range-track"></div>
                         </div>
                         <span class="range-value" id="ownershipRangeValue">0% – 500%</span>
+                        <label style="display:flex;align-items:flex-start;gap:0.4rem;margin-top:0.45rem;font-size:0.75rem;text-transform:none;letter-spacing:0;color:var(--text-color);">
+                            <input type="checkbox" id="gppOwnMix" style="margin-top:0.15rem;">
+                            <span>GPP mix: 4+ players under 10% owned, at most 4 at 20%+ (from 2025 Milly winners). Uncheck if the slate is too chalky.</span>
+                        </label>
                     </div>
                 </div>
                 </div>
@@ -7090,7 +7094,7 @@
                 'minOwnershipSlider','maxOwnershipSlider','maxExposureSlider','leverageSlider','randomnessSlider',
                 'minUniqueInput','multiEntrySelect','showdownSplitSelect','sdMinKDst','numLineupsInput',
                 'classicNoOppDstWithQb','classicForcePassStack','classicRbDstStack','classicQbWrTe','classicQbTwoPc',
-                'classicFadeGameDst','classicBringBack'
+                'classicFadeGameDst','classicBringBack','gppOwnMix'
             ];
         }
         function captureContestState() {
@@ -7288,6 +7292,10 @@
                 sel.value = preset;
                 onShowdownSplitChange();
             };
+            const setGppMix = (on) => {
+                const el = document.getElementById('gppOwnMix');
+                if (el) el.checked = !!on;
+            };
 
             // Reset flex & favorite forces when switching presets
             clearFavoriteForces();
@@ -7307,13 +7315,16 @@
             if (type === 'classic_cash') {
                 ensureClassicSlate();
                 setExp(70); setOwn(140, 280); setLev(5); setRand(10); setUnique(1); setMulti(1);
+                setGppMix(false);
                 if (document.getElementById('autoStack')) document.getElementById('autoStack').checked = false;
             } else if (type === 'classic_gpp') {
                 ensureClassicSlate();
                 setExp(40); setOwn(0, 220); setLev(45); setRand(40); setUnique(4); setMulti(20);
+                setGppMix(true);
             } else if (type === 'leverage') {
                 ensureClassicSlate();
                 setExp(35); setOwn(0, 180); setLev(70); setRand(50); setUnique(5); setMulti(20);
+                setGppMix(true);
             } else if (type === 'classic_3rb') {
                 ensureClassicSlate();
                 setExp(60); setOwn(100, 260); setLev(15); setRand(20); setUnique(2); setMulti(20);
@@ -7365,11 +7376,13 @@
             } else if (type === 'cash_floor') {
                 ensureClassicSlate();
                 setExp(80); setOwn(160, 300); setLev(0); setRand(6); setUnique(1); setMulti(1);
+                setGppMix(false);
                 setSalaryLeftover(500);
                 resetClassicCorr({ forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none' });
             } else if (type === 'cash_3rb') {
                 ensureClassicSlate();
                 setExp(75); setOwn(150, 290); setLev(5); setRand(8); setUnique(1); setMulti(1);
+                setGppMix(false);
                 setFlexEligible(['RB']);
                 setSalaryLeftover(500);
                 resetClassicCorr({ forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none' });
@@ -7383,14 +7396,18 @@
                 ensureClassicSlate();
                 setExp(32); setOwn(0, 200); setLev(55); setRand(45); setUnique(5); setMulti(150);
                 resetClassicCorr({ forcePc: true, twoPc: true, wrte: false, fadeDst: true, bring: 'rb', noOppDst: true });
+                setGppMix(true);
+                tagGppOwnershipMix();
             } else if (type === 'gpp_mini') {
                 ensureClassicSlate();
                 setExp(38); setOwn(0, 210); setLev(42); setRand(38); setUnique(4); setMulti(20);
                 resetClassicCorr({ forcePc: true, twoPc: false, wrte: false, fadeDst: true, bring: 'none', noOppDst: true });
+                setGppMix(true);
             } else if (type === 'gpp_uniques') {
                 ensureClassicSlate();
                 setExp(30); setOwn(0, 190); setLev(60); setRand(48); setUnique(5); setMulti(150);
                 resetClassicCorr({ forcePc: true, twoPc: false, wrte: false, fadeDst: true, bring: 'rb', noOppDst: true });
+                setGppMix(true);
                 tagGppOwnershipMix();
             } else if (type === 'balanced') {
                 setExp(55); setOwn(0, 200); setLev(25); setRand(30); setUnique(3); setMulti(20);
@@ -8177,7 +8194,7 @@
             } else {
                 tr.innerHTML += '<th>QB</th><th>RB1</th><th>RB2</th><th>WR1</th><th>WR2</th><th>WR3</th><th>TE</th><th>FLEX</th><th>DST</th>';
             }
-            tr.innerHTML += '<th>Total Salary</th><th>Total Projected Points</th><th>Total Projected Ownership</th>';
+            tr.innerHTML += '<th>Total Salary</th><th>Total Projected Points</th><th>Total Projected Ownership</th><th title="GPP shape vs 2025 Milly traits">Grade</th>';
         }
 
         function updateLineupTable() {
@@ -8207,7 +8224,7 @@
                     });
                 }
                 const checked = lineupChecked.has(origIdx) ? 'checked' : '';
-                return `<tr data-lineup-idx="${origIdx}"><td><input type="checkbox" class="lineup-check" data-idx="${origIdx}" ${checked} onchange="onLineupCheckChange()"></td><td>${i+1}</td>${cells}<td>${l.totalSalary}</td><td>${l.totalPoints.toFixed(2)}</td><td>${l.totalOwnership.toFixed(1)}%</td></tr>`;
+                return `<tr data-lineup-idx="${origIdx}"><td><input type="checkbox" class="lineup-check" data-idx="${origIdx}" ${checked} onchange="onLineupCheckChange()"></td><td>${i+1}</td>${cells}<td>${l.totalSalary}</td><td>${l.totalPoints.toFixed(2)}</td><td>${l.totalOwnership.toFixed(1)}%</td><td title="${(l.gppNotes||'').replace(/"/g,'')}">${l.gppGrade || '—'}</td></tr>`;
             }).join('');
             updateLineupCheckedCount();
         }
@@ -8428,6 +8445,54 @@
             return Array.from(slots);
         }
 
+        function ownershipQuality() {
+            const src = (filteredData && filteredData.length) ? filteredData : (allSlatePlayers || []);
+            const skill = src.filter(p => p && !deselectedPlayers.has(p.displayName) && (Number(p.projectedFP)||0) > 0 && ['QB','RB','WR','TE','DST'].includes(String(p.Position||'').split('/')[0]));
+            const withOwn = skill.filter(p => (Number(p.ownership)||0) > 0);
+            const pct = skill.length ? withOwn.length / skill.length : 0;
+            return { ready: pct >= 0.4 && withOwn.length >= 12, pct, n: withOwn.length, total: skill.length };
+        }
+        function classicPlayersOf(lineupObj) {
+            if (!lineupObj) return [];
+            if (lineupObj.captain) return [lineupObj.captain, ...(lineupObj.flex || [])].filter(Boolean);
+            return ['QB','RB1','RB2','WR1','WR2','WR3','TE','FLEX','DST'].map(k => lineupObj[k]).filter(Boolean);
+        }
+        function gradeGeneratedLineup(entry, isShowdown) {
+            const players = classicPlayersOf(entry && entry.lineup);
+            const rows = players.map(p => {
+                const raw = (filteredData || []).find(x => x.displayName === p.name || x.baseName === p.baseName || x.id === p.id);
+                return {
+                    name: p.name, pos: raw ? String(raw.Position||'').split('/')[0] : '',
+                    salary: Number(p.salary)||0, own: Number((raw && raw.ownership) != null ? raw.ownership : p.ownership)||0,
+                    team: raw ? raw.Team : '', opp: raw ? raw.Opponent : ''
+                };
+            });
+            const oq = ownershipQuality();
+            const low = rows.filter(r => r.own > 0 && r.own < 10).length;
+            const chalk = rows.filter(r => r.own >= 20).length;
+            const paidRb = rows.some(r => r.pos === 'RB' && r.salary >= 7000);
+            const paidDst = rows.some(r => r.pos === 'DST' && r.salary >= 3000);
+            const qb = rows.find(r => r.pos === 'QB');
+            const dst = rows.find(r => r.pos === 'DST');
+            const destack = !!(qb && dst && qb.opp && dst.team === qb.opp);
+            let score = 0;
+            const notes = [];
+            if (oq.ready) {
+                if (low >= 4) score += 2; else notes.push(low + ' uniques <10%');
+                if (chalk <= 4) score += 1; else notes.push(chalk + ' chalk 20%+');
+                if (chalk >= 1 && chalk <= 4) score += 1;
+            }
+            if (paidRb) score += 1; else notes.push('no $7k RB');
+            if (paidDst) score += 1; else notes.push('DST <$3k');
+            if (!destack) score += 1; else notes.push('QB vs opp DST');
+            const leftover = Math.max(0, (typeof maxSalary === 'number' ? maxSalary : 50000) - (entry.totalSalary || 0));
+            if (leftover <= 500) score += 1;
+            const maxScore = oq.ready ? 8 : 4;
+            const letter = score >= maxScore - 1 ? 'A' : score >= maxScore - 3 ? 'B' : 'C';
+            entry.gppGrade = letter;
+            entry.gppNotes = notes.join(' · ');
+            return entry;
+        }
         function buildGenPool(isShowdown) {
             const must = new Set();
             try {
@@ -8495,6 +8560,19 @@
                 variables: {},
                 ints: {}
             };
+            const oq = ownershipQuality();
+            const gppMixWanted = !!document.getElementById('gppOwnMix')?.checked;
+            const gppMixOn = gppMixWanted && oq.ready;
+            if (gppMixWanted && !oq.ready) {
+                try { if (typeof logMessages !== 'undefined') logMessages.push('GPP mix skipped — ownership still too sparse (' + Math.round(oq.pct*100) + '% of pool has a number).'); } catch (e) {}
+            }
+            if (gppMixOn) {
+                const poolForMix = (typeof genPool === 'function' ? genPool() : (filteredData || []));
+                const lowN = poolForMix.filter(p => p && !deselectedPlayers.has(p.displayName) && (Number(p.ownership)||0) < 10 && (Number(p.projectedFP)||0) > 0).length;
+                model.constraints.uniqueLow = { min: Math.min(4, Math.max(0, lowN)) };
+                model.constraints.chalkHigh = { max: 4 };
+            }
+            const gppShapeOn = gppMixWanted || !!(document.getElementById('classicQbTwoPc')?.checked) || !!(document.getElementById('classicFadeGameDst')?.checked);
             const isShowdown = selectedSlate.includes('Showdown Captain Mode');
             const slotRequirements = isShowdown
                 ? { Captain: 1, FLEX: 5 }
@@ -8569,6 +8647,11 @@
                         [player.baseName]: 1,
                         [slot]: 1
                     };
+                    if (gppMixOn) {
+                        const ownN = Number(player.ownership) || 0;
+                        if (ownN < 10) model.variables[varName].uniqueLow = 1;
+                        if (ownN >= 20) model.variables[varName].chalkHigh = 1;
+                    }
                     model.ints[varName] = 1;
                 });
                 uniqueNames.add(player.baseName);
@@ -8578,6 +8661,29 @@
                 if (!model.constraints[name]) model.constraints[name] = {};
                 model.constraints[name].max = 1;
             });
+
+            if (!isShowdown && gppShapeOn) {
+                Object.keys(model.variables).forEach(v => {
+                    if (!v.endsWith('_RB') && !v.endsWith('_FLEX')) return;
+                    const base = v.replace(/_RB$|_FLEX$/, '');
+                    const p = genPool().find(x => x.baseName === base);
+                    if (p && String(p.Position||'').split('/')[0] === 'RB' && (Number(p.salary)||0) >= 7000) {
+                        model.variables[v].paidRb7k = 1;
+                    }
+                });
+                if (Object.values(model.variables).some(v => v.paidRb7k)) {
+                    model.constraints.paidRb7k = { min: 1 };
+                }
+                Object.keys(model.variables).forEach(v => {
+                    if (!v.endsWith('_DST')) return;
+                    const base = v.replace(/_DST$/, '');
+                    const p = genPool().find(x => x.baseName === base);
+                    if (p && (Number(p.salary)||0) >= 3000) model.variables[v].paidDst3k = 1;
+                });
+                if (Object.values(model.variables).some(v => v.paidDst3k)) {
+                    model.constraints.paidDst3k = { min: 1 };
+                }
+            }
 
             // Game stack: at least N players from selected game(s)
             if (selectedGames.length && gameStackMinPlayers > 0) {
@@ -9844,6 +9950,7 @@
                         if (stackSpec?.receiver2 && !has(stackSpec.receiver2)) return null;
                         if (stackSpec?.bringPlayer && !has(stackSpec.bringPlayer)) return null;
                     }
+                    try { gradeGeneratedLineup(lineup, isShowdown); } catch (e) {}
                     generatedLineups.push(lineup);
                     updatePlayerCounts(lineup, playerCounts, isShowdown);
                     // Slight re-tighten after success so we don't stay fully relaxed forever
