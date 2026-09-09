@@ -1922,50 +1922,7 @@
             margin-bottom: 0.75rem;
         }
         .cs-toolbar label, .gp-toolbar label { font-size: 0.72rem; }
-        .cs-multitag { position: relative; }
-        .cs-multitag-menu {
-            position: absolute; z-index: 30; top: calc(100% + 4px); left: 0;
-            min-width: 180px; padding: 0.45rem;
-            background: var(--card-bg); border: 1px solid var(--border-color);
-            border-radius: 10px; box-shadow: 0 10px 24px rgba(0,0,0,0.18);
-            display: flex; flex-direction: column; gap: 0.28rem;
-        }
-        .cs-multitag-menu[hidden] { display: none; }
-        .cs-multitag-menu label { display: flex; gap: 0.4rem; align-items: center; font-size: 0.8rem; cursor: pointer; }
-        .lu-fab {
-            position: fixed; right: 16px; bottom: 16px; z-index: 1100;
-            background: #12325c; color: #fff; border: 1px solid #2a3350;
-            border-radius: 999px; padding: 0.55rem 0.9rem; font-weight: 700;
-            box-shadow: 0 10px 28px rgba(0,0,0,0.28); cursor: pointer;
-        }
-        .lu-dock {
-            position: fixed; right: 0; top: 0; bottom: 0; width: min(320px, 92vw);
-            background: #0b1220; color: #eef2ff; border-left: 1px solid #2a3350;
-            z-index: 1100; display: flex; flex-direction: column;
-            transform: translateX(105%); transition: transform 0.2s ease;
-        }
-        .lu-dock.open { transform: translateX(0); }
-        .lu-dock-head { padding: 0.85rem; border-bottom: 1px solid #2a3350; display: flex; justify-content: space-between; gap: 0.5rem; align-items: center; }
-        .lu-dock-body { padding: 0.7rem 0.85rem; overflow: auto; flex: 1; }
-        .lu-slot { display: grid; grid-template-columns: 42px 1fr auto auto; gap: 0.35rem; align-items: center; padding: 0.38rem 0; border-bottom: 1px solid rgba(42,51,80,0.55); font-size: 0.8rem; }
-        .lu-slot .pos { font-size: 0.65rem; letter-spacing: 0.06em; color: #9aa6c3; font-weight: 700; }
-        .lu-add {
-            border: 1px solid #2a3350; background: #16325f; color: #3ee0b4;
-            border-radius: 8px; width: 28px; height: 28px; font-weight: 800; cursor: pointer;
-        }
         .cs-toolbar input, .cs-toolbar select, .gp-toolbar select, .gp-toolbar input { min-width: 130px; }
-        .cs-toolbar input[type="text"], .cs-toolbar input[type="number"], #csSearch {
-            color: #0b1220 !important;
-            background: #ffffff !important;
-            caret-color: #0b1220;
-        }
-        body[data-theme="dark"] .cs-toolbar input[type="text"],
-        body[data-theme="dark"] .cs-toolbar input[type="number"],
-        body[data-theme="dark"] #csSearch {
-            color: #eef2ff !important;
-            background: #121a2c !important;
-            caret-color: #eef2ff;
-        }
         .cs-seg {
             display: inline-flex;
             background: var(--input-bg);
@@ -3396,18 +3353,16 @@
                         </div>
                         <div>
                             <label>Tag</label>
-                            <div class="cs-multitag">
-                                <button type="button" class="ghost" id="csTagBtn" onclick="toggleCsTagMenu()">All tags</button>
-                                <div id="csTagMenu" class="cs-multitag-menu" hidden>
-                                    <label><input type="checkbox" value="coreish" onchange="onCsTagChange()"> Extreme / Core</label>
-                                    <label><input type="checkbox" value="Extreme Core" onchange="onCsTagChange()"> Extreme Core</label>
-                                    <label><input type="checkbox" value="Core Play" onchange="onCsTagChange()"> Core Play</label>
-                                    <label><input type="checkbox" value="Safe" onchange="onCsTagChange()"> Safe</label>
-                                    <label><input type="checkbox" value="Core Value" onchange="onCsTagChange()"> Core Value</label>
-                                    <label><input type="checkbox" value="Playable" onchange="onCsTagChange()"> Playable</label>
-                                    <label><input type="checkbox" value="Fade" onchange="onCsTagChange()"> Fade</label>
-                                </div>
-                            </div>
+                            <select id="csTag" onchange="renderCheatSheet()">
+                                <option value="">All tags</option>
+                                <option value="coreish">Extreme / Core</option>
+                                <option value="Extreme Core">Extreme Core</option>
+                                <option value="Core Play">Core Play</option>
+                                <option value="Safe">Safe</option>
+                                <option value="Core Value">Core Value</option>
+                                <option value="Playable">Playable</option>
+                                <option value="Fade">Fade</option>
+                            </select>
                         </div>
                         <div>
                             <label>Min Proj</label>
@@ -3448,24 +3403,11 @@
                     <h3 style="margin:0;" id="csDrawerTitle">Player</h3>
                     <p class="cs-note" style="margin:0.2rem 0 0;" id="csDrawerSub"></p>
                 </div>
-                <button type="button" class="ghost" id="csAddLuBtn" onclick="luAddFromDrawer()">+ Lineup</button>
                 <button type="button" class="ghost" onclick="closeCsDrawer()">✕</button>
             </div>
             <div class="cs-drawer-body" id="csDrawerBody"></div>
         </div>
 
-
-        <button type="button" class="lu-fab" id="luFab" onclick="luOpen(true)">Lineup 0/9 · $0</button>
-        <aside class="lu-dock" id="luDock" aria-label="Cash lineup">
-            <div class="lu-dock-head">
-                <div>
-                    <strong>Lineup</strong>
-                    <div class="cs-note" id="luMeta">0/9</div>
-                </div>
-                <button type="button" class="ghost" onclick="luOpen(false)">Minimize</button>
-            </div>
-            <div class="lu-dock-body" id="luDockBody"></div>
-        </aside>
         <div id="panelLeverage" class="workspace-panel" hidden>
             <div class="card">
                 <div class="card-body">
@@ -4105,7 +4047,10 @@
             refreshChecklist();
 
             // Auto-refresh pool data every 5 minutes
-            // Manual refresh only — auto-refresh was wiping in-progress work.
+            setInterval(() => {
+                console.log('Auto-refreshing NFL data…');
+                fetchData(true);
+            }, 5 * 60 * 1000);
 
             // Auto-save work periodically + when leaving the page / switching tabs
             setInterval(() => saveSession(true), 30 * 1000);
@@ -10970,21 +10915,15 @@
                 let scriptVeto = false;
                 if (!m.dual && m.fav >= 9) scriptVeto = true;
                 if (!m.dual && m.fav >= 7 && m.passAtt < 34) scriptVeto = true;
-                const hitsValue = m.valueX >= 3;
-                const dvpQ = (typeof dvpFor === 'function') ? dvpFor(p) : null;
-                const toughMatch = !!(dvpQ && dvpQ.rank != null && (dvpQ.rank >= 22 || (dvpQ.of && dvpQ.rank / dvpQ.of >= 0.68)));
+                const hitsValue = m.valueX >= 2.45;
                 if (scriptVeto && !m.dual && m.fav >= 9) {
                     primary = volSafe ? 'Safe' : 'Fade';
                     exposure = primary === 'Safe' ? 'Mid Exposure' : 'Zero / Fade';
                     reason = `FADE as Core: pocket QB, ${p.Team || ''} -${m.fav.toFixed(1)}`;
-                } else if (volCore && hitsValue && !scriptVeto && !toughMatch) {
+                } else if (volCore && hitsValue && !scriptVeto) {
                     primary = 'Core Play';
                     exposure = 'High Exposure';
-                    reason = `CORE: ${m.passAtt.toFixed(0)} att${m.dual ? ', ' + m.rushAtt.toFixed(0) + ' ru att' : ''}, ${m.valueX.toFixed(2)}x, DVP ${dvpQ ? '#' + dvpQ.rank : 'n/a'}`;
-                } else if (volCore && hitsValue && !scriptVeto && toughMatch) {
-                    primary = 'Safe';
-                    exposure = 'Mid Exposure';
-                    reason = `SAFE: ${m.valueX.toFixed(2)}x volume but tough DVP #${dvpQ.rank}`;
+                    reason = `CORE: ${m.passAtt.toFixed(0)} att${m.dual ? ', ' + m.rushAtt.toFixed(0) + ' ru att' : ''}, ${m.valueX.toFixed(2)}x`;
                 } else if (volSafe) {
                     primary = 'Safe';
                     exposure = 'Mid Exposure';
@@ -11405,120 +11344,8 @@
             const idx = peers.findIndex(x => x.displayName === p.displayName);
             return { rank: idx >= 0 ? idx + 1 : '—', of: peers.length || '—' };
         }
-        function playerWhyHtml(p, pack, m, dvp) {
-            const bits = [];
-            bits.push(`<p><strong>${csEsc(csName(p))}</strong> is tagged <strong>${csEsc(pack.primary)}</strong> with ${csEsc(pack.exposure)}${pack.role ? ` as a ${csEsc(pack.role)}` : ''}.</p>`);
-            if (pack.reason) bits.push(`<p>${csEsc(pack.reason)}.</p>`);
-            const pos = csPos(p);
-            if (pos === 'QB') {
-                bits.push(`<p>Volume is ${m.passAtt ? m.passAtt.toFixed(1) : '—'} pass attempts` + (m.dual ? ` and ${m.rushAtt.toFixed(1)} rush attempts (dual-threat).` : '.') + ` Cash Core now also requires 3.0x and a non-tough matchup. He is at ${m.valueX.toFixed(2)}x.</p>`);
-            } else if (pos === 'RB') {
-                bits.push(`<p>He is projected for ${m.opps.toFixed(1)} opportunities (${m.rushAtt.toFixed(1)} rush att + ${m.tgt.toFixed(1)} targets) at ${m.valueX.toFixed(2)}x with ${m.pTD.toFixed(2)} P(TD).</p>`);
-            } else if (pos === 'WR' || pos === 'TE') {
-                bits.push(`<p>Target volume is ${m.tgt.toFixed(1)} with ${m.rec.toFixed(1)} catches projected at ${m.valueX.toFixed(2)}x.</p>`);
-            }
-            if (dvp) bits.push(`<p>Matchup DVP is #${dvp.rank} (1 = easiest). ${dvp.rank <= 12 ? 'That is an appealing spot.' : dvp.rank >= 22 ? 'That is a tough spot, which blocks QB Core.' : 'That is a neutral-to-mixed spot.'}</p>`);
-            const impl = implSpreadText(p);
-            if (impl) bits.push(`<p>Team implied total / spread: ${csEsc(impl)}.</p>`);
-            if (m.fav >= 7 && pos === 'QB' && !m.dual) bits.push(`<p>Script risk: pocket QB on a ${m.fav.toFixed(1)}-point favorite can lose passing volume.</p>`);
-            if (m.fav >= 6 && pos === 'RB') bits.push(`<p>Favorite script helps this back if the lead holds.</p>`);
-            bits.push(`<p class="cs-note">This writeup is generated from the same cash-tag rules as the Cheat Sheet, not a live model chat.</p>`);
-            return bits.join('');
-        }
-        function luIsShowdown() {
-            return !!(typeof selectedSlate === 'string' && selectedSlate.includes('Showdown'));
-        }
-        function luSlotList() {
-            return luIsShowdown() ? ['CPT','FLEX','FLEX','FLEX','FLEX','FLEX'] : ['QB','RB','RB','WR','WR','WR','TE','FLEX','DST'];
-        }
-        let luState = { open: false, slots: {} };
-        try { luState = Object.assign(luState, JSON.parse(localStorage.getItem('nflCsLineup') || '{}')); } catch (e) {}
-        function luSave() {
-            try { localStorage.setItem('nflCsLineup', JSON.stringify({ open: !!luState.open, slots: luState.slots || {} })); } catch (e) {}
-        }
-        function luSalary() {
-            return Object.values(luState.slots || {}).reduce((s, p) => s + (Number(p && p.salary) || 0), 0);
-        }
-        function luCount() {
-            return Object.keys(luState.slots || {}).length;
-        }
-        function luFindPlayer(name) {
-            return (typeof csSourcePool === 'function' ? csSourcePool() : []).find(x => x.displayName === name || csName(x) === name)
-                || (filteredData || []).find(x => x.displayName === name);
-        }
-        function luCanFlex(pos) { return pos === 'RB' || pos === 'WR' || pos === 'TE'; }
-        function luAddPlayer(name) {
-            const p = luFindPlayer(name);
-            if (!p) return;
-            const pos = csPos(p);
-            const used = new Set(Object.values(luState.slots || {}).map(x => x && x.displayName));
-            if (used.has(p.displayName)) { luRender(); luOpen(true); return; }
-            const slots = luSlotList();
-            let target = slots.find(s => !luState.slots[s] && s === pos);
-            if (!target && luCanFlex(pos)) target = slots.find(s => !luState.slots[s] && s === 'FLEX');
-            if (!target && luIsShowdown() && pos !== 'DST') target = slots.find(s => !luState.slots[s] && (s === 'FLEX' || (s === 'CPT' && pos)));
-            if (!target) { alert('No empty ' + pos + ' / FLEX slot'); luOpen(true); return; }
-            if (!luState.slots) luState.slots = {};
-            luState.slots[target] = {
-                displayName: p.displayName,
-                name: csName(p),
-                pos: pos,
-                team: p.Team || '',
-                salary: csSal(p)
-            };
-            luSave();
-            luOpen(true);
-            luRender();
-        }
-        function luAddFromDrawer() {
-            const title = document.getElementById('csDrawerTitle')?.textContent;
-            if (title) luAddPlayer(title);
-        }
-        function luRemove(slot) {
-            if (luState.slots) delete luState.slots[slot];
-            luSave();
-            luRender();
-        }
-        function luClear() {
-            luState.slots = {};
-            luSave();
-            luRender();
-        }
-        function luOpen(force) {
-            luState.open = force == null ? !luState.open : !!force;
-            luSave();
-            const dock = document.getElementById('luDock');
-            const fab = document.getElementById('luFab');
-            if (dock) dock.classList.toggle('open', luState.open);
-            if (fab) fab.hidden = luState.open;
-            luRender();
-        }
-        function luRender() {
-            const slots = luSlotList();
-            const body = document.getElementById('luDockBody');
-            const fab = document.getElementById('luFab');
-            const meta = document.getElementById('luMeta');
-            const cap = luIsShowdown() ? 50000 : 50000;
-            const sal = luSalary();
-            const filled = luCount();
-            if (fab) fab.textContent = `Lineup ${filled}/${slots.length} · $${sal.toLocaleString()}`;
-            if (meta) meta.textContent = `${filled}/${slots.length} · $${sal.toLocaleString()} / $${cap.toLocaleString()}`;
-            if (!body) return;
-            body.innerHTML = slots.map(slot => {
-                const pl = luState.slots && luState.slots[slot];
-                return `<div class="lu-slot"><span class="pos">${slot}</span><span>${pl ? csEsc(pl.name) + ' · ' + csEsc(pl.team) : '—'}</span><span>${pl ? '$' + pl.salary : ''}</span>${pl ? `<button type="button" class="ghost" onclick="luRemove('${slot}')">✕</button>` : '<span></span>'}</div>`;
-            }).join('') + `<div style="display:flex;gap:0.4rem;margin-top:0.7rem;"><button type="button" class="ghost" onclick="luClear()">Clear</button></div>`;
-        }
-        document.addEventListener('click', (e) => {
-            const menu = document.getElementById('csTagMenu');
-            if (!menu || menu.hidden) return;
-            if (e.target.closest('.cs-multitag')) return;
-            menu.hidden = true;
-        });
-        window.addEventListener('load', () => { try { luRender(); if (luState.open) luOpen(true); } catch (e) {} });
-
         function setCsDrawerTab(tab) {
-            ['ov','log','mu','ai'].forEach(id => {
+            ['ov','log','mu'].forEach(id => {
                 const el = document.getElementById('csTab-' + id);
                 if (el) el.hidden = id !== tab;
             });
@@ -11549,11 +11376,7 @@
             const shot = playerHeadshot(p) || p.headshot || '';
             document.getElementById('csDrawerTitle').textContent = csName(p);
             const subEl = document.getElementById('csDrawerSub');
-            const oppTxt = csOpp(p) || p.Opponent || '';
-            const implTxt = implSpreadText(p) || ((m.impl != null && Number.isFinite(Number(m.impl))) ? Number(m.impl).toFixed(1) : '');
-            const dvpHead = dvp ? `DVP #${dvp.rank}` : '';
-            const meta = [p.Team || '', pos, '$' + csSal(p), oppTxt ? 'vs ' + oppTxt : '', implTxt ? 'Impl ' + implTxt : '', dvpHead].filter(Boolean).join(' | ');
-            if (subEl) subEl.innerHTML = `${csEsc(meta)}<div class="cs-tag-row" style="margin-top:0.35rem;">${cashPills(p)}</div>${pack.role ? `<div class="cs-note" style="margin:0.2rem 0 0;">Role: ${csEsc(pack.role)}</div>` : ''}`;
+            if (subEl) subEl.innerHTML = `${csEsc(p.Team||'')} | ${csEsc(pos)} | $${csSal(p)}<div class="cs-tag-row" style="margin-top:0.35rem;">${cashPills(p)}</div>${pack.role ? `<div class="cs-note" style="margin:0.2rem 0 0;">Role: ${csEsc(pack.role)}</div>` : ''}`;
             const img = document.getElementById('csDrawerHeadshot');
             if (img) {
                 if (shot) { img.referrerPolicy = 'no-referrer'; img.src = shot; img.alt = csName(p); img.hidden = false; img.onerror = () => { img.hidden = true; }; }
@@ -11595,14 +11418,13 @@
             body.innerHTML = `
                 <div class="cs-dk-kpis">
                     ${kpi('ATT', att)}${kpi('YDS', yds)}${kpi('YDS/G', ypg)}${kpi('TD', td)}${kpi('FPPG', csFp(p).toFixed(1))}
-                    ${kpi('OWN', (Number(p.ownership)||0).toFixed(1)+'%')}${kpi('POS RK', rk.rank)}
+                    ${kpi('OWN', (Number(p.ownership)||0).toFixed(1)+'%')}${kpi('POS RK', rk.rank + ' / ' + rk.of)}
                 </div>
                 <p class="cs-reason">${csEsc(pack.reason)}</p>
                 <div class="cs-dk-tabs">
                     <button type="button" class="active" data-tab="ov" onclick="setCsDrawerTab('ov')">Overview</button>
                     <button type="button" data-tab="log" onclick="setCsDrawerTab('log')">Game Log</button>
                     <button type="button" data-tab="mu" onclick="setCsDrawerTab('mu')">Matchup</button>
-                    <button type="button" data-tab="ai" onclick="setCsDrawerTab('ai')">Why this tag</button>
                 </div>
                 <div id="csTab-ov">
                     ${line ? `<p class="cs-note">Week line: ${csEsc(line)}</p>` : ''}
@@ -11640,10 +11462,6 @@
                     <h4 style="margin:0.7rem 0 0.3rem;">Vs ${csEsc(csOpp(p)||'opp')}</h4>
                     ${vs.length ? logTable(vs) + `<p class="cs-note">Avg ${(vs.reduce((s,g)=>s+g.fp,0)/vs.length).toFixed(1)} DK FP in ${vs.length} game(s).</p>` : '<p class="cs-note">No logged games against this opponent.</p>'}
                 </div>
-                <div id="csTab-ai" hidden>
-                    <h4 style="margin:0.2rem 0 0.35rem;">Why this tag</h4>
-                    ${playerWhyHtml(p, pack, m, dvp)}
-                </div>
             `;
             drawer.classList.add('open');
             drawer.setAttribute('aria-hidden', 'false');
@@ -11680,29 +11498,6 @@
             if (!vals.length) return { min: 0, max: 0 };
             return { min: Math.min(...vals), max: Math.max(...vals) };
         }
-        function implSpreadText(p) {
-            const impl = p && p.impliedTotal;
-            if (impl == null || impl === '' || !Number.isFinite(Number(impl))) return '';
-            const i = Number(impl).toFixed(1);
-            const sp = p.spread;
-            if (sp == null || sp === '' || !Number.isFinite(Number(sp))) return i;
-            const n = Number(sp);
-            const s = (n > 0 ? '+' : '') + (Number.isInteger(n) ? String(n) : n.toFixed(1));
-            return i + ' (' + s + ')';
-        }
-        function csSelectedTags() {
-            return [...document.querySelectorAll('#csTagMenu input[type="checkbox"]:checked')].map(el => el.value);
-        }
-        function toggleCsTagMenu() {
-            const menu = document.getElementById('csTagMenu');
-            if (menu) menu.hidden = !menu.hidden;
-        }
-        function onCsTagChange() {
-            const tags = csSelectedTags();
-            const btn = document.getElementById('csTagBtn');
-            if (btn) btn.textContent = tags.length ? tags.join(', ') : 'All tags';
-            renderCheatSheet();
-        }
         function heatPill(val, range, label) {
             if (val == null || val === '' || !Number.isFinite(Number(val))) {
                 return `<span class="heat-pill empty">${label || '—'}</span>`;
@@ -11736,18 +11531,15 @@
             const minFp = parseFloat(document.getElementById('csMinFp')?.value) || 0;
             const minVal = parseFloat(document.getElementById('csMinVal')?.value) || 0;
             const hideZero = document.getElementById('csHideZero')?.checked !== false;
-            const tagWantList = csSelectedTags();
+            const tagWant = document.getElementById('csTag')?.value || '';
             const teamWant = document.getElementById('csTeam')?.value || '';
             const list = csSourcePool().filter(p => {
                 if (deselectedPlayers.has(p.displayName)) return false;
                 if (teamWant && String(p.Team || '') !== teamWant) return false;
-                if (tagWantList.length) {
+                if (tagWant) {
                     const pack = cashTagPlayer(p);
-                    const hit = tagWantList.some(tagWant =>
-                        (tagWant === 'coreish' && ['Extreme Core','Core Play'].includes(pack.primary)) ||
-                        pack.primary === tagWant
-                    );
-                    if (!hit) return false;
+                    if (tagWant === 'coreish' && !['Extreme Core','Core Play'].includes(pack.primary)) return false;
+                    else if (tagWant !== 'coreish' && pack.primary !== tagWant) return false;
                 }
                 const fp = csFp(p);
                 if (hideZero && fp <= 0) return false;
@@ -11882,7 +11674,7 @@
             const sorted = sortedAll.slice(0, cap);
             const th = (key, label, tip) => `<th style="cursor:pointer;" title="${String(tip||'').replace(/"/g,'&quot;')}" onclick="csSortKey='${key}';csSortDir=csSortKey==='${key}'&&csSortDir==='desc'?'asc':'desc';renderCheatSheet();">${label}</th>`;
             const body = sorted.map((p, i) => {
-                const impl = implSpreadText(p);
+                const impl = p.impliedTotal != null ? Number(p.impliedTotal).toFixed(1) : '';
                 const stackBtn = csPos(p)==='QB'
                     ? `<button type="button" class="ghost" style="padding:0.15rem 0.4rem;font-size:0.7rem;" onclick="csStartStack('${csArg(p.displayName)}','${csArg(p.Team)}')">Stack</button>`
                     : (csStackPick && p.Team === csStackPick.team && csPos(p)!=='QB'
@@ -11902,10 +11694,7 @@
                         <div class="cs-player-cell">
                             ${(playerHeadshot(p)||p.headshot) ? `<img class="cs-mini-shot" src="${csEsc(playerHeadshot(p)||p.headshot)}" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">` : ''}
                             <div>
-                                <div style="display:flex;align-items:center;gap:0.35rem;">
-                                    <button type="button" class="cs-name-btn" onclick="openCsDrawer('${csArg(p.displayName)}')">${csEsc(csName(p))}</button>
-                                    <button type="button" class="lu-add" title="Add to lineup" onclick="event.stopPropagation();luAddPlayer('${csArg(p.displayName)}')">+</button>
-                                </div>
+                                <button type="button" class="cs-name-btn" onclick="openCsDrawer('${csArg(p.displayName)}')">${csEsc(csName(p))}</button>
                                 <div class="cs-tag-row">${cashPills(p)}</div>
                             </div>
                         </div>
@@ -11926,7 +11715,7 @@
             }).join('');
             const banner = csStackPick ? `<p class="cs-note">Stacking from <strong>${csEsc(csStackPick.qbDisplay)}</strong> — click Add on a teammate. <button type="button" class="ghost" onclick="csCancelStack()">Cancel</button></p>` : '';
             return banner + `<div class="cs-table-wrap"><table id="cheatSheetTable">
-                <thead><tr>${th('fp','#','Row number after current sort')}${th('name','Player','Name plus cash tag and exposure')}${th('pos','Pos','DraftKings position')}${th('team','Team','Player team')}${th('opp','Opp','Opponent on this slate')}${th('impl','Impl Tot','Implied team total with spread. Example 22.5 (-4)')}${th('dvp','DVP','Defense vs this position. 1 = easiest')}${th('sal','Salary','DraftKings salary')}${th('fp','Proj','Cheat Sheet projected fantasy points')}${th('val','Val','Proj divided by salary per 1000. 2.5x is the cash bar')}${th('line','Week line','Position-specific projection line from the Cheat Sheet')}${th('l3','L3','Average DraftKings FP over the last 3 logged games')}${th('own','Own','Projected ownership percent')}</tr></thead>
+                <thead><tr>${th('fp','#','Row number after current sort')}${th('name','Player','Name plus cash tag and exposure')}${th('pos','Pos','DraftKings position')}${th('team','Team','Player team')}${th('opp','Opp','Opponent on this slate')}${th('impl','Impl Tot','Implied team total from O/U and spread')}${th('dvp','DVP','Defense vs this position. 1 = easiest')}${th('sal','Salary','DraftKings salary')}${th('fp','Proj','Cheat Sheet projected fantasy points')}${th('val','Val','Proj divided by salary per 1000. 2.5x is the cash bar')}${th('line','Week line','Position-specific projection line from the Cheat Sheet')}${th('l3','L3','Average DraftKings FP over the last 3 logged games')}${th('own','Own','Projected ownership percent')}</tr></thead>
                 <tbody>${body || '<tr><td colspan="13">No players match filters.</td></tr>'}
                 ${sortedAll.length > sorted.length ? `<tr><td colspan="13"><button type="button" class="ghost" onclick="window.csRowCap=${sorted.length+80};renderCheatSheet();">Show more (${sorted.length} of ${sortedAll.length})</button></td></tr>` : ''}
                 </tbody>
