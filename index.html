@@ -2873,10 +2873,6 @@
                             <div id="ownershipRangeTrack" class="range-track"></div>
                         </div>
                         <span class="range-value" id="ownershipRangeValue">0% – 500%</span>
-                        <label style="display:flex;align-items:flex-start;gap:0.4rem;margin-top:0.45rem;font-size:0.75rem;text-transform:none;letter-spacing:0;color:var(--text-color);">
-                            <input type="checkbox" id="gppOwnMix" style="margin-top:0.15rem;">
-                            <span>GPP mix: 4+ players under 10% owned, at most 4 at 20%+ (from 2025 Milly winners). Uncheck if the slate is too chalky.</span>
-                        </label>
                     </div>
                 </div>
                 </div>
@@ -7094,7 +7090,7 @@
                 'minOwnershipSlider','maxOwnershipSlider','maxExposureSlider','leverageSlider','randomnessSlider',
                 'minUniqueInput','multiEntrySelect','showdownSplitSelect','sdMinKDst','numLineupsInput',
                 'classicNoOppDstWithQb','classicForcePassStack','classicRbDstStack','classicQbWrTe','classicQbTwoPc',
-                'classicFadeGameDst','classicBringBack','gppOwnMix'
+                'classicFadeGameDst','classicBringBack'
             ];
         }
         function captureContestState() {
@@ -7292,10 +7288,6 @@
                 sel.value = preset;
                 onShowdownSplitChange();
             };
-            const setGppMix = (on) => {
-                const el = document.getElementById('gppOwnMix');
-                if (el) el.checked = !!on;
-            };
 
             // Reset flex & favorite forces when switching presets
             clearFavoriteForces();
@@ -7315,16 +7307,13 @@
             if (type === 'classic_cash') {
                 ensureClassicSlate();
                 setExp(70); setOwn(140, 280); setLev(5); setRand(10); setUnique(1); setMulti(1);
-                setGppMix(false);
                 if (document.getElementById('autoStack')) document.getElementById('autoStack').checked = false;
             } else if (type === 'classic_gpp') {
                 ensureClassicSlate();
                 setExp(40); setOwn(0, 220); setLev(45); setRand(40); setUnique(4); setMulti(20);
-                setGppMix(true);
             } else if (type === 'leverage') {
                 ensureClassicSlate();
                 setExp(35); setOwn(0, 180); setLev(70); setRand(50); setUnique(5); setMulti(20);
-                setGppMix(true);
             } else if (type === 'classic_3rb') {
                 ensureClassicSlate();
                 setExp(60); setOwn(100, 260); setLev(15); setRand(20); setUnique(2); setMulti(20);
@@ -7376,13 +7365,11 @@
             } else if (type === 'cash_floor') {
                 ensureClassicSlate();
                 setExp(80); setOwn(160, 300); setLev(0); setRand(6); setUnique(1); setMulti(1);
-                setGppMix(false);
                 setSalaryLeftover(500);
                 resetClassicCorr({ forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none' });
             } else if (type === 'cash_3rb') {
                 ensureClassicSlate();
                 setExp(75); setOwn(150, 290); setLev(5); setRand(8); setUnique(1); setMulti(1);
-                setGppMix(false);
                 setFlexEligible(['RB']);
                 setSalaryLeftover(500);
                 resetClassicCorr({ forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none' });
@@ -7396,18 +7383,14 @@
                 ensureClassicSlate();
                 setExp(32); setOwn(0, 200); setLev(55); setRand(45); setUnique(5); setMulti(150);
                 resetClassicCorr({ forcePc: true, twoPc: true, wrte: false, fadeDst: true, bring: 'rb', noOppDst: true });
-                setGppMix(true);
-                tagGppOwnershipMix();
             } else if (type === 'gpp_mini') {
                 ensureClassicSlate();
                 setExp(38); setOwn(0, 210); setLev(42); setRand(38); setUnique(4); setMulti(20);
                 resetClassicCorr({ forcePc: true, twoPc: false, wrte: false, fadeDst: true, bring: 'none', noOppDst: true });
-                setGppMix(true);
             } else if (type === 'gpp_uniques') {
                 ensureClassicSlate();
                 setExp(30); setOwn(0, 190); setLev(60); setRand(48); setUnique(5); setMulti(150);
                 resetClassicCorr({ forcePc: true, twoPc: false, wrte: false, fadeDst: true, bring: 'rb', noOppDst: true });
-                setGppMix(true);
                 tagGppOwnershipMix();
             } else if (type === 'balanced') {
                 setExp(55); setOwn(0, 200); setLev(25); setRand(30); setUnique(3); setMulti(20);
@@ -8512,13 +8495,6 @@
                 variables: {},
                 ints: {}
             };
-            const gppMixOn = !!document.getElementById('gppOwnMix')?.checked;
-            if (gppMixOn) {
-                const poolForMix = (typeof genPool === 'function' ? genPool() : (filteredData || []));
-                const lowN = poolForMix.filter(p => p && !deselectedPlayers.has(p.displayName) && (Number(p.ownership)||0) < 10 && (Number(p.projectedFP)||0) > 0).length;
-                model.constraints.uniqueLow = { min: Math.min(4, Math.max(0, lowN)) };
-                model.constraints.chalkHigh = { max: 4 };
-            }
             const isShowdown = selectedSlate.includes('Showdown Captain Mode');
             const slotRequirements = isShowdown
                 ? { Captain: 1, FLEX: 5 }
@@ -8593,11 +8569,6 @@
                         [player.baseName]: 1,
                         [slot]: 1
                     };
-                    if (gppMixOn) {
-                        const ownN = Number(player.ownership) || 0;
-                        if (ownN < 10) model.variables[varName].uniqueLow = 1;
-                        if (ownN >= 20) model.variables[varName].chalkHigh = 1;
-                    }
                     model.ints[varName] = 1;
                 });
                 uniqueNames.add(player.baseName);
