@@ -9701,9 +9701,8 @@
             // ---- Performance guards (prevent main-thread freeze) ----
             // Failed solves used to loop 180–220 times with ZERO yields → page lockup.
             const MAX_CONSEC_FAIL = isShowdown ? 18 : 22;
-            const MAX_ILP_LINEUPS = Math.min(numLineups, numLineups <= 20 ? 20 : 24);
-            const MAX_TOTAL_ATTEMPTS = Math.max(30, MAX_ILP_LINEUPS * 5);
-            const RUN_TIME_BUDGET_MS = Math.min(150000, 12000 + numLineups * 500);
+            const MAX_TOTAL_ATTEMPTS = Math.max(40, numLineups * 8);
+            const RUN_TIME_BUDGET_MS = Math.min(180000, 20000 + numLineups * 800);
             const runStartedAt = Date.now();
             let totalAttempts = 0;
             let globalTempMin = minSalary;
@@ -9829,46 +9828,26 @@
                 }
             }
 
-            // Phase 3: ILP seed set only — remaining lineups use fast swaps
+            // Phase 3: remaining lineups — solver only
             let fails = 0;
-            while (generatedLineups.length < MAX_ILP_LINEUPS && fails < MAX_CONSEC_FAIL && stillHaveBudget()) {
+            while (generatedLineups.length < numLineups && fails < MAX_CONSEC_FAIL && stillHaveBudget()) {
                 const got = await trySolve({ label: 'Building remaining' });
                 if (got) fails = 0;
                 else fails++;
             }
 
-            // If still short and constraints were the issue, one soft-fill pass with uniqueness off
-            if (generatedLineups.length < numLineups && !abortLineupGeneration && (Date.now() - runStartedAt) < RUN_TIME_BUDGET_MS) {
+            if (generatedLineups.length < numLineups && !abortLineupGeneration && stillHaveBudget()) {
                 const savedUnique = minUniquePlayers;
-                minUniquePlayers = 0;
-                globalTempMin = 0;
-                globalRelaxed = 1;
+                minUniquePlayers = Math.max(0, minUniquePlayers - 1);
+                globalTempMin = Math.max(0, globalTempMin - 1500);
                 fails = 0;
-                updateProgress((generatedLineups.length / numLineups) * 100, 'Soft fill (relaxed)…');
-                while (generatedLineups.length < MAX_ILP_LINEUPS && fails < 12 && !abortLineupGeneration) {
+                updateProgress((generatedLineups.length / numLineups) * 100, 'Soft fill…');
+                while (generatedLineups.length < numLineups && fails < 16 && stillHaveBudget()) {
                     const got = await trySolve({ label: 'Soft fill' });
                     if (got) fails = 0;
                     else fails++;
                 }
                 minUniquePlayers = savedUnique;
-            }
-
-            if (generatedLineups.length < numLineups && !abortLineupGeneration) {
-                updateProgress((generatedLineups.length / numLineups) * 100, 'Diversifying lineups…');
-                let swaps = 0;
-                while (generatedLineups.length < numLineups && swaps < numLineups * 200 && !abortLineupGeneration) {
-                    swaps++;
-                    const extra = (swaps % 5 === 0)
-                        ? (greedyBuildLineup(isShowdown, lineupSet, playerCounts) || swapFillLineup(isShowdown, lineupSet, playerCounts))
-                        : (swapFillLineup(isShowdown, lineupSet, playerCounts) || greedyBuildLineup(isShowdown, lineupSet, playerCounts));
-                    if (!extra) continue;
-                    generatedLineups.push(extra);
-                    updatePlayerCounts(extra, playerCounts, isShowdown);
-                    if (swaps % 8 === 0) {
-                        updateProgress((generatedLineups.length / numLineups) * 100, `Diversifying ${generatedLineups.length}/${numLineups}`);
-                        await yieldToUI();
-                    }
-                }
             }
 
             if (!stillHaveBudget() && !abortLineupGeneration) {
