@@ -6654,7 +6654,6 @@
 
 
         function updateSlate(value, opts = {}) {
-            window._optPoolCache = null;
             const preserveFilters = !!(opts && opts.preserveFilters);
             selectedSlate = value;
             document.getElementById('slateDropdown').textContent = value.replace(',', ' (').replace(/$/, ')');
@@ -7397,8 +7396,7 @@
                 return;
             }
 
-            const pool = (allSlatePlayers || filteredData || [])
-                .filter(p => !deselectedPlayers.has(p.displayName));
+            const pool = optimizerPool();
             if (!pool.length) {
                 alert('Load a Classic slate first, then click 925 Favorite again.');
                 return;
@@ -8344,10 +8342,16 @@
         }
 
         function optimizerPool() {
-            const src = (allSlatePlayers && allSlatePlayers.length)
-                ? allSlatePlayers
-                : (filteredData || []);
-            return src.filter(p => p && !deselectedPlayers.has(p.displayName));
+            // Current slate only — same universe the attached builder used when no
+            // table filters were on. Never mix other slates into the ILP.
+            const slate = selectedSlate;
+            const fromSlate = (allSlatePlayers || []).filter(p =>
+                p && p.id && (p.salary > 0) &&
+                (!slate || !p.Role || p.Role === slate) &&
+                !deselectedPlayers.has(p.displayName)
+            );
+            if (fromSlate.length) return fromSlate;
+            return (filteredData || []).filter(p => p && p.id && (p.salary > 0) && !deselectedPlayers.has(p.displayName));
         }
         function createModel(enforceStack = false, enforceGroup = false, playerCounts = {}, currentGenerated = 0,
             stackCap = null, stackRec = null, group = null, tempMinSalary = minSalary, relaxedMax = maxExposure,
@@ -9457,7 +9461,7 @@
             const forceShowdownStack = isShowdown && document.getElementById('showdownAutoStack').checked;
             updateLineupTableHeaders(isShowdown);
 
-            const availablePlayers = (allSlatePlayers || []).filter(r => !deselectedPlayers.has(r.displayName)).map(r => ({
+            const availablePlayers = optimizerPool().map(r => ({
                 name: r.baseName, baseName: r.baseName, displayName: r.displayName, id: r.id,
                 salary: r.salary, points: r.projectedFP, maxExposure: r.maxExposure, minExposure: r.minExposure,
                 slotType: isShowdown ? (r.displayName.endsWith(' (CPT)') ? 'Captain' : 'FLEX') : null,
@@ -9540,10 +9544,9 @@
 
             // ---- Performance guards (prevent main-thread freeze) ----
             // Failed solves used to loop 180–220 times with ZERO yields → page lockup.
-            window._optPoolCache = null;
-            const MAX_CONSEC_FAIL = isShowdown ? 60 : 90;
-            const MAX_TOTAL_ATTEMPTS = Math.max(200, numLineups * (isShowdown ? 14 : 18));
-            const RUN_TIME_BUDGET_MS = isShowdown ? 120000 : 180000;
+            const MAX_CONSEC_FAIL = isShowdown ? 28 : 40;
+            const MAX_TOTAL_ATTEMPTS = Math.max(80, numLineups * (isShowdown ? 6 : 8));
+            const RUN_TIME_BUDGET_MS = isShowdown ? 45000 : 60000;
             const runStartedAt = Date.now();
             let totalAttempts = 0;
             let globalTempMin = minSalary;
@@ -12405,7 +12408,7 @@
             if (!root) return;
             try { enrichPlayerMatchups(allSlatePlayers); } catch (e) {}
             const isSd = selectedSlate && String(selectedSlate).includes('Showdown');
-            const pool = (allSlatePlayers || filteredData || []).filter(p => {
+            const pool = optimizerPool().filter(p => {
                 if (deselectedPlayers.has(p.displayName)) return false;
                 if (p.slotType === 'Captain') return false;
                 return true;
