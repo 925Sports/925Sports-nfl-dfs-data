@@ -1922,7 +1922,50 @@
             margin-bottom: 0.75rem;
         }
         .cs-toolbar label, .gp-toolbar label { font-size: 0.72rem; }
+        .cs-multitag { position: relative; }
+        .cs-multitag-menu {
+            position: absolute; z-index: 30; top: calc(100% + 4px); left: 0;
+            min-width: 180px; padding: 0.45rem;
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 10px; box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+            display: flex; flex-direction: column; gap: 0.28rem;
+        }
+        .cs-multitag-menu[hidden] { display: none; }
+        .cs-multitag-menu label { display: flex; gap: 0.4rem; align-items: center; font-size: 0.8rem; cursor: pointer; }
+        .lu-fab {
+            position: fixed; right: 16px; bottom: 16px; z-index: 1100;
+            background: #12325c; color: #fff; border: 1px solid #2a3350;
+            border-radius: 999px; padding: 0.55rem 0.9rem; font-weight: 700;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.28); cursor: pointer;
+        }
+        .lu-dock {
+            position: fixed; right: 0; top: 0; bottom: 0; width: min(320px, 92vw);
+            background: #0b1220; color: #eef2ff; border-left: 1px solid #2a3350;
+            z-index: 1100; display: flex; flex-direction: column;
+            transform: translateX(105%); transition: transform 0.2s ease;
+        }
+        .lu-dock.open { transform: translateX(0); }
+        .lu-dock-head { padding: 0.85rem; border-bottom: 1px solid #2a3350; display: flex; justify-content: space-between; gap: 0.5rem; align-items: center; }
+        .lu-dock-body { padding: 0.7rem 0.85rem; overflow: auto; flex: 1; }
+        .lu-slot { display: grid; grid-template-columns: 42px 1fr auto auto; gap: 0.35rem; align-items: center; padding: 0.38rem 0; border-bottom: 1px solid rgba(42,51,80,0.55); font-size: 0.8rem; }
+        .lu-slot .pos { font-size: 0.65rem; letter-spacing: 0.06em; color: #9aa6c3; font-weight: 700; }
+        .lu-add {
+            border: 1px solid #2a3350; background: #16325f; color: #3ee0b4;
+            border-radius: 8px; width: 28px; height: 28px; font-weight: 800; cursor: pointer;
+        }
         .cs-toolbar input, .cs-toolbar select, .gp-toolbar select, .gp-toolbar input { min-width: 130px; }
+        .cs-toolbar input[type="text"], .cs-toolbar input[type="number"], #csSearch {
+            color: #0b1220 !important;
+            background: #ffffff !important;
+            caret-color: #0b1220;
+        }
+        body[data-theme="dark"] .cs-toolbar input[type="text"],
+        body[data-theme="dark"] .cs-toolbar input[type="number"],
+        body[data-theme="dark"] #csSearch {
+            color: #eef2ff !important;
+            background: #121a2c !important;
+            caret-color: #eef2ff;
+        }
         .cs-seg {
             display: inline-flex;
             background: var(--input-bg);
@@ -1993,7 +2036,10 @@
         .tag-proper { background: #7db7ff; color: #041428; }
         .tag-sover { background: #f5d76e; color: #1b1403; }
         .tag-over { background: #5a2430; color: #ffd0d6; }
-        .cs-player-cell { display: flex; align-items: center; gap: 0.55rem; min-width: 0; }
+        .cs-player-cell { display: flex; align-items: center; gap: 0.45rem; }
+        .cs-player-cell .cs-player-meta { min-width: 0; flex: 1; }
+        .cs-player-cell .lu-add { margin-left: auto; flex: 0 0 26px; }
+        .cs-player-cell-x { display: flex; align-items: center; gap: 0.55rem; min-width: 0; }
         .cs-mini-shot {
             width: 42px; height: 42px; border-radius: 10px;
             object-fit: cover; object-position: top center;
@@ -3353,16 +3399,18 @@
                         </div>
                         <div>
                             <label>Tag</label>
-                            <select id="csTag" onchange="renderCheatSheet()">
-                                <option value="">All tags</option>
-                                <option value="coreish">Extreme / Core</option>
-                                <option value="Extreme Core">Extreme Core</option>
-                                <option value="Core Play">Core Play</option>
-                                <option value="Safe">Safe</option>
-                                <option value="Core Value">Core Value</option>
-                                <option value="Playable">Playable</option>
-                                <option value="Fade">Fade</option>
-                            </select>
+                            <div class="cs-multitag">
+                                <button type="button" class="ghost" id="csTagBtn" onclick="toggleCsTagMenu()">All tags</button>
+                                <div id="csTagMenu" class="cs-multitag-menu" hidden>
+                                    <label><input type="checkbox" value="coreish" onchange="onCsTagChange()"> Extreme / Core</label>
+                                    <label><input type="checkbox" value="Extreme Core" onchange="onCsTagChange()"> Extreme Core</label>
+                                    <label><input type="checkbox" value="Core Play" onchange="onCsTagChange()"> Core Play</label>
+                                    <label><input type="checkbox" value="Safe" onchange="onCsTagChange()"> Safe</label>
+                                    <label><input type="checkbox" value="Core Value" onchange="onCsTagChange()"> Core Value</label>
+                                    <label><input type="checkbox" value="Playable" onchange="onCsTagChange()"> Playable</label>
+                                    <label><input type="checkbox" value="Fade" onchange="onCsTagChange()"> Fade</label>
+                                </div>
+                            </div>
                         </div>
                         <div>
                             <label>Min Proj</label>
@@ -3403,11 +3451,24 @@
                     <h3 style="margin:0;" id="csDrawerTitle">Player</h3>
                     <p class="cs-note" style="margin:0.2rem 0 0;" id="csDrawerSub"></p>
                 </div>
+                <button type="button" class="ghost" id="csAddLuBtn" onclick="luAddFromDrawer()">+ Lineup</button>
                 <button type="button" class="ghost" onclick="closeCsDrawer()">✕</button>
             </div>
             <div class="cs-drawer-body" id="csDrawerBody"></div>
         </div>
 
+
+        <button type="button" class="lu-fab" id="luFab" onclick="luOpen(true)">Lineup 0/9 · $0</button>
+        <aside class="lu-dock" id="luDock" aria-label="Cash lineup">
+            <div class="lu-dock-head">
+                <div>
+                    <strong>Lineup</strong>
+                    <div class="cs-note" id="luMeta">0/9</div>
+                </div>
+                <button type="button" class="ghost" onclick="luOpen(false)">Minimize</button>
+            </div>
+            <div class="lu-dock-body" id="luDockBody"></div>
+        </aside>
         <div id="panelLeverage" class="workspace-panel" hidden>
             <div class="card">
                 <div class="card-body">
@@ -4047,10 +4108,7 @@
             refreshChecklist();
 
             // Auto-refresh pool data every 5 minutes
-            setInterval(() => {
-                console.log('Auto-refreshing NFL data…');
-                fetchData(true);
-            }, 5 * 60 * 1000);
+            // Manual refresh only — auto-refresh was wiping in-progress work.
 
             // Auto-save work periodically + when leaving the page / switching tabs
             setInterval(() => saveSession(true), 30 * 1000);
@@ -5998,7 +6056,7 @@
 
                 Papa.parse(csvText, {
                     header: true, skipEmptyLines: true, dynamicTyping: true,
-                    complete: (results) => {
+                    complete: async (results) => {
                         try {
                         if (results.errors.length > 0 || results.data.length === 0) {
                             rawData = [];
@@ -6010,7 +6068,8 @@
                             document.getElementById('tableBody').innerHTML = '<tr><td colspan="12">No data loaded</td></tr>';
                         } else {
                             cheatIndex = new Map();
-                            rawData = results.data.map(row => {
+                            const parsedRows = results.data;
+                            const mapRow = (row) => {
                                 let gameStartTimeStr = row['Game Start Time (PLAYER_DATA2)'] || 'n/a';
                                 let gameStartTime;
                                 if (gameStartTimeStr !== 'n/a') {
@@ -6089,9 +6148,18 @@
                                     sheetValue: pickNum(row, ['Value'])
                                 };
                                 try { indexCheatSource(row); } catch (e) {}
-                                hydrateCheatRow(rec);
                                 return rec;
-                            }).filter(row => row['Player Name']);
+                            };
+                            rawData = [];
+                            for (let i = 0; i < parsedRows.length; i++) {
+                                const rec = mapRow(parsedRows[i]);
+                                if (rec && rec['Player Name']) rawData.push(rec);
+                                if (i % 80 === 0) {
+                                    const lt = document.getElementById('loadingText');
+                                    if (lt) lt.textContent = 'Parsing player pool… ' + (i + 1) + '/' + parsedRows.length;
+                                    await new Promise(r => setTimeout(r, 0));
+                                }
+                            }
 
                             // Backfill Opp / lines / implied total from teammates on the same team
                             const teamMeta = new Map();
@@ -6254,6 +6322,7 @@
         }
 
         function saveSession(silent = false) {
+            if (window._skipSessionSave) return;
             try {
                 // Capture manual FP / ownership edits keyed by normalized base name
                 // (survives CPT/FLEX suffix, slate rebuild, and tab restore)
@@ -6476,17 +6545,18 @@
         }
 
         function clearSavedSession() {
-            if (!confirm('Clear ALL saved work for this browser?\n\nThis removes tiers, locks, settings, AND all custom projection overrides.')) return;
-
-            localStorage.removeItem('nflOptimizerSession');
-            // Also clear in-memory override stores so they cannot survive
-            customProjections = {};
-            adjustedProjections = {};
-
-            // Force a clean reload from the live data source
-            fetchData(false);
-
-            alert('Saved work and projection overrides cleared. Data is being reloaded from source.');
+            if (!confirm('Reset the tool to a clean start?\n\nThis clears saved lineups, locks, stacks, filters, exposures, the sidebar lineup, and projection overrides.')) return;
+            window._skipSessionSave = true;
+            try {
+                const keep = new Set(['theme']);
+                Object.keys(localStorage).forEach(k => {
+                    if (keep.has(k)) return;
+                    if (/nfl|925|optimizer|csLineup|session|lineup|proj/i.test(k)) localStorage.removeItem(k);
+                });
+                localStorage.removeItem('nflOptimizerSession');
+                localStorage.removeItem('nflCsLineup');
+            } catch (e) {}
+            window.location.reload();
         }
 
         /** Wipe all manual / uploaded projected FP overrides and restore live GitHub values. */
@@ -7326,8 +7396,7 @@
                 return;
             }
 
-            const pool = (filteredData.length ? filteredData : allSlatePlayers)
-                .filter(p => !deselectedPlayers.has(p.displayName));
+            const pool = filteredData.filter(p => !deselectedPlayers.has(p.displayName));
             if (!pool.length) {
                 alert('Load a Classic slate first, then click 925 Favorite again.');
                 return;
@@ -8272,6 +8341,57 @@
             return Array.from(slots);
         }
 
+        function buildGenPool(isShowdown) {
+            const must = new Set();
+            try {
+                (forcedPlayers || []).forEach(n => must.add(n));
+                (corePlayers || []).forEach(n => must.add(n));
+                (stackList || []).forEach(s => [s.captain, s.receiver, s.receiver2, s.bringPlayer].forEach(n => { if (n) must.add(n); }));
+            } catch (e) {}
+            const src = (filteredData || []).filter(p => {
+                if (!p || deselectedPlayers.has(p.displayName)) return false;
+                if (!(Number(p.salary) > 0)) return false;
+                const keepZero = must.has(p.displayName) || must.has(p.baseName) || (minExposures[p.displayName] || 0) > 0;
+                if (!(Number(p.projectedFP) > 0) && !keepZero) return false;
+                return true;
+            });
+            const caps = isShowdown
+                ? { Captain: 16, CPT: 16, FLEX: 32 }
+                : { QB: 12, RB: 20, WR: 28, TE: 12, DST: 10 };
+            const byPos = {};
+            src.forEach(p => {
+                const pos = isShowdown
+                    ? (p.slotType || ((p.displayName || '').endsWith(' (CPT)') ? 'Captain' : 'FLEX'))
+                    : String(p.Position || '').split('/')[0];
+                (byPos[pos] || (byPos[pos] = [])).push(p);
+            });
+            const out = [];
+            const seen = new Set();
+            const take = (arr, cap) => {
+                (arr || []).slice().sort((a,b) => (Number(b.projectedFP)||0) - (Number(a.projectedFP)||0)).forEach((p, i) => {
+                    const keep = i < cap || must.has(p.displayName) || must.has(p.baseName) || (minExposures[p.displayName] || 0) > 0;
+                    if (!keep || seen.has(p.displayName)) return;
+                    seen.add(p.displayName);
+                    out.push(p);
+                });
+            };
+            if (isShowdown) {
+                take(byPos.Captain || byPos.CPT || [], caps.Captain);
+                take(byPos.FLEX || [], caps.FLEX);
+            } else {
+                ['QB','RB','WR','TE','DST'].forEach(pos => take(byPos[pos] || [], caps[pos] || 12));
+            }
+            src.forEach(p => {
+                if ((must.has(p.displayName) || must.has(p.baseName)) && !seen.has(p.displayName)) {
+                    seen.add(p.displayName);
+                    out.push(p);
+                }
+            });
+            return out;
+        }
+        function genPool() {
+            return (window._genPool && window._genPool.length) ? window._genPool : (filteredData || []);
+        }
         function createModel(enforceStack = false, enforceGroup = false, playerCounts = {}, currentGenerated = 0,
             stackCap = null, stackRec = null, group = null, tempMinSalary = minSalary, relaxedMax = maxExposure,
             previousLineups = [], randomnessFactor = 0.3, forceQBStack = false, forceShowdownStack = false,
@@ -8299,14 +8419,18 @@
             const uniqueNames = new Set();
             let latestTime = -Infinity;
             if (!isShowdown) {
-                filteredData.forEach(p => {
-                    if (p.gameStartTime.getTime() > latestTime) latestTime = p.gameStartTime.getTime();
+                genPool().forEach(p => {
+                    const ts = p.gameStartTime && typeof p.gameStartTime.getTime === 'function' ? p.gameStartTime.getTime() : 0;
+                    if (ts > latestTime) latestTime = ts;
                 });
             }
 
-            filteredData.forEach(player => {
+            const forcedSet = new Set(forcedInclude || []);
+            genPool().forEach(player => {
                 const displayName = player.displayName;
                 if (deselectedPlayers.has(displayName)) return;
+                const hasMin = (minExposures[displayName] || 0) > 0;
+                if (!(Number(player.projectedFP) > 0) && !forcedSet.has(player.baseName) && !hasMin) return;
 
                 const minReq = Math.ceil((minExposures[displayName] || 0) / 100 * numLineups);
                 const effectiveMax = Math.max(minExposures[displayName] || 0, Math.min(maxExposures[displayName] || 100, relaxedMax * 100));
@@ -8374,7 +8498,7 @@
                 selectedGames.forEach(k => k.split('@').forEach(t => gameTeams.add(t)));
                 Object.keys(model.variables).forEach(v => {
                     const base = v.replace(/_Captain$|_FLEX$|_QB$|_RB$|_WR$|_TE$|_DST$/, '');
-                    const p = filteredData.find(x => x.baseName === base);
+                    const p = genPool().find(x => x.baseName === base);
                     if (!p || !gameTeams.has(p.Team)) return;
                     if (style === 'offense' && p.Position === 'DST') return;
                     if (style === 'pass' && !['QB','WR','TE','CPT'].includes(p.Position) && p.slotType !== 'Captain') return;
@@ -8403,7 +8527,7 @@
             };
             const varsFor = (pred) => Object.keys(model.variables).filter(v => {
                 const base = v.replace(/_Captain$|_FLEX$|_QB$|_RB$|_WR$|_TE$|_DST$/, '');
-                const p = filteredData.find(x => x.baseName === base);
+                const p = genPool().find(x => x.baseName === base);
                 return p && pred(p, v);
             });
 
@@ -8413,8 +8537,8 @@
                 forceNamed(stackRec);
                 const spec = stackSpec || {};
                 if (spec.receiver2) forceNamed(spec.receiver2);
-                const qbRow = filteredData.find(p => p.displayName === stackCap) ||
-                    filteredData.find(p => p.baseName === stackCap.split(' (')[0]);
+                const qbRow = genPool().find(p => p.displayName === stackCap) ||
+                    genPool().find(p => p.baseName === stackCap.split(' (')[0]);
                 const team = qbRow?.Team;
                 const opp = qbRow?.Opponent;
                 const qbVars = varsFor(p => p.displayName === stackCap || p.baseName === (stackCap||'').split(' (')[0]);
@@ -8438,7 +8562,7 @@
                     addSetMinIf(qbVars, bbVars, 1, 'stack_bringback');
                 }
                 if (spec.fadeGameDst && team) {
-                    filteredData.filter(p => p.Position === 'DST' && (p.Team === team || p.Team === opp)).forEach(dst => {
+                    genPool().filter(p => p.Position === 'DST' && (p.Team === team || p.Team === opp)).forEach(dst => {
                         const vn = `${dst.baseName}_DST`;
                         if (model.variables[vn]) {
                             const cName = `stack_fade_dst_${dst.baseName}`;
@@ -8464,7 +8588,7 @@
                         const cName = `group_min_${i}`;
                         model.constraints[cName] = { min: numPlayers - bigM };
                         g.players.forEach(pl => {
-                            const pd = filteredData.find(p => p.displayName === pl);
+                            const pd = genPool().find(p => p.displayName === pl);
                             if (pd) {
                                 (isShowdown ? [pd.slotType] : getEligibleSlots(pd.positions)).forEach(slot => {
                                     const vn = `${pd.baseName}_${slot}`;
@@ -8472,7 +8596,7 @@
                                 });
                             }
                         });
-                        filteredData.filter(p => p.baseName === conditionBase).forEach(cp => {
+                        genPool().filter(p => p.baseName === conditionBase).forEach(cp => {
                             (isShowdown ? [cp.slotType] : getEligibleSlots(cp.positions)).forEach(slot => {
                                 const vn = `${conditionBase}_${slot}`;
                                 if (model.variables[vn]) model.variables[vn][cName] = -bigM;
@@ -8483,7 +8607,7 @@
                         const cName = `group_max_${i}`;
                         model.constraints[cName] = { max: numPlayers + bigM };
                         g.players.forEach(pl => {
-                            const pd = filteredData.find(p => p.displayName === pl);
+                            const pd = genPool().find(p => p.displayName === pl);
                             if (pd) {
                                 (isShowdown ? [pd.slotType] : getEligibleSlots(pd.positions)).forEach(slot => {
                                     const vn = `${pd.baseName}_${slot}`;
@@ -8491,7 +8615,7 @@
                                 });
                             }
                         });
-                        filteredData.filter(p => p.baseName === conditionBase).forEach(cp => {
+                        genPool().filter(p => p.baseName === conditionBase).forEach(cp => {
                             (isShowdown ? [cp.slotType] : getEligibleSlots(cp.positions)).forEach(slot => {
                                 const vn = `${conditionBase}_${slot}`;
                                 if (model.variables[vn]) model.variables[vn][cName] = bigM;
@@ -8504,7 +8628,7 @@
                     else if (type === 'max') model.constraints[cName] = { max: numPlayers };
                     else model.constraints[cName] = { min: numPlayers, max: numPlayers };
                     g.players.forEach(pl => {
-                        const pd = filteredData.find(p => p.displayName === pl);
+                        const pd = genPool().find(p => p.displayName === pl);
                         if (pd) {
                             (isShowdown ? [pd.slotType] : getEligibleSlots(pd.positions)).forEach(slot => {
                                 const vn = `${pd.baseName}_${slot}`;
@@ -8517,10 +8641,10 @@
 
             // Force QB stack
             if (forceQBStack && !isShowdown) {
-                const teams = [...new Set(filteredData.map(p => p.Team))];
+                const teams = [...new Set(genPool().map(p => p.Team))];
                 teams.forEach(team => {
-                    const qbs = filteredData.filter(p => p.Team === team && p.Position === 'QB');
-                    const pcs = filteredData.filter(p => p.Team === team && (p.Position === 'WR' || p.Position === 'TE'));
+                    const qbs = genPool().filter(p => p.Team === team && p.Position === 'QB');
+                    const pcs = genPool().filter(p => p.Team === team && (p.Position === 'WR' || p.Position === 'TE'));
                     if (qbs.length && pcs.length) {
                         const cName = `qb_stack_${team}`;
                         model.constraints[cName] = { min: 0 };
@@ -8540,11 +8664,11 @@
 
             // Classic: QB → no opposing DST (hard exclusion when both selected)
             if (!isShowdown && document.getElementById('classicNoOppDstWithQb')?.checked !== false) {
-                filteredData.forEach(qb => {
+                genPool().forEach(qb => {
                     if (qb.Position !== 'QB') return;
                     const qbVar = `${qb.baseName}_QB`;
                     if (!model.variables[qbVar]) return;
-                    filteredData.forEach(dst => {
+                    genPool().forEach(dst => {
                         if (dst.Position !== 'DST') return;
                         // Opponent of the QB's team
                         const opp = qb.Opponent || '';
@@ -8570,23 +8694,23 @@
                 const bringKind = document.getElementById('classicBringBack')?.value || 'none';
                 const bringMin = Math.max(1, Math.min(2, parseInt(document.getElementById('classicBringBackMin')?.value) || 1));
                 if (wantWrTe || wantTwoPc || fadeGame || (bringKind && bringKind !== 'none')) {
-                    const teams = [...new Set(filteredData.map(p => p.Team))];
+                    const teams = [...new Set(genPool().map(p => p.Team))];
                     teams.forEach(team => {
                         const qbVars = Object.keys(model.variables).filter(v => {
-                            const p = filteredData.find(x => x.baseName === v.replace(/_QB$|_FLEX$|_Captain$/, ''));
+                            const p = genPool().find(x => x.baseName === v.replace(/_QB$|_FLEX$|_Captain$/, ''));
                             return p && p.Team === team && p.Position === 'QB' && model.variables[v];
                         });
                         if (!qbVars.length) return;
                         const wrVars = Object.keys(model.variables).filter(v => {
-                            const p = filteredData.find(x => x.baseName === v.replace(/_WR$|_FLEX$|_TE$|_RB$|_QB$|_DST$|_Captain$/, ''));
+                            const p = genPool().find(x => x.baseName === v.replace(/_WR$|_FLEX$|_TE$|_RB$|_QB$|_DST$|_Captain$/, ''));
                             return p && p.Team === team && p.Position === 'WR' && model.variables[v];
                         });
                         const teVars = Object.keys(model.variables).filter(v => {
-                            const p = filteredData.find(x => x.baseName === v.replace(/_WR$|_FLEX$|_TE$|_RB$|_QB$|_DST$|_Captain$/, ''));
+                            const p = genPool().find(x => x.baseName === v.replace(/_WR$|_FLEX$|_TE$|_RB$|_QB$|_DST$|_Captain$/, ''));
                             return p && p.Team === team && p.Position === 'TE' && model.variables[v];
                         });
                         const pcVars = wrVars.concat(teVars);
-                        const qbRow = filteredData.find(p => p.Team === team && p.Position === 'QB');
+                        const qbRow = genPool().find(p => p.Team === team && p.Position === 'QB');
                         const opp = qbRow?.Opponent;
                         if (wantTwoPc && pcVars.length >= 2) {
                             const cName = `classic_2pc_${team}`;
@@ -8610,7 +8734,7 @@
                         }
                         if (bringKind !== 'none' && opp) {
                             const bbVars = Object.keys(model.variables).filter(v => {
-                                const p = filteredData.find(x => x.baseName === v.replace(/_WR$|_FLEX$|_TE$|_RB$|_QB$|_DST$|_Captain$/, ''));
+                                const p = genPool().find(x => x.baseName === v.replace(/_WR$|_FLEX$|_TE$|_RB$|_QB$|_DST$|_Captain$/, ''));
                                 if (!p || p.Team !== opp) return false;
                                 if (bringKind === 'rb') return p.Position === 'RB';
                                 if (bringKind === 'pc') return p.Position === 'WR' || p.Position === 'TE';
@@ -8624,7 +8748,7 @@
                             }
                         }
                         if (fadeGame) {
-                            filteredData.filter(p => p.Position === 'DST' && (p.Team === team || p.Team === opp)).forEach(dst => {
+                            genPool().filter(p => p.Position === 'DST' && (p.Team === team || p.Team === opp)).forEach(dst => {
                                 const dstVar = `${dst.baseName}_DST`;
                                 if (!model.variables[dstVar]) return;
                                 qbVars.forEach(qv => {
@@ -8640,12 +8764,12 @@
             }
 
             if (forceShowdownStack && isShowdown) {
-                const teams = [...new Set(filteredData.map(p => p.Team))];
+                const teams = [...new Set(genPool().map(p => p.Team))];
                 teams.forEach(team => {
-                    const qbCpt = filteredData.filter(p => p.Team === team && p.Position === 'QB' && p.slotType === 'Captain').map(p => `${p.baseName}_Captain`);
-                    const pcFlex = filteredData.filter(p => p.Team === team && (p.Position === 'WR' || p.Position === 'TE') && p.slotType === 'FLEX').map(p => `${p.baseName}_FLEX`);
-                    const pcCpt = filteredData.filter(p => p.Team === team && (p.Position === 'WR' || p.Position === 'TE') && p.slotType === 'Captain').map(p => `${p.baseName}_Captain`);
-                    const qbFlex = filteredData.filter(p => p.Team === team && p.Position === 'QB' && p.slotType === 'FLEX').map(p => `${p.baseName}_FLEX`);
+                    const qbCpt = genPool().filter(p => p.Team === team && p.Position === 'QB' && p.slotType === 'Captain').map(p => `${p.baseName}_Captain`);
+                    const pcFlex = genPool().filter(p => p.Team === team && (p.Position === 'WR' || p.Position === 'TE') && p.slotType === 'FLEX').map(p => `${p.baseName}_FLEX`);
+                    const pcCpt = genPool().filter(p => p.Team === team && (p.Position === 'WR' || p.Position === 'TE') && p.slotType === 'Captain').map(p => `${p.baseName}_Captain`);
+                    const qbFlex = genPool().filter(p => p.Team === team && p.Position === 'QB' && p.slotType === 'FLEX').map(p => `${p.baseName}_FLEX`);
 
                     if (qbCpt.length && pcFlex.length) {
                         const cName = `sd_qb_cpt_${team}`;
@@ -8668,7 +8792,7 @@
                 const minB = Math.max(1, showdownMinTeamB || 0);
                 Object.keys(model.variables).forEach(v => {
                     const base = v.replace(/_Captain$|_FLEX$/, '');
-                    const p = filteredData.find(x => x.baseName === base);
+                    const p = genPool().find(x => x.baseName === base);
                     if (!p) return;
                     if (p.Team === showdownTeamA) model.variables[v].sdTeamA = 1;
                     if (p.Team === showdownTeamB) model.variables[v].sdTeamB = 1;
@@ -8683,17 +8807,17 @@
                     if (!p) return false;
                     let pos = p.Position;
                     if (pos === 'CPT' || p.slotType === 'Captain') {
-                        const flexTwin = filteredData.find(x => x.baseName === p.baseName && x.slotType === 'FLEX');
+                        const flexTwin = genPool().find(x => x.baseName === p.baseName && x.slotType === 'FLEX');
                         pos = flexTwin?.Position || pos;
                     }
                     return pos === 'K' || pos === 'DST' || p.Position === 'K' || p.Position === 'DST';
                 };
                 Object.keys(model.variables).forEach(v => {
                     const base = v.replace(/_Captain$|_FLEX$/, '');
-                    const p = filteredData.find(x => x.baseName === base && (
+                    const p = genPool().find(x => x.baseName === base && (
                         (v.endsWith('_Captain') && x.slotType === 'Captain') ||
                         (v.endsWith('_FLEX') && x.slotType === 'FLEX')
-                    )) || filteredData.find(x => x.baseName === base);
+                    )) || genPool().find(x => x.baseName === base);
                     if (isKOrDst(p)) model.variables[v].sdKDst = 1;
                 });
                 model.constraints.sdKDst = { min: showdownMinKDst };
@@ -8701,7 +8825,7 @@
 
             // Build around CPT: force that player into Captain slot
             if (isShowdown && buildAroundCpt) {
-                const cpt = filteredData.find(p => p.displayName === buildAroundCpt && p.slotType === 'Captain');
+                const cpt = genPool().find(p => p.displayName === buildAroundCpt && p.slotType === 'Captain');
                 if (cpt) {
                     const vn = `${cpt.baseName}_Captain`;
                     if (model.variables[vn]) {
@@ -8716,7 +8840,7 @@
             const getUnderlyingPos = (cpt) => {
                 let pos = cpt.Position;
                 if (pos === 'CPT' || cpt.slotType === 'Captain') {
-                    const flexTwin = filteredData.find(x => x.baseName === cpt.baseName && x.slotType === 'FLEX');
+                    const flexTwin = genPool().find(x => x.baseName === cpt.baseName && x.slotType === 'FLEX');
                     if (flexTwin?.Position && flexTwin.Position !== 'CPT') pos = flexTwin.Position;
                     // Also try raw positions array
                     if ((!pos || pos === 'CPT') && Array.isArray(cpt.positions)) {
@@ -8731,11 +8855,11 @@
             const excludeOppDst = document.getElementById('excludeOppDstWithOffenseCpt')?.checked !== false;
             if (isShowdown && excludeOppDst) {
                 const offensePos = ['QB', 'RB', 'WR', 'TE'];
-                filteredData.forEach(cpt => {
+                genPool().forEach(cpt => {
                     if (cpt.slotType !== 'Captain') return;
                     const pos = getUnderlyingPos(cpt);
                     if (!offensePos.includes(pos)) return;
-                    filteredData.forEach(dst => {
+                    genPool().forEach(dst => {
                         if (dst.Position !== 'DST' || dst.Team === cpt.Team) return;
                         const cptVar = `${cpt.baseName}_Captain`;
                         const dstVar = `${dst.baseName}_FLEX`;
@@ -8750,12 +8874,12 @@
 
             // CPT WR or TE → require ≥1 same-team QB in FLEX
             if (isShowdown && document.getElementById('sdCptWrStackQb')?.checked) {
-                filteredData.forEach(cpt => {
+                genPool().forEach(cpt => {
                     if (cpt.slotType !== 'Captain') return;
                     if (!['WR', 'TE'].includes(getUnderlyingPos(cpt))) return;
                     const cptVar = `${cpt.baseName}_Captain`;
                     if (!model.variables[cptVar]) return;
-                    const qbVars = filteredData.filter(p =>
+                    const qbVars = genPool().filter(p =>
                         p.slotType === 'FLEX' && p.Team === cpt.Team && getUnderlyingPos(p) === 'QB'
                         && model.variables[`${p.baseName}_FLEX`]
                     ).map(p => `${p.baseName}_FLEX`);
@@ -8769,12 +8893,12 @@
 
             // CPT QB → require ≥1 same-team WR or TE in FLEX
             if (isShowdown && document.getElementById('sdCptQbStackPass')?.checked) {
-                filteredData.forEach(cpt => {
+                genPool().forEach(cpt => {
                     if (cpt.slotType !== 'Captain') return;
                     if (getUnderlyingPos(cpt) !== 'QB') return;
                     const cptVar = `${cpt.baseName}_Captain`;
                     if (!model.variables[cptVar]) return;
-                    const passVars = filteredData.filter(p =>
+                    const passVars = genPool().filter(p =>
                         p.slotType === 'FLEX' && p.Team === cpt.Team
                         && ['WR', 'TE'].includes(getUnderlyingPos(p))
                         && model.variables[`${p.baseName}_FLEX`]
@@ -8789,12 +8913,12 @@
 
             // CPT RB → require ≥1 same-team DST in FLEX
             if (isShowdown && document.getElementById('sdCptRbStackDst')?.checked) {
-                filteredData.forEach(cpt => {
+                genPool().forEach(cpt => {
                     if (cpt.slotType !== 'Captain') return;
                     if (getUnderlyingPos(cpt) !== 'RB') return;
                     const cptVar = `${cpt.baseName}_Captain`;
                     if (!model.variables[cptVar]) return;
-                    const dstVars = filteredData.filter(p =>
+                    const dstVars = genPool().filter(p =>
                         p.slotType === 'FLEX' && p.Team === cpt.Team && p.Position === 'DST'
                         && model.variables[`${p.baseName}_FLEX`]
                     ).map(p => `${p.baseName}_FLEX`);
@@ -8808,12 +8932,12 @@
 
             // CPT DST → require ≥1 same-team RB in FLEX
             if (isShowdown && document.getElementById('sdCptDstStackRb')?.checked) {
-                filteredData.forEach(cpt => {
+                genPool().forEach(cpt => {
                     if (cpt.slotType !== 'Captain') return;
                     if (getUnderlyingPos(cpt) !== 'DST' && cpt.Position !== 'DST') return;
                     const cptVar = `${cpt.baseName}_Captain`;
                     if (!model.variables[cptVar]) return;
-                    const rbVars = filteredData.filter(p =>
+                    const rbVars = genPool().filter(p =>
                         p.slotType === 'FLEX' && p.Team === cpt.Team && getUnderlyingPos(p) === 'RB'
                         && model.variables[`${p.baseName}_FLEX`]
                     ).map(p => `${p.baseName}_FLEX`);
@@ -8827,12 +8951,12 @@
 
             // CPT K → exclude same-team QB (FG script ≠ pass TD script)
             if (isShowdown && document.getElementById('sdCptKFadeQb')?.checked) {
-                filteredData.forEach(cpt => {
+                genPool().forEach(cpt => {
                     if (cpt.slotType !== 'Captain') return;
                     if (getUnderlyingPos(cpt) !== 'K' && cpt.Position !== 'K') return;
                     const cptVar = `${cpt.baseName}_Captain`;
                     if (!model.variables[cptVar]) return;
-                    filteredData.forEach(qb => {
+                    genPool().forEach(qb => {
                         if (qb.slotType !== 'FLEX' || qb.Team !== cpt.Team || getUnderlyingPos(qb) !== 'QB') return;
                         const qbVar = `${qb.baseName}_FLEX`;
                         if (!model.variables[qbVar]) return;
@@ -8846,7 +8970,7 @@
 
             // Uniqueness vs recent lineups only (keep window small — large windows freeze the solver)
             const uniqN = minUniquePlayers > 0
-                ? (isShowdown ? Math.min(4, previousLineups.length) : Math.min(6, previousLineups.length))
+                ? (isShowdown ? Math.min(2, previousLineups.length) : Math.min(3, previousLineups.length))
                 : 0;
             if (uniqN > 0 && minUniquePlayers > 0) {
                 const recent = previousLineups.slice(-uniqN);
@@ -8880,7 +9004,8 @@
             Object.keys(result).forEach(key => {
                 if (key === 'feasible' || key === 'result' || result[key] !== 1) return;
                 const [name, slot] = key.split('_');
-                const player = filteredData.find(p => p.baseName === name && (isShowdown ? p.slotType === slot : true));
+                const player = genPool().find(p => p.baseName === name && (isShowdown ? p.slotType === slot : true))
+                    || filteredData.find(p => p.baseName === name && (isShowdown ? p.slotType === slot : true));
                 if (!player) return;
                 if (isShowdown) {
                     if (slot === 'Captain') {
@@ -9297,7 +9422,91 @@
             }
         }
 
-        const runLineupGeneration = async () => {
+        function cloneLuPlayer(p) {
+            return p ? { name: p.name, id: p.id, baseName: p.baseName, salary: p.salary, projectedFP: p.projectedFP, ownership: p.ownership } : null;
+        }
+        function swapFillLineup(isShowdown, lineupSet, playerCounts) {
+            if (!generatedLineups.length) return null;
+            const pool = genPool().filter(p => (Number(p.projectedFP) || 0) > 0 && (Number(p.salary) || 0) > 0 && !deselectedPlayers.has(p.displayName));
+            if (!pool.length) return null;
+            const src = generatedLineups[Math.floor(Math.random() * Math.min(generatedLineups.length, 8))];
+            const used = new Set();
+            const maxFor = (dn) => {
+                const effectiveMax = Math.max(minExposures[dn] || 0, Math.min(maxExposures[dn] || 100, maxExposure * 100));
+                return Math.floor(effectiveMax / 100 * Math.max(1, numLineups));
+            };
+            const canUse = (p) => {
+                if (!p || used.has(p.displayName) || used.has(p.baseName)) return false;
+                if ((playerCounts[p.displayName] || 0) >= maxFor(p.displayName)) return false;
+                return true;
+            };
+            const pick = (pos, slotType) => {
+                const cand = pool.filter(p => {
+                    if (!canUse(p)) return false;
+                    if (isShowdown) return (p.slotType || '') === slotType || (slotType === 'Captain' && (p.displayName || '').endsWith(' (CPT)'));
+                    const pp = String(p.Position || '').split('/')[0];
+                    if (pos === 'FLEX') return pp === 'RB' || pp === 'WR' || pp === 'TE';
+                    return pp === pos;
+                }).sort((a,b) => (Number(b.projectedFP)||0) * (0.85 + Math.random()*0.3) - (Number(a.projectedFP)||0));
+                return cand[0] || null;
+            };
+            const toP = (p) => ({ name: p.displayName, id: p.id, baseName: p.baseName, salary: p.salary, projectedFP: p.projectedFP, ownership: p.ownership || 0 });
+            if (isShowdown) {
+                let cap = src.lineup.captain ? pool.find(p => p.displayName === src.lineup.captain.name) : pick(null, 'Captain');
+                const flex = (src.lineup.flex || []).map(f => pool.find(p => p.displayName === f.name)).filter(Boolean);
+                if (cap) used.add(cap.displayName);
+                flex.forEach(p => used.add(p.displayName));
+                const swapsN = 1 + Math.floor(Math.random() * 3);
+                for (let i = 0; i < swapsN && flex.length; i++) {
+                    const idx = Math.floor(Math.random() * flex.length);
+                    const nxt = pick(null, 'FLEX');
+                    if (nxt && nxt.baseName !== cap?.baseName) { used.delete(flex[idx].displayName); flex[idx] = nxt; used.add(nxt.displayName); }
+                }
+                if (Math.random() < 0.25) {
+                    const nxt = pick(null, 'Captain');
+                    if (nxt) { used.delete(cap?.displayName); cap = nxt; used.add(nxt.displayName); }
+                }
+                if (!cap || flex.length < 5) return null;
+                const lineup = { captain: toP(cap), flex: flex.map(toP) };
+                const totalSalary = cap.salary + flex.reduce((s,p)=>s+p.salary,0);
+                if (totalSalary > maxSalary || totalSalary < Math.max(0, minSalary - 2500)) return null;
+                const signature = `${cap.displayName}|${flex.map(p=>p.displayName).sort().join(',')}`;
+                if (lineupSet.has(signature)) return null;
+                lineupSet.add(signature);
+                return { lineup, totalSalary, totalPoints: cap.projectedFP + flex.reduce((s,p)=>s+p.projectedFP,0), totalOwnership: (cap.ownership||0)+flex.reduce((s,p)=>s+(p.ownership||0),0) };
+            }
+            const keys = ['QB','RB1','RB2','WR1','WR2','WR3','TE','FLEX','DST'];
+            const posOf = { QB:'QB', RB1:'RB', RB2:'RB', WR1:'WR', WR2:'WR', WR3:'WR', TE:'TE', FLEX:'FLEX', DST:'DST' };
+            const lineup = {};
+            keys.forEach(k => {
+                lineup[k] = cloneLuPlayer(src.lineup[k]);
+                if (lineup[k]) used.add(lineup[k].name);
+            });
+            const nSwap = 2 + Math.floor(Math.random() * 3);
+            const order = keys.slice().sort(() => Math.random() - 0.5);
+            let changed = 0;
+            for (const k of order) {
+                if (changed >= nSwap) break;
+                const nxt = pick(posOf[k]);
+                if (!nxt) continue;
+                used.delete(lineup[k]?.name);
+                lineup[k] = toP(nxt);
+                used.add(nxt.displayName);
+                changed++;
+            }
+            if (changed < 2) return null;
+            const players = keys.map(k => lineup[k]).filter(Boolean);
+            if (players.length !== 9) return null;
+            const names = new Set(players.map(p => p.name));
+            if (names.size !== 9) return null;
+            const totalSalary = players.reduce((s,p)=>s+p.salary,0);
+            if (totalSalary > maxSalary || totalSalary < Math.max(0, minSalary - 2500)) return null;
+            const signature = players.map(p => p.name).slice().sort().join(',');
+            if (lineupSet.has(signature)) return null;
+            lineupSet.add(signature);
+            return { lineup, totalSalary, totalPoints: players.reduce((s,p)=>s+p.projectedFP,0), totalOwnership: players.reduce((s,p)=>s+(p.ownership||0),0) };
+        }
+                const runLineupGeneration = async () => {
             if (!selectedSlate) { alert('Please select a slate'); return; }
             if (lineupGenerationRunning) {
                 alert('Lineup generation is already running. Click Stop generation to abort.');
@@ -9324,7 +9533,8 @@
             const forceShowdownStack = isShowdown && document.getElementById('showdownAutoStack').checked;
             updateLineupTableHeaders(isShowdown);
 
-            const availablePlayers = filteredData.filter(r => !deselectedPlayers.has(r.displayName)).map(r => ({
+            window._genPool = buildGenPool(isShowdown);
+            const availablePlayers = genPool().filter(r => !deselectedPlayers.has(r.displayName) && Number(r.projectedFP) > 0).map(r => ({
                 name: r.baseName, baseName: r.baseName, displayName: r.displayName, id: r.id,
                 salary: r.salary, points: r.projectedFP, maxExposure: r.maxExposure, minExposure: r.minExposure,
                 slotType: isShowdown ? (r.displayName.endsWith(' (CPT)') ? 'Captain' : 'FLEX') : null,
@@ -9407,9 +9617,10 @@
 
             // ---- Performance guards (prevent main-thread freeze) ----
             // Failed solves used to loop 180–220 times with ZERO yields → page lockup.
-            const MAX_CONSEC_FAIL = isShowdown ? 28 : 40;
-            const MAX_TOTAL_ATTEMPTS = Math.max(80, numLineups * (isShowdown ? 6 : 8));
-            const RUN_TIME_BUDGET_MS = isShowdown ? 45000 : 60000;
+            const MAX_CONSEC_FAIL = isShowdown ? 18 : 22;
+            const MAX_ILP_LINEUPS = Math.min(numLineups, numLineups <= 20 ? 20 : 24);
+            const MAX_TOTAL_ATTEMPTS = Math.max(30, MAX_ILP_LINEUPS * 5);
+            const RUN_TIME_BUDGET_MS = Math.min(150000, 12000 + numLineups * 500);
             const runStartedAt = Date.now();
             let totalAttempts = 0;
             let globalTempMin = minSalary;
@@ -9462,7 +9673,7 @@
                         });
                     }
                     const result = solver.Solve(model);
-                    await yieldToUI();
+                    if (totalAttempts % 4 === 0) await yieldToUI();
                     if (!result || !result.feasible) {
                         globalTempMin = Math.max(0, globalTempMin - 2000);
                         globalRelaxed = Math.min(1, globalRelaxed + 0.06);
@@ -9535,9 +9746,9 @@
                 }
             }
 
-            // Phase 3: Remaining fill
+            // Phase 3: ILP seed set only — remaining lineups use fast swaps
             let fails = 0;
-            while (generatedLineups.length < numLineups && fails < MAX_CONSEC_FAIL && stillHaveBudget()) {
+            while (generatedLineups.length < MAX_ILP_LINEUPS && fails < MAX_CONSEC_FAIL && stillHaveBudget()) {
                 const got = await trySolve({ label: 'Building remaining' });
                 if (got) fails = 0;
                 else fails++;
@@ -9551,12 +9762,28 @@
                 globalRelaxed = 1;
                 fails = 0;
                 updateProgress((generatedLineups.length / numLineups) * 100, 'Soft fill (relaxed)…');
-                while (generatedLineups.length < numLineups && fails < 20 && !abortLineupGeneration) {
+                while (generatedLineups.length < MAX_ILP_LINEUPS && fails < 12 && !abortLineupGeneration) {
                     const got = await trySolve({ label: 'Soft fill' });
                     if (got) fails = 0;
                     else fails++;
                 }
                 minUniquePlayers = savedUnique;
+            }
+
+            if (generatedLineups.length < numLineups && !abortLineupGeneration) {
+                updateProgress((generatedLineups.length / numLineups) * 100, 'Diversifying lineups…');
+                let swaps = 0;
+                while (generatedLineups.length < numLineups && swaps < numLineups * 12 && !abortLineupGeneration) {
+                    swaps++;
+                    const extra = swapFillLineup(isShowdown, lineupSet, playerCounts);
+                    if (!extra) continue;
+                    generatedLineups.push(extra);
+                    updatePlayerCounts(extra, playerCounts, isShowdown);
+                    if (swaps % 8 === 0) {
+                        updateProgress((generatedLineups.length / numLineups) * 100, `Diversifying ${generatedLineups.length}/${numLineups}`);
+                        await yieldToUI();
+                    }
+                }
             }
 
             if (!stillHaveBudget() && !abortLineupGeneration) {
@@ -10915,15 +11142,21 @@
                 let scriptVeto = false;
                 if (!m.dual && m.fav >= 9) scriptVeto = true;
                 if (!m.dual && m.fav >= 7 && m.passAtt < 34) scriptVeto = true;
-                const hitsValue = m.valueX >= 2.45;
+                const hitsValue = m.valueX >= 3;
+                const dvpQ = (typeof dvpFor === 'function') ? dvpFor(p) : null;
+                const toughMatch = !!(dvpQ && dvpQ.rank != null && (dvpQ.rank >= 22 || (dvpQ.of && dvpQ.rank / dvpQ.of >= 0.68)));
                 if (scriptVeto && !m.dual && m.fav >= 9) {
                     primary = volSafe ? 'Safe' : 'Fade';
                     exposure = primary === 'Safe' ? 'Mid Exposure' : 'Zero / Fade';
                     reason = `FADE as Core: pocket QB, ${p.Team || ''} -${m.fav.toFixed(1)}`;
-                } else if (volCore && hitsValue && !scriptVeto) {
+                } else if (volCore && hitsValue && !scriptVeto && !toughMatch) {
                     primary = 'Core Play';
                     exposure = 'High Exposure';
-                    reason = `CORE: ${m.passAtt.toFixed(0)} att${m.dual ? ', ' + m.rushAtt.toFixed(0) + ' ru att' : ''}, ${m.valueX.toFixed(2)}x`;
+                    reason = `CORE: ${m.passAtt.toFixed(0)} att${m.dual ? ', ' + m.rushAtt.toFixed(0) + ' ru att' : ''}, ${m.valueX.toFixed(2)}x, DVP ${dvpQ ? '#' + dvpQ.rank : 'n/a'}`;
+                } else if (volCore && hitsValue && !scriptVeto && toughMatch) {
+                    primary = 'Safe';
+                    exposure = 'Mid Exposure';
+                    reason = `SAFE: ${m.valueX.toFixed(2)}x volume but tough DVP #${dvpQ.rank}`;
                 } else if (volSafe) {
                     primary = 'Safe';
                     exposure = 'Mid Exposure';
@@ -11344,8 +11577,137 @@
             const idx = peers.findIndex(x => x.displayName === p.displayName);
             return { rank: idx >= 0 ? idx + 1 : '—', of: peers.length || '—' };
         }
+        function playerWhyHtml(p, pack, m, dvp) {
+            const bits = [];
+            bits.push(`<p><strong>${csEsc(csName(p))}</strong> is tagged <strong>${csEsc(pack.primary)}</strong> with ${csEsc(pack.exposure)}${pack.role ? ` as a ${csEsc(pack.role)}` : ''}.</p>`);
+            if (pack.reason) bits.push(`<p>${csEsc(pack.reason)}.</p>`);
+            const pos = csPos(p);
+            if (pos === 'QB') {
+                bits.push(`<p>Volume is ${m.passAtt ? m.passAtt.toFixed(1) : '—'} pass attempts` + (m.dual ? ` and ${m.rushAtt.toFixed(1)} rush attempts (dual-threat).` : '.') + ` Cash Core now also requires 3.0x and a non-tough matchup. He is at ${m.valueX.toFixed(2)}x.</p>`);
+            } else if (pos === 'RB') {
+                bits.push(`<p>He is projected for ${m.opps.toFixed(1)} opportunities (${m.rushAtt.toFixed(1)} rush att + ${m.tgt.toFixed(1)} targets) at ${m.valueX.toFixed(2)}x with ${m.pTD.toFixed(2)} P(TD).</p>`);
+            } else if (pos === 'WR' || pos === 'TE') {
+                bits.push(`<p>Target volume is ${m.tgt.toFixed(1)} with ${m.rec.toFixed(1)} catches projected at ${m.valueX.toFixed(2)}x.</p>`);
+            }
+            if (dvp) bits.push(`<p>Matchup DVP is #${dvp.rank} (1 = easiest). ${dvp.rank <= 12 ? 'That is an appealing spot.' : dvp.rank >= 22 ? 'That is a tough spot, which blocks QB Core.' : 'That is a neutral-to-mixed spot.'}</p>`);
+            const impl = implSpreadText(p);
+            if (impl) bits.push(`<p>Team implied total / spread: ${csEsc(impl)}.</p>`);
+            if (m.fav >= 7 && pos === 'QB' && !m.dual) bits.push(`<p>Script risk: pocket QB on a ${m.fav.toFixed(1)}-point favorite can lose passing volume.</p>`);
+            if (m.fav >= 6 && pos === 'RB') bits.push(`<p>Favorite script helps this back if the lead holds.</p>`);
+            bits.push(`<p class="cs-note">This writeup is generated from the same cash-tag rules as the Cheat Sheet, not a live model chat.</p>`);
+            return bits.join('');
+        }
+        function luIsShowdown() {
+            return !!(typeof selectedSlate === 'string' && selectedSlate.includes('Showdown'));
+        }
+        function luSlotList() {
+            return luIsShowdown()
+                ? ['CPT','FLEX1','FLEX2','FLEX3','FLEX4','FLEX5']
+                : ['QB','RB1','RB2','WR1','WR2','WR3','TE','FLEX','DST'];
+        }
+        function luSlotPos(slot) {
+            const s = String(slot || '');
+            if (s.startsWith('RB')) return 'RB';
+            if (s.startsWith('WR')) return 'WR';
+            if (s.startsWith('FLEX')) return 'FLEX';
+            return s;
+        }
+        let luState = { open: false, slots: {} };
+        try { luState = Object.assign(luState, JSON.parse(localStorage.getItem('nflCsLineup') || '{}')); } catch (e) {}
+        function luSave() {
+            try { localStorage.setItem('nflCsLineup', JSON.stringify({ open: !!luState.open, slots: luState.slots || {} })); } catch (e) {}
+        }
+        function luSalary() {
+            return Object.values(luState.slots || {}).reduce((s, p) => s + (Number(p && p.salary) || 0), 0);
+        }
+        function luCount() {
+            return Object.keys(luState.slots || {}).length;
+        }
+        function luFindPlayer(name) {
+            return (typeof csSourcePool === 'function' ? csSourcePool() : []).find(x => x.displayName === name || csName(x) === name)
+                || (filteredData || []).find(x => x.displayName === name);
+        }
+        function luCanFlex(pos) { return pos === 'RB' || pos === 'WR' || pos === 'TE'; }
+        function luAddPlayer(name) {
+            const p = luFindPlayer(name);
+            if (!p) return;
+            const pos = csPos(p);
+            const used = new Set(Object.values(luState.slots || {}).map(x => x && (x.displayName || x.name)));
+            if (used.has(p.displayName) || used.has(csName(p))) { luRender(); luOpen(true); return; }
+            const slots = luSlotList();
+            let target = slots.find(s => !luState.slots[s] && luSlotPos(s) === pos);
+            if (!target && luCanFlex(pos)) target = slots.find(s => !luState.slots[s] && luSlotPos(s) === 'FLEX');
+            if (!target && luIsShowdown() && pos !== 'DST') target = slots.find(s => !luState.slots[s] && (luSlotPos(s) === 'FLEX' || s === 'CPT'));
+            if (!target) { alert('No empty ' + pos + ' / FLEX slot'); luOpen(true); return; }
+            if (!luState.slots) luState.slots = {};
+            luState.slots[target] = {
+                displayName: p.displayName,
+                name: csName(p),
+                pos: pos,
+                team: p.Team || '',
+                salary: csSal(p)
+            };
+            luSave();
+            luOpen(true);
+            luRender();
+        }
+        function luAddFromDrawer() {
+            const title = document.getElementById('csDrawerTitle')?.textContent;
+            if (title) luAddPlayer(title);
+        }
+        function luRemove(slot) {
+            if (luState.slots) delete luState.slots[slot];
+            luSave();
+            luRender();
+        }
+        function luClear() {
+            luState.slots = {};
+            luSave();
+            luRender();
+        }
+        function luOpen(force) {
+            luState.open = force == null ? !luState.open : !!force;
+            luSave();
+            const dock = document.getElementById('luDock');
+            const fab = document.getElementById('luFab');
+            if (dock) dock.classList.toggle('open', luState.open);
+            if (fab) fab.hidden = luState.open;
+            luRender();
+        }
+        function luMigrateSlots() {
+            const s = luState.slots || {};
+            if (s.RB && !s.RB1) { s.RB1 = s.RB; delete s.RB; }
+            if (s.WR && !s.WR1) { s.WR1 = s.WR; delete s.WR; }
+            if (s.FLEX && luIsShowdown() && !s.FLEX1) { s.FLEX1 = s.FLEX; delete s.FLEX; }
+            luState.slots = s;
+        }
+        function luRender() {
+            luMigrateSlots();
+            const slots = luSlotList();
+            const body = document.getElementById('luDockBody');
+            const fab = document.getElementById('luFab');
+            const meta = document.getElementById('luMeta');
+            const cap = luIsShowdown() ? 50000 : 50000;
+            const sal = luSalary();
+            const filled = luCount();
+            if (fab) fab.textContent = `Lineup ${filled}/${slots.length} · $${sal.toLocaleString()}`;
+            if (meta) meta.textContent = `${filled}/${slots.length} · $${sal.toLocaleString()} / $${cap.toLocaleString()}`;
+            if (!body) return;
+            body.innerHTML = slots.map(slot => {
+                const pl = luState.slots && luState.slots[slot];
+                return `<div class="lu-slot"><span class="pos">${slot}</span><span>${pl ? csEsc(pl.name) + ' · ' + csEsc(pl.team) : '—'}</span><span>${pl ? '$' + pl.salary : ''}</span>${pl ? `<button type="button" class="ghost" onclick="luRemove('${slot}')">✕</button>` : '<span></span>'}</div>`;
+            }).join('') + `<div style="display:flex;gap:0.4rem;margin-top:0.7rem;"><button type="button" class="ghost" onclick="luClear()">Clear</button></div>`;
+        }
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('csTagMenu');
+            if (!menu || menu.hidden) return;
+            if (e.target.closest('.cs-multitag')) return;
+            menu.hidden = true;
+        });
+        window.addEventListener('load', () => { try { luRender(); if (luState.open) luOpen(true); } catch (e) {} });
+
         function setCsDrawerTab(tab) {
-            ['ov','log','mu'].forEach(id => {
+            ['ov','log','mu','ai'].forEach(id => {
                 const el = document.getElementById('csTab-' + id);
                 if (el) el.hidden = id !== tab;
             });
@@ -11376,7 +11738,11 @@
             const shot = playerHeadshot(p) || p.headshot || '';
             document.getElementById('csDrawerTitle').textContent = csName(p);
             const subEl = document.getElementById('csDrawerSub');
-            if (subEl) subEl.innerHTML = `${csEsc(p.Team||'')} | ${csEsc(pos)} | $${csSal(p)}<div class="cs-tag-row" style="margin-top:0.35rem;">${cashPills(p)}</div>${pack.role ? `<div class="cs-note" style="margin:0.2rem 0 0;">Role: ${csEsc(pack.role)}</div>` : ''}`;
+            const oppTxt = csOpp(p) || p.Opponent || '';
+            const implTxt = implSpreadText(p) || ((m.impl != null && Number.isFinite(Number(m.impl))) ? Number(m.impl).toFixed(1) : '');
+            const dvpHead = dvp ? `DVP #${dvp.rank}` : '';
+            const meta = [p.Team || '', pos, '$' + csSal(p), oppTxt ? 'vs ' + oppTxt : '', implTxt ? 'Impl ' + implTxt : '', dvpHead].filter(Boolean).join(' | ');
+            if (subEl) subEl.innerHTML = `${csEsc(meta)}<div class="cs-tag-row" style="margin-top:0.35rem;">${cashPills(p)}</div>${pack.role ? `<div class="cs-note" style="margin:0.2rem 0 0;">Role: ${csEsc(pack.role)}</div>` : ''}`;
             const img = document.getElementById('csDrawerHeadshot');
             if (img) {
                 if (shot) { img.referrerPolicy = 'no-referrer'; img.src = shot; img.alt = csName(p); img.hidden = false; img.onerror = () => { img.hidden = true; }; }
@@ -11418,13 +11784,14 @@
             body.innerHTML = `
                 <div class="cs-dk-kpis">
                     ${kpi('ATT', att)}${kpi('YDS', yds)}${kpi('YDS/G', ypg)}${kpi('TD', td)}${kpi('FPPG', csFp(p).toFixed(1))}
-                    ${kpi('OWN', (Number(p.ownership)||0).toFixed(1)+'%')}${kpi('POS RK', rk.rank + ' / ' + rk.of)}
+                    ${kpi('OWN', (Number(p.ownership)||0).toFixed(1)+'%')}${kpi('POS RK', rk.rank)}
                 </div>
                 <p class="cs-reason">${csEsc(pack.reason)}</p>
                 <div class="cs-dk-tabs">
                     <button type="button" class="active" data-tab="ov" onclick="setCsDrawerTab('ov')">Overview</button>
                     <button type="button" data-tab="log" onclick="setCsDrawerTab('log')">Game Log</button>
                     <button type="button" data-tab="mu" onclick="setCsDrawerTab('mu')">Matchup</button>
+                    <button type="button" data-tab="ai" onclick="setCsDrawerTab('ai')">Why this tag</button>
                 </div>
                 <div id="csTab-ov">
                     ${line ? `<p class="cs-note">Week line: ${csEsc(line)}</p>` : ''}
@@ -11462,6 +11829,10 @@
                     <h4 style="margin:0.7rem 0 0.3rem;">Vs ${csEsc(csOpp(p)||'opp')}</h4>
                     ${vs.length ? logTable(vs) + `<p class="cs-note">Avg ${(vs.reduce((s,g)=>s+g.fp,0)/vs.length).toFixed(1)} DK FP in ${vs.length} game(s).</p>` : '<p class="cs-note">No logged games against this opponent.</p>'}
                 </div>
+                <div id="csTab-ai" hidden>
+                    <h4 style="margin:0.2rem 0 0.35rem;">Why this tag</h4>
+                    ${playerWhyHtml(p, pack, m, dvp)}
+                </div>
             `;
             drawer.classList.add('open');
             drawer.setAttribute('aria-hidden', 'false');
@@ -11498,6 +11869,29 @@
             if (!vals.length) return { min: 0, max: 0 };
             return { min: Math.min(...vals), max: Math.max(...vals) };
         }
+        function implSpreadText(p) {
+            const impl = p && p.impliedTotal;
+            if (impl == null || impl === '' || !Number.isFinite(Number(impl))) return '';
+            const i = Number(impl).toFixed(1);
+            const sp = p.spread;
+            if (sp == null || sp === '' || !Number.isFinite(Number(sp))) return i;
+            const n = Number(sp);
+            const s = (n > 0 ? '+' : '') + (Number.isInteger(n) ? String(n) : n.toFixed(1));
+            return i + ' (' + s + ')';
+        }
+        function csSelectedTags() {
+            return [...document.querySelectorAll('#csTagMenu input[type="checkbox"]:checked')].map(el => el.value);
+        }
+        function toggleCsTagMenu() {
+            const menu = document.getElementById('csTagMenu');
+            if (menu) menu.hidden = !menu.hidden;
+        }
+        function onCsTagChange() {
+            const tags = csSelectedTags();
+            const btn = document.getElementById('csTagBtn');
+            if (btn) btn.textContent = tags.length ? tags.join(', ') : 'All tags';
+            renderCheatSheet();
+        }
         function heatPill(val, range, label) {
             if (val == null || val === '' || !Number.isFinite(Number(val))) {
                 return `<span class="heat-pill empty">${label || '—'}</span>`;
@@ -11531,15 +11925,18 @@
             const minFp = parseFloat(document.getElementById('csMinFp')?.value) || 0;
             const minVal = parseFloat(document.getElementById('csMinVal')?.value) || 0;
             const hideZero = document.getElementById('csHideZero')?.checked !== false;
-            const tagWant = document.getElementById('csTag')?.value || '';
+            const tagWantList = csSelectedTags();
             const teamWant = document.getElementById('csTeam')?.value || '';
             const list = csSourcePool().filter(p => {
                 if (deselectedPlayers.has(p.displayName)) return false;
                 if (teamWant && String(p.Team || '') !== teamWant) return false;
-                if (tagWant) {
+                if (tagWantList.length) {
                     const pack = cashTagPlayer(p);
-                    if (tagWant === 'coreish' && !['Extreme Core','Core Play'].includes(pack.primary)) return false;
-                    else if (tagWant !== 'coreish' && pack.primary !== tagWant) return false;
+                    const hit = tagWantList.some(tagWant =>
+                        (tagWant === 'coreish' && ['Extreme Core','Core Play'].includes(pack.primary)) ||
+                        pack.primary === tagWant
+                    );
+                    if (!hit) return false;
                 }
                 const fp = csFp(p);
                 if (hideZero && fp <= 0) return false;
@@ -11674,7 +12071,7 @@
             const sorted = sortedAll.slice(0, cap);
             const th = (key, label, tip) => `<th style="cursor:pointer;" title="${String(tip||'').replace(/"/g,'&quot;')}" onclick="csSortKey='${key}';csSortDir=csSortKey==='${key}'&&csSortDir==='desc'?'asc':'desc';renderCheatSheet();">${label}</th>`;
             const body = sorted.map((p, i) => {
-                const impl = p.impliedTotal != null ? Number(p.impliedTotal).toFixed(1) : '';
+                const impl = implSpreadText(p);
                 const stackBtn = csPos(p)==='QB'
                     ? `<button type="button" class="ghost" style="padding:0.15rem 0.4rem;font-size:0.7rem;" onclick="csStartStack('${csArg(p.displayName)}','${csArg(p.Team)}')">Stack</button>`
                     : (csStackPick && p.Team === csStackPick.team && csPos(p)!=='QB'
@@ -11693,10 +12090,11 @@
                     <td>
                         <div class="cs-player-cell">
                             ${(playerHeadshot(p)||p.headshot) ? `<img class="cs-mini-shot" src="${csEsc(playerHeadshot(p)||p.headshot)}" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">` : ''}
-                            <div>
+                            <div class="cs-player-meta">
                                 <button type="button" class="cs-name-btn" onclick="openCsDrawer('${csArg(p.displayName)}')">${csEsc(csName(p))}</button>
                                 <div class="cs-tag-row">${cashPills(p)}</div>
                             </div>
+                            <button type="button" class="lu-add" title="Add to lineup" onclick="event.stopPropagation();luAddPlayer('${csArg(p.displayName)}')">+</button>
                         </div>
                         ${stackBtn}
                     </td>
@@ -11715,7 +12113,7 @@
             }).join('');
             const banner = csStackPick ? `<p class="cs-note">Stacking from <strong>${csEsc(csStackPick.qbDisplay)}</strong> — click Add on a teammate. <button type="button" class="ghost" onclick="csCancelStack()">Cancel</button></p>` : '';
             return banner + `<div class="cs-table-wrap"><table id="cheatSheetTable">
-                <thead><tr>${th('fp','#','Row number after current sort')}${th('name','Player','Name plus cash tag and exposure')}${th('pos','Pos','DraftKings position')}${th('team','Team','Player team')}${th('opp','Opp','Opponent on this slate')}${th('impl','Impl Tot','Implied team total from O/U and spread')}${th('dvp','DVP','Defense vs this position. 1 = easiest')}${th('sal','Salary','DraftKings salary')}${th('fp','Proj','Cheat Sheet projected fantasy points')}${th('val','Val','Proj divided by salary per 1000. 2.5x is the cash bar')}${th('line','Week line','Position-specific projection line from the Cheat Sheet')}${th('l3','L3','Average DraftKings FP over the last 3 logged games')}${th('own','Own','Projected ownership percent')}</tr></thead>
+                <thead><tr>${th('fp','#','Row number after current sort')}${th('name','Player','Name plus cash tag and exposure')}${th('pos','Pos','DraftKings position')}${th('team','Team','Player team')}${th('opp','Opp','Opponent on this slate')}${th('impl','Impl Tot','Implied team total with spread. Example 22.5 (-4)')}${th('dvp','DVP','Defense vs this position. 1 = easiest')}${th('sal','Salary','DraftKings salary')}${th('fp','Proj','Cheat Sheet projected fantasy points')}${th('val','Val','Proj divided by salary per 1000. 2.5x is the cash bar')}${th('line','Week line','Position-specific projection line from the Cheat Sheet')}${th('l3','L3','Average DraftKings FP over the last 3 logged games')}${th('own','Own','Projected ownership percent')}</tr></thead>
                 <tbody>${body || '<tr><td colspan="13">No players match filters.</td></tr>'}
                 ${sortedAll.length > sorted.length ? `<tr><td colspan="13"><button type="button" class="ghost" onclick="window.csRowCap=${sorted.length+80};renderCheatSheet();">Show more (${sorted.length} of ${sortedAll.length})</button></td></tr>` : ''}
                 </tbody>
@@ -12082,7 +12480,7 @@
             if (!root) return;
             try { enrichPlayerMatchups(allSlatePlayers); } catch (e) {}
             const isSd = selectedSlate && String(selectedSlate).includes('Showdown');
-            const pool = (filteredData && filteredData.length ? filteredData : allSlatePlayers || []).filter(p => {
+            const pool = filteredData.filter(p => {
                 if (deselectedPlayers.has(p.displayName)) return false;
                 if (p.slotType === 'Captain') return false;
                 return true;
