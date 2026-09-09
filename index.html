@@ -4287,6 +4287,16 @@
         }
 
         function applyRecipe(key) {
+            if (activeRecipe === key) {
+                restoreContestState();
+                activeRecipe = null;
+                activePreset = null;
+                clearContestHighlights();
+                try { refreshChecklist(); } catch (e) {}
+                try { updateStickyBar(); } catch (e) {}
+                return;
+            }
+            if (!activePreset && !activeRecipe) captureContestState();
             if (key === 'classic_gpp_simple') {
                 applyPreset('classic_gpp');
                 setNextStep('Classic GPP applied. Tag 6–12 players with High/Mid tiers, optional game stack (Advanced), then Run.');
@@ -7070,7 +7080,65 @@
             document.getElementById('randomnessValue').textContent = Math.round(randomnessFactorBase * 100) + '%';
         }
 
+
         let activePreset = null;
+        let activeRecipe = null;
+        let contestStateSnapshot = null;
+
+        function contestSnapIds() {
+            return [
+                'minOwnershipSlider','maxOwnershipSlider','maxExposureSlider','leverageSlider','randomnessSlider',
+                'minUniqueInput','multiEntrySelect','showdownSplitSelect','sdMinKDst','numLineupsInput',
+                'classicNoOppDstWithQb','classicForcePassStack','classicRbDstStack','classicQbWrTe','classicQbTwoPc',
+                'classicFadeGameDst','classicBringBack'
+            ];
+        }
+        function captureContestState() {
+            const fields = {};
+            contestSnapIds().forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                fields[id] = (el.type === 'checkbox') ? !!el.checked : el.value;
+            });
+            contestStateSnapshot = {
+                fields,
+                maxExposure, minUniquePlayers, leverageWeight, randomnessFactor,
+                minTotalOwnership, maxTotalOwnership, showdownMinKDst,
+                selectedFlexPositions: (selectedFlexPositions || []).slice(),
+                numLineups
+            };
+        }
+        function restoreContestState() {
+            const snap = contestStateSnapshot;
+            if (!snap) return;
+            Object.entries(snap.fields || {}).forEach(([id, val]) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                if (el.type === 'checkbox') el.checked = !!val;
+                else el.value = val;
+            });
+            if (typeof snap.maxExposure === 'number') maxExposure = snap.maxExposure;
+            if (typeof snap.minUniquePlayers === 'number') minUniquePlayers = snap.minUniquePlayers;
+            if (typeof snap.leverageWeight === 'number') leverageWeight = snap.leverageWeight;
+            if (typeof snap.randomnessFactor === 'number') randomnessFactor = snap.randomnessFactor;
+            if (typeof snap.minTotalOwnership === 'number') minTotalOwnership = snap.minTotalOwnership;
+            if (typeof snap.maxTotalOwnership === 'number') maxTotalOwnership = snap.maxTotalOwnership;
+            if (typeof snap.showdownMinKDst === 'number') showdownMinKDst = snap.showdownMinKDst;
+            if (Array.isArray(snap.selectedFlexPositions)) setFlexEligible(snap.selectedFlexPositions);
+            if (typeof snap.numLineups === 'number') numLineups = snap.numLineups;
+            try { updateOwnershipRange(); } catch (e) {}
+            try { updateMaxExposure(); } catch (e) {}
+            try { updateLeverage(); } catch (e) {}
+            try { updateRandomness(); } catch (e) {}
+            try { updateMinUnique(); } catch (e) {}
+            try { updateMultiEntry(); } catch (e) {}
+            try { updateNumLineups(); } catch (e) {}
+            try { updateStickyBar(); } catch (e) {}
+            try { refreshChecklist(); } catch (e) {}
+        }
+        function clearContestHighlights() {
+            document.querySelectorAll('.preset-btn.active, .recipe-row button.active').forEach(b => b.classList.remove('active'));
+        }
 
         function isShowdownSlateName(name) {
             return !!(name && (String(name).includes('Showdown Captain Mode') || /showdown/i.test(String(name))));
@@ -7185,20 +7253,23 @@
 
         function applyPreset(type) {
             const btn = event && event.target && event.target.closest ? event.target.closest('.preset-btn') : (event && event.target);
+            const fromRecipe = !!(event && event.target && event.target.closest && event.target.closest('.recipe-row button'));
             // Toggle off if same preset clicked again
-            if (activePreset === type && btn && btn.classList.contains('active')) {
+            if (!fromRecipe && activePreset === type && btn && btn.classList.contains('active')) {
+                restoreContestState();
                 activePreset = null;
-                document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-                clearFavoriteForces();
-                setFlexEligible(['RB', 'WR', 'TE']);
-                showdownMinKDst = 0;
-                const kd = document.getElementById('sdMinKDst');
-                if (kd) kd.value = 0;
+                activeRecipe = null;
+                clearContestHighlights();
                 return;
             }
 
+            if (!activePreset && !activeRecipe) captureContestState();
             document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-            if (btn) btn.classList.add('active');
+            if (btn && btn.classList.contains('preset-btn')) btn.classList.add('active');
+            if (!fromRecipe) {
+                document.querySelectorAll('.recipe-row button').forEach(b => b.classList.remove('active'));
+                activeRecipe = null;
+            }
             activePreset = type;
 
             const setOwn = (min, max) => {
