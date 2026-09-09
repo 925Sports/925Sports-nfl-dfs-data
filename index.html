@@ -6654,6 +6654,7 @@
 
 
         function updateSlate(value, opts = {}) {
+            window._optPoolCache = null;
             const preserveFilters = !!(opts && opts.preserveFilters);
             selectedSlate = value;
             document.getElementById('slateDropdown').textContent = value.replace(',', ' (').replace(/$/, ')');
@@ -8372,15 +8373,17 @@
                 model.constraints[slot] = { equal: slotRequirements[slot] };
             });
 
+            const pool = optimizerPool();
             const uniqueNames = new Set();
             let latestTime = -Infinity;
             if (!isShowdown) {
-                optimizerPool().forEach(p => {
-                    if (p.gameStartTime.getTime() > latestTime) latestTime = p.gameStartTime.getTime();
+                pool.forEach(p => {
+                    const ts = p.gameStartTime && typeof p.gameStartTime.getTime === 'function' ? p.gameStartTime.getTime() : 0;
+                    if (ts > latestTime) latestTime = ts;
                 });
             }
 
-            optimizerPool().forEach(player => {
+            pool.forEach(player => {
                 const displayName = player.displayName;
                 if (deselectedPlayers.has(displayName)) return;
 
@@ -8450,7 +8453,7 @@
                 selectedGames.forEach(k => k.split('@').forEach(t => gameTeams.add(t)));
                 Object.keys(model.variables).forEach(v => {
                     const base = v.replace(/_Captain$|_FLEX$|_QB$|_RB$|_WR$|_TE$|_DST$/, '');
-                    const p = optimizerPool().find(x => x.baseName === base);
+                    const p = pool.find(x => x.baseName === base);
                     if (!p || !gameTeams.has(p.Team)) return;
                     if (style === 'offense' && p.Position === 'DST') return;
                     if (style === 'pass' && !['QB','WR','TE','CPT'].includes(p.Position) && p.slotType !== 'Captain') return;
@@ -8479,7 +8482,7 @@
             };
             const varsFor = (pred) => Object.keys(model.variables).filter(v => {
                 const base = v.replace(/_Captain$|_FLEX$|_QB$|_RB$|_WR$|_TE$|_DST$/, '');
-                const p = optimizerPool().find(x => x.baseName === base);
+                const p = pool.find(x => x.baseName === base);
                 return p && pred(p, v);
             });
 
@@ -8489,8 +8492,8 @@
                 forceNamed(stackRec);
                 const spec = stackSpec || {};
                 if (spec.receiver2) forceNamed(spec.receiver2);
-                const qbRow = optimizerPool().find(p => p.displayName === stackCap) ||
-                    optimizerPool().find(p => p.baseName === stackCap.split(' (')[0]);
+                const qbRow = pool.find(p => p.displayName === stackCap) ||
+                    pool.find(p => p.baseName === stackCap.split(' (')[0]);
                 const team = qbRow?.Team;
                 const opp = qbRow?.Opponent;
                 const qbVars = varsFor(p => p.displayName === stackCap || p.baseName === (stackCap||'').split(' (')[0]);
@@ -8514,7 +8517,7 @@
                     addSetMinIf(qbVars, bbVars, 1, 'stack_bringback');
                 }
                 if (spec.fadeGameDst && team) {
-                    optimizerPool().filter(p => p.Position === 'DST' && (p.Team === team || p.Team === opp)).forEach(dst => {
+                    pool.filter(p => p.Position === 'DST' && (p.Team === team || p.Team === opp)).forEach(dst => {
                         const vn = `${dst.baseName}_DST`;
                         if (model.variables[vn]) {
                             const cName = `stack_fade_dst_${dst.baseName}`;
@@ -8540,7 +8543,7 @@
                         const cName = `group_min_${i}`;
                         model.constraints[cName] = { min: numPlayers - bigM };
                         g.players.forEach(pl => {
-                            const pd = optimizerPool().find(p => p.displayName === pl);
+                            const pd = pool.find(p => p.displayName === pl);
                             if (pd) {
                                 (isShowdown ? [pd.slotType] : getEligibleSlots(pd.positions)).forEach(slot => {
                                     const vn = `${pd.baseName}_${slot}`;
@@ -8548,7 +8551,7 @@
                                 });
                             }
                         });
-                        optimizerPool().filter(p => p.baseName === conditionBase).forEach(cp => {
+                        pool.filter(p => p.baseName === conditionBase).forEach(cp => {
                             (isShowdown ? [cp.slotType] : getEligibleSlots(cp.positions)).forEach(slot => {
                                 const vn = `${conditionBase}_${slot}`;
                                 if (model.variables[vn]) model.variables[vn][cName] = -bigM;
@@ -8559,7 +8562,7 @@
                         const cName = `group_max_${i}`;
                         model.constraints[cName] = { max: numPlayers + bigM };
                         g.players.forEach(pl => {
-                            const pd = optimizerPool().find(p => p.displayName === pl);
+                            const pd = pool.find(p => p.displayName === pl);
                             if (pd) {
                                 (isShowdown ? [pd.slotType] : getEligibleSlots(pd.positions)).forEach(slot => {
                                     const vn = `${pd.baseName}_${slot}`;
@@ -8567,7 +8570,7 @@
                                 });
                             }
                         });
-                        optimizerPool().filter(p => p.baseName === conditionBase).forEach(cp => {
+                        pool.filter(p => p.baseName === conditionBase).forEach(cp => {
                             (isShowdown ? [cp.slotType] : getEligibleSlots(cp.positions)).forEach(slot => {
                                 const vn = `${conditionBase}_${slot}`;
                                 if (model.variables[vn]) model.variables[vn][cName] = bigM;
@@ -8580,7 +8583,7 @@
                     else if (type === 'max') model.constraints[cName] = { max: numPlayers };
                     else model.constraints[cName] = { min: numPlayers, max: numPlayers };
                     g.players.forEach(pl => {
-                        const pd = optimizerPool().find(p => p.displayName === pl);
+                        const pd = pool.find(p => p.displayName === pl);
                         if (pd) {
                             (isShowdown ? [pd.slotType] : getEligibleSlots(pd.positions)).forEach(slot => {
                                 const vn = `${pd.baseName}_${slot}`;
@@ -8593,10 +8596,10 @@
 
             // Force QB stack
             if (forceQBStack && !isShowdown) {
-                const teams = [...new Set(optimizerPool().map(p => p.Team))];
+                const teams = [...new Set(pool.map(p => p.Team))];
                 teams.forEach(team => {
-                    const qbs = optimizerPool().filter(p => p.Team === team && p.Position === 'QB');
-                    const pcs = optimizerPool().filter(p => p.Team === team && (p.Position === 'WR' || p.Position === 'TE'));
+                    const qbs = pool.filter(p => p.Team === team && p.Position === 'QB');
+                    const pcs = pool.filter(p => p.Team === team && (p.Position === 'WR' || p.Position === 'TE'));
                     if (qbs.length && pcs.length) {
                         const cName = `qb_stack_${team}`;
                         model.constraints[cName] = { min: 0 };
@@ -8616,11 +8619,11 @@
 
             // Classic: QB → no opposing DST (hard exclusion when both selected)
             if (!isShowdown && document.getElementById('classicNoOppDstWithQb')?.checked !== false) {
-                optimizerPool().forEach(qb => {
+                pool.forEach(qb => {
                     if (qb.Position !== 'QB') return;
                     const qbVar = `${qb.baseName}_QB`;
                     if (!model.variables[qbVar]) return;
-                    optimizerPool().forEach(dst => {
+                    pool.forEach(dst => {
                         if (dst.Position !== 'DST') return;
                         // Opponent of the QB's team
                         const opp = qb.Opponent || '';
@@ -8646,23 +8649,23 @@
                 const bringKind = document.getElementById('classicBringBack')?.value || 'none';
                 const bringMin = Math.max(1, Math.min(2, parseInt(document.getElementById('classicBringBackMin')?.value) || 1));
                 if (wantWrTe || wantTwoPc || fadeGame || (bringKind && bringKind !== 'none')) {
-                    const teams = [...new Set(optimizerPool().map(p => p.Team))];
+                    const teams = [...new Set(pool.map(p => p.Team))];
                     teams.forEach(team => {
                         const qbVars = Object.keys(model.variables).filter(v => {
-                            const p = optimizerPool().find(x => x.baseName === v.replace(/_QB$|_FLEX$|_Captain$/, ''));
+                            const p = pool.find(x => x.baseName === v.replace(/_QB$|_FLEX$|_Captain$/, ''));
                             return p && p.Team === team && p.Position === 'QB' && model.variables[v];
                         });
                         if (!qbVars.length) return;
                         const wrVars = Object.keys(model.variables).filter(v => {
-                            const p = optimizerPool().find(x => x.baseName === v.replace(/_WR$|_FLEX$|_TE$|_RB$|_QB$|_DST$|_Captain$/, ''));
+                            const p = pool.find(x => x.baseName === v.replace(/_WR$|_FLEX$|_TE$|_RB$|_QB$|_DST$|_Captain$/, ''));
                             return p && p.Team === team && p.Position === 'WR' && model.variables[v];
                         });
                         const teVars = Object.keys(model.variables).filter(v => {
-                            const p = optimizerPool().find(x => x.baseName === v.replace(/_WR$|_FLEX$|_TE$|_RB$|_QB$|_DST$|_Captain$/, ''));
+                            const p = pool.find(x => x.baseName === v.replace(/_WR$|_FLEX$|_TE$|_RB$|_QB$|_DST$|_Captain$/, ''));
                             return p && p.Team === team && p.Position === 'TE' && model.variables[v];
                         });
                         const pcVars = wrVars.concat(teVars);
-                        const qbRow = optimizerPool().find(p => p.Team === team && p.Position === 'QB');
+                        const qbRow = pool.find(p => p.Team === team && p.Position === 'QB');
                         const opp = qbRow?.Opponent;
                         if (wantTwoPc && pcVars.length >= 2) {
                             const cName = `classic_2pc_${team}`;
@@ -8686,7 +8689,7 @@
                         }
                         if (bringKind !== 'none' && opp) {
                             const bbVars = Object.keys(model.variables).filter(v => {
-                                const p = optimizerPool().find(x => x.baseName === v.replace(/_WR$|_FLEX$|_TE$|_RB$|_QB$|_DST$|_Captain$/, ''));
+                                const p = pool.find(x => x.baseName === v.replace(/_WR$|_FLEX$|_TE$|_RB$|_QB$|_DST$|_Captain$/, ''));
                                 if (!p || p.Team !== opp) return false;
                                 if (bringKind === 'rb') return p.Position === 'RB';
                                 if (bringKind === 'pc') return p.Position === 'WR' || p.Position === 'TE';
@@ -8700,7 +8703,7 @@
                             }
                         }
                         if (fadeGame) {
-                            optimizerPool().filter(p => p.Position === 'DST' && (p.Team === team || p.Team === opp)).forEach(dst => {
+                            pool.filter(p => p.Position === 'DST' && (p.Team === team || p.Team === opp)).forEach(dst => {
                                 const dstVar = `${dst.baseName}_DST`;
                                 if (!model.variables[dstVar]) return;
                                 qbVars.forEach(qv => {
@@ -8716,12 +8719,12 @@
             }
 
             if (forceShowdownStack && isShowdown) {
-                const teams = [...new Set(optimizerPool().map(p => p.Team))];
+                const teams = [...new Set(pool.map(p => p.Team))];
                 teams.forEach(team => {
-                    const qbCpt = optimizerPool().filter(p => p.Team === team && p.Position === 'QB' && p.slotType === 'Captain').map(p => `${p.baseName}_Captain`);
-                    const pcFlex = optimizerPool().filter(p => p.Team === team && (p.Position === 'WR' || p.Position === 'TE') && p.slotType === 'FLEX').map(p => `${p.baseName}_FLEX`);
-                    const pcCpt = optimizerPool().filter(p => p.Team === team && (p.Position === 'WR' || p.Position === 'TE') && p.slotType === 'Captain').map(p => `${p.baseName}_Captain`);
-                    const qbFlex = optimizerPool().filter(p => p.Team === team && p.Position === 'QB' && p.slotType === 'FLEX').map(p => `${p.baseName}_FLEX`);
+                    const qbCpt = pool.filter(p => p.Team === team && p.Position === 'QB' && p.slotType === 'Captain').map(p => `${p.baseName}_Captain`);
+                    const pcFlex = pool.filter(p => p.Team === team && (p.Position === 'WR' || p.Position === 'TE') && p.slotType === 'FLEX').map(p => `${p.baseName}_FLEX`);
+                    const pcCpt = pool.filter(p => p.Team === team && (p.Position === 'WR' || p.Position === 'TE') && p.slotType === 'Captain').map(p => `${p.baseName}_Captain`);
+                    const qbFlex = pool.filter(p => p.Team === team && p.Position === 'QB' && p.slotType === 'FLEX').map(p => `${p.baseName}_FLEX`);
 
                     if (qbCpt.length && pcFlex.length) {
                         const cName = `sd_qb_cpt_${team}`;
@@ -8744,7 +8747,7 @@
                 const minB = Math.max(1, showdownMinTeamB || 0);
                 Object.keys(model.variables).forEach(v => {
                     const base = v.replace(/_Captain$|_FLEX$/, '');
-                    const p = optimizerPool().find(x => x.baseName === base);
+                    const p = pool.find(x => x.baseName === base);
                     if (!p) return;
                     if (p.Team === showdownTeamA) model.variables[v].sdTeamA = 1;
                     if (p.Team === showdownTeamB) model.variables[v].sdTeamB = 1;
@@ -8759,17 +8762,17 @@
                     if (!p) return false;
                     let pos = p.Position;
                     if (pos === 'CPT' || p.slotType === 'Captain') {
-                        const flexTwin = optimizerPool().find(x => x.baseName === p.baseName && x.slotType === 'FLEX');
+                        const flexTwin = pool.find(x => x.baseName === p.baseName && x.slotType === 'FLEX');
                         pos = flexTwin?.Position || pos;
                     }
                     return pos === 'K' || pos === 'DST' || p.Position === 'K' || p.Position === 'DST';
                 };
                 Object.keys(model.variables).forEach(v => {
                     const base = v.replace(/_Captain$|_FLEX$/, '');
-                    const p = optimizerPool().find(x => x.baseName === base && (
+                    const p = pool.find(x => x.baseName === base && (
                         (v.endsWith('_Captain') && x.slotType === 'Captain') ||
                         (v.endsWith('_FLEX') && x.slotType === 'FLEX')
-                    )) || optimizerPool().find(x => x.baseName === base);
+                    )) || pool.find(x => x.baseName === base);
                     if (isKOrDst(p)) model.variables[v].sdKDst = 1;
                 });
                 model.constraints.sdKDst = { min: showdownMinKDst };
@@ -8777,7 +8780,7 @@
 
             // Build around CPT: force that player into Captain slot
             if (isShowdown && buildAroundCpt) {
-                const cpt = optimizerPool().find(p => p.displayName === buildAroundCpt && p.slotType === 'Captain');
+                const cpt = pool.find(p => p.displayName === buildAroundCpt && p.slotType === 'Captain');
                 if (cpt) {
                     const vn = `${cpt.baseName}_Captain`;
                     if (model.variables[vn]) {
@@ -8792,7 +8795,7 @@
             const getUnderlyingPos = (cpt) => {
                 let pos = cpt.Position;
                 if (pos === 'CPT' || cpt.slotType === 'Captain') {
-                    const flexTwin = optimizerPool().find(x => x.baseName === cpt.baseName && x.slotType === 'FLEX');
+                    const flexTwin = pool.find(x => x.baseName === cpt.baseName && x.slotType === 'FLEX');
                     if (flexTwin?.Position && flexTwin.Position !== 'CPT') pos = flexTwin.Position;
                     // Also try raw positions array
                     if ((!pos || pos === 'CPT') && Array.isArray(cpt.positions)) {
@@ -8807,11 +8810,11 @@
             const excludeOppDst = document.getElementById('excludeOppDstWithOffenseCpt')?.checked !== false;
             if (isShowdown && excludeOppDst) {
                 const offensePos = ['QB', 'RB', 'WR', 'TE'];
-                optimizerPool().forEach(cpt => {
+                pool.forEach(cpt => {
                     if (cpt.slotType !== 'Captain') return;
                     const pos = getUnderlyingPos(cpt);
                     if (!offensePos.includes(pos)) return;
-                    optimizerPool().forEach(dst => {
+                    pool.forEach(dst => {
                         if (dst.Position !== 'DST' || dst.Team === cpt.Team) return;
                         const cptVar = `${cpt.baseName}_Captain`;
                         const dstVar = `${dst.baseName}_FLEX`;
@@ -8826,12 +8829,12 @@
 
             // CPT WR or TE → require ≥1 same-team QB in FLEX
             if (isShowdown && document.getElementById('sdCptWrStackQb')?.checked) {
-                optimizerPool().forEach(cpt => {
+                pool.forEach(cpt => {
                     if (cpt.slotType !== 'Captain') return;
                     if (!['WR', 'TE'].includes(getUnderlyingPos(cpt))) return;
                     const cptVar = `${cpt.baseName}_Captain`;
                     if (!model.variables[cptVar]) return;
-                    const qbVars = optimizerPool().filter(p =>
+                    const qbVars = pool.filter(p =>
                         p.slotType === 'FLEX' && p.Team === cpt.Team && getUnderlyingPos(p) === 'QB'
                         && model.variables[`${p.baseName}_FLEX`]
                     ).map(p => `${p.baseName}_FLEX`);
@@ -8845,12 +8848,12 @@
 
             // CPT QB → require ≥1 same-team WR or TE in FLEX
             if (isShowdown && document.getElementById('sdCptQbStackPass')?.checked) {
-                optimizerPool().forEach(cpt => {
+                pool.forEach(cpt => {
                     if (cpt.slotType !== 'Captain') return;
                     if (getUnderlyingPos(cpt) !== 'QB') return;
                     const cptVar = `${cpt.baseName}_Captain`;
                     if (!model.variables[cptVar]) return;
-                    const passVars = optimizerPool().filter(p =>
+                    const passVars = pool.filter(p =>
                         p.slotType === 'FLEX' && p.Team === cpt.Team
                         && ['WR', 'TE'].includes(getUnderlyingPos(p))
                         && model.variables[`${p.baseName}_FLEX`]
@@ -8865,12 +8868,12 @@
 
             // CPT RB → require ≥1 same-team DST in FLEX
             if (isShowdown && document.getElementById('sdCptRbStackDst')?.checked) {
-                optimizerPool().forEach(cpt => {
+                pool.forEach(cpt => {
                     if (cpt.slotType !== 'Captain') return;
                     if (getUnderlyingPos(cpt) !== 'RB') return;
                     const cptVar = `${cpt.baseName}_Captain`;
                     if (!model.variables[cptVar]) return;
-                    const dstVars = optimizerPool().filter(p =>
+                    const dstVars = pool.filter(p =>
                         p.slotType === 'FLEX' && p.Team === cpt.Team && p.Position === 'DST'
                         && model.variables[`${p.baseName}_FLEX`]
                     ).map(p => `${p.baseName}_FLEX`);
@@ -8884,12 +8887,12 @@
 
             // CPT DST → require ≥1 same-team RB in FLEX
             if (isShowdown && document.getElementById('sdCptDstStackRb')?.checked) {
-                optimizerPool().forEach(cpt => {
+                pool.forEach(cpt => {
                     if (cpt.slotType !== 'Captain') return;
                     if (getUnderlyingPos(cpt) !== 'DST' && cpt.Position !== 'DST') return;
                     const cptVar = `${cpt.baseName}_Captain`;
                     if (!model.variables[cptVar]) return;
-                    const rbVars = optimizerPool().filter(p =>
+                    const rbVars = pool.filter(p =>
                         p.slotType === 'FLEX' && p.Team === cpt.Team && getUnderlyingPos(p) === 'RB'
                         && model.variables[`${p.baseName}_FLEX`]
                     ).map(p => `${p.baseName}_FLEX`);
@@ -8903,12 +8906,12 @@
 
             // CPT K → exclude same-team QB (FG script ≠ pass TD script)
             if (isShowdown && document.getElementById('sdCptKFadeQb')?.checked) {
-                optimizerPool().forEach(cpt => {
+                pool.forEach(cpt => {
                     if (cpt.slotType !== 'Captain') return;
                     if (getUnderlyingPos(cpt) !== 'K' && cpt.Position !== 'K') return;
                     const cptVar = `${cpt.baseName}_Captain`;
                     if (!model.variables[cptVar]) return;
-                    optimizerPool().forEach(qb => {
+                    pool.forEach(qb => {
                         if (qb.slotType !== 'FLEX' || qb.Team !== cpt.Team || getUnderlyingPos(qb) !== 'QB') return;
                         const qbVar = `${qb.baseName}_FLEX`;
                         if (!model.variables[qbVar]) return;
@@ -9373,7 +9376,61 @@
             }
         }
 
-        const runLineupGeneration = async () => {
+        function greedyFillLineup(isShowdown, lineupSet) {
+            const pool = optimizerPool().filter(p => (Number(p.projectedFP) || 0) > 0 && (Number(p.salary) || 0) > 0);
+            if (!pool.length) return null;
+            const jitter = (p) => (Number(p.projectedFP) || 0) * (0.82 + Math.random() * 0.36);
+            const pick = (arr, n) => arr.slice().sort((a,b) => jitter(b) - jitter(a)).slice(0, n);
+            const used = new Set();
+            const take = (arr, n) => {
+                const out = [];
+                for (const p of pick(arr, arr.length)) {
+                    if (used.has(p.displayName)) continue;
+                    out.push(p); used.add(p.displayName);
+                    if (out.length >= n) break;
+                }
+                return out;
+            };
+            let lineup, playersInLineup, totalSalary, totalPoints, totalOwnership;
+            if (isShowdown) {
+                const cpts = pool.filter(p => p.slotType === 'Captain' || (p.displayName || '').endsWith(' (CPT)'));
+                const flex = pool.filter(p => p.slotType === 'FLEX' || (p.displayName || '').endsWith(' (FLEX)'));
+                const cap = take(cpts, 1)[0];
+                const fl = take(flex.filter(p => p.baseName !== cap?.baseName), 5);
+                if (!cap || fl.length < 5) return null;
+                lineup = { captain: { name: cap.displayName, id: cap.id, baseName: cap.baseName, salary: cap.salary, projectedFP: cap.projectedFP, ownership: cap.ownership }, flex: fl.map(p => ({ name: p.displayName, id: p.id, baseName: p.baseName, salary: p.salary, projectedFP: p.projectedFP, ownership: p.ownership })) };
+                playersInLineup = [cap.displayName, ...fl.map(p => p.displayName)];
+                totalSalary = cap.salary + fl.reduce((s,p) => s + p.salary, 0);
+                totalPoints = cap.projectedFP + fl.reduce((s,p) => s + p.projectedFP, 0);
+                totalOwnership = (cap.ownership || 0) + fl.reduce((s,p) => s + (p.ownership || 0), 0);
+                if (totalSalary > maxSalary) return null;
+                const signature = `${cap.displayName}|${fl.map(p => p.displayName).sort().join(',')}`;
+                if (lineupSet.has(signature)) return null;
+                lineupSet.add(signature);
+            } else {
+                const by = (pos) => pool.filter(p => (p.Position === pos) || (p.positions || []).includes(pos));
+                const toP = (p) => ({ name: p.displayName, id: p.id, baseName: p.baseName, salary: p.salary, projectedFP: p.projectedFP, ownership: p.ownership });
+                const qb = take(by('QB'), 1)[0];
+                const rb = take(by('RB'), 2);
+                const wr = take(by('WR'), 3);
+                const te = take(by('TE'), 1)[0];
+                const dst = take(by('DST'), 1)[0];
+                const flexPool = pool.filter(p => ['RB','WR','TE'].includes(p.Position) && !used.has(p.displayName));
+                const flex = take(flexPool, 1)[0];
+                if (!qb || rb.length < 2 || wr.length < 3 || !te || !dst || !flex) return null;
+                lineup = { QB: toP(qb), RB1: toP(rb[0]), RB2: toP(rb[1]), WR1: toP(wr[0]), WR2: toP(wr[1]), WR3: toP(wr[2]), TE: toP(te), FLEX: toP(flex), DST: toP(dst) };
+                playersInLineup = Object.values(lineup).map(x => x.name);
+                totalSalary = Object.values(lineup).reduce((s,x) => s + x.salary, 0);
+                totalPoints = Object.values(lineup).reduce((s,x) => s + x.projectedFP, 0);
+                totalOwnership = Object.values(lineup).reduce((s,x) => s + (x.ownership || 0), 0);
+                if (totalSalary > maxSalary) return null;
+                const signature = playersInLineup.slice().sort().join(',');
+                if (lineupSet.has(signature)) return null;
+                lineupSet.add(signature);
+            }
+            return { lineup, totalSalary, totalPoints, totalOwnership };
+        }
+                const runLineupGeneration = async () => {
             if (!selectedSlate) { alert('Please select a slate'); return; }
             if (lineupGenerationRunning) {
                 alert('Lineup generation is already running. Click Stop generation to abort.');
@@ -9483,9 +9540,10 @@
 
             // ---- Performance guards (prevent main-thread freeze) ----
             // Failed solves used to loop 180–220 times with ZERO yields → page lockup.
-            const MAX_CONSEC_FAIL = isShowdown ? 28 : 40;
-            const MAX_TOTAL_ATTEMPTS = Math.max(80, numLineups * (isShowdown ? 6 : 8));
-            const RUN_TIME_BUDGET_MS = isShowdown ? 45000 : 60000;
+            window._optPoolCache = null;
+            const MAX_CONSEC_FAIL = isShowdown ? 60 : 90;
+            const MAX_TOTAL_ATTEMPTS = Math.max(200, numLineups * (isShowdown ? 14 : 18));
+            const RUN_TIME_BUDGET_MS = isShowdown ? 120000 : 180000;
             const runStartedAt = Date.now();
             let totalAttempts = 0;
             let globalTempMin = minSalary;
@@ -9538,7 +9596,7 @@
                         });
                     }
                     const result = solver.Solve(model);
-                    await yieldToUI();
+                    if (totalAttempts % 3 === 0) await yieldToUI();
                     if (!result || !result.feasible) {
                         globalTempMin = Math.max(0, globalTempMin - 2000);
                         globalRelaxed = Math.min(1, globalRelaxed + 0.06);
@@ -9611,29 +9669,47 @@
                 }
             }
 
-            // Phase 3: Remaining fill
+            // Phase 3: Remaining fill — relax sooner so basic 20-lineup runs finish
             let fails = 0;
+            const savedUniquePhase = minUniquePlayers;
             while (generatedLineups.length < numLineups && fails < MAX_CONSEC_FAIL && stillHaveBudget()) {
                 const got = await trySolve({ label: 'Building remaining' });
                 if (got) fails = 0;
-                else fails++;
+                else {
+                    fails++;
+                    if (fails === 4) globalTempMin = Math.max(0, globalTempMin - 1500);
+                    if (fails === 8) { minUniquePlayers = Math.max(0, minUniquePlayers - 1); globalRelaxed = Math.min(1, globalRelaxed + 0.15); }
+                    if (fails === 14) { minUniquePlayers = 0; globalTempMin = 0; globalRelaxed = 1; }
+                }
             }
 
-            // If still short and constraints were the issue, one soft-fill pass with uniqueness off
-            if (generatedLineups.length < numLineups && !abortLineupGeneration && (Date.now() - runStartedAt) < RUN_TIME_BUDGET_MS) {
-                const savedUnique = minUniquePlayers;
+            if (generatedLineups.length < numLineups && !abortLineupGeneration) {
                 minUniquePlayers = 0;
                 globalTempMin = 0;
                 globalRelaxed = 1;
                 fails = 0;
                 updateProgress((generatedLineups.length / numLineups) * 100, 'Soft fill (relaxed)…');
-                while (generatedLineups.length < numLineups && fails < 20 && !abortLineupGeneration) {
+                while (generatedLineups.length < numLineups && fails < 40 && stillHaveBudget()) {
                     const got = await trySolve({ label: 'Soft fill' });
                     if (got) fails = 0;
                     else fails++;
                 }
-                minUniquePlayers = savedUnique;
             }
+
+            if (generatedLineups.length < numLineups && !abortLineupGeneration) {
+                updateProgress((generatedLineups.length / numLineups) * 100, 'Fast fill…');
+                let gf = 0;
+                while (generatedLineups.length < numLineups && gf < numLineups * 8 && !abortLineupGeneration) {
+                    gf++;
+                    const extra = greedyFillLineup(isShowdown, lineupSet);
+                    if (!extra) continue;
+                    generatedLineups.push(extra);
+                    updatePlayerCounts(extra, playerCounts, isShowdown);
+                    updateProgress((generatedLineups.length / numLineups) * 100, `Fast fill ${generatedLineups.length}/${numLineups}`);
+                    if (gf % 3 === 0) await yieldToUI();
+                }
+            }
+            minUniquePlayers = savedUniquePhase;
 
             if (!stillHaveBudget() && !abortLineupGeneration) {
                 if (totalAttempts >= MAX_TOTAL_ATTEMPTS)
