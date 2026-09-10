@@ -6265,9 +6265,9 @@
                     if (lt) lt.textContent = 'Downloading slate CSVs…';
                 }
                 const [mainRes, ownRes, finalRes, espnRes] = await Promise.all([
-                    fetchWithRetry(DATA_SOURCES.main, 2, 12000, true),
-                    fetchWithRetry(DATA_SOURCES.ownership, 2, 8000, true).catch(() => null),
-                    fetchWithRetry(DATA_SOURCES.final, 2, 8000, true).catch(() => null),
+                    fetchWithRetry(DATA_SOURCES.main, 2, 15000, false),
+                    fetchWithRetry(DATA_SOURCES.ownership, 2, 8000, false).catch(() => null),
+                    fetchWithRetry(DATA_SOURCES.final, 2, 8000, false).catch(() => null),
                     fetchWithRetry(DATA_SOURCES.espnScoreboard, 1, 8000, true).catch(() =>
                         fetchWithRetry(DATA_SOURCES.espnScoreboardProxy, 1, 8000).catch(() => null)
                     )
@@ -6514,6 +6514,8 @@
                                 }
                             });
 
+                            rebuildSlateRoles(rawData);
+
                             adjustedProjections = {};
                             rawData.forEach(row => {
                                 if (!adjustedProjections[row['Role']]) adjustedProjections[row['Role']] = {};
@@ -6536,22 +6538,26 @@
 
                             availableSlates = [...new Set(rawData.map(r => r['Role']))].filter(Boolean);
                             const slatesWithDates = availableSlates.map(slate => {
-                                const datePattern = /\d{4}-\d{2}-\d{2}/;
-                                const dateStr = slate.match(datePattern)?.[0] || '9999-12-31';
-                                const [y, m, d] = dateStr.split('-').map(Number);
-                                const date = new Date(y, m - 1, d);
-                                return { slate, date };
+                                const sample = rawData.find(r => r.Role === slate);
+                                const dateMs = parseSlateSortDate(slate, sample ? [sample] : []);
+                                return { slate, date: new Date(dateMs) };
                             }).sort((a, b) => {
                                 if (a.date.getTime() !== b.date.getTime()) return a.date - b.date;
-                                const aSD = a.slate.includes('Showdown');
-                                const bSD = b.slate.includes('Showdown');
-                                if (aSD && !bSD) return 1;
-                                if (!aSD && bSD) return -1;
+                                const rank = (s) => {
+                                    if (isInGameShowdownName(s) && /Q4|4th/i.test(s)) return 5;
+                                    if (isInGameShowdownName(s)) return 4;
+                                    if (isMainShowdownName(s)) return 3;
+                                    if (/late|afternoon/i.test(s)) return 2;
+                                    if (/early/i.test(s)) return 1;
+                                    return 0;
+                                };
+                                const rd = rank(a.slate) - rank(b.slate);
+                                if (rd) return rd;
                                 return a.slate.localeCompare(b.slate);
                             });
 
                             document.getElementById('slateMenu').innerHTML = slatesWithDates.map(({slate}) =>
-                                `<label><input type="radio" name="slate" value="${slate}" onchange="updateSlate(this.value)">${slate.replace(',', ' (').replace(/$/, ')')}</label>`
+                                `<label><input type="radio" name="slate" value="${slate}" onchange="updateSlate(this.value)">${formatSlateLabel(slate)}</label>`
                             ).join('');
 
                             // Prefer previously selected slate from session if still available
@@ -6569,7 +6575,7 @@
                             }
                             selectedSlate = preferred || (slatesWithDates.length ? slatesWithDates[0].slate : null);
                             document.getElementById('slateDropdown').textContent = selectedSlate
-                                ? selectedSlate.replace(',', ' (').replace(/$/, ')')
+                                ? formatSlateLabel(selectedSlate)
                                 : 'Select Slate';
 
                             // Snapshot filters before rebuild so background refresh does not wipe them
@@ -6992,7 +6998,7 @@
         function updateSlate(value, opts = {}) {
             const preserveFilters = !!(opts && opts.preserveFilters);
             selectedSlate = value;
-            document.getElementById('slateDropdown').textContent = value.replace(',', ' (').replace(/$/, ')');
+            document.getElementById('slateDropdown').textContent = formatSlateLabel(value);
             // Close slate menu after pick so it doesn't sit under other sections
             document.getElementById('slateMenu')?.classList.remove('show');
             document.querySelectorAll('.settings-section.dropdown-open').forEach(s => s.classList.remove('dropdown-open'));
@@ -7401,13 +7407,101 @@
 
         let activePreset = null;
 
-        function isShowdownSlateName(name) {
-            return !!(name && (String(name).includes('Showdown Captain Mode') || /showdown/i.test(String(name))));
+        function formatSlateLabel(name) {
+            return String(name || '')
+                .replace(/\(\s*@\s*\)/g, '')
+                .replace(/,\s*(\d+)\s*Games/i, ' ($1 Games)')
+                .replace(/\s+/g, ' ')
+                .trim();
         }
-
+        function isShowdownSlateName(name) {
+            return !!(name && /showdown/i.test(String(name)));
+        }
+        function isInGameShowdownName(name) {
+            return /2nd\s*half|\b2H\b|4th\s*quarter|\bQ4\b|\b4Q\b/i.test(String(name || ''));
+        }
+        function isMainShowdownName(name) {
+            return isShowdownSlateName(name) && !isInGameShowdownName(name);
+        }
+        function parseSlateClock(row) {
+            const raw = row && (row['Game Start Time (DRAFTTABLE)'] || row['Game Start Time'] || '');
+            const n = Date.parse(raw);
+            if (Number.isFinite(n) && n > 0) return n;
+            return 0;
+        }
+        function parseSlateSortDate(slate, sampleRows) {
+            const s = String(slate || '');
+            let m = s.match(/(\d{4})-(\d{2})-(\d{2})/);
+            if (m) return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])).getTime();
+            m = s.match(/(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?/);
+            if (m) {
+                const year = m[3] ? (String(m[3]).length === 2 ? 2000 + Number(m[3]) : Number(m[3])) : new Date().getFullYear();
+                return new Date(year, Number(m[1]) - 1, Number(m[2])).getTime();
+            }
+            const ts = (sampleRows || []).map(parseSlateClock).find(v => v > 0);
+            return ts || Date.parse('9999-12-31');
+        }
+        function rebuildSlateRoles(rows) {
+            if (!rows || !rows.length) return;
+            const byRole = new Map();
+            rows.forEach(r => {
+                const role = String(r.Role || '').trim();
+                if (!role) return;
+                if (!byRole.has(role)) byRole.set(role, []);
+                byRole.get(role).push(r);
+            });
+            const metas = [];
+            byRole.forEach((list, role) => {
+                const teams = [...new Set(list.map(p => normalizeTeam(p.Team || '')).filter(Boolean))].sort();
+                const ts = list.map(parseSlateClock).filter(v => v > 0).sort((a,b) => a-b)[0] || 0;
+                let matchup = '';
+                const named = String(role).match(/\(([^)]+)\)/);
+                if (named && named[1] && !/^\s*@\s*$/.test(named[1])) matchup = named[1].trim();
+                if (!matchup && teams.length === 2) matchup = teams[0] + ' vs ' + teams[1];
+                else if (!matchup && teams.length) matchup = teams.join(', ');
+                const day = ts ? new Date(ts).toDateString() : (String(role).match(/\d{1,2}\/\d{1,2}/) || ['x'])[0];
+                metas.push({
+                    role, list, teams, ts, matchup, day,
+                    isSd: isShowdownSlateName(role) || /showdown/i.test(String(list[0]['Slate Type'] || '')),
+                    alreadyTagged: isInGameShowdownName(role) || /showdown 2nd half|showdown 4th quarter/i.test(role)
+                });
+            });
+            const rename = new Map();
+            const clusters = new Map();
+            metas.filter(m => m.isSd).forEach(m => {
+                const key = m.day + '|' + m.teams.join('-');
+                if (!clusters.has(key)) clusters.set(key, []);
+                clusters.get(key).push(m);
+            });
+            clusters.forEach(list => {
+                list.sort((a,b) => (a.ts||0) - (b.ts||0) || a.role.localeCompare(b.role));
+                list.forEach((meta, i) => {
+                    let tag = '';
+                    if (/4th\s*quarter|\bQ4\b|\b4Q\b/i.test(meta.role) || /4th quarter/i.test(String(meta.list[0]['Slate Type']||''))) tag = 'Q4';
+                    else if (/2nd\s*half|\b2H\b/i.test(meta.role) || /2nd half/i.test(String(meta.list[0]['Slate Type']||''))) tag = '2H';
+                    else if (!meta.alreadyTagged && list.length >= 3) tag = i === 1 ? '2H' : i >= 2 ? 'Q4' : '';
+                    else if (!meta.alreadyTagged && list.length === 2) tag = i === 1 ? '2H' : '';
+                    const timeMatch = String(meta.role).match(/(\d{1,2}\/\d{1,2}(?:\/\d{2,4})?\s+\d{1,2}:\d{2}\s*[AP]M)/i);
+                    let when = timeMatch ? timeMatch[1].replace(/\s+/g, ' ') : '';
+                    if (!when && meta.ts) {
+                        const d = new Date(meta.ts);
+                        when = (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+                    }
+                    const kind = tag === 'Q4' ? 'Showdown Q4' : tag === '2H' ? 'Showdown 2H' : 'Showdown';
+                    const label = [kind, when, tag && !when.includes(tag) ? tag : '', meta.matchup ? '(' + meta.matchup + ')' : ''].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+                    if (label) rename.set(meta.role, label);
+                });
+            });
+            if (!rename.size) return;
+            rows.forEach(r => {
+                if (rename.has(r.Role)) r.Role = rename.get(r.Role);
+            });
+        }
         function ensureShowdownSlate() {
-            if (isShowdownSlateName(selectedSlate)) return true;
-            const showdown = (availableSlates || []).find(s => isShowdownSlateName(s));
+            if (isMainShowdownName(selectedSlate)) return true;
+            const ranked = (availableSlates || []).filter(isMainShowdownName)
+                .sort((a, b) => parseSlateSortDate(a) - parseSlateSortDate(b));
+            const showdown = ranked[0] || (availableSlates || []).find(s => isShowdownSlateName(s));
             if (showdown) {
                 updateSlate(showdown);
                 return true;
