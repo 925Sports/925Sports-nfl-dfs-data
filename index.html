@@ -5429,7 +5429,7 @@
         function openModal() { document.getElementById('infoModal').style.display = 'block'; }
         function closeModal() { document.getElementById('infoModal').style.display = 'none'; }
         function openStackModal() {
-            const isShowdown = selectedSlate && selectedSlate.includes('Showdown Captain Mode');
+            const isShowdown = isShowdownSlateName(selectedSlate);
             document.getElementById('stackCaptainLabel').textContent = isShowdown ? 'Stack Captain' : 'Stack QB';
             document.getElementById('stackReceiverLabel').textContent = isShowdown ? 'Stack Receiver' : 'Stack Pass Catcher';
             document.getElementById('stackModal').style.display = 'block';
@@ -5698,7 +5698,7 @@
             const player = filteredData.find(p => p.displayName === playerDisplayName);
             if (!player) return;
 
-            const isShowdown = selectedSlate && selectedSlate.includes('Showdown Captain Mode');
+            const isShowdown = isShowdownSlateName(selectedSlate);
             const isQB = player.Position === 'QB' || (isShowdown && player.Position === 'CPT' && player.baseName && 
                 filteredData.some(p => p.baseName === player.baseName && p.Position === 'QB'));
             const isPassCatcher = player.Position === 'WR' || player.Position === 'TE' || 
@@ -6087,7 +6087,7 @@
             const partner = filteredData.find(p => p.displayName === partnerName);
             if (!primary || !partner) return;
 
-            const isShowdown = selectedSlate && selectedSlate.includes('Showdown Captain Mode');
+            const isShowdown = isShowdownSlateName(selectedSlate);
             const primaryIsQB = primary.Position === 'QB' || (isShowdown && primary.slotType === 'Captain' && primary.Position === 'QB');
             const partnerIsQB = partner.Position === 'QB' || (isShowdown && partner.slotType === 'Captain' && partner.Position === 'QB');
 
@@ -7415,7 +7415,11 @@
                 .trim();
         }
         function isShowdownSlateName(name) {
-            return !!(name && /showdown/i.test(String(name)));
+            const s = String(name || '');
+            if (!s) return false;
+            if (/showdown/i.test(s)) return true;
+            if (/\b(2H|Q4|4Q)\b|2nd\s*half|4th\s*quarter/i.test(s) && /vs|@/.test(s)) return true;
+            return false;
         }
         function isInGameShowdownName(name) {
             return /2nd\s*half|\b2H\b|4th\s*quarter|\bQ4\b|\b4Q\b/i.test(String(name || ''));
@@ -7487,7 +7491,7 @@
                         const d = new Date(meta.ts);
                         when = (d.getMonth()+1) + '/' + d.getDate() + ' ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
                     }
-                    const kind = tag === 'Q4' ? 'Showdown Q4' : tag === '2H' ? 'Showdown 2H' : 'Showdown';
+                    const kind = tag === 'Q4' ? 'Showdown 4th Quarter' : tag === '2H' ? 'Showdown 2nd Half' : 'Showdown Captain Mode';
                     const label = [kind, when, tag && !when.includes(tag) ? tag : '', meta.matchup ? '(' + meta.matchup + ')' : ''].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
                     if (label) rename.set(meta.role, label);
                 });
@@ -8035,7 +8039,7 @@
             const posEl = document.getElementById('poolPosChips');
             const teamEl = document.getElementById('poolTeamChips');
             if (!posEl || !teamEl) return;
-            const isShowdown = selectedSlate && selectedSlate.includes('Showdown Captain Mode');
+            const isShowdown = isShowdownSlateName(selectedSlate);
             const positions = isShowdown
                 ? ['CPT', 'FLEX', 'QB', 'RB', 'WR', 'TE', 'K', 'DST']
                 : ['QB', 'RB', 'WR', 'TE', 'DST', 'K'];
@@ -8173,7 +8177,7 @@
         }
 
         function populateStackCaptainMenu() {
-            const isShowdown = selectedSlate?.includes('Showdown Captain Mode');
+            const isShowdown = isShowdownSlateName(selectedSlate);
             let captains = isShowdown
                 ? allSlatePlayers.filter(p => p.slotType === 'Captain')
                 : allSlatePlayers.filter(p => p.Position === 'QB');
@@ -8186,7 +8190,7 @@
             if (!stackCaptain) return [];
             const qb = allSlatePlayers.find(p => p.displayName === stackCaptain);
             if (!qb) return [];
-            const isShowdown = selectedSlate?.includes('Showdown Captain Mode');
+            const isShowdown = isShowdownSlateName(selectedSlate);
             return allSlatePlayers
                 .filter(p => p.Team === qb.Team && p.displayName !== stackCaptain && (!isShowdown || p.slotType === 'FLEX')
                     && posIncludes.some(pos => String(p.Position).includes(pos)))
@@ -8221,7 +8225,7 @@
             if (!qb) return;
             const kind = document.getElementById('stackBringBackSelect')?.value || 'either';
             const opp = qb.Opponent;
-            const isShowdown = selectedSlate?.includes('Showdown Captain Mode');
+            const isShowdown = isShowdownSlateName(selectedSlate);
             const okPos = (p) => {
                 const pos = String(p.Position);
                 if (kind === 'rb') return pos.includes('RB');
@@ -8262,7 +8266,7 @@
                 document.getElementById('tableBody').innerHTML = '<tr><td colspan="12">No slate selected</td></tr>';
                 return;
             }
-            const isShowdown = selectedSlate.includes('Showdown Captain Mode');
+            const isShowdown = isShowdownSlateName(selectedSlate);
             let tempData = rawData.filter(row => {
                 // Use >= so Min FP = 0 still shows zero-projection players (critical for preseason)
                 const proj = adjustedProjections[row.Role]?.[row['Player Name']] ?? row['Projected FP'] ?? 0;
@@ -8457,8 +8461,8 @@
             if (document.getElementById('lineupTableContainer').style.display !== 'none') {
                 const playerCounts = {};
                 filteredData.forEach(p => playerCounts[p.displayName] = 0);
-                generatedLineups.forEach(l => updatePlayerCounts(l, playerCounts, selectedSlate.includes('Showdown Captain Mode')));
-                updateExposureComparison(playerCounts, [], groupList, selectedSlate.includes('Showdown Captain Mode'), exposurePositionFilter);
+                generatedLineups.forEach(l => updatePlayerCounts(l, playerCounts, isShowdownSlateName(selectedSlate)));
+                updateExposureComparison(playerCounts, [], groupList, isShowdownSlateName(selectedSlate), exposurePositionFilter);
             }
         }
 
@@ -8583,7 +8587,7 @@
         }
 
         function updateLineupTable() {
-            const isShowdown = selectedSlate.includes('Showdown Captain Mode');
+            const isShowdown = isShowdownSlateName(selectedSlate);
             // Keep original indices for swap
             const withIdx = generatedLineups.map((l, origIdx) => ({ l, origIdx }));
             let sortedPairs = [...withIdx];
@@ -8648,7 +8652,7 @@
         }
 
         function openSwapModal(lineupIndex, slot) {
-            const isShowdown = selectedSlate.includes('Showdown Captain Mode');
+            const isShowdown = isShowdownSlateName(selectedSlate);
             const lu = generatedLineups[lineupIndex];
             if (!lu) return;
             let current = null;
@@ -8720,7 +8724,7 @@
             if (!newPlayer) return;
 
             const scope = (document.querySelector('input[name="swapScope"]:checked') || {}).value || 'one';
-            const isShowdown = selectedSlate.includes('Showdown Captain Mode');
+            const isShowdown = isShowdownSlateName(selectedSlate);
             const { lineupIndex, slot, current } = swapContext;
 
             const indices = [];
@@ -8897,7 +8901,7 @@
                 variables: {},
                 ints: {}
             };
-            const isShowdown = selectedSlate.includes('Showdown Captain Mode');
+            const isShowdown = isShowdownSlateName(selectedSlate);
             const slotRequirements = isShowdown
                 ? { Captain: 1, FLEX: 5 }
                 : { QB: 1, RB: 2, WR: 3, TE: 1, DST: 1, FLEX: 1 };
@@ -9826,7 +9830,7 @@
         function applyConstraintFixes(warnings) {
             const fixes = new Set((warnings || []).map(w => w.fix).filter(Boolean));
             const actions = [];
-            const isShowdown = selectedSlate && selectedSlate.includes('Showdown Captain Mode');
+            const isShowdown = isShowdownSlateName(selectedSlate);
 
             if (fixes.has('clearGroups') || fixes.has('widenOwnershipAndClearGroups') || fixes.has('simplifyLayers')) {
                 if ((groupList || []).length) {
@@ -10179,7 +10183,7 @@
 
             abortLineupGeneration = false;
 
-            const isShowdown = selectedSlate.includes('Showdown Captain Mode');
+            const isShowdown = isShowdownSlateName(selectedSlate);
             const forceQBStack = !isShowdown && document.getElementById('autoStack').checked;
             const forceShowdownStack = isShowdown && document.getElementById('showdownAutoStack').checked;
             updateLineupTableHeaders(isShowdown);
@@ -10600,7 +10604,7 @@
         function openReplacementModal(lineupIndex, slotIndex) {
             replacementLineupIndex = lineupIndex;
             replacementSlot = slotIndex;
-            const isShowdown = selectedSlate.includes('Showdown Captain Mode');
+            const isShowdown = isShowdownSlateName(selectedSlate);
             const lineup = generatedLineups[lineupIndex].lineup;
             originalPlayer = isShowdown
                 ? (slotIndex === 0 ? lineup.captain : lineup.flex[slotIndex - 1])
@@ -10633,7 +10637,7 @@
             const newPlayer = filteredData.find(p => p.displayName === newName);
             if (!newPlayer) return;
             const replaceAll = document.getElementById('replaceAll').checked;
-            const isShowdown = selectedSlate.includes('Showdown Captain Mode');
+            const isShowdown = isShowdownSlateName(selectedSlate);
 
             const doReplace = (genLineup, slotIdx) => {
                 const lineup = genLineup.lineup;
@@ -10838,8 +10842,8 @@
             if (generatedLineups.length) {
                 const counts = {};
                 filteredData.forEach(p => counts[p.displayName] = 0);
-                generatedLineups.forEach(l => updatePlayerCounts(l, counts, selectedSlate.includes('Showdown Captain Mode')));
-                updateExposureComparison(counts, [], groupList, selectedSlate.includes('Showdown Captain Mode'), exposurePositionFilter);
+                generatedLineups.forEach(l => updatePlayerCounts(l, counts, isShowdownSlateName(selectedSlate)));
+                updateExposureComparison(counts, [], groupList, isShowdownSlateName(selectedSlate), exposurePositionFilter);
             } else {
                 updateTable();
             }
@@ -10849,8 +10853,8 @@
             exposurePositionFilter = pos;
             const counts = {};
             filteredData.forEach(p => counts[p.displayName] = 0);
-            generatedLineups.forEach(l => updatePlayerCounts(l, counts, selectedSlate.includes('Showdown Captain Mode')));
-            updateExposureComparison(counts, [], groupList, selectedSlate.includes('Showdown Captain Mode'), pos);
+            generatedLineups.forEach(l => updatePlayerCounts(l, counts, isShowdownSlateName(selectedSlate)));
+            updateExposureComparison(counts, [], groupList, isShowdownSlateName(selectedSlate), pos);
         }
 
         function isDkShowdownSlate(slate) {
@@ -10946,7 +10950,7 @@
         }
 
         function downloadLineupsDetailed() {
-            const isShowdown = selectedSlate.includes('Showdown Captain Mode');
+            const isShowdown = isShowdownSlateName(selectedSlate);
             let rows = [];
             if (isShowdown) {
                 rows.push(['Lineup','CPT','FLEX1','FLEX2','FLEX3','FLEX4','FLEX5','Salary','Proj FP','Ownership']);
@@ -10985,7 +10989,7 @@
                 alert('No lineups to copy.');
                 return;
             }
-            const isShowdown = selectedSlate.includes('Showdown Captain Mode');
+            const isShowdown = isShowdownSlateName(selectedSlate);
             let text = `NFL DFS Lineups — ${selectedSlate}\n`;
             text += `Generated ${generatedLineups.length} lineups | Multi-entry target: ${multiEntryTarget}\n`;
             text += '─'.repeat(50) + '\n\n';
@@ -11191,7 +11195,7 @@
             // Lineup leverage (if generated)
             const levBody = document.getElementById('levLineupBody');
             if (generatedLineups.length) {
-                const isShowdown = selectedSlate.includes('Showdown Captain Mode');
+                const isShowdown = isShowdownSlateName(selectedSlate);
                 const lineupLevs = generatedLineups.map((l, i) => {
                     const players = isShowdown
                         ? [l.lineup.captain, ...l.lineup.flex].filter(Boolean)
@@ -11223,7 +11227,7 @@
                 alert('Generate lineups first.');
                 return;
             }
-            const isShowdown = selectedSlate.includes('Showdown Captain Mode');
+            const isShowdown = isShowdownSlateName(selectedSlate);
             const nSims = Math.min(8000, Math.max(500, parseInt(document.getElementById('mcSimsInput').value) || 2500));
             const fieldSize = Math.min(500, Math.max(50, parseInt(document.getElementById('mcFieldSize').value) || 200));
             const useCorr = document.getElementById('mcCorrelated').checked;
