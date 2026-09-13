@@ -945,6 +945,46 @@
             padding: 0.35rem 0.65rem;
         }
 
+        /* Generated lineups: keep salary / proj / own visible without horizontal hunting */
+        #lineupTableContainer .table-wrapper {
+            max-height: min(62vh, 720px);
+            overflow: auto;
+        }
+        #lineupTable {
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.75rem;
+        }
+        #lineupTable th, #lineupTable td {
+            white-space: nowrap;
+        }
+        #lineupTable td.lineup-player {
+            white-space: normal;
+            min-width: 92px;
+            max-width: 128px;
+            line-height: 1.25;
+            text-align: left;
+            font-size: 0.72rem;
+        }
+        #lineupTable .lu-metric {
+            font-variant-numeric: tabular-nums;
+            font-weight: 700;
+            background: var(--table-head-bg);
+        }
+        #lineupTable thead th.lu-sticky,
+        #lineupTable tbody td.lu-sticky {
+            position: sticky;
+            z-index: 4;
+            background: var(--card-bg);
+            box-shadow: 1px 0 0 var(--border-color);
+        }
+        #lineupTable thead th.lu-sticky { z-index: 6; top: 0; }
+        #lineupTable th.lu-sticky:nth-child(1), #lineupTable td.lu-sticky:nth-child(1) { left: 0; min-width: 36px; }
+        #lineupTable th.lu-sticky:nth-child(2), #lineupTable td.lu-sticky:nth-child(2) { left: 36px; min-width: 36px; }
+        #lineupTable th.lu-sticky:nth-child(3), #lineupTable td.lu-sticky:nth-child(3) { left: 72px; min-width: 64px; }
+        #lineupTable th.lu-sticky:nth-child(4), #lineupTable td.lu-sticky:nth-child(4) { left: 136px; min-width: 62px; }
+        #lineupTable th.lu-sticky:nth-child(5), #lineupTable td.lu-sticky:nth-child(5) { left: 198px; min-width: 70px; box-shadow: 6px 0 10px rgba(0,0,0,0.12); }
+
         /* Tables */
         .table-wrapper {
             overflow-x: auto;
@@ -3368,6 +3408,13 @@
                     <div class="pool-search-wrap">
                         <input type="search" id="poolSearchInput" placeholder="Search player…" autocomplete="off"
                                oninput="onPoolSearchInput(this.value)" data-tip="Filter the table by player name">
+                        <label style="display:flex;align-items:center;gap:0.35rem;font-size:0.75rem;white-space:nowrap;margin:0;">
+                            Min FP
+                            <input type="number" id="poolMinFpInput" min="0" max="40" step="0.5" value="0"
+                                   style="width:70px;padding:0.4rem 0.45rem;"
+                                   onchange="setPoolMinProjectedFP(this.value)"
+                                   data-tip="Hide players below this projected FP from the pool and optimizer. 0 keeps everyone.">
+                        </label>
                         <button type="button" class="ghost pool-clear-btn" onclick="clearPoolFilters()" title="Clear search, positions, and teams">Clear</button>
                     </div>
                     <div class="pool-chip-row" id="poolPosChips" aria-label="Positions"></div>
@@ -3383,7 +3430,7 @@
                     <button class="ghost" data-tip="Set max exposure to 60% for all visible players. Balanced multi-entry setting." onclick="bulkSetExposure('max', 60)">Max Exp 60%</button>
                     <button class="ghost" data-tip="Allow any player up to 100% exposure (no per-player cap beyond global max)." onclick="bulkSetExposure('max', 100)">Max Exp 100%</button>
                     <button class="ghost" data-tip="Exclude all players with projected FP under 8 from the pool." onclick="bulkZeroLowProj()">Zero &lt; 8 FP</button>
-                    <button class="ghost" data-tip="Exclude every player currently showing 0 projected fantasy points from the pool." onclick="bulkExcludeZeroProj()">Exclude 0 FP</button>
+                    <button class="ghost" data-tip="Exclude players at or below the Min FP box (pool filter bar). Set Min FP first, then click." onclick="bulkExcludeBelowMinFp()">Exclude below Min FP</button>
                     <button class="ghost" data-tip="Reset every player's min exposure to 0% and max to 100%." onclick="bulkResetExposures()">Reset Exposures</button>
                     <button class="ghost" data-tip="Clear all Force and Core Lock flags from the player pool." onclick="clearAllForces()">Clear Forces</button>
                     <button class="ghost" data-tip="Clear all Priority boosts (projection multipliers + auto min exposure)." onclick="clearAllPriorities()">Clear Priorities</button>
@@ -3609,9 +3656,11 @@
                                 <option value="">All teams</option>
                             </select>
                         </div>
-                        <div class="cs-tag-filters">
-                            <span class="cs-tag-filters-label">Tags</span>
-                            <div class="cs-tag-chips" id="csTagMenu">
+                        <div class="cs-multitag dropdown-container">
+                            <label>Tags</label>
+                            <button type="button" class="dropdown-button" id="csTagBtn" onclick="toggleCsTagMenu()">All tags</button>
+                            <div class="dropdown-menu cs-multitag-menu" id="csTagMenu" hidden>
+                                <div class="cs-tag-menu-title">Select one or more tags</div>
                                 <label><input type="checkbox" value="coreish" onchange="onCsTagChange()"> Extreme / Core</label>
                                 <label><input type="checkbox" value="Extreme Core" onchange="onCsTagChange()"> Extreme Core</label>
                                 <label><input type="checkbox" value="Core Play" onchange="onCsTagChange()"> Core Play</label>
@@ -3619,19 +3668,19 @@
                                 <label><input type="checkbox" value="Core Value" onchange="onCsTagChange()"> Core Value</label>
                                 <label><input type="checkbox" value="Playable" onchange="onCsTagChange()"> Playable</label>
                                 <label><input type="checkbox" value="Fade" onchange="onCsTagChange()"> Fade</label>
-                                <button type="button" class="ghost pool-clear-btn" onclick="clearCsTags()">Clear</button>
+                                <button type="button" class="ghost pool-clear-btn" onclick="clearCsTags()">Clear tags</button>
                             </div>
                         </div>
                         <div>
                             <label>Min Proj</label>
-                            <input type="number" id="csMinFp" value="5" min="0" step="0.5" onchange="renderCheatSheet()">
+                            <input type="number" id="csMinFp" value="0" min="0" step="0.5" onchange="renderCheatSheet()">
                         </div>
                         <div>
                             <label>Min value</label>
                             <input type="number" id="csMinVal" value="0" min="0" step="0.1" onchange="renderCheatSheet()">
                         </div>
                         <label style="display:flex;align-items:center;gap:0.35rem;font-weight:600;">
-                            <input type="checkbox" id="csHideZero" checked onchange="renderCheatSheet()"> Hide 0-proj
+                            <input type="checkbox" id="csHideZero" onchange="renderCheatSheet()"> Hide 0-proj
                         </label>
                         <button type="button" class="ghost" onclick="csExportCsv()">Export CSV</button>
                     </div>
@@ -3685,7 +3734,7 @@
                     <div class="cs-hero">
                         <div>
                             <h2>Ownership Leverage</h2>
-                            <p class="cs-note" style="margin:0;">DK slots: QB 1 · RB 2–3 (FLEX) · WR 3–4 (FLEX) · TE 1–2 (FLEX). Ownership is scaled to an RB-equivalent chalk rate, then priced into FP. 60% RB ≈ 35 own-price. Same raw own% is more expensive at QB than at WR.</p>
+                            <p class="cs-note" style="margin:0;">Own-need FP is the production a player must deliver to justify their projected ownership, given position norms and salary. Compare that to salary-implied FP and Cheat Sheet projected FP. Positive vs Own-need = under-owned leverage. Negative = over-owned relative to projection.</p>
                         </div>
                     </div>
                     <div class="cs-kpis" id="levKpis"></div>
@@ -3823,6 +3872,18 @@
                         </table>
                     </div>
                     <div id="slLevBoards"></div>
+                    <h3 style="font-size:0.95rem;margin:1.25rem 0 0.35rem;">Ownership leverage stacks</h3>
+                    <p class="sl-note">QB + pass catcher ranked by combined vs-own-need leverage (projection minus the FP their ownership is asking for). Use these when you want under-owned production stacks, not just raw combo FP.</p>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th><th>QB</th><th>Pass catcher</th><th>Team</th><th>Combo FP</th><th>Own</th><th>Lev</th><th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="slLevStackBody"></tbody>
+                        </table>
+                    </div>
 
                     <h3 style="font-size:0.95rem;margin:1.25rem 0 0.35rem;">Best QB + pass-catcher pairs</h3>
                     <p class="sl-note">Primary stack. GPP score = projection + value + leverage (lower own helps). Cash score = projection + value + chalk (higher own helps).</p>
@@ -3927,9 +3988,9 @@
                         <div>
                             <label>Type</label>
                             <select id="groupTypeSelect">
-                                <option value="min">At Least</option>
+                                <option value="min" selected>At Least</option>
                                 <option value="exact">Exactly</option>
-                                <option value="max" selected>At Most</option>
+                                <option value="max">At Most</option>
                             </select>
                         </div>
                         <div>
@@ -3948,6 +4009,44 @@
                             <div id="groupPlayersMenu" class="dropdown-menu">
                                 <input type="text" id="group-player-search" placeholder="Search…" oninput="filterGroupPlayersSearch()">
                                 <div id="groupPlayerList"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="border:1px dashed var(--border-color);border-radius:10px;padding:0.65rem 0.7rem;">
+                        <div class="sd-panel-title" style="margin-bottom:0.35rem;">Run-back (optional)</div>
+                        <p class="sd-field-hint" style="margin:0 0 0.55rem;">When the player above is in a lineup, also require a run-back from this set. Example: Geno at 5–7% exposure, at least 2 Jets pass catchers, and at least 1 of Spears or Pollard.</p>
+                        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+                            <div>
+                                <label>Run-back type</label>
+                                <select id="groupRunbackTypeSelect">
+                                    <option value="min" selected>At Least</option>
+                                    <option value="exact">Exactly</option>
+                                    <option value="max">At Most</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Number</label>
+                                <input type="number" id="groupRunbackNum" min="0" max="9" value="1" style="width:70px;">
+                            </div>
+                        </div>
+                        <div style="margin-top:0.5rem;">
+                            <label>Run-back players</label>
+                            <div class="dropdown-container">
+                                <button class="dropdown-button" id="groupRunbackDropdown" onclick="toggleDropdown('groupRunbackMenu')">None (optional)</button>
+                                <div id="groupRunbackMenu" class="dropdown-menu">
+                                    <input type="text" id="group-runback-search" placeholder="Search…" oninput="filterRunbackPlayersSearch()">
+                                    <div id="groupRunbackList"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:0.55rem;">
+                            <div>
+                                <label>Anchor min %</label>
+                                <input type="number" id="groupConditionMinExp" min="0" max="100" value="" placeholder="e.g. 5" style="width:80px;" title="Optional min exposure for the When-include player">
+                            </div>
+                            <div>
+                                <label>Anchor max %</label>
+                                <input type="number" id="groupConditionMaxExp" min="0" max="100" value="" placeholder="e.g. 7" style="width:80px;" title="Optional max exposure for the When-include player">
                             </div>
                         </div>
                     </div>
@@ -4987,7 +5086,8 @@
                         });
                     });
             });
-            const bestLev = stacks.slice().sort((a,b) => b.levSum - a.levSum || b.projSum - a.projSum).slice(0, 8);
+            const topNLev = Math.max(8, Math.min(30, parseInt(document.getElementById('slTopN')?.value) || 12));
+            const bestLev = stacks.slice().sort((a,b) => b.levSum - a.levSum || b.projSum - a.projSum).slice(0, topNLev);
             const chalkiest = stacks.slice().sort((a,b) => b.ownSum - a.ownSum).slice(0, 8);
             const runbacks = [];
             qbs.forEach(qb => {
@@ -5007,13 +5107,42 @@
             runbacks.sort((a,b) => b.ownSum - a.ownSum);
             const line = (left, meta) => `<div class="gp-player"><span>${left}</span><span>${meta}</span></div>`;
             root.innerHTML = `
-                <details class="cs-best" style="margin-top:0.9rem;"><summary>Ownership leverage stacks</summary>
+                <details class="cs-best" style="margin-top:0.9rem;" open><summary>Ownership leverage stack board</summary>
                     <div class="cs-top-board">
                         <div class="cs-top-col"><div class="k">Best leverage stacks</div><div class="chips">${bestLev.map((s,i)=>line(`${i+1}. ${csEsc(csName(s.qb))} + ${csEsc(csName(s.rec))}`, `lev ${s.levSum>0?'+':''}${s.levSum} · ${s.ownSum.toFixed(0)}% own`)).join('')||'<span class="cs-sub">Need ownership + QBs</span>'}</div></div>
                         <div class="cs-top-col"><div class="k">Chalkiest stacks</div><div class="chips">${chalkiest.map((s,i)=>line(`${i+1}. ${csEsc(csName(s.qb))} + ${csEsc(csName(s.rec))}`, `${s.ownSum.toFixed(0)}% own · ${s.projSum.toFixed(1)} fp`)).join('')||'<span class="cs-sub">None</span>'}</div></div>
                         <div class="cs-top-col"><div class="k">Chalkiest runbacks</div><div class="chips">${runbacks.slice(0,8).map((s,i)=>line(`${i+1}. ${csEsc(csName(s.qb))}+${csEsc(csName(s.rec))} / ${csEsc(csName(s.rb))}`, `${s.ownSum.toFixed(0)}% own`)).join('')||'<span class="cs-sub">Need opponents</span>'}</div></div>
                     </div>
                 </details>`;
+            const levBody = document.getElementById('slLevStackBody');
+            if (levBody) {
+                _slCache.levStacks = bestLev;
+                const esc = (s) => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+                levBody.innerHTML = bestLev.map((s, i) => `<tr>
+                    <td class="num"><input type="checkbox" class="sl-lev-cb" data-idx="${i}" ${i < 3 ? 'checked' : ''}></td>
+                    <td>${esc(csName(s.qb))} ${slOwnBand(s.qb.ownership)}</td>
+                    <td>${esc(csName(s.rec))} ${slOwnBand(s.rec.ownership)}</td>
+                    <td>${esc(s.qb.Team || '')}</td>
+                    <td class="num">${s.projSum.toFixed(1)}</td>
+                    <td class="num">${s.ownSum.toFixed(0)}%</td>
+                    <td class="num"><strong>${s.levSum > 0 ? '+' : ''}${Number(s.levSum).toFixed(1)}</strong></td>
+                    <td class="num"><button class="ghost" style="padding:0.2rem 0.45rem;font-size:0.72rem;" onclick="slAddLevStack(${i})">Add</button></td>
+                </tr>`).join('') || '<tr><td colspan="8" style="color:var(--muted);">Need ownership loaded to rank leverage stacks.</td></tr>';
+            }
+        }
+        function slAddLevStack(idx) {
+            const s = (_slCache.levStacks || [])[idx];
+            if (!s) return;
+            const ok = slPushStack({
+                captain: s.qb.displayName,
+                receiver: s.rec.displayName,
+                recipe: 'qb_wr',
+                percentage: 28,
+                fadeGameDst: true
+            });
+            updateStackListDisplay();
+            if (typeof saveSession === 'function') saveSession(true);
+            alert(ok ? `Added leverage stack ${csName(s.qb)} + ${csName(s.rec)}.` : 'That pair is already in your stack list.');
         }
 
         function slPushStack(obj) {
@@ -5124,6 +5253,16 @@
                     recipe: 'qb_wr_bb',
                     bringBack: p.bbType === 'Opp RB' ? 'rb' : 'pc',
                     bringPlayer: p.bb.displayName,
+                    fadeGameDst: true,
+                    percentage: 28
+                })) added++;
+            });
+            document.querySelectorAll('.sl-lev-cb:checked').forEach(cb => {
+                const p = (_slCache.levStacks || [])[parseInt(cb.dataset.idx, 10)];
+                if (p && slPushStack({
+                    captain: p.qb.displayName,
+                    receiver: p.rec.displayName,
+                    recipe: 'qb_wr',
                     fadeGameDst: true,
                     percentage: 28
                 })) added++;
@@ -7386,8 +7525,23 @@
             updateStickyBar();
         }
         function updateMinProjectedFP() {
-            minProjectedFP = parseInt(document.getElementById('minProjectedFPSlider').value);
+            minProjectedFP = parseFloat(document.getElementById('minProjectedFPSlider').value) || 0;
             document.getElementById('minProjectedFPValue').textContent = minProjectedFP;
+            const box = document.getElementById('poolMinFpInput');
+            if (box && String(box.value) !== String(minProjectedFP)) box.value = minProjectedFP;
+            try { updateTable(); } catch (e) {}
+        }
+        function setPoolMinProjectedFP(val) {
+            const n = Math.max(0, Math.min(40, parseFloat(val) || 0));
+            minProjectedFP = n;
+            const slider = document.getElementById('minProjectedFPSlider');
+            if (slider) slider.value = Math.round(n);
+            const lab = document.getElementById('minProjectedFPValue');
+            if (lab) lab.textContent = n;
+            const box = document.getElementById('poolMinFpInput');
+            if (box) box.value = n;
+            try { updateTable(); } catch (e) {}
+            try { queueSessionSave(); } catch (e) {}
             updateTable();
         }
         function updateMinUnique() {
@@ -8003,6 +8157,12 @@
                 l.style.display = l.textContent.toLowerCase().includes(s) ? 'block' : 'none';
             });
         }
+        function filterRunbackPlayersSearch() {
+            const s = String(document.getElementById('group-runback-search')?.value || '').toLowerCase();
+            document.querySelectorAll('#groupRunbackList label').forEach(l => {
+                l.style.display = l.textContent.toLowerCase().includes(s) ? 'block' : 'none';
+            });
+        }
 
         function updatePositions() {
             selectedPositions = Array.from(document.querySelectorAll('#positionMenu input:checked')).map(i => i.value);
@@ -8142,29 +8302,74 @@
             const selected = Array.from(document.querySelectorAll('#groupPlayerList input:checked')).map(i => i.value);
             updateDropdownButton('groupPlayersDropdown', selected, 'players');
         }
+        function updateGroupRunbackPlayers() {
+            const selected = Array.from(document.querySelectorAll('#groupRunbackList input:checked')).map(i => i.value);
+            updateDropdownButton('groupRunbackDropdown', selected, selected.length ? 'players' : 'run-back');
+            const btn = document.getElementById('groupRunbackDropdown');
+            if (btn && !selected.length) btn.textContent = 'None (optional)';
+        }
+        function applyAnchorExposure(name, minPct, maxPct) {
+            if (!name) return;
+            const keys = new Set([name, String(name).split(' (')[0]]);
+            (allSlatePlayers || []).forEach(p => {
+                if (!p) return;
+                if (keys.has(p.displayName) || keys.has(p.baseName) || keys.has(p['Player Name'])) {
+                    if (Number.isFinite(minPct)) {
+                        minExposures[p.displayName] = minPct;
+                        p.minExposure = minPct;
+                    }
+                    if (Number.isFinite(maxPct)) {
+                        maxExposures[p.displayName] = maxPct;
+                        p.maxExposure = maxPct;
+                    }
+                }
+            });
+            try { updateTable(); } catch (e) {}
+        }
 
         function addGroup() {
             const type = document.getElementById('groupTypeSelect').value;
             const numPlayers = Math.min(9, Math.max(0, parseInt(document.getElementById('numGroupPlayers').value) || 1));
             const players = Array.from(document.querySelectorAll('#groupPlayerList input:checked')).map(i => i.value);
             const percentage = Math.min(100, Math.max(0, parseInt(document.getElementById('groupPercentageInput').value) || 100));
+            const runbackPlayers = Array.from(document.querySelectorAll('#groupRunbackList input:checked')).map(i => i.value);
+            const runbackType = document.getElementById('groupRunbackTypeSelect')?.value || 'min';
+            const runbackNum = Math.min(9, Math.max(0, parseInt(document.getElementById('groupRunbackNum')?.value) || 1));
+            const condMinRaw = document.getElementById('groupConditionMinExp')?.value;
+            const condMaxRaw = document.getElementById('groupConditionMaxExp')?.value;
+            const conditionMinExp = condMinRaw === '' || condMinRaw == null ? null : Math.min(100, Math.max(0, parseFloat(condMinRaw)));
+            const conditionMaxExp = condMaxRaw === '' || condMaxRaw == null ? null : Math.min(100, Math.max(0, parseFloat(condMaxRaw)));
             if (!players.length) { alert('Select players for the group.'); return; }
+            const rec = {
+                type, numPlayers, players: [...new Set(players)], conditionPlayer, percentage,
+                runbackType, runbackNum, runbackPlayers: [...new Set(runbackPlayers)],
+                conditionMinExp, conditionMaxExp
+            };
             if (editingIndex >= 0) {
-                groupList[editingIndex] = { type, numPlayers, players: [...new Set(players)], conditionPlayer, percentage };
+                groupList[editingIndex] = rec;
                 editingIndex = -1;
                 document.getElementById('addGroupButton').textContent = 'Add Group';
             } else {
-                groupList.push({ type, numPlayers, players: [...new Set(players)], conditionPlayer, percentage });
+                groupList.push(rec);
+            }
+            if (conditionPlayer && (Number.isFinite(conditionMinExp) || Number.isFinite(conditionMaxExp))) {
+                applyAnchorExposure(conditionPlayer, conditionMinExp, conditionMaxExp);
             }
             updateGroupList();
             resetGroupFields();
         }
         function resetGroupFields() {
-            document.getElementById('groupTypeSelect').value = 'max';
+            document.getElementById('groupTypeSelect').value = 'min';
             document.getElementById('numGroupPlayers').value = 1;
             document.getElementById('groupPercentageInput').value = 100;
             document.querySelectorAll('#groupPlayerList input:checked').forEach(i => i.checked = false);
             updateDropdownButton('groupPlayersDropdown', [], 'players');
+            document.querySelectorAll('#groupRunbackList input:checked').forEach(i => i.checked = false);
+            if (document.getElementById('groupRunbackTypeSelect')) document.getElementById('groupRunbackTypeSelect').value = 'min';
+            if (document.getElementById('groupRunbackNum')) document.getElementById('groupRunbackNum').value = 1;
+            if (document.getElementById('groupConditionMinExp')) document.getElementById('groupConditionMinExp').value = '';
+            if (document.getElementById('groupConditionMaxExp')) document.getElementById('groupConditionMaxExp').value = '';
+            updateGroupRunbackPlayers();
             conditionPlayer = null;
             document.getElementById('conditionPlayerDropdown').textContent = 'Any Player (Optional)';
             document.querySelectorAll('#conditionPlayerList input:checked').forEach(i => i.checked = false);
@@ -8176,7 +8381,13 @@
             div.innerHTML = groupList.map((g, i) => {
                 const cond = g.conditionPlayer ? `When include ${g.conditionPlayer}, ` : '';
                 const t = g.type === 'min' ? 'At Least' : g.type === 'exact' ? 'Exactly' : 'At Most';
-                return `<div style="margin:0.3rem 0;">${cond}${t} ${g.numPlayers} of ${g.players.join(', ')} in ${g.percentage}% 
+                const rb = (g.runbackPlayers && g.runbackPlayers.length)
+                    ? `; run-back ${g.runbackType === 'exact' ? 'exactly' : g.runbackType === 'max' ? 'at most' : 'at least'} ${g.runbackNum} of ${g.runbackPlayers.join(', ')}`
+                    : '';
+                const exp = (g.conditionPlayer && (g.conditionMinExp != null || g.conditionMaxExp != null))
+                    ? ` (${g.conditionPlayer} exp ${g.conditionMinExp ?? 0}–${g.conditionMaxExp ?? 100}%)`
+                    : '';
+                return `<div style="margin:0.3rem 0;">${cond}${t} ${g.numPlayers} of ${g.players.join(', ')}${rb}${exp} in ${g.percentage}% 
                     <button class="ghost" style="padding:0.15rem 0.4rem;font-size:0.75rem;" onclick="deleteGroup(${i})">Del</button>
                     <button class="ghost" style="padding:0.15rem 0.4rem;font-size:0.75rem;" onclick="editGroup(${i})">Edit</button></div>`;
             }).join('');
@@ -8199,6 +8410,12 @@
             document.querySelectorAll('#conditionPlayerList input[name="conditionPlayer"]').forEach(inp => {
                 inp.checked = inp.value === (g.conditionPlayer || '');
             });
+            if (document.getElementById('groupRunbackTypeSelect')) document.getElementById('groupRunbackTypeSelect').value = g.runbackType || 'min';
+            if (document.getElementById('groupRunbackNum')) document.getElementById('groupRunbackNum').value = g.runbackNum != null ? g.runbackNum : 1;
+            document.querySelectorAll('#groupRunbackList input').forEach(inp => inp.checked = (g.runbackPlayers || []).includes(inp.value));
+            updateGroupRunbackPlayers();
+            if (document.getElementById('groupConditionMinExp')) document.getElementById('groupConditionMinExp').value = g.conditionMinExp != null ? g.conditionMinExp : '';
+            if (document.getElementById('groupConditionMaxExp')) document.getElementById('groupConditionMaxExp').value = g.conditionMaxExp != null ? g.conditionMaxExp : '';
             document.getElementById('addGroupButton').textContent = 'Update Group';
         }
 
@@ -8278,6 +8495,12 @@
             document.getElementById('groupPlayerList').innerHTML = players.map(p =>
                 `<label><input type="checkbox" value="${p}" onchange="updateGroupPlayers()">${p}</label>`
             ).join('');
+            const rb = document.getElementById('groupRunbackList');
+            if (rb) {
+                rb.innerHTML = players.map(p =>
+                    `<label><input type="checkbox" value="${p}" onchange="updateGroupRunbackPlayers()">${p}</label>`
+                ).join('');
+            }
         }
 
         // ====================== TABLE ======================
@@ -8573,22 +8796,22 @@
             updateTable();
         }
         function bulkExcludeZeroProj() {
-            // Exclude everyone at exactly 0 FP in the current pool view (and raw slate rows)
+            bulkExcludeBelowMinFp(0);
+        }
+        function bulkExcludeBelowMinFp(forceMin) {
+            const cut = forceMin != null ? Number(forceMin) : (Number(minProjectedFP) || 0);
             let n = 0;
-            filteredData.forEach(p => {
-                if ((p.projectedFP || 0) <= 0) {
-                    deselectedPlayers.add(p.displayName);
-                    n++;
-                }
-            });
-            // Also catch any slate rows not in filteredData (e.g. filtered out by pos/team)
-            (allSlatePlayers || []).forEach(p => {
-                if ((p.projectedFP || 0) <= 0) {
+            const mark = (p) => {
+                if (!p) return;
+                if ((Number(p.projectedFP) || 0) <= cut) {
+                    if (!deselectedPlayers.has(p.displayName)) n++;
                     deselectedPlayers.add(p.displayName);
                 }
-            });
+            };
+            (filteredData || []).forEach(mark);
+            (allSlatePlayers || []).forEach(mark);
             updateTable();
-            setDataStatus('', `Excluded ${n} zero-FP players from pool`);
+            setDataStatus('', `Excluded ${n} players at or below ${cut} FP`);
         }
         function bulkResetExposures() {
             filteredData.forEach(p => {
@@ -8603,13 +8826,17 @@
         // ====================== GENERATION ======================
         function updateLineupTableHeaders(isShowdown) {
             const tr = document.getElementById('lineupHeaderRow');
-            tr.innerHTML = '<th><input type="checkbox" id="lineupSelectAll" onchange="toggleAllLineupChecks(this.checked)" title="Select all"></th><th>Lineup #</th>';
+            const sticky = (label, extra) => `<th class="lu-sticky lu-metric" ${extra || ''}>${label}</th>`;
+            tr.innerHTML = '<th class="lu-sticky"><input type="checkbox" id="lineupSelectAll" onchange="toggleAllLineupChecks(this.checked)" title="Select all"></th>'
+                + sticky('#')
+                + sticky('Proj FP', 'title="Total source projected fantasy points"')
+                + sticky('Own %', 'title="Total projected ownership"')
+                + sticky('Salary', 'title="Total salary"');
             if (isShowdown) {
                 tr.innerHTML += '<th>CPT</th><th>FLEX1</th><th>FLEX2</th><th>FLEX3</th><th>FLEX4</th><th>FLEX5</th>';
             } else {
                 tr.innerHTML += '<th>QB</th><th>RB1</th><th>RB2</th><th>WR1</th><th>WR2</th><th>WR3</th><th>TE</th><th>FLEX</th><th>DST</th>';
             }
-            tr.innerHTML += '<th>Total Salary</th><th>Total Projected Points</th><th>Total Projected Ownership</th>';
         }
 
         function updateLineupTable() {
@@ -8620,9 +8847,9 @@
             if (lineupSortColumn) {
                 sortedPairs.sort((a, b) => {
                     let valA = 0, valB = 0;
-                    if (lineupSortColumn === 'Total Salary') { valA = a.l.totalSalary; valB = b.l.totalSalary; }
-                    else if (lineupSortColumn === 'Total Projected Points') { valA = a.l.totalPoints; valB = b.l.totalPoints; }
-                    else if (lineupSortColumn === 'Total Projected Ownership') { valA = a.l.totalOwnership; valB = b.l.totalOwnership; }
+                    if (lineupSortColumn === 'Total Salary' || lineupSortColumn === 'Salary') { valA = a.l.totalSalary; valB = b.l.totalSalary; }
+                    else if (lineupSortColumn === 'Total Projected Points' || lineupSortColumn === 'Proj FP') { valA = a.l.totalPoints; valB = b.l.totalPoints; }
+                    else if (lineupSortColumn === 'Total Projected Ownership' || lineupSortColumn === 'Own %') { valA = a.l.totalOwnership; valB = b.l.totalOwnership; }
                     return lineupSortDirection === 'asc' ? valA - valB : valB - valA;
                 });
             }
@@ -8639,7 +8866,9 @@
                     });
                 }
                 const checked = lineupChecked.has(origIdx) ? 'checked' : '';
-                return `<tr data-lineup-idx="${origIdx}"><td><input type="checkbox" class="lineup-check" data-idx="${origIdx}" ${checked} onchange="onLineupCheckChange()"></td><td>${i+1}</td>${cells}<td>${l.totalSalary}</td><td>${l.totalPoints.toFixed(2)}</td><td>${l.totalOwnership.toFixed(1)}%</td></tr>`;
+                const shortName = (txt) => String(txt || '').replace(/\s*\((CPT|FLEX)\)\s*$/, '');
+                cells = cells.replace(/class="lineup-player"/g, 'class="lineup-player"');
+                return `<tr data-lineup-idx="${origIdx}"><td class="lu-sticky"><input type="checkbox" class="lineup-check" data-idx="${origIdx}" ${checked} onchange="onLineupCheckChange()"></td><td class="lu-sticky">${i+1}</td><td class="lu-sticky lu-metric">${l.totalPoints.toFixed(2)}</td><td class="lu-sticky lu-metric">${l.totalOwnership.toFixed(1)}%</td><td class="lu-sticky lu-metric">$${l.totalSalary}</td>${cells}</tr>`;
             }).join('');
             updateLineupCheckedCount();
         }
@@ -8866,6 +9095,11 @@
                 (forcedPlayers || []).forEach(n => must.add(n));
                 (corePlayers || []).forEach(n => must.add(n));
                 (stackList || []).forEach(s => [s.captain, s.receiver, s.receiver2, s.bringPlayer].forEach(n => { if (n) must.add(n); }));
+                (groupList || []).forEach(g => {
+                    (g.players || []).forEach(n => { if (n) must.add(n); });
+                    (g.runbackPlayers || []).forEach(n => { if (n) must.add(n); });
+                    if (g.conditionPlayer) must.add(g.conditionPlayer);
+                });
             } catch (e) {}
             const src = (filteredData || []).filter(p => {
                 if (!p || deselectedPlayers.has(p.displayName)) return false;
@@ -8946,13 +9180,31 @@
             }
 
             const forcedSet = new Set(forcedInclude || []);
+            const groupMust = new Set();
+            try {
+                (groupList || []).forEach(g => {
+                    (g.players || []).forEach(n => groupMust.add(n));
+                    (g.runbackPlayers || []).forEach(n => groupMust.add(n));
+                    if (g.conditionPlayer) groupMust.add(g.conditionPlayer);
+                });
+                if (group) {
+                    (group.players || []).forEach(n => groupMust.add(n));
+                    (group.runbackPlayers || []).forEach(n => groupMust.add(n));
+                    if (group.conditionPlayer) groupMust.add(group.conditionPlayer);
+                }
+            } catch (e) {}
+            const nameMatchesMust = (player) => {
+                if (!player) return false;
+                return forcedSet.has(player.baseName) || groupMust.has(player.displayName) || groupMust.has(player.baseName)
+                    || [...groupMust].some(n => n && (n === player.displayName || String(n).split(' (')[0] === player.baseName));
+            };
             genPool().forEach(player => {
                 const displayName = player.displayName;
                 if (deselectedPlayers.has(displayName)) return;
                 const hasMin = (minExposures[displayName] || 0) > 0;
                 const pos0 = String(player.Position || '').toUpperCase();
                 const keepKDst = isDefensePlayer(player) || pos0 === 'K' || pos0 === 'DST' || pos0 === 'DEF';
-                if (!(Number(player.projectedFP) > 0) && !forcedSet.has(player.baseName) && !hasMin && !keepKDst) return;
+                if (!(Number(player.projectedFP) > 0) && !nameMatchesMust(player) && !hasMin && !keepKDst) return;
                 if (keepKDst && !(Number(player.projectedFP) > 0)) player.projectedFP = player.projectedFP || 6.5;
 
                 const minReq = Math.ceil((minExposures[displayName] || 0) / 100 * numLineups);
@@ -8987,6 +9239,16 @@
                     else if (prioKey === 'low') boost = Math.min(1.15, boost + 0.2);
                     else if (prioKey === 'lower') boost = Math.min(1.1, boost + 0.1);
                     adjustedPoints *= (1 + boost);
+                }
+
+                // Group / run-back members: keep them viable even with thin source projections.
+                // Solver-only — displayed lineup totals still use source projectedFP.
+                if (nameMatchesMust(player) && (enforceGroup || (groupList || []).length)) {
+                    const used = playerCounts[displayName] || playerCounts[player.baseName] || 0;
+                    const floorPts = Math.max(7.5, (Number(player.salary) || 4000) / 1000 * 2.05);
+                    if (adjustedPoints < floorPts) adjustedPoints = floorPts;
+                    const rotate = 1 + ((used + currentGenerated) % 4) * 0.12;
+                    adjustedPoints *= (used < Math.max(1, Math.ceil(numLineups * 0.04)) ? 1.45 : 1.18) * rotate;
                 }
 
                 const eligibleSlots = isShowdown ? [player.slotType] : getEligibleSlots(player.positions);
@@ -9099,66 +9361,66 @@
             // Groups
             const bigM = 100;
             const groupsToApply = groupList.filter(g => g.percentage === 100);
-            if (enforceGroup && group) groupsToApply.push(group);
+            if (enforceGroup && group && !groupsToApply.includes(group)) groupsToApply.push(group);
 
-            groupsToApply.forEach((g, i) => {
-                const type = g.type;
-                const numPlayers = g.numPlayers;
-                const conditionBase = g.conditionPlayer ? g.conditionPlayer.split(' (')[0] : null;
-
-                if (conditionBase) {
-                    if (type === 'min' || type === 'exact') {
-                        const cName = `group_min_${i}`;
-                        model.constraints[cName] = { min: numPlayers - bigM };
-                        g.players.forEach(pl => {
-                            const pd = genPool().find(p => p.displayName === pl);
-                            if (pd) {
-                                (isShowdown ? [pd.slotType] : getEligibleSlots(pd.positions)).forEach(slot => {
-                                    const vn = `${pd.baseName}_${slot}`;
-                                    if (model.variables[vn]) model.variables[vn][cName] = 1;
-                                });
+            const namesMatch = (player, label) => {
+                if (!player || !label) return false;
+                const a = String(label);
+                const aBase = a.split(' (')[0];
+                return player.displayName === a || player.baseName === a || player.baseName === aBase
+                    || player.displayName === aBase || String(player['Player Name'] || '') === aBase;
+            };
+            const varsForLabels = (labels) => {
+                const out = [];
+                const seen = new Set();
+                (labels || []).forEach(pl => {
+                    genPool().filter(p => namesMatch(p, pl)).forEach(pd => {
+                        (isShowdown ? [pd.slotType] : getEligibleSlots(pd.positions)).forEach(slot => {
+                            const vn = `${pd.baseName}_${slot}`;
+                            if (model.variables[vn] && !seen.has(vn)) {
+                                seen.add(vn);
+                                out.push(vn);
                             }
                         });
-                        genPool().filter(p => p.baseName === conditionBase).forEach(cp => {
-                            (isShowdown ? [cp.slotType] : getEligibleSlots(cp.positions)).forEach(slot => {
-                                const vn = `${conditionBase}_${slot}`;
-                                if (model.variables[vn]) model.variables[vn][cName] = -bigM;
-                            });
-                        });
+                    });
+                });
+                return out;
+            };
+            const applyCountRule = (prefix, type, numPlayers, memberVars, conditionLabels) => {
+                if (!memberVars.length) return;
+                const condVars = conditionLabels ? varsForLabels([].concat(conditionLabels).filter(Boolean)) : [];
+                if (condVars.length) {
+                    if (type === 'min' || type === 'exact') {
+                        const cName = prefix + '_min';
+                        model.constraints[cName] = { min: numPlayers - bigM };
+                        memberVars.forEach(v => { model.variables[v][cName] = 1; });
+                        condVars.forEach(v => { model.variables[v][cName] = -bigM; });
                     }
                     if (type === 'max' || type === 'exact') {
-                        const cName = `group_max_${i}`;
+                        const cName = prefix + '_max';
                         model.constraints[cName] = { max: numPlayers + bigM };
-                        g.players.forEach(pl => {
-                            const pd = genPool().find(p => p.displayName === pl);
-                            if (pd) {
-                                (isShowdown ? [pd.slotType] : getEligibleSlots(pd.positions)).forEach(slot => {
-                                    const vn = `${pd.baseName}_${slot}`;
-                                    if (model.variables[vn]) model.variables[vn][cName] = 1;
-                                });
-                            }
-                        });
-                        genPool().filter(p => p.baseName === conditionBase).forEach(cp => {
-                            (isShowdown ? [cp.slotType] : getEligibleSlots(cp.positions)).forEach(slot => {
-                                const vn = `${conditionBase}_${slot}`;
-                                if (model.variables[vn]) model.variables[vn][cName] = bigM;
-                            });
-                        });
+                        memberVars.forEach(v => { model.variables[v][cName] = 1; });
+                        condVars.forEach(v => { model.variables[v][cName] = bigM; });
                     }
                 } else {
-                    const cName = `group_${i}`;
+                    const cName = prefix;
                     if (type === 'min') model.constraints[cName] = { min: numPlayers };
                     else if (type === 'max') model.constraints[cName] = { max: numPlayers };
                     else model.constraints[cName] = { min: numPlayers, max: numPlayers };
-                    g.players.forEach(pl => {
-                        const pd = genPool().find(p => p.displayName === pl);
-                        if (pd) {
-                            (isShowdown ? [pd.slotType] : getEligibleSlots(pd.positions)).forEach(slot => {
-                                const vn = `${pd.baseName}_${slot}`;
-                                if (model.variables[vn]) model.variables[vn][cName] = 1;
-                            });
-                        }
-                    });
+                    memberVars.forEach(v => { model.variables[v][cName] = 1; });
+                }
+            };
+
+            groupsToApply.forEach((g, i) => {
+                applyCountRule(`group_${i}`, g.type, g.numPlayers, varsForLabels(g.players), g.conditionPlayer);
+                if (g.runbackPlayers && g.runbackPlayers.length && g.runbackNum > 0) {
+                    applyCountRule(
+                        `group_${i}_rb`,
+                        g.runbackType || 'min',
+                        g.runbackNum,
+                        varsForLabels(g.runbackPlayers),
+                        g.conditionPlayer || null
+                    );
                 }
             });
 
@@ -10352,6 +10614,16 @@
                                     });
                                 });
                             }
+                        });
+                    }
+                    if (enforceGroup && group) {
+                        const bump = [...(group.players || []), ...(group.runbackPlayers || []), group.conditionPlayer].filter(Boolean);
+                        bump.forEach((nm, idx) => {
+                            const b = String(nm).split(' (')[0];
+                            const extra = 1.2 + ((generatedLineups.length + idx) % 3) * 0.15;
+                            Object.keys(model.variables).forEach(v => {
+                                if (v.startsWith(b + '_')) model.variables[v].points *= extra;
+                            });
                         });
                     }
                     const result = solver.Solve(model);
@@ -12052,10 +12324,17 @@
             return (Number(own) || 0) * (3 / max);
         }
         function ownPayoffFp(own, pos) {
-            const adj = Math.min(80, slotAdjOwn(own, pos));
+            // Kept as a fallback only. Primary leverage now uses position-relative own-need FP.
+            const adj = Math.min(80, Number(own) || 0);
             const offset = { QB: 3, RB: 0, WR: -1.5, TE: -3.5, DST: -5, K: -4 }[pos] || 0;
             const raw = 12 + 0.20 * adj + 0.0030 * adj * adj;
             return Math.round((raw + offset) * 10) / 10;
+        }
+        function levMedian(arr) {
+            const a = (arr || []).filter(n => Number.isFinite(n)).slice().sort((x, y) => x - y);
+            if (!a.length) return 0;
+            const mid = Math.floor(a.length / 2);
+            return a.length % 2 ? a[mid] : (a[mid - 1] + a[mid]) / 2;
         }
         function buildLeverageRows(pool) {
             levCache = new Map();
@@ -12070,20 +12349,26 @@
                 const rows = groups[pos].filter(p => csFp(p) > 0 && (Number(p.ownership) || 0) > 0);
                 if (!rows.length) return;
                 const slots = posSlots(pos);
+                const medOwn = levMedian(rows.map(p => Number(p.ownership) || 0)) || 12;
+                const medProj = levMedian(rows.map(p => csFp(p))) || 10;
+                const medSalK = levMedian(rows.map(p => csSal(p) / 1000)) || 5;
                 const tmp = rows.map(p => {
                     const own = Number(p.ownership) || 0;
                     const proj = csFp(p);
                     const sal = csSal(p);
-                    const valueX = sal > 0 ? proj / (sal / 1000) : 0;
+                    const salK = sal > 0 ? sal / 1000 : 0;
+                    const valueX = salK > 0 ? proj / salK : 0;
                     const impl = levImplFp(p);
                     const price = levPriceFp(p);
-                    const cashFloor = sal > 0 ? (sal / 1000) * 2.5 : 0;
-                    const adjOwn = slotAdjOwn(own, pos);
-                    const payoff = ownPayoffFp(own, pos);
-                    const budgetShare = slots.budget > 0 ? (own / slots.budget) * 100 : own;
-                    return { p, pos, own, adjOwn, proj, impl, price, cashFloor, valueX, payoff, slots, budgetShare };
+                    // Ownership demand: what FP this own% is asking for at this position,
+                    // blended with salary-implied FP so expensive chalk is not compared only to a median WR.
+                    const ownRatio = own / Math.max(1, medOwn);
+                    const ownFromField = medProj * ownRatio;
+                    const ownFromSalary = price * ownRatio * (medSalK > 0 && salK > 0 ? Math.max(0.65, Math.min(1.45, salK / medSalK)) : 1);
+                    const payoff = Math.round((0.58 * ownFromField + 0.42 * ownFromSalary) * 10) / 10;
+                    const cashFloor = salK * 2.5;
+                    return { p, pos, own, adjOwn: own, proj, impl, price, cashFloor, valueX, payoff, slots, budgetShare: own };
                 });
-                const n = tmp.length;
                 const byProj = tmp.slice().sort((a, b) => b.proj - a.proj || csSal(b.p) - csSal(a.p));
                 const byOwn = tmp.slice().sort((a, b) => b.own - a.own || b.proj - a.proj);
                 byProj.forEach((r, i) => { r.projRank = i + 1; });
@@ -12096,18 +12381,14 @@
                     rec.vsImpl = rec.proj - rec.impl;
                     rec.levScore = Math.round(rec.edge * 10) / 10;
                     rec.ownShare = rec.own;
-                    const chalk = rec.adjOwn >= 25 || rec.own >= 25;
+                    const overAsk = rec.own >= Math.max(8, medOwn * 1.15);
                     let tag = 'Properly owned';
-                    const canOver = rec.own >= 5;
-                    if (canOver && chalk && rec.edge <= -8) tag = 'Over-valued';
-                    else if (canOver && chalk && rec.edge <= -4) tag = 'Slightly over-valued';
-                    else if (canOver && rec.edge <= -8) tag = 'Over-valued';
-                    else if (canOver && rec.edge <= -3) tag = 'Slightly over-valued';
-                    else if (rec.edge >= 4 && rec.adjOwn < 18 && rec.valueX >= 2) tag = 'Under-owned';
-                    else if (rec.edge >= 2 && rec.adjOwn < 22) tag = 'Slightly under-valued';
-                    else tag = 'Properly owned';
+                    if (rec.own >= 4 && rec.edge <= -5) tag = 'Over-valued';
+                    else if (rec.own >= 4 && rec.edge <= -2.2) tag = 'Slightly over-valued';
+                    else if (rec.edge >= 3.5 && rec.own <= medOwn && rec.valueX >= 1.8) tag = 'Under-owned';
+                    else if (rec.edge >= 1.8 && !overAsk) tag = 'Slightly under-valued';
                     rec.tag = tag;
-                    rec.reason = `${tag}: ${rec.own.toFixed(1)}% own on ${rec.slots.min}–${rec.slots.max} ${rec.pos} slots (adj ${rec.adjOwn.toFixed(0)}%) prices ${rec.payoff.toFixed(1)} FP · proj ${rec.proj.toFixed(1)} · impl ${rec.impl.toFixed(1)} (${rec.edge >= 0 ? '+' : ''}${rec.edge.toFixed(1)} vs own-price)`;
+                    rec.reason = `${tag}: ${rec.own.toFixed(1)}% ${rec.pos} own asks ${rec.payoff.toFixed(1)} FP (pos median own ${medOwn.toFixed(1)}%). Proj ${rec.proj.toFixed(1)} vs salary-implied ${rec.impl.toFixed(1)} (${rec.edge >= 0 ? '+' : ''}${rec.edge.toFixed(1)} vs own-need, ${rec.vsImpl >= 0 ? '+' : ''}${rec.vsImpl.toFixed(1)} vs salary).`;
                     levCache.set(rec.p.displayName, rec);
                     out.push(rec);
                 });
@@ -12171,9 +12452,8 @@
                 <td>${csEsc(r.p.Team || '')}</td>
                 <td><span class="cs-tag ${levTagClass(r.tag)}">${r.tag}</span></td>
                 <td class="num">${r.own.toFixed(1)}%</td>
-                <td class="num">${(r.adjOwn||0).toFixed(1)}%</td>
-                <td class="num">${r.slots.min}–${r.slots.max}</td>
                 <td class="num">${r.payoff.toFixed(1)}</td>
+                <td class="num">${r.price.toFixed(1)}</td>
                 <td class="num">${r.proj.toFixed(1)}</td>
                 <td class="num">${r.impl.toFixed(1)}</td>
                 <td class="num" style="font-weight:700;color:${r.edge>=2?'#7dffa3':r.edge<=-4?'#ff8a96':'inherit'}">${r.edge>=0?'+':''}${r.edge.toFixed(1)}</td>
@@ -12202,20 +12482,19 @@
                     <th title="Team">Team</th>
                     <th title="Leverage tag from own-price vs projection">Tag</th>
                     <th title="Projected ownership percent">Own</th>
-                    <th title="Ownership scaled to RB baseline: raw own times 3 / max slots">Adj own</th>
-                    <th title="Dedicated to max roster spots including FLEX">Slots</th>
-                    <th title="Fantasy points this ownership is paying for. RB 60 percent is about 35">Own-price</th>
+                    <th title="FP this ownership is asking for at this position and salary">Own-need FP</th>
+                    <th title="Salary-implied FP (sheet Implied FP or $ / 1000 × 3)">Sal-impl FP</th>
                     <th title="Cheat Sheet projected fantasy points">Proj</th>
-                    <th title="Implied or salary-based FP">Impl</th>
-                    <th title="Proj minus own-price. Negative means cannot pay off that own percent">vs Own</th>
-                    <th title="Proj minus implied FP">vs Impl</th>
+                    <th title="Implied or salary-based FP used in vs Impl">Impl</th>
+                    <th title="Proj minus own-need FP. Positive = under-owned leverage">vs Own-need</th>
+                    <th title="Proj minus salary-implied FP">vs Impl</th>
                     <th title="Proj divided by salary per 1000">Val</th>
                 </tr></thead>
                 <tbody>${body || '<tr><td colspan="13">No players match. Ownership must be loaded for this slate.</td></tr>'}
                 ${allRows.length > rows.length ? `<tr><td colspan="13"><button type="button" class="ghost" onclick="window.levRowCap=${rows.length+80};renderLeverage();">Show more (${rows.length} of ${allRows.length})</button></td></tr>` : ''}
                 </tbody>
             </table></div>
-            <p class="cs-note">Adj own = raw own × (3 / max slots) so RB is the baseline. QB 20% ≈ RB 60% chalk. Own-price uses that adjusted rate (RB 60% ≈ 35 FP). vs Own = Proj − own-price. Field budgets assume FLEX split ~RB 50% / WR 40% / TE 10%. Stacks live in Stacks Lab.</p>`;
+            <p class="cs-note">Own-need FP is what a player must score to justify their projected ownership inside their position (scaled by salary). vs Own-need = Proj − Own-need. vs Impl = Proj − salary-implied FP. This is no longer forced onto an RB-slot scale. Add those leverage stacks from Stacks Lab.</p>`;
             } catch (err) {
                 console.warn('Leverage render failed', err);
                 root.innerHTML = '<p class="cs-note">Ownership Leverage hit an error: ' + String(err && err.message || err) + '</p>';
@@ -12417,6 +12696,7 @@
             if (!menu || menu.hidden) return;
             if (e.target.closest('.cs-multitag')) return;
             menu.hidden = true;
+            menu.classList.remove('show');
         });
         window.addEventListener('load', () => { try { luRender(); if (luState.open) luOpen(true); } catch (e) {} });
 
@@ -12561,12 +12841,28 @@
         }
 
         function csSourcePool() {
-            const src = (filteredData && filteredData.length) ? filteredData
-                : ((allSlatePlayers && allSlatePlayers.length) ? allSlatePlayers : []);
-            return src.filter(p => p && (p.baseName || p['Player Name'] || p.displayName) && p.slotType !== 'Captain');
+            const isSd = (typeof isShowdownSlateName === 'function' && isShowdownSlateName(selectedSlate))
+                || (typeof selectedSlate === 'string' && selectedSlate.includes('Showdown'));
+            const src = (allSlatePlayers && allSlatePlayers.length) ? allSlatePlayers
+                : ((filteredData && filteredData.length) ? filteredData : []);
+            return src.filter(p => {
+                if (!p || !(p.baseName || p['Player Name'] || p.displayName)) return false;
+                if (isSd && p.slotType === 'Captain') return false;
+                return true;
+            });
         }
         function csFp(p) { return Number(p.projectedFP || p['Projected FP'] || 0) || 0; }
         function csSal(p) { return Number(p.salary || 0) || 0; }
+        function csCptSal(p) {
+            if (!p) return null;
+            const isSd = (typeof isShowdownSlateName === 'function' && isShowdownSlateName(selectedSlate))
+                || (typeof selectedSlate === 'string' && selectedSlate.includes('Showdown'));
+            if (!isSd) return null;
+            const twin = (allSlatePlayers || []).find(x => x && x.baseName === p.baseName && x.slotType === 'Captain');
+            if (twin && Number(twin.salary) > 0) return Number(twin.salary);
+            const s = csSal(p);
+            return s > 0 ? Math.round(s * 1.5) : null;
+        }
         function csPtsPerK(p) { const s = csSal(p); return s > 0 ? csFp(p) / (s / 1000) : 0; }
         function csName(p) { return String(p.displayName || p['Player Name'] || p.baseName || '').replace(/\s*\([^)]*\)\s*$/, ''); }
         function csOpp(p) { return p.Opponent || p.Opp || ''; }
@@ -12598,7 +12894,10 @@
         }
         function toggleCsTagMenu() {
             const menu = document.getElementById('csTagMenu');
-            if (menu && menu.classList.contains('cs-multitag-menu')) menu.hidden = !menu.hidden;
+            if (!menu) return;
+            const open = menu.hidden || !menu.classList.contains('show');
+            menu.hidden = !open;
+            menu.classList.toggle('show', open);
         }
         function clearCsTags() {
             document.querySelectorAll('#csTagMenu input[type="checkbox"]').forEach(el => { el.checked = false; });
@@ -12650,7 +12949,6 @@
             const tagWantList = csSelectedTags();
             const teamWant = document.getElementById('csTeam')?.value || '';
             const list = csSourcePool().filter(p => {
-                if (deselectedPlayers.has(p.displayName)) return false;
                 if (teamWant && String(p.Team || '') !== teamWant) return false;
                 if (tagWantList.length) {
                     const pack = cashTagPlayer(p);
@@ -12666,8 +12964,7 @@
                 if (fp < minFp && !isDst) return false;
                 if (csPtsPerK(p) < minVal) return false;
                 const ppos = csPos(p);
-                if (pos === 'WR' && !(ppos === 'WR' || ppos === 'TE')) return false;
-                else if (pos && pos !== 'WR' && ppos !== pos) return false;
+                if (pos && ppos !== pos) return false;
                 if (q) {
                     const blob = [csName(p), p.Team, csOpp(p), ppos].join(' ').toLowerCase();
                     if (!blob.includes(q)) return false;
@@ -12777,7 +13074,7 @@
             const games = csGameCount(csSourcePool());
             const want = ['QB','RB','WR','TE'];
             return `<details class="cs-best" id="csBestPlays"><summary>Best plays by position</summary><div class="cs-top-board">${want.map(pos => {
-                const list = rows.filter(p => pos === 'WR' ? (csPos(p)==='WR'||csPos(p)==='TE') : csPos(p)===pos)
+                const list = rows.filter(p => csPos(p)===pos)
                     .sort((a,b)=>csFp(b)-csFp(a)).slice(0,8);
                 const items = list.map((p,i) => `<button type="button" onclick="openCsDrawer('${csArg(csName(p))}')">
                     <span class="n">${i+1}</span><span class="nm">${csEsc(csName(p))}</span>
@@ -12790,7 +13087,7 @@
             const heatI = heatRange(rows, p => Number(p.impliedTotal));
             const heatV = heatRange(rows, p => csPtsPerK(p));
             const sortedAll = csSort(rows);
-            const cap = Number(window.csRowCap) > 0 ? Number(window.csRowCap) : 80;
+            const cap = Number(window.csRowCap) > 0 ? Number(window.csRowCap) : 200;
             const sorted = sortedAll.slice(0, cap);
             const th = (key, label, tip) => `<th style="cursor:pointer;" title="${String(tip||'').replace(/"/g,'&quot;')}" onclick="csSortKey='${key}';csSortDir=csSortKey==='${key}'&&csSortDir==='desc'?'asc':'desc';renderCheatSheet();">${label}</th>`;
             const body = sorted.map((p, i) => {
@@ -12826,7 +13123,7 @@
                     <td>${csEsc(csOpp(p))}</td>
                     <td>${heatPill(p.impliedTotal, heatI, impl)}</td>
                     <td>${dvpPill(dvp)}</td>
-                    <td class="num">$${csSal(p)}</td>
+                    <td class="num">$${csSal(p)}${csCptSal(p) ? `<div class="cs-sub">CPT $${csCptSal(p)}</div>` : ''}</td>
                     <td class="num">${csFp(p).toFixed(1)}</td>
                     <td class="num"><span class="${valClass(csPtsPerK(p))}">${csPtsPerK(p).toFixed(2)}</span></td>
                     <td class="num" title="${csEsc(pack.reason || line || '')}">${csEsc(line || '—')}</td>
@@ -12836,7 +13133,7 @@
             }).join('');
             const banner = csStackPick ? `<p class="cs-note">Stacking from <strong>${csEsc(csStackPick.qbDisplay)}</strong> — click Add on a teammate. <button type="button" class="ghost" onclick="csCancelStack()">Cancel</button></p>` : '';
             return banner + `<div class="cs-table-wrap"><table id="cheatSheetTable">
-                <thead><tr>${th('fp','#','Row number after current sort')}${th('name','Player','Name plus cash tag and exposure')}${th('pos','Pos','DraftKings position')}${th('team','Team','Player team')}${th('opp','Opp','Opponent on this slate')}${th('impl','Impl Tot','Implied team total with spread. Example 22.5 (-4)')}${th('dvp','DVP','Defense vs this position. 1 = easiest')}${th('sal','Salary','DraftKings salary')}${th('fp','Proj','Cheat Sheet projected fantasy points')}${th('val','Val','Proj divided by salary per 1000. 2.5x is the cash bar')}${th('line','Week line','Position-specific projection line from the Cheat Sheet')}${th('l3','L3','Average DraftKings FP over the last 3 logged games')}${th('own','Own','Projected ownership percent')}</tr></thead>
+                <thead><tr>${th('fp','#','Row number after current sort')}${th('name','Player','Name plus cash tag and exposure')}${th('pos','Pos','DraftKings position')}${th('team','Team','Player team')}${th('opp','Opp','Opponent on this slate')}${th('impl','Impl Tot','Implied team total with spread. Example 22.5 (-4)')}${th('dvp','DVP','Defense vs this position. 1 = easiest')}${th('sal','Salary','DraftKings salary for the slate selected in Builder. Showdown also lists CPT salary.')}${th('fp','Proj','Cheat Sheet projected fantasy points')}${th('val','Val','Proj divided by salary per 1000. 2.5x is the cash bar')}${th('line','Week line','Position-specific projection line from the Cheat Sheet')}${th('l3','L3','Average DraftKings FP over the last 3 logged games')}${th('own','Own','Projected ownership percent')}</tr></thead>
                 <tbody>${body || '<tr><td colspan="13">No players match filters.</td></tr>'}
                 ${sortedAll.length > sorted.length ? `<tr><td colspan="13"><button type="button" class="ghost" onclick="window.csRowCap=${sorted.length+80};renderCheatSheet();">Show more (${sorted.length} of ${sortedAll.length})</button></td></tr>` : ''}
                 </tbody>
@@ -12851,7 +13148,7 @@
             try { attachLogInsights(csSourcePool()); } catch (e) {}
             csSourcePool().forEach(hydrateCheatRow);
             const rows = cheatPool();
-            if (lab) lab.textContent = (selectedSlate || 'No slate') + ' · implied totals from team O/U and spread (TM/P).';
+            if (lab) lab.textContent = (selectedSlate || 'No slate') + ' · salaries from this slate' + ((typeof isShowdownSlateName === 'function' && isShowdownSlateName(selectedSlate)) ? ' (FLEX + CPT)' : '') + ' · implied totals from team O/U and spread (TM/P).';
             const teamSel = document.getElementById('csTeam');
             if (teamSel) {
                 const cur = teamSel.value;
