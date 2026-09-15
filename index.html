@@ -383,16 +383,37 @@
         .dropdown-menu input[type="checkbox"],
         .dropdown-menu input[type="radio"] { margin-right: 0.45rem; }
 
-        #player-search, #condition-player-search, #group-player-search {
+        #player-search, #condition-player-search, #group-player-search, #group-runback-search {
             width: 100%;
             padding: 0.45rem 0.6rem;
             margin-bottom: 0.45rem;
             font-size: 0.82rem;
-            background: var(--input-bg);
-            color: var(--text-color);
+            background: #ffffff;
+            color: #111111;
+            caret-color: #111111;
             border: 1px solid var(--border-color);
             border-radius: 6px;
             box-sizing: border-box;
+        }
+        #player-search::placeholder,
+        #condition-player-search::placeholder,
+        #group-player-search::placeholder,
+        #group-runback-search::placeholder {
+            color: #5c6578;
+            opacity: 1;
+        }
+        .dropdown-menu input[type="text"] {
+            background: #ffffff;
+            color: #111111;
+            caret-color: #111111;
+        }
+        .group-list-head {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--muted);
+            padding: 0.35rem 0.4rem 0.15rem;
         }
 
         /* Dual range */
@@ -733,6 +754,27 @@
             color: var(--muted);
             line-height: 1.3;
         }
+        #classicCorrRules .sd-rule-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-auto-rows: minmax(4.6rem, auto);
+            gap: 0.55rem;
+            align-items: stretch;
+        }
+        #classicCorrRules .sd-rule {
+            position: relative;
+            min-height: 0;
+            height: auto;
+            overflow: hidden;
+            box-sizing: border-box;
+            align-items: flex-start;
+        }
+        #classicCorrRules label.sd-rule.corr-recipe-on {
+            outline: none;
+        }
+        @media (max-width: 640px) {
+            #classicCorrRules .sd-rule-grid { grid-template-columns: 1fr; }
+        }
         .sd-exp-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -944,6 +986,70 @@
             font-size: 0.78rem;
             padding: 0.35rem 0.65rem;
         }
+
+        /* Generated lineups: keep salary / proj / own visible without horizontal hunting */
+        #lineupTableContainer .table-wrapper {
+            max-height: min(62vh, 720px);
+            overflow: auto;
+        }
+        #lineupTable {
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.75rem;
+        }
+        #lineupTable th, #lineupTable td {
+            white-space: nowrap;
+        }
+        #lineupTable td.lineup-player {
+            white-space: normal;
+            min-width: 92px;
+            max-width: 128px;
+            line-height: 1.25;
+            text-align: left;
+            font-size: 0.72rem;
+        }
+        #lineupTable .lu-metric {
+            font-variant-numeric: tabular-nums;
+            font-weight: 700;
+            background: var(--table-head-bg);
+        }
+        #lineupTable thead th.lu-sticky,
+        #lineupTable tbody td.lu-sticky {
+            position: sticky;
+            z-index: 4;
+            background: var(--card-bg);
+            box-shadow: 1px 0 0 var(--border-color);
+        }
+        #lineupTable thead th.lu-sticky { z-index: 6; top: 0; }
+        #lineupTable th.sortable,
+        #mcTable th.sortable,
+        #levLineupTable th.sortable {
+            cursor: pointer;
+            user-select: none;
+        }
+        #lineupTable th.sortable:hover,
+        #mcTable th.sortable:hover,
+        #levLineupTable th.sortable:hover {
+            color: #3ee0b4;
+        }
+        #lineupTable th.sortable .sort-ind,
+        #mcTable th.sortable .sort-ind,
+        #levLineupTable th.sortable .sort-ind {
+            font-size: 0.65em;
+            opacity: 0.4;
+            margin-left: 0.2rem;
+        }
+        #lineupTable th.sortable.is-sorted .sort-ind,
+        #mcTable th.sortable.is-sorted .sort-ind,
+        #levLineupTable th.sortable.is-sorted .sort-ind {
+            opacity: 1;
+            color: #3ee0b4;
+        }
+        #lineupTable th.lu-sticky:nth-child(1), #lineupTable td.lu-sticky:nth-child(1) { left: 0; min-width: 36px; }
+        #lineupTable th.lu-sticky:nth-child(2), #lineupTable td.lu-sticky:nth-child(2) { left: 36px; min-width: 36px; }
+        #lineupTable th.lu-sticky:nth-child(3), #lineupTable td.lu-sticky:nth-child(3) { left: 72px; min-width: 64px; }
+        #lineupTable th.lu-sticky:nth-child(4), #lineupTable td.lu-sticky:nth-child(4) { left: 136px; min-width: 62px; }
+        #lineupTable th.lu-sticky:nth-child(5), #lineupTable td.lu-sticky:nth-child(5) { left: 198px; min-width: 70px; box-shadow: 6px 0 10px rgba(0,0,0,0.12); }
 
         /* Tables */
         .table-wrapper {
@@ -1635,15 +1741,26 @@
             padding: 0.35rem 0.6rem;
             border-radius: 999px;
         }
-        .recipe-row button.active {
-            background: var(--accent);
-            color: #0b1020;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(62,224,180,0.35);
-            font-weight: 700;
-        }
-        body[data-theme="light"] .recipe-row button.active {
+        .recipe-row button:hover,
+        body[data-theme="dark"] .recipe-row button.ghost:hover {
+            background: #174D4D;
             color: #fff;
+            border-color: #47C6C8;
+        }
+        .recipe-row button.active,
+        .recipe-row button.recipe-selected,
+        .recipe-row button[aria-pressed="true"],
+        body[data-theme="dark"] .recipe-row button.active,
+        body[data-theme="dark"] .recipe-row button.recipe-selected,
+        body[data-theme="dark"] .recipe-row button.ghost.active,
+        body[data-theme="dark"] .recipe-row button.ghost.recipe-selected,
+        body[data-theme="light"] .recipe-row button.active,
+        body[data-theme="light"] .recipe-row button.recipe-selected {
+            background: #174D4D !important;
+            color: #ffffff !important;
+            border-color: #47C6C8 !important;
+            box-shadow: 0 0 0 2px rgba(71,198,200,0.35);
+            font-weight: 700;
         }
         .recipe-group-label {
             width: 100%;
@@ -2725,6 +2842,49 @@
             color: #0C2627;
         }
         .workspace-tab:active { transform: translateY(0); }
+
+        /* Recipe selected state — last in the stylesheet so it beats later .ghost rules */
+        .recipe-row button.ghost.recipe-selected,
+        .recipe-row button.ghost[aria-pressed="true"],
+        body[data-theme="dark"] .recipe-row button.ghost.recipe-selected,
+        body[data-theme="dark"] .recipe-row button.ghost[aria-pressed="true"],
+        body[data-theme="light"] .recipe-row button.ghost.recipe-selected {
+            background: #174D4D !important;
+            color: #ffffff !important;
+            border-color: #47C6C8 !important;
+            box-shadow: 0 0 0 2px rgba(71,198,200,0.45) !important;
+            font-weight: 700 !important;
+        }
+        label.sd-rule.corr-recipe-on {
+            border-color: #47C6C8;
+            background: rgba(62, 224, 180, 0.08);
+            box-shadow: inset 3px 0 0 #3ee0b4;
+            z-index: 0;
+        }
+        body[data-theme="light"] label.sd-rule.corr-recipe-on {
+            background: #e7f7f4;
+            border-color: #237374;
+            box-shadow: inset 3px 0 0 #237374;
+        }
+        .howto-videos { margin: 0.35rem 0 0.85rem; padding-left: 1.15rem; }
+        .howto-videos a { color: #3ee0b4; text-decoration: none; font-weight: 600; }
+        .howto-videos a:hover { text-decoration: underline; }
+        body[data-theme="light"] .howto-videos a { color: #237374; }
+        .recipe-corr-status {
+            margin: 0.45rem 0 0.15rem;
+            padding: 0.4rem 0.6rem;
+            border-radius: 8px;
+            border: 1px solid #2a5c5c;
+            background: #12322f;
+            color: #d7fff6;
+            font-size: 0.76rem;
+            line-height: 1.35;
+        }
+        body[data-theme="light"] .recipe-corr-status {
+            background: #e7f7f4;
+            border-color: #9ad4d0;
+            color: #0C2627;
+        }
     </style>
 </head>
 <body data-theme="dark">
@@ -2773,6 +2933,13 @@
             </div>
             <div class="card-body howto-card">
                 <p style="margin-top:0;color:var(--muted);">Data loads on open and refreshes quietly in the background — your filters, tiers, and locks are kept. Work also auto-saves in this browser.</p>
+
+                <h3>Video breakdowns</h3>
+                <ul class="howto-videos">
+                    <li><a href="https://youtu.be/BiNvwwIrk_U" target="_blank" rel="noopener">How to use this tool</a> — full walkthrough of the builder.</li>
+                    <li><a href="https://youtu.be/kVhN3OfbEBs" target="_blank" rel="noopener">CPT slates: how to make profitable lineups</a> — Showdown / Captain Mode.</li>
+                    <li><a href="https://youtu.be/zQu7ablUMEk" target="_blank" rel="noopener">GPP main slate: how to win</a> — classic large-field approach.</li>
+                </ul>
 
                 <h3>Interactive walkthrough</h3>
                 <p style="font-size:0.88rem;margin:0.35rem 0;">No separate video file needed — use these in-app tours. They highlight each control and explain simple vs advanced workflows.</p>
@@ -2929,20 +3096,56 @@
                 <summary class="settings-section-title">One-click recipes</summary>
                 <div class="settings-section-body">
                 <div class="recipe-row">
-                    <span class="recipe-group-label">Cash (50/50 · Double-Up · H2H)</span>
-                    <button type="button" class="ghost" data-tip="Classic Cash ownership band. Next: Core/High tier your locks only." onclick="applyRecipe('classic_cash_simple')">Classic Cash starter</button>
-                    <button type="button" class="ghost" data-tip="One lineup · highest floor · leftover ≤$500 · stacks off · eat chalk. Fire into 30 H2Hs." onclick="applyRecipe('cash_floor_lock')">Cash floor lock</button>
-                    <button type="button" class="ghost" data-tip="Cash + FLEX = RB. Use when 3 live RBs have 15+ opportunities." onclick="applyRecipe('cash_3rb_floor')">Cash 3RB floor</button>
-                    <button type="button" class="ghost" data-tip="Cash + raise min% on the chalkiest skill players. Do not fade a lock because he is chalk." onclick="applyRecipe('cash_eat_chalk')">Eat the chalk</button>
-                    <button type="button" class="ghost" data-tip="Cash-style: force 1 same-team PC, no bring-back, keep opp-DST fade." onclick="applyRecipe('classic_cash_stack')">Classic cash stack</button>
-                    <span class="recipe-group-label">GPP (Milly · large field)</span>
-                    <button type="button" class="ghost" data-tip="Classic GPP style + max exp ~40%. Next: tag 6–12 players with High/Mid tiers." onclick="applyRecipe('classic_gpp_simple')">Classic GPP starter</button>
-                    <button type="button" class="ghost" data-tip="150-max Milly shape: unique 5, QB+2 PCs, opposing RB bring-back, fade both game DSTs." onclick="applyRecipe('gpp_milly_winner')">Milly winner shape</button>
-                    <button type="button" class="ghost" data-tip="GPP + QB + 2 PCs + opposing RB bring-back. Default 2025 game-stack winner." onclick="applyRecipe('gpp_qb2_bb_rb')">QB+2 + RB bring-back</button>
-                    <button type="button" class="ghost" data-tip="GPP + QB + 1 PC only (mini-stack). More room for 4 uniques." onclick="applyRecipe('gpp_mini_stack')">GPP mini-stack</button>
-                    <button type="button" class="ghost" data-tip="Cap chalk ~40% and boost &lt;10% owned names so the pool can produce 4+ uniques." onclick="applyRecipe('gpp_four_uniques')">Four uniques mix</button>
-                    <button type="button" class="ghost" data-tip="Classic GPP + QB must have WR+TE. Next: suggest stacks or pick QBs." onclick="applyRecipe('classic_3man')">Classic QB+WR+TE</button>
-                    <button type="button" class="ghost" data-tip="Classic GPP + 2 pass catchers + opponent bring-back + fade both game DSTs." onclick="applyRecipe('classic_game_stack')">Classic game stack</button>
+                    <span class="recipe-group-label">Cash (50/50 · Double-Up · H2H) <span class="sd-guide">
+                        <button type="button" class="sd-guide-btn" aria-label="Which cash recipe to pick">?</button>
+                        <div class="sd-guide-pop">
+                            <strong>What you are entering</strong>
+                            Use Cash recipes for 50/50s, Double-Ups, H2H, and single-entry cash.
+                            <strong>Classic Cash starter</strong>
+                            Default cash band. Core/High only true locks, then Run 20.
+                            <strong>Cash floor lock</strong>
+                            One lineup everywhere. Highest floor, leftover ≤$500, stacks off.
+                            <strong>Cash 3RB floor</strong>
+                            Same as cash + FLEX locked to RB. Use when 3 live backs have jobs.
+                            <strong>Eat the chalk</strong>
+                            Cash knobs + min% on the highest-owned skill players. Do not fade a lock because he is popular.
+                            <strong>Classic cash stack</strong>
+                            Every lineup has QB + 1 same-team WR/TE. No bring-back. Safer cash correlation.
+                        </div>
+                    </span></span>
+                    <button type="button" class="ghost" data-tip="Classic Cash ownership band. Next: Core/High tier your locks only." onclick="applyRecipe('classic_cash_simple', this)" data-recipe="classic_cash_simple">Classic Cash starter</button>
+                    <button type="button" class="ghost" data-tip="One lineup · highest floor · leftover ≤$500 · stacks off · eat chalk. Fire into 30 H2Hs." onclick="applyRecipe('cash_floor_lock', this)" data-recipe="cash_floor_lock">Cash floor lock</button>
+                    <button type="button" class="ghost" data-tip="Cash + FLEX = RB. Use when 3 live RBs have 15+ opportunities." onclick="applyRecipe('cash_3rb_floor', this)" data-recipe="cash_3rb_floor">Cash 3RB floor</button>
+                    <button type="button" class="ghost" data-tip="Cash + raise min% on the chalkiest skill players. Do not fade a lock because he is chalk." onclick="applyRecipe('cash_eat_chalk', this)" data-recipe="cash_eat_chalk">Eat the chalk</button>
+                    <button type="button" class="ghost" data-tip="Cash-style: force 1 same-team PC, no bring-back, keep opp-DST fade." onclick="applyRecipe('classic_cash_stack', this)" data-recipe="classic_cash_stack">Classic cash stack</button>
+                    <span class="recipe-group-label">GPP (Milly · large field) <span class="sd-guide">
+                        <button type="button" class="sd-guide-btn" aria-label="Which GPP recipe to pick">?</button>
+                        <div class="sd-guide-pop">
+                            <strong>What you are entering</strong>
+                            Use GPP recipes for Milly Maker, large-field tournaments, and 20-max / 150-max contests.
+                            <strong>Classic GPP starter</strong>
+                            Balanced GPP knobs. Tag 6–12 players, optional game stack, then Run.
+                            <strong>Milly winner shape</strong>
+                            150-max default. Unique 5, QB+2 PCs, opp RB bring-back, fade both game DSTs.
+                            <strong>QB+2 + RB bring-back</strong>
+                            Same correlation as Milly without forcing the 150-max contest size.
+                            <strong>GPP mini-stack</strong>
+                            QB + 1 pass catcher only. More room for 4 uniques.
+                            <strong>Four uniques mix</strong>
+                            Cap chalk ~40% and boost sub-10% owned names.
+                            <strong>Classic QB+WR+TE</strong>
+                            If a QB is used, require his WR and TE.
+                            <strong>Classic game stack</strong>
+                            QB + 2 PCs + opponent bring-back + fade both DSTs. Pick the game in Stacks Lab.
+                        </div>
+                    </span></span>
+                    <button type="button" class="ghost" data-tip="Classic GPP style + max exp ~40%. Next: tag 6–12 players with High/Mid tiers." onclick="applyRecipe('classic_gpp_simple', this)" data-recipe="classic_gpp_simple">Classic GPP starter</button>
+                    <button type="button" class="ghost" data-tip="150-max Milly shape: unique 5, QB+2 PCs, opposing RB bring-back, fade both game DSTs." onclick="applyRecipe('gpp_milly_winner', this)" data-recipe="gpp_milly_winner">Milly winner shape</button>
+                    <button type="button" class="ghost" data-tip="GPP + QB + 2 PCs + opposing RB bring-back. Default 2025 game-stack winner." onclick="applyRecipe('gpp_qb2_bb_rb', this)" data-recipe="gpp_qb2_bb_rb">QB+2 + RB bring-back</button>
+                    <button type="button" class="ghost" data-tip="GPP + QB + 1 PC only (mini-stack). More room for 4 uniques." onclick="applyRecipe('gpp_mini_stack', this)" data-recipe="gpp_mini_stack">GPP mini-stack</button>
+                    <button type="button" class="ghost" data-tip="Cap chalk ~40% and boost &lt;10% owned names so the pool can produce 4+ uniques." onclick="applyRecipe('gpp_four_uniques', this)" data-recipe="gpp_four_uniques">Four uniques mix</button>
+                    <button type="button" class="ghost" data-tip="Classic GPP + QB must have WR+TE. Next: suggest stacks or pick QBs." onclick="applyRecipe('classic_3man', this)" data-recipe="classic_3man">Classic QB+WR+TE</button>
+                    <button type="button" class="ghost" data-tip="Classic GPP + 2 pass catchers + opponent bring-back + fade both game DSTs." onclick="applyRecipe('classic_game_stack', this)" data-recipe="classic_game_stack">Classic game stack</button>
                     <span class="recipe-group-label">Showdown <span class="sd-guide">
                         <button type="button" class="sd-guide-btn" aria-label="Best Showdown option by contest">?</button>
                         <div class="sd-guide-pop">
@@ -2960,13 +3163,14 @@
                             <b>Preseason K/DST</b>. Regular season: keep K/DST eligible, max 2 combined — do not force 3.
                         </div>
                     </span></span>
-                    <button type="button" class="ghost" data-tip="Best cash recipe. 3–3, leftover ≤$800, floor CPT, no RB-DST force." onclick="applyRecipe('sd_cash_simple')">Cash 3–3</button>
-                    <button type="button" class="ghost" data-tip="Best 20-max GPP recipe. 4–2, $1k–$2.5k leftover, WR/QB stacks + one bring-back." onclick="applyRecipe('sd_gpp_simple')">GPP 4–2</button>
-                    <button type="button" class="ghost" data-tip="One-ticket GPP. CPT WR/RB in the 8–18% band, 3–3 or 4–2, no CPT TE/K." onclick="applyRecipe('sd_single')">Single-entry GPP</button>
-                    <button type="button" class="ghost" data-tip="O/U 49+: WR CPT + his QB, cap extra same-team WRs, optional both QBs." onclick="applyRecipe('sd_shootout')">Shootout</button>
-                    <button type="button" class="ghost" data-tip="O/U ≤42 or spread 7+: RB CPT lean, same-team DST, 4–2 or 5–1." onclick="applyRecipe('sd_grind')">Grind / favorite</button>
-                    <button type="button" class="ghost" data-tip="Preseason only. Force exactly 2 K+DST. Skip on regular slates." onclick="applyRecipe('sd_kdst2')">Preseason K/DST</button>
+                    <button type="button" class="ghost" data-tip="Best cash recipe. 3–3, leftover ≤$800, floor CPT, no RB-DST force." onclick="applyRecipe('sd_cash_simple', this)" data-recipe="sd_cash_simple">Cash 3–3</button>
+                    <button type="button" class="ghost" data-tip="Best 20-max GPP recipe. 4–2, $1k–$2.5k leftover, WR/QB stacks + one bring-back." onclick="applyRecipe('sd_gpp_simple', this)" data-recipe="sd_gpp_simple">GPP 4–2</button>
+                    <button type="button" class="ghost" data-tip="One-ticket GPP. CPT WR/RB in the 8–18% band, 3–3 or 4–2, no CPT TE/K." onclick="applyRecipe('sd_single', this)" data-recipe="sd_single">Single-entry GPP</button>
+                    <button type="button" class="ghost" data-tip="O/U 49+: WR CPT + his QB, cap extra same-team WRs, optional both QBs." onclick="applyRecipe('sd_shootout', this)" data-recipe="sd_shootout">Shootout</button>
+                    <button type="button" class="ghost" data-tip="O/U ≤42 or spread 7+: RB CPT lean, same-team DST, 4–2 or 5–1." onclick="applyRecipe('sd_grind', this)" data-recipe="sd_grind">Grind / favorite</button>
+                    <button type="button" class="ghost" data-tip="Preseason only. Force exactly 2 K+DST. Skip on regular slates." onclick="applyRecipe('sd_kdst2', this)" data-recipe="sd_kdst2">Preseason K/DST</button>
                 </div>
+                <div id="recipeCorrStatus" class="recipe-corr-status" hidden></div>
                 </div>
                 </details>
 
@@ -3047,7 +3251,7 @@
                 </div>
                 </details>
 
-                <details class="settings-section">
+                <details class="settings-section" id="gameStacksSection">
                 <summary class="settings-section-title">Game Stacks &amp; Correlations</summary>
                 <div class="settings-section-body">
                 <div class="filter-grid">
@@ -3086,8 +3290,7 @@
                         <button class="ghost" style="margin-left:0.4rem;" data-tip="Open the Stacks Lab tab — ranked pairs, 3-mans, games, and RB bring-backs from this slate." onclick="switchWorkspace('stacks')">🔗 Stacks Lab</button>
                     </div>
                 </div>
-                <!-- Classic correlation rules (mirrors Showdown CPT rules) -->
-                <div id="classicCorrRules" class="sd-panel" style="margin-top:0.75rem;display:none;">
+                <div id="classicCorrRules" class="sd-panel" style="margin-top:0.75rem;">
                     <div class="sd-panel-title">Classic correlation rules</div>
                     <p class="sd-panel-hint">Optional hard rules for Main / Classic slates. Similar spirit to Showdown CPT rules. Turn off anything that fights your stacks or ownership band.</p>
                     <div class="sd-rule-grid">
@@ -3099,38 +3302,38 @@
                             </span>
                         </label>
                         <label class="sd-rule">
-                            <input type="checkbox" id="classicForcePassStack" >
+                            <input type="checkbox" id="classicFadeGameDst">
+                            <span class="sd-rule-text">
+                                <strong>QB → fade both game DSTs</strong>
+                                <small>Exclude his DST and the opponent DST</small>
+                            </span>
+                        </label>
+                        <label class="sd-rule">
+                            <input type="checkbox" id="classicForcePassStack">
                             <span class="sd-rule-text">
                                 <strong>QB → ≥1 same-team WR/TE</strong>
-                                <small>Same as the Force QB + Pass Catcher checkbox (kept in sync)</small>
-                            </span>
-                        </label>
-                        <label class="sd-rule">
-                            <input type="checkbox" id="classicRbDstStack" >
-                            <span class="sd-rule-text">
-                                <strong>Prefer RB + same-team DST</strong>
-                                <small>Soft boost when both appear (positive script lean)</small>
-                            </span>
-                        </label>
-                        <label class="sd-rule">
-                            <input type="checkbox" id="classicQbWrTe">
-                            <span class="sd-rule-text">
-                                <strong>QB → WR + TE</strong>
-                                <small>If a QB is used, require ≥1 same-team WR and ≥1 same-team TE</small>
+                                <small>Same as Force QB + Pass Catcher</small>
                             </span>
                         </label>
                         <label class="sd-rule">
                             <input type="checkbox" id="classicQbTwoPc">
                             <span class="sd-rule-text">
                                 <strong>QB → 2 pass catchers</strong>
-                                <small>If a QB is used, require ≥2 same-team WR/TE</small>
+                                <small>Require ≥2 same-team WR/TE</small>
                             </span>
                         </label>
                         <label class="sd-rule">
-                            <input type="checkbox" id="classicFadeGameDst">
+                            <input type="checkbox" id="classicQbWrTe">
                             <span class="sd-rule-text">
-                                <strong>QB → fade both game DSTs</strong>
-                                <small>If a QB is used, exclude his DST and the opponent DST (shootout fade)</small>
+                                <strong>QB → WR + TE</strong>
+                                <small>Require ≥1 same-team WR and ≥1 same-team TE</small>
+                            </span>
+                        </label>
+                        <label class="sd-rule">
+                            <input type="checkbox" id="classicRbDstStack">
+                            <span class="sd-rule-text">
+                                <strong>Prefer RB + same-team DST</strong>
+                                <small>Soft boost when both appear</small>
                             </span>
                         </label>
                     </div>
@@ -3368,6 +3571,13 @@
                     <div class="pool-search-wrap">
                         <input type="search" id="poolSearchInput" placeholder="Search player…" autocomplete="off"
                                oninput="onPoolSearchInput(this.value)" data-tip="Filter the table by player name">
+                        <label style="display:flex;align-items:center;gap:0.35rem;font-size:0.75rem;white-space:nowrap;margin:0;">
+                            Min FP
+                            <input type="number" id="poolMinFpInput" min="0" max="40" step="0.5" value="0"
+                                   style="width:70px;padding:0.4rem 0.45rem;"
+                                   onchange="setPoolMinProjectedFP(this.value)"
+                                   data-tip="Hide players below this projected FP from the pool and optimizer. 0 keeps everyone.">
+                        </label>
                         <button type="button" class="ghost pool-clear-btn" onclick="clearPoolFilters()" title="Clear search, positions, and teams">Clear</button>
                     </div>
                     <div class="pool-chip-row" id="poolPosChips" aria-label="Positions"></div>
@@ -3383,7 +3593,7 @@
                     <button class="ghost" data-tip="Set max exposure to 60% for all visible players. Balanced multi-entry setting." onclick="bulkSetExposure('max', 60)">Max Exp 60%</button>
                     <button class="ghost" data-tip="Allow any player up to 100% exposure (no per-player cap beyond global max)." onclick="bulkSetExposure('max', 100)">Max Exp 100%</button>
                     <button class="ghost" data-tip="Exclude all players with projected FP under 8 from the pool." onclick="bulkZeroLowProj()">Zero &lt; 8 FP</button>
-                    <button class="ghost" data-tip="Exclude every player currently showing 0 projected fantasy points from the pool." onclick="bulkExcludeZeroProj()">Exclude 0 FP</button>
+                    <button class="ghost" data-tip="Exclude players at or below the Min FP box (pool filter bar). Set Min FP first, then click." onclick="bulkExcludeBelowMinFp()">Exclude below Min FP</button>
                     <button class="ghost" data-tip="Reset every player's min exposure to 0% and max to 100%." onclick="bulkResetExposures()">Reset Exposures</button>
                     <button class="ghost" data-tip="Clear all Force and Core Lock flags from the player pool." onclick="clearAllForces()">Clear Forces</button>
                     <button class="ghost" data-tip="Clear all Priority boosts (projection multipliers + auto min exposure)." onclick="clearAllPriorities()">Clear Priorities</button>
@@ -3609,9 +3819,11 @@
                                 <option value="">All teams</option>
                             </select>
                         </div>
-                        <div class="cs-tag-filters">
-                            <span class="cs-tag-filters-label">Tags</span>
-                            <div class="cs-tag-chips" id="csTagMenu">
+                        <div class="cs-multitag dropdown-container">
+                            <label>Tags</label>
+                            <button type="button" class="dropdown-button" id="csTagBtn" onclick="toggleCsTagMenu()">All tags</button>
+                            <div class="dropdown-menu cs-multitag-menu" id="csTagMenu" hidden>
+                                <div class="cs-tag-menu-title">Select one or more tags</div>
                                 <label><input type="checkbox" value="coreish" onchange="onCsTagChange()"> Extreme / Core</label>
                                 <label><input type="checkbox" value="Extreme Core" onchange="onCsTagChange()"> Extreme Core</label>
                                 <label><input type="checkbox" value="Core Play" onchange="onCsTagChange()"> Core Play</label>
@@ -3619,19 +3831,19 @@
                                 <label><input type="checkbox" value="Core Value" onchange="onCsTagChange()"> Core Value</label>
                                 <label><input type="checkbox" value="Playable" onchange="onCsTagChange()"> Playable</label>
                                 <label><input type="checkbox" value="Fade" onchange="onCsTagChange()"> Fade</label>
-                                <button type="button" class="ghost pool-clear-btn" onclick="clearCsTags()">Clear</button>
+                                <button type="button" class="ghost pool-clear-btn" onclick="clearCsTags()">Clear tags</button>
                             </div>
                         </div>
                         <div>
                             <label>Min Proj</label>
-                            <input type="number" id="csMinFp" value="5" min="0" step="0.5" onchange="renderCheatSheet()">
+                            <input type="number" id="csMinFp" value="0" min="0" step="0.5" onchange="renderCheatSheet()">
                         </div>
                         <div>
                             <label>Min value</label>
                             <input type="number" id="csMinVal" value="0" min="0" step="0.1" onchange="renderCheatSheet()">
                         </div>
                         <label style="display:flex;align-items:center;gap:0.35rem;font-weight:600;">
-                            <input type="checkbox" id="csHideZero" checked onchange="renderCheatSheet()"> Hide 0-proj
+                            <input type="checkbox" id="csHideZero" onchange="renderCheatSheet()"> Hide 0-proj
                         </label>
                         <button type="button" class="ghost" onclick="csExportCsv()">Export CSV</button>
                     </div>
@@ -3685,7 +3897,7 @@
                     <div class="cs-hero">
                         <div>
                             <h2>Ownership Leverage</h2>
-                            <p class="cs-note" style="margin:0;">DK slots: QB 1 · RB 2–3 (FLEX) · WR 3–4 (FLEX) · TE 1–2 (FLEX). Ownership is scaled to an RB-equivalent chalk rate, then priced into FP. 60% RB ≈ 35 own-price. Same raw own% is more expensive at QB than at WR.</p>
+                            <p class="cs-note" style="margin:0;">Own-need FP is the production a player must deliver to justify their projected ownership, given position norms and salary. Compare that to salary-implied FP and Cheat Sheet projected FP. Positive vs Own-need = under-owned leverage. Negative = over-owned relative to projection.</p>
                         </div>
                     </div>
                     <div class="cs-kpis" id="levKpis"></div>
@@ -3802,9 +4014,9 @@
                     </div>
                     <div class="sl-actions">
                         <button type="button" class="primary" onclick="refreshStacksLab()">↻ Recalculate</button>
-                        <button type="button" class="ghost" onclick="applyRecipe('gpp_milly_winner')">Apply Milly recipe</button>
-                        <button type="button" class="ghost" onclick="applyRecipe('gpp_qb2_bb_rb')">Apply QB+2 + RB BB</button>
-                        <button type="button" class="ghost" onclick="applyRecipe('classic_cash_stack')">Apply cash mini-stack</button>
+                        <button type="button" class="ghost" onclick="applyRecipe('gpp_milly_winner', this)" data-recipe="gpp_milly_winner">Apply Milly recipe</button>
+                        <button type="button" class="ghost" onclick="applyRecipe('gpp_qb2_bb_rb', this)" data-recipe="gpp_qb2_bb_rb">Apply QB+2 + RB BB</button>
+                        <button type="button" class="ghost" onclick="applyRecipe('classic_cash_stack', this)" data-recipe="classic_cash_stack">Apply cash mini-stack</button>
                         <button type="button" class="ghost" onclick="slAddCheckedStacks()">＋ Add checked rows as stacks</button>
                         <button type="button" class="ghost" onclick="openStackModal()">Open stack config</button>
                     </div>
@@ -3823,6 +4035,18 @@
                         </table>
                     </div>
                     <div id="slLevBoards"></div>
+                    <h3 style="font-size:0.95rem;margin:1.25rem 0 0.35rem;">Ownership leverage stacks</h3>
+                    <p class="sl-note">QB + pass catcher ranked by combined vs-own-need leverage (projection minus the FP their ownership is asking for). Use these when you want under-owned production stacks, not just raw combo FP.</p>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th><th>QB</th><th>Pass catcher</th><th>Team</th><th>Combo FP</th><th>Own</th><th>Lev</th><th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="slLevStackBody"></tbody>
+                        </table>
+                    </div>
 
                     <h3 style="font-size:0.95rem;margin:1.25rem 0 0.35rem;">Best QB + pass-catcher pairs</h3>
                     <p class="sl-note">Primary stack. GPP score = projection + value + leverage (lower own helps). Cash score = projection + value + chalk (higher own helps).</p>
@@ -3898,6 +4122,14 @@
                     <li><strong>Export</strong> — DK CSV upload or Copy as Text for Discord.</li>
                 </ol>
                 <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0;">Cash → high floor. GPP → lower exposure + leverage + stacks + strong sim Top %.</p>
+                <p style="font-size:0.85rem;margin:0.65rem 0 0;">
+                    Videos:
+                    <a href="https://youtu.be/BiNvwwIrk_U" target="_blank" rel="noopener">How to use the tool</a>
+                    ·
+                    <a href="https://youtu.be/kVhN3OfbEBs" target="_blank" rel="noopener">CPT slates</a>
+                    ·
+                    <a href="https://youtu.be/zQu7ablUMEk" target="_blank" rel="noopener">GPP main slate</a>
+                </p>
             </div>
         </div>
     </div>
@@ -3927,9 +4159,9 @@
                         <div>
                             <label>Type</label>
                             <select id="groupTypeSelect">
-                                <option value="min">At Least</option>
+                                <option value="min" selected>At Least</option>
                                 <option value="exact">Exactly</option>
-                                <option value="max" selected>At Most</option>
+                                <option value="max">At Most</option>
                             </select>
                         </div>
                         <div>
@@ -3948,6 +4180,44 @@
                             <div id="groupPlayersMenu" class="dropdown-menu">
                                 <input type="text" id="group-player-search" placeholder="Search…" oninput="filterGroupPlayersSearch()">
                                 <div id="groupPlayerList"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="border:1px dashed var(--border-color);border-radius:10px;padding:0.65rem 0.7rem;">
+                        <div class="sd-panel-title" style="margin-bottom:0.35rem;">Run-back (optional)</div>
+                        <p class="sd-field-hint" style="margin:0 0 0.55rem;">When the player above is in a lineup, also require a run-back from this set. Example: Geno at 5–7% exposure, at least 2 Jets pass catchers, and at least 1 of Spears or Pollard.</p>
+                        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+                            <div>
+                                <label>Run-back type</label>
+                                <select id="groupRunbackTypeSelect">
+                                    <option value="min" selected>At Least</option>
+                                    <option value="exact">Exactly</option>
+                                    <option value="max">At Most</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Number</label>
+                                <input type="number" id="groupRunbackNum" min="0" max="9" value="1" style="width:70px;">
+                            </div>
+                        </div>
+                        <div style="margin-top:0.5rem;">
+                            <label>Run-back players</label>
+                            <div class="dropdown-container">
+                                <button class="dropdown-button" id="groupRunbackDropdown" onclick="toggleDropdown('groupRunbackMenu')">None (optional)</button>
+                                <div id="groupRunbackMenu" class="dropdown-menu">
+                                    <input type="text" id="group-runback-search" placeholder="Search…" oninput="filterRunbackPlayersSearch()">
+                                    <div id="groupRunbackList"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:0.55rem;">
+                            <div>
+                                <label>Anchor min %</label>
+                                <input type="number" id="groupConditionMinExp" min="0" max="100" value="" placeholder="e.g. 5" style="width:80px;" title="Optional min exposure for the When-include player">
+                            </div>
+                            <div>
+                                <label>Anchor max %</label>
+                                <input type="number" id="groupConditionMaxExp" min="0" max="100" value="" placeholder="e.g. 7" style="width:80px;" title="Optional max exposure for the When-include player">
                             </div>
                         </div>
                     </div>
@@ -4164,6 +4434,69 @@
             espnScoreboardProxy: 'https://corsproxy.io/?https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'
         };
 
+        window.RECIPE_CORR = {
+            classic_cash_simple: { forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true },
+            cash_floor_lock:     { forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true },
+            cash_3rb_floor:      { forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true },
+            cash_eat_chalk:      { forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true },
+            classic_cash_stack:  { forcePc: true,  twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true },
+            classic_gpp_simple:  { forcePc: true,  twoPc: false, wrte: false, fadeDst: true,  bring: 'none', noOppDst: true },
+            gpp_milly_winner:    { forcePc: true,  twoPc: true,  wrte: false, fadeDst: true,  bring: 'rb',   noOppDst: true },
+            gpp_qb2_bb_rb:       { forcePc: true,  twoPc: true,  wrte: false, fadeDst: true,  bring: 'rb',   noOppDst: true },
+            gpp_mini_stack:      { forcePc: true,  twoPc: false, wrte: false, fadeDst: true,  bring: 'none', noOppDst: true },
+            gpp_four_uniques:    { forcePc: true,  twoPc: false, wrte: false, fadeDst: true,  bring: 'rb',   noOppDst: true },
+            classic_3man:        { forcePc: true,  twoPc: false, wrte: true,  fadeDst: true,  bring: 'none', noOppDst: true },
+            classic_game_stack:  { forcePc: true,  twoPc: true,  wrte: false, fadeDst: true,  bring: 'either', noOppDst: true }
+        };
+        function applyCorrProfile(opts) {
+            if (!opts) return;
+            const setBox = (id, on) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.checked = !!on;
+                const lab = el.closest('label');
+                if (lab) lab.classList.toggle('corr-recipe-on', !!on);
+            };
+            setBox('classicNoOppDstWithQb', opts.noOppDst !== false);
+            setBox('classicForcePassStack', !!opts.forcePc);
+            setBox('classicRbDstStack', !!opts.rbDst);
+            setBox('classicQbWrTe', !!opts.wrte);
+            setBox('classicQbTwoPc', !!opts.twoPc);
+            setBox('classicFadeGameDst', !!opts.fadeDst);
+            const bb = document.getElementById('classicBringBack');
+            if (bb) bb.value = opts.bring || 'none';
+            const bmin = document.getElementById('classicBringBackMin');
+            if (bmin) bmin.value = opts.bringMin != null ? opts.bringMin : 1;
+            const auto = document.getElementById('autoStack');
+            if (auto) auto.checked = !!opts.forcePc;
+            const stacksSec = document.getElementById('gameStacksSection');
+            if (stacksSec) stacksSec.open = true;
+            const box = document.getElementById('classicCorrRules');
+            if (box) box.style.display = 'block';
+            const status = document.getElementById('recipeCorrStatus');
+            if (status) {
+                const bits = [];
+                if (opts.noOppDst !== false) bits.push('QB fades opp DST');
+                if (opts.forcePc) bits.push('QB + ≥1 WR/TE');
+                if (opts.twoPc) bits.push('QB + 2 pass catchers');
+                if (opts.wrte) bits.push('QB + WR + TE');
+                if (opts.fadeDst) bits.push('fade both game DSTs');
+                if (opts.bring === 'rb') bits.push('opp RB bring-back');
+                if (opts.bring === 'pc') bits.push('opp PC bring-back');
+                if (opts.bring === 'either') bits.push('opp RB or WR/TE bring-back');
+                status.hidden = false;
+                status.style.display = 'block';
+                status.textContent = 'Classic correlation: ' + (bits.join(' · ') || 'cleared');
+            }
+        }
+        document.addEventListener('click', function (e) {
+            const b = e.target && e.target.closest && e.target.closest('[data-recipe]');
+            if (!b) return;
+            const key = b.getAttribute('data-recipe');
+            const corr = window.RECIPE_CORR && window.RECIPE_CORR[key];
+            if (corr) applyCorrProfile(corr);
+        }, true);
+
         // Normalize every team to a single nickname so chips/filters never show both "GB" and "Packers"
         const TEAM_NICKNAMES = {
             ARI: 'Cardinals', Arizona: 'Cardinals', Cardinals: 'Cardinals',
@@ -4350,7 +4683,9 @@
         let sortColumn = 'Projected FP';
         let sortDirection = 'desc';
         let lineupSortColumn = null;
-        let lineupSortDirection = 'asc';
+        let lineupSortDirection = 'desc';
+        let mcSortColumn = null;
+        let mcSortDirection = 'desc';
         let replacementLineupIndex = null;
         let replacementSlot = null;
         let deselectedPlayers = new Set();
@@ -4591,12 +4926,15 @@
             }
         }
 
-        function applyRecipe(key) {
+        function applyRecipe(key, btn) {
+            try {
             if (key === 'classic_gpp_simple') {
                 applyPreset('classic_gpp');
+                resetClassicCorr({ forcePc: true, twoPc: false, wrte: false, fadeDst: true, bring: 'none', noOppDst: true });
                 setNextStep('Classic GPP applied. Tag 6–12 players with High/Mid tiers, optional game stack (Advanced), then Run.');
             } else if (key === 'classic_cash_simple') {
                 applyPreset('classic_cash');
+                resetClassicCorr({ forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true });
                 setNextStep('Classic Cash applied. Core/High tier your locks (safer chalk), then Run 20 lineups.');
             } else if (key === 'sd_kdst2') {
                 applyPreset('sd_kdst');
@@ -4618,46 +4956,17 @@
                 setNextStep('Grind / favorite: lean RB CPT + same-team DST. Use Favorite smash (5–1) only if the spread is 7+. Tier the lead back, then Run.');
             } else if (key === 'classic_3man') {
                 applyPreset('classic_gpp');
-                const wrte = document.getElementById('classicQbWrTe');
-                if (wrte) wrte.checked = true;
-                const two = document.getElementById('classicQbTwoPc');
-                if (two) two.checked = false;
-                const fade = document.getElementById('classicFadeGameDst');
-                if (fade) fade.checked = true;
-                const bb = document.getElementById('classicBringBack');
-                if (bb) bb.value = 'none';
-                const noOpp = document.getElementById('classicNoOppDstWithQb');
-                if (noOpp) noOpp.checked = true;
+                resetClassicCorr({ forcePc: true, twoPc: false, wrte: true, fadeDst: true, bring: 'none', noOppDst: true });
                 setNextStep('Classic 3-man recipe on: QB requires WR+TE, fade both game DSTs. Suggest or add named stacks, then Run.');
             } else if (key === 'classic_game_stack') {
                 applyPreset('classic_gpp');
-                const wrte = document.getElementById('classicQbWrTe');
-                if (wrte) wrte.checked = false;
-                const two = document.getElementById('classicQbTwoPc');
-                if (two) two.checked = true;
-                const fade = document.getElementById('classicFadeGameDst');
-                if (fade) fade.checked = true;
-                const bb = document.getElementById('classicBringBack');
-                if (bb) bb.value = 'either';
-                const noOpp = document.getElementById('classicNoOppDstWithQb');
-                if (noOpp) noOpp.checked = true;
+                resetClassicCorr({ forcePc: true, twoPc: true, wrte: false, fadeDst: true, bring: 'either', noOppDst: true });
                 const style = document.getElementById('gameStackStyle');
                 if (style) style.value = 'offense';
                 setNextStep('Game-stack recipe on: QB + 2 PCs + opponent bring-back + fade both DSTs. Pick a game or named stacks, then Run.');
             } else if (key === 'classic_cash_stack') {
                 applyPreset('classic_cash');
-                const wrte = document.getElementById('classicQbWrTe');
-                if (wrte) wrte.checked = false;
-                const two = document.getElementById('classicQbTwoPc');
-                if (two) two.checked = false;
-                const fade = document.getElementById('classicFadeGameDst');
-                if (fade) fade.checked = false;
-                const bb = document.getElementById('classicBringBack');
-                if (bb) bb.value = 'none';
-                const force = document.getElementById('classicForcePassStack');
-                if (force) { force.checked = true; force.dispatchEvent(new Event('change')); }
-                const noOpp = document.getElementById('classicNoOppDstWithQb');
-                if (noOpp) noOpp.checked = true;
+                resetClassicCorr({ forcePc: true, twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true });
                 setNextStep('Cash stack recipe: every lineup has QB + 1 same-team PC. No bring-back. Core/High your locks, then Run.');
             } else if (key === 'cash_floor_lock') {
                 applyPreset('cash_floor');
@@ -4670,7 +4979,8 @@
                 setNextStep('Eat the chalk on. Highest-owned skill players have min exposure. Do not fade a lock because he is popular. Run 1 lineup.');
             } else if (key === 'gpp_milly_winner') {
                 applyPreset('gpp_milly');
-                setNextStep('Milly winner shape on. Open Stacks Lab, add 2–4 stacks (QB+2 + opp RB), tag 4+ players under 10% own, Run 20–150.');
+                resetClassicCorr({ forcePc: true, twoPc: true, wrte: false, fadeDst: true, bring: 'rb', noOppDst: true });
+                setNextStep('Milly winner shape on. Classic rules: QB+2 PCs, opp RB bring-back, fade both game DSTs. Add named stacks if you want, then Run.');
             } else if (key === 'gpp_qb2_bb_rb') {
                 applyPreset('classic_gpp');
                 resetClassicCorr({ forcePc: true, twoPc: true, wrte: false, fadeDst: true, bring: 'rb', noOppDst: true });
@@ -4682,14 +4992,58 @@
                 applyPreset('gpp_uniques');
                 setNextStep('Four uniques mix on. Confirm 4+ names under 10% own in Stacks Lab, add one game stack, Run.');
             }
-            document.querySelectorAll('.recipe-row button').forEach(b => b.classList.remove('active'));
-            const recBtn = (typeof event !== 'undefined' && event && event.target && event.target.closest)
-                ? event.target.closest('.recipe-row button')
-                : null;
-            if (recBtn) recBtn.classList.add('active');
+            } catch (err) {
+                console.warn('applyRecipe preset failed', key, err);
+            }
+            const hit = btn
+                || (typeof event !== 'undefined' && event && event.target && event.target.closest && event.target.closest('[data-recipe]'))
+                || document.querySelector('[data-recipe="' + key + '"]');
+            const corr = (window.RECIPE_CORR || {})[key];
+            if (corr) {
+                applyCorrProfile(corr);
+                setTimeout(() => applyCorrProfile(corr), 60);
+            }
+            markActiveRecipe(key, hit);
             refreshChecklist();
             updateStickyBar();
+            requestAnimationFrame(() => markActiveRecipe(key, hit));
+            setTimeout(() => markActiveRecipe(key, hit), 0);
         }
+        function markActiveRecipe(key, el) {
+            window._activeRecipe = key || null;
+            const onBg = '#174D4D', onFg = '#ffffff', onBd = '#47C6C8';
+            const paint = (b, on) => {
+                if (!b || !b.style) return;
+                b.classList.toggle('active', !!on);
+                b.classList.toggle('recipe-selected', !!on);
+                b.setAttribute('aria-pressed', on ? 'true' : 'false');
+                if (on) {
+                    b.style.setProperty('background', onBg, 'important');
+                    b.style.setProperty('color', onFg, 'important');
+                    b.style.setProperty('border-color', onBd, 'important');
+                    b.style.setProperty('box-shadow', '0 0 0 2px rgba(71,198,200,0.45)', 'important');
+                    b.style.setProperty('font-weight', '700', 'important');
+                } else {
+                    b.style.removeProperty('background');
+                    b.style.removeProperty('color');
+                    b.style.removeProperty('border-color');
+                    b.style.removeProperty('box-shadow');
+                    b.style.removeProperty('font-weight');
+                }
+            };
+            document.querySelectorAll('.recipe-row button[data-recipe], .recipe-row button[onclick*="applyRecipe"]').forEach(b => {
+                const onclick = b.getAttribute('onclick') || '';
+                const match = !!(key && (b.getAttribute('data-recipe') === key || onclick.indexOf("'" + key + "'") !== -1));
+                paint(b, match);
+            });
+            if (el && key) paint(el, true);
+        }
+        document.addEventListener('click', function (e) {
+            const b = e.target && e.target.closest && e.target.closest('.recipe-row button[data-recipe]');
+            if (!b) return;
+            const key = b.getAttribute('data-recipe');
+            setTimeout(function () { markActiveRecipe(key, b); }, 30);
+        }, true);
 
         function switchWorkspace(which) {
             const panels = {
@@ -4987,7 +5341,8 @@
                         });
                     });
             });
-            const bestLev = stacks.slice().sort((a,b) => b.levSum - a.levSum || b.projSum - a.projSum).slice(0, 8);
+            const topNLev = Math.max(8, Math.min(30, parseInt(document.getElementById('slTopN')?.value) || 12));
+            const bestLev = stacks.slice().sort((a,b) => b.levSum - a.levSum || b.projSum - a.projSum).slice(0, topNLev);
             const chalkiest = stacks.slice().sort((a,b) => b.ownSum - a.ownSum).slice(0, 8);
             const runbacks = [];
             qbs.forEach(qb => {
@@ -5007,13 +5362,42 @@
             runbacks.sort((a,b) => b.ownSum - a.ownSum);
             const line = (left, meta) => `<div class="gp-player"><span>${left}</span><span>${meta}</span></div>`;
             root.innerHTML = `
-                <details class="cs-best" style="margin-top:0.9rem;"><summary>Ownership leverage stacks</summary>
+                <details class="cs-best" style="margin-top:0.9rem;" open><summary>Ownership leverage stack board</summary>
                     <div class="cs-top-board">
                         <div class="cs-top-col"><div class="k">Best leverage stacks</div><div class="chips">${bestLev.map((s,i)=>line(`${i+1}. ${csEsc(csName(s.qb))} + ${csEsc(csName(s.rec))}`, `lev ${s.levSum>0?'+':''}${s.levSum} · ${s.ownSum.toFixed(0)}% own`)).join('')||'<span class="cs-sub">Need ownership + QBs</span>'}</div></div>
                         <div class="cs-top-col"><div class="k">Chalkiest stacks</div><div class="chips">${chalkiest.map((s,i)=>line(`${i+1}. ${csEsc(csName(s.qb))} + ${csEsc(csName(s.rec))}`, `${s.ownSum.toFixed(0)}% own · ${s.projSum.toFixed(1)} fp`)).join('')||'<span class="cs-sub">None</span>'}</div></div>
                         <div class="cs-top-col"><div class="k">Chalkiest runbacks</div><div class="chips">${runbacks.slice(0,8).map((s,i)=>line(`${i+1}. ${csEsc(csName(s.qb))}+${csEsc(csName(s.rec))} / ${csEsc(csName(s.rb))}`, `${s.ownSum.toFixed(0)}% own`)).join('')||'<span class="cs-sub">Need opponents</span>'}</div></div>
                     </div>
                 </details>`;
+            const levBody = document.getElementById('slLevStackBody');
+            if (levBody) {
+                _slCache.levStacks = bestLev;
+                const esc = (s) => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+                levBody.innerHTML = bestLev.map((s, i) => `<tr>
+                    <td class="num"><input type="checkbox" class="sl-lev-cb" data-idx="${i}" ${i < 3 ? 'checked' : ''}></td>
+                    <td>${esc(csName(s.qb))} ${slOwnBand(s.qb.ownership)}</td>
+                    <td>${esc(csName(s.rec))} ${slOwnBand(s.rec.ownership)}</td>
+                    <td>${esc(s.qb.Team || '')}</td>
+                    <td class="num">${s.projSum.toFixed(1)}</td>
+                    <td class="num">${s.ownSum.toFixed(0)}%</td>
+                    <td class="num"><strong>${s.levSum > 0 ? '+' : ''}${Number(s.levSum).toFixed(1)}</strong></td>
+                    <td class="num"><button class="ghost" style="padding:0.2rem 0.45rem;font-size:0.72rem;" onclick="slAddLevStack(${i})">Add</button></td>
+                </tr>`).join('') || '<tr><td colspan="8" style="color:var(--muted);">Need ownership loaded to rank leverage stacks.</td></tr>';
+            }
+        }
+        function slAddLevStack(idx) {
+            const s = (_slCache.levStacks || [])[idx];
+            if (!s) return;
+            const ok = slPushStack({
+                captain: s.qb.displayName,
+                receiver: s.rec.displayName,
+                recipe: 'qb_wr',
+                percentage: 28,
+                fadeGameDst: true
+            });
+            updateStackListDisplay();
+            if (typeof saveSession === 'function') saveSession(true);
+            alert(ok ? `Added leverage stack ${csName(s.qb)} + ${csName(s.rec)}.` : 'That pair is already in your stack list.');
         }
 
         function slPushStack(obj) {
@@ -5124,6 +5508,16 @@
                     recipe: 'qb_wr_bb',
                     bringBack: p.bbType === 'Opp RB' ? 'rb' : 'pc',
                     bringPlayer: p.bb.displayName,
+                    fadeGameDst: true,
+                    percentage: 28
+                })) added++;
+            });
+            document.querySelectorAll('.sl-lev-cb:checked').forEach(cb => {
+                const p = (_slCache.levStacks || [])[parseInt(cb.dataset.idx, 10)];
+                if (p && slPushStack({
+                    captain: p.qb.displayName,
+                    receiver: p.rec.displayName,
+                    recipe: 'qb_wr',
                     fadeGameDst: true,
                     percentage: 28
                 })) added++;
@@ -7021,7 +7415,9 @@
             const autoStackEl = document.getElementById('autoStack');
             const classicForceEl = document.getElementById('classicForcePassStack');
             if (autoStackEl && classicForceEl) {
-                classicForceEl.checked = autoStackEl.checked;
+                // Keep the two boxes in sync from user clicks only.
+                // Do not copy autoStack → classicForce here: that wiped recipe
+                // correlation right after Milly set QB+2 / fade DST.
                 classicForceEl.onchange = () => { autoStackEl.checked = classicForceEl.checked; };
                 autoStackEl.onchange = () => { classicForceEl.checked = autoStackEl.checked; };
             }
@@ -7386,8 +7782,23 @@
             updateStickyBar();
         }
         function updateMinProjectedFP() {
-            minProjectedFP = parseInt(document.getElementById('minProjectedFPSlider').value);
+            minProjectedFP = parseFloat(document.getElementById('minProjectedFPSlider').value) || 0;
             document.getElementById('minProjectedFPValue').textContent = minProjectedFP;
+            const box = document.getElementById('poolMinFpInput');
+            if (box && String(box.value) !== String(minProjectedFP)) box.value = minProjectedFP;
+            try { updateTable(); } catch (e) {}
+        }
+        function setPoolMinProjectedFP(val) {
+            const n = Math.max(0, Math.min(40, parseFloat(val) || 0));
+            minProjectedFP = n;
+            const slider = document.getElementById('minProjectedFPSlider');
+            if (slider) slider.value = Math.round(n);
+            const lab = document.getElementById('minProjectedFPValue');
+            if (lab) lab.textContent = n;
+            const box = document.getElementById('poolMinFpInput');
+            if (box) box.value = n;
+            try { updateTable(); } catch (e) {}
+            try { queueSessionSave(); } catch (e) {}
             updateTable();
         }
         function updateMinUnique() {
@@ -7567,26 +7978,32 @@
 
         function resetClassicCorr(opts) {
             opts = opts || {};
-            const setChk = (id, on) => {
-                const el = document.getElementById(id);
-                if (el) el.checked = !!on;
-            };
-            const setVal = (id, v) => {
-                const el = document.getElementById(id);
-                if (el) el.value = v;
-            };
-            setChk('classicNoOppDstWithQb', opts.noOppDst !== false);
-            setChk('classicForcePassStack', !!opts.forcePc);
-            setChk('classicRbDstStack', !!opts.rbDst);
-            setChk('classicQbWrTe', !!opts.wrte);
-            setChk('classicQbTwoPc', !!opts.twoPc);
-            setChk('classicFadeGameDst', !!opts.fadeDst);
-            setVal('classicBringBack', opts.bring || 'none');
-            const auto = document.getElementById('autoStack');
-            if (auto) auto.checked = !!opts.forcePc;
-            if (opts.forcePc) {
-                const force = document.getElementById('classicForcePassStack');
-                if (force) force.dispatchEvent(new Event('change'));
+            applyCorrProfile(opts);
+            const box = document.getElementById('classicCorrRules');
+            if (box) {
+                const hide = (typeof isShowdownSlateName === 'function' && isShowdownSlateName(selectedSlate));
+                box.style.display = hide ? 'none' : 'block';
+            }
+            const stacksSec = document.getElementById('gameStacksSection');
+            if (stacksSec) stacksSec.open = true;
+            document.body.classList.remove('quick-build');
+            const bits = [];
+            if (opts.noOppDst !== false) bits.push('QB fades opp DST');
+            if (opts.forcePc) bits.push('QB + ≥1 WR/TE');
+            if (opts.twoPc) bits.push('QB + 2 pass catchers');
+            if (opts.wrte) bits.push('QB + WR + TE');
+            if (opts.fadeDst) bits.push('fade both game DSTs');
+            if (opts.bring === 'rb') bits.push('opp RB bring-back');
+            if (opts.bring === 'pc') bits.push('opp pass-catcher bring-back');
+            if (opts.bring === 'either') bits.push('opp RB or WR/TE bring-back');
+            if (opts.rbDst) bits.push('prefer RB + same-team DST');
+            if (!bits.length) bits.push('no forced stacks (cash default)');
+            const status = document.getElementById('recipeCorrStatus');
+            if (status) {
+                status.hidden = false;
+                status.removeAttribute('hidden');
+                status.style.display = 'block';
+                status.textContent = 'Classic correlation: ' + bits.join(' · ');
             }
         }
 
@@ -7689,7 +8106,8 @@
             }
 
             document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-            if (btn) btn.classList.add('active');
+            if (btn && btn.classList.contains('preset-btn')) btn.classList.add('active');
+            if (btn && btn.classList.contains('preset-btn')) markActiveRecipe(null);
             activePreset = type;
 
             const setOwn = (min, max) => {
@@ -7726,9 +8144,11 @@
                 ensureClassicSlate();
                 setExp(70); setOwn(140, 280); setLev(5); setRand(10); setUnique(1); setMulti(1);
                 if (document.getElementById('autoStack')) document.getElementById('autoStack').checked = false;
+                resetClassicCorr({ forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true });
             } else if (type === 'classic_gpp') {
                 ensureClassicSlate();
                 setExp(40); setOwn(0, 220); setLev(45); setRand(40); setUnique(4); setMulti(20);
+                resetClassicCorr({ forcePc: true, twoPc: false, wrte: false, fadeDst: true, bring: 'none', noOppDst: true });
             } else if (type === 'leverage') {
                 ensureClassicSlate();
                 setExp(35); setOwn(0, 180); setLev(70); setRand(50); setUnique(5); setMulti(20);
@@ -8003,6 +8423,12 @@
                 l.style.display = l.textContent.toLowerCase().includes(s) ? 'block' : 'none';
             });
         }
+        function filterRunbackPlayersSearch() {
+            const s = String(document.getElementById('group-runback-search')?.value || '').toLowerCase();
+            document.querySelectorAll('#groupRunbackList label').forEach(l => {
+                l.style.display = l.textContent.toLowerCase().includes(s) ? 'block' : 'none';
+            });
+        }
 
         function updatePositions() {
             selectedPositions = Array.from(document.querySelectorAll('#positionMenu input:checked')).map(i => i.value);
@@ -8137,10 +8563,35 @@
         function updateConditionPlayer(v) {
             conditionPlayer = v;
             document.getElementById('conditionPlayerDropdown').textContent = v || 'Any Player (Optional)';
+            try { populateGroupPlayersMenu(); } catch (e) {}
         }
         function updateGroupPlayers() {
             const selected = Array.from(document.querySelectorAll('#groupPlayerList input:checked')).map(i => i.value);
             updateDropdownButton('groupPlayersDropdown', selected, 'players');
+        }
+        function updateGroupRunbackPlayers() {
+            const selected = Array.from(document.querySelectorAll('#groupRunbackList input:checked')).map(i => i.value);
+            updateDropdownButton('groupRunbackDropdown', selected, selected.length ? 'players' : 'run-back');
+            const btn = document.getElementById('groupRunbackDropdown');
+            if (btn && !selected.length) btn.textContent = 'None (optional)';
+        }
+        function applyAnchorExposure(name, minPct, maxPct) {
+            if (!name) return;
+            const keys = new Set([name, String(name).split(' (')[0]]);
+            (allSlatePlayers || []).forEach(p => {
+                if (!p) return;
+                if (keys.has(p.displayName) || keys.has(p.baseName) || keys.has(p['Player Name'])) {
+                    if (Number.isFinite(minPct)) {
+                        minExposures[p.displayName] = minPct;
+                        p.minExposure = minPct;
+                    }
+                    if (Number.isFinite(maxPct)) {
+                        maxExposures[p.displayName] = maxPct;
+                        p.maxExposure = maxPct;
+                    }
+                }
+            });
+            try { updateTable(); } catch (e) {}
         }
 
         function addGroup() {
@@ -8148,23 +8599,44 @@
             const numPlayers = Math.min(9, Math.max(0, parseInt(document.getElementById('numGroupPlayers').value) || 1));
             const players = Array.from(document.querySelectorAll('#groupPlayerList input:checked')).map(i => i.value);
             const percentage = Math.min(100, Math.max(0, parseInt(document.getElementById('groupPercentageInput').value) || 100));
+            const runbackPlayers = Array.from(document.querySelectorAll('#groupRunbackList input:checked')).map(i => i.value);
+            const runbackType = document.getElementById('groupRunbackTypeSelect')?.value || 'min';
+            const runbackNum = Math.min(9, Math.max(0, parseInt(document.getElementById('groupRunbackNum')?.value) || 1));
+            const condMinRaw = document.getElementById('groupConditionMinExp')?.value;
+            const condMaxRaw = document.getElementById('groupConditionMaxExp')?.value;
+            const conditionMinExp = condMinRaw === '' || condMinRaw == null ? null : Math.min(100, Math.max(0, parseFloat(condMinRaw)));
+            const conditionMaxExp = condMaxRaw === '' || condMaxRaw == null ? null : Math.min(100, Math.max(0, parseFloat(condMaxRaw)));
             if (!players.length) { alert('Select players for the group.'); return; }
+            const rec = {
+                type, numPlayers, players: [...new Set(players)], conditionPlayer, percentage,
+                runbackType, runbackNum, runbackPlayers: [...new Set(runbackPlayers)],
+                conditionMinExp, conditionMaxExp
+            };
             if (editingIndex >= 0) {
-                groupList[editingIndex] = { type, numPlayers, players: [...new Set(players)], conditionPlayer, percentage };
+                groupList[editingIndex] = rec;
                 editingIndex = -1;
                 document.getElementById('addGroupButton').textContent = 'Add Group';
             } else {
-                groupList.push({ type, numPlayers, players: [...new Set(players)], conditionPlayer, percentage });
+                groupList.push(rec);
+            }
+            if (conditionPlayer && (Number.isFinite(conditionMinExp) || Number.isFinite(conditionMaxExp))) {
+                applyAnchorExposure(conditionPlayer, conditionMinExp, conditionMaxExp);
             }
             updateGroupList();
             resetGroupFields();
         }
         function resetGroupFields() {
-            document.getElementById('groupTypeSelect').value = 'max';
+            document.getElementById('groupTypeSelect').value = 'min';
             document.getElementById('numGroupPlayers').value = 1;
             document.getElementById('groupPercentageInput').value = 100;
             document.querySelectorAll('#groupPlayerList input:checked').forEach(i => i.checked = false);
             updateDropdownButton('groupPlayersDropdown', [], 'players');
+            document.querySelectorAll('#groupRunbackList input:checked').forEach(i => i.checked = false);
+            if (document.getElementById('groupRunbackTypeSelect')) document.getElementById('groupRunbackTypeSelect').value = 'min';
+            if (document.getElementById('groupRunbackNum')) document.getElementById('groupRunbackNum').value = 1;
+            if (document.getElementById('groupConditionMinExp')) document.getElementById('groupConditionMinExp').value = '';
+            if (document.getElementById('groupConditionMaxExp')) document.getElementById('groupConditionMaxExp').value = '';
+            updateGroupRunbackPlayers();
             conditionPlayer = null;
             document.getElementById('conditionPlayerDropdown').textContent = 'Any Player (Optional)';
             document.querySelectorAll('#conditionPlayerList input:checked').forEach(i => i.checked = false);
@@ -8176,7 +8648,13 @@
             div.innerHTML = groupList.map((g, i) => {
                 const cond = g.conditionPlayer ? `When include ${g.conditionPlayer}, ` : '';
                 const t = g.type === 'min' ? 'At Least' : g.type === 'exact' ? 'Exactly' : 'At Most';
-                return `<div style="margin:0.3rem 0;">${cond}${t} ${g.numPlayers} of ${g.players.join(', ')} in ${g.percentage}% 
+                const rb = (g.runbackPlayers && g.runbackPlayers.length)
+                    ? `; run-back ${g.runbackType === 'exact' ? 'exactly' : g.runbackType === 'max' ? 'at most' : 'at least'} ${g.runbackNum} of ${g.runbackPlayers.join(', ')}`
+                    : '';
+                const exp = (g.conditionPlayer && (g.conditionMinExp != null || g.conditionMaxExp != null))
+                    ? ` (${g.conditionPlayer} exp ${g.conditionMinExp ?? 0}–${g.conditionMaxExp ?? 100}%)`
+                    : '';
+                return `<div style="margin:0.3rem 0;">${cond}${t} ${g.numPlayers} of ${g.players.join(', ')}${rb}${exp} in ${g.percentage}% 
                     <button class="ghost" style="padding:0.15rem 0.4rem;font-size:0.75rem;" onclick="deleteGroup(${i})">Del</button>
                     <button class="ghost" style="padding:0.15rem 0.4rem;font-size:0.75rem;" onclick="editGroup(${i})">Edit</button></div>`;
             }).join('');
@@ -8199,6 +8677,12 @@
             document.querySelectorAll('#conditionPlayerList input[name="conditionPlayer"]').forEach(inp => {
                 inp.checked = inp.value === (g.conditionPlayer || '');
             });
+            if (document.getElementById('groupRunbackTypeSelect')) document.getElementById('groupRunbackTypeSelect').value = g.runbackType || 'min';
+            if (document.getElementById('groupRunbackNum')) document.getElementById('groupRunbackNum').value = g.runbackNum != null ? g.runbackNum : 1;
+            document.querySelectorAll('#groupRunbackList input').forEach(inp => inp.checked = (g.runbackPlayers || []).includes(inp.value));
+            updateGroupRunbackPlayers();
+            if (document.getElementById('groupConditionMinExp')) document.getElementById('groupConditionMinExp').value = g.conditionMinExp != null ? g.conditionMinExp : '';
+            if (document.getElementById('groupConditionMaxExp')) document.getElementById('groupConditionMaxExp').value = g.conditionMaxExp != null ? g.conditionMaxExp : '';
             document.getElementById('addGroupButton').textContent = 'Update Group';
         }
 
@@ -8272,12 +8756,62 @@
                 '<label><input type="radio" name="conditionPlayer" value="" onchange="updateConditionPlayer(this.value)">Any Player (Optional)</label>' +
                 players.map(p => `<label><input type="radio" name="conditionPlayer" value="${p}" onchange="updateConditionPlayer(this.value)">${p}</label>`).join('');
         }
+        function slateRowByName(name) {
+            if (!name) return null;
+            const src = allSlatePlayers || [];
+            return src.find(p => p && (p.displayName === name || p.baseName === name || p['Player Name'] === name
+                || (typeof playerLabelMatch === 'function' && playerLabelMatch(p, name)))) || null;
+        }
+        function groupMenuChecked(sel) {
+            return new Set(Array.from(document.querySelectorAll(sel + ' input:checked')).map(i => i.value));
+        }
         function populateGroupPlayersMenu() {
-            const players = [...new Set(allSlatePlayers.map(p => p.displayName))]
-                .sort((a,b) => (allSlatePlayers.find(p => p.displayName === b)?.projectedFP || 0) - (allSlatePlayers.find(p => p.displayName === a)?.projectedFP || 0));
-            document.getElementById('groupPlayerList').innerHTML = players.map(p =>
-                `<label><input type="checkbox" value="${p}" onchange="updateGroupPlayers()">${p}</label>`
-            ).join('');
+            const names = [...new Set((allSlatePlayers || []).map(p => p.displayName).filter(Boolean))];
+            const byProj = (a, b) => {
+                const pa = slateRowByName(a), pb = slateRowByName(b);
+                return (Number(pb?.projectedFP) || 0) - (Number(pa?.projectedFP) || 0);
+            };
+            const anchor = slateRowByName(conditionPlayer);
+            const team = anchor ? (typeof normalizeTeam === 'function' ? normalizeTeam(anchor.Team) : anchor.Team) : '';
+            const opp = anchor ? (typeof normalizeTeam === 'function' ? normalizeTeam(anchor.Opponent) : (anchor.Opponent || '')) : '';
+            const teamOf = (n) => {
+                const p = slateRowByName(n);
+                if (!p) return '';
+                return typeof normalizeTeam === 'function' ? normalizeTeam(p.Team) : (p.Team || '');
+            };
+            const splitBy = (pred) => {
+                const hit = [], rest = [];
+                names.forEach(n => (pred(n) ? hit : rest).push(n));
+                hit.sort(byProj);
+                rest.sort(byProj);
+                return { hit, rest };
+            };
+            const checkedMain = groupMenuChecked('#groupPlayerList');
+            const checkedRb = groupMenuChecked('#groupRunbackList');
+            const renderList = (primary, rest, headPrimary, onchange, checked) => {
+                const row = (n) => `<label><input type="checkbox" value="${n}" onchange="${onchange}"${checked.has(n) ? ' checked' : ''}>${n}</label>`;
+                if (!primary.length) return rest.map(row).join('');
+                return `<div class="group-list-head">${headPrimary}</div>`
+                    + primary.map(row).join('')
+                    + (rest.length ? `<div class="group-list-head">Everyone else</div>${rest.map(row).join('')}` : '');
+            };
+            let mainPrimary = [], mainRest = names.slice().sort(byProj);
+            let rbPrimary = [], rbRest = names.slice().sort(byProj);
+            if (anchor && team) {
+                const teammates = splitBy(n => teamOf(n) === team && n !== conditionPlayer && !(n || '').includes('(CPT)'));
+                mainPrimary = teammates.hit;
+                mainRest = teammates.rest.filter(n => n !== conditionPlayer);
+                if (opp) {
+                    const opps = splitBy(n => teamOf(n) === opp && n !== conditionPlayer);
+                    rbPrimary = opps.hit;
+                    rbRest = opps.rest.filter(n => n !== conditionPlayer);
+                }
+            }
+            const mainEl = document.getElementById('groupPlayerList');
+            if (mainEl) mainEl.innerHTML = renderList(mainPrimary, mainRest, team ? `${team} teammates` : 'Players', 'updateGroupPlayers()', checkedMain);
+            const rb = document.getElementById('groupRunbackList');
+            if (rb) rb.innerHTML = renderList(rbPrimary, rbRest, opp ? `${opp} run-back` : 'Players', 'updateGroupRunbackPlayers()', checkedRb);
+            try { updateGroupPlayers(); updateGroupRunbackPlayers(); } catch (e) {}
         }
 
         // ====================== TABLE ======================
@@ -8573,22 +9107,22 @@
             updateTable();
         }
         function bulkExcludeZeroProj() {
-            // Exclude everyone at exactly 0 FP in the current pool view (and raw slate rows)
+            bulkExcludeBelowMinFp(0);
+        }
+        function bulkExcludeBelowMinFp(forceMin) {
+            const cut = forceMin != null ? Number(forceMin) : (Number(minProjectedFP) || 0);
             let n = 0;
-            filteredData.forEach(p => {
-                if ((p.projectedFP || 0) <= 0) {
-                    deselectedPlayers.add(p.displayName);
-                    n++;
-                }
-            });
-            // Also catch any slate rows not in filteredData (e.g. filtered out by pos/team)
-            (allSlatePlayers || []).forEach(p => {
-                if ((p.projectedFP || 0) <= 0) {
+            const mark = (p) => {
+                if (!p) return;
+                if ((Number(p.projectedFP) || 0) <= cut) {
+                    if (!deselectedPlayers.has(p.displayName)) n++;
                     deselectedPlayers.add(p.displayName);
                 }
-            });
+            };
+            (filteredData || []).forEach(mark);
+            (allSlatePlayers || []).forEach(mark);
             updateTable();
-            setDataStatus('', `Excluded ${n} zero-FP players from pool`);
+            setDataStatus('', `Excluded ${n} players at or below ${cut} FP`);
         }
         function bulkResetExposures() {
             filteredData.forEach(p => {
@@ -8601,15 +9135,28 @@
         }
 
         // ====================== GENERATION ======================
+        function sortMark(col) {
+            const on = lineupSortColumn === col;
+            const arrow = !on ? '↕' : (lineupSortDirection === 'asc' ? '▲' : '▼');
+            return `<span class="sort-ind">${arrow}</span>`;
+        }
+        function thSort(label, col, extraClass, title) {
+            const on = lineupSortColumn === col;
+            return `<th class="sortable ${extraClass || ''} ${on ? 'is-sorted' : ''}" title="${title || 'Sort by ' + label}" onclick="sortLineupTable('${col}')">${label}${sortMark(col)}</th>`;
+        }
         function updateLineupTableHeaders(isShowdown) {
             const tr = document.getElementById('lineupHeaderRow');
-            tr.innerHTML = '<th><input type="checkbox" id="lineupSelectAll" onchange="toggleAllLineupChecks(this.checked)" title="Select all"></th><th>Lineup #</th>';
+            if (!tr) return;
+            tr.innerHTML = '<th class="lu-sticky"><input type="checkbox" id="lineupSelectAll" onchange="toggleAllLineupChecks(this.checked)" title="Select all"></th>'
+                + thSort('#', '#', 'lu-sticky', 'Sort by original order')
+                + thSort('Proj FP', 'Proj FP', 'lu-sticky lu-metric', 'Total projected fantasy points')
+                + thSort('Own %', 'Own %', 'lu-sticky lu-metric', 'Total projected ownership')
+                + thSort('Salary', 'Salary', 'lu-sticky lu-metric', 'Total salary');
             if (isShowdown) {
-                tr.innerHTML += '<th>CPT</th><th>FLEX1</th><th>FLEX2</th><th>FLEX3</th><th>FLEX4</th><th>FLEX5</th>';
+                ['CPT','FLEX1','FLEX2','FLEX3','FLEX4','FLEX5'].forEach(s => { tr.innerHTML += thSort(s, s); });
             } else {
-                tr.innerHTML += '<th>QB</th><th>RB1</th><th>RB2</th><th>WR1</th><th>WR2</th><th>WR3</th><th>TE</th><th>FLEX</th><th>DST</th>';
+                ['QB','RB1','RB2','WR1','WR2','WR3','TE','FLEX','DST'].forEach(s => { tr.innerHTML += thSort(s, s); });
             }
-            tr.innerHTML += '<th>Total Salary</th><th>Total Projected Points</th><th>Total Projected Ownership</th>';
         }
 
         function updateLineupTable() {
@@ -8618,12 +9165,29 @@
             const withIdx = generatedLineups.map((l, origIdx) => ({ l, origIdx }));
             let sortedPairs = [...withIdx];
             if (lineupSortColumn) {
+                const slotName = (lu, col) => {
+                    if (isShowdown) {
+                        if (col === 'CPT') return lu.lineup.captain?.name || '';
+                        const m = String(col).match(/^FLEX(\d)$/);
+                        if (m) return lu.lineup.flex?.[Number(m[1]) - 1]?.name || '';
+                    }
+                    return lu.lineup?.[col]?.name || '';
+                };
                 sortedPairs.sort((a, b) => {
-                    let valA = 0, valB = 0;
-                    if (lineupSortColumn === 'Total Salary') { valA = a.l.totalSalary; valB = b.l.totalSalary; }
-                    else if (lineupSortColumn === 'Total Projected Points') { valA = a.l.totalPoints; valB = b.l.totalPoints; }
-                    else if (lineupSortColumn === 'Total Projected Ownership') { valA = a.l.totalOwnership; valB = b.l.totalOwnership; }
-                    return lineupSortDirection === 'asc' ? valA - valB : valB - valA;
+                    let valA, valB;
+                    if (lineupSortColumn === '#' ) { valA = a.origIdx; valB = b.origIdx; }
+                    else if (lineupSortColumn === 'Salary' || lineupSortColumn === 'Total Salary') { valA = a.l.totalSalary; valB = b.l.totalSalary; }
+                    else if (lineupSortColumn === 'Proj FP' || lineupSortColumn === 'Total Projected Points') { valA = a.l.totalPoints; valB = b.l.totalPoints; }
+                    else if (lineupSortColumn === 'Own %' || lineupSortColumn === 'Total Projected Ownership') { valA = a.l.totalOwnership; valB = b.l.totalOwnership; }
+                    else {
+                        valA = slotName(a.l, lineupSortColumn);
+                        valB = slotName(b.l, lineupSortColumn);
+                    }
+                    if (typeof valA === 'string' || typeof valB === 'string') {
+                        const cmp = String(valA).localeCompare(String(valB), undefined, { sensitivity: 'base' });
+                        return lineupSortDirection === 'asc' ? cmp : -cmp;
+                    }
+                    return lineupSortDirection === 'asc' ? (valA - valB) : (valB - valA);
                 });
             }
             document.getElementById('lineupTableBody').innerHTML = sortedPairs.map(({ l, origIdx }, i) => {
@@ -8639,9 +9203,12 @@
                     });
                 }
                 const checked = lineupChecked.has(origIdx) ? 'checked' : '';
-                return `<tr data-lineup-idx="${origIdx}"><td><input type="checkbox" class="lineup-check" data-idx="${origIdx}" ${checked} onchange="onLineupCheckChange()"></td><td>${i+1}</td>${cells}<td>${l.totalSalary}</td><td>${l.totalPoints.toFixed(2)}</td><td>${l.totalOwnership.toFixed(1)}%</td></tr>`;
+                const shortName = (txt) => String(txt || '').replace(/\s*\((CPT|FLEX)\)\s*$/, '');
+                cells = cells.replace(/class="lineup-player"/g, 'class="lineup-player"');
+                return `<tr data-lineup-idx="${origIdx}"><td class="lu-sticky"><input type="checkbox" class="lineup-check" data-idx="${origIdx}" ${checked} onchange="onLineupCheckChange()"></td><td class="lu-sticky">${i+1}</td><td class="lu-sticky lu-metric">${l.totalPoints.toFixed(2)}</td><td class="lu-sticky lu-metric">${l.totalOwnership.toFixed(1)}%</td><td class="lu-sticky lu-metric">$${l.totalSalary}</td>${cells}</tr>`;
             }).join('');
             updateLineupCheckedCount();
+            updateLineupTableHeaders(isShowdown);
         }
 
         function onLineupCheckChange() {
@@ -8824,8 +9391,10 @@
         }
 
         function sortLineupTable(column) {
+            const numeric = column === 'Proj FP' || column === 'Own %' || column === 'Salary'
+                || column === 'Total Salary' || column === 'Total Projected Points' || column === 'Total Projected Ownership';
             if (lineupSortColumn === column) lineupSortDirection = lineupSortDirection === 'asc' ? 'desc' : 'asc';
-            else { lineupSortColumn = column; lineupSortDirection = 'asc'; }
+            else { lineupSortColumn = column; lineupSortDirection = numeric ? 'desc' : 'asc'; }
             updateLineupTable();
         }
 
@@ -8866,6 +9435,11 @@
                 (forcedPlayers || []).forEach(n => must.add(n));
                 (corePlayers || []).forEach(n => must.add(n));
                 (stackList || []).forEach(s => [s.captain, s.receiver, s.receiver2, s.bringPlayer].forEach(n => { if (n) must.add(n); }));
+                (groupList || []).forEach(g => {
+                    (g.players || []).forEach(n => { if (n) must.add(n); });
+                    (g.runbackPlayers || []).forEach(n => { if (n) must.add(n); });
+                    if (g.conditionPlayer) must.add(g.conditionPlayer);
+                });
             } catch (e) {}
             const src = (filteredData || []).filter(p => {
                 if (!p || deselectedPlayers.has(p.displayName)) return false;
@@ -8946,13 +9520,46 @@
             }
 
             const forcedSet = new Set(forcedInclude || []);
+            const groupKeep = new Set();
+            const groupBoost = new Set();
+            const addLabels = (set, labels) => {
+                (labels || []).forEach(n => { if (n) set.add(n); });
+            };
+            try {
+                // Always keep group names in the variable pool so a When-QB slice can use a thin TE.
+                // Do NOT globally boost those names — that stuffed Wilson/Pollard/Spears into the whole field.
+                (groupList || []).forEach(g => {
+                    addLabels(groupKeep, g.players);
+                    addLabels(groupKeep, g.runbackPlayers);
+                    if (g.conditionPlayer) groupKeep.add(g.conditionPlayer);
+                });
+                if (enforceGroup && group) {
+                    addLabels(groupBoost, group.players);
+                    addLabels(groupBoost, group.runbackPlayers);
+                    if (group.conditionPlayer) groupBoost.add(group.conditionPlayer);
+                    addLabels(groupKeep, group.players);
+                    addLabels(groupKeep, group.runbackPlayers);
+                    if (group.conditionPlayer) groupKeep.add(group.conditionPlayer);
+                }
+            } catch (e) {}
+            const labelHit = (player, set) => {
+                if (!player || !set || !set.size) return false;
+                if (set.has(player.displayName) || set.has(player.baseName) || set.has(player['Player Name'])) return true;
+                const base = String(player.baseName || '').split(' (')[0];
+                return [...set].some(n => n && (n === player.displayName || String(n).split(' (')[0] === base));
+            };
+            const nameMatchesMust = (player) => {
+                if (!player) return false;
+                return forcedSet.has(player.baseName) || labelHit(player, groupKeep);
+            };
+            const nameMatchesGroupBoost = (player) => enforceGroup && labelHit(player, groupBoost);
             genPool().forEach(player => {
                 const displayName = player.displayName;
                 if (deselectedPlayers.has(displayName)) return;
                 const hasMin = (minExposures[displayName] || 0) > 0;
                 const pos0 = String(player.Position || '').toUpperCase();
                 const keepKDst = isDefensePlayer(player) || pos0 === 'K' || pos0 === 'DST' || pos0 === 'DEF';
-                if (!(Number(player.projectedFP) > 0) && !forcedSet.has(player.baseName) && !hasMin && !keepKDst) return;
+                if (!(Number(player.projectedFP) > 0) && !nameMatchesMust(player) && !hasMin && !keepKDst) return;
                 if (keepKDst && !(Number(player.projectedFP) > 0)) player.projectedFP = player.projectedFP || 6.5;
 
                 const minReq = Math.ceil((minExposures[displayName] || 0) / 100 * numLineups);
@@ -8989,12 +9596,26 @@
                     adjustedPoints *= (1 + boost);
                 }
 
+                // Solver-only bump for the ACTIVE When-QB group (Geno slice only).
+                // Displayed lineup totals still use source projectedFP. Other lineups use base proj.
+                if (nameMatchesGroupBoost(player)) {
+                    const used = playerCounts[displayName] || playerCounts[player.baseName] || 0;
+                    const floorPts = Math.max(7.5, (Number(player.salary) || 4000) / 1000 * 2.05);
+                    if (adjustedPoints < floorPts) adjustedPoints = floorPts;
+                    const rotate = 1 + ((used + currentGenerated) % 4) * 0.08;
+                    adjustedPoints *= (used < Math.max(1, Math.ceil(numLineups * 0.04)) ? 1.35 : 1.12) * rotate;
+                }
+
                 const eligibleSlots = isShowdown ? [player.slotType] : getEligibleSlots(player.positions);
                 eligibleSlots.forEach(slot => {
-                    if (slot === 'FLEX' && !isShowdown && player.gameStartTime.getTime() < latestTime) {
-                        adjustedPoints *= 0.001; // heavily penalize early games in FLEX
+                    if (slot === 'FLEX' && !isShowdown) {
+                        const ts = player.gameStartTime && typeof player.gameStartTime.getTime === 'function'
+                            ? player.gameStartTime.getTime() : 0;
+                        if (ts && latestTime && ts < latestTime) adjustedPoints *= 0.001;
                     }
-                    if (slot === 'FLEX' && !isShowdown && !player.positions.some(pos => selectedFlexPositions.includes(pos))) return;
+                    if (slot === 'FLEX' && !isShowdown && Array.isArray(player.positions)
+                        && player.positions.length
+                        && !player.positions.some(pos => selectedFlexPositions.includes(pos))) return;
 
                     const varName = `${player.baseName}_${slot}`;
                     model.variables[varName] = {
@@ -9097,70 +9718,106 @@
             }
 
             // Groups
+            // "When QB, at least N of … @100%" means: IF that QB is in the lineup, enforce the stack.
+            // It does NOT mean "this construction must appear in every lineup."
+            // Missing condition-player vars used to fall through to an unconditional min-N rule,
+            // which stacked every When-QB group on the same lineup and produced 0 feasible builds.
             const bigM = 100;
-            const groupsToApply = groupList.filter(g => g.percentage === 100);
-            if (enforceGroup && group) groupsToApply.push(group);
+            const softGroups = !!window._softGroups;
+            const groupsToApply = [];
+            if (!softGroups) {
+                (groupList || []).forEach(g => {
+                    if (!g) return;
+                    if (enforceGroup && group && g === group) return;
+                    if (g.conditionPlayer) {
+                        if (g.percentage === 100) groupsToApply.push(g);
+                    } else if (g.percentage === 100) {
+                        groupsToApply.push(g);
+                    }
+                });
+            }
+            if (enforceGroup && group && !groupsToApply.includes(group)) groupsToApply.push(group);
 
-            groupsToApply.forEach((g, i) => {
-                const type = g.type;
-                const numPlayers = g.numPlayers;
-                const conditionBase = g.conditionPlayer ? g.conditionPlayer.split(' (')[0] : null;
-
-                if (conditionBase) {
-                    if (type === 'min' || type === 'exact') {
-                        const cName = `group_min_${i}`;
-                        model.constraints[cName] = { min: numPlayers - bigM };
-                        g.players.forEach(pl => {
-                            const pd = genPool().find(p => p.displayName === pl);
-                            if (pd) {
-                                (isShowdown ? [pd.slotType] : getEligibleSlots(pd.positions)).forEach(slot => {
-                                    const vn = `${pd.baseName}_${slot}`;
-                                    if (model.variables[vn]) model.variables[vn][cName] = 1;
-                                });
+            const namesMatch = (player, label) => {
+                if (!player || !label) return false;
+                const a = String(label).replace(/\s+/g, ' ').trim();
+                const aBase = a.split(' (')[0].trim();
+                const aLow = aBase.toLowerCase();
+                const dn = String(player.displayName || '').replace(/\s+/g, ' ').trim();
+                const bn = String(player.baseName || '').replace(/\s+/g, ' ').trim();
+                const pn = String(player['Player Name'] || '').replace(/\s+/g, ' ').trim();
+                if (dn === a || bn === a || bn === aBase || dn === aBase || pn === aBase) return true;
+                if (dn.toLowerCase() === aLow || bn.toLowerCase() === aLow || pn.toLowerCase() === aLow) return true;
+                const strip = (s) => s.toLowerCase().replace(/[^a-z]/g, '');
+                if (strip(bn) === strip(aBase) || strip(dn) === strip(aBase) || strip(pn) === strip(aBase)) return true;
+                return false;
+            };
+            const varsForLabels = (labels) => {
+                const out = [];
+                const seen = new Set();
+                (labels || []).forEach(pl => {
+                    genPool().filter(p => namesMatch(p, pl)).forEach(pd => {
+                        const slots = isShowdown
+                            ? [pd.slotType]
+                            : (typeof getEligibleSlots === 'function' ? getEligibleSlots(pd.positions || [pd.Position]) : [pd.Position]);
+                        (slots || []).forEach(slot => {
+                            if (!slot) return;
+                            const vn = `${pd.baseName}_${slot}`;
+                            if (model.variables[vn] && !seen.has(vn)) {
+                                seen.add(vn);
+                                out.push(vn);
                             }
                         });
-                        genPool().filter(p => p.baseName === conditionBase).forEach(cp => {
-                            (isShowdown ? [cp.slotType] : getEligibleSlots(cp.positions)).forEach(slot => {
-                                const vn = `${conditionBase}_${slot}`;
-                                if (model.variables[vn]) model.variables[vn][cName] = -bigM;
-                            });
-                        });
+                    });
+                });
+                return out;
+            };
+            const applyCountRule = (prefix, type, numPlayers, memberVars, conditionLabels) => {
+                if (!memberVars.length || !numPlayers) return false;
+                const wantCond = !!(conditionLabels && [].concat(conditionLabels).filter(Boolean).length);
+                const condVars = wantCond ? varsForLabels([].concat(conditionLabels).filter(Boolean)) : [];
+                if (wantCond && !condVars.length) {
+                    // Condition player is not in the model — skip rather than making the rule global.
+                    return false;
+                }
+                if (condVars.length) {
+                    if (type === 'min' || type === 'exact') {
+                        const cName = prefix + '_min';
+                        model.constraints[cName] = { min: numPlayers - bigM };
+                        memberVars.forEach(v => { model.variables[v][cName] = 1; });
+                        condVars.forEach(v => { model.variables[v][cName] = -bigM; });
                     }
                     if (type === 'max' || type === 'exact') {
-                        const cName = `group_max_${i}`;
+                        const cName = prefix + '_max';
                         model.constraints[cName] = { max: numPlayers + bigM };
-                        g.players.forEach(pl => {
-                            const pd = genPool().find(p => p.displayName === pl);
-                            if (pd) {
-                                (isShowdown ? [pd.slotType] : getEligibleSlots(pd.positions)).forEach(slot => {
-                                    const vn = `${pd.baseName}_${slot}`;
-                                    if (model.variables[vn]) model.variables[vn][cName] = 1;
-                                });
-                            }
-                        });
-                        genPool().filter(p => p.baseName === conditionBase).forEach(cp => {
-                            (isShowdown ? [cp.slotType] : getEligibleSlots(cp.positions)).forEach(slot => {
-                                const vn = `${conditionBase}_${slot}`;
-                                if (model.variables[vn]) model.variables[vn][cName] = bigM;
-                            });
-                        });
+                        memberVars.forEach(v => { model.variables[v][cName] = 1; });
+                        condVars.forEach(v => { model.variables[v][cName] = bigM; });
                     }
-                } else {
-                    const cName = `group_${i}`;
-                    if (type === 'min') model.constraints[cName] = { min: numPlayers };
-                    else if (type === 'max') model.constraints[cName] = { max: numPlayers };
-                    else model.constraints[cName] = { min: numPlayers, max: numPlayers };
-                    g.players.forEach(pl => {
-                        const pd = genPool().find(p => p.displayName === pl);
-                        if (pd) {
-                            (isShowdown ? [pd.slotType] : getEligibleSlots(pd.positions)).forEach(slot => {
-                                const vn = `${pd.baseName}_${slot}`;
-                                if (model.variables[vn]) model.variables[vn][cName] = 1;
-                            });
-                        }
-                    });
+                    return true;
+                }
+                const cName = prefix;
+                if (type === 'min') model.constraints[cName] = { min: numPlayers };
+                else if (type === 'max') model.constraints[cName] = { max: numPlayers };
+                else model.constraints[cName] = { min: numPlayers, max: numPlayers };
+                memberVars.forEach(v => { model.variables[v][cName] = 1; });
+                return true;
+            };
+
+            groupsToApply.forEach((g, i) => {
+                applyCountRule(`group_${i}`, g.type, g.numPlayers, varsForLabels(g.players), g.conditionPlayer);
+                if (g.runbackPlayers && g.runbackPlayers.length && g.runbackNum > 0) {
+                    applyCountRule(
+                        `group_${i}_rb`,
+                        g.runbackType || 'min',
+                        g.runbackNum,
+                        varsForLabels(g.runbackPlayers),
+                        g.conditionPlayer || null
+                    );
                 }
             });
+            if (enforceGroup && group && group.conditionPlayer) {
+                forceNamed(group.conditionPlayer);
+            }
 
             // Force QB stack
             if (forceQBStack && !isShowdown) {
@@ -9612,7 +10269,10 @@
 
             Object.keys(result).forEach(key => {
                 if (key === 'feasible' || key === 'result' || result[key] !== 1) return;
-                const [name, slot] = key.split('_');
+                const cut = String(key).lastIndexOf('_');
+                if (cut < 1) return;
+                const name = key.slice(0, cut);
+                const slot = key.slice(cut + 1);
                 const player = genPool().find(p => p.baseName === name && (isShowdown ? p.slotType === slot : true))
                     || filteredData.find(p => p.baseName === name && (isShowdown ? p.slotType === slot : true));
                 if (!player) return;
@@ -10041,8 +10701,14 @@
             const src = (filteredData && filteredData.length) ? filteredData : genPool();
             return src.filter(p => {
                 if (!p || deselectedPlayers.has(p.displayName)) return false;
-                if (!(Number(p.projectedFP) > 0) || !(Number(p.salary) > 0)) return false;
+                if (!(Number(p.salary) > 0)) return false;
                 const dn = p.displayName;
+                const keepZero = (minExposures[dn] || 0) > 0
+                    || (groupList || []).some(g =>
+                        (g.conditionPlayer && playerLabelMatch(p, g.conditionPlayer))
+                        || (g.players || []).some(n => playerLabelMatch(p, n))
+                        || (g.runbackPlayers || []).some(n => playerLabelMatch(p, n)));
+                if (!(Number(p.projectedFP) > 0) && !keepZero) return false;
                 const count = playerCounts[dn] || playerCounts[p.baseName] || playerCounts[p.name] || 0;
                 const effectiveMax = Math.max(minExposures[dn] || 0, Math.min(maxExposures[dn] || 100, maxExposure * 100));
                 let maxAllowed = Math.max(1, Math.floor(effectiveMax / 100 * Math.max(1, numLineups)));
@@ -10055,17 +10721,40 @@
             const players = keys.map(k => slots[k]);
             const names = players.map(p => p.name);
             if (new Set(names).size !== 9) return null;
-            const totalSalary = players.reduce((s,p) => s + p.salary, 0);
+            const totalSalary = players.reduce((s,p) => s + Number(p.salary || 0), 0);
             if (totalSalary > maxSalary) return null;
+            const floor = Math.max(0, (minSalary || 0) - 2000);
+            if (floor > 0 && totalSalary < floor) return null;
             const signature = names.slice().sort().join(',');
             if (lineupSet.has(signature)) return null;
             lineupSet.add(signature);
             return {
                 lineup: slots,
                 totalSalary,
-                totalPoints: players.reduce((s,p) => s + p.projectedFP, 0),
-                totalOwnership: players.reduce((s,p) => s + (p.ownership || 0), 0)
+                totalPoints: players.reduce((s,p) => s + (Number(p.projectedFP) || 0), 0),
+                totalOwnership: players.reduce((s,p) => s + (Number(p.ownership) || 0), 0)
             };
+        }
+        function lineupQualityFloor() {
+            if (!generatedLineups.length) return { minPts: 0, minSal: Math.max(0, (maxSalary || 50000) - 8000) };
+            const pts = generatedLineups.map(l => Number(l.totalPoints) || 0).sort((a,b) => a - b);
+            const mid = pts[Math.floor(pts.length * 0.35)] || pts[0] || 0;
+            const best = pts[pts.length - 1] || 0;
+            const have = generatedLineups.length;
+            const frac = Math.min(0.92, 0.72 + have / Math.max(20, numLineups) * 0.2);
+            return {
+                minPts: Math.max(0, mid * frac, best * 0.78),
+                minSal: Math.max(0, Math.min(minSalary || 0, (maxSalary || 50000) - 2500) - (have < 8 ? 2500 : 800))
+            };
+        }
+        function lineupLooksGood(lu, loose) {
+            if (!lu) return false;
+            const floor = lineupQualityFloor();
+            const minPts = loose ? floor.minPts * 0.86 : floor.minPts;
+            const minSal = loose ? Math.max(0, floor.minSal - 1500) : floor.minSal;
+            if ((Number(lu.totalPoints) || 0) < minPts) return false;
+            if ((Number(lu.totalSalary) || 0) < minSal) return false;
+            return true;
         }
         function toLu(p) {
             return { name: p.displayName, id: p.id, baseName: p.baseName, salary: p.salary, projectedFP: p.projectedFP, ownership: p.ownership || 0 };
@@ -10076,11 +10765,26 @@
             cand.sort((a,b) => ((Number(b.projectedFP)||0) * (0.7 + Math.random() * 0.6)) - ((Number(a.projectedFP)||0)));
             return cand[Math.floor(Math.random() * Math.min(6, cand.length))];
         }
-        function greedyBuildLineup(isShowdown, lineupSet, playerCounts) {
+        function playerLabelMatch(player, label) {
+            if (!player || !label) return false;
+            const a = String(label).replace(/\s+/g, ' ').trim();
+            const aBase = a.split(' (')[0].trim();
+            const strip = (s) => String(s || '').toLowerCase().replace(/[^a-z]/g, '');
+            const dn = String(player.displayName || '').trim();
+            const bn = String(player.baseName || '').trim();
+            const pn = String(player['Player Name'] || '').trim();
+            if (dn === a || bn === a || dn === aBase || bn === aBase || pn === aBase) return true;
+            return strip(dn) === strip(aBase) || strip(bn) === strip(aBase) || strip(pn) === strip(aBase);
+        }
+        function greedyBuildLineup(isShowdown, lineupSet, playerCounts, hint) {
             const pool = genEligible(isShowdown, playerCounts);
             if (!pool.length) return null;
             const used = new Set();
-            const jitter = (p) => (Number(p.projectedFP) || 0) * (0.65 + Math.random() * 0.7);
+            const qualityScore = (p) => {
+                const fp = Number(p.projectedFP) || 0;
+                const salK = Math.max(1, (Number(p.salary) || 4000) / 1000);
+                return fp * 1.4 + (fp / salK) * 0.9 + Math.random() * 1.15;
+            };
             const take = (list, maxSal, minSal) => {
                 const cand = list.filter(p => {
                     if (used.has(p.displayName) || used.has(p.baseName)) return false;
@@ -10088,9 +10792,20 @@
                     if (sal > maxSal) return false;
                     if (minSal && sal < minSal) return false;
                     return true;
-                }).sort((a,b) => jitter(b) - jitter(a));
+                }).sort((a,b) => qualityScore(b) - qualityScore(a));
                 return cand[0] || null;
             };
+            const takeNamedBest = (labels) => {
+                const found = [];
+                (labels || []).forEach(label => {
+                    const p = pool.find(x => playerLabelMatch(x, label) && !used.has(x.displayName) && !used.has(x.baseName));
+                    if (p) found.push(p);
+                });
+                found.sort((a,b) => (Number(b.projectedFP) || 0) - (Number(a.projectedFP) || 0)
+                    || qualityScore(b) - qualityScore(a));
+                return found;
+            };
+            const takeNamed = (label) => pool.find(p => playerLabelMatch(p, label) && !used.has(p.displayName) && !used.has(p.baseName));
             if (isShowdown) {
                 const caps = pool.filter(p => p.slotType === 'Captain' || (p.displayName||'').endsWith(' (CPT)'));
                 const flexes = pool.filter(p => p.slotType === 'FLEX' || (p.displayName||'').endsWith(' (FLEX)'));
@@ -10125,7 +10840,8 @@
                     totalOwnership: (cap.ownership||0) + flex.reduce((s,p)=>s+(p.ownership||0),0)
                 };
             }
-            const byPos = (pos) => pool.filter(p => String(p.Position||'').split('/')[0] === pos);
+            const posOfPlayer = (p) => String(p.Position || '').split('/')[0];
+            const byPos = (pos) => pool.filter(p => posOfPlayer(p) === pos);
             const order = [
                 { key: 'QB', pos: 'QB' },
                 { key: 'WR1', pos: 'WR' },
@@ -10140,11 +10856,41 @@
             const slots = {};
             let left = maxSalary;
             const remainAfter = { QB:8, WR1:7, RB1:6, WR2:5, RB2:4, WR3:3, TE:2, FLEX:1, DST:0 };
+            const placePlayer = (p) => {
+                if (!p) return false;
+                const pos = posOfPlayer(p);
+                const tryKeys = pos === 'QB' ? ['QB']
+                    : pos === 'RB' ? ['RB1','RB2','FLEX']
+                    : pos === 'WR' ? ['WR1','WR2','WR3','FLEX']
+                    : pos === 'TE' ? ['TE','FLEX']
+                    : pos === 'DST' || pos === 'DEF' ? ['DST']
+                    : ['FLEX'];
+                for (const k of tryKeys) {
+                    if (slots[k]) continue;
+                    slots[k] = toLu(p);
+                    used.add(p.displayName); used.add(p.baseName);
+                    left -= Number(p.salary) || 0;
+                    return true;
+                }
+                return false;
+            };
+            if (hint) {
+                if (hint.conditionPlayer) placePlayer(takeNamed(hint.conditionPlayer));
+                const need = Math.max(0, hint.numPlayers || 0);
+                const ranked = takeNamedBest(hint.players || []);
+                let got = 0;
+                for (const p of ranked) {
+                    if (got >= need) break;
+                    if (placePlayer(p)) got++;
+                }
+                takeNamedBest(hint.runbackPlayers || []).slice(0, hint.runbackNum || 1).forEach(p => placePlayer(p));
+            }
             for (const step of order) {
+                if (slots[step.key]) continue;
                 const floor = 2200 * remainAfter[step.key];
                 const maxThis = left - floor;
                 const list = step.pos === 'FLEX'
-                    ? pool.filter(p => ['RB','WR','TE'].includes(String(p.Position||'').split('/')[0]))
+                    ? pool.filter(p => ['RB','WR','TE'].includes(posOfPlayer(p)))
                     : byPos(step.pos);
                 const pick = take(list, maxThis, 0);
                 if (!pick) return null;
@@ -10152,6 +10898,27 @@
                 slots[step.key] = toLu(pick);
                 left -= pick.salary;
             }
+            // Upgrade pass: spend leftover on higher-projection same-slot players.
+            const upgradeKeys = ['FLEX','WR3','RB2','WR2','TE','RB1','WR1','DST'];
+            upgradeKeys.forEach(k => {
+                const cur = slots[k];
+                if (!cur) return;
+                const pos = k === 'FLEX' ? 'FLEX' : (k === 'DST' ? 'DST' : k.replace(/\d/g, ''));
+                const list = pos === 'FLEX'
+                    ? pool.filter(p => ['RB','WR','TE'].includes(posOfPlayer(p)))
+                    : byPos(pos);
+                const room = left + (Number(cur.salary) || 0);
+                const better = list
+                    .filter(p => !used.has(p.displayName) && !used.has(p.baseName) && (Number(p.salary) || 0) <= room)
+                    .sort((a,b) => (Number(b.projectedFP) || 0) - (Number(a.projectedFP) || 0));
+                const nxt = better[0];
+                if (nxt && (Number(nxt.projectedFP) || 0) > (Number(cur.projectedFP) || 0) + 0.15) {
+                    used.delete(cur.name);
+                    used.add(nxt.displayName); used.add(nxt.baseName);
+                    left = room - (Number(nxt.salary) || 0);
+                    slots[k] = toLu(nxt);
+                }
+            });
             return packClassicLineup(slots, lineupSet);
         }
                 function swapFillLineup(isShowdown, lineupSet, playerCounts) {
@@ -10300,14 +11067,16 @@
             // Failed solves used to loop 180–220 times with ZERO yields → page lockup.
             // Larger Showdown runs (150) need more attempts + a greedy fallback so we
             // don't hitch on an infeasible LP and then quit short of the target.
-            const MAX_CONSEC_FAIL = isShowdown ? Math.max(28, Math.ceil(numLineups / 4)) : 28;
-            const MAX_TOTAL_ATTEMPTS = Math.max(80, numLineups * (isShowdown ? 16 : 10));
-            const RUN_TIME_BUDGET_MS = Math.min(240000, 25000 + numLineups * (isShowdown ? 1100 : 800));
+            const MAX_CONSEC_FAIL = isShowdown ? Math.max(12, Math.ceil(numLineups / 8)) : 10;
+            const MAX_TOTAL_ATTEMPTS = Math.max(80, numLineups * (isShowdown ? 12 : 8));
+            const RUN_TIME_BUDGET_MS = Math.min(180000, 20000 + numLineups * (isShowdown ? 900 : 650));
             const runStartedAt = Date.now();
             let totalAttempts = 0;
+            const groupPressure = (groupList || []).length > 0;
             let globalTempMin = minSalary;
             let globalRelaxed = maxExposure;
-            let globalRand = randomnessFactorBase;
+            let globalRand = Math.min(0.28, Math.max(0.12, randomnessFactorBase || 0.22));
+            window._softGroups = false;
 
             const yieldToUI = () => new Promise(r => setTimeout(r, 0));
 
@@ -10330,13 +11099,18 @@
                     enforceStack = false, enforceGroup = false,
                     stackCap = null, stackRec = null, group = null,
                     stackSpec = null,
-                    label = 'Building'
+                    label = 'Building',
+                    tempMin = null,
+                    rand = null,
+                    allowGreedy = false
                 } = opts || {};
                 try {
+                    const useMin = (tempMin != null) ? tempMin : globalTempMin;
+                    const useRand = (rand != null) ? rand : globalRand;
                     const model = createModel(
                         enforceStack, enforceGroup, playerCounts, generatedLineups.length,
                         stackCap, stackRec, group,
-                        globalTempMin, globalRelaxed, generatedLineups, globalRand,
+                        useMin, globalRelaxed, generatedLineups, useRand,
                         forceQBStack, forceShowdownStack, globalForcedInclude, [],
                         stackSpec
                     );
@@ -10354,18 +11128,25 @@
                             }
                         });
                     }
+                    if (enforceGroup && group) {
+                        const bump = [...(group.players || []), ...(group.runbackPlayers || []), group.conditionPlayer].filter(Boolean);
+                        bump.forEach((nm, idx) => {
+                            const b = String(nm).split(' (')[0];
+                            const extra = 1.2 + ((generatedLineups.length + idx) % 3) * 0.15;
+                            Object.keys(model.variables).forEach(v => {
+                                if (v.startsWith(b + '_')) model.variables[v].points *= extra;
+                            });
+                        });
+                    }
                     const result = solver.Solve(model);
                     if (totalAttempts % 2 === 0) await yieldToUI();
                     if (!result || !result.feasible) {
-                        globalTempMin = Math.max(0, globalTempMin - 2000);
-                        globalRelaxed = Math.min(1, globalRelaxed + 0.06);
-                        globalRand = Math.min(0.95, globalRand + 0.08);
-                        if (isShowdown && (totalAttempts % 3 === 0)) {
-                            const fb = (typeof swapFillLineup === 'function' ? swapFillLineup(true, lineupSet, playerCounts) : null)
-                                || greedyBuildLineup(true, lineupSet, playerCounts);
+                        if (allowGreedy) {
+                            const fb = greedyBuildLineup(isShowdown, lineupSet, playerCounts, group)
+                                || (typeof swapFillLineup === 'function' ? swapFillLineup(isShowdown, lineupSet, playerCounts) : null);
                             if (fb && validLineup(fb)) {
                                 generatedLineups.push(fb);
-                                updatePlayerCounts(fb, playerCounts, true);
+                                updatePlayerCounts(fb, playerCounts, isShowdown);
                                 updateProgress((generatedLineups.length / numLineups) * 100, `${label} · ${generatedLineups.length}/${numLineups}`);
                                 await yieldToUI();
                                 return fb;
@@ -10421,71 +11202,122 @@
                 logMessages.push(`Stack ${si + 1}: ${stack.generated}/${stack.num}`);
             }
 
-            // Phase 2: Partial groups
-            const groupsPartial = groupList.filter(g => g.percentage > 0 && g.percentage < 100)
-                .map(g => ({ ...g, num: Math.floor(numLineups * g.percentage / 100), generated: 0 }));
+            // Phase 2: Groups. "When QB @100%" is a rule on that QB, not a demand that
+            // the QB appear in every lineup. Target count comes from the QB's min exposure
+            // (or the group %) so Lamar @7% gets ~11 stacked lineups in a 150-max, not 150.
+            const groupsPartial = (groupList || []).filter(g => g && g.percentage > 0).map(g => {
+                let num = Math.floor(numLineups * Math.min(100, g.percentage) / 100);
+                if (g.conditionPlayer) {
+                    const minE = (g.conditionMinExp != null)
+                        ? g.conditionMinExp
+                        : (minExposures[g.conditionPlayer] || 0);
+                    const fromMin = Math.ceil((minE || 0) / 100 * numLineups);
+                    if (g.percentage >= 100) num = Math.max(fromMin, fromMin ? fromMin : Math.min(8, Math.ceil(numLineups * 0.05)));
+                    else num = Math.max(num, fromMin);
+                }
+                return { ...g, num: Math.max(0, num), generated: 0 };
+            });
             let totalPartial = groupsPartial.reduce((s, g) => s + g.num, 0);
-            if (totalPartial > numLineups - generatedLineups.length) {
-                const scale = (numLineups - generatedLineups.length) / Math.max(1, totalPartial);
-                groupsPartial.forEach(g => g.num = Math.floor(g.num * scale));
+            const room = Math.max(0, numLineups - generatedLineups.length);
+            if (totalPartial > room && totalPartial > 0) {
+                const scale = room / totalPartial;
+                groupsPartial.forEach(g => { g.num = Math.floor(g.num * scale); });
             }
             for (let gi = 0; gi < groupsPartial.length && stillHaveBudget(); gi++) {
                 const group = groupsPartial[gi];
+                if (!group.num) continue;
                 let fails = 0;
-                while (group.generated < group.num && fails < MAX_CONSEC_FAIL && stillHaveBudget()) {
-                    const got = await trySolve({ enforceGroup: true, group, label: 'Group phase' });
+                const failCap = 6;
+                updateProgress((generatedLineups.length / numLineups) * 100, `Group ${gi + 1}: ${group.conditionPlayer || 'set'}`);
+                while (group.generated < group.num && fails < failCap && stillHaveBudget() && generatedLineups.length < numLineups) {
+                    const dip = fails >= 2 ? Math.max(0, minSalary - 1500) : minSalary;
+                    const got = await trySolve({
+                        enforceGroup: true,
+                        group,
+                        label: 'Group phase',
+                        tempMin: dip,
+                        rand: 0.16 + Math.min(0.12, fails * 0.04),
+                        allowGreedy: fails >= 3
+                    });
                     if (got) { group.generated++; fails = 0; }
-                    else fails++;
+                    else {
+                        fails++;
+                        if (fails >= 2) {
+                            const fb = greedyBuildLineup(isShowdown, lineupSet, playerCounts, group);
+                            if (fb && validLineup(fb)) {
+                                generatedLineups.push(fb);
+                                updatePlayerCounts(fb, playerCounts, isShowdown);
+                                group.generated++;
+                                fails = 0;
+                                updateProgress((generatedLineups.length / numLineups) * 100, `Group ${gi + 1} · ${generatedLineups.length}/${numLineups}`);
+                            }
+                        }
+                    }
                 }
+                logMessages.push(`Group ${gi + 1} (${group.conditionPlayer || (group.players || []).slice(0,2).join('/')}): ${group.generated}/${group.num}`);
             }
 
-            // Phase 3: remaining lineups — solver only
+            // Phase 3: remaining field — keep salary/projection quality
             let fails = 0;
+            globalTempMin = minSalary;
+            globalRand = Math.min(0.26, Math.max(0.14, randomnessFactorBase || 0.2));
             while (generatedLineups.length < numLineups && fails < MAX_CONSEC_FAIL && stillHaveBudget()) {
-                const got = await trySolve({ label: 'Building remaining' });
+                const got = await trySolve({ label: 'Building remaining', tempMin: minSalary, rand: globalRand });
                 if (got) fails = 0;
-                else fails++;
+                else {
+                    fails++;
+                    if (fails >= 3) {
+                        const fb = (typeof swapFillLineup === 'function' ? swapFillLineup(isShowdown, lineupSet, playerCounts) : null)
+                            || greedyBuildLineup(isShowdown, lineupSet, playerCounts);
+                        if (fb && validLineup(fb)) {
+                            generatedLineups.push(fb);
+                            updatePlayerCounts(fb, playerCounts, isShowdown);
+                            fails = 0;
+                            updateProgress((generatedLineups.length / numLineups) * 100, `Fill · ${generatedLineups.length}/${numLineups}`);
+                        }
+                    }
+                }
             }
 
             if (generatedLineups.length < numLineups && !abortLineupGeneration && stillHaveBudget()) {
                 const savedUnique = minUniquePlayers;
                 minUniquePlayers = Math.max(0, minUniquePlayers - 1);
-                globalTempMin = Math.max(0, globalTempMin - 1500);
+                window._softGroups = true;
                 fails = 0;
                 updateProgress((generatedLineups.length / numLineups) * 100, 'Soft fill…');
-                while (generatedLineups.length < numLineups && fails < Math.max(24, Math.ceil(numLineups / 5)) && stillHaveBudget()) {
-                    const got = await trySolve({ label: 'Soft fill' });
+                while (generatedLineups.length < numLineups && fails < 16 && stillHaveBudget()) {
+                    const got = await trySolve({
+                        label: 'Soft fill',
+                        tempMin: Math.max(0, minSalary - 1000),
+                        rand: 0.22,
+                        allowGreedy: fails >= 2
+                    });
                     if (got) fails = 0;
-                    else {
-                        fails++;
-                        const fb = greedyBuildLineup(isShowdown, lineupSet, playerCounts);
-                        if (fb && validLineup(fb)) {
-                            generatedLineups.push(fb);
-                            updatePlayerCounts(fb, playerCounts, isShowdown);
-                            fails = 0;
-                            updateProgress((generatedLineups.length / numLineups) * 100, `Greedy fill · ${generatedLineups.length}/${numLineups}`);
-                        }
-                    }
+                    else fails++;
                 }
                 minUniquePlayers = savedUnique;
+                window._softGroups = false;
             }
 
-            // Last-resort Showdown fill so 150-max runs don't die on a solver hitch
-            if (isShowdown && generatedLineups.length < numLineups && !abortLineupGeneration) {
+            // Last-resort: still projection-ranked, just so the field is complete
+            if (generatedLineups.length < numLineups && !abortLineupGeneration) {
                 let guard = 0;
-                const hardCap = Math.min(400, (numLineups - generatedLineups.length) * 8);
-                updateProgress((generatedLineups.length / numLineups) * 100, 'Greedy finish…');
+                const hardCap = Math.min(220, (numLineups - generatedLineups.length) * 4);
+                updateProgress((generatedLineups.length / numLineups) * 100, 'Finish field…');
                 while (generatedLineups.length < numLineups && guard < hardCap && !abortLineupGeneration) {
                     guard++;
                     if (guard % 8 === 0) await yieldToUI();
-                    const fb = greedyBuildLineup(true, lineupSet, playerCounts);
+                    const fb = greedyBuildLineup(isShowdown, lineupSet, playerCounts)
+                        || (typeof swapFillLineup === 'function' ? swapFillLineup(isShowdown, lineupSet, playerCounts) : null);
                     if (!fb || !validLineup(fb)) continue;
                     generatedLineups.push(fb);
-                    updatePlayerCounts(fb, playerCounts, true);
-                    updateProgress((generatedLineups.length / numLineups) * 100, `Greedy finish · ${generatedLineups.length}/${numLineups}`);
+                    updatePlayerCounts(fb, playerCounts, isShowdown);
+                    updateProgress((generatedLineups.length / numLineups) * 100, `Finish field · ${generatedLineups.length}/${numLineups}`);
                 }
                 if (generatedLineups.length < numLineups) {
-                    logMessages.push(`Filled ${generatedLineups.length}/${numLineups} after solver hitch — pool/constraints may be too tight for a full 150.`);
+                    logMessages.push(`Filled ${generatedLineups.length}/${numLineups}. Remaining groups/min exposures were not feasible at the current salary floor.`);
+                } else if (groupPressure) {
+                    logMessages.push('Finished the field. Group slices used the solver first; only infeasible slices fell back to a projection-ranked build.');
                 }
             }
 
@@ -10554,7 +11386,8 @@
                 // partial results still shown
             } else if (generatedLineups.length < numLineups) {
                 const tips = [];
-                if (minSalary > 49000) tips.push('Lower min salary (current floor may be too high)');
+                if (minSalary > 49000) tips.push('Lower min salary (current floor may be too high — $49.4k + When-QB groups often has no legal lineup)');
+                if ((groupList || []).length >= 4) tips.push('Several When-QB groups at 100% were treated as “if QB then stack,” not “every lineup.” Some groups may still be short.');
                 if (maxExposure < 0.35) tips.push('Raise max exposure');
                 if (minUniquePlayers >= 4) tips.push('Lower min unique players');
                 if (stackList.length > 3) tips.push('Too many stacks competing — reduce stack % or count');
@@ -10812,8 +11645,15 @@
                             const names = isShowdown
                                 ? [l.lineup.captain?.name, ...l.lineup.flex.map(f => f.name)]
                                 : Object.values(l.lineup).map(x => x?.name);
-                            if (g.conditionPlayer && !names.includes(g.conditionPlayer)) return true;
-                            const c = g.players.filter(pl => names.includes(pl)).length;
+                            const hasName = (label) => names.some(n => {
+                                if (!n || !label) return false;
+                                if (n === label) return true;
+                                const a = String(n).split(' (')[0].toLowerCase();
+                                const b = String(label).split(' (')[0].toLowerCase();
+                                return a === b || a.replace(/[^a-z]/g,'') === b.replace(/[^a-z]/g,'');
+                            });
+                            if (g.conditionPlayer && !hasName(g.conditionPlayer)) return true;
+                            const c = g.players.filter(pl => hasName(pl)).length;
                             return (g.type === 'min' && c >= g.numPlayers) || (g.type === 'max' && c <= g.numPlayers) || (g.type === 'exact' && c === g.numPlayers);
                         }).length;
                         mets.push(actual);
@@ -11351,35 +12191,9 @@
 
             lastMcResults = results;
             mcChecked = new Set();
-
-            const formatLineupBrief = (idx) => {
-                const lu = generatedLineups[idx - 1];
-                if (!lu) return '—';
-                if (isShowdown) {
-                    const names = [lu.lineup.captain?.name, ...(lu.lineup.flex || []).map(f => f.name)].filter(Boolean);
-                    return names.join(', ');
-                }
-                return ['QB','RB1','RB2','WR1','WR2','WR3','TE','FLEX','DST']
-                    .map(s => lu.lineup[s]?.name).filter(Boolean).join(', ');
-            };
-
-            document.getElementById('mcTableBody').innerHTML = results.map(r => `
-                <tr>
-                    <td><input type="checkbox" class="mc-check" data-idx="${r.index}" onchange="onMcCheckChange()"></td>
-                    <td>${r.index}</td>
-                    <td style="text-align:left;font-size:0.72rem;max-width:280px;white-space:normal;line-height:1.3;">${formatLineupBrief(r.index)}</td>
-                    <td>${r.median.toFixed(1)}</td>
-                    <td>${r.p75.toFixed(1)}</td>
-                    <td><strong>${r.p90.toFixed(1)}</strong></td>
-                    <td>${r.boomPct.toFixed(1)}%</td>
-                    <td>${r.p10.toFixed(1)}</td>
-                    <td>${r.top1Pct != null ? r.top1Pct.toFixed(2) + '%' : '—'}</td>
-                    <td>${r.top5Pct != null ? r.top5Pct.toFixed(2) + '%' : '—'}</td>
-                    <td>${r.cashPct != null ? r.cashPct.toFixed(1) + '%' : '—'}</td>
-                    <td>${r.origProj.toFixed(1)}</td>
-                </tr>
-            `).join('');
-
+            mcSortColumn = useContest ? 'Top 1%' : '90th';
+            mcSortDirection = 'desc';
+            renderMcTable();
             updateMcCheckedCount();
 
             const corrNote = useCorr ? 'Correlated stacks ON. ' : '';
@@ -11393,6 +12207,100 @@
             document.getElementById('loadingMessage').classList.add('hidden');
             btn.disabled = false;
             btn.textContent = '🎲 Run Simulation';
+        }
+
+        function mcSortMark(col) {
+            const on = mcSortColumn === col;
+            const arrow = !on ? '↕' : (mcSortDirection === 'asc' ? '▲' : '▼');
+            return `<span class="sort-ind">${arrow}</span>`;
+        }
+        function sortMcTable(column) {
+            const numeric = column !== 'Lineup';
+            if (mcSortColumn === column) mcSortDirection = mcSortDirection === 'asc' ? 'desc' : 'asc';
+            else { mcSortColumn = column; mcSortDirection = numeric ? 'desc' : 'asc'; }
+            renderMcTable();
+        }
+        function formatMcLineupBrief(idx) {
+            const lu = generatedLineups[idx - 1];
+            if (!lu) return '—';
+            if (isShowdownSlateName(selectedSlate)) {
+                const names = [lu.lineup.captain?.name, ...(lu.lineup.flex || []).map(f => f.name)].filter(Boolean);
+                return names.join(', ');
+            }
+            return ['QB','RB1','RB2','WR1','WR2','WR3','TE','FLEX','DST']
+                .map(s => lu.lineup[s]?.name).filter(Boolean).join(', ');
+        }
+        function renderMcTable() {
+            const head = document.getElementById('mcHeaderRow');
+            const body = document.getElementById('mcTableBody');
+            if (!body) return;
+            const cols = [
+                ['Lineup #', 'Lineup #'],
+                ['Lineup', 'Lineup'],
+                ['Median', 'Median'],
+                ['75th', '75th'],
+                ['90th', '90th'],
+                ['Boom %', 'Boom %'],
+                ['Floor', 'Floor'],
+                ['Top 1%', 'Top 1%'],
+                ['Top 5%', 'Top 5%'],
+                ['Cash %', 'Cash %'],
+                ['Orig Proj', 'Orig Proj']
+            ];
+            if (head) {
+                head.innerHTML = '<th><input type="checkbox" id="mcSelectAll" onchange="toggleAllMcChecks(this.checked)" title="Select all"></th>'
+                    + cols.map(([label, col]) => {
+                        const on = mcSortColumn === col;
+                        return `<th class="sortable ${on ? 'is-sorted' : ''}" onclick="sortMcTable('${col}')">${label}${mcSortMark(col)}</th>`;
+                    }).join('');
+            }
+            const rows = [...(lastMcResults || [])];
+            const key = (r) => {
+                switch (mcSortColumn) {
+                    case 'Lineup #': return r.index;
+                    case 'Lineup': return formatMcLineupBrief(r.index);
+                    case 'Median': return r.median;
+                    case '75th': return r.p75;
+                    case '90th': return r.p90;
+                    case 'Boom %': return r.boomPct;
+                    case 'Floor': return r.p10;
+                    case 'Top 1%': return r.top1Pct;
+                    case 'Top 5%': return r.top5Pct;
+                    case 'Cash %': return r.cashPct;
+                    case 'Orig Proj': return r.origProj;
+                    default: return r.p90;
+                }
+            };
+            if (mcSortColumn) {
+                rows.sort((a, b) => {
+                    const va = key(a), vb = key(b);
+                    if (va == null && vb == null) return 0;
+                    if (va == null) return 1;
+                    if (vb == null) return -1;
+                    if (typeof va === 'string' || typeof vb === 'string') {
+                        const cmp = String(va).localeCompare(String(vb), undefined, { sensitivity: 'base' });
+                        return mcSortDirection === 'asc' ? cmp : -cmp;
+                    }
+                    return mcSortDirection === 'asc' ? (va - vb) : (vb - va);
+                });
+            }
+            body.innerHTML = rows.map(r => `
+                <tr>
+                    <td><input type="checkbox" class="mc-check" data-idx="${r.index}" ${mcChecked.has(r.index) ? 'checked' : ''} onchange="onMcCheckChange()"></td>
+                    <td>${r.index}</td>
+                    <td style="text-align:left;font-size:0.72rem;max-width:280px;white-space:normal;line-height:1.3;">${formatMcLineupBrief(r.index)}</td>
+                    <td>${r.median.toFixed(1)}</td>
+                    <td>${r.p75.toFixed(1)}</td>
+                    <td><strong>${r.p90.toFixed(1)}</strong></td>
+                    <td>${r.boomPct.toFixed(1)}%</td>
+                    <td>${r.p10.toFixed(1)}</td>
+                    <td>${r.top1Pct != null ? r.top1Pct.toFixed(2) + '%' : '—'}</td>
+                    <td>${r.top5Pct != null ? r.top5Pct.toFixed(2) + '%' : '—'}</td>
+                    <td>${r.cashPct != null ? r.cashPct.toFixed(1) + '%' : '—'}</td>
+                    <td>${r.origProj.toFixed(1)}</td>
+                </tr>
+            `).join('');
+            updateMcCheckedCount();
         }
 
         function onMcCheckChange() {
@@ -12052,10 +12960,17 @@
             return (Number(own) || 0) * (3 / max);
         }
         function ownPayoffFp(own, pos) {
-            const adj = Math.min(80, slotAdjOwn(own, pos));
+            // Kept as a fallback only. Primary leverage now uses position-relative own-need FP.
+            const adj = Math.min(80, Number(own) || 0);
             const offset = { QB: 3, RB: 0, WR: -1.5, TE: -3.5, DST: -5, K: -4 }[pos] || 0;
             const raw = 12 + 0.20 * adj + 0.0030 * adj * adj;
             return Math.round((raw + offset) * 10) / 10;
+        }
+        function levMedian(arr) {
+            const a = (arr || []).filter(n => Number.isFinite(n)).slice().sort((x, y) => x - y);
+            if (!a.length) return 0;
+            const mid = Math.floor(a.length / 2);
+            return a.length % 2 ? a[mid] : (a[mid - 1] + a[mid]) / 2;
         }
         function buildLeverageRows(pool) {
             levCache = new Map();
@@ -12070,20 +12985,26 @@
                 const rows = groups[pos].filter(p => csFp(p) > 0 && (Number(p.ownership) || 0) > 0);
                 if (!rows.length) return;
                 const slots = posSlots(pos);
+                const medOwn = levMedian(rows.map(p => Number(p.ownership) || 0)) || 12;
+                const medProj = levMedian(rows.map(p => csFp(p))) || 10;
+                const medSalK = levMedian(rows.map(p => csSal(p) / 1000)) || 5;
                 const tmp = rows.map(p => {
                     const own = Number(p.ownership) || 0;
                     const proj = csFp(p);
                     const sal = csSal(p);
-                    const valueX = sal > 0 ? proj / (sal / 1000) : 0;
+                    const salK = sal > 0 ? sal / 1000 : 0;
+                    const valueX = salK > 0 ? proj / salK : 0;
                     const impl = levImplFp(p);
                     const price = levPriceFp(p);
-                    const cashFloor = sal > 0 ? (sal / 1000) * 2.5 : 0;
-                    const adjOwn = slotAdjOwn(own, pos);
-                    const payoff = ownPayoffFp(own, pos);
-                    const budgetShare = slots.budget > 0 ? (own / slots.budget) * 100 : own;
-                    return { p, pos, own, adjOwn, proj, impl, price, cashFloor, valueX, payoff, slots, budgetShare };
+                    // Ownership demand: what FP this own% is asking for at this position,
+                    // blended with salary-implied FP so expensive chalk is not compared only to a median WR.
+                    const ownRatio = own / Math.max(1, medOwn);
+                    const ownFromField = medProj * ownRatio;
+                    const ownFromSalary = price * ownRatio * (medSalK > 0 && salK > 0 ? Math.max(0.65, Math.min(1.45, salK / medSalK)) : 1);
+                    const payoff = Math.round((0.58 * ownFromField + 0.42 * ownFromSalary) * 10) / 10;
+                    const cashFloor = salK * 2.5;
+                    return { p, pos, own, adjOwn: own, proj, impl, price, cashFloor, valueX, payoff, slots, budgetShare: own };
                 });
-                const n = tmp.length;
                 const byProj = tmp.slice().sort((a, b) => b.proj - a.proj || csSal(b.p) - csSal(a.p));
                 const byOwn = tmp.slice().sort((a, b) => b.own - a.own || b.proj - a.proj);
                 byProj.forEach((r, i) => { r.projRank = i + 1; });
@@ -12096,18 +13017,14 @@
                     rec.vsImpl = rec.proj - rec.impl;
                     rec.levScore = Math.round(rec.edge * 10) / 10;
                     rec.ownShare = rec.own;
-                    const chalk = rec.adjOwn >= 25 || rec.own >= 25;
+                    const overAsk = rec.own >= Math.max(8, medOwn * 1.15);
                     let tag = 'Properly owned';
-                    const canOver = rec.own >= 5;
-                    if (canOver && chalk && rec.edge <= -8) tag = 'Over-valued';
-                    else if (canOver && chalk && rec.edge <= -4) tag = 'Slightly over-valued';
-                    else if (canOver && rec.edge <= -8) tag = 'Over-valued';
-                    else if (canOver && rec.edge <= -3) tag = 'Slightly over-valued';
-                    else if (rec.edge >= 4 && rec.adjOwn < 18 && rec.valueX >= 2) tag = 'Under-owned';
-                    else if (rec.edge >= 2 && rec.adjOwn < 22) tag = 'Slightly under-valued';
-                    else tag = 'Properly owned';
+                    if (rec.own >= 4 && rec.edge <= -5) tag = 'Over-valued';
+                    else if (rec.own >= 4 && rec.edge <= -2.2) tag = 'Slightly over-valued';
+                    else if (rec.edge >= 3.5 && rec.own <= medOwn && rec.valueX >= 1.8) tag = 'Under-owned';
+                    else if (rec.edge >= 1.8 && !overAsk) tag = 'Slightly under-valued';
                     rec.tag = tag;
-                    rec.reason = `${tag}: ${rec.own.toFixed(1)}% own on ${rec.slots.min}–${rec.slots.max} ${rec.pos} slots (adj ${rec.adjOwn.toFixed(0)}%) prices ${rec.payoff.toFixed(1)} FP · proj ${rec.proj.toFixed(1)} · impl ${rec.impl.toFixed(1)} (${rec.edge >= 0 ? '+' : ''}${rec.edge.toFixed(1)} vs own-price)`;
+                    rec.reason = `${tag}: ${rec.own.toFixed(1)}% ${rec.pos} own asks ${rec.payoff.toFixed(1)} FP (pos median own ${medOwn.toFixed(1)}%). Proj ${rec.proj.toFixed(1)} vs salary-implied ${rec.impl.toFixed(1)} (${rec.edge >= 0 ? '+' : ''}${rec.edge.toFixed(1)} vs own-need, ${rec.vsImpl >= 0 ? '+' : ''}${rec.vsImpl.toFixed(1)} vs salary).`;
                     levCache.set(rec.p.displayName, rec);
                     out.push(rec);
                 });
@@ -12171,9 +13088,8 @@
                 <td>${csEsc(r.p.Team || '')}</td>
                 <td><span class="cs-tag ${levTagClass(r.tag)}">${r.tag}</span></td>
                 <td class="num">${r.own.toFixed(1)}%</td>
-                <td class="num">${(r.adjOwn||0).toFixed(1)}%</td>
-                <td class="num">${r.slots.min}–${r.slots.max}</td>
                 <td class="num">${r.payoff.toFixed(1)}</td>
+                <td class="num">${r.price.toFixed(1)}</td>
                 <td class="num">${r.proj.toFixed(1)}</td>
                 <td class="num">${r.impl.toFixed(1)}</td>
                 <td class="num" style="font-weight:700;color:${r.edge>=2?'#7dffa3':r.edge<=-4?'#ff8a96':'inherit'}">${r.edge>=0?'+':''}${r.edge.toFixed(1)}</td>
@@ -12202,20 +13118,19 @@
                     <th title="Team">Team</th>
                     <th title="Leverage tag from own-price vs projection">Tag</th>
                     <th title="Projected ownership percent">Own</th>
-                    <th title="Ownership scaled to RB baseline: raw own times 3 / max slots">Adj own</th>
-                    <th title="Dedicated to max roster spots including FLEX">Slots</th>
-                    <th title="Fantasy points this ownership is paying for. RB 60 percent is about 35">Own-price</th>
+                    <th title="FP this ownership is asking for at this position and salary">Own-need FP</th>
+                    <th title="Salary-implied FP (sheet Implied FP or $ / 1000 × 3)">Sal-impl FP</th>
                     <th title="Cheat Sheet projected fantasy points">Proj</th>
-                    <th title="Implied or salary-based FP">Impl</th>
-                    <th title="Proj minus own-price. Negative means cannot pay off that own percent">vs Own</th>
-                    <th title="Proj minus implied FP">vs Impl</th>
+                    <th title="Implied or salary-based FP used in vs Impl">Impl</th>
+                    <th title="Proj minus own-need FP. Positive = under-owned leverage">vs Own-need</th>
+                    <th title="Proj minus salary-implied FP">vs Impl</th>
                     <th title="Proj divided by salary per 1000">Val</th>
                 </tr></thead>
                 <tbody>${body || '<tr><td colspan="13">No players match. Ownership must be loaded for this slate.</td></tr>'}
                 ${allRows.length > rows.length ? `<tr><td colspan="13"><button type="button" class="ghost" onclick="window.levRowCap=${rows.length+80};renderLeverage();">Show more (${rows.length} of ${allRows.length})</button></td></tr>` : ''}
                 </tbody>
             </table></div>
-            <p class="cs-note">Adj own = raw own × (3 / max slots) so RB is the baseline. QB 20% ≈ RB 60% chalk. Own-price uses that adjusted rate (RB 60% ≈ 35 FP). vs Own = Proj − own-price. Field budgets assume FLEX split ~RB 50% / WR 40% / TE 10%. Stacks live in Stacks Lab.</p>`;
+            <p class="cs-note">Own-need FP is what a player must score to justify their projected ownership inside their position (scaled by salary). vs Own-need = Proj − Own-need. vs Impl = Proj − salary-implied FP. This is no longer forced onto an RB-slot scale. Add those leverage stacks from Stacks Lab.</p>`;
             } catch (err) {
                 console.warn('Leverage render failed', err);
                 root.innerHTML = '<p class="cs-note">Ownership Leverage hit an error: ' + String(err && err.message || err) + '</p>';
@@ -12417,6 +13332,7 @@
             if (!menu || menu.hidden) return;
             if (e.target.closest('.cs-multitag')) return;
             menu.hidden = true;
+            menu.classList.remove('show');
         });
         window.addEventListener('load', () => { try { luRender(); if (luState.open) luOpen(true); } catch (e) {} });
 
@@ -12561,12 +13477,28 @@
         }
 
         function csSourcePool() {
-            const src = (filteredData && filteredData.length) ? filteredData
-                : ((allSlatePlayers && allSlatePlayers.length) ? allSlatePlayers : []);
-            return src.filter(p => p && (p.baseName || p['Player Name'] || p.displayName) && p.slotType !== 'Captain');
+            const isSd = (typeof isShowdownSlateName === 'function' && isShowdownSlateName(selectedSlate))
+                || (typeof selectedSlate === 'string' && selectedSlate.includes('Showdown'));
+            const src = (allSlatePlayers && allSlatePlayers.length) ? allSlatePlayers
+                : ((filteredData && filteredData.length) ? filteredData : []);
+            return src.filter(p => {
+                if (!p || !(p.baseName || p['Player Name'] || p.displayName)) return false;
+                if (isSd && p.slotType === 'Captain') return false;
+                return true;
+            });
         }
         function csFp(p) { return Number(p.projectedFP || p['Projected FP'] || 0) || 0; }
         function csSal(p) { return Number(p.salary || 0) || 0; }
+        function csCptSal(p) {
+            if (!p) return null;
+            const isSd = (typeof isShowdownSlateName === 'function' && isShowdownSlateName(selectedSlate))
+                || (typeof selectedSlate === 'string' && selectedSlate.includes('Showdown'));
+            if (!isSd) return null;
+            const twin = (allSlatePlayers || []).find(x => x && x.baseName === p.baseName && x.slotType === 'Captain');
+            if (twin && Number(twin.salary) > 0) return Number(twin.salary);
+            const s = csSal(p);
+            return s > 0 ? Math.round(s * 1.5) : null;
+        }
         function csPtsPerK(p) { const s = csSal(p); return s > 0 ? csFp(p) / (s / 1000) : 0; }
         function csName(p) { return String(p.displayName || p['Player Name'] || p.baseName || '').replace(/\s*\([^)]*\)\s*$/, ''); }
         function csOpp(p) { return p.Opponent || p.Opp || ''; }
@@ -12598,7 +13530,10 @@
         }
         function toggleCsTagMenu() {
             const menu = document.getElementById('csTagMenu');
-            if (menu && menu.classList.contains('cs-multitag-menu')) menu.hidden = !menu.hidden;
+            if (!menu) return;
+            const open = menu.hidden || !menu.classList.contains('show');
+            menu.hidden = !open;
+            menu.classList.toggle('show', open);
         }
         function clearCsTags() {
             document.querySelectorAll('#csTagMenu input[type="checkbox"]').forEach(el => { el.checked = false; });
@@ -12650,7 +13585,6 @@
             const tagWantList = csSelectedTags();
             const teamWant = document.getElementById('csTeam')?.value || '';
             const list = csSourcePool().filter(p => {
-                if (deselectedPlayers.has(p.displayName)) return false;
                 if (teamWant && String(p.Team || '') !== teamWant) return false;
                 if (tagWantList.length) {
                     const pack = cashTagPlayer(p);
@@ -12666,8 +13600,7 @@
                 if (fp < minFp && !isDst) return false;
                 if (csPtsPerK(p) < minVal) return false;
                 const ppos = csPos(p);
-                if (pos === 'WR' && !(ppos === 'WR' || ppos === 'TE')) return false;
-                else if (pos && pos !== 'WR' && ppos !== pos) return false;
+                if (pos && ppos !== pos) return false;
                 if (q) {
                     const blob = [csName(p), p.Team, csOpp(p), ppos].join(' ').toLowerCase();
                     if (!blob.includes(q)) return false;
@@ -12777,7 +13710,7 @@
             const games = csGameCount(csSourcePool());
             const want = ['QB','RB','WR','TE'];
             return `<details class="cs-best" id="csBestPlays"><summary>Best plays by position</summary><div class="cs-top-board">${want.map(pos => {
-                const list = rows.filter(p => pos === 'WR' ? (csPos(p)==='WR'||csPos(p)==='TE') : csPos(p)===pos)
+                const list = rows.filter(p => csPos(p)===pos)
                     .sort((a,b)=>csFp(b)-csFp(a)).slice(0,8);
                 const items = list.map((p,i) => `<button type="button" onclick="openCsDrawer('${csArg(csName(p))}')">
                     <span class="n">${i+1}</span><span class="nm">${csEsc(csName(p))}</span>
@@ -12790,7 +13723,7 @@
             const heatI = heatRange(rows, p => Number(p.impliedTotal));
             const heatV = heatRange(rows, p => csPtsPerK(p));
             const sortedAll = csSort(rows);
-            const cap = Number(window.csRowCap) > 0 ? Number(window.csRowCap) : 80;
+            const cap = Number(window.csRowCap) > 0 ? Number(window.csRowCap) : 200;
             const sorted = sortedAll.slice(0, cap);
             const th = (key, label, tip) => `<th style="cursor:pointer;" title="${String(tip||'').replace(/"/g,'&quot;')}" onclick="csSortKey='${key}';csSortDir=csSortKey==='${key}'&&csSortDir==='desc'?'asc':'desc';renderCheatSheet();">${label}</th>`;
             const body = sorted.map((p, i) => {
@@ -12826,7 +13759,7 @@
                     <td>${csEsc(csOpp(p))}</td>
                     <td>${heatPill(p.impliedTotal, heatI, impl)}</td>
                     <td>${dvpPill(dvp)}</td>
-                    <td class="num">$${csSal(p)}</td>
+                    <td class="num">$${csSal(p)}${csCptSal(p) ? `<div class="cs-sub">CPT $${csCptSal(p)}</div>` : ''}</td>
                     <td class="num">${csFp(p).toFixed(1)}</td>
                     <td class="num"><span class="${valClass(csPtsPerK(p))}">${csPtsPerK(p).toFixed(2)}</span></td>
                     <td class="num" title="${csEsc(pack.reason || line || '')}">${csEsc(line || '—')}</td>
@@ -12836,7 +13769,7 @@
             }).join('');
             const banner = csStackPick ? `<p class="cs-note">Stacking from <strong>${csEsc(csStackPick.qbDisplay)}</strong> — click Add on a teammate. <button type="button" class="ghost" onclick="csCancelStack()">Cancel</button></p>` : '';
             return banner + `<div class="cs-table-wrap"><table id="cheatSheetTable">
-                <thead><tr>${th('fp','#','Row number after current sort')}${th('name','Player','Name plus cash tag and exposure')}${th('pos','Pos','DraftKings position')}${th('team','Team','Player team')}${th('opp','Opp','Opponent on this slate')}${th('impl','Impl Tot','Implied team total with spread. Example 22.5 (-4)')}${th('dvp','DVP','Defense vs this position. 1 = easiest')}${th('sal','Salary','DraftKings salary')}${th('fp','Proj','Cheat Sheet projected fantasy points')}${th('val','Val','Proj divided by salary per 1000. 2.5x is the cash bar')}${th('line','Week line','Position-specific projection line from the Cheat Sheet')}${th('l3','L3','Average DraftKings FP over the last 3 logged games')}${th('own','Own','Projected ownership percent')}</tr></thead>
+                <thead><tr>${th('fp','#','Row number after current sort')}${th('name','Player','Name plus cash tag and exposure')}${th('pos','Pos','DraftKings position')}${th('team','Team','Player team')}${th('opp','Opp','Opponent on this slate')}${th('impl','Impl Tot','Implied team total with spread. Example 22.5 (-4)')}${th('dvp','DVP','Defense vs this position. 1 = easiest')}${th('sal','Salary','DraftKings salary for the slate selected in Builder. Showdown also lists CPT salary.')}${th('fp','Proj','Cheat Sheet projected fantasy points')}${th('val','Val','Proj divided by salary per 1000. 2.5x is the cash bar')}${th('line','Week line','Position-specific projection line from the Cheat Sheet')}${th('l3','L3','Average DraftKings FP over the last 3 logged games')}${th('own','Own','Projected ownership percent')}</tr></thead>
                 <tbody>${body || '<tr><td colspan="13">No players match filters.</td></tr>'}
                 ${sortedAll.length > sorted.length ? `<tr><td colspan="13"><button type="button" class="ghost" onclick="window.csRowCap=${sorted.length+80};renderCheatSheet();">Show more (${sorted.length} of ${sortedAll.length})</button></td></tr>` : ''}
                 </tbody>
@@ -12851,7 +13784,7 @@
             try { attachLogInsights(csSourcePool()); } catch (e) {}
             csSourcePool().forEach(hydrateCheatRow);
             const rows = cheatPool();
-            if (lab) lab.textContent = (selectedSlate || 'No slate') + ' · implied totals from team O/U and spread (TM/P).';
+            if (lab) lab.textContent = (selectedSlate || 'No slate') + ' · salaries from this slate' + ((typeof isShowdownSlateName === 'function' && isShowdownSlateName(selectedSlate)) ? ' (FLEX + CPT)' : '') + ' · implied totals from team O/U and spread (TM/P).';
             const teamSel = document.getElementById('csTeam');
             if (teamSel) {
                 const cur = teamSel.value;
