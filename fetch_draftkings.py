@@ -45,6 +45,33 @@ def format_date_only(iso_str):
         return ""
 
 
+def fetch_draftables(dg_id):
+    """DK blocks the old draftgroups URL from many clouds. Try US-DK first."""
+    urls = [
+        f"https://api.draftkings.com/sites/US-DK/draftgroups/v1/draftgroups/{dg_id}/draftables?format=json",
+        f"https://api.draftkings.com/draftgroups/v1/draftgroups/{dg_id}/draftables?format=json",
+    ]
+    last = None
+    for attempt in range(3):
+        for url in urls:
+            try:
+                r = requests.get(url, headers=HEADERS, timeout=30)
+                last = r.status_code
+                if r.status_code == 200:
+                    data = r.json()
+                    if data.get("draftables"):
+                        return data
+                print(f"  {dg_id} {r.status_code} {url.split('/sites/')[-1][:48]}")
+            except Exception as e:
+                last = e
+                print(f"  {dg_id} error {e}")
+        if attempt < 2:
+            import time
+            time.sleep(1.5 * (attempt + 1))
+    print(f"  Failed {dg_id}: {last}")
+    return None
+
+
 def clean_suffix(raw):
     s = str(raw or "").strip()
     return s[1:-1].strip() if s.startswith("(") and s.endswith(")") else s
@@ -192,19 +219,12 @@ def main():
 
     for dg_id, group in draft_groups.items():
         print(f"Fetching draftables for {dg_id}...")
-        url = f"https://api.draftkings.com/draftgroups/v1/draftgroups/{dg_id}/draftables?format=json"
-        try:
-            r = requests.get(url, headers=HEADERS, timeout=30)
-            if r.status_code != 200:
-                print(f"  Failed {dg_id}: {r.status_code}")
-                continue
-            salary_data = r.json()
-        except Exception as e:
-            print(f"  Error {dg_id}: {e}")
+        salary_data = fetch_draftables(dg_id)
+        if not salary_data:
             continue
-
         draftables = salary_data.get("draftables", [])
         if not draftables:
+            print(f"  Empty draftables {dg_id}")
             continue
 
         meta = group.get("meta") or {}
