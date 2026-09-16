@@ -4664,6 +4664,7 @@
         let dvpTable = {}; // `${oppAbbr}|${pos}` -> { avg, rank, n, season }
         let dvpReady = false;
         let nflOddsByTeam = new Map();
+        let gameOddsByTeam = new Map();
         let selectedPositions = [];
         let selectedTeams = [];
         let poolSearchQuery = '';
@@ -6726,7 +6727,7 @@
                     });
                 }
 
-                const gameOddsByTeam = new Map();
+                gameOddsByTeam = new Map();
                 if (gameOddsCsv) {
                     Papa.parse(gameOddsCsv, {
                         header: true, skipEmptyLines: true, dynamicTyping: true,
@@ -13954,20 +13955,18 @@
         function applySlateMatchups(players) {
             if (!players || !players.length) return;
             const slateTeams = new Set(players.map(p => normalizeTeam(p.Team || '')).filter(Boolean));
-            const parseOpp = (team, p) => {
-                const raw = p.Game || p.Tournament || p['Match Title (Underdog)'] || '';
-                if (!team || !raw) return '';
-                const parts = String(raw).split('@').map(s => normalizeTeam(s.trim())).filter(Boolean);
-                if (parts.length !== 2) return '';
-                const away = parts[0], home = parts[1];
-                if (team === home) return away;
-                if (team === away) return home;
-                return '';
-            };
+            const missing = (v) => v == null || v === '' || (typeof v === 'number' && !Number.isFinite(v));
             players.forEach(p => {
                 const team = normalizeTeam(p.Team || '');
+                const snap = gameOddsByTeam.get(team);
+                if (snap && snap.opp) {
+                    p.Opponent = snap.opp;
+                    if (snap.spread != null) p.spread = snap.spread;
+                    if (snap.ou != null) p.ou = snap.ou;
+                    if (snap.implied != null) p.impliedTotal = snap.implied;
+                    return;
+                }
                 const g = nflOddsByTeam.get(team);
-                const missing = (v) => v == null || v === '' || (typeof v === 'number' && !Number.isFinite(v));
                 if (g && g.opp && slateTeams.has(g.opp)) {
                     if (missing(p.Opponent)) p.Opponent = g.opp;
                     if (missing(p.spread) && g.spread != null) p.spread = g.spread;
@@ -13975,24 +13974,37 @@
                     if (missing(p.impliedTotal) && g.implied != null) p.impliedTotal = g.implied;
                     if (!missing(p.Opponent)) return;
                 }
-                let opp = normalizeTeam(p.Opponent || '') || parseOpp(team, p);
-                if (opp && opp !== team && slateTeams.has(opp)) {
-                    p.Opponent = opp;
-                    return;
-                }
+                let opp = normalizeTeam(p.Opponent || '') || parseOppFromGame(team, p);
                 if (opp && opp !== team) p.Opponent = opp;
             });
+        }
+        function parseOppFromGame(team, p) {
+            const tm = normalizeTeam(team || (p && p.Team) || '');
+            if (!tm) return '';
+            const snap = gameOddsByTeam.get(tm);
+            if (snap && snap.opp && snap.opp !== tm) return snap.opp;
+            const raw = (p && (p.Game || p.Tournament || p['Match Title (Underdog)'])) || '';
+            if (!raw) return '';
+            const parts = String(raw).split('@').map(s => normalizeTeam(s.trim())).filter(Boolean);
+            if (parts.length !== 2) return '';
+            const away = parts[0], home = parts[1];
+            if (tm === home) return away;
+            if (tm === away) return home;
+            return '';
         }
         function consensusOppMap(players) {
             const votes = new Map();
             (players || []).forEach(p => {
                 const team = normalizeTeam(p.Team || '');
+                const snap = gameOddsByTeam.get(team);
+                const parsed = parseOppFromGame(team, p);
                 const espn = nflOddsByTeam.get(team);
-                const opp = (espn && espn.opp) ? espn.opp : normalizeTeam(p.Opponent || '');
+                const opp = (snap && snap.opp) || parsed || normalizeTeam(p.Opponent || '') || (espn && espn.opp) || '';
                 if (!team || !opp || team === opp) return;
                 if (!votes.has(team)) votes.set(team, new Map());
                 const m = votes.get(team);
-                m.set(opp, (m.get(opp) || 0) + 1000); // ESPN / slate-locked opp wins
+                const w = snap && snap.opp === opp ? 5000 : parsed === opp ? 3000 : 1000;
+                m.set(opp, (m.get(opp) || 0) + w);
             });
             const best = new Map();
             votes.forEach((m, team) => {
@@ -14185,6 +14197,15 @@
         function enrichPlayerMatchups(list) {
             const players = list || allSlatePlayers || [];
             if (!players.length) return;
+            players.forEach(p => {
+                const team = normalizeTeam(p.Team || '');
+                const snap = gameOddsByTeam.get(team);
+                if (!snap) return;
+                if (snap.opp) p.Opponent = snap.opp;
+                if (snap.spread != null) p.spread = snap.spread;
+                if (snap.ou != null) p.ou = snap.ou;
+                if (snap.implied != null) p.impliedTotal = snap.implied;
+            });
             const byTeam = new Map();
             players.forEach(p => {
                 if (!p.Team) return;
