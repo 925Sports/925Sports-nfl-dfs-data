@@ -4430,6 +4430,7 @@
             final: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/final.csv',
             drafttable: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/drafttable.csv',
             gamelogs: 'https://raw.githubusercontent.com/925Sports/NFL-Player-Log/main/data/gamelogs.csv',
+            gameOdds: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR5CGYxMTghCulNtsHaMDKjkkbbYKaEWt0tJ2ie7iu-Mx2YpBClXzIZaZeYRdkg7LJlt8r_6nrxdqYa/pub?gid=485904050&single=true&output=csv',
             espnScoreboard: 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard',
             espnScoreboardProxy: 'https://corsproxy.io/?https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'
         };
@@ -4536,6 +4537,18 @@
             if (!t) return '';
             const s = String(t).trim();
             return TEAM_NICKNAMES[s] || TEAM_NICKNAMES[s.toUpperCase()] || s;
+        }
+        function teamKeyFromOddsName(name) {
+            const s = String(name || '').trim();
+            if (!s) return '';
+            const direct = TEAM_NICKNAMES[s] || TEAM_NICKNAMES[s.toUpperCase()];
+            if (direct) return direct;
+            const parts = s.split(/\s+/);
+            for (let i = 0; i < parts.length; i++) {
+                const tail = parts.slice(i).join(' ');
+                if (TEAM_NICKNAMES[tail]) return TEAM_NICKNAMES[tail];
+            }
+            return normalizeTeam(s);
         }
 
         function dstBareName(p) {
@@ -6658,13 +6671,15 @@
                     const lt = document.getElementById('loadingText');
                     if (lt) lt.textContent = 'Downloading slate CSVs…';
                 }
-                const [mainRes, ownRes, finalRes, espnRes] = await Promise.all([
+                const [mainRes, ownRes, finalRes, espnRes, draftRes, oddsRes] = await Promise.all([
                     fetchWithRetry(DATA_SOURCES.main, 2, 15000, false),
                     fetchWithRetry(DATA_SOURCES.ownership, 2, 8000, false).catch(() => null),
                     fetchWithRetry(DATA_SOURCES.final, 2, 8000, false).catch(() => null),
                     fetchWithRetry(DATA_SOURCES.espnScoreboard, 1, 8000, true).catch(() =>
                         fetchWithRetry(DATA_SOURCES.espnScoreboardProxy, 1, 8000).catch(() => null)
-                    )
+                    ),
+                    fetchWithRetry(DATA_SOURCES.drafttable, 2, 12000, false).catch(() => null),
+                    fetchWithRetry(DATA_SOURCES.gameOdds, 2, 10000, false).catch(() => null)
                 ]);
                 if (!mainRes.ok) throw new Error('Main data failed: ' + mainRes.status);
                 if (!silent) {
@@ -6677,6 +6692,8 @@
                 const csvText = await mainRes.text();
                 const ownershipCsv = ownRes ? await ownRes.text() : '';
                 const finalCsv = finalRes ? await finalRes.text() : '';
+                const draftCsvText = draftRes ? await draftRes.text() : '';
+                const gameOddsCsv = oddsRes ? await oddsRes.text() : '';
                 try {
                     if (espnRes && espnRes.ok) ingestEspnOdds(await espnRes.json());
                 } catch (e) { console.warn('ESPN odds failed', e); }
@@ -6709,6 +6726,45 @@
                     });
                 }
 
+                const gameOddsByTeam = new Map();
+                if (gameOddsCsv) {
+                    Papa.parse(gameOddsCsv, {
+                        header: true, skipEmptyLines: true, dynamicTyping: true,
+                        complete: (parsed) => {
+                            const now = Date.now() - 6 * 3600 * 1000;
+                            const cands = [];
+                            (parsed.data || []).forEach(row => {
+                                const teamRaw = row.Team || row.team || '';
+                                const oppRaw = row.Opponent || row.opponent || '';
+                                if (!teamRaw || /home_team|away_team|^#/i.test(String(teamRaw))) return;
+                                const ou = Number(row['Average Total Line']);
+                                const spr = Number(row['Average Team Spread']);
+                                if (!Number.isFinite(ou) || ou <= 0) return;
+                                const team = teamKeyFromOddsName(teamRaw);
+                                const opp = teamKeyFromOddsName(oppRaw);
+                                if (!team) return;
+                                const start = Date.parse(row['Commence Time'] || '') || 0;
+                                const implied = Number.isFinite(spr)
+                                    ? Math.round((ou / 2 - spr / 2) * 10) / 10
+                                    : null;
+                                cands.push({ team, opp, ou, spread: Number.isFinite(spr) ? spr : null, implied, start });
+                            });
+                            cands.sort((a, b) => a.start - b.start);
+                            cands.forEach(g => {
+                                const prev = gameOddsByTeam.get(g.team);
+                                if (!prev) {
+                                    gameOddsByTeam.set(g.team, g);
+                                    return;
+                                }
+                                const prevFuture = prev.start >= now;
+                                const gFuture = g.start >= now;
+                                if (!prevFuture && gFuture) gameOddsByTeam.set(g.team, g);
+                                else if (prevFuture && gFuture && g.start < prev.start) gameOddsByTeam.set(g.team, g);
+                            });
+                        }
+                    });
+                }
+
                 const finalMap = new Map();
                 const finalByTeam = new Map();
                 if (finalCsv) {
@@ -6733,7 +6789,7 @@
                     });
                 }
 
-                const draftCsv = '';
+                const draftCsv = draftCsvText || '';
                 const draftGameByName = new Map();
                 const draftGameByTeam = new Map();
                 if (draftCsv) {
@@ -6808,9 +6864,11 @@
                                 const ownRow = ownershipMap.get(norm + '|' + team) || ownershipMap.get(norm) || {};
                                 const teamOdds = ownershipByTeam.get(team) || {};
                                 const finalData = finalMap.get(norm) || finalByTeam.get(team) || { spread: '', ou: '', opponent: '', matchTitle: '' };
-                                let opponent = ownRow.opp || teamOdds.opp || finalData.opponent || '';
-                                const matchTitle = row['Match Title (Underdog)'] || row.Tournament || finalData.matchTitle || draftGameByName.get(norm) || draftGameByTeam.get(team) || '';
-                                if (!opponent) opponent = oppFromMatchup(team, matchTitle);
+                                const matchTitle = row['Match Title (Underdog)'] || row.Tournament || row.Game || finalData.matchTitle || draftGameByName.get(norm) || draftGameByTeam.get(team) || '';
+                                const matchOpp = oppFromMatchup(team, matchTitle);
+                                const ownOpp = normalizeTeam(ownRow.opp || teamOdds.opp || finalData.opponent || '');
+                                // Live DK / sheet matchup beats a leftover ownership OPP from last week.
+                                let opponent = matchOpp || ownOpp || '';
                                 if (!opponent && matchTitle) {
                                     const parts = String(matchTitle).split(' @ ').map(s => s.trim());
                                     if (parts.length === 2) {
@@ -6819,6 +6877,7 @@
                                     }
                                 }
                                 if (opponent) opponent = normalizeTeam(opponent);
+                                const ownOppMatches = ownOpp && opponent && ownOpp === opponent;
 
                                 // Keep original source projection so Reset can restore it
                                 const sourceProj = parseFloat(row['Projected FP']) || 0;
@@ -6830,9 +6889,20 @@
                                     if (customProjections[norm].proj != null) proj = customProjections[norm].proj;
                                     if (customProjections[norm].ownership != null) own = customProjections[norm].ownership;
                                 }
-                                const spread = (ownRow.spread !== '' && ownRow.spread != null) ? ownRow.spread : ((teamOdds.spread !== '' && teamOdds.spread != null) ? teamOdds.spread : finalData.spread);
-                                const ou = (ownRow.ou !== '' && ownRow.ou != null) ? ownRow.ou : ((teamOdds.ou !== '' && teamOdds.ou != null) ? teamOdds.ou : finalData.ou);
-                                const impliedTotal = computeImplied(ou, spread, ownRow.implied);
+                                let spread = ownOppMatches && ownRow.spread !== '' && ownRow.spread != null
+                                    ? ownRow.spread
+                                    : ((teamOdds.spread !== '' && teamOdds.spread != null) ? teamOdds.spread : finalData.spread);
+                                let ou = ownOppMatches && ownRow.ou !== '' && ownRow.ou != null
+                                    ? ownRow.ou
+                                    : ((teamOdds.ou !== '' && teamOdds.ou != null) ? teamOdds.ou : finalData.ou);
+                                let impliedTotal = computeImplied(ou, spread, ownOppMatches ? ownRow.implied : '');
+                                const snap = gameOddsByTeam.get(team) || gameOddsByTeam.get(normalizeTeam(team));
+                                if (snap) {
+                                    if (snap.opp) opponent = snap.opp;
+                                    if (snap.spread != null) spread = snap.spread;
+                                    if (snap.ou != null) ou = snap.ou;
+                                    if (snap.implied != null) impliedTotal = snap.implied;
+                                }
 
                                 const rec = {
                                     ...row,
@@ -6840,6 +6910,7 @@
                                     'Position': row['Position'] || '',
                                     'Team': team,
                                     'Opponent': opponent,
+                                    Game: matchTitle || row.Game || '',
                                     'Projected FP': proj,
                                     sourceProjectedFP: sourceProj,
                                     'Role': row['Role'] || '',
@@ -13867,37 +13938,49 @@
             if (!nflOddsByTeam.size || !rows) return;
             const require = !!opts.requireOppOnSameRows;
             const present = new Set(rows.map(r => normalizeTeam(r.Team || '')).filter(Boolean));
+            const missing = (v) => v == null || v === '' || (typeof v === 'number' && !Number.isFinite(v));
             rows.forEach(r => {
                 const team = normalizeTeam(r.Team || '');
                 const g = nflOddsByTeam.get(team);
                 if (!g) return;
                 if (require && g.opp && !present.has(g.opp)) return;
-                r.Opponent = g.opp;
-                r.spread = g.spread;
-                r.ou = g.ou;
-                r.impliedTotal = g.implied;
+                // Google Sheet (ownership TM/P, SPRD, O/U, OPP) wins. ESPN only fills blanks.
+                if (missing(r.Opponent) && g.opp) r.Opponent = g.opp;
+                if (missing(r.spread) && g.spread != null && g.spread !== '') r.spread = g.spread;
+                if (missing(r.ou) && g.ou != null && g.ou !== '') r.ou = g.ou;
+                if (missing(r.impliedTotal) && g.implied != null && Number.isFinite(Number(g.implied))) r.impliedTotal = g.implied;
             });
         }
         function applySlateMatchups(players) {
             if (!players || !players.length) return;
             const slateTeams = new Set(players.map(p => normalizeTeam(p.Team || '')).filter(Boolean));
+            const parseOpp = (team, p) => {
+                const raw = p.Game || p.Tournament || p['Match Title (Underdog)'] || '';
+                if (!team || !raw) return '';
+                const parts = String(raw).split('@').map(s => normalizeTeam(s.trim())).filter(Boolean);
+                if (parts.length !== 2) return '';
+                const away = parts[0], home = parts[1];
+                if (team === home) return away;
+                if (team === away) return home;
+                return '';
+            };
             players.forEach(p => {
                 const team = normalizeTeam(p.Team || '');
                 const g = nflOddsByTeam.get(team);
+                const missing = (v) => v == null || v === '' || (typeof v === 'number' && !Number.isFinite(v));
                 if (g && g.opp && slateTeams.has(g.opp)) {
-                    p.Opponent = g.opp;
-                    p.spread = g.spread;
-                    p.ou = g.ou;
-                    p.impliedTotal = g.implied;
+                    if (missing(p.Opponent)) p.Opponent = g.opp;
+                    if (missing(p.spread) && g.spread != null) p.spread = g.spread;
+                    if (missing(p.ou) && g.ou != null) p.ou = g.ou;
+                    if (missing(p.impliedTotal) && g.implied != null) p.impliedTotal = g.implied;
+                    if (!missing(p.Opponent)) return;
+                }
+                let opp = normalizeTeam(p.Opponent || '') || parseOpp(team, p);
+                if (opp && opp !== team && slateTeams.has(opp)) {
+                    p.Opponent = opp;
                     return;
                 }
-                const opp = normalizeTeam(p.Opponent || '');
-                if (!opp || !slateTeams.has(opp) || opp === team) {
-                    p.Opponent = '';
-                    p.spread = '';
-                    p.ou = '';
-                    p.impliedTotal = null;
-                }
+                if (opp && opp !== team) p.Opponent = opp;
             });
         }
         function consensusOppMap(players) {
