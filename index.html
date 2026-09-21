@@ -4812,7 +4812,10 @@
                 if (col) sortTable(col);
             });
             document.getElementById('lineupHeaderRow').addEventListener('click', (e) => {
-                if (e.target.tagName === 'TH') sortLineupTable(e.target.textContent);
+                const th = e.target.closest('th');
+                if (!th) return;
+                const col = th.getAttribute('data-col');
+                if (col) sortLineupTable(col);
             });
             document.getElementById('lineupTableBody').addEventListener('click', (e) => {
                 if (e.target.tagName === 'TD' && e.target.classList.contains('player-cell')) {
@@ -9214,7 +9217,7 @@
         }
         function thSort(label, col, extraClass, title) {
             const on = lineupSortColumn === col;
-            return `<th class="sortable ${extraClass || ''} ${on ? 'is-sorted' : ''}" title="${title || 'Sort by ' + label}" onclick="sortLineupTable('${col}')">${label}${sortMark(col)}</th>`;
+            return `<th class="sortable ${extraClass || ''} ${on ? 'is-sorted' : ''}" data-col="${col}" title="${title || 'Sort by ' + label}">${label}${sortMark(col)}</th>`;
         }
         function updateLineupTableHeaders(isShowdown) {
             const tr = document.getElementById('lineupHeaderRow');
@@ -10091,19 +10094,7 @@
             }
 
             // ---- Showdown CPT correlation rules ----
-            const getUnderlyingPos = (cpt) => {
-                let pos = cpt.Position;
-                if (pos === 'CPT' || cpt.slotType === 'Captain') {
-                    const flexTwin = genPool().find(x => x.baseName === cpt.baseName && x.slotType === 'FLEX');
-                    if (flexTwin?.Position && flexTwin.Position !== 'CPT') pos = flexTwin.Position;
-                    // Also try raw positions array
-                    if ((!pos || pos === 'CPT') && Array.isArray(cpt.positions)) {
-                        const real = cpt.positions.find(p => p !== 'CPT' && p !== 'FLEX');
-                        if (real) pos = real;
-                    }
-                }
-                return pos;
-            };
+            const getUnderlyingPos = (cpt) => sdUnderlyingPos(cpt, genPool());
 
             // If CPT is offense (QB/RB/WR/TE), exclude opposing DST
             const excludeOppDst = document.getElementById('excludeOppDstWithOffenseCpt')?.checked !== false;
@@ -10848,6 +10839,154 @@
             if (dn === a || bn === a || dn === aBase || bn === aBase || pn === aBase) return true;
             return strip(dn) === strip(aBase) || strip(bn) === strip(aBase) || strip(pn) === strip(aBase);
         }
+        
+        function sdFlexTwin(p, pool) {
+            const base = p && (p.baseName || String(p.displayName || '').replace(/\s*\((CPT|FLEX)\)\s*$/, ''));
+            if (!base) return null;
+            const src = pool || (typeof genPool === 'function' ? genPool() : null) || allSlatePlayers || [];
+            return src.find(x => x && x.baseName === base && (x.slotType === 'FLEX' || String(x.displayName || '').endsWith(' (FLEX)'))) || null;
+        }
+        function sdUnderlyingPos(p, pool) {
+            if (!p) return '';
+            const raw = String(p.Position || p.position || '').toUpperCase();
+            if (raw && raw !== 'CPT' && raw !== 'FLEX' && raw !== 'UTIL') return raw === 'DEF' ? 'DST' : raw;
+            const twin = sdFlexTwin(p, pool);
+            const tp = String((twin && (twin.Position || twin.position)) || '').toUpperCase();
+            if (tp && tp !== 'CPT' && tp !== 'FLEX') return tp === 'DEF' ? 'DST' : tp;
+            if (Array.isArray(p.positions)) {
+                const real = p.positions.map(x => String(x || '').toUpperCase()).find(x => x && x !== 'CPT' && x !== 'FLEX');
+                if (real) return real === 'DEF' ? 'DST' : real;
+            }
+            return raw === 'DEF' ? 'DST' : raw;
+        }
+        function sdSkillPos(pos) { return ['QB','RB','WR','TE'].includes(pos); }
+        function sdTeamOf(p) { return normalizeTeam((p && (p.Team || p.team)) || ''); }
+        function sdLineupOk(lu, pool) {
+            if (!lu || !lu.lineup || !lu.lineup.captain || !Array.isArray(lu.lineup.flex) || lu.lineup.flex.length !== 5) return false;
+            const cap = lu.lineup.captain;
+            const flex = lu.lineup.flex;
+            const all = [cap, ...flex];
+            const posOf = (p) => sdUnderlyingPos(p, pool);
+            const capPos = posOf(cap);
+            const capTeam = sdTeamOf(cap);
+            const on = (id) => !!(document.getElementById(id) && document.getElementById(id).checked);
+            if (lu.totalSalary != null && lu.totalSalary > maxSalary) return false;
+            if (lu.totalSalary != null && lu.totalSalary < Math.max(0, (minSalary || 0) - 1200)) return false;
+            if (showdownTeamA && showdownTeamB) {
+                const nA = all.filter(p => sdTeamOf(p) === normalizeTeam(showdownTeamA)).length;
+                const nB = all.filter(p => sdTeamOf(p) === normalizeTeam(showdownTeamB)).length;
+                if (nA < Math.max(1, showdownMinTeamA || 0) || nB < Math.max(1, showdownMinTeamB || 0)) return false;
+            }
+            const kdst = all.filter(p => { const pos = posOf(p); return pos === 'K' || pos === 'DST'; }).length;
+            if ((showdownMinKDst || 0) > 0 && kdst < showdownMinKDst) return false;
+            if ((showdownMaxKDst || 0) > 0 && showdownMaxKDst < 6 && kdst > showdownMaxKDst) return false;
+            if (on('excludeOppDstWithOffenseCpt') && sdSkillPos(capPos)) {
+                if (flex.some(p => posOf(p) === 'DST' && sdTeamOf(p) && sdTeamOf(p) !== capTeam)) return false;
+            }
+            if (on('sdCptWrStackQb') && (capPos === 'WR' || capPos === 'TE')) {
+                if (!flex.some(p => posOf(p) === 'QB' && sdTeamOf(p) === capTeam)) return false;
+            }
+            if (on('sdCptQbStackPass') && capPos === 'QB') {
+                const pcs = flex.filter(p => (posOf(p) === 'WR' || posOf(p) === 'TE') && sdTeamOf(p) === capTeam).length;
+                if (pcs < 1) return false;
+                const rushAtt = Number(cap.rushAtt || cap['Proj Rush Att'] || 0);
+                const rushYds = Number(cap.rushYds || 0);
+                const rusher = rushAtt >= 5.5 || rushYds >= 25;
+                if (!rusher) {
+                    const avail = (pool || (typeof genPool === 'function' ? genPool() : []) || []).filter(p =>
+                        (p.slotType === 'FLEX' || String(p.displayName||'').endsWith(' (FLEX)')) &&
+                        sdTeamOf(p) === capTeam && (posOf(p) === 'WR' || posOf(p) === 'TE'));
+                    if (avail.length >= 2 && pcs < 2) return false;
+                }
+            }
+            if (on('sdCptWrCapExtra') && (capPos === 'WR' || capPos === 'TE')) {
+                if (flex.filter(p => (posOf(p) === 'WR' || posOf(p) === 'TE') && sdTeamOf(p) === capTeam).length > 1) return false;
+            }
+            if (on('sdCptPassBringBack') && (capPos === 'QB' || capPos === 'WR' || capPos === 'TE')) {
+                if (!flex.some(p => (posOf(p) === 'QB' || posOf(p) === 'WR' || posOf(p) === 'TE') && sdTeamOf(p) && sdTeamOf(p) !== capTeam)) return false;
+            }
+            if (on('sdCptRbStackDst') && capPos === 'RB') {
+                if (!flex.some(p => posOf(p) === 'DST' && sdTeamOf(p) === capTeam)) return false;
+            }
+            if (on('sdCptDstStackRb') && capPos === 'DST') {
+                if (!flex.some(p => posOf(p) === 'RB' && sdTeamOf(p) === capTeam)) return false;
+            }
+            if (on('sdCptQbFadeK') && capPos === 'QB') {
+                if (flex.some(p => posOf(p) === 'K' && sdTeamOf(p) === capTeam)) return false;
+            }
+            if (on('sdCptKFadeQb') && capPos === 'K') {
+                if (flex.some(p => posOf(p) === 'QB' && sdTeamOf(p) === capTeam)) return false;
+            }
+            if (on('sdDstMaxOppSkill')) {
+                const dsts = all.filter(p => posOf(p) === 'DST');
+                for (const d of dsts) {
+                    const oppSkill = all.filter(p => p !== d && sdSkillPos(posOf(p)) && sdTeamOf(p) && sdTeamOf(p) !== sdTeamOf(d)).length;
+                    if (oppSkill > 3) return false;
+                }
+            }
+            return true;
+        }
+        function packShowdownLineup(cap, flex, lineupSet) {
+            if (!cap || !flex || flex.length !== 5) return null;
+            const totalSalary = cap.salary + flex.reduce((s,p)=>s+p.salary,0);
+            const lu = {
+                lineup: { captain: toLu(cap), flex: flex.map(toLu) },
+                totalSalary,
+                totalPoints: (Number(cap.projectedFP)||0) + flex.reduce((s,p)=>s+(Number(p.projectedFP)||0),0),
+                totalOwnership: (Number(cap.ownership)||0) + flex.reduce((s,p)=>s+(Number(p.ownership)||0),0)
+            };
+            if (!sdLineupOk(lu)) return null;
+            const signature = `${cap.displayName}|${flex.map(p=>p.displayName).sort().join(',')}`;
+            if (lineupSet && lineupSet.has(signature)) return null;
+            if (lineupSet) lineupSet.add(signature);
+            return lu;
+        }
+        function mutateShowdownLineup(isShowdown, lineupSet, playerCounts) {
+            if (!isShowdown || !generatedLineups.length) return null;
+            const pool = genEligible(isShowdown, playerCounts);
+            if (!pool.length) return null;
+            const src = generatedLineups[Math.floor(Math.random() * generatedLineups.length)];
+            if (!src || !src.lineup || !src.lineup.captain) return null;
+            const caps = pool.filter(p => p.slotType === 'Captain' || String(p.displayName||'').endsWith(' (CPT)'));
+            const flexes = pool.filter(p => p.slotType === 'FLEX' || String(p.displayName||'').endsWith(' (FLEX)'));
+            let cap = pool.find(p => p.displayName === src.lineup.captain.displayName || p.baseName === src.lineup.captain.baseName && (p.slotType === 'Captain' || String(p.displayName||'').endsWith(' (CPT)')))
+                || caps.find(p => p.baseName === src.lineup.captain.baseName);
+            const flex = (src.lineup.flex || []).map(f =>
+                flexes.find(p => p.displayName === f.displayName || (p.baseName === f.baseName && p.slotType === 'FLEX'))
+            ).filter(Boolean);
+            if (!cap || flex.length !== 5) return greedyBuildLineup(true, lineupSet, playerCounts);
+            const used = new Set([cap.displayName, cap.baseName, ...flex.map(p => p.displayName), ...flex.map(p => p.baseName)]);
+            const nSwap = 1 + Math.floor(Math.random() * 3);
+            if (Math.random() < 0.28 && caps.length) {
+                const alt = caps.filter(p => !used.has(p.displayName) || p.baseName === cap.baseName);
+                const pick = alt[Math.floor(Math.random() * alt.length)];
+                if (pick) {
+                    used.delete(cap.displayName); used.delete(cap.baseName);
+                    cap = pick;
+                    used.add(cap.displayName); used.add(cap.baseName);
+                    // drop same-player flex if CPT changed to that player
+                    for (let i = 0; i < flex.length; i++) {
+                        if (flex[i].baseName === cap.baseName) {
+                            const repl = flexes.find(p => !used.has(p.displayName) && !used.has(p.baseName) && p.baseName !== cap.baseName);
+                            if (repl) { used.add(repl.displayName); used.add(repl.baseName); flex[i] = repl; }
+                        }
+                    }
+                }
+            }
+            for (let s = 0; s < nSwap; s++) {
+                const i = Math.floor(Math.random() * flex.length);
+                const room = maxSalary - cap.salary - flex.reduce((sum,p,idx)=> sum + (idx===i ? 0 : p.salary), 0);
+                const cand = flexes.filter(p => !used.has(p.displayName) && !used.has(p.baseName) && p.baseName !== cap.baseName && p.salary <= room + 200);
+                if (!cand.length) continue;
+                cand.sort((a,b) => ((Number(b.projectedFP)||0) + Math.random()*3) - ((Number(a.projectedFP)||0) + Math.random()*3));
+                const nxt = cand[0];
+                used.delete(flex[i].displayName); used.delete(flex[i].baseName);
+                flex[i] = nxt;
+                used.add(nxt.displayName); used.add(nxt.baseName);
+            }
+            return packShowdownLineup(cap, flex, lineupSet);
+        }
+
         function greedyBuildLineup(isShowdown, lineupSet, playerCounts, hint) {
             const pool = genEligible(isShowdown, playerCounts);
             if (!pool.length) return null;
@@ -10878,40 +11017,65 @@
                 return found;
             };
             const takeNamed = (label) => pool.find(p => playerLabelMatch(p, label) && !used.has(p.displayName) && !used.has(p.baseName));
+
             if (isShowdown) {
-                const caps = pool.filter(p => p.slotType === 'Captain' || (p.displayName||'').endsWith(' (CPT)'));
-                const flexes = pool.filter(p => p.slotType === 'FLEX' || (p.displayName||'').endsWith(' (FLEX)'));
-                const cap = take(caps, 18000, 0);
-                if (!cap) return null;
-                used.add(cap.displayName); used.add(cap.baseName);
-                const flex = [];
-                let left = maxSalary - cap.salary;
-                for (let i = 0; i < 5; i++) {
-                    const need = 4 - i;
-                    const floorSal = Math.max(1500, Math.min(2500, Math.floor(left / (need + 1))));
-                    let f = take(flexes, left - need * floorSal, 0);
-                    if (f && f.baseName === cap.baseName) {
-                        used.add(f.displayName); used.add(f.baseName);
-                        f = take(flexes, left - need * floorSal, 0);
+                const caps = pool.filter(p => p.slotType === 'Captain' || String(p.displayName||'').endsWith(' (CPT)'));
+                const flexes = pool.filter(p => p.slotType === 'FLEX' || String(p.displayName||'').endsWith(' (FLEX)'));
+                if (caps.length < 1 || flexes.length < 5) return null;
+                const rankedCaps = caps.slice().sort((a,b) => qualityScore(b) - qualityScore(a));
+                const seeds = rankedCaps.slice(0, Math.min(14, rankedCaps.length));
+                if (rankedCaps.length > 14) seeds.push(rankedCaps[Math.floor(Math.random() * rankedCaps.length)]);
+                for (const cap of seeds) {
+                    const used = new Set([cap.displayName, cap.baseName]);
+                    const flex = [];
+                    let left = maxSalary - cap.salary;
+                    const capPos = sdUnderlyingPos(cap, pool);
+                    const capTeam = sdTeamOf(cap);
+                    const wantQb = (capPos === 'WR' || capPos === 'TE') && document.getElementById('sdCptWrStackQb')?.checked;
+                    const wantPc = capPos === 'QB' && document.getElementById('sdCptQbStackPass')?.checked;
+                    const noOppDst = document.getElementById('excludeOppDstWithOffenseCpt')?.checked && ['QB','RB','WR','TE'].includes(capPos);
+                    const prefer = [];
+                    if (wantQb) {
+                        const qb = flexes.find(p => sdUnderlyingPos(p, pool) === 'QB' && sdTeamOf(p) === capTeam && !used.has(p.baseName));
+                        if (qb) prefer.push(qb);
                     }
-                    if (!f) f = take(flexes, left, 0);
-                    if (!f || f.baseName === cap.baseName) return null;
-                    used.add(f.displayName); used.add(f.baseName);
-                    flex.push(f);
-                    left -= f.salary;
+                    if (wantPc) {
+                        flexes.filter(p => ['WR','TE'].includes(sdUnderlyingPos(p, pool)) && sdTeamOf(p) === capTeam && !used.has(p.baseName))
+                            .sort((a,b) => qualityScore(b) - qualityScore(a)).slice(0, 2).forEach(p => prefer.push(p));
+                    }
+                    for (const p of prefer) {
+                        if (flex.length >= 5) break;
+                        if (used.has(p.displayName) || used.has(p.baseName) || p.baseName === cap.baseName) continue;
+                        if (p.salary > left - (4 - flex.length) * 1500) continue;
+                        used.add(p.displayName); used.add(p.baseName);
+                        flex.push(p); left -= p.salary;
+                    }
+                    for (let i = flex.length; i < 5; i++) {
+                        const need = 4 - i;
+                        const floorSal = Math.max(1200, Math.min(2500, Math.floor(left / (need + 1))));
+                        const legal = flexes.filter(p => {
+                            if (used.has(p.displayName) || used.has(p.baseName) || p.baseName === cap.baseName) return false;
+                            if (p.salary > left - need * Math.min(1200, floorSal)) return false;
+                            const pos = sdUnderlyingPos(p, pool);
+                            if (noOppDst && pos === 'DST' && sdTeamOf(p) !== capTeam) return false;
+                            return true;
+                        }).sort((a,b) => qualityScore(b) - qualityScore(a));
+                        let f = legal[0];
+                        if (!f) {
+                            const any = flexes.filter(p => !used.has(p.displayName) && !used.has(p.baseName) && p.baseName !== cap.baseName && p.salary <= left);
+                            f = any.sort((a,b) => qualityScore(b)-qualityScore(a))[0];
+                        }
+                        if (!f) break;
+                        used.add(f.displayName); used.add(f.baseName);
+                        flex.push(f); left -= f.salary;
+                    }
+                    if (flex.length !== 5) continue;
+                    const packed = packShowdownLineup(cap, flex, lineupSet);
+                    if (packed) return packed;
                 }
-                const totalSalary = cap.salary + flex.reduce((s,p)=>s+p.salary,0);
-                if (totalSalary > maxSalary) return null;
-                const signature = `${cap.displayName}|${flex.map(p=>p.displayName).sort().join(',')}`;
-                if (lineupSet.has(signature)) return null;
-                lineupSet.add(signature);
-                return {
-                    lineup: { captain: toLu(cap), flex: flex.map(toLu) },
-                    totalSalary,
-                    totalPoints: cap.projectedFP + flex.reduce((s,p)=>s+p.projectedFP,0),
-                    totalOwnership: (cap.ownership||0) + flex.reduce((s,p)=>s+(p.ownership||0),0)
-                };
+                return null;
             }
+
             const posOfPlayer = (p) => String(p.Position || '').split('/')[0];
             const byPos = (pos) => pool.filter(p => posOfPlayer(p) === pos);
             const order = [
@@ -11139,8 +11303,8 @@
             // Failed solves used to loop 180–220 times with ZERO yields → page lockup.
             // Larger Showdown runs (150) need more attempts + a greedy fallback so we
             // don't hitch on an infeasible LP and then quit short of the target.
-            const MAX_CONSEC_FAIL = isShowdown ? Math.max(12, Math.ceil(numLineups / 8)) : 10;
-            const MAX_TOTAL_ATTEMPTS = Math.max(80, numLineups * (isShowdown ? 12 : 8));
+            const MAX_CONSEC_FAIL = isShowdown ? Math.max(28, Math.ceil(numLineups / 4)) : 10;
+            const MAX_TOTAL_ATTEMPTS = Math.max(80, numLineups * (isShowdown ? 16 : 8));
             const RUN_TIME_BUDGET_MS = Math.min(180000, 20000 + numLineups * (isShowdown ? 900 : 650));
             const runStartedAt = Date.now();
             let totalAttempts = 0;
@@ -11216,7 +11380,7 @@
                         if (allowGreedy) {
                             const fb = greedyBuildLineup(isShowdown, lineupSet, playerCounts, group)
                                 || (typeof swapFillLineup === 'function' ? swapFillLineup(isShowdown, lineupSet, playerCounts) : null);
-                            if (fb && validLineup(fb)) {
+                            if (fb && validLineup(fb) && (!isShowdown || sdLineupOk(fb))) {
                                 generatedLineups.push(fb);
                                 updatePlayerCounts(fb, playerCounts, isShowdown);
                                 updateProgress((generatedLineups.length / numLineups) * 100, `${label} · ${generatedLineups.length}/${numLineups}`);
@@ -11228,6 +11392,7 @@
                     }
                     const lineup = buildLineup(result, lineupSet, isShowdown);
                     if (!validLineup(lineup)) return null;
+                    if (isShowdown && typeof sdLineupOk === 'function' && !sdLineupOk(lineup)) return null;
                     if (enforceStack && stackCap && stackRec) {
                         const names = isShowdown
                             ? [lineup.lineup.captain?.name, ...(lineup.lineup.flex || []).map(f => f.name)]
@@ -11339,7 +11504,8 @@
                 else {
                     fails++;
                     if (fails >= 3) {
-                        const fb = (typeof swapFillLineup === 'function' ? swapFillLineup(isShowdown, lineupSet, playerCounts) : null)
+                        const fb = (isShowdown ? mutateShowdownLineup(true, lineupSet, playerCounts) : null)
+                            || (typeof swapFillLineup === 'function' ? swapFillLineup(isShowdown, lineupSet, playerCounts) : null)
                             || greedyBuildLineup(isShowdown, lineupSet, playerCounts);
                         if (fb && validLineup(fb)) {
                             generatedLineups.push(fb);
@@ -11374,14 +11540,15 @@
             // Last-resort: still projection-ranked, just so the field is complete
             if (generatedLineups.length < numLineups && !abortLineupGeneration) {
                 let guard = 0;
-                const hardCap = Math.min(220, (numLineups - generatedLineups.length) * 4);
+                const hardCap = Math.min(isShowdown ? 900 : 220, (numLineups - generatedLineups.length) * (isShowdown ? 10 : 4));
                 updateProgress((generatedLineups.length / numLineups) * 100, 'Finish field…');
                 while (generatedLineups.length < numLineups && guard < hardCap && !abortLineupGeneration) {
                     guard++;
                     if (guard % 8 === 0) await yieldToUI();
-                    const fb = greedyBuildLineup(isShowdown, lineupSet, playerCounts)
+                    const fb = (isShowdown ? mutateShowdownLineup(true, lineupSet, playerCounts) : null)
+                        || greedyBuildLineup(isShowdown, lineupSet, playerCounts)
                         || (typeof swapFillLineup === 'function' ? swapFillLineup(isShowdown, lineupSet, playerCounts) : null);
-                    if (!fb || !validLineup(fb)) continue;
+                    if (!fb || !validLineup(fb) || (isShowdown && !sdLineupOk(fb))) continue;
                     generatedLineups.push(fb);
                     updatePlayerCounts(fb, playerCounts, isShowdown);
                     updateProgress((generatedLineups.length / numLineups) * 100, `Finish field · ${generatedLineups.length}/${numLineups}`);
