@@ -2519,6 +2519,78 @@
             color: #9aa6c3; border-radius: 0; padding: 0.55rem 0.85rem; font-weight: 700; cursor: pointer;
         }
         .cs-dk-tabs button.active { background: transparent; color: #fff; border-bottom-color: #3ee0b4; }
+
+        .cs-drawer { width: min(1080px, 96vw) !important; }
+        .cs-log-wrap { overflow:auto; max-height: 52vh; border:1px solid #243056; border-radius:10px; }
+        .cs-log-table { width:100%; border-collapse:collapse; font-size:0.74rem; min-width:860px; }
+        .cs-log-table th { text-align:center; color:#9aa6c3; font-size:0.62rem; letter-spacing:0.05em; text-transform:uppercase; padding:0.28rem 0.32rem; border-bottom:1px solid #2a3350; white-space:nowrap; background:#10182b; }
+        .cs-log-table th.grp { background:#16233d; color:#d7e3ff; font-size:0.66rem; letter-spacing:0.08em; }
+        .cs-log-table th.left, .cs-log-table td.left { text-align:left; }
+        .cs-log-table td { padding:0.32rem 0.32rem; border-bottom:1px solid rgba(42,51,80,0.55); text-align:center; white-space:nowrap; }
+        .cs-log-table td.num { font-variant-numeric: tabular-nums; }
+        .cs-log-table tr.win td.res { color:#7dffa6; }
+        .cs-log-table tr.loss td.res { color:#ff8f8f; }
+        .cs-inj { display:inline-block; margin-left:0.35rem; padding:0.08rem 0.4rem; border-radius:999px; font-size:0.68rem; font-weight:700; letter-spacing:0.04em; }
+        .cs-inj.out { background:#4a1515; color:#ffb4b4; }
+        .cs-inj.doubt { background:#4a3210; color:#ffd08a; }
+        .cs-inj.q { background:#3a2a10; color:#ffe3a6; }
+
+        
+        
+        .dvp-target { border-color:#1f6f4a; }
+        .dvp-avoid { border-color:#7a2d2d; }
+        .dvp-chip { padding:0.28rem 0.4rem; border-radius:8px; margin:0.2rem 0; font-size:0.82rem; }
+        
+        button.dvp-chip { display:block; width:100%; text-align:left; border:0; cursor:pointer; }
+        button.dvp-chip:hover { filter:brightness(1.08); }
+        .dvp-why { margin-top:0.7rem; padding:0.7rem 0.8rem; border:1px solid #2a3350; border-radius:12px; background:#10182b; }
+        .dvp-why h4 { margin:0 0 0.35rem; }
+
+        .dvp-chip.up { background:rgba(16,185,129,0.16); color:#b7f7d6; }
+        .dvp-chip.down { background:rgba(239,68,68,0.16); color:#ffc3c3; }
+        
+        .script-run { color:#34d399; }
+        .dvp-soft-txt { color:#34d399; font-weight:700; }
+        .dvp-tough-txt { color:#f87171; font-weight:700; }
+        .cs-summary-head { margin-bottom:0.65rem; }
+
+        .cs-summary p { line-height:1.55; margin:0 0 0.7rem; }
+
+        
+        .heat-hot { color:#6ee7b7; font-weight:700; }
+        .heat-warm { color:#86efac; }
+        .heat-mid { color:#e5e7eb; }
+        .heat-cool { color:#9ca3af; }
+        .snap-blue { color:#60a5fa; font-weight:800; }
+        .snap-green { color:#34d399; font-weight:700; }
+        .snap-yellow { color:#fbbf24; font-weight:700; }
+        .snap-red { color:#f87171; font-weight:700; }
+        .dvp-row.elite td { background: rgba(16,185,129,0.16); }
+        .dvp-row.great td { background: rgba(52,211,153,0.08); }
+        .dvp-row.average td { background: transparent; }
+        .dvp-row.poor td { background: rgba(239,68,68,0.12); }
+
+        .dvp-row.great td { background: rgba(52,211,153,0.08); }
+        .dvp-row.poor td { background: rgba(239,68,68,0.10); }
+        .snap-bar { position:relative; height:16px; background:#1b2438; border-radius:8px; overflow:hidden; min-width:90px; }
+        .snap-bar span { display:block; height:100%; background:linear-gradient(90deg,#1d4ed8,#3b82f6); }
+        .snap-bar em { position:absolute; right:6px; top:0; font-size:0.68rem; font-style:normal; color:#e8eefc; line-height:16px; }
+
+        .cs-inj.active { background:#14351f; color:#8dffb4; }
+        .cs-log-table tr.cs-year-split td {
+            background:#15233d; color:#3ee0b4; font-weight:800; letter-spacing:0.08em;
+            text-transform:uppercase; text-align:center; border-top:3px solid #3ee0b4; border-bottom:3px solid #1e3d34;
+        }
+        .gp-dvp-drop { margin: 0.45rem 0 0.65rem; border:1px solid #2a3350; border-radius:10px; padding:0.35rem 0.55rem 0.5rem; background:#0e1628; }
+        .gp-dvp-drop > summary { cursor:pointer; font-weight:700; color:#d7e3ff; list-style:none; }
+        .gp-dvp-drop > summary::-webkit-details-marker { display:none; }
+        .gp-dvp-drop > summary::before { content:'▸ '; color:#3ee0b4; }
+        .gp-dvp-drop[open] > summary::before { content:'▾ '; }
+
+        .cs-news-item { padding:0.45rem 0; border-bottom:1px solid #243056; }
+        .cs-news-item .when { color:#8b93a7; font-size:0.7rem; }
+        .dvp-detail { font-size:0.8rem; color:#c9d4ee; line-height:1.45; }
+
         .cs-log-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
         .cs-log-table th { text-align: left; color: var(--muted); font-size: 0.65rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.35rem 0.4rem; border-bottom: 1px solid var(--border-color); white-space: nowrap; }
         .cs-log-table td { padding: 0.38rem 0.4rem; border-bottom: 1px solid rgba(42,51,80,0.55); }
@@ -2650,6 +2722,31 @@
         }
         .gp-callout strong { color: var(--brand-teal); }
         body[data-theme="dark"] .gp-callout strong { color: var(--brand-mint); }
+        
+        .gp-dvp-board { display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:0.75rem; margin: 0.75rem 0 1rem; }
+        .gp-dvp-card { background:#10182b; border:1px solid #2a3350; border-radius:12px; padding:0.7rem 0.8rem; }
+        .gp-dvp-card h4 { margin:0 0 0.2rem; font-size:0.92rem; }
+        .gp-dvp-table { width:100%; border-collapse:collapse; font-size:0.78rem; }
+        .gp-dvp-table th { text-align:left; color:#9aa6c3; font-size:0.65rem; letter-spacing:0.05em; text-transform:uppercase; padding:0.25rem 0.3rem; border-bottom:1px solid #2a3350; }
+        .gp-dvp-table td { padding:0.28rem 0.3rem; border-bottom:1px solid rgba(42,51,80,0.5); }
+
+        
+        .heat-blue { color:#60a5fa; font-weight:800; }
+        .heat-green { color:#34d399; font-weight:700; }
+        .heat-yellow { color:#fbbf24; font-weight:600; }
+        .heat-red { color:#f87171; font-weight:700; }
+        .gp-side-pop { border:1px solid #2d3b63; border-radius:14px; padding:0.7rem 0.8rem 0.5rem; background:linear-gradient(180deg,#121b32,#0d1426); }
+        .gp-side-head { display:flex; justify-content:space-between; align-items:flex-start; gap:0.6rem; margin-bottom:0.45rem; }
+        .gp-team-name { font-size:1.15rem; font-weight:800; letter-spacing:-0.02em; }
+        .gp-impl { text-align:right; font-size:1.35rem; font-weight:800; line-height:1; }
+        .gp-impl span { display:block; font-size:0.62rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#9aa6c3; margin-top:0.15rem; }
+        .gp-impl.impl-hot { color:#60a5fa; }
+        .gp-impl.impl-ok { color:#34d399; }
+        .gp-impl.impl-low { color:#fbbf24; }
+        .gp-dvp-line { display:flex; flex-wrap:wrap; gap:0.35rem; margin:0 0 0.55rem; }
+        .gp-player { border-radius:8px; padding:0.22rem 0.2rem; }
+        .gp-player:nth-child(odd) { background:rgba(255,255,255,0.02); }
+
         .gp-dvp { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; }
 
 
@@ -2944,6 +3041,9 @@
             <button type="button" class="workspace-tab" id="tabBtnPreview" onclick="switchWorkspace('preview')">🏈 Game Preview</button>
             <button type="button" class="workspace-tab" id="tabBtnSlate" onclick="switchWorkspace('slate')">🛰️ Slate Preview</button>
             <button type="button" class="workspace-tab" id="tabBtnStacks" onclick="switchWorkspace('stacks')">🔗 Stacks Lab</button>
+            <button type="button" class="workspace-tab" id="tabBtnDvp" onclick="switchWorkspace('dvp')">🛡️ DVP</button>
+            <button type="button" class="workspace-tab" id="tabBtnSnaps" onclick="switchWorkspace('snaps')">📊 Snaps</button>
+
         </div>
 
         <div id="panelBuilder" class="workspace-panel">
@@ -3882,6 +3982,11 @@
                                 <label><input type="checkbox" value="Core Value" onchange="onCsTagChange()"> Core Value</label>
                                 <label><input type="checkbox" value="Playable" onchange="onCsTagChange()"> Playable</label>
                                 <label><input type="checkbox" value="Fade" onchange="onCsTagChange()"> Fade</label>
+                                <div class="cs-tag-menu-title">Exposure</div>
+                                <label><input type="checkbox" value="High Exposure" onchange="onCsTagChange()"> High Exposure</label>
+                                <label><input type="checkbox" value="Mid Exposure" onchange="onCsTagChange()"> Mid Exposure</label>
+                                <label><input type="checkbox" value="Low Exposure" onchange="onCsTagChange()"> Low Exposure</label>
+                                <label><input type="checkbox" value="Zero / Fade" onchange="onCsTagChange()"> Zero / Fade</label>
                                 <button type="button" class="ghost pool-clear-btn" onclick="clearCsTags()">Clear tags</button>
                             </div>
                         </div>
@@ -3907,7 +4012,7 @@
                             <p><strong>Core Value</strong> — cheap enough that a modest line already hits value. Fills salary; not a true core.</p>
                             <p><strong>Playable</strong> — fine, no special tag.</p>
                             <p><strong>Fade</strong> — needs a TD, role change, or script flip. Avoid in cash.</p>
-                            <p>Exposure (High / Mid / Low / Zero) is how often you would actually roster him in cash.</p>
+                            <p><strong>Two tags on purpose.</strong> The first is the cash <em>role</em> (Extreme Core / Core / Safe / Value / Playable / Fade). The second is suggested <em>exposure</em> (High / Mid / Low / Zero) — how often to actually roster him. A Core Play can still be Mid exposure if the slate is deep.</p>
                         </div>
                     </details>
                     <div id="csMain"></div>
@@ -3942,6 +4047,55 @@
             </div>
             <div class="lu-dock-body" id="luDockBody"></div>
         </aside>
+        
+        <div id="panelDvp" class="workspace-panel" hidden>
+            <div class="card">
+                <div class="card-body">
+                    <div class="cs-hero">
+                        <div>
+                            <h2>Defense vs Position</h2>
+                            <p class="cs-note" style="margin:0;">What each defense allows per game. Rank 1 = easiest (most DK FP). Green = smash spot.</p>
+                        </div>
+                    </div>
+                    <div class="cs-seg" id="dvpPosSeg">
+                        <button type="button" class="active" onclick="setDvpPos('QB')">QB</button>
+                        <button type="button" onclick="setDvpPos('RB')">RB</button>
+                        <button type="button" onclick="setDvpPos('WR')">WR</button>
+                        <button type="button" onclick="setDvpPos('TE')">TE</button>
+                    </div>
+                    <div id="dvpLabMain"></div>
+                </div>
+            </div>
+        </div>
+        <div id="panelSnaps" class="workspace-panel" hidden>
+            <div class="card">
+                <div class="card-body">
+                    <div class="cs-hero">
+                        <div>
+                            <h2>Snap counts</h2>
+                            <p class="cs-note" style="margin:0;">Offense snaps by team. Switch to Routes / Tgt % to see route rate, target share, and air-yards share by week.</p>
+                        </div>
+                    </div>
+                    <div class="cs-seg" style="margin:0 0 0.7rem;">
+                        <button type="button" id="snapViewSnaps" class="active" onclick="snapView='snaps';renderSnapsLab();">Snap %</button>
+                        <button type="button" id="snapViewUsage" onclick="snapView='usage';renderSnapsLab();">Routes / Tgt %</button>
+                    </div>
+                    <div class="cs-toolbar">
+                        <div><label>Team</label><select id="snapTeam" onchange="renderSnapsLab()"><option value="">All teams on slate</option></select></div>
+                        <div><label>Position</label><select id="snapPos" onchange="renderSnapsLab()">
+                            <option value="">All offense</option>
+                            <option value="QB">QB</option>
+                            <option value="RB">RB</option>
+                            <option value="WR">WR</option>
+                            <option value="TE">TE</option>
+                        </select></div>
+                        <div><label>Search</label><input type="text" id="snapSearch" placeholder="Player…" oninput="renderSnapsLab()"></div>
+                    </div>
+                    <div id="snapsLabMain"></div>
+                </div>
+            </div>
+        </div>
+
         <div id="panelLeverage" class="workspace-panel" hidden>
             <div class="card">
                 <div class="card-body">
@@ -4481,6 +4635,15 @@
             final: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/final.csv',
             drafttable: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/drafttable.csv',
             gamelogs: 'https://raw.githubusercontent.com/925Sports/NFL-Player-Log/main/data/gamelogs.csv',
+
+            snapsLog: 'https://raw.githubusercontent.com/925Sports/NFL-Player-Log/main/data/snap_counts.csv',
+            snapsLog2026: 'https://raw.githubusercontent.com/925Sports/NFL-Player-Log/main/data/snap_counts_2026.csv',
+            snapsLog2025: 'https://raw.githubusercontent.com/925Sports/NFL-Player-Log/main/data/snap_counts_2025.csv',
+            snaps2025: 'https://corsproxy.io/?https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2025.csv',
+            snaps2026: 'https://corsproxy.io/?https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2026.csv',
+            playerNews: 'https://raw.githubusercontent.com/925Sports/NFL-Player-Log/main/data/news.csv',
+            espnInjuries: 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/injuries',
+
             gameOdds: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR5CGYxMTghCulNtsHaMDKjkkbbYKaEWt0tJ2ie7iu-Mx2YpBClXzIZaZeYRdkg7LJlt8r_6nrxdqYa/pub?gid=485904050&single=true&output=csv',
             espnScoreboard: 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard',
             espnScoreboardProxy: 'https://corsproxy.io/?https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard'
@@ -4799,6 +4962,32 @@
         let allSlatePlayers = [];
         let cheatIndex = new Map();
         let gameLogIndex = new Map(); // normName -> compact games
+
+        let routeIndex = new Map();
+        function routesForGame(p, g) {
+            if (!g) return { routes: 0, routePct: 0 };
+            if (g.routePct || g.routes) return { routes: Number(g.routes)||0, routePct: Number(g.routePct)||0 };
+            const keys = [normalizeName(csName(p)), normalizeName(p && p.baseName), normalizeName(p && p.displayName), normalizeName(g.name)];
+            for (const key of keys) {
+                if (!key || !routeIndex.has(key)) continue;
+                const hit = routeIndex.get(key).find(r => Number(r.season) === Number(g.season) && Number(r.week) === Number(g.week));
+                if (hit) return hit;
+            }
+            const snap = typeof snapsForGame === 'function' ? snapsForGame(p, g) : null;
+            if (snap && (snap.routePct || snap.routes)) return { routes: Number(snap.routes)||0, routePct: Number(snap.routePct)||0 };
+            return { routes: 0, routePct: 0 };
+        }
+        function routeCells(p, g) {
+            const r = routesForGame(p, g);
+            const pct = r.routePct ? (r.routePct > 1.5 ? r.routePct : r.routePct * 100) : 0;
+            const rts = r.routes ? (Number.isInteger(r.routes) ? r.routes : r.routes.toFixed(1)) : '';
+            return `<td class="num">${rts || '—'}</td><td class="num">${pct ? pct.toFixed(0)+'%' : '—'}</td>`;
+        }
+
+        let snapIndex = new Map(); // normName -> [{season,week,off,offPct,def,defPct}]
+        let newsIndex = new Map(); // normName -> articles
+        let injuryIndex = new Map(); // normName -> {status,comment,date}
+        let gameResultIndex = new Map(); // season|week|TEAM -> {result,score,opp}
         let dvpTable = {}; // `${oppAbbr}|${pos}` -> { avg, rank, n, season }
         let dvpReady = false;
         let nflOddsByTeam = new Map();
@@ -5207,6 +5396,324 @@
             setTimeout(function () { markActiveRecipe(key, b); }, 30);
         }, true);
 
+
+        let dvpPosView = 'QB';
+        let dvpShowTotal = false;
+        let dvpColorOn = true;
+        let dvpWhyKey = "";
+
+        function showDvpWhy(ab, pos) {
+            dvpWhyKey = String(ab || '');
+            renderDvpLab();
+        }
+        function dvpWhyHtml(ab, pos) {
+            if (!ab) return '<p class="cs-note">Click a defense above for a short why.</p>';
+            const info = dvpTable[ab + '|' + pos] || dvpTable[String(ab).toUpperCase() + '|' + pos];
+            if (!info) return '<p class="cs-note">No 2026 DVP row for that defense.</p>';
+            const nick = normalizeTeam(ab) || ab;
+            const row = { info };
+            const easy = info.rank <= 10;
+            const hard = info.rank >= 22;
+            const verb = easy ? 'Target' : hard ? 'Avoid' : 'Neutral';
+            let why = `<div class="dvp-why"><h4>${verb}: ${csEsc(nick)} vs ${pos} · ${dvpPill(info)}</h4>`;
+            why += `<p>They have allowed <strong>${info.avg.toFixed(1)} DK FP</strong> per game to ${pos}s across ${info.n} 2026 game${info.n===1?'':'s'} (rank ${info.rank} of ${info.of || 32}; 1 = easiest).</p>`;
+            if (pos === 'QB') {
+                why += `<p>The passing line is ${Number(info.passYds||0).toFixed(0)} yards, ${Number(info.passTd||0).toFixed(2)} pass TDs, and ${Number(info.ints||0).toFixed(2)} INTs, plus ${Number(info.rushYds||0).toFixed(0)} QB rush yards. `;
+                why += easy ? 'That volume is why opposing QBs grade as a target here.' : hard ? 'Low scoring + takeaways are why this is an avoid for opposing QBs.' : 'This is a middle passing environment.</p>';
+                if (!why.endsWith('</p>')) why += '</p>';
+            } else if (pos === 'RB') {
+                why += `<p>Opposing RBs have seen ${Number(info.rushYds||0).toFixed(0)} rush yards, ${Number(info.tgt||0).toFixed(1)} targets, ${Number(info.rushTd||0).toFixed(2)} rush TDs and ${Number(info.recTd||0).toFixed(2)} rec TDs per game. `;
+                why += easy ? 'That is a smash run/checkdown diet — target the lead back and pass-catching back against them.' : hard ? 'They are bottling the run and not leaking much RB receiving. Fade non-pass-down backs here.' : 'Workload is average; lean on price and script more than the matchup.</p>';
+                if (!why.endsWith('</p>')) why += '</p>';
+            } else {
+                why += `<p>They allow ${Number(info.tgt||0).toFixed(1)} targets, ${Number(info.rec||0).toFixed(1)} catches, ${Number(info.recYds||0).toFixed(0)} yards and ${Number(info.td||0).toFixed(2)} TDs per game to ${pos}s. `;
+                why += easy ? 'Coverage is leaking yards and scores — this is a spot to pay up or stack.' : hard ? 'They are taking away this position. Only force the name if the projection still wins on volume.' : 'Average coverage; let salary and targets decide.</p>';
+                if (!why.endsWith('</p>')) why += '</p>';
+            }
+            const faces = (csSourcePool() || []).filter(p => csPos(p) === pos && (teamAbbr(csOpp(p)) === String(ab).toUpperCase() || normalizeTeam(csOpp(p)) === nick));
+            if (faces.length) why += `<p>Slate names facing them: ${faces.slice(0,6).map(p => csEsc(csName(p))).join(', ')}.</p>`;
+            why += '</div>';
+            return why;
+        }
+
+        function setDvpPos(pos) {
+            dvpPosView = pos || 'QB';
+            document.querySelectorAll('#dvpPosSeg button').forEach(b => {
+                b.classList.toggle('active', (b.getAttribute('onclick') || '').includes("'" + dvpPosView + "'"));
+            });
+            renderDvpLab();
+        }
+        function heatNum(txt, dir) {
+            const n = parseFloat(txt);
+            if (!Number.isFinite(n)) return txt;
+            let cls = 'heat-mid';
+            if (dir === 'lo') cls = n >= 1.2 ? 'heat-hot' : n >= 0.6 ? 'heat-warm' : n <= 0.2 ? 'heat-cool' : 'heat-mid';
+            else cls = n >= 28 ? 'heat-hot' : n >= 12 ? 'heat-warm' : n >= 4 ? 'heat-mid' : 'heat-cool';
+            if (n >= 1 && n <= 8 && dir === 'hi') cls = n >= 4 ? 'heat-hot' : n >= 2 ? 'heat-warm' : 'heat-mid';
+            return `<span class="${cls}">${txt}</span>`;
+        }
+        function snapTone(pct) {
+            if (pct == null || !Number.isFinite(pct)) return '';
+            if (pct >= 90) return 'snap-blue';
+            if (pct >= 72) return 'snap-green';
+            if (pct >= 51) return 'snap-yellow';
+            if (pct >= 40) return '';
+            return 'snap-red';
+        }
+        function sortLabTable(th) {
+            const table = th.closest('table');
+            if (!table) return;
+            const idx = [...th.parentNode.children].indexOf(th);
+            const dir = th.dataset.dir === 'asc' ? 'desc' : 'asc';
+            th.parentNode.querySelectorAll('th').forEach(x => { x.dataset.dir = ''; });
+            th.dataset.dir = dir;
+            const rows = [...table.tBodies[0].rows];
+            const num = (td) => parseFloat(String(td.textContent).replace(/[^0-9.\-]+/g,''));
+            rows.sort((a,b) => {
+                const va = num(a.cells[idx]); const vb = num(b.cells[idx]);
+                const na = Number.isFinite(va), nb = Number.isFinite(vb);
+                let c;
+                if (na && nb) c = va - vb;
+                else c = String(a.cells[idx].textContent).localeCompare(String(b.cells[idx].textContent));
+                return dir === 'asc' ? c : -c;
+            });
+            rows.forEach(r => table.tBodies[0].appendChild(r));
+        }
+        function renderDvpLab() {
+            const root = document.getElementById('dvpLabMain');
+            if (!root) return;
+            if (!dvpReady) {
+                root.innerHTML = '<p class="cs-note">Game logs still loading. DVP appears after NFL-Player-Log finishes.</p>';
+                loadGameLogsDeferred();
+                return;
+            }
+            const pos = dvpPosView || 'QB';
+            const rows = Object.entries(dvpTable)
+                .filter(([k]) => k.endsWith('|' + pos))
+                .map(([k, info]) => {
+                    const defAb = k.split('|')[0];
+                    const defNick = normalizeTeam(defAb) || defAb;
+                    const espn = nflOddsByTeam.get(defNick) || nflOddsByTeam.get(normalizeTeam(defAb));
+                    const face = espn && espn.opp ? espn.opp : '';
+                    return { defAb, defNick, face, info };
+                })
+                .sort((a,b) => (b.info.avg||0) - (a.info.avg||0));
+            const targets = rows.filter(r => r.info.rank <= 10);
+            const avoids = rows.filter(r => r.info.rank >= 22);
+            const starters = (() => {
+                const best = new Map();
+                (csSourcePool() || []).filter(p => csPos(p) === pos).forEach(p => {
+                    const tm = p.Team || '';
+                    if (!tm) return;
+                    const cur = best.get(tm);
+                    if (!cur || csFp(p) > csFp(cur)) best.set(tm, p);
+                });
+                return [...best.values()];
+            })();
+            const smashPlayers = starters.filter(p => p.dvpRank && p.dvpRank <= 10).sort((a,b)=>a.dvpRank-b.dvpRank);
+            const fadePlayers = starters.filter(p => p.dvpRank && p.dvpRank >= 22).sort((a,b)=>b.dvpRank-a.dvpRank);
+            const fmtVal = (info, key, d=1) => {
+                const avg = Number(info[key]) || 0;
+                const v = dvpShowTotal ? avg * (info.n || 1) : avg;
+                return d === 0 ? v.toFixed(0) : v.toFixed(d);
+            };
+            const chip = (r, kind) => `<button type="button" class="dvp-chip ${kind}" onclick="showDvpWhy('${csArg(r.defAb)}','${pos}')">▲ ${csEsc(r.defNick)} <b>#${r.info.rank}</b> · ${r.info.avg.toFixed(1)} FP${r.face? ' vs '+csEsc(r.face):''}</button>`.replace('▲', kind==='up'?'▲':'▼');
+            const summary = `<details class="gp-dvp-drop" open>
+                <summary><strong>${pos} matchup summary</strong> — click a team for the why</summary>
+                <div class="gp-dvp-board">
+                    <div class="gp-dvp-card dvp-target"><h4>▲ Target</h4>
+                        <p class="cs-note">Easiest defenses (rank 1–10)</p>
+                        ${targets.slice(0,8).map(r => chip(r,'up')).join('') || '—'}
+                        ${smashPlayers.length ? `<p class="cs-note">${pos}1s: ${smashPlayers.map(p => csEsc(csName(p))+' #'+p.dvpRank).join(' · ')}</p>` : ''}
+                    </div>
+                    <div class="gp-dvp-card dvp-avoid"><h4>▼ Avoid</h4>
+                        <p class="cs-note">Toughest defenses (rank 22+)</p>
+                        ${avoids.slice(0,8).map(r => chip(r,'down')).join('') || '—'}
+                        ${fadePlayers.length ? `<p class="cs-note">${pos}1s: ${fadePlayers.map(p => csEsc(csName(p))+' #'+p.dvpRank).join(' · ')}</p>` : ''}
+                    </div>
+                </div>
+                <div id="dvpWhyBox">${dvpWhyHtml(dvpWhyKey, pos)}</div>
+            </details>`;
+            const th = (label) => `<th style="cursor:pointer;" onclick="sortLabTable(this)">${label}</th>`;
+            const head = pos === 'QB'
+                ? `${th('Cmp')}${th('Att')}${th('Pass Yds')}${th('Pass TD')}${th('INT')}${th('Rush Att')}${th('Rush Yds')}${th('Rush TD')}`
+                : pos === 'RB'
+                ? `${th('Rush Att')}${th('Rush Yds')}${th('Rush TD')}${th('Tgt')}${th('Rec')}${th('Rec Yds')}${th('Rec TD')}${th('Tot TD')}`
+                : `${th('Tgt')}${th('Rec')}${th('Rec Yds')}${th('TD')}`;
+            const scale = (key, invert) => {
+                const vals = rows.map(r => Number(r.info[key])).filter(Number.isFinite);
+                const min = vals.length ? Math.min(...vals) : 0;
+                const max = vals.length ? Math.max(...vals) : 1;
+                return (v) => {
+                    const n = Number(v);
+                    if (!Number.isFinite(n) || max <= min) return 'heat-yellow';
+                    let t = (n - min) / (max - min);
+                    if (invert) t = 1 - t;
+                    if (t >= 0.82) return 'heat-blue';
+                    if (t >= 0.55) return 'heat-green';
+                    if (t >= 0.30) return 'heat-yellow';
+                    return 'heat-red';
+                };
+            };
+            const hFp = scale('avg', false);
+            const hPassY = scale('passYds', false);
+            const hPassA = scale('passAtt', false);
+            const hCmp = scale('passCmp', false);
+            const hPtd = scale('passTd', false);
+            const hInt = scale('ints', true);
+            const hRuA = scale('rushAtt', false);
+            const hRuY = scale('rushYds', false);
+            const hRuTd = scale('rushTd', false);
+            const hTgt = scale('tgt', false);
+            const hRec = scale('rec', false);
+            const hRecY = scale('recYds', false);
+            const hTd = scale('td', false);
+            const hRecTd = scale('recTd', false);
+            const paint = (txt, cls) => dvpColorOn ? `<span class="${cls}">${txt}</span>` : txt;
+            const body = rows.map((r, i) => {
+                const info = r.info;
+                const band = info.rank <= 5 ? 'elite' : info.rank <= 10 ? 'great' : info.rank <= 20 ? 'average' : 'poor';
+                const cells = pos === 'QB'
+                    ? `<td class="num">${paint(fmtVal(info,'passCmp'), hCmp(info.passCmp))}</td><td class="num">${paint(fmtVal(info,'passAtt'), hPassA(info.passAtt))}</td><td class="num">${paint(fmtVal(info,'passYds',0), hPassY(info.passYds))}</td><td class="num">${paint(fmtVal(info,'passTd',2), hPtd(info.passTd))}</td><td class="num">${paint(fmtVal(info,'ints',2), hInt(info.ints))}</td><td class="num">${paint(fmtVal(info,'rushAtt'), hRuA(info.rushAtt))}</td><td class="num">${paint(fmtVal(info,'rushYds',0), hRuY(info.rushYds))}</td><td class="num">${paint(fmtVal(info,'rushTd',2), hRuTd(info.rushTd))}</td>`
+                    : pos === 'RB'
+                    ? `<td class="num">${paint(fmtVal(info,'rushAtt'), hRuA(info.rushAtt))}</td><td class="num">${paint(fmtVal(info,'rushYds',0), hRuY(info.rushYds))}</td><td class="num">${paint(fmtVal(info,'rushTd',2), hRuTd(info.rushTd))}</td><td class="num">${paint(fmtVal(info,'tgt'), hTgt(info.tgt))}</td><td class="num">${paint(fmtVal(info,'rec'), hRec(info.rec))}</td><td class="num">${paint(fmtVal(info,'recYds',0), hRecY(info.recYds))}</td><td class="num">${paint(fmtVal(info,'recTd',2), hRecTd(info.recTd))}</td><td class="num">${paint(fmtVal(info,'td',2), hTd(info.td))}</td>`
+                    : `<td class="num">${paint(fmtVal(info,'tgt'), hTgt(info.tgt))}</td><td class="num">${paint(fmtVal(info,'rec'), hRec(info.rec))}</td><td class="num">${paint(fmtVal(info,'recYds',0), hRecY(info.recYds))}</td><td class="num">${paint(fmtVal(info,'td',2), hTd(info.td))}</td>`;
+                return `<tr class="dvp-row ${dvpColorOn ? band : ''}">
+                    <td class="num">${i+1}</td>
+                    <td><strong>${csEsc(r.defNick)}</strong> <span class="cs-sub">${csEsc(r.defAb)}</span></td>
+                    <td>${r.face ? csEsc(r.face) : '—'}</td>
+                    <td>${dvpPill(info)}</td>
+                    <td class="num">${paint((dvpShowTotal ? (info.avg*(info.n||1)).toFixed(1) : info.avg.toFixed(1)), hFp(info.avg))}</td>
+                    <td class="num">${info.n||'—'}</td>
+                    ${cells}
+                </tr>`;
+            }).join('');
+            root.innerHTML = `<div class="cs-seg" style="margin:0.4rem 0 0.7rem;">
+                <button type="button" class="${dvpShowTotal?'':'active'}" onclick="dvpShowTotal=false;renderDvpLab();">Average</button>
+                <button type="button" class="${dvpShowTotal?'active':''}" onclick="dvpShowTotal=true;renderDvpLab();">Total</button>
+                <button type="button" class="${dvpColorOn?'active':''}" onclick="dvpColorOn=!dvpColorOn;renderDvpLab();">${dvpColorOn?'Colors on':'Colors off'}</button>
+            </div>` + summary + `<p class="cs-note">2026 regular season only. Click a header to sort. Green = smash DVP.</p>
+                <div class="cs-table-wrap"><table class="gp-dvp-table" id="dvpLabTable">
+                    <thead><tr>${th('#')}${th('Defense')}${th('Faces')}${th('Rank')}${th('FP/g')}${th('G')}${head}</tr></thead>
+                    <tbody>${body || '<tr><td colspan="16">No 2026 DVP rows yet.</td></tr>'}</tbody>
+                </table></div>`;
+        }
+                function snapPctNum(s) {
+            const v = Number(s && s.offPct) || 0;
+            return v > 1.5 ? v : v * 100;
+        }
+        let snapView = 'snaps';
+        function renderSnapsLab() {
+            const root = document.getElementById('snapsLabMain');
+            if (!root) return;
+            if (!snapIndex.size) {
+                root.innerHTML = '<p class="cs-note">Loading 2026 snap counts from NFL-Player-Log…</p>';
+                loadSnapCounts().then(() => renderSnapsLab());
+                return;
+            }
+            const teamWant = document.getElementById('snapTeam')?.value || '';
+            const posWant = document.getElementById('snapPos')?.value || '';
+            const q = String(document.getElementById('snapSearch')?.value || '').toLowerCase();
+            const usage = snapView === 'usage';
+            const btnS = document.getElementById('snapViewSnaps');
+            const btnU = document.getElementById('snapViewUsage');
+            if (btnS) btnS.classList.toggle('active', !usage);
+            if (btnU) btnU.classList.toggle('active', usage);
+            const pool = csSourcePool().filter(p => ['QB','RB','WR','TE'].includes(csPos(p)));
+            const teamSel = document.getElementById('snapTeam');
+            const teams = [...new Set(pool.map(p => p.Team).filter(Boolean))].sort();
+            if (teamSel) {
+                const keep = teamWant;
+                teamSel.innerHTML = '<option value="">All teams on slate</option>' + teams.map(tm => `<option value="${csEsc(tm)}">${csEsc(tm)}</option>`).join('');
+                if (keep && [...teamSel.options].some(o => o.value === keep)) teamSel.value = keep;
+            }
+            const teamMatch = (tm) => {
+                if (!teamWant) return true;
+                return tm === teamWant || normalizeTeam(tm) === normalizeTeam(teamWant) || teamAbbr(tm) === teamAbbr(teamWant);
+            };
+            const byTeam = new Map();
+            const addRow = (labelTeam, rec) => {
+                if (!byTeam.has(labelTeam)) byTeam.set(labelTeam, []);
+                byTeam.get(labelTeam).push(rec);
+            };
+            const seen = new Set();
+            pool.forEach(p => {
+                if (teamWant && !teamMatch(p.Team)) return;
+                if (posWant && csPos(p) !== posWant) return;
+                if (q && !csName(p).toLowerCase().includes(q)) return;
+                const weeks = {};
+                (snapIndex.get(normalizeName(csName(p))) || snapIndex.get(normalizeName(p.baseName||'')) || []).filter(s => Number(s.season) === 2026).forEach(s => { weeks[s.week] = s; });
+                const season = Object.values(weeks);
+                const seasonPct = season.length ? season.reduce((a,s)=>a+snapPctNum(s),0)/season.length : 0;
+                seen.add(normalizeName(csName(p)));
+                addRow(p.Team || 'Unknown', { p, weeks, seasonPct, name: csName(p), pos: csPos(p) });
+            });
+            snapIndex.forEach((list, key) => {
+                const rows26 = list.filter(s => Number(s.season) === 2026);
+                if (!rows26.length || seen.has(key)) return;
+                const sample = rows26[0];
+                const tmNick = normalizeTeam(sample.team) || sample.team;
+                if (teamWant && !teamMatch(tmNick) && !teamMatch(sample.team)) return;
+                const pos = String(sample.pos || '').replace('HB','RB').replace('FB','RB');
+                if (posWant && pos && pos !== posWant) return;
+                if (q && !(sample.name || '').toLowerCase().includes(q)) return;
+                if (pos && !['QB','RB','WR','TE'].includes(pos)) return;
+                const weeks = {};
+                rows26.forEach(s => { weeks[s.week] = s; });
+                const season = Object.values(weeks);
+                const seasonPct = season.length ? season.reduce((a,s)=>a+snapPctNum(s),0)/season.length : 0;
+                const fake = { displayName: sample.name, Team: tmNick, Position: pos };
+                addRow(tmNick, { p: fake, weeks, seasonPct, name: sample.name, pos });
+            });
+            const weekNums = [...new Set([...snapIndex.values()].flat()
+                .filter(s => Number(s.season) === 2026)
+                .map(s => Number(s.week)).filter(n => n >= 1 && n <= 18))].sort((a,b)=>a-b);
+            const blocks = [...byTeam.entries()].sort((a,b)=>String(a[0]).localeCompare(String(b[0]))).map(([tm, list]) => {
+                list.sort((a,b)=> b.seasonPct - a.seasonPct);
+                const rows = list.map(r => {
+                    const logs = (typeof playerLogs === 'function' && r.p) ? playerLogs(r.p) : [];
+                    const usageWeek = (w) => {
+                        const g = logs.find(x => Number(x.season) === 2026 && Number(x.week) === Number(w)) || { season:2026, week:w, name: r.name };
+                        const rt = typeof routesForGame === 'function' ? routesForGame(r.p || { displayName:r.name }, g) : { routes:0, routePct:0 };
+                        const tgt = g.tgtShare ? (g.tgtShare > 1 ? g.tgtShare : g.tgtShare * 100) : 0;
+                        const ay = g.ayShare ? (g.ayShare > 1 ? g.ayShare : g.ayShare * 100) : 0;
+                        const rp = rt.routePct ? (rt.routePct > 1.5 ? rt.routePct : rt.routePct * 100) : 0;
+                        return { tgt, ay, rp, rts: rt.routes || 0 };
+                    };
+                    const wcells = weekNums.map(w => {
+                        if (!usage) {
+                            const s = r.weeks[w];
+                            if (!s) return '<td class="num"></td>';
+                            const pct = snapPctNum(s);
+                            return `<td class="num ${snapTone(pct)}">${Math.round(pct)}%</td>`;
+                        }
+                        const u = usageWeek(w);
+                        if (!u.rp && !u.tgt && !u.rts) return '<td class="num"></td>';
+                        return `<td class="num ${snapTone(u.rp || u.tgt)}"><div>${u.rp ? Math.round(u.rp)+'% rt' : '—'}</div><div class="cs-sub">${u.tgt ? Math.round(u.tgt)+'% tgt' : ''}${u.ay ? ' · '+Math.round(u.ay)+'% ay' : ''}${u.rts ? ' · '+u.rts+' rts' : ''}</div></td>`;
+                    }).join('');
+                    const seasonUse = weekNums.map(usageWeek);
+                    const avgRt = (() => { const xs = seasonUse.map(u=>u.rp).filter(Boolean); return xs.length ? xs.reduce((a,b)=>a+b,0)/xs.length : 0; })();
+                    const barVal = usage ? avgRt : r.seasonPct;
+                    const bar = Math.max(0, Math.min(100, barVal));
+                    const nm = r.name || csName(r.p);
+                    return `<tr>
+                        <td><button type="button" class="cs-name-btn" onclick="openCsDrawer('${csArg((r.p && r.p.displayName) || nm)}')">${csEsc(nm)}</button></td>
+                        <td>${csEsc(r.pos || csPos(r.p))}</td>
+                        <td><div class="snap-bar"><span style="width:${bar}%"></span><em>${barVal ? Math.round(barVal)+'%' : '—'}</em></div></td>
+                        ${wcells}
+                    </tr>`;
+                }).join('');
+                return `<div class="gp-dvp-card" style="margin-bottom:0.8rem;">
+                    <h4>${csEsc(tm)}</h4>
+                    <div class="cs-table-wrap"><table class="gp-dvp-table">
+                        <thead><tr><th style="cursor:pointer;" onclick="sortLabTable(this)">Player</th><th style="cursor:pointer;" onclick="sortLabTable(this)">Pos</th>${usage ? '<th style="cursor:pointer;" onclick="sortLabTable(this)">Season RT%</th>' : '<th style="cursor:pointer;" onclick="sortLabTable(this)">Season snap %</th>'}${weekNums.map(w=>'<th>W'+w+'</th>').join('')}</tr></thead>
+                        <tbody>${rows}</tbody>
+                    </table></div>
+                </div>`;
+            }).join('');
+                        root.innerHTML = blocks || '<p class="cs-note">No 2026 snap rows matched that team / position. Try All teams or All offense.</p>';
+        }
+
         function switchWorkspace(which) {
             const panels = {
                 builder: 'panelBuilder',
@@ -5214,7 +5721,9 @@
                 leverage: 'panelLeverage',
                 preview: 'panelPreview',
                 slate: 'panelSlate',
-                stacks: 'panelStacks'
+                stacks: 'panelStacks',
+                dvp: 'panelDvp',
+                snaps: 'panelSnaps'
             };
             const buttons = {
                 builder: 'tabBtnBuilder',
@@ -5222,7 +5731,9 @@
                 leverage: 'tabBtnLev',
                 preview: 'tabBtnPreview',
                 slate: 'tabBtnSlate',
-                stacks: 'tabBtnStacks'
+                stacks: 'tabBtnStacks',
+                dvp: 'tabBtnDvp',
+                snaps: 'tabBtnSnaps'
             };
             if (!panels[which]) which = 'builder';
             Object.keys(panels).forEach(k => {
@@ -5239,11 +5750,13 @@
                 cheat: renderCheatSheet,
                 leverage: renderLeverage,
                 preview: renderGamePreview,
-                slate: renderSlatePreview
+                slate: renderSlatePreview,
+                dvp: renderDvpLab,
+                snaps: renderSnapsLab
             };
             const fn = paint[which];
             if (typeof fn === 'function') {
-                const labels = { cheat: 'Building Cheat Sheet…', leverage: 'Scoring ownership leverage…', preview: 'Building Game Preview…', slate: 'Building Slate Preview…', stacks: 'Ranking stacks…' };
+                const labels = { cheat: 'Building Cheat Sheet…', leverage: 'Scoring ownership leverage…', preview: 'Building Game Preview…', slate: 'Building Slate Preview…', stacks: 'Ranking stacks…', dvp: 'Building DVP table…', snaps: 'Building snap chart…' };
                 showBusy(labels[which] || 'Loading tab…');
                 requestAnimationFrame(() => {
                     try { fn(); } catch (err) {
@@ -7069,7 +7582,11 @@
                 const draftCsvText = draftRes ? await draftRes.text() : '';
                 const gameOddsCsv = oddsRes ? await oddsRes.text() : '';
                 try {
-                    if (espnRes && espnRes.ok) ingestEspnOdds(await espnRes.json());
+                    if (espnRes && espnRes.ok) {
+                        const base = await espnRes.json();
+                        ingestEspnOdds(base, true);
+                        await loadEspnUpcomingWeeks(base);
+                    }
                 } catch (e) { console.warn('ESPN odds failed', e); }
                 if (!silent) {
                     const pf = document.getElementById('progressFill');
@@ -7087,7 +7604,7 @@
                     Papa.parse(gameOddsCsv, {
                         header: true, skipEmptyLines: true, dynamicTyping: true,
                         complete: (parsed) => {
-                            const now = Date.now() - 6 * 3600 * 1000;
+                            const now = Date.now() - 4 * 3600 * 1000;
                             const cands = [];
                             (parsed.data || []).forEach(row => {
                                 const teamRaw = row.Team || row.team || '';
@@ -7105,17 +7622,16 @@
                                     : null;
                                 cands.push({ team, opp, ou, spread: Number.isFinite(spr) ? spr : null, implied, start });
                             });
-                            cands.sort((a, b) => a.start - b.start);
-                            cands.forEach(g => {
+                            const upcoming = cands.filter(g => g.start >= now);
+            const pool = upcoming.length ? upcoming : [];
+                            pool.sort((a, b) => a.start - b.start);
+                            pool.forEach(g => {
                                 const prev = gameOddsByTeam.get(g.team);
                                 if (!prev) {
                                     gameOddsByTeam.set(g.team, g);
                                     return;
                                 }
-                                const prevFuture = prev.start >= now;
-                                const gFuture = g.start >= now;
-                                if (!prevFuture && gFuture) gameOddsByTeam.set(g.team, g);
-                                else if (prevFuture && gFuture && g.start < prev.start) gameOddsByTeam.set(g.team, g);
+                                if (g.start < prev.start) gameOddsByTeam.set(g.team, g);
                             });
                         }
                     });
@@ -7253,7 +7769,8 @@
                                     : ((teamOdds.ou !== '' && teamOdds.ou != null) ? teamOdds.ou : finalData.ou);
                                 let impliedTotal = computeImplied(ou, spread, ownOppMatches ? ownRow.implied : '');
                                 const snap = gameOddsByTeam.get(team) || gameOddsByTeam.get(normalizeTeam(team));
-                                if (snap) {
+                                const snapFresh = snap && (!snap.start || snap.start >= Date.now() - 4 * 3600 * 1000);
+                                if (snapFresh) {
                                     if (snap.opp) opponent = snap.opp;
                                     if (snap.spread != null) spread = snap.spread;
                                     if (snap.ou != null) ou = snap.ou;
@@ -13780,16 +14297,205 @@
         }
         let logsLoadStarted = false;
         async function loadGameLogsDeferred() {
-            if (logsLoadStarted || dvpReady) return;
+            if (logsLoadStarted) return;
             logsLoadStarted = true;
-            try {
-                const res = await fetchWithRetry(DATA_SOURCES.gamelogs, 1, 20000, true);
-                const txt = await res.text();
-                ingestGameLogs(txt);
+            const refreshViews = () => {
                 try { if (document.getElementById('panelCheat') && !document.getElementById('panelCheat').hidden) renderCheatSheet(); } catch (e) {}
                 try { if (document.getElementById('panelPreview') && !document.getElementById('panelPreview').hidden) renderGamePreview(); } catch (e) {}
-            } catch (e) {
-                console.warn('Game logs deferred load failed', e);
+            };
+            try {
+                const res = await fetchWithRetry(DATA_SOURCES.gamelogs, 1, 20000, true);
+                ingestGameLogs(await res.text());
+                refreshViews();
+            } catch (e) { console.warn('Game logs deferred load failed', e); }
+            Promise.allSettled([
+                loadSnapCounts(),
+                loadRoutesOptional(),
+                loadPlayerNews(),
+                loadEspnInjuries(),
+                loadRecentGameResults()
+            ]).then(() => {
+                refreshViews();
+                try { if (document.getElementById('panelSnaps') && !document.getElementById('panelSnaps').hidden) renderSnapsLab(); } catch (e) {}
+                try { if (document.getElementById('panelDvp') && !document.getElementById('panelDvp').hidden) renderDvpLab(); } catch (e) {}
+            });
+        }
+        function passerRating(cmp, att, yds, td, ints) {
+            att = Number(att) || 0;
+            if (att <= 0) return 0;
+            const a = Math.max(0, Math.min(2.375, (((Number(cmp)||0)/att) - 0.3) * 5));
+            const b = Math.max(0, Math.min(2.375, (((Number(yds)||0)/att) - 3) * 0.25));
+            const c = Math.max(0, Math.min(2.375, ((Number(td)||0)/att) * 20));
+            const d = Math.max(0, Math.min(2.375, 2.375 - ((Number(ints)||0)/att) * 25));
+            return ((a + b + c + d) / 6) * 100;
+        }
+        function snapsForGame(p, g) {
+            const key = normalizeName(csName(p) || p.baseName || '');
+            const list = snapIndex.get(key) || snapIndex.get(normalizeName(p.baseName || '')) || [];
+            const hit = list.find(s => Number(s.season) === Number(g.season) && Number(s.week) === Number(g.week));
+            return hit || null;
+        }
+        function gameResultFor(g) {
+            if (!g) return null;
+            const tm = String(g.team || '').toUpperCase();
+            const keys = [
+                [g.season, g.week, tm].join('|'),
+                [g.week, tm].join('|')
+            ];
+            for (const k of keys) if (gameResultIndex.has(k)) return gameResultIndex.get(k);
+            return null;
+        }
+        function injuryFor(p) {
+            const keys = [normalizeName(csName(p)), normalizeName(p.baseName || ''), normalizeName(p.displayName || '')];
+            for (const k of keys) if (k && injuryIndex.has(k)) return injuryIndex.get(k);
+            return null;
+        }
+        function newsFor(p) {
+            const keys = [normalizeName(csName(p)), normalizeName(p.baseName || ''), normalizeName(p.displayName || '')];
+            const out = [];
+            keys.forEach(k => { if (k && newsIndex.has(k)) out.push(...newsIndex.get(k)); });
+            const seen = new Set();
+            return out.filter(n => { if (seen.has(n.headline)) return false; seen.add(n.headline); return true; }).slice(0, 6);
+        }
+
+        async function loadSnapCounts() {
+            const urls = [
+                DATA_SOURCES.snapsLog2026,
+                DATA_SOURCES.snapsLog,
+                DATA_SOURCES.snapsLog2025
+            ];
+            let loaded = 0;
+            for (const url of urls) {
+                try {
+                    const bust = url + (url.includes('?') ? '&' : '?') + 't=' + Date.now();
+                    const res = await fetchWithRetry(bust, 2, 20000, true);
+                    const parsed = Papa.parse(await res.text(), { header: true, skipEmptyLines: true, dynamicTyping: true });
+                    (parsed.data || []).forEach(row => {
+                        const name = row.player || row.player_name || '';
+                        if (!name) return;
+                        const key = normalizeName(name);
+                        if (!snapIndex.has(key)) snapIndex.set(key, []);
+                        snapIndex.get(key).push({
+                            season: Number(row.season) || 0,
+                            week: Number(row.week) || 0,
+                            team: String(row.team || '').toUpperCase(),
+                            opp: String(row.opponent || '').toUpperCase(),
+                            pos: String(row.position || '').toUpperCase(),
+                            off: Number(row.offense_snaps) || 0,
+                            offPct: Number(row.offense_pct) || 0,
+                            def: Number(row.defense_snaps) || 0,
+                            defPct: Number(row.defense_pct) || 0,
+                            st: Number(row.st_snaps) || 0,
+                            routes: Number(row.routes || row.routes_run || row.offense_routes || 0) || 0,
+                            routePct: Number(row.route_pct || row.routes_pct || 0) || 0,
+                            name
+                        });
+                        loaded++;
+                    });
+                    if (loaded) break;
+                } catch (e) { console.warn('snap load failed', url, e); }
+            }
+            try { await loadRoutesOptional(); } catch (e) {}
+        }
+        async function loadRoutesOptional() {
+            const url = 'https://raw.githubusercontent.com/925Sports/NFL-Player-Log/main/data/routes.csv';
+            try {
+                const res = await fetchWithRetry(url + '?t=' + Date.now(), 1, 12000, true);
+                const parsed = Papa.parse(await res.text(), { header: true, skipEmptyLines: true, dynamicTyping: true });
+                (parsed.data || []).forEach(row => {
+                    const name = row.player || row.player_name || row.player_display_name || '';
+                    if (!name) return;
+                    const key = normalizeName(name);
+                    const season = Number(row.season) || 2026;
+                    const week = Number(row.week) || 0;
+                    const routes = Number(row.routes || row.routes_run || 0) || 0;
+                    const routePct = Number(row.route_pct || row.routes_pct || row.route_share || 0) || 0;
+                    if (!routeIndex.has(key)) routeIndex.set(key, []);
+                    routeIndex.get(key).push({ season, week, routes, routePct });
+                    const list = snapIndex.get(key) || [];
+                    const hit = list.find(s => Number(s.season) === season && Number(s.week) === week);
+                    if (hit) { hit.routes = routes; hit.routePct = routePct; }
+                    const logs = gameLogIndex.get(key) || [];
+                    logs.forEach(g => {
+                        if (Number(g.season) === season && Number(g.week) === week) {
+                            g.routes = routes; g.routePct = routePct;
+                        }
+                    });
+                });
+            } catch (e) { /* optional until the file exists */ }
+        }
+
+        async function loadPlayerNews() {
+            try {
+                const res = await fetchWithRetry(DATA_SOURCES.playerNews, 1, 12000, true);
+                const parsed = Papa.parse(await res.text(), { header: true, skipEmptyLines: true });
+                (parsed.data || []).forEach(row => {
+                    const hl = String(row.headline || '');
+                    const m = hl.match(/^([^:]{3,48}):/);
+                    const key = normalizeName(m ? m[1] : '');
+                    if (!key) return;
+                    if (!newsIndex.has(key)) newsIndex.set(key, []);
+                    newsIndex.get(key).push({
+                        headline: hl,
+                        desc: String(row.description || '').replace(/Visit RotoWire.*/i,'').trim(),
+                        when: row.published || '',
+                        url: row.web_url || ''
+                    });
+                    const low = hl.toLowerCase();
+                    if (/out|doubtful|questionable|injured|ir\b|pup\b|groin|hamstring|ankle|knee|concussion/.test(low) && !injuryIndex.has(key)) {
+                        let status = /out\b/.test(low) ? 'Out' : /doubtful/.test(low) ? 'Doubtful' : /questionable/.test(low) ? 'Questionable' : 'News';
+                        injuryIndex.set(key, { status, comment: hl, date: row.published || '' });
+                    }
+                });
+            } catch (e) { console.warn('news load failed', e); }
+        }
+        async function loadEspnInjuries() {
+            try {
+                const res = await fetchWithRetry(DATA_SOURCES.espnInjuries, 1, 10000, true);
+                const data = await res.json();
+                (data.injuries || []).forEach(team => {
+                    (team.injuries || []).forEach(item => {
+                        const name = item.athlete && item.athlete.displayName;
+                        if (!name) return;
+                        injuryIndex.set(normalizeName(name), {
+                            status: item.status || (item.type && item.type.description) || 'Injured',
+                            comment: item.longComment || item.shortComment || '',
+                            date: item.date || '',
+                            team: team.displayName || ''
+                        });
+                    });
+                });
+            } catch (e) { console.warn('espn injuries failed', e); }
+        }
+        async function loadRecentGameResults() {
+            const year = 2026;
+            for (let week = 1; week <= 4; week++) {
+                try {
+                    const url = `https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?seasontype=2&week=${week}&dates=${year}`;
+                    const res = await fetchWithRetry(url, 1, 8000, true);
+                    const data = await res.json();
+                    (data.events || []).forEach(ev => {
+                        const comp = (ev.competitions || [])[0];
+                        if (!comp) return;
+                        const wk = Number((ev.week && ev.week.number) || week);
+                        const comps = comp.competitors || [];
+                        if (comps.length < 2) return;
+                        const rows = comps.map(c => ({
+                            team: teamAbbr(c.team && (c.team.abbreviation || c.team.displayName)) || String(c.team && c.team.abbreviation || '').toUpperCase(),
+                            score: Number(c.score) || 0,
+                            home: c.homeAway === 'home',
+                            winner: !!c.winner
+                        }));
+                        rows.forEach(r => {
+                            const opp = rows.find(x => x.team !== r.team);
+                            if (!r.team || !opp) return;
+                            const resStr = `${r.winner ? 'W' : 'L'} ${r.score}-${opp.score}`;
+                            const pack = { result: resStr, score: r.score, oppScore: opp.score, opp: opp.team, winner: r.winner };
+                            gameResultIndex.set([year, wk, r.team].join('|'), pack);
+                            gameResultIndex.set([wk, r.team].join('|'), pack);
+                        });
+                    });
+                } catch (e) { console.warn('scoreboard week failed', week, e); }
             }
         }
         function ingestGameLogs(csvText) {
@@ -13816,40 +14522,84 @@
                     type: stype,
                     team: String(row.team || '').toUpperCase(),
                     opp: String(row.opponent_team || '').toUpperCase(),
+                    gameId: String(row.game_id || ''),
+                    cmp: Number(row.completions) || 0,
                     passYds: Number(row.passing_yards) || 0,
                     passTd: Number(row.passing_tds) || 0,
                     passAtt: Number(row.attempts) || 0,
+                    ints: Number(row.passing_interceptions) || 0,
+                    rushAtt: Number(row.carries) || 0,
                     rushYds: Number(row.rushing_yards) || 0,
                     rushTd: Number(row.rushing_tds) || 0,
                     recYds: Number(row.receiving_yards) || 0,
                     recTd: Number(row.receiving_tds) || 0,
                     rec: Number(row.receptions) || 0,
                     tgt: Number(row.targets) || 0,
+                    tgtShare: Number(row.target_share) || 0,
+                    routes: Number(row.routes || row.routes_run || 0) || 0,
+                    routePct: Number(row.route_pct || row.routes_pct || 0) || 0,
+                    ayShare: Number(row.air_yards_share) || 0,
+                    fum: Number(row.fumbles_total != null ? row.fumbles_total : row.rushing_fumbles) || 0,
+                    fumLost: Number(row.fumbles_lost_total != null ? row.fumbles_lost_total : row.rushing_fumbles_lost) || 0,
                     fp: logDkFp(row, pos)
                 };
                 const key = normalizeName(name);
                 if (!gameLogIndex.has(key)) gameLogIndex.set(key, []);
                 gameLogIndex.get(key).push(rec);
-                if (stype === 'REG' && week >= 1 && week <= 18 && rec.opp) {
-                    const dk = rec.opp + '|' + pos;
-                    if (!dvpAcc[dk]) dvpAcc[dk] = { sum: 0, n: 0, season };
-                    dvpAcc[dk].sum += rec.fp;
-                    dvpAcc[dk].n += 1;
+                if (stype === 'REG' && week >= 1 && week <= 18 && rec.opp && Number(season) === 2026) {
+                    const gk = [rec.opp, pos, rec.gameId || (rec.team + '-' + week)].join('|');
+                    if (!dvpAcc._games) dvpAcc._games = {};
+                    if (!dvpAcc._games[gk]) dvpAcc._games[gk] = { opp: rec.opp, pos, sum:0, passYds:0,passAtt:0,passCmp:0,ints:0,rushYds:0,rushAtt:0,recYds:0,rec:0,tgt:0,td:0,passTd:0,rushTd:0,recTd:0 };
+                    const gacc = dvpAcc._games[gk];
+                    gacc.sum += rec.fp;
+                    gacc.passYds += rec.passYds; gacc.passAtt += rec.passAtt || 0; gacc.passCmp += rec.cmp || 0; gacc.ints += rec.ints || 0;
+                    gacc.rushYds += rec.rushYds; gacc.rushAtt += rec.rushAtt || 0;
+                    gacc.recYds += rec.recYds; gacc.rec += rec.rec; gacc.tgt += rec.tgt;
+                    gacc.td += rec.passTd + rec.rushTd + rec.recTd;
+                    gacc.passTd += rec.passTd; gacc.rushTd += rec.rushTd; gacc.recTd += rec.recTd;
                 }
             });
             gameLogIndex.forEach(list => list.sort((a,b) => (a.season - b.season) || (a.week - b.week)));
-            // ranks by position (1 = easiest = most FP allowed)
+            const rolled = {};
+            Object.values(dvpAcc._games || {}).forEach(g => {
+                const dk = g.opp + '|' + g.pos;
+                if (!rolled[dk]) rolled[dk] = { sum:0,n:0,season:2026, passYds:0,passAtt:0,passCmp:0,ints:0,rushYds:0,rushAtt:0,recYds:0,rec:0,tgt:0,td:0,passTd:0,rushTd:0,recTd:0 };
+                const acc = rolled[dk];
+                acc.n += 1;
+                acc.sum += g.sum;
+                acc.passYds += g.passYds; acc.passAtt += g.passAtt; acc.passCmp += g.passCmp; acc.ints += g.ints;
+                acc.rushYds += g.rushYds; acc.rushAtt += g.rushAtt;
+                acc.recYds += g.recYds; acc.rec += g.rec; acc.tgt += g.tgt;
+                acc.td += g.td; acc.passTd += g.passTd; acc.rushTd += g.rushTd; acc.recTd += g.recTd;
+            });
             const byPos = {};
-            Object.entries(dvpAcc).forEach(([k, v]) => {
+            Object.entries(rolled).forEach(([k, v]) => {
                 const pos = k.split('|')[1];
                 const avg = v.n ? v.sum / v.n : 0;
                 if (!byPos[pos]) byPos[pos] = [];
-                byPos[pos].push({ k, avg, n: v.n, season: v.season });
+                byPos[pos].push({ k, avg, n: v.n, season: 2026, raw: v });
             });
             Object.values(byPos).forEach(arr => {
                 arr.sort((a,b) => b.avg - a.avg);
                 arr.forEach((row, i) => {
-                    dvpTable[row.k] = { avg: row.avg, rank: i + 1, n: row.n, season: row.season, of: arr.length };
+                    const raw = row.raw || {};
+                    const n = row.n || 1;
+                    dvpTable[row.k] = {
+                        avg: row.avg, rank: i + 1, n: row.n, season: row.season, of: arr.length,
+                        passYds: (raw.passYds || 0) / n,
+                        passAtt: (raw.passAtt || 0) / n,
+                        passCmp: (raw.passCmp || 0) / n,
+                        ints: (raw.ints || 0) / n,
+                        rushYds: (raw.rushYds || 0) / n,
+                        rushAtt: (raw.rushAtt || 0) / n,
+                        recYds: (raw.recYds || 0) / n,
+                        rec: (raw.rec || 0) / n,
+                        tgt: (raw.tgt || 0) / n,
+                        td: (raw.td || 0) / n,
+                        passTd: (raw.passTd || 0) / n,
+                        rushTd: (raw.rushTd || 0) / n,
+                        recTd: (raw.recTd || 0) / n
+                    };
                 });
             });
             dvpReady = true;
@@ -13879,7 +14629,7 @@
         }
         function dvpPill(info) {
             if (!info) return '<span class="cs-sub">—</span>';
-            const cls = info.rank <= 10 ? 'dvp-soft' : info.rank <= 20 ? 'dvp-mid' : 'dvp-tough';
+            const cls = info.rank <= 6 ? 'dvp-soft' : info.rank <= 12 ? 'dvp-mid' : 'dvp-tough';
             return `<span class="dvp-pill ${cls}" title="${info.avg.toFixed(1)} DK FP allowed · ${info.n} games">#${info.rank}</span>`;
         }
         function attachLogInsights(list) {
@@ -13893,6 +14643,18 @@
                 const d = dvpFor(p);
                 p.dvpRank = d ? d.rank : null;
                 p.dvpAvg = d ? d.avg : null;
+                const snapRows = last3.map(g => snapsForGame(p, g)).filter(Boolean);
+                const lastG = last3.length ? last3[last3.length-1] : null;
+                const lastS = lastG ? snapsForGame(p, lastG) : (snapRows[snapRows.length-1] || null);
+                const off = (s) => Number(s && s.off) || 0;
+                const pct = (s) => {
+                    const v = Number(s && s.offPct) || 0;
+                    return v > 1.5 ? v : v * 100;
+                };
+                p.lastSnaps = lastS ? off(lastS) : null;
+                p.lastSnapPct = lastS ? pct(lastS) : null;
+                p.last3Snaps = snapRows.length ? snapRows.reduce((s,x)=>s+off(x),0)/snapRows.length : null;
+                p.last3SnapPct = snapRows.length ? snapRows.reduce((s,x)=>s+pct(x),0)/snapRows.length : null;
             });
         }
 
@@ -13944,7 +14706,7 @@
             const atdRaw = firstNum(x.atd, p.atd, pickNum(p, ['Proj Anytime TD','Anytime TD']));
             const atd = atdRaw != null ? cashN(atdRaw) : null;
             const xTD = rushTd + recTd;
-            const pTD = atd != null ? atd : (xTD > 0 ? 1 - Math.exp(-xTD) : 0);
+            const pTD = Math.max(atd != null ? atd : 0, xTD > 0 ? 1 - Math.exp(-xTD) : 0, xTD);
             const opps = rushAtt + tgt;
             const effVol = passAtt + (rushAtt * 1.5);
             const dual = rushAtt >= 6 || rushYds >= 28;
@@ -14014,7 +14776,7 @@
             } else if (pos === 'RB') {
                 const committee = m.rushAtt > 0 && m.rushAtt < 14 && m.tgt < 4;
                 const tdLikely = m.pTD >= 0.50 || m.xTD >= 0.60;
-                const hitsValue = m.valueX >= 2.45;
+                const hitsValue = m.valueX >= 2.35;
                 const baseCore = m.opps >= 19.5 && hitsValue && !committee;
                 role = committee ? 'committee' : (m.tgt >= 4 ? 'three-down' : 'lead back');
                 if (baseCore && tdLikely && m.fav >= 6) {
@@ -14027,11 +14789,15 @@
                     reason = `CORE: ${m.opps.toFixed(0)} opps, ${m.valueX.toFixed(2)}x, ${m.pTD.toFixed(2)} P(TD)`;
                 } else if (baseCore) {
                     primary = 'Core Play';
-                    exposure = 'Mid Exposure';
+                    exposure = (m.opps >= 20 || m.fav >= 6) ? 'High Exposure' : 'Mid Exposure';
                     reason = `CORE: ${m.opps.toFixed(0)} opps, ${m.valueX.toFixed(2)}x`;
+                } else if (m.opps >= 20 && m.fav >= 6 && !committee) {
+                    primary = 'Core Play';
+                    exposure = 'High Exposure';
+                    reason = `CORE: ${m.opps.toFixed(0)} opps, run script -${m.fav.toFixed(1)}, ${m.valueX.toFixed(2)}x`;
                 } else if (m.opps >= 16 && !committee) {
                     primary = 'Safe';
-                    exposure = 'Mid Exposure';
+                    exposure = (m.opps >= 20 || m.fav >= 7) ? 'High Exposure' : 'Mid Exposure';
                     reason = `SAFE: ${m.opps.toFixed(0)} opps, ${m.valueX.toFixed(2)}x${tdLikely ? '' : ', <50% TD'}`;
                 } else if ((m.opps >= 14 && m.opps <= 18 && (hitsValue || m.valueX >= 2.0) && m.sal <= 5600) || (m.sal <= 4800 && m.opps >= 12 && m.valueX >= 2.0)) {
                     primary = 'Core Value';
@@ -14079,10 +14845,10 @@
                     primary = 'Core Play';
                     exposure = 'High Exposure';
                     reason = `CORE: ${m.tgt.toFixed(1)} tgt, ${m.valueX.toFixed(2)}x`;
-                } else if (m.sal >= 3000 && m.sal <= 4500 && m.tgt >= 4) {
+                } else if (m.valueX >= 2.70 && m.sal <= 5200 && m.tgt >= 4 && m.proj >= 8) {
                     primary = 'Core Value';
-                    exposure = 'Mid Exposure';
-                    reason = `CORE VALUE: $${m.sal}, ${m.tgt.toFixed(1)} tgt, ${m.proj.toFixed(1)} pts`;
+                    exposure = 'Low Exposure';
+                    reason = `CORE VALUE: ${m.valueX.toFixed(2)}x at $${m.sal}, ${m.tgt.toFixed(1)} tgt`;
                 } else if (m.tgt >= 6) {
                     primary = 'Safe';
                     exposure = 'Mid Exposure';
@@ -14353,7 +15119,7 @@
         }
         function cashPills(p) {
             const pack = cashTagPlayer(p);
-            return `<span class="cs-tag ${cashTagClass(pack.primary)}">${pack.primary}</span><span class="cs-tag tag-exp">${pack.exposure}</span>`;
+            return `<span class="cs-tag ${cashTagClass(pack.primary)}" title="Cash role: how strong the play is">${pack.primary}</span><span class="cs-tag tag-exp" title="Suggested cash exposure band">Exp: ${String(pack.exposure||'').replace(' Exposure','')}</span>`;
         }
         function csPosProjGroups(p) {
             const pos = csPos(p);
@@ -14421,26 +15187,78 @@
             const idx = peers.findIndex(x => x.displayName === p.displayName);
             return { rank: idx >= 0 ? idx + 1 : '—', of: peers.length || '—' };
         }
+
         function playerWhyHtml(p, pack, m, dvp) {
-            const bits = [];
-            bits.push(`<p><strong>${csEsc(csName(p))}</strong> is tagged <strong>${csEsc(pack.primary)}</strong> with ${csEsc(pack.exposure)}${pack.role ? ` as a ${csEsc(pack.role)}` : ''}.</p>`);
-            if (pack.reason) bits.push(`<p>${csEsc(pack.reason)}.</p>`);
+            const name = csName(p);
             const pos = csPos(p);
-            if (pos === 'QB') {
-                bits.push(`<p>Volume is ${m.passAtt ? m.passAtt.toFixed(1) : '—'} pass attempts` + (m.dual ? ` and ${m.rushAtt.toFixed(1)} rush attempts (dual-threat).` : '.') + ` Cash Core now also requires 3.0x and a non-tough matchup. He is at ${m.valueX.toFixed(2)}x.</p>`);
-            } else if (pos === 'RB') {
-                bits.push(`<p>He is projected for ${m.opps.toFixed(1)} opportunities (${m.rushAtt.toFixed(1)} rush att + ${m.tgt.toFixed(1)} targets) at ${m.valueX.toFixed(2)}x with ${m.pTD.toFixed(2)} P(TD).</p>`);
-            } else if (pos === 'WR' || pos === 'TE') {
-                bits.push(`<p>Target volume is ${m.tgt.toFixed(1)} with ${m.rec.toFixed(1)} catches projected at ${m.valueX.toFixed(2)}x.</p>`);
+            const team = p.Team || '';
+            const opp = csOpp(p) || p.Opponent || 'this defense';
+            const logs = (typeof lastNLogs === 'function' ? lastNLogs(p, 8) : []).filter(g => !g.season || Number(g.season) >= 2026);
+            const n = logs.length;
+            const avg = (fn) => n ? logs.reduce((s,g)=>s+fn(g),0)/n : null;
+            const avgFp = avg(g => Number(g.fp)||0);
+            const avgRush = avg(g => Number(g.rushAtt)||0);
+            const avgTgt = avg(g => Number(g.tgt)||0);
+            const avgPass = avg(g => Number(g.passAtt)||0);
+            const proj = csFp(p);
+            const fav = Number(m.fav) || 0;
+            const dog = fav < 0;
+            const runScript = pos === 'RB' && fav >= 6;
+            const passScript = pos === 'QB' && !m.dual && fav >= 7;
+            const impl = m.impl != null ? Number(m.impl).toFixed(1) : null;
+            const spreadTxt = m.spread != null ? ((m.spread>0?'+':'') + Number(m.spread).toFixed(1)) : '';
+            const paras = [];
+            const tag = pack.primary;
+
+            const exp = String(pack.exposure||'').replace(' Exposure','');
+            let open = `${name} is a ${tag} on this slate`;
+            if (exp) open += ` with ${exp.toLowerCase()} suggested cash exposure`;
+            if (pack.role) open += ` (${pack.role})`;
+            open += '. ';
+            if (pos === 'RB') {
+                open += `The projection gives him ${m.opps.toFixed(1)} opportunities (${m.rushAtt.toFixed(1)} carries and ${m.tgt.toFixed(1)} targets) at ${m.valueX.toFixed(2)}x salary value`;
+                if (m.pTD) open += `, with a ${m.pTD.toFixed(2)} touchdown projection`;
+                open += '.';
+            } else if (pos === 'QB') {
+                open += `He is projected for ${m.passAtt ? m.passAtt.toFixed(1) : '—'} pass attempts`;
+                if (m.dual) open += ` and ${m.rushAtt.toFixed(1)} designed or scramble carries`;
+                open += ` at ${m.valueX.toFixed(2)}x.`;
+            } else {
+                open += `Target volume sits at ${m.tgt.toFixed(1)} (${m.rec.toFixed(1)} catches) and the salary produces ${m.valueX.toFixed(2)}x.`;
             }
-            if (dvp) bits.push(`<p>Matchup DVP is #${dvp.rank} (1 = easiest). ${dvp.rank <= 12 ? 'That is an appealing spot.' : dvp.rank >= 22 ? 'That is a tough spot, which blocks QB Core.' : 'That is a neutral-to-mixed spot.'}</p>`);
-            const impl = implSpreadText(p);
-            if (impl) bits.push(`<p>Team implied total / spread: ${csEsc(impl)}.</p>`);
-            if (m.fav >= 7 && pos === 'QB' && !m.dual) bits.push(`<p>Script risk: pocket QB on a ${m.fav.toFixed(1)}-point favorite can lose passing volume.</p>`);
-            if (m.fav >= 6 && pos === 'RB') bits.push(`<p>Favorite script helps this back if the lead holds.</p>`);
-            bits.push(`<p class="cs-note">This writeup is generated from the same cash-tag rules as the Cheat Sheet, not a live model chat.</p>`);
-            return bits.join('');
+            paras.push(`<p>${csEsc(open)}</p>`);
+            if (runScript) {
+                paras.push(`<p>This profiles as a <strong class="script-run">run-heavy script</strong>. ${csEsc(team)} are ${fav.toFixed(1)}-point favorites${impl ? ' with a ' + impl + ' implied total' : ''}${spreadTxt ? ' (' + spreadTxt + ')' : ''}. If they play from ahead, ${csEsc(name)} keeps getting the ball. That is a large part of why the tag is this strong.</p>`);
+            } else if (pos === 'RB' && dog && fav <= -6) {
+                paras.push(`<p>Script leans the other way. ${csEsc(team)} are ${Math.abs(fav).toFixed(1)}-point underdogs, so pass volume may rise and rushing opportunities can shrink if they trail.</p>`);
+            } else if (passScript) {
+                paras.push(`<p>Script risk for a pocket passer: ${csEsc(team)} are laid ${fav.toFixed(1)} points. If they sit on a lead, dropbacks come off and the passing tag should not be treated like a smash Core.</p>`);
+            } else if (impl || spreadTxt) {
+                paras.push(`<p>Game environment: ${csEsc(team)} ${spreadTxt || ''} ${impl ? '· implied ' + impl : ''} ${m.ou != null ? '· O/U ' + Number(m.ou).toFixed(1) : ''}.</p>`);
+            }
+            if (dvp) {
+                const soft = dvp.rank <= 10, tough = dvp.rank >= 22;
+                const tone = soft ? '<span class="dvp-soft-txt">one of the softer spots on the slate</span>' : tough ? '<span class="dvp-tough-txt">a below-average spot</span>' : 'a middle-of-the-pack spot';
+                let line = `${csEsc(opp)} grade out as ${tone} against ${pos}s: ${dvpPill(dvp)} allowing <strong>${dvp.avg.toFixed(1)}</strong> DK fantasy points per game`;
+                if (pos === 'QB') line += ` on ${(dvp.passYds||0).toFixed(0)} passing yards, ${(dvp.passTd||0).toFixed(2)} pass TDs, and ${(dvp.rushYds||0).toFixed(0)} QB rush yards`;
+                else if (pos === 'RB') line += ` with ${(dvp.rushYds||0).toFixed(0)} rush yards, ${(dvp.tgt||0).toFixed(1)} targets, and ${(dvp.td||0).toFixed(2)} TDs allowed to the position`;
+                else line += ` with ${(dvp.tgt||0).toFixed(1)} targets, ${(dvp.rec||0).toFixed(1)} catches, ${(dvp.recYds||0).toFixed(0)} receiving yards, and ${(dvp.td||0).toFixed(2)} TDs`;
+                line += '.';
+                if (avgFp != null) line += ` ${name.split(' ')[0]} is averaging ${avgFp.toFixed(1)} DK FP over ${n} logged 2026 game${n===1?'':'s'} and projects ${proj.toFixed(1)} this week, so the matchup ${soft ? 'supports beating that baseline' : tough ? 'makes it harder to clear the projection' : 'is roughly in line with the projection'}.`;
+                paras.push(`<p>${line}</p>`);
+            }
+            if (avgRush != null && pos === 'RB') {
+                paras.push(`<p>Recent workload: ${avgRush.toFixed(1)} carries and ${(avgTgt||0).toFixed(1)} targets per game in 2026, versus ${m.rushAtt.toFixed(1)} / ${m.tgt.toFixed(1)} in this projection.</p>`);
+            }
+            if (tag === 'Extreme Core') paras.push(`<p>Extreme Core is reserved for locked volume, 2.5x or better, and a script that should feed the position. That is the bar he clears here.</p>`);
+            else if (tag === 'Core Play') paras.push(`<p>Core Play means the volume and value are good enough to pay in cash if the game stays on schedule — not quite Extreme Core unless the opportunity count and script both pop.</p>`);
+            else if (tag === 'Core Value') paras.push(`<p>Core Value is a salary piece, not a true core. The multiple is high enough that a modest line already beats 2.7x. Use him to fit the build; do not treat him like a locked Extreme Core.</p>`);
+            else if (tag === 'Safe') paras.push(`<p>Safe means the role is real, but something — price, script, or DVP — keeps him short of Core.</p>`);
+            else if (tag === 'Fade') paras.push(`<p>Fade means the projection needs a touchdown or a role change to be worth cash exposure.</p>`);
+            paras.push(`<p class="cs-note">Written from this slate's projection, implied total, and 2026 DVP — not a live chat model.</p>`);
+            return `<div class="cs-summary">${paras.join('')}</div>`;
         }
+
         function luIsShowdown() {
             return !!(typeof selectedSlate === 'string' && selectedSlate.includes('Showdown'));
         }
@@ -14560,13 +15378,37 @@
                 b.classList.toggle('active', b.getAttribute('data-tab') === tab);
             });
         }
+
+        function withYearSplits(games, rowHtml) {
+            return (games || []).map(rowHtml).join('');
+        }
+        function logTableWrap(head, body, qb) {
+            return `<div class="cs-log-wrap"><table class="cs-log-table"><thead>${head}</thead><tbody>${body}</tbody></table></div>
+                <p class="cs-note">Salary is this slate DK salary. Target share comes from NFL-Player-Log.</p>`;
+        }
+        function toggleCsLogGroup(el, cls) {
+            const box = el.closest('.cs-log-box') || el.closest('#csDrawerBody');
+            if (!box) return;
+            box.querySelectorAll('.' + cls).forEach(n => { n.style.display = el.checked ? '' : 'none'; });
+        }
+
         function openCsDrawer(displayName) {
+            try {
+                openCsDrawerInner(displayName);
+            } catch (err) {
+                console.warn('player popup failed', err);
+                alert('Could not open player card: ' + (err && err.message ? err.message : err));
+            }
+        }
+        function openCsDrawerInner(displayName) {
             const p = csSourcePool().find(x => x.displayName === displayName || csName(x) === displayName)
                 || (filteredData||[]).find(x => x.displayName === displayName);
             const drawer = document.getElementById('csPlayerDrawer');
             const back = document.getElementById('csDrawerBackdrop');
             const body = document.getElementById('csDrawerBody');
             if (!drawer || !body || !p) return;
+            if (back && back.parentElement !== document.body) document.body.appendChild(back);
+            if (drawer.parentElement !== document.body) document.body.appendChild(drawer);
             p.proj = parseCheatProj(p);
             applyCheatLookup(p);
             if (!p.headshot) p.headshot = playerHeadshot(p);
@@ -14585,9 +15427,11 @@
             const subEl = document.getElementById('csDrawerSub');
             const oppTxt = csOpp(p) || p.Opponent || '';
             const implTxt = implSpreadText(p) || ((m.impl != null && Number.isFinite(Number(m.impl))) ? Number(m.impl).toFixed(1) : '');
-            const dvpHead = dvp ? `DVP #${dvp.rank}` : '';
-            const meta = [p.Team || '', pos, '$' + csSal(p), oppTxt ? 'vs ' + oppTxt : '', implTxt ? 'Impl ' + implTxt : '', dvpHead].filter(Boolean).join(' | ');
-            if (subEl) subEl.innerHTML = `${csEsc(meta)}<div class="cs-tag-row" style="margin-top:0.35rem;">${cashPills(p)}</div>${pack.role ? `<div class="cs-note" style="margin:0.2rem 0 0;">Role: ${csEsc(pack.role)}</div>` : ''}`;
+            const dvpHead = dvp ? dvpPill(dvp) : '';
+            const metaBits = [p.Team || '', pos, '$' + csSal(p), oppTxt ? 'vs ' + oppTxt : '', implTxt ? 'Impl ' + implTxt : ''].filter(Boolean).join(' | ');
+            const inj = injuryFor(p);
+            const injBadge = inj ? `<span class="cs-inj ${injBadgeClass(inj.status)}">${csEsc(inj.status)}</span>` : '';
+            if (subEl) subEl.innerHTML = `${csEsc(metaBits)} ${dvpHead} ${injBadge}<div class="cs-tag-row" style="margin-top:0.35rem;">${cashPills(p)}</div>${pack.role ? `<div class="cs-note" style="margin:0.2rem 0 0;">Role: ${csEsc(pack.role)}</div>` : ''}`;
             const img = document.getElementById('csDrawerHeadshot');
             if (img) {
                 if (shot) { img.referrerPolicy = 'no-referrer'; img.src = shot; img.alt = csName(p); img.hidden = false; img.onerror = () => { img.hidden = true; }; }
@@ -14613,15 +15457,105 @@
             }
             const logTable = (games) => {
                 if (!games.length) return '<p class="cs-note">No game logs matched this name yet.</p>';
+                const cur = games.filter(g => !g.season || Number(g.season) >= 2026);
+                const old = games.filter(g => Number(g.season) && Number(g.season) < 2026);
+                const paint = (list) => logTableInner(list);
+                return (cur.length ? paint(cur) : '') + (old.length ? `<details class="cs-log-box"><summary>${old[0].season || 2025} season · ${old.length} games</summary>${paint(old)}</details>` : '');
+            };
+            const logTableInner = (games) => {
+                if (!games.length) return '';
                 const qb = pos === 'QB';
-                const head = qb
-                    ? '<tr><th>Wk</th><th>Opp</th><th>Att</th><th>Pass Yds</th><th>Pass TD</th><th>Rush Yds</th><th>Rush TD</th><th>FP</th></tr>'
-                    : '<tr><th>Wk</th><th>Opp</th><th>Rush Yds</th><th>Rush TD</th><th>Rec</th><th>Tgt</th><th>Rec Yds</th><th>Rec TD</th><th>FP</th></tr>';
-                const body = games.map(g => qb
-                    ? `<tr><td>W${g.week}</td><td>${csEsc(g.opp)}</td><td class="num">${g.passAtt||0}</td><td class="num">${g.passYds||0}</td><td class="num">${g.passTd||0}</td><td class="num">${g.rushYds||0}</td><td class="num">${g.rushTd||0}</td><td class="num">${Number(g.fp).toFixed(1)}</td></tr>`
-                    : `<tr><td>W${g.week}</td><td>${csEsc(g.opp)}</td><td class="num">${g.rushYds||0}</td><td class="num">${g.rushTd||0}</td><td class="num">${g.rec||0}</td><td class="num">${g.tgt||0}</td><td class="num">${g.recYds||0}</td><td class="num">${g.recTd||0}</td><td class="num">${Number(g.fp).toFixed(1)}</td></tr>`
-                ).join('');
-                return `<div class="cs-table-wrap"><table class="cs-log-table"><thead>${head}</thead><tbody>${body}</tbody></table></div>`;
+                const fmtPct = (a,b) => (!b ? '—' : ((100*a/b).toFixed(1)));
+                const avg = (yds,att) => (!att ? '—' : (yds/att).toFixed(1));
+                const snapCell = (g) => {
+                    const s = snapsForGame(p, g);
+                    if (!s) return '<td class="num">—</td><td class="num">—</td>';
+                    const snaps = pos === 'DST' ? s.def : s.off;
+                    const pct = pos === 'DST' ? s.defPct : s.offPct;
+                    const pctTxt = pct > 1.5 ? pct.toFixed(0) + '%' : Math.round(pct * 100) + '%';
+                    return `<td class="num">${snaps}</td><td class="num">${pctTxt}</td>`;
+                };
+                const resCell = (g) => {
+                    const r = gameResultFor(g);
+                    if (!r) return '<td class="res">—</td>';
+                    return `<td class="res">${csEsc(r.result)}</td>`;
+                };
+                const mu = (g) => {
+                    const home = '';
+                    return `${csEsc(g.team || p.Team || '')} @ ${csEsc(g.opp)}`;
+                };
+                const sal = () => {
+                    const s = csSal(p);
+                    return s ? ('$' + s) : '—';
+                };
+                if (qb) {
+                    const head = `<tr>
+                        <th colspan="5" class="grp left g-game">FANTASY / GAME</th>
+                        <th colspan="8" class="grp g-pass">PASSING</th>
+                        <th colspan="4" class="grp g-rush">RUSHING</th>
+                        <th colspan="2" class="grp g-fum">FUMBLES</th>
+                        <th colspan="2" class="grp g-snap">SNAPS</th>
+                    </tr>
+                    <tr>
+                        <th class="left">WEEK</th><th>FPTS</th><th>SALARY</th><th class="left">MATCHUP</th><th>RESULT</th>
+                        <th>COMP</th><th>ATT</th><th>PCT</th><th>YDS</th><th>AVG</th><th>TD</th><th>INT</th><th>RATE</th>
+                        <th>ATT</th><th>YDS</th><th>AVG</th><th>TD</th>
+                        <th>FUM</th><th>LOST</th>
+                        <th>SNP</th><th>SNP%</th>
+                    </tr>`;
+                    const body = withYearSplits(games, g => {
+                        const r = gameResultFor(g);
+                        const cls = r ? (r.winner ? 'win' : 'loss') : '';
+                        return `<tr class="${cls}">
+                            <td class="left">${g.season ? String(g.season).slice(2)+' W'+g.week : 'W'+g.week}</td>
+                            <td class="num">${Number(g.fp).toFixed(1)}</td>
+                            <td class="num">${sal()}</td>
+                            <td class="left">${mu(g)}</td>
+                            ${resCell(g)}
+                            <td class="num">${g.cmp||0}</td><td class="num">${g.passAtt||0}</td><td class="num">${fmtPct(g.cmp||0,g.passAtt||0)}</td>
+                            <td class="num">${g.passYds||0}</td><td class="num">${avg(g.passYds,g.passAtt)}</td>
+                            <td class="num">${g.passTd||0}</td><td class="num">${g.ints||0}</td>
+                            <td class="num">${passerRating(g.cmp,g.passAtt,g.passYds,g.passTd,g.ints).toFixed(1)}</td>
+                            <td class="num">${g.rushAtt||0}</td><td class="num">${g.rushYds||0}</td><td class="num">${avg(g.rushYds,g.rushAtt)}</td>
+                            <td class="num">${g.rushTd||0}</td>
+                            <td class="num">${g.fum||0}</td><td class="num">${g.fumLost||0}</td>
+                            ${snapCell(g)}
+                        </tr>`;
+                    });
+                    return logTableWrap(head, body, qb);
+                }
+                const head = `<tr>
+                    <th colspan="5" class="grp left g-game">FANTASY / GAME</th>
+                    <th colspan="8" class="grp g-rec">RECEIVING</th>
+                    <th colspan="4" class="grp g-rush">RUSHING</th>
+                    <th colspan="2" class="grp g-fum">FUMBLES</th>
+                    <th colspan="2" class="grp g-snap">SNAPS</th>
+                </tr>
+                <tr>
+                    <th class="left">WEEK</th><th>FPTS</th><th>SALARY</th><th class="left">MATCHUP</th><th>RESULT</th>
+                    <th>REC</th><th>TAR</th><th>YDS</th><th>TD</th><th>TGT%</th><th>AY%</th><th>RTS</th><th>RT%</th>
+                    <th>ATT</th><th>YDS</th><th>AVG</th><th>TD</th>
+                    <th>FUM</th><th>LOST</th>
+                    <th>SNP</th><th>SNP%</th>
+                </tr>`;
+                const body = withYearSplits(games, g => {
+                    const r = gameResultFor(g);
+                    const cls = r ? (r.winner ? 'win' : 'loss') : '';
+                    return `<tr class="${cls}">
+                        <td class="left">${g.season ? String(g.season).slice(2)+' W'+g.week : 'W'+g.week}</td>
+                        <td class="num">${Number(g.fp).toFixed(1)}</td>
+                        <td class="num">${sal()}</td>
+                        <td class="left">${mu(g)}</td>
+                        ${resCell(g)}
+                        <td class="num">${g.rec||0}</td><td class="num">${g.tgt||0}</td><td class="num">${g.recYds||0}</td><td class="num">${g.recTd||0}</td>
+                        <td class="num">${g.tgtShare ? (g.tgtShare>1?g.tgtShare:g.tgtShare*100).toFixed(0)+'%' : '—'}</td><td class="num">${g.ayShare ? (g.ayShare>1?g.ayShare:g.ayShare*100).toFixed(0)+'%' : '—'}</td>${routeCells(p, g)}
+                        <td class="num">${g.rushAtt||0}</td><td class="num">${g.rushYds||0}</td><td class="num">${avg(g.rushYds,g.rushAtt)}</td>
+                        <td class="num">${g.rushTd||0}</td>
+                        <td class="num">${g.fum||0}</td><td class="num">${g.fumLost||0}</td>
+                        ${snapCell(g)}
+                    </tr>`;
+                });
+                return logTableWrap(head, body, false);
             };
             const l3 = p.last3Avg != null ? p.last3Avg.toFixed(1) : '—';
             const dvpTxt = dvp ? `#${dvp.rank} of ${dvp.of} vs ${pos} (${dvp.avg.toFixed(1)} DK FP allowed)` : 'DVP n/a';
@@ -14636,7 +15570,7 @@
                     <button type="button" class="active" data-tab="ov" onclick="setCsDrawerTab('ov')">Overview</button>
                     <button type="button" data-tab="log" onclick="setCsDrawerTab('log')">Game Log</button>
                     <button type="button" data-tab="mu" onclick="setCsDrawerTab('mu')">Matchup</button>
-                    <button type="button" data-tab="ai" onclick="setCsDrawerTab('ai')">Why this tag</button>
+                    <button type="button" data-tab="ai" onclick="setCsDrawerTab('ai')">Summary</button>
                 </div>
                 <div id="csTab-ov">
                     ${line ? `<p class="cs-note">Week line: ${csEsc(line)}</p>` : ''}
@@ -14669,13 +15603,16 @@
                         <div class="cs-stat"><div class="k">Impl Tot</div><div class="v">${m.impl != null ? m.impl.toFixed(1) : '—'}</div></div>
                         <div class="cs-stat"><div class="k">DVP</div><div class="v">${dvp ? '#'+dvp.rank+' / '+dvp.of : '—'}</div></div>
                     </div>
-                    <p class="cs-note">${dvpTxt}. 1 = easiest matchup.</p>
+                    <p class="dvp-detail">${dvp ? `${csEsc(csOpp(p)||'Opp')} allow <strong>${dvp.avg.toFixed(1)} DK FP/${pos}</strong> per game (#${dvp.rank} of ${dvp.of}, 1 = easiest). Avg line: ${dvp.tgt? dvp.tgt.toFixed(1)+' tgt · ':''}${dvp.rec? dvp.rec.toFixed(1)+' rec · ':''}${pos==='QB' ? (dvp.passYds||0).toFixed(0)+' pass yds · ' : (dvp.recYds||0).toFixed(0)+' rec yds · '}${(dvp.rushYds||0).toFixed(0)} rush yds · ${(dvp.td||0).toFixed(2)} TD.` : dvpTxt}</p>
                     ${lv ? `<p class="cs-reason">${csEsc(lv.reason)}</p>` : ''}
+                    ${inj ? `<p class="cs-reason"><strong>Injury:</strong> ${csEsc(inj.status)}${inj.comment ? ' — '+csEsc(inj.comment) : ''}</p>` : ''}
+                    <h4 style="margin:0.7rem 0 0.3rem;">News</h4>
+                    ${newsFor(p).length ? newsFor(p).map(n => `<div class="cs-news-item"><div>${csEsc(n.headline)}</div><div class="when">${csEsc(n.when)}</div>${n.desc ? `<div class="cs-note">${csEsc(n.desc).slice(0,280)}</div>` : ''}</div>`).join('') : '<p class="cs-note">No recent player news in the feed.</p>'}
                     <h4 style="margin:0.7rem 0 0.3rem;">Vs ${csEsc(csOpp(p)||'opp')}</h4>
                     ${vs.length ? logTable(vs) + `<p class="cs-note">Avg ${(vs.reduce((s,g)=>s+g.fp,0)/vs.length).toFixed(1)} DK FP in ${vs.length} game(s).</p>` : '<p class="cs-note">No logged games against this opponent.</p>'}
                 </div>
                 <div id="csTab-ai" hidden>
-                    <h4 style="margin:0.2rem 0 0.35rem;">Why this tag</h4>
+                    <h4 style="margin:0.2rem 0 0.35rem;">Summary</h4>
                     ${playerWhyHtml(p, pack, m, dvp)}
                 </div>
             `;
@@ -14805,7 +15742,12 @@
                     const pack = cashTagPlayer(p);
                     const hit = tagWantList.some(tagWant =>
                         (tagWant === 'coreish' && ['Extreme Core','Core Play'].includes(pack.primary)) ||
-                        pack.primary === tagWant
+                        pack.primary === tagWant ||
+                        pack.exposure === tagWant ||
+                        (tagWant === 'High Exposure' && pack.exposure === 'High Exposure') ||
+                        (tagWant === 'Mid Exposure' && pack.exposure === 'Mid Exposure') ||
+                        (tagWant === 'Low Exposure' && pack.exposure === 'Low Exposure') ||
+                        (tagWant === 'Zero / Fade' && (pack.exposure === 'Zero / Fade' || pack.primary === 'Fade'))
                     );
                     if (!hit) return false;
                 }
@@ -14855,6 +15797,7 @@
                 else if (key === 'impl') { va = Number(a.impliedTotal)||0; vb = Number(b.impliedTotal)||0; }
                 else if (key === 'dvp') { va = Number(a.dvpRank)||99; vb = Number(b.dvpRank)||99; }
                 else if (key === 'l3') { va = Number(a.last3Avg)||0; vb = Number(b.last3Avg)||0; }
+                else if (key === 'snp') { va = Number(a.lastSnaps)||0; vb = Number(b.lastSnaps)||0; }
                 else { va = csFp(a); vb = csFp(b); }
                 return (va - vb) * dir;
             });
@@ -15044,8 +15987,33 @@
         }
 
 
-        function ingestEspnOdds(json) {
-            nflOddsByTeam = new Map();
+
+        async function loadEspnUpcomingWeeks(base) {
+            const week = Number(base && base.week && base.week.number) || 0;
+            const year = Number(base && base.season && base.season.year) || new Date().getFullYear();
+            const weeks = [];
+            if (week) weeks.push(week + 1);
+            if (week) weeks.push(week);
+            weeks.push(3, 4);
+            const seen = new Set();
+            for (const w of weeks) {
+                if (!w || seen.has(w)) continue;
+                seen.add(w);
+                const url = DATA_SOURCES.espnScoreboard + '?seasontype=2&week=' + w + '&dates=' + year;
+                try {
+                    const res = await fetchWithRetry(url, 1, 8000, true);
+                    ingestEspnOdds(await res.json(), false);
+                } catch (e) {
+                    try {
+                        const res2 = await fetchWithRetry(DATA_SOURCES.espnScoreboardProxy + encodeURIComponent('?seasontype=2&week='+w+'&dates='+year), 1, 8000);
+                        ingestEspnOdds(await res2.json(), false);
+                    } catch (e2) {}
+                }
+            }
+        }
+
+        function ingestEspnOdds(json, replace) {
+            if (replace || !nflOddsByTeam) nflOddsByTeam = new Map();
             const events = (json && json.events) || [];
             events.forEach(ev => {
                 const comp = (ev.competitions || [])[0];
@@ -15072,7 +16040,15 @@
                 const start = Date.parse(ev.date || comp.date || '') || 0;
                 const put = (team, opp, spread) => {
                     const implied = (Number.isFinite(ou) && Number.isFinite(spread)) ? (ou / 2 - spread / 2) : null;
-                    nflOddsByTeam.set(team, { team, opp, spread: Number.isFinite(spread) ? spread : null, ou: Number.isFinite(ou) ? ou : null, implied, home: team === home, start });
+                    const rec = { team, opp, spread: Number.isFinite(spread) ? spread : null, ou: Number.isFinite(ou) ? ou : null, implied, home: team === home, start };
+                    const prev = nflOddsByTeam.get(team);
+                    const now = Date.now() - 4 * 3600 * 1000;
+                    if (!prev) { nflOddsByTeam.set(team, rec); return; }
+                    const prevF = (prev.start || 0) >= now;
+                    const recF = start >= now;
+                    if (!prevF && recF) nflOddsByTeam.set(team, rec);
+                    else if (prevF && recF && start && start < prev.start) nflOddsByTeam.set(team, rec);
+                    else if (!prevF && !recF && start > (prev.start || 0)) nflOddsByTeam.set(team, rec);
                 };
                 put(home, away, homeSpread);
                 put(away, home, awaySpread);
@@ -15082,17 +16058,18 @@
             if (!nflOddsByTeam.size || !rows) return;
             const require = !!opts.requireOppOnSameRows;
             const present = new Set(rows.map(r => normalizeTeam(r.Team || '')).filter(Boolean));
-            const missing = (v) => v == null || v === '' || (typeof v === 'number' && !Number.isFinite(v));
+            const now = Date.now() - 4 * 3600 * 1000;
             rows.forEach(r => {
                 const team = normalizeTeam(r.Team || '');
                 const g = nflOddsByTeam.get(team);
-                if (!g) return;
-                if (require && g.opp && !present.has(g.opp)) return;
-                // Google Sheet (ownership TM/P, SPRD, O/U, OPP) wins. ESPN only fills blanks.
-                if (missing(r.Opponent) && g.opp) r.Opponent = g.opp;
-                if (missing(r.spread) && g.spread != null && g.spread !== '') r.spread = g.spread;
-                if (missing(r.ou) && g.ou != null && g.ou !== '') r.ou = g.ou;
-                if (missing(r.impliedTotal) && g.implied != null && Number.isFinite(Number(g.implied))) r.impliedTotal = g.implied;
+                if (!g || !g.opp) return;
+                if (require && !present.has(g.opp)) return;
+                const espnFuture = !g.start || g.start >= now;
+                if (!espnFuture) return;
+                r.Opponent = g.opp;
+                if (g.spread != null && g.spread !== '') r.spread = g.spread;
+                if (g.ou != null && g.ou !== '') r.ou = g.ou;
+                if (g.implied != null && Number.isFinite(Number(g.implied))) r.impliedTotal = g.implied;
             });
         }
         function applySlateMatchups(players) {
@@ -15102,7 +16079,8 @@
             players.forEach(p => {
                 const team = normalizeTeam(p.Team || '');
                 const snap = gameOddsByTeam.get(team);
-                if (snap && snap.opp) {
+                const snapFresh = snap && snap.opp && (!snap.start || snap.start >= Date.now() - 4 * 3600 * 1000);
+                if (snapFresh) {
                     p.Opponent = snap.opp;
                     if (snap.spread != null) p.spread = snap.spread;
                     if (snap.ou != null) p.ou = snap.ou;
@@ -15181,6 +16159,86 @@
             if (p.Team && p.Opponent) return p.Opponent + ' @ ' + p.Team;
             return p.Team || 'Game';
         }
+
+        function injBadgeClass(status) {
+            const s = String(status || '');
+            if (/out|ir\b|pup|inactive/i.test(s)) return 'out';
+            if (/doubt/i.test(s)) return 'doubt';
+            if (/question/i.test(s)) return 'q';
+            if (/active/i.test(s)) return 'active';
+            return 'q';
+        }
+        function isActionableInjury(inj) {
+            if (!inj) return false;
+            const s = String(inj.status || '').trim();
+            if (/^active$/i.test(s)) return false;
+            return /out|doubt|question|ir\b|pup|inactive|injured reserve|not expected|will not play/i.test(s + ' ' + String(inj.comment || ''));
+        }
+        function dvpLineFor(info, pos) {
+            if (!info) return '—';
+            if (pos === 'QB') return `${info.avg.toFixed(1)} FP · ${(info.passAtt||0).toFixed(1)} att · ${(info.passYds||0).toFixed(0)} yds · ${(info.passTd||info.td||0).toFixed(2)} TD`;
+            if (pos === 'RB') return `${info.avg.toFixed(1)} FP · ${(info.rushAtt||0).toFixed(1)} att · ${(info.rushYds||0).toFixed(0)} rush · ${(info.tgt||0).toFixed(1)} tgt · ${(info.rec||0).toFixed(1)} rec · ${(info.recYds||0).toFixed(0)} rec yds · ${(info.td||0).toFixed(2)} TD`;
+            return `${info.avg.toFixed(1)} FP · ${(info.tgt||0).toFixed(1)} tgt · ${(info.rec||0).toFixed(1)} rec · ${(info.recYds||0).toFixed(0)} yds · ${(info.td||0).toFixed(2)} TD`;
+        }
+        function renderSideDvpDrop(team, opp, summaryBits) {
+            const oppAb = teamAbbr(opp) || opp;
+            const posList = ['QB','RB','WR','TE'];
+            const rows = posList.map(pos => {
+                const info = dvpTable[oppAb + '|' + pos] || dvpTable[normalizeTeam(opp) + '|' + pos];
+                if (!info) return `<tr><td>${pos}</td><td colspan="3" class="cs-sub">No DVP yet</td></tr>`;
+                return `<tr>
+                    <td>${pos}</td>
+                    <td>${dvpPill(info)}</td>
+                    <td class="num">${info.avg.toFixed(1)}</td>
+                    <td>${dvpLineFor(info, pos)}</td>
+                </tr>`;
+            }).join('');
+            return `<details class="gp-dvp-drop">
+                <summary>DVP vs ${csEsc(opp || 'opp')} ${summaryBits ? '· '+summaryBits : ''}</summary>
+                <p class="cs-note">Rank 1 = easiest (most DK FP allowed). Averages are per game.</p>
+                <div class="cs-table-wrap"><table class="gp-dvp-table">
+                    <thead><tr><th>Pos</th><th>Rank</th><th>FP/g</th><th>Allowed per game</th></tr></thead>
+                    <tbody>${rows}</tbody>
+                </table></div>
+            </details>`;
+        }
+        function renderGpDvpBoard(g) {
+            if (!g || !g.teams) return '';
+            const posList = ['QB','RB','WR','TE'];
+            const blocks = g.teams.map(tm => {
+                const side = g.byTeam[tm] || {};
+                const opp = normalizeTeam(side.opp || g.teams.find(x => x !== tm) || '');
+                const oppAb = teamAbbr(opp) || opp;
+                const rows = posList.map(pos => {
+                    const info = dvpTable[oppAb + '|' + pos] || dvpTable[opp + '|' + pos];
+                    if (!info) return `<tr><td>${pos}</td><td colspan="6" class="cs-sub">No DVP yet</td></tr>`;
+                    const cls = info.rank <= 6 ? 'dvp-soft' : info.rank <= 12 ? 'dvp-mid' : 'dvp-tough';
+                    const vol = pos === 'QB'
+                        ? `${(info.passYds||0).toFixed(0)} pass yds · ${(info.td||0).toFixed(2)} TD`
+                        : pos === 'RB'
+                        ? `${(info.rushYds||0).toFixed(0)} rush yds · ${(info.rec||0).toFixed(1)} rec · ${(info.td||0).toFixed(2)} TD`
+                        : `${(info.tgt||0).toFixed(1)} tgt · ${(info.rec||0).toFixed(1)} rec · ${(info.recYds||0).toFixed(0)} yds · ${(info.td||0).toFixed(2)} TD`;
+                    return `<tr>
+                        <td>${pos}</td>
+                        <td><span class="dvp-pill ${cls}">#${info.rank}</span></td>
+                        <td class="num">${info.avg.toFixed(1)}</td>
+                        <td class="num">${info.of || 32}</td>
+                        <td class="num">${info.n || '—'}</td>
+                        <td>${vol}</td>
+                    </tr>`;
+                }).join('');
+                return `<div class="gp-dvp-card">
+                    <h4>${csEsc(tm)} offense vs ${csEsc(opp)} DVP</h4>
+                    <p class="cs-note" style="margin:0 0 0.35rem;">What ${csEsc(opp)} allow per game. Rank 1 = most FP allowed (easiest).</p>
+                    <div class="cs-table-wrap"><table class="gp-dvp-table">
+                        <thead><tr><th>Pos</th><th>Rank</th><th>FP/g</th><th>of</th><th>G</th><th>Allowed line</th></tr></thead>
+                        <tbody>${rows}</tbody>
+                    </table></div>
+                </div>`;
+            }).join('');
+            return `<div class="gp-dvp-board">${blocks}</div>`;
+        }
+
         function gpBuildGames() {
             const q = String(document.getElementById('gpSearch')?.value || '').trim().toLowerCase();
             const sort = document.getElementById('gpSort')?.value || 'total';
@@ -15189,7 +16247,10 @@
             const map = new Map();
             pool.forEach(p => {
                 const team = normalizeTeam(p.Team);
-                const opp = oppMap.get(team) || normalizeTeam(p.Opponent || '');
+                const now = Date.now() - 4 * 3600 * 1000;
+                const espn = (typeof nflOddsByTeam !== 'undefined') ? nflOddsByTeam.get(team) : null;
+                const espnOpp = (espn && espn.opp && (!espn.start || espn.start >= now)) ? normalizeTeam(espn.opp) : '';
+                const opp = espnOpp || oppMap.get(team) || normalizeTeam(p.Opponent || '');
                 if (!team || !opp || team === opp) return;
                 const key = [team, opp].sort().join('|');
                 if (!map.has(key)) {
@@ -15208,9 +16269,11 @@
                 const byTeam = {};
                 teams.forEach(tm => {
                     const plist = g.players.filter(p => normalizeTeam(p.Team) === tm);
-                    const implRaw = majorityTeamField(plist, tm, 'impliedTotal');
-                    const sprRaw = majorityTeamField(plist, tm, 'spread');
-                    const ouRaw = majorityTeamField(plist, tm, 'ou');
+                    const espnT = (typeof nflOddsByTeam !== 'undefined') ? nflOddsByTeam.get(tm) : null;
+                    const espnFresh = espnT && (!espnT.start || espnT.start >= Date.now() - 4 * 3600 * 1000);
+                    const implRaw = espnFresh && espnT.implied != null ? espnT.implied : majorityTeamField(plist, tm, 'impliedTotal');
+                    const sprRaw = espnFresh && espnT.spread != null ? espnT.spread : majorityTeamField(plist, tm, 'spread');
+                    const ouRaw = espnFresh && espnT.ou != null ? espnT.ou : majorityTeamField(plist, tm, 'ou');
                     byTeam[tm] = {
                         team: tm,
                         opp: teams.find(x => x !== tm) || oppMap.get(tm) || '',
@@ -15298,7 +16361,19 @@
             const callouts = [];
             if (hot.length) callouts.push(`<div class="gp-callout"><strong>Playing well recently</strong> — last 3 logged games: ${hot.map(p => `${csEsc(csName(p))} ${p.last3Avg.toFixed(1)} FP`).join(' · ')}</div>`);
             if (matchupHits.length) callouts.push(`<div class="gp-callout"><strong>Likes this matchup</strong> — vs current opponent: ${matchupHits.map(p => `${csEsc(csName(p))} ${p.vsOppAvg.toFixed(1)} FP (${p.vsOppN}g)`).join(' · ')}</div>`);
-            if (softDvp.length) callouts.push(`<div class="gp-callout"><strong>Soft DVP spots</strong> — easiest 10 defenses vs position: ${softDvp.map(p => `${csEsc(csName(p))} ${csPos(p)} #${p.dvpRank}`).join(' · ')}</div>`);
+            callouts.push(`<details class="gp-callout gp-dvp-drop">
+                <summary><strong>Soft DVP spots</strong> — click for the full defense-vs-position table</summary>
+                <p class="cs-note">${softDvp.length ? 'Easiest names on this game: ' + softDvp.map(p => `${csEsc(csName(p))} ${csPos(p)} #${p.dvpRank}`).join(' · ') : 'No top-10 DVP names flagged.'}</p>
+                ${renderGpDvpBoard(g)}
+            </details>`);
+            const hurt = gamePlayers.map(p => ({p, inj: injuryFor(p)})).filter(x => x.inj && isActionableInjury(x.inj));
+            if (hurt.length) callouts.push(`<details class="gp-callout gp-dvp-drop">
+                <summary><strong>Injury news</strong> — ${hurt.length} Out / Q / Doubtful</summary>
+                ${hurt.slice(0,12).map(x => {
+                    const note = String(x.inj.comment || x.inj.headline || '').replace(/Visit RotoWire.*/i,'').trim();
+                    return `<div class="cs-news-item"><span class="cs-inj ${injBadgeClass(x.inj.status)}">${csEsc(x.inj.status)}</span> <strong>${csEsc(csName(x.p))}</strong> <span class="cs-sub">${csEsc(csPos(x.p))}</span>${note ? `<div class="cs-note">${csEsc(note).slice(0,280)}</div>` : ''}</div>`;
+                }).join('')}
+            </details>`);
             if (!dvpReady) callouts.push(`<div class="gp-callout">Game logs still loading or unavailable — DVP / recent form will appear after the NFL-Player-Log file loads.</div>`);
             const sides = g.teams.map(tm => {
                 const side = g.byTeam[tm];
@@ -15310,15 +16385,32 @@
                 const oppAbbr = teamAbbr(side.opp || (g.teams.find(x => x !== tm) || ''));
                 const dvpBits = ['QB','RB','WR','TE'].map(pos => {
                     const info = dvpTable[oppAbbr + '|' + pos];
-                    return info ? `${pos} ${dvpPill(info)}` : '';
+                    if (!info) return '';
+                    const extra = pos === 'QB'
+                        ? `${info.avg.toFixed(1)} FP · ${(info.passYds||0).toFixed(0)} pass yds`
+                        : `${info.avg.toFixed(1)} FP · ${(info.rec||0).toFixed(1)} rec · ${(info.recYds||0).toFixed(0)} yds`;
+                    return `<span title="${extra}">${pos} ${dvpPill(info)} <span class="cs-sub">${info.avg.toFixed(1)}</span></span>`;
                 }).filter(Boolean).join(' ');
-                return `<div class="gp-side">
-                    <div style="display:flex;justify-content:space-between;gap:0.5rem;align-items:baseline;">
-                        <strong>${csEsc(tm)}</strong>
-                        <span class="cs-sub">${spr} · Impl ${impl}${side.ou!=null && side.ou!=='' ? ' · O/U '+side.ou : ''}</span>
+                const implN = Number(side.implied);
+                const implCls = Number.isFinite(implN) ? (implN >= 26 ? 'impl-hot' : implN >= 22 ? 'impl-ok' : 'impl-low') : '';
+                return `<div class="gp-side gp-side-pop">
+                    <div class="gp-side-head">
+                        <div>
+                            <div class="gp-team-name">${csEsc(tm)}</div>
+                            <div class="cs-sub">${spr}${side.ou!=null && side.ou!=='' ? ' · O/U '+side.ou : ''}</div>
+                        </div>
+                        <div class="gp-impl ${implCls}">${impl}<span>implied</span></div>
                     </div>
-                    <div class="gp-dvp">Opp DVP ${dvpBits || '—'}</div>
-                    ${list.map(p => `<div class="gp-player"><span><button type="button" class="cs-name-btn" onclick="openCsDrawer('${csArg(p.displayName)}')">${csEsc(csName(p))}</button></span><span class="meta">${csEsc(csPos(p))}</span><span class="meta">${p.last3Avg!=null? 'L3 '+p.last3Avg.toFixed(1):'—'}</span><span class="sal">$${csSal(p)}</span><span class="fp">${csFp(p).toFixed(1)}</span></div>`).join('')}
+                    <div class="gp-dvp-line">${dvpBits || ''}</div>
+
+                    ${list.map(p => {
+                        const injP = (() => { const i = injuryFor(p); return (i && isActionableInjury(i)) ? i : null; })();
+                        const last = lastNLogs(p, 1)[0];
+                        const sn = last ? snapsForGame(p, last) : null;
+                        const _pos = csPos(p); const snTxt = sn ? `${_pos === 'DST' ? sn.def : sn.off} sn (${Math.round(((_pos==='DST'?sn.defPct:sn.offPct) > 1.5 ? (_pos==='DST'?sn.defPct:sn.offPct) : (_pos==='DST'?sn.defPct:sn.offPct)*100))}%)` : '';
+                        const injTxt = injP ? ` · ${injP.status}` : '';
+                        return `<div class="gp-player"><span><button type="button" class="cs-name-btn" onclick="openCsDrawer('${csArg(p.displayName)}')">${csEsc(csName(p))}</button>${injP?`<span class="cs-inj ${/out/i.test(injP.status)?'out':/doubt/i.test(injP.status)?'doubt':'q'}">${csEsc(injP.status)}</span>`:''}</span><span class="meta">${csEsc(csPos(p))}</span><span class="meta">${p.last3Avg!=null? 'L3 '+p.last3Avg.toFixed(1):'—'}${snTxt? ' · '+snTxt:''}${p.dvpRank? ' · DVP #'+p.dvpRank:''}</span><span class="sal">$${csSal(p)}</span><span class="fp">${csFp(p).toFixed(1)}</span></div>`;
+                    }).join('')}
                     <div class="gp-actions">
                         ${qb && wr ? `<button type="button" class="ghost" onclick="gpAddStack('${csArg(csName(qb))}','${csArg(csName(wr))}')">Stack ${csEsc(csName(qb).split(' ').slice(-1)[0])} + ${csEsc(csName(wr).split(' ').slice(-1)[0])}</button>` : ''}
                     </div>
@@ -15326,7 +16418,7 @@
             }).join('');
             desk.innerHTML = `<div class="gp-card">
                 <div class="gp-match">
-                    <div><h3>${csEsc(g.label)}</h3><p class="cs-note" style="margin:0;">Implied total = O/U ÷ 2 − spread ÷ 2. DVP is 2025 DK FP allowed by that defense vs position (1 = easiest).</p></div>
+                    <div><h3>${csEsc(g.label)}</h3><p class="cs-note" style="margin:0;">Upcoming matchup + implied total. DVP = DK FP this defense allows per game to that position (1 = easiest).</p></div>
                 </div>
                 <div class="gp-callouts">${callouts.join('') || '<div class="gp-callout">No recent-form or matchup flags on this game yet.</div>'}</div>
                 <div class="gp-sides">${sides}</div>
@@ -15340,14 +16432,25 @@
         function enrichPlayerMatchups(list) {
             const players = list || allSlatePlayers || [];
             if (!players.length) return;
+            const now = Date.now() - 4 * 3600 * 1000;
             players.forEach(p => {
                 const team = normalizeTeam(p.Team || '');
                 const snap = gameOddsByTeam.get(team);
-                if (!snap) return;
-                if (snap.opp) p.Opponent = snap.opp;
-                if (snap.spread != null) p.spread = snap.spread;
-                if (snap.ou != null) p.ou = snap.ou;
-                if (snap.implied != null) p.impliedTotal = snap.implied;
+                const snapFresh = snap && (!snap.start || snap.start >= now);
+                if (snapFresh) {
+                    if (snap.opp) p.Opponent = snap.opp;
+                    if (snap.spread != null) p.spread = snap.spread;
+                    if (snap.ou != null) p.ou = snap.ou;
+                    if (snap.implied != null) p.impliedTotal = snap.implied;
+                    return;
+                }
+                const g = nflOddsByTeam.get(team);
+                if (g && g.opp && (!g.start || g.start >= now)) {
+                    p.Opponent = g.opp;
+                    if (g.spread != null) p.spread = g.spread;
+                    if (g.ou != null) p.ou = g.ou;
+                    if (g.implied != null) p.impliedTotal = g.implied;
+                }
             });
             const byTeam = new Map();
             players.forEach(p => {
