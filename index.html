@@ -4079,6 +4079,8 @@
                     <div class="cs-seg" style="margin:0 0 0.7rem;">
                         <button type="button" id="snapViewSnaps" class="active" onclick="snapView='snaps';renderSnapsLab();">Snap %</button>
                         <button type="button" id="snapViewUsage" onclick="snapView='usage';renderSnapsLab();">Routes / Tgt %</button>
+                        <button type="button" id="snapGroupTeam" class="active" onclick="snapGroup='team';renderSnapsLab();">By team</button>
+                        <button type="button" id="snapGroupPlayers" onclick="snapGroup='players';renderSnapsLab();">All players</button>
                     </div>
                     <div class="cs-toolbar">
                         <div><label>Team</label><select id="snapTeam" onchange="renderSnapsLab()"><option value="">All teams on slate</option></select></div>
@@ -4741,6 +4743,22 @@
         }, true);
 
         // Normalize every team to a single nickname so chips/filters never show both "GB" and "Packers"
+
+        const TEAM_CANON = {
+            JAC:'JAX', JAX:'JAX',
+            WSH:'WAS', WAS:'WAS', WFT:'WAS',
+            LA:'LAR', LAR:'LAR',
+            SD:'LAC', LAC:'LAC',
+            ARZ:'ARI', ARI:'ARI',
+            GNB:'GB', GB:'GB',
+            KAN:'KC', KC:'KC',
+            NWE:'NE', NE:'NE',
+            NOR:'NO', NO:'NO',
+            SFO:'SF', SF:'SF',
+            TAM:'TB', TB:'TB',
+            OAK:'LV', LV:'LV', STL:'LAR'
+        };
+
         const TEAM_NICKNAMES = {
             ARI: 'Cardinals', Arizona: 'Cardinals', Cardinals: 'Cardinals',
             ATL: 'Falcons', Atlanta: 'Falcons', Falcons: 'Falcons',
@@ -5603,6 +5621,7 @@
             return v > 1.5 ? v : v * 100;
         }
         let snapView = 'snaps';
+        let snapGroup = 'team';
         function renderSnapsLab() {
             const root = document.getElementById('snapsLabMain');
             if (!root) return;
@@ -5615,10 +5634,15 @@
             const posWant = document.getElementById('snapPos')?.value || '';
             const q = String(document.getElementById('snapSearch')?.value || '').toLowerCase();
             const usage = snapView === 'usage';
+            const byPlayer = snapGroup === 'players';
             const btnS = document.getElementById('snapViewSnaps');
             const btnU = document.getElementById('snapViewUsage');
             if (btnS) btnS.classList.toggle('active', !usage);
             if (btnU) btnU.classList.toggle('active', usage);
+            const gT = document.getElementById('snapGroupTeam');
+            const gP = document.getElementById('snapGroupPlayers');
+            if (gT) gT.classList.toggle('active', !byPlayer);
+            if (gP) gP.classList.toggle('active', byPlayer);
             const pool = csSourcePool().filter(p => ['QB','RB','WR','TE'].includes(csPos(p)));
             const teamSel = document.getElementById('snapTeam');
             const teams = [...new Set(pool.map(p => p.Team).filter(Boolean))].sort();
@@ -5668,7 +5692,7 @@
             const weekNums = [...new Set([...snapIndex.values()].flat()
                 .filter(s => Number(s.season) === 2026)
                 .map(s => Number(s.week)).filter(n => n >= 1 && n <= 18))].sort((a,b)=>a-b);
-            const blocks = [...byTeam.entries()].sort((a,b)=>String(a[0]).localeCompare(String(b[0]))).map(([tm, list]) => {
+            let blocks = [...byTeam.entries()].sort((a,b)=>String(a[0]).localeCompare(String(b[0]))).map(([tm, list]) => {
                 list.sort((a,b)=> b.seasonPct - a.seasonPct);
                 const rows = list.map(r => {
                     const logs = (typeof playerLogs === 'function' && r.p) ? playerLogs(r.p) : [];
@@ -5711,7 +5735,51 @@
                     </table></div>
                 </div>`;
             }).join('');
-                        root.innerHTML = blocks || '<p class="cs-note">No 2026 snap rows matched that team / position. Try All teams or All offense.</p>';
+                        if (byPlayer) {
+                const flat = [];
+                byTeam.forEach((list, tm) => list.forEach(r => flat.push({ tm, ...r })));
+                flat.sort((a,b) => b.seasonPct - a.seasonPct);
+                const rows = flat.map(r => {
+                    const logs = (typeof playerLogs === 'function' && r.p) ? playerLogs(r.p) : [];
+                    const usageWeek = (w) => {
+                        const g = logs.find(x => Number(x.season) === 2026 && Number(x.week) === Number(w)) || { season:2026, week:w, name: r.name };
+                        const rt = typeof routesForGame === 'function' ? routesForGame(r.p || { displayName:r.name }, g) : { routes:0, routePct:0 };
+                        const tgt = g.tgtShare ? (g.tgtShare > 1 ? g.tgtShare : g.tgtShare * 100) : 0;
+                        const ay = g.ayShare ? (g.ayShare > 1 ? g.ayShare : g.ayShare * 100) : 0;
+                        const rp = rt.routePct ? (rt.routePct > 1.5 ? rt.routePct : rt.routePct * 100) : 0;
+                        return { tgt, ay, rp, rts: rt.routes || 0 };
+                    };
+                    const wcells = weekNums.map(w => {
+                        if (!usage) {
+                            const s = r.weeks[w];
+                            if (!s) return '<td class="num"></td>';
+                            const pct = snapPctNum(s);
+                            return `<td class="num ${snapTone(pct)}">${Math.round(pct)}%</td>`;
+                        }
+                        const u = usageWeek(w);
+                        if (!u.rp && !u.tgt && !u.rts) return '<td class="num"></td>';
+                        return `<td class="num ${snapTone(u.rp || u.tgt)}"><div>${u.rp ? Math.round(u.rp)+'% rt' : '—'}</div><div class="cs-sub">${u.tgt ? Math.round(u.tgt)+'% tgt' : ''}${u.ay ? ' · '+Math.round(u.ay)+'% ay' : ''}</div></td>`;
+                    }).join('');
+                    const seasonUse = weekNums.map(usageWeek);
+                    const avgRt = (() => { const xs = seasonUse.map(u=>u.rp).filter(Boolean); return xs.length ? xs.reduce((a,b)=>a+b,0)/xs.length : 0; })();
+                    const barVal = usage ? avgRt : r.seasonPct;
+                    const bar = Math.max(0, Math.min(100, barVal));
+                    const nm = r.name || csName(r.p);
+                    return `<tr>
+                        <td><button type="button" class="cs-name-btn" onclick="openCsDrawer('${csArg((r.p && r.p.displayName) || nm)}')">${csEsc(nm)}</button></td>
+                        <td>${csEsc(r.pos || csPos(r.p))}</td>
+                        <td>${csEsc(r.tm)}</td>
+                        <td><div class="snap-bar"><span style="width:${bar}%"></span><em>${barVal ? Math.round(barVal)+'%' : '—'}</em></div></td>
+                        ${wcells}
+                    </tr>`;
+                }).join('');
+                blocks = `<div class="gp-dvp-card"><h4>All players</h4>
+                    <div class="cs-table-wrap"><table class="gp-dvp-table">
+                        <thead><tr><th style="cursor:pointer;" onclick="sortLabTable(this)">Player</th><th>Pos</th><th>Team</th><th>${usage ? 'Season RT%' : 'Season snap %'}</th>${weekNums.map(w=>'<th>W'+w+'</th>').join('')}</tr></thead>
+                        <tbody>${rows}</tbody>
+                    </table></div></div>`;
+            }
+            root.innerHTML = blocks || '<p class="cs-note">No 2026 snap rows matched that team / position. Try All teams or All offense.</p>';
         }
 
         function switchWorkspace(which) {
@@ -14284,10 +14352,14 @@
                     if (String(k).length <= 3) teamAbbr._rev[v] = String(k).toUpperCase();
                 });
             }
-            if (TEAM_NICKNAMES[s] && s.length <= 3) return s.toUpperCase();
-            if (TEAM_NICKNAMES[s.toUpperCase()] && s.length <= 3) return s.toUpperCase();
-            const nick = TEAM_NICKNAMES[s] || TEAM_NICKNAMES[s.toUpperCase()] || s;
-            return teamAbbr._rev[nick] || teamAbbr._rev[s] || s.toUpperCase();
+            let ab = '';
+            if (TEAM_NICKNAMES[s] && s.length <= 3) ab = s.toUpperCase();
+            else if (TEAM_NICKNAMES[s.toUpperCase()] && s.length <= 3) ab = s.toUpperCase();
+            else {
+                const nick = TEAM_NICKNAMES[s] || TEAM_NICKNAMES[s.toUpperCase()] || s;
+                ab = teamAbbr._rev[nick] || teamAbbr._rev[s] || s.toUpperCase();
+            }
+            return TEAM_CANON[ab] || TEAM_CANON[ab.toUpperCase()] || ab;
         }
         function logDkFp(row, pos) {
             const p = String(pos || row.position || '').toUpperCase();
@@ -14521,7 +14593,7 @@
                     season,
                     type: stype,
                     team: String(row.team || '').toUpperCase(),
-                    opp: String(row.opponent_team || '').toUpperCase(),
+                    opp: teamAbbr(row.opponent_team || '') || String(row.opponent_team || '').toUpperCase(),
                     gameId: String(row.game_id || ''),
                     cmp: Number(row.completions) || 0,
                     passYds: Number(row.passing_yards) || 0,
@@ -14613,8 +14685,10 @@
             return [];
         }
         function lastNLogs(p, n) {
-            const logs = playerLogs(p).filter(g => g.type === 'REG' || g.type === 'POST');
-            return logs.slice(-1 * (n || 5));
+            const logs = playerLogs(p).slice().sort((a,b) => (Number(a.season)-Number(b.season)) || (Number(a.week)-Number(b.week)));
+            const reg = logs.filter(g => !g.type || /REG|POST|regular/i.test(String(g.type)));
+            const src = reg.length ? reg : logs;
+            return src.slice(-1 * (n || 5));
         }
         function vsOppLogs(p) {
             const opp = teamAbbr(csOpp(p) || p.Opponent);
@@ -14622,10 +14696,19 @@
             return playerLogs(p).filter(g => g.opp === opp);
         }
         function dvpFor(p) {
-            const opp = teamAbbr(csOpp(p) || p.Opponent);
+            const raw = csOpp(p) || p.Opponent || '';
             const pos = csPos(p);
-            if (!opp || !pos) return null;
-            return dvpTable[opp + '|' + pos] || null;
+            if (!raw || !pos) return null;
+            const opp = teamAbbr(raw);
+            const tries = [opp, String(raw).toUpperCase(), TEAM_CANON[String(raw).toUpperCase()]];
+            if (opp === 'JAX') tries.push('JAC');
+            if (opp === 'WAS') tries.push('WSH','WFT');
+            for (const ab of tries) {
+                if (!ab) continue;
+                const hit = dvpTable[ab + '|' + pos];
+                if (hit) return hit;
+            }
+            return null;
         }
         function dvpPill(info) {
             if (!info) return '<span class="cs-sub">—</span>';
@@ -15384,7 +15467,7 @@
         }
         function logTableWrap(head, body, qb) {
             return `<div class="cs-log-wrap"><table class="cs-log-table"><thead>${head}</thead><tbody>${body}</tbody></table></div>
-                <p class="cs-note">Salary is this slate DK salary. Target share comes from NFL-Player-Log.</p>`;
+                <p class="cs-note">Salary is this slate DK salary.</p>`;
         }
         function toggleCsLogGroup(el, cls) {
             const box = el.closest('.cs-log-box') || el.closest('#csDrawerBody');
@@ -15418,7 +15501,7 @@
             const x = p.proj || {};
             const rk = posRankFor(p);
             const dvp = dvpFor(p);
-            const last = lastNLogs(p, 8).slice().reverse();
+            const last = playerLogs(p).slice().sort((a,b) => (Number(b.season)-Number(a.season)) || (Number(b.week)-Number(a.week)));
             const vs = vsOppLogs(p).slice().reverse();
             const groups = csPosProjGroups(p);
             const line = weekLine(p) || '';
