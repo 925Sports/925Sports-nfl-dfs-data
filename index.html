@@ -4637,6 +4637,7 @@
             final: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/final.csv',
             drafttable: 'https://raw.githubusercontent.com/925Sports/925Sports-nfl-dfs-data/main/drafttable.csv',
             gamelogs: 'https://raw.githubusercontent.com/925Sports/NFL-Player-Log/main/data/gamelogs.csv',
+            gamelogs2026: 'https://raw.githubusercontent.com/925Sports/NFL-Player-Log/main/data/gamelogs_2026.csv',
 
             snapsLog: 'https://raw.githubusercontent.com/925Sports/NFL-Player-Log/main/data/snap_counts.csv',
             snapsLog2026: 'https://raw.githubusercontent.com/925Sports/NFL-Player-Log/main/data/snap_counts_2026.csv',
@@ -14376,8 +14377,16 @@
                 try { if (document.getElementById('panelPreview') && !document.getElementById('panelPreview').hidden) renderGamePreview(); } catch (e) {}
             };
             try {
-                const res = await fetchWithRetry(DATA_SOURCES.gamelogs, 1, 20000, true);
-                ingestGameLogs(await res.text());
+                const urls = [DATA_SOURCES.gamelogs2026, DATA_SOURCES.gamelogs];
+                let first = true;
+                for (const url of urls) {
+                    if (!url) continue;
+                    try {
+                        const res = await fetchWithRetry(url, 2, 25000, false);
+                        ingestGameLogs(await res.text(), !first);
+                        first = false;
+                    } catch (e) { console.warn('gamelog fetch failed', url, e); }
+                }
                 refreshViews();
             } catch (e) { console.warn('Game logs deferred load failed', e); }
             Promise.allSettled([
@@ -14570,10 +14579,12 @@
                 } catch (e) { console.warn('scoreboard week failed', week, e); }
             }
         }
-        function ingestGameLogs(csvText) {
-            gameLogIndex = new Map();
-            dvpTable = {};
-            dvpReady = false;
+        function ingestGameLogs(csvText, append) {
+            if (!append) {
+                gameLogIndex = new Map();
+                dvpTable = {};
+                dvpReady = false;
+            }
             if (!csvText) return;
             const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true, dynamicTyping: true });
             const skill = new Set(['QB','RB','WR','TE','K']);
@@ -14617,6 +14628,7 @@
                 };
                 const key = normalizeName(name);
                 if (!gameLogIndex.has(key)) gameLogIndex.set(key, []);
+                if (append && gameLogIndex.get(key).some(g => Number(g.season)===rec.season && Number(g.week)===rec.week && g.gameId===rec.gameId)) return;
                 gameLogIndex.get(key).push(rec);
                 if (stype === 'REG' && week >= 1 && week <= 18 && rec.opp && Number(season) === 2026) {
                     const gk = [rec.opp, pos, rec.gameId || (rec.team + '-' + week)].join('|');
