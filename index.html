@@ -364,6 +364,34 @@
             padding: 0.6rem;
             box-shadow: 0 10px 28px rgba(12, 38, 39, 0.18);
         }
+        
+        #slateMenu {
+            min-width: min(340px, 86vw);
+            padding: 0.25rem 0 0.4rem;
+        }
+        .slate-group-title {
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-weight: 700;
+            padding: 0.5rem 0.75rem 0.15rem;
+        }
+        .slate-group + .slate-group .slate-group-title {
+            margin-top: 0.25rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 0.55rem;
+        }
+        #slateMenu label.slate-opt {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.45rem;
+            padding: 0.38rem 0.75rem;
+            line-height: 1.25;
+            white-space: normal;
+        }
+        #slateMenu label.slate-opt span { flex: 1; }
+
         .dropdown-menu.show { display: block; }
         .dropdown-menu label {
             display: flex;
@@ -1943,6 +1971,21 @@
         }
         #poolCard.mobile-panel-hide {
             display: block !important;
+        }
+
+        
+        .lu-anchor-lab {
+            display:inline-flex; align-items:center; gap:0.35rem;
+            font-size:0.75rem; color:var(--muted); margin-left:0.55rem;
+        }
+        .lu-anchor-lab select {
+            min-width:11rem; max-width:18rem;
+            background: var(--panel, #121a2b);
+            color: var(--text, #e7ecf5);
+            border: 1px solid var(--line, #2a3350);
+            border-radius: 8px;
+            padding: 0.22rem 0.4rem;
+            font-size: 0.78rem;
         }
 
         .lu-quality-bar { display:flex; flex-wrap:wrap; gap:0.45rem; align-items:center; margin:0.75rem 0 0.55rem; }
@@ -3773,6 +3816,12 @@
                     <button type="button" class="ghost" data-luq="proper" onclick="setLineupQualityFilter('proper', this)">Proper</button>
                     <button type="button" class="ghost" data-luq="improper" onclick="setLineupQualityFilter('improper', this)">Needs review</button>
                     <span id="luQualityCounts" style="font-size:0.78rem;color:var(--muted);margin-left:0.3rem;"></span>
+                    <label class="lu-anchor-lab" id="luAnchorWrap" title="Filter generated builds by captain (Showdown) or QB (Classic).">
+                        <span id="luAnchorLabel">CPT / QB</span>
+                        <select id="luAnchorFilter" onchange="lineupAnchorFilter=this.value;updateLineupTable();">
+                            <option value="">All</option>
+                        </select>
+                    </label>
                     <button type="button" class="primary" style="font-size:0.78rem;margin-left:auto;" onclick="rebuildImproperLineups()" data-tip="Drop Needs-review lineups and rebuild those slots with the current rules.">Rebuild needs-review</button>
                     <button type="button" class="ghost" style="font-size:0.78rem;" onclick="downloadProperLineups()" data-tip="DraftKings CSV of Proper lineups only.">⬇ Proper CSV</button>
                 </div>
@@ -7963,9 +8012,8 @@
                                 return a.slate.localeCompare(b.slate);
                             });
 
-                            document.getElementById('slateMenu').innerHTML = slatesWithDates.map(({slate}) =>
-                                `<label><input type="radio" name="slate" value="${slate}" onchange="updateSlate(this.value)">${formatSlateLabel(slate)}</label>`
-                            ).join('');
+                            const menuEl = document.getElementById('slateMenu');
+                            if (menuEl) menuEl.innerHTML = renderSlateMenu(slatesWithDates);
 
                             // Prefer previously selected slate from session if still available
                             let preferred = null;
@@ -7982,7 +8030,7 @@
                             }
                             selectedSlate = preferred || (slatesWithDates.length ? slatesWithDates[0].slate : null);
                             document.getElementById('slateDropdown').textContent = selectedSlate
-                                ? formatSlateLabel(selectedSlate)
+                                ? prettySlateLine(selectedSlate)
                                 : 'Select Slate';
 
                             // Snapshot filters before rebuild so background refresh does not wipe them
@@ -8414,7 +8462,7 @@
         function updateSlate(value, opts = {}) {
             const preserveFilters = !!(opts && opts.preserveFilters);
             selectedSlate = value;
-            document.getElementById('slateDropdown').textContent = formatSlateLabel(value);
+            document.getElementById('slateDropdown').textContent = prettySlateLine(value);
             // Close slate menu after pick so it doesn't sit under other sections
             document.getElementById('slateMenu')?.classList.remove('show');
             document.querySelectorAll('.settings-section.dropdown-open').forEach(s => s.classList.remove('dropdown-open'));
@@ -8890,6 +8938,45 @@
         }
 
         let activePreset = null;
+
+
+        function slateGameMeta(slate) {
+            const rows = (rawData || []).filter(r => r.Role === slate);
+            const games = [];
+            const seen = new Set();
+            rows.forEach(r => {
+                const g = String(r.Game || r.game || r.Matchup || '').replace(/\s+/g, ' ').trim();
+                if (!g || seen.has(g)) return;
+                seen.add(g);
+                games.push(g);
+            });
+            return { nGames: games.length, games };
+        }
+        function prettySlateLine(slate) {
+            let label = formatSlateLabel(slate);
+            const meta = slateGameMeta(slate);
+            const isSd = isShowdownSlateName(slate);
+            if (isSd && meta.games.length === 1) {
+                const mu = meta.games[0];
+                if (mu && !label.includes(mu) && !/@/.test(label)) label += ` (${mu})`;
+            } else if (!isSd && meta.nGames && !/\(\d+\s*Games?\)/i.test(label)) {
+                label += ` (${meta.nGames} Game${meta.nGames === 1 ? '' : 's'})`;
+            }
+            return label;
+        }
+        function renderSlateMenu(list) {
+            const esc = (s) => String(s).replace(/&/g,'&').replace(/"/g,'"').replace(/</g,'<');
+            const classic = (list || []).filter(x => !isShowdownSlateName(x.slate));
+            const showdown = (list || []).filter(x => isShowdownSlateName(x.slate));
+            const block = (title, items) => {
+                if (!items.length) return '';
+                const opts = items.map(({slate}) =>
+                    `<label class="slate-opt"><input type="radio" name="slate" value="${esc(slate)}" onchange="updateSlate(this.value)"><span>${esc(prettySlateLine(slate))}</span></label>`
+                ).join('');
+                return `<div class="slate-group"><div class="slate-group-title">${title}</div>${opts}</div>`;
+            };
+            return block('Classic', classic) + block('Showdown', showdown);
+        }
 
         function formatSlateLabel(name) {
             return String(name || '')
@@ -10245,6 +10332,7 @@
 
 
         let lineupQualityFilter = 'all';
+        let lineupAnchorFilter = '';
         function lineupRuleReport(lu) {
             const issues = [];
             if (!lu || !lu.lineup) return { proper: false, issues: ['empty'] };
@@ -10321,6 +10409,37 @@
             lu.issues = r.issues;
             return lu;
         }
+
+        function lineupAnchorName(lu, isSd) {
+            const strip = (n) => String(n || '').replace(/\s*\((CPT|FLEX)\)\s*$/i, '').trim();
+            if (!lu || !lu.lineup) return '';
+            if (isSd) {
+                const c = lu.lineup.captain;
+                return strip(c && (c.name || c.displayName || ''));
+            }
+            const qb = lu.lineup.QB;
+            return strip(qb && (qb.name || qb.displayName || ''));
+        }
+        function refreshLineupAnchorFilter(isSd) {
+            const sel = document.getElementById('luAnchorFilter');
+            const lab = document.getElementById('luAnchorLabel');
+            if (lab) lab.textContent = isSd ? 'CPT' : 'QB';
+            if (!sel) return;
+            const counts = {};
+            (generatedLineups || []).forEach(l => {
+                const n = lineupAnchorName(l, isSd);
+                if (!n) return;
+                counts[n] = (counts[n] || 0) + 1;
+            });
+            const cur = lineupAnchorFilter || sel.value || '';
+            const esc = (s) => String(s).replace(/&/g,'&').replace(/"/g,'"').replace(/</g,'<');
+            const names = Object.keys(counts).sort((a,b) => a.localeCompare(b));
+            sel.innerHTML = `<option value="">All ${isSd ? 'CPTs' : 'QBs'}</option>` +
+                names.map(n => `<option value="${esc(n)}">${esc(n)} (${counts[n]})</option>`).join('');
+            sel.value = counts[cur] ? cur : '';
+            lineupAnchorFilter = sel.value;
+        }
+
         function setLineupQualityFilter(mode, btn) {
             lineupQualityFilter = mode || 'all';
             document.querySelectorAll('#luQualityBar [data-luq]').forEach(b => b.classList.toggle('active', b.getAttribute('data-luq') === lineupQualityFilter));
@@ -10336,6 +10455,7 @@
             const keep = (generatedLineups || []).filter(l => l.proper !== false);
             const need = Math.max(0, numLineups - keep.length);
             if (!need) { alert('Every lineup is already Proper.'); return; }
+            if (typeof showBusy === 'function') showBusy('Rebuilding needs-review lineups… this can take a minute.');
             generatedLineups = keep.slice();
             const lineupSet = new Set();
             const playerCounts = {};
@@ -10351,7 +10471,13 @@
             const cap = Math.min(900, need * 12);
             while (generatedLineups.length < numLineups && guard < cap) {
                 guard++;
-                if (guard % 10 === 0) await new Promise(r => setTimeout(r, 0));
+                if (guard % 10 === 0) {
+                    const lt = document.getElementById('loadingText');
+                    if (lt) lt.textContent = `Rebuilding… ${generatedLineups.length - keep.length} / ${need} new proper lineups`;
+                    const pf = document.getElementById('progressFill');
+                    if (pf) pf.style.width = Math.min(90, 20 + Math.round(((generatedLineups.length - keep.length) / Math.max(1,need)) * 70)) + '%';
+                    await new Promise(r => setTimeout(r, 0));
+                }
                 const fb = isSd
                     ? (buildShowdownByRules(genEligible(true, playerCounts), lineupSet, playerCounts)
                         || mutateShowdownLineup(true, lineupSet, playerCounts)
@@ -10367,6 +10493,7 @@
             if (typeof updateSummary === 'function') updateSummary();
             showPostRunReview(generatedLineups.length);
             const left = generatedLineups.filter(l => l.proper === false).length;
+            if (typeof hideBusy === 'function') hideBusy(400);
             alert(`Rebuilt. Proper ${generatedLineups.filter(l=>l.proper!==false).length} / ${generatedLineups.length}` + (left ? `. ${left} still need review.` : '.'));
         }
 
@@ -10401,9 +10528,11 @@
                     return lineupSortDirection === 'asc' ? (valA - valB) : (valB - valA);
                 });
             }
+            refreshLineupAnchorFilter(isShowdown);
             const filteredPairs = sortedPairs.filter(({ l }) => {
-                if (lineupQualityFilter === 'proper') return l.proper !== false;
-                if (lineupQualityFilter === 'improper') return l.proper === false;
+                if (lineupQualityFilter === 'proper' && l.proper === false) return false;
+                if (lineupQualityFilter === 'improper' && l.proper !== false) return false;
+                if (lineupAnchorFilter && lineupAnchorName(l, isShowdown) !== lineupAnchorFilter) return false;
                 return true;
             });
             const qEl = document.getElementById('luQualityCounts');
@@ -14490,16 +14619,17 @@
                     const season = Number(row.season) || 2026;
                     const week = Number(row.week) || 0;
                     const routes = Number(row.routes || row.routes_run || 0) || 0;
-                    const routePct = Number(row.route_pct || row.routes_pct || row.route_share || 0) || 0;
+                    const routePct = Number(row.route_pct || row.routes_pct || 0) || 0;
+                    const dropbacks = Number(row.team_dropbacks || row.dropbacks || 0) || 0;
                     if (!routeIndex.has(key)) routeIndex.set(key, []);
-                    routeIndex.get(key).push({ season, week, routes, routePct });
+                    routeIndex.get(key).push({ season, week, routes, routePct, dropbacks });
                     const list = snapIndex.get(key) || [];
                     const hit = list.find(s => Number(s.season) === season && Number(s.week) === week);
-                    if (hit) { hit.routes = routes; hit.routePct = routePct; }
+                    if (hit) { hit.routes = routes; hit.routePct = routePct; hit.dropbacks = dropbacks; }
                     const logs = gameLogIndex.get(key) || [];
                     logs.forEach(g => {
                         if (Number(g.season) === season && Number(g.week) === week) {
-                            g.routes = routes; g.routePct = routePct;
+                            g.routes = routes; g.routePct = routePct; g.dropbacks = dropbacks;
                         }
                     });
                 });
@@ -15628,7 +15758,7 @@
                 </tr>
                 <tr>
                     <th class="left">WEEK</th><th>FPTS</th><th>SALARY</th><th class="left">MATCHUP</th><th>RESULT</th>
-                    <th>REC</th><th>TAR</th><th>YDS</th><th>TD</th><th>TGT%</th><th>AY%</th><th>RTS</th><th>RT%</th>
+                    <th>REC</th><th>TAR</th><th>YDS</th><th>TD</th><th>TGT%</th><th>AY%</th><th title="Estimated routes = team dropbacks × off snap %. Not targets.">EST RTS</th><th title="Estimated route rate (snap share of dropbacks). Not target share.">EST RT%</th>
                     <th>ATT</th><th>YDS</th><th>AVG</th><th>TD</th>
                     <th>FUM</th><th>LOST</th>
                     <th>SNP</th><th>SNP%</th>
