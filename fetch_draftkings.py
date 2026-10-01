@@ -46,30 +46,81 @@ def format_date_only(iso_str):
         return ""
 
 
+def parse_game_info(info):
+    """'PIT@CLE 10/01/2026 08:15PM ET' -> matchup, iso start."""
+    text = str(info or "").strip()
+    m = re.match(r"([A-Za-z]{2,3})@([A-Za-z]{2,3})\s+(\d{1,2}/\d{1,2}/\d{4})\s+(\d{1,2}:\d{2}\s*[AP]M)", text, re.I)
+    if not m:
+        return text, ""
+    matchup = f"{m.group(1).upper()} @ {m.group(2).upper()}"
+    try:
+        dt = datetime.strptime(f"{m.group(3)} {m.group(4).replace(' ', '')}", "%m/%d/%Y %I:%M%p")
+        dt = dt.replace(tzinfo=ZoneInfo("America/New_York"))
+        return matchup, dt.isoformat()
+    except Exception:
+        return matchup, ""
+
+
 def fetch_draftables(dg_id):
-    """DK blocks datacenter IPs. Try every public draftables URL."""
-    urls = [
-        f"https://api.draftkings.com/draftgroups/v1/draftgroups/{dg_id}/draftables?format=json",
-        f"https://api.draftkings.com/sites/US-DK/draftgroups/v1/draftgroups/{dg_id}/draftables?format=json",
-        f"https://api.draftkings.com/draftgroups/v1/draftgroups/{dg_id}/draftables",
+    """Salary CSV is public. The draftables JSON API 403s from GitHub."""
+    csv_urls = [
+        f"https://www.draftkings.com/lineup/getavailableplayerscsv?draftGroupId={dg_id}",
+        f"https://www.draftkings.com/lineup/getavailableplayerscsv?contestTypeId=96&draftGroupId={dg_id}",
     ]
     last = None
-    for attempt in range(3):
-        for url in urls:
-            try:
-                r = requests.get(url, headers=HEADERS, timeout=30)
-                last = r.status_code
-                if r.status_code == 200:
-                    data = r.json()
-                    if data.get("draftables"):
-                        return data
-                print(f"  {dg_id} {r.status_code} {url.split('/sites/')[-1][:48]}")
-            except Exception as e:
-                last = e
-                print(f"  {dg_id} error {e}")
-        if attempt < 2:
-            import time
-            time.sleep(1.5 * (attempt + 1))
+    for url in csv_urls:
+        try:
+            r = requests.get(url, headers=HEADERS, timeout=30)
+            last = r.status_code
+            if r.status_code != 200 or "Name" not in r.text[:200]:
+                print(f"  {dg_id} csv {r.status_code}")
+                continue
+            reader = csv.DictReader(r.text.lstrip("\ufeff").splitlines())
+            draftables = []
+            comps = {}
+            for row in reader:
+                name = (row.get("Name") or "").strip()
+                salary = int(float(row.get("Salary") or 0))
+                draftable_id = str(row.get("ID") or "").strip()
+                if not name or salary <= 0 or not draftable_id:
+                    continue
+                roster = (row.get("Roster Position") or row.get("Position") or "").upper()
+                pos = (row.get("Position") or "").upper()
+                if roster == "CPT":
+                    pos_out = "CPT"
+                else:
+                    pos_out = pos or roster
+                matchup, start = parse_game_info(row.get("Game Info") or "")
+                team = (row.get("TeamAbbrev") or "").upper()
+                comp_id = matchup or "game"
+                if comp_id not in comps:
+                    comps[comp_id] = {
+                        "competitionId": comp_id,
+                        "name": matchup,
+                        "startTime": start,
+                        "homeTeam": {"abbreviation": matchup.split("@")[-1].strip() if "@" in matchup else ""},
+                        "awayTeam": {"abbreviation": matchup.split("@")[0].strip() if "@" in matchup else ""},
+                    }
+                parts = name.split()
+                draftables.append({
+                    "playerId": f"{name}|{team}",
+                    "draftableId": draftable_id,
+                    "displayName": name,
+                    "firstName": parts[0] if parts else "",
+                    "lastName": " ".join(parts[1:]) if len(parts) > 1 else "",
+                    "salary": salary,
+                    "position": pos_out if pos_out != "CPT" else (pos or "CPT"),
+                    "rosterSlot": roster,
+                    "teamAbbreviation": team,
+                    "playerImage50": "",
+                    "competition": {"competitionId": comp_id, "name": matchup, "startTime": start},
+                })
+            if draftables:
+                print(f"  {dg_id} csv players {len(draftables)}")
+                return {"draftables": draftables, "competitions": list(comps.values())}
+        except Exception as e:
+            last = e
+            print(f"  {dg_id} csv error {e}")
     print(f"  Failed {dg_id}: {last}")
     return None
 
