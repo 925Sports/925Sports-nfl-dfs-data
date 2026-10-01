@@ -89,7 +89,7 @@ def slate_type_from_meta(game_type_id, contest_type_id, suffix, contest_names):
     except (TypeError, ValueError):
         cid = 0
     suf = suffix or ""
-    # Lobby GameTypeId is the source of truth. Do not scan contest names —
+    # Lobby GameTypeId is the source of truth. Do not scan contest names -
     # Classic slates often contain a stray contest with "Showdown" in the title.
     if gid == 108 or cid == 108:
         return "Showdown 2nd Half"
@@ -415,10 +415,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-NFL DFS - Grok
-Close
-Essential cookies keep the site working and stay on. Optional cookies help with performance and advertising — accept, reject, or manage them. Learn more in our Cookie Policy, Privacy Policy, and Terms of Service.
-
-Cookies Settings
-Reject All
-Accept All Cookies
