@@ -1,6 +1,7 @@
 import requests
 import csv
 import re
+import sys
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from collections import defaultdict
@@ -46,10 +47,11 @@ def format_date_only(iso_str):
 
 
 def fetch_draftables(dg_id):
-    """DK blocks the old draftgroups URL from many clouds. Try US-DK first."""
+    """DK blocks datacenter IPs. Try every public draftables URL."""
     urls = [
-        f"https://api.draftkings.com/sites/US-DK/draftgroups/v1/draftgroups/{dg_id}/draftables?format=json",
         f"https://api.draftkings.com/draftgroups/v1/draftgroups/{dg_id}/draftables?format=json",
+        f"https://api.draftkings.com/sites/US-DK/draftgroups/v1/draftgroups/{dg_id}/draftables?format=json",
+        f"https://api.draftkings.com/draftgroups/v1/draftgroups/{dg_id}/draftables",
     ]
     last = None
     for attempt in range(3):
@@ -163,15 +165,28 @@ def build_slate_header(slate_type, start_iso, num_games, matchup, suffix):
 
 def main():
     print("Fetching DraftKings contests...")
-    contest_url = "https://www.draftkings.com/lobby/getcontests?sport=NFL"
-
-    try:
-        r = requests.get(contest_url, headers=HEADERS, timeout=30)
-        r.raise_for_status()
-        data = r.json()
-    except Exception as e:
-        print(f"Failed to fetch contests: {e}")
-        return
+    contest_urls = [
+        "https://www.draftkings.com/lobby/getcontests?sport=NFL",
+        "https://www.draftkings.com/lobby/getcontests?sport=NFL&format=json",
+    ]
+    data = None
+    last = None
+    for contest_url in contest_urls:
+        try:
+            r = requests.get(contest_url, headers=HEADERS, timeout=30)
+            last = r.status_code
+            r.raise_for_status()
+            data = r.json()
+            if data.get("Contests") or data.get("DraftGroups"):
+                print(f"Lobby ok {contest_url} contests={len(data.get('Contests') or [])} groups={len(data.get('DraftGroups') or [])}")
+                break
+        except Exception as e:
+            last = e
+            print(f"Lobby failed {contest_url}: {e}")
+    if not data:
+        print(f"Failed to fetch contests: {last}")
+        print("drafttable.csv was NOT rewritten. Old Showdown rows will stay in the repo.")
+        sys.exit(1)
 
     contests = data.get("Contests", [])
     lobby_groups = {str(g.get("DraftGroupId")): g for g in (data.get("DraftGroups") or []) if g.get("DraftGroupId")}
@@ -192,7 +207,11 @@ def main():
 
         meta = lobby_groups.get(dg, {})
         gid = meta.get("GameTypeId") or c.get("gameTypeId") or meta.get("ContestTypeId")
-        if gid not in KEEP_GAME_TYPE_IDS and int(gid or 0) not in KEEP_GAME_TYPE_IDS:
+        try:
+            gid = int(gid or 0)
+        except (TypeError, ValueError):
+            gid = 0
+        if gid not in KEEP_GAME_TYPE_IDS:
             # Still allow Classic/Showdown if lobby metadata is missing
             if "showdown" not in name.lower() and str(c.get("gameType") or "").lower() not in {"classic", "showdown captain mode"}:
                 continue
@@ -377,17 +396,29 @@ def main():
                         slate_header,
                     ])
 
-    if not rows:
-        print("No player rows generated")
-        return
+    showdown_rows = [r for r in rows if "Showdown" in str(r[14])]
+    print(f"Showdown rows: {len(showdown_rows)} of {len(rows)}")
+    if not rows or not showdown_rows:
+        print("No Showdown rows generated. drafttable.csv was NOT rewritten.")
+        print("Check the log above for 'Failed {draftGroupId}'. DK is likely blocking the draftables API from GitHub.")
+        sys.exit(1)
 
     rows.sort(key=lambda x: int(x[7]) if str(x[7]).isdigit() else 0, reverse=True)
     with open("drafttable.csv", "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(headers)
         writer.writerows(rows)
+    headers_out = sorted({r[20] for r in rows if "Showdown" in str(r[14])})
+    print("Showdown slates:", " | ".join(headers_out))
     print(f"Wrote {len(rows)} rows to drafttable.csv")
 
 
 if __name__ == "__main__":
     main()
+NFL DFS - Grok
+Close
+Essential cookies keep the site working and stay on. Optional cookies help with performance and advertising — accept, reject, or manage them. Learn more in our Cookie Policy, Privacy Policy, and Terms of Service.
+
+Cookies Settings
+Reject All
+Accept All Cookies
