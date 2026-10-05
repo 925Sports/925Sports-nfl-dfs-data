@@ -1,45 +1,45 @@
 Player,Position,Team,Opp,FF Avg,FG Avg,FGA Avg,FPTS Avg,FR Avg,FUM_LOST Avg,INT Avg,PA Avg,PASS_ATT Avg,PASS_CMP Avg,PASS_TD Avg,PASS_YDS Avg,REC Avg,REC_TD Avg,REC_YDS Avg,RUSH_ATT Avg,RUSH_TD Avg,RUSH_YDS Avg,SACK Avg,SAFETY Avg,TD Avg,XPT Avg,YDS_AGN Avg,DraftKings,FanDuel,PrizePicks,Underdog,Fav,Spread,O/U,Match Title (Underdog),Game Short Title (Underdog),Venue Name (Underdog),Venue Type (Underdog),Broadcasts (Underdog),Player Salary,Player Image,Tournament,Game Start Time
-Josh Allen,QB,BUF,,,,,22.9,,0.3,0.6,,30.6,20.5,1.6,239.4,,,,7.6,0.7,36.3,,,,,,22.91,22.61,22.91,22.91,,,,,,,,,,,,
+Josh Allen,QB,BUF,,,,,22.9,,0.3,0.6,,30.6,20.5,1.6,247.5,,,,7.6,0.7,36.3,,,,,,23.23,22.93,23.23,23.23,,,,,,,,,,,,
 Lamar Jackson,QB,BAL,,,,,21.1,,0.2,0.5,,26.7,18,1.7,240.5,,,,7.1,0.2,40.9,,,,,,21.01,20.81,21.01,21.01,,,,,,,,,,,,
-Patrick Mahomes II,QB,KC,,,,,19.8,,0.1,0.6,,32.52,20.77,1.9,229.3,,,,3.5,0.28,17.055,,,,,,19.46,19.36,19.46,19.46,,,,,,,,,,,,
-Trevor Lawrence,QB,JAC,,,,,19.5,,0.2,0.8,,33.4,20.8,1.8,256,,,,3.9,0.3,19,,,,,,20.14,19.94,20.14,20.14,,,,,,,,,,,,
+Patrick Mahomes II,QB,KC,,,,,19.8,,0.1,0.6,,33.6,22.3,1.9,249.3,,,,3.5,0.2,18.2,,,,,,19.89,19.79,19.89,19.89,,,,,,,,,,,,
+Trevor Lawrence,QB,JAC,,,,,19.5,,0.2,0.8,,33.4,20.8,1.8,248.5,,,,3.9,0.3,19,,,,,,19.84,19.64,19.84,19.84,,,,PHI @ JAX,Eagles @ Jaguars,Tottenham Hotspur Stadium,outdoor,NFL Network,,,,10/11/2026
 Joe Burrow,QB,CIN,,,,,19.3,,0.2,0.8,,36.7,25.2,2,266.4,,,,2.8,0.1,11.2,,,,,,19.38,19.18,19.38,19.38,,,,,,,,,,,,
-Brock Purdy,QB,SF,,,,,19.2,,0.2,0.3,,32.9,18.155,0.885,168.75,,,,4.1,0.265,32.725,,,,,,14.65,14.45,14.65,14.65,,,,,,,,,,,,
-Tyler Shough,QB,NO,,,,,19.2,,0.3,0.57,,35.135,23.62,1.55,253.825,,,,4.5,0.375,16.11,,,,,,19.34,19.04,19.34,19.34,,,,ATL @ NO,Falcons @ Saints,Caesars Superdome,dome,ESPN,14400,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,ATL @ NO,10/5/2026
-Bryce Young,QB,CAR,,,,,19.1,,0.2,0.62,,34.965,21.48,1.55,243.42,,,,2.625,0.325,12.605,,,,,,18.33,18.13,18.33,18.33,,,,DET @ CAR,Lions @ Panthers,Bank of America Stadium,outdoor,NBC/Peacock,14700,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,DET @ CAR,10/4/2026
+Brock Purdy,QB,SF,,,,,19.2,,0.2,0.8,,32.9,21.9,1.7,234.5,,,,4.1,0.2,20.9,,,,,,18.47,18.27,18.47,18.47,,,,SF @ SEA,49ers @ Seahawks,Lumen Field,outdoor,FOX,,,,10/11/2026
+Bryce Young,QB,CAR,,,,,19.2,,0.2,0.7,,34.2,21.4,1.9,241.7,,,,3.4,0.2,17.4,,,,,,19.31,19.11,19.31,19.31,,,,,,,,,14700,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,DET @ CAR,
+Tyler Shough,QB,NO,,,,,19.1,,0.3,0.58,,35.215,23.645,1.545,255.72,,,,4.4,0.375,16.77,,,,,,19.46,19.16,19.46,19.46,,,,ATL @ NO,Falcons @ Saints,Caesars Superdome,dome,ESPN,14400,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,ATL @ NO,10/5/2026
 Kyler Murray,QB,MIN,,,,,18.3,,0.2,0.7,,28.9,19.8,1.6,213.2,,,,4.8,0.3,27.1,,,,,,18.54,18.34,18.54,18.54,,,,,,,,,,,,
-C.J. Stroud,QB,HOU,,,,,18.1,,0.2,0.5,,33.9,21.8,1.7,255.3,,,,3,0.1,14.6,,,,,,18.37,18.17,18.37,18.37,,,,,,,,,,,,
-Michael Penix Jr.,QB,ATL,NO,,,,16.39,,,0.565,,30.665,20.13,1.4,223.405,,,0,,0.3,5.505,,,,,,16.32,16.32,16.32,16.32,,,,n/a,n/a,n/a,n/a,n/a,13500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,ATL @ NO,10/5/2026
-Jahmyr Gibbs,RB,DET,,,,,20.3,,0.1,,,,,,,4.63,0.15375,36.39,20.6,0.46125,96.08,,,,,,21.47,19.05,21.47,21.47,,,,DET @ CAR,Lions @ Panthers,Bank of America Stadium,outdoor,NBC/Peacock,18000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,DET @ CAR,10/4/2026
-Jonathan Taylor,RB,IND,,,,,18.8,,0.1,,,,,,,3.1,0.1,26.5,21.1,1,95.7,,,,,,21.82,20.17,21.82,21.82,,,,,,,,,,,,
-Bijan Robinson,RB,ATL,,,,,17.6,,0.1,,,,,,,4.565,0.185,39.285,19,0.37,86.35,,,,,,20.36,17.98,20.36,20.36,,,,ATL @ NO,Falcons @ Saints,Caesars Superdome,dome,ESPN,17700,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,ATL @ NO,10/5/2026
+Jared Goff,QB,DET,,,,,18.2,,0.2,0.6,,34.1,23.3,2,263.6,,,,1.7,0.1,4.6,,,,,,18.8,18.6,18.8,18.8,,,,,,,,,15000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,DET @ CAR,
+Michael Penix Jr.,QB,ATL,NO,,,,16.39,,,0.575,,30.68,19.75,1.395,223.085,,,0,,0.3,5.64,,,,,,16.29,16.29,16.29,16.29,,,,n/a,n/a,n/a,n/a,n/a,13500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,ATL @ NO,10/5/2026
+Jahmyr Gibbs,RB,DET,,,,,20.6,,0.1,,,,,,,4.7,0.3,36.7,19.1,0.9,97.2,,,,,,25.19,22.74,25.19,25.19,,,,,,,,,18000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,DET @ CAR,
+Jonathan Taylor,RB,IND,,,,,18.8,,0.1,,,,,,,3.1,0.1,26.5,21.1,1,89.5,,,,,,21.2,19.55,21.2,21.2,,,,IND @ PIT,Colts @ Steelers,Acrisure Stadium,outdoor,CBS,,,,10/11/2026
+Bijan Robinson,RB,ATL,,,,,17.7,,0.1,,,,,,,4.56,0.1883333333,38.9,19.02,0.3766666667,87.695,,,,,,20.51,18.13,20.51,20.51,,,,ATL @ NO,Falcons @ Saints,Caesars Superdome,dome,ESPN,17700,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,ATL @ NO,10/5/2026
 Derrick Henry,RB,BAL,,,,,17.4,,0.1,,,,,,,1.2,0.1,12,20,1,99.6,,,,,,18.86,18.16,18.86,18.86,,,,,,,,,,,,
-Kenneth Walker III,RB,KC,,,,,15.3,,0.1,,,,,,,2.84,0.10875,23.04,18.5,0.32625,170.885,,,,,,24.74,23.22,24.74,24.74,,,,,,,,,,,,
-James Cook III,RB,BUF,,,,,14.9,,0.1,,,,,,,1.8,0.1,13.2,18.2,0.7,92.5,,,,,,17.07,16.07,17.07,17.07,,,,,,,,,,,,
-Christian McCaffrey,RB,SF,,,,,14.9,,0.1,,,,,,,2.27,0.2,-1.215,15.1,0.6,59.49,,,,,,12.8,11.56,12.8,12.8,,,,,,,,,,,,
-Jaylen Warren,RB,PIT,,,,,13.7,,0.1,,,,,,,3.1,0.1,23.4,17.7,0.4,85.7,,,,,,16.91,15.26,16.91,16.91,,,,,,,,,,,,
-Chuba Hubbard,RB,CAR,,,,,13.2,,0.1,,,,,,,2.735,0.1457142857,18.405,16.575,0.3642857143,65.535,,,,,,14.09,12.62,14.09,14.09,,,,DET @ CAR,Lions @ Panthers,Bank of America Stadium,outdoor,NBC/Peacock,14100,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,DET @ CAR,10/4/2026
-Cam Skattebo,RB,NYG,,,,,13.1,,0.1,,,,,,,2.4,0.1,21.3,17.1,0.5,73.4,,,,,,15.37,14.07,15.37,15.37,,,,,,,,,,,,
-Brian Robinson Jr.,RB,ATL,NO,,,,4.96,,,,,,,,0,,0,2,,0.355,28.655,,,,,,5.2,5.2,5.2,5.2,,,,n/a,n/a,n/a,n/a,n/a,5700,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,ATL @ NO,10/5/2026
-Jaxon Smith-Njigba,WR,SEA,,,,,15.7,,0,,,,,,,4.4,0.275,65.135,0.3,0,1.4,,,,,,12.7,10.5,12.7,12.7,,,,,,,,,,,,
-Amon-Ra St. Brown,WR,DET,,,,,12.63,,0,,,,,,0,6.965,0.51,77.28,0.2,0,0.5,,,,,,17.8,14.32,17.8,17.8,,,,DET @ CAR,Lions @ Panthers,Bank of America Stadium,outdoor,NBC/Peacock,16500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,DET @ CAR,10/4/2026
-Puka Nacua,WR,LAR,,,,,12.6,,0,,,,,,,6.6,0.5,91.5,0.7,0,4.2,,,,,,19.17,15.87,19.17,19.17,,,,,,,,,,,,
-Chris Olave,WR,NO,,,,,12.3,,0,,,,,,,6.76,0.455,84.69,0,0,0.1,,,,,,17.97,14.59,17.97,17.97,,,,ATL @ NO,Falcons @ Saints,Caesars Superdome,dome,ESPN,16200,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,ATL @ NO,10/5/2026
+Kenneth Walker III,RB,KC,,,,,15.3,,0.1,,,,,,,3.5,0.2,27.4,17.6,0.6,79.2,,,,,,18.86,17.01,18.86,18.86,,,,,,,,,,,,
+James Cook III,RB,BUF,,,,,14.9,,0.1,,,,,,,1.8,0.1,13.2,18.2,0.7,80.5,,,,,,15.87,14.87,15.87,15.87,,,,,,,,,,,,
+Christian McCaffrey,RB,SF,,,,,14.9,,0.1,,,,,,,4.5,0.2,36.6,15.1,0.6,62.5,,,,,,19.11,16.76,19.11,19.11,,,,SF @ SEA,49ers @ Seahawks,Lumen Field,outdoor,FOX,,,,10/11/2026
+Jaylen Warren,RB,PIT,,,,,13.7,,0.1,,,,,,,3.1,0.1,23.4,17.7,0.4,76.5,,,,,,15.99,14.34,15.99,15.99,,,,IND @ PIT,Colts @ Steelers,Acrisure Stadium,outdoor,CBS,,,,10/11/2026
+Chuba Hubbard,RB,CAR,,,,,13.3,,0.1,,,,,,,3.1,0.3,20.6,15.4,0.5,69.1,,,,,,16.77,15.12,16.77,16.77,,,,,,,,,14100,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,DET @ CAR,
+Cam Skattebo,RB,NYG,,,,,13.1,,0.1,,,,,,,2.4,0.1,21.3,17.1,0.5,58.5,,,,,,13.88,12.58,13.88,13.88,,,,NYG @ WAS,Giants @ Commanders,Northwest Stadium,outdoor,FOX,,,,10/11/2026
+Brian Robinson Jr.,RB,ATL,NO,,,,4.96,,,,,,,,0,,0,2,,0.355,28.915,,,,,,5.22,5.22,5.22,5.22,,,,n/a,n/a,n/a,n/a,n/a,5700,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,ATL @ NO,10/5/2026
+Jaxon Smith-Njigba,WR,SEA,,,,,15.7,,0,,,,,,,7.2,0.8,93.5,0.3,0,1.4,,,,,,21.49,17.89,21.49,21.49,,,,SF @ SEA,49ers @ Seahawks,Lumen Field,outdoor,FOX,,,,10/11/2026
+Amon-Ra St. Brown,WR,DET,,,,,12.7,,0,,,,,,,7.1,0.7,83.4,0.2,0,1,,,,,,19.74,16.19,19.74,19.74,,,,,,,,,16500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,DET @ CAR,
+Puka Nacua,WR,LAR,,,,,12.6,,0,,,,,,,6.6,0.5,85.5,0.7,0,4.2,,,,,,18.57,15.27,18.57,18.57,,,,,,,,,,,,
+Chris Olave,WR,NO,,,,,12.3,,0,,,,,,,6.76,0.46,85.73,0,0,0.1,,,,,,18.1,14.72,18.1,18.1,,,,ATL @ NO,Falcons @ Saints,Caesars Superdome,dome,ESPN,16200,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,ATL @ NO,10/5/2026
 Ja'Marr Chase,WR,CIN,,,,,11.7,,0,,,,,,,6.9,0.6,78.8,0.1,0,0.7,,,,,,18.45,15,18.45,18.45,,,,,,,,,,,,
 Zay Flowers,WR,BAL,,,,,11.3,,0,,,,,,,5.2,0.5,81.4,0.5,0,3.2,,,,,,16.66,14.06,16.66,16.66,,,,,,,,,,,,
-Nico Collins,WR,HOU,,,,,11.1,,0,,,,,,,5.3,0.5,76.2,0.3,0,1.5,,,,,,16.07,13.42,16.07,16.07,,,,,,,,,,,,
-Garrett Wilson,WR,NYJ,,,,,11,,0,,,,,,,6.8,0.5,82.4,0.1,0,0.5,,,,,,18.09,14.69,18.09,18.09,,,,,,,,,,,,
-Drake London,WR,ATL,,,,,11,,0,,,,,,,5.74,0.455,78.03,0.2,0,0.8,,,,,,16.35,13.48,16.35,16.35,,,,ATL @ NO,Falcons @ Saints,Caesars Superdome,dome,ESPN,15000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,ATL @ NO,10/5/2026
-CeeDee Lamb,WR,DAL,,,,,11,,0,,,,,,,6,0.4,82.9,0.2,0,1,,,,,,16.79,13.79,16.79,16.79,,,,,,,,,,,,
+Nico Collins,WR,HOU,,,,,11.1,,0,,,,,,,5.3,0.5,70.5,0.3,0,1.5,,,,,,15.5,12.85,15.5,15.5,,,,HOU @ TEN,Texans @ Titans,Nissan Stadium,outdoor,CBS,,,,10/11/2026
+Drake London,WR,ATL,,,,,11,,0,,,,,,,5.715,0.455,77.385,0.2,0,0.8,,,,,,16.26,13.41,16.26,16.26,,,,n/a,n/a,n/a,n/a,n/a,15000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,ATL @ NO,10/5/2026
+Garrett Wilson,WR,NYJ,,,,,11,,0,,,,,,,6.8,0.5,76.5,0.1,0,0.5,,,,,,17.5,14.1,17.5,17.5,,,,CLE @ NYJ,Browns @ Jets,MetLife Stadium,outdoor,CBS,,,,10/11/2026
+CeeDee Lamb,WR,DAL,,,,,11,,0,,,,,,,5.59,0.48,77.515,0.2,0,1,,,,,,16.32,13.53,16.32,16.32,,,,TB @ DAL,Buccaneers @ Cowboys,AT&T Stadium,retractable_dome,Prime,8100,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,TB @ DAL,10/8/2026
 Trey McBride,TE,ARI,,,,,10.1,,0,,,,,,,7.3,0.6,65.8,,,,,,,,,17.48,13.83,17.48,17.48,,,,,,,,,,,,
-Brock Bowers,TE,LV,,,,,9.6,,0,,,,,,,6.615,0.325,63.65,,0,,,,,,,14.93,11.62,14.93,14.93,,,,,,,,,,,,
+Brock Bowers,TE,LV,,,,,9.6,,0,,,,,,,6.4,0.5,75.5,,,,,,,,,16.95,13.75,16.95,16.95,,,,LV @ NE,Raiders @ Patriots,Gillette Stadium,outdoor,CBS,,,,10/11/2026
 Tyler Warren,TE,IND,,,,,8.8,,0,,,,,,,5.7,0.5,56.7,,,,,,,,,14.37,11.52,14.37,14.37,,,,,,,,,,,,
-George Kittle,TE,SF,,,,,8.4,,0,,,,,,,3.205,0.27,4.89,,0,,,,,,,5.31,3.71,5.31,5.31,,,,,,,,,,,,
-Travis Kelce,TE,KC,,,,,7.6,,0,,,,,,,4.465,0.3,33.955,,0,,,,,,,9.66,7.43,9.66,9.66,,,,,,,,,,,,
+George Kittle,TE,SF,,,,,8.4,,0,,,,,,,4.7,0.4,66.5,,,,,,,,,13.75,11.4,13.75,13.75,,,,SF @ SEA,49ers @ Seahawks,Lumen Field,outdoor,FOX,,,,10/11/2026
+Travis Kelce,TE,KC,,,,,7.6,,0,,,,,,,4.6,0.4,53.8,,,,,,,,,12.38,10.08,12.38,12.38,,,,,,,,,,,,
 Dalton Kincaid,TE,BUF,,,,,7.6,,0,,,,,,,4.4,0.3,58.2,,,,,,,,,12.02,9.82,12.02,12.02,,,,,,,,,,,,
 Isaiah Likely,TE,NYG,,,,,7.2,,0,,,,,,,4.3,0.4,47.8,,,,,,,,,11.48,9.33,11.48,11.48,,,,,,,,,,,,
-Juwan Johnson,TE,NO,,,,,7,,0.1,,,,,,,3.6,0.38,40.685,,0,,,,,,,9.85,7.95,9.85,9.85,,,,ATL @ NO,Falcons @ Saints,Caesars Superdome,dome,ESPN,11100,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,ATL @ NO,10/5/2026
-Sam LaPorta,TE,DET,,,,,7,,0,,,,,,,4.44,0.41,47.66,,0,,,,,,,11.67,9.45,11.67,11.67,,,,DET @ CAR,Lions @ Panthers,Bank of America Stadium,outdoor,NBC/Peacock,9900,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,DET @ CAR,10/4/2026
+Sam LaPorta,TE,DET,,,,,7.1,,0,,,,,,,4.5,0.4,49.3,,,,,,,,,11.83,9.58,11.83,11.83,,,,,,,,,9900,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,DET @ CAR,
+Juwan Johnson,TE,NO,,,,,7,,0.1,,,,,,,3.605,0.38,40.795,,0,,,,,,,9.86,7.96,9.86,9.86,,,,ATL @ NO,Falcons @ Saints,Caesars Superdome,dome,ESPN,11100,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,ATL @ NO,10/5/2026
 Mark Andrews,TE,BAL,,,,,6.5,,0,,,,,,,3.9,0.4,40.7,,,,,,,,,10.37,8.42,10.37,10.37,,,,,,,,,,,,
 Ka'imi Fairbairn,K,HOU,,,2.1,2.5,8.8,,,,,,,,,,,,,,,,,,2.6,,8.9,8.9,8.9,8.9,,,,,,,,,,,,
 Jason Myers,K,SEA,,,2,2.4,8.7,,,,,,,,,,,,,,,,,,2.8,,8.8,8.8,8.8,8.8,,,,,,,,,,,,
@@ -50,7 +50,7 @@ Spencer Shrader,K,IND,,,1.8,2.1,8.3,,,,,,,,,,,,,,,,,,2.9,,8.3,8.3,8.3,8.3,,,,,,,
 Eddy Pineiro,K,SF,,,1.9,2.2,8.2,,,,,,,,,,,,,,,,,,2.5,,8.2,8.2,8.2,8.2,,,,,,,,,,,,
 Cairo Santos,K,CHI,,,1.8,2.2,8.1,,,,,,,,,,,,,,,,,,2.7,,8.1,8.1,8.1,8.1,,,,,,,,,,,,
 Evan McPherson,K,CIN,,,1.8,2.2,8.1,,,,,,,,,,,,,,,,,,2.6,,8,8,8,8,,,,,,,,,,,,
-Daniel Carlson,K,NO,,,1.9,2.3,8,,,,,,,,,,,,,,,,,,2.4,,8.1,8.1,8.1,8.1,,,,ATL @ NO,Falcons @ Saints,Caesars Superdome,dome,ESPN,7200,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,ATL @ NO,
+Brandon Aubrey,K,DAL,,,1.8,2.2,8,,,,,,,,,,,,,,,,,,2.4,,7.8,7.8,7.8,7.8,,,,TB @ DAL,Buccaneers @ Cowboys,AT&T Stadium,retractable_dome,Prime,,,,
 PIT,DST,PIT,,1.1,,,8.6,0.6,,0.8,17,,,,,,,,,,,3.6,0,0.2,,283.2,8.6,8.6,8.6,8.6,,,,,,,,,,,,
 MIN,DST,MIN,,1,,,8.1,0.6,,0.8,14.4,,,,,,,,,,,3.2,0,0.2,,279.8,8.2,8.2,8.2,8.2,,,,,,,,,,,,
 SEA,DST,SEA,,0.8,,,7.7,0.5,,0.8,17.5,,,,,,,,,,,2.9,0,0.2,,304.9,6.7,6.7,6.7,6.7,,,,,,,,,,,,
@@ -60,4 +60,4 @@ BUF,DST,BUF,,0.9,,,6.6,0.6,,0.8,21.1,,,,,,,,,,,2.7,0,0.2,,361.8,3.7,3.7,3.7,3.7,
 CHI,DST,CHI,,1,,,6.5,0.6,,0.8,20.7,,,,,,,,,,,2.8,0,0.2,,333.4,5.8,5.8,5.8,5.8,,,,,,,,,,,,
 CLE,DST,CLE,,0.8,,,6.5,0.5,,0.6,19.7,,,,,,,,,,,2.4,0,0.1,,310.6,5.2,5.2,5.2,5.2,,,,,,,,,,,,
 ARI,DST,ARI,,0.8,,,6.1,0.5,,1,22.1,,,,,,,,,,,2.3,0,0.1,,333,4.9,4.9,4.9,4.9,,,,,,,,,,,,
-ATL,DST,ATL,,0.8,,,6.1,0.6,,0.8,24.7,,,,,,,,,,,2.6,0,0.1,,342.3,5,5,5,5,,,,ATL @ NO,Falcons @ Saints,Caesars Superdome,dome,ESPN,,,,
+ATL,DST,ATL,,0.8,,,6,0.5,,0.8,24.5,,,,,,,,,,,2.6,0,0.1,,342.2,4.8,4.8,4.8,4.8,,,,ATL @ NO,Falcons @ Saints,Caesars Superdome,dome,ESPN,,,,
