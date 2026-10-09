@@ -921,7 +921,18 @@
             background: linear-gradient(135deg, rgba(35, 115, 116, 0.25), rgba(0, 210, 170, 0.08));
             border-color: rgba(71, 198, 200, 0.45);
         }
-        .preset-btn.contest-classic { border-color: var(--brand-teal); }
+        .preset-btn .contest-tag, .recipe-row .contest-tag {
+            display: block;
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            opacity: 0.78;
+            margin-top: 0.08rem;
+        }
+.cs-toolbar { display:grid; grid-template-columns: minmax(220px,1.4fr) repeat(auto-fit,minmax(140px,1fr)); gap:0.7rem 0.8rem; align-items:end; margin:0.8rem 0 1rem; padding:0.8rem; border:1px solid var(--border-color); border-radius:12px; background:rgba(255,255,255,0.02); }
+        .cs-toolbar label { display:block; margin-bottom:0.28rem; font-size:0.72rem; letter-spacing:0.03em; text-transform:uppercase; color:var(--muted); }
+        #csSearch, #dvpTeamSearch { width:100%; }
+.preset-btn.contest-classic { border-color: var(--brand-teal); }
         .preset-btn.contest-showdown { border-color: var(--brand-aqua); }
         .preset-group-label {
             font-size: 0.72rem;
@@ -3222,17 +3233,17 @@
                 <div class="settings-section-body">
                 <div class="presets-row">
                     <span class="preset-group-label">Classic / Main slate</span>
-                    <button class="preset-btn contest-classic" data-tip="Classic Cash: high ownership band, light stacks, low randomness, safer floor. Best for 50/50s &amp; double-ups." onclick="applyPreset('classic_cash')">Classic Cash</button>
-                    <button class="preset-btn contest-classic" data-tip="Classic GPP: lower exposure, more uniqueness &amp; leverage. Use with game stacks + specific stacks." onclick="applyPreset('classic_gpp')">Classic GPP</button>
-                    <button class="preset-btn contest-classic" data-tip="Classic Leverage: aggressively fades chalk for large-field GPPs." onclick="applyPreset('leverage')">Classic Leverage</button>
-                    <button class="preset-btn contest-classic" data-tip="3 RBs: forces FLEX to be RB only so every lineup has three running backs." onclick="applyPreset('classic_3rb')">3 RBs</button>
-                    <button class="preset-btn contest-classic" data-tip="925 Favorite: cheapest DST ≥2 FP, 3 RBs, value QB &amp; TE under $5K targeting 3x, chalk/stud RBs &amp; WRs." onclick="applyPreset('favorite')">925 Favorite</button>
-                    <button class="preset-btn contest-classic" data-tip="Cash Floor Lock: one lineup everywhere. Highest floor, eat chalk, leftover ≤$500, stacks off. 50/50 · Double-Up · H2H." onclick="applyPreset('cash_floor')">Cash Floor Lock</button>
-                    <button class="preset-btn contest-classic" data-tip="Cash 3RB Floor: FLEX locked to RB. Matches the cash FLEX tree when 3 live RBs exist." onclick="applyPreset('cash_3rb')">Cash 3RB Floor</button>
-                    <button class="preset-btn contest-classic" data-tip="Eat the Chalk: cash knobs + min-exposure on the highest-owned skill players. Ownership is not a fade in cash." onclick="applyPreset('cash_eat_chalk')">Eat the Chalk</button>
-                    <button class="preset-btn contest-classic" data-tip="Milly Winner: 150-max GPP. Unique 5, stacks on (QB+2 PCs + opposing RB bring-back), fade game DSTs, leverage on." onclick="applyPreset('gpp_milly')">Milly Winner</button>
-                    <button class="preset-btn contest-classic" data-tip="GPP Mini-Stack: QB + 1 PC only (22% of 2025 Milly winners). Lower correlation, more room for uniques." onclick="applyPreset('gpp_mini')">GPP Mini-Stack</button>
-                    <button class="preset-btn contest-classic" data-tip="Four Uniques: GPP mix — cap chalk at ~40% and boost &lt;10% owned pieces so builds can land 4+ contrarian names." onclick="applyPreset('gpp_uniques')">Four Uniques</button>
+                    <button class="preset-btn contest-classic" data-tip="Classic Cash: high ownership band, light stacks, low randomness, safer floor. Best for 50/50s &amp; double-ups." onclick="applyPreset('classic_cash')">Classic Cash<small class="contest-tag">SE · 50/50</small></button>
+                    <button class="preset-btn contest-classic" data-tip="Classic GPP: lower exposure, more uniqueness &amp; leverage. Use with game stacks + specific stacks." onclick="applyPreset('classic_gpp')">Classic GPP<small class="contest-tag">20-max</small></button>
+                    <button class="preset-btn contest-classic" data-tip="Classic Leverage: aggressively fades chalk for large-field GPPs." onclick="applyPreset('leverage')">Classic Leverage<small class="contest-tag">150-max</small></button>
+                    <button class="preset-btn contest-classic" data-tip="3 RBs: forces FLEX to be RB only so every lineup has three running backs." onclick="applyPreset('classic_3rb')">3 RBs<small class="contest-tag">Cash · SE</small></button>
+                    <button class="preset-btn contest-classic" data-tip="925 Favorite: cheapest DST ≥2 FP, 3 RBs, value QB &amp; TE under $5K targeting 3x, chalk/stud RBs &amp; WRs." onclick="applyPreset('favorite')">925 Favorite<small class="contest-tag">20-max</small></button>
+                    <button class="preset-btn contest-classic" data-tip="Cash Floor Lock: one lineup everywhere. Highest floor, eat chalk, leftover ≤$500, stacks off. 50/50 · Double-Up · H2H." onclick="applyPreset('cash_floor')">Cash Floor Lock<small class="contest-tag">SE · H2H</small></button>
+                    <button class="preset-btn contest-classic" data-tip="Cash 3RB Floor: FLEX locked to RB. Matches the cash FLEX tree when 3 live RBs exist." onclick="applyPreset('cash_3rb')">Cash 3RB Floor<small class="contest-tag">SE · 50/50</small></button>
+                    <button class="preset-btn contest-classic" data-tip="Eat the Chalk: cash knobs + min-exposure on the highest-owned skill players. Ownership is not a fade in cash." onclick="applyPreset('cash_eat_chalk')">Eat the Chalk<small class="contest-tag">SE · 50/50</small></button>
+                    <button class="preset-btn contest-classic" data-tip="Milly Winner: 150-max GPP. Unique 5, stacks on (QB+2 PCs + opposing RB bring-back), fade game DSTs, leverage on." onclick="applyPreset('gpp_milly')">Milly Winner<small class="contest-tag">150-max</small></button>
+                    <button class="preset-btn contest-classic" data-tip="GPP Mini-Stack: QB + 1 PC only (22% of 2025 Milly winners). Lower correlation, more room for uniques." onclick="applyPreset('gpp_mini')">GPP Mini-Stack<small class="contest-tag">20-max</small></button>
+                    <button class="preset-btn contest-classic" data-tip="Four Uniques: GPP mix — cap chalk at ~40% and boost &lt;10% owned pieces so builds can land 4+ contrarian names." onclick="applyPreset('gpp_uniques')">Four Uniques<small class="contest-tag">20 / 150</small></button>
                     <span class="preset-group-label">Showdown <span class="sd-guide">
                         <button type="button" class="sd-guide-btn" aria-label="Best Showdown option by contest">?</button>
                         <div class="sd-guide-pop">
@@ -3250,13 +3261,13 @@
                             <b>Preseason K/DST</b>. Regular season: keep K/DST eligible, max 2 combined — do not force 3.
                         </div>
                     </span></span>
-                    <button class="preset-btn contest-showdown" data-tip="Best for 50/50s and H2H. 3–3 split, leftover ≤$800, floor CPT, K/DST allowed as FLEX (max 2)." onclick="applyPreset('sd_cash')">Showdown Cash</button>
-                    <button class="preset-btn contest-showdown" data-tip="Best default for 20-max GPPs. 4–2 split, leftover $1k–$2.5k, WR/QB stacks, max 2 K+DST." onclick="applyPreset('sd_gpp')">Showdown GPP</button>
-                    <button class="preset-btn contest-showdown" data-tip="Use only on a big-spread favorite: 5–1 + RB CPT lean + same-team DST. Not a default GPP." onclick="applyPreset('sd_gpp_smash')">Favorite smash</button>
-                    <button class="preset-btn contest-showdown" data-tip="Preseason / low-scoring only. Min 2 and max 2 K+DST. Do not use this on regular-season GPPs." onclick="applyPreset('sd_kdst')">Preseason K/DST</button>
+                    <button class="preset-btn contest-showdown" data-tip="Best for 50/50s and H2H. 3–3 split, leftover ≤$800, floor CPT, K/DST allowed as FLEX (max 2)." onclick="applyPreset('sd_cash')">Showdown Cash<small class="contest-tag">SE · H2H</small></button>
+                    <button class="preset-btn contest-showdown" data-tip="Best default for 20-max GPPs. 4–2 split, leftover $1k–$2.5k, WR/QB stacks, max 2 K+DST." onclick="applyPreset('sd_gpp')">Showdown GPP<small class="contest-tag">20-max</small></button>
+                    <button class="preset-btn contest-showdown" data-tip="Use only on a big-spread favorite: 5–1 + RB CPT lean + same-team DST. Not a default GPP." onclick="applyPreset('sd_gpp_smash')">Favorite smash<small class="contest-tag">20-max</small></button>
+                    <button class="preset-btn contest-showdown" data-tip="Preseason / low-scoring only. Min 2 and max 2 K+DST. Do not use this on regular-season GPPs." onclick="applyPreset('sd_kdst')">Preseason K/DST<small class="contest-tag">Preseason</small></button>
                     <span class="preset-group-label">General</span>
-                    <button class="preset-btn" data-tip="Balanced: middle ground between cash safety and GPP upside." onclick="applyPreset('balanced')">Balanced</button>
-                    <button class="preset-btn" data-tip="Stack Heavy: force QB/CPT + pass catcher stacking with lower uniqueness." onclick="applyPreset('stackheavy')">Stack Heavy</button>
+                    <button class="preset-btn" data-tip="Balanced: middle ground between cash safety and GPP upside." onclick="applyPreset('balanced')">Balanced<small class="contest-tag">Any field</small></button>
+                    <button class="preset-btn" data-tip="Stack Heavy: force QB/CPT + pass catcher stacking with lower uniqueness." onclick="applyPreset('stackheavy')">Stack Heavy<small class="contest-tag">20 / 150</small></button>
                 </div>
                 </div>
                 </details>
@@ -3282,12 +3293,14 @@
                             Every lineup has QB + 1 same-team WR/TE. No bring-back. Safer cash correlation.
                         </div>
                     </span></span>
-                    <button type="button" class="ghost" data-tip="Classic Cash ownership band. Next: Core/High tier your locks only." onclick="applyRecipe('classic_cash_simple', this)" data-recipe="classic_cash_simple">Classic Cash starter</button>
-                    <button type="button" class="ghost" data-tip="Single 50/50 or Double-Up ticket: 1 lineup, high ownership, leverage ~0, low randomness. Core/High your locks, then Run." onclick="applyRecipe('cash_doubleup', this)" data-recipe="cash_doubleup">Double-up / H2H</button>
-                    <button type="button" class="ghost" data-tip="One lineup · highest floor · leftover ≤$500 · stacks off · eat chalk. Fire into 30 H2Hs." onclick="applyRecipe('cash_floor_lock', this)" data-recipe="cash_floor_lock">Cash floor lock</button>
-                    <button type="button" class="ghost" data-tip="Cash + FLEX = RB. Use when 3 live RBs have 15+ opportunities." onclick="applyRecipe('cash_3rb_floor', this)" data-recipe="cash_3rb_floor">Cash 3RB floor</button>
-                    <button type="button" class="ghost" data-tip="Cash + raise min% on the chalkiest skill players. Do not fade a lock because he is chalk." onclick="applyRecipe('cash_eat_chalk', this)" data-recipe="cash_eat_chalk">Eat the chalk</button>
-                    <button type="button" class="ghost" data-tip="Cash-style: force 1 same-team PC, no bring-back, keep opp-DST fade." onclick="applyRecipe('classic_cash_stack', this)" data-recipe="classic_cash_stack">Classic cash stack</button>
+                    <button type="button" class="ghost" data-tip="Classic Cash ownership band. Next: Core/High tier your locks only." onclick="applyRecipe('classic_cash_simple', this)" data-recipe="classic_cash_simple">Classic Cash starter<small class="contest-tag">SE · 50/50</small></button>
+                    <button type="button" class="ghost" data-tip="Single 50/50 or Double-Up ticket: 1 lineup, high ownership, leverage ~0, low randomness. Core/High your locks, then Run." onclick="applyRecipe('cash_doubleup', this)" data-recipe="cash_doubleup">Double-up / H2H<small class="contest-tag">SE · H2H</small></button>
+                    <button type="button" class="ghost" data-tip="One lineup · highest floor · leftover ≤$500 · stacks off · eat chalk. Fire into 30 H2Hs." onclick="applyRecipe('cash_floor_lock', this)" data-recipe="cash_floor_lock">Cash floor lock<small class="contest-tag">SE · H2H</small></button>
+                    <button type="button" class="ghost" data-tip="Cash + FLEX = RB. Use when 3 live RBs have 15+ opportunities." onclick="applyRecipe('cash_3rb_floor', this)" data-recipe="cash_3rb_floor">Cash 3RB floor<small class="contest-tag">SE · 50/50</small></button>
+                    <button type="button" class="ghost" data-tip="Cash + raise min% on the chalkiest skill players. Do not fade a lock because he is chalk." onclick="applyRecipe('cash_eat_chalk', this)" data-recipe="cash_eat_chalk">Eat the chalk<small class="contest-tag">SE · 50/50</small></button>
+                    <button type="button" class="ghost" data-tip="Extreme chalk: highest-owned cores, min exposure on the chalk, almost no leverage. Showdown totals use CPT ownership for the captain." onclick="applyRecipe('extreme_chalk', this)" data-recipe="extreme_chalk">Extreme chalk<small class="contest-tag">SE · 50/50</small></button>
+                    <button type="button" class="ghost" data-tip="Optimal: highest projected builds only. No randomness, no quota filler. Stops when the next build falls off." onclick="applyRecipe('optimal_builds', this)" data-recipe="optimal_builds">Optimal<small class="contest-tag">SE cash</small></button>
+                    <button type="button" class="ghost" data-tip="Cash-style: force 1 same-team PC, no bring-back, keep opp-DST fade." onclick="applyRecipe('classic_cash_stack', this)" data-recipe="classic_cash_stack">Classic cash stack<small class="contest-tag">SE · 50/50</small></button>
                     <span class="recipe-group-label">GPP (Milly · large field) <span class="sd-guide">
                         <button type="button" class="sd-guide-btn" aria-label="Which GPP recipe to pick">?</button>
                         <div class="sd-guide-pop">
@@ -3309,13 +3322,13 @@
                             QB + 2 PCs + opponent bring-back + fade both DSTs. Pick the game in Stacks Lab.
                         </div>
                     </span></span>
-                    <button type="button" class="ghost" data-tip="Classic GPP style + max exp ~40%. Next: tag 6–12 players with High/Mid tiers." onclick="applyRecipe('classic_gpp_simple', this)" data-recipe="classic_gpp_simple">Classic GPP starter</button>
-                    <button type="button" class="ghost" data-tip="150-max Milly shape: unique 5, QB+2 PCs, opposing RB bring-back, fade both game DSTs." onclick="applyRecipe('gpp_milly_winner', this)" data-recipe="gpp_milly_winner">Milly winner shape</button>
-                    <button type="button" class="ghost" data-tip="GPP + QB + 2 PCs + opposing RB bring-back. Default 2025 game-stack winner." onclick="applyRecipe('gpp_qb2_bb_rb', this)" data-recipe="gpp_qb2_bb_rb">QB+2 + RB bring-back</button>
-                    <button type="button" class="ghost" data-tip="GPP + QB + 1 PC only (mini-stack). More room for 4 uniques." onclick="applyRecipe('gpp_mini_stack', this)" data-recipe="gpp_mini_stack">GPP mini-stack</button>
-                    <button type="button" class="ghost" data-tip="Cap chalk ~40% and boost &lt;10% owned names so the pool can produce 4+ uniques." onclick="applyRecipe('gpp_four_uniques', this)" data-recipe="gpp_four_uniques">Four uniques mix</button>
-                    <button type="button" class="ghost" data-tip="Classic GPP + QB must have WR+TE. Next: suggest stacks or pick QBs." onclick="applyRecipe('classic_3man', this)" data-recipe="classic_3man">Classic QB+WR+TE</button>
-                    <button type="button" class="ghost" data-tip="Classic GPP + 2 pass catchers + opponent bring-back + fade both game DSTs." onclick="applyRecipe('classic_game_stack', this)" data-recipe="classic_game_stack">Classic game stack</button>
+                    <button type="button" class="ghost" data-tip="Classic GPP style + max exp ~40%. Next: tag 6–12 players with High/Mid tiers." onclick="applyRecipe('classic_gpp_simple', this)" data-recipe="classic_gpp_simple">Classic GPP starter<small class="contest-tag">20-max</small></button>
+                    <button type="button" class="ghost" data-tip="150-max Milly shape: unique 5, QB+2 PCs, opposing RB bring-back, fade both game DSTs." onclick="applyRecipe('gpp_milly_winner', this)" data-recipe="gpp_milly_winner">Milly winner shape<small class="contest-tag">150-max</small></button>
+                    <button type="button" class="ghost" data-tip="GPP + QB + 2 PCs + opposing RB bring-back. Default 2025 game-stack winner." onclick="applyRecipe('gpp_qb2_bb_rb', this)" data-recipe="gpp_qb2_bb_rb">QB+2 + RB bring-back<small class="contest-tag">20 / 150</small></button>
+                    <button type="button" class="ghost" data-tip="GPP + QB + 1 PC only (mini-stack). More room for 4 uniques." onclick="applyRecipe('gpp_mini_stack', this)" data-recipe="gpp_mini_stack">GPP mini-stack<small class="contest-tag">20-max</small></button>
+                    <button type="button" class="ghost" data-tip="Cap chalk ~40% and boost &lt;10% owned names so the pool can produce 4+ uniques." onclick="applyRecipe('gpp_four_uniques', this)" data-recipe="gpp_four_uniques">Four uniques mix<small class="contest-tag">20 / 150</small></button>
+                    <button type="button" class="ghost" data-tip="Classic GPP + QB must have WR+TE. Next: suggest stacks or pick QBs." onclick="applyRecipe('classic_3man', this)" data-recipe="classic_3man">Classic QB+WR+TE<small class="contest-tag">20-max</small></button>
+                    <button type="button" class="ghost" data-tip="Classic GPP + 2 pass catchers + opponent bring-back + fade both game DSTs." onclick="applyRecipe('classic_game_stack', this)" data-recipe="classic_game_stack">Classic game stack<small class="contest-tag">20 / 150</small></button>
                     <span class="recipe-group-label">Showdown <span class="sd-guide">
                         <button type="button" class="sd-guide-btn" aria-label="Best Showdown option by contest">?</button>
                         <div class="sd-guide-pop">
@@ -3333,12 +3346,14 @@
                             <b>Preseason K/DST</b>. Regular season: keep K/DST eligible, max 2 combined — do not force 3.
                         </div>
                     </span></span>
-                    <button type="button" class="ghost" data-tip="Best cash recipe. 3–3, leftover ≤$800, floor CPT, no RB-DST force." onclick="applyRecipe('sd_cash_simple', this)" data-recipe="sd_cash_simple">Cash 3–3</button>
-                    <button type="button" class="ghost" data-tip="Best 20-max GPP recipe. 4–2, $1k–$2.5k leftover, WR/QB stacks + one bring-back." onclick="applyRecipe('sd_gpp_simple', this)" data-recipe="sd_gpp_simple">GPP 4–2</button>
-                    <button type="button" class="ghost" data-tip="One-ticket GPP. CPT WR/RB in the 8–18% band, 3–3 or 4–2, no CPT TE/K." onclick="applyRecipe('sd_single', this)" data-recipe="sd_single">Single-entry GPP</button>
-                    <button type="button" class="ghost" data-tip="O/U 49+: WR CPT + his QB, cap extra same-team WRs, optional both QBs." onclick="applyRecipe('sd_shootout', this)" data-recipe="sd_shootout">Shootout</button>
-                    <button type="button" class="ghost" data-tip="O/U ≤42 or spread 7+: RB CPT lean, same-team DST, 4–2 or 5–1." onclick="applyRecipe('sd_grind', this)" data-recipe="sd_grind">Grind / favorite</button>
-                    <button type="button" class="ghost" data-tip="Preseason only. Force exactly 2 K+DST. Skip on regular slates." onclick="applyRecipe('sd_kdst2', this)" data-recipe="sd_kdst2">Preseason K/DST</button>
+                    <button type="button" class="ghost" data-tip="Extreme chalk showdown. Captain ownership (not flex) counts in the lineup total. Locks the highest CPT-owned names." onclick="applyRecipe('sd_extreme_chalk', this)" data-recipe="sd_extreme_chalk">Extreme chalk<small class="contest-tag">SE · H2H</small></button>
+                    <button type="button" class="ghost" data-tip="Optimal showdown: best projected legal builds only. No junk filler to hit the lineup count." onclick="applyRecipe('sd_optimal', this)" data-recipe="sd_optimal">Optimal<small class="contest-tag">SE cash</small></button>
+                    <button type="button" class="ghost" data-tip="Best cash recipe. 3–3, leftover ≤$800, floor CPT, no RB-DST force." onclick="applyRecipe('sd_cash_simple', this)" data-recipe="sd_cash_simple">Cash 3–3<small class="contest-tag">SE · H2H</small></button>
+                    <button type="button" class="ghost" data-tip="Best 20-max GPP recipe. 4–2, $1k–$2.5k leftover, WR/QB stacks + one bring-back." onclick="applyRecipe('sd_gpp_simple', this)" data-recipe="sd_gpp_simple">GPP 4–2<small class="contest-tag">20-max</small></button>
+                    <button type="button" class="ghost" data-tip="One-ticket GPP. CPT WR/RB in the 8–18% band, 3–3 or 4–2, no CPT TE/K." onclick="applyRecipe('sd_single', this)" data-recipe="sd_single">Single-entry GPP<small class="contest-tag">SE GPP</small></button>
+                    <button type="button" class="ghost" data-tip="O/U 49+: WR CPT + his QB, cap extra same-team WRs, optional both QBs." onclick="applyRecipe('sd_shootout', this)" data-recipe="sd_shootout">Shootout<small class="contest-tag">20 / 150</small></button>
+                    <button type="button" class="ghost" data-tip="O/U ≤42 or spread 7+: RB CPT lean, same-team DST, 4–2 or 5–1." onclick="applyRecipe('sd_grind', this)" data-recipe="sd_grind">Grind / favorite<small class="contest-tag">20-max</small></button>
+                    <button type="button" class="ghost" data-tip="Preseason only. Force exactly 2 K+DST. Skip on regular slates." onclick="applyRecipe('sd_kdst2', this)" data-recipe="sd_kdst2">Preseason K/DST<small class="contest-tag">Preseason</small></button>
                 </div>
                 <div id="recipeCorrStatus" class="recipe-corr-status" hidden></div>
                 </div>
@@ -3610,6 +3625,13 @@
                                     <span class="sd-rule-text">
                                         <strong>QB CPT → same-team WR/TE</strong>
                                         <small>Pocket QB wants 2 PCs; rusher can use 1</small>
+                                    </span>
+                                </label>
+                                <label class="sd-rule">
+                                    <input type="checkbox" id="sdQbAnywhereStack" checked>
+                                    <span class="sd-rule-text">
+                                        <strong>QB in FLEX → same-team WR/TE</strong>
+                                        <small>A flex QB still needs one of his pass catchers</small>
                                     </span>
                                 </label>
                                 <label class="sd-rule">
@@ -3999,7 +4021,7 @@
                     <div class="cs-toolbar">
                         <div>
                             <label>Search</label>
-                            <input type="text" id="csSearch" placeholder="Player, team, opponent…" oninput="renderCheatSheet()">
+                            <input type="text" id="csSearch" placeholder="Player, team, opponent, or matchup" oninput="renderCheatSheet()">
                         </div>
                         <div>
                             <label>Position</label>
@@ -4104,6 +4126,12 @@
                         <div>
                             <h2>Defense vs Position</h2>
                             <p class="cs-note" style="margin:0;">What each defense allows per game. Rank 1 = easiest (most DK FP). Green = smash spot.</p>
+                        </div>
+                    </div>
+                    <div class="cs-toolbar" style="margin:0.6rem 0;">
+                        <div style="min-width:240px;flex:1;">
+                            <label>Search matchup / team</label>
+                            <input type="text" id="dvpTeamSearch" placeholder="Team, opponent, or matchup" oninput="renderDvpLab()">
                         </div>
                     </div>
                     <div class="cs-seg" id="dvpPosSeg">
@@ -5341,6 +5369,27 @@
             }
         }
 
+
+        function applyExtremeChalkMins() {
+            const isSd = typeof isShowdownSlateName === 'function' && isShowdownSlateName(selectedSlate);
+            const skill = (p) => !['DST','K','DEF'].includes(String(p.Position||'').toUpperCase());
+            const pool = (allSlatePlayers || filteredData || []).filter(p => skill(p) && (!isSd || p.slotType === 'Captain' || String(p.displayName||'').endsWith(' (CPT)')));
+            const ranked = pool.slice().sort((a,b) => (Number(b._cptImpliedOwn ?? b.ownership)||0) - (Number(a._cptImpliedOwn ?? a.ownership)||0));
+            if (isSd && ranked[0] && typeof setBuildAroundCpt === 'function') {
+                setBuildAroundCpt(ranked[0].displayName || ranked[0]['Player Name']);
+            }
+            ranked.slice(0, isSd ? 3 : 8).forEach((p, i) => {
+                const name = p.displayName || p['Player Name'];
+                if (!name) return;
+                const min = i === 0 ? 100 : 25;
+                minExposures[name] = Math.max(Number(minExposures[name])||0, min);
+                if (p.baseName) minExposures[p.baseName] = Math.max(Number(minExposures[p.baseName])||0, min);
+            });
+            if (typeof setExp === 'function') setExp(100);
+            if (typeof setSalaryLeftover === 'function') setSalaryLeftover(isSd ? 5000 : 4000);
+            if (typeof updatePlayerTable === 'function') updatePlayerTable();
+        }
+
         function applyRecipe(key, btn) {
             try {
             if (key === 'classic_gpp_simple') {
@@ -5393,7 +5442,25 @@
             } else if (key === 'cash_3rb_floor') {
                 applyPreset('cash_3rb');
                 setNextStep('Cash 3RB floor on. High-tier three live backs, cheap DST, leftover ≤$500, then Run.');
+            } else if (key === 'extreme_chalk' || key === 'sd_extreme_chalk') {
+                window._buildMode = 'chalk';
+                if (typeof isShowdownSlateName === 'function' && isShowdownSlateName(selectedSlate)) applyPreset('sd_cash');
+                else applyPreset('cash_eat_chalk');
+                if (typeof applyExtremeChalkMins === 'function') applyExtremeChalkMins();
+                const rand = document.getElementById('randomnessSlider');
+                if (rand) { rand.value = 5; if (typeof updateRandomness === 'function') updateRandomness(); }
+                setNextStep('Extreme chalk on. Highest-owned cores are locked in. Showdown totals use CPT ownership for the captain. Run.');
+            } else if (key === 'optimal_builds' || key === 'sd_optimal') {
+                window._buildMode = 'optimal';
+                if (typeof isShowdownSlateName === 'function' && isShowdownSlateName(selectedSlate)) applyPreset('sd_cash');
+                else applyPreset('classic_cash');
+                if (typeof setExp === 'function') setExp(100);
+                if (typeof setSalaryLeftover === 'function') setSalaryLeftover(5000);
+                const rand = document.getElementById('randomnessSlider');
+                if (rand) { rand.value = 0; if (typeof updateRandomness === 'function') updateRandomness(); }
+                setNextStep('Optimal on. Best projected legal builds only. Salary floor is already relaxed so you do not need Apply suggestions.');
             } else if (key === 'cash_eat_chalk') {
+                window._buildMode = '';
                 applyPreset('cash_eat_chalk');
                 setNextStep('Eat the chalk on. Highest-owned skill players have min exposure. Do not fade a lock because he is popular. Run 1 lineup.');
             } else if (key === 'gpp_milly_winner') {
@@ -5566,8 +5633,10 @@
                     return { defAb, defNick, face, info };
                 })
                 .sort((a,b) => (b.info.avg||0) - (a.info.avg||0));
-            const targets = rows.filter(r => r.info.rank <= 10);
-            const avoids = rows.filter(r => r.info.rank >= 22);
+            const dq = String(document.getElementById('dvpTeamSearch')?.value || '').trim().toLowerCase();
+            const filtered = dq ? rows.filter(r => [r.defNick, r.defAb, r.face].join(' ').toLowerCase().includes(dq)) : rows;
+            const targets = filtered.filter(r => r.info.rank <= 10);
+            const avoids = filtered.filter(r => r.info.rank >= 22);
             const starters = (() => {
                 const best = new Map();
                 (csSourcePool() || []).filter(p => csPos(p) === pos).forEach(p => {
@@ -5609,7 +5678,7 @@
                 ? `${th('Rush Att')}${th('Rush Yds')}${th('Rush TD')}${th('Tgt')}${th('Rec')}${th('Rec Yds')}${th('Rec TD')}${th('Tot TD')}`
                 : `${th('Tgt')}${th('Rec')}${th('Rec Yds')}${th('TD')}`;
             const scale = (key, invert) => {
-                const vals = rows.map(r => Number(r.info[key])).filter(Number.isFinite);
+                const vals = filtered.map(r => Number(r.info[key])).filter(Number.isFinite);
                 const min = vals.length ? Math.min(...vals) : 0;
                 const max = vals.length ? Math.max(...vals) : 1;
                 return (v) => {
@@ -5638,7 +5707,7 @@
             const hTd = scale('td', false);
             const hRecTd = scale('recTd', false);
             const paint = (txt, cls) => dvpColorOn ? `<span class="${cls}">${txt}</span>` : txt;
-            const body = rows.map((r, i) => {
+            const body = filtered.map((r, i) => {
                 const info = r.info;
                 const band = info.rank <= 5 ? 'elite' : info.rank <= 10 ? 'great' : info.rank <= 20 ? 'average' : 'poor';
                 const cells = pos === 'QB'
@@ -9234,6 +9303,7 @@
             setSdRule('showdownAutoStack', gpp && !smash ? true : (smash ? true : false));
             setSdRule('sdCptWrStackQb', true);
             setSdRule('sdCptQbStackPass', true);
+            setSdRule('sdQbAnywhereStack', true);
             setSdRule('sdCptWrCapExtra', true);
             setSdRule('sdCptPassBringBack', gpp && !smash);
             setSdRule('sdCptRbStackDst', smash);
@@ -10333,6 +10403,19 @@
 
         let lineupQualityFilter = 'all';
         let lineupAnchorFilter = '';
+
+        function sdQbNeedsPassCatcher(lineup) {
+            if (!lineup || !lineup.lineup) return false;
+            if (document.getElementById('sdQbAnywhereStack')?.checked === false) return false;
+            const pool = (typeof genPool === 'function' ? genPool() : null) || allSlatePlayers || [];
+            const cap = lineup.lineup.captain;
+            const flex = lineup.lineup.flex || [];
+            const all = [cap, ...flex].filter(Boolean);
+            const pos = (p) => sdUnderlyingPos(p, pool);
+            const tm = (p) => sdTeamOf(p);
+            return all.some(q => pos(q) === 'QB' && !all.some(p => p !== q && (pos(p) === 'WR' || pos(p) === 'TE') && tm(p) && tm(p) === tm(q)));
+        }
+
         function lineupRuleReport(lu) {
             const issues = [];
             if (!lu || !lu.lineup) return { proper: false, issues: ['empty'] };
@@ -10362,6 +10445,7 @@
                 if (pcs < 1) issues.push('QB CPT missing pass catcher');
                 else if (!sdQbIsRusher(cap, pool) && pcs < 2) issues.push('pocket QB CPT needs 2 pass catchers');
             }
+            if (sdQbNeedsPassCatcher(lu)) issues.push('FLEX QB missing pass catcher');
             if (on('sdCptQbFadeK') && capPos === 'QB') {
                 if (flex.some(p => pos(p) === 'K' && tm(p) === capT)) issues.push('QB CPT + same-team K');
             }
@@ -10495,6 +10579,77 @@
             const left = generatedLineups.filter(l => l.proper === false).length;
             if (typeof hideBusy === 'function') hideBusy(400);
             alert(`Rebuilt. Proper ${generatedLineups.filter(l=>l.proper!==false).length} / ${generatedLineups.length}` + (left ? `. ${left} still need review.` : '.'));
+        }
+
+
+        function lineupPieces(lu) {
+            if (!lu || !lu.lineup) return [];
+            if (lu.lineup.captain) return [lu.lineup.captain, ...(lu.lineup.flex || [])].filter(Boolean);
+            return Object.values(lu.lineup).filter(Boolean);
+        }
+        function scoreBuiltLineup(lu) {
+            if (!lu) return -9999;
+            const pcs = lineupPieces(lu);
+            if (!pcs.length) return -9999;
+            const isSd = isShowdownSlateName(selectedSlate);
+            const pool = (typeof genPool === 'function' ? genPool() : null) || allSlatePlayers || [];
+            const posOf = (p) => {
+                const hit = pool.find(x => x.displayName === p.name || x.baseName === p.baseName);
+                return String((hit && hit.Position) || p.position || '').toUpperCase();
+            };
+            const teamOf = (p) => {
+                const hit = pool.find(x => x.displayName === p.name || x.baseName === p.baseName);
+                return String((hit && hit.Team) || p.team || '');
+            };
+            let score = Number(lu.totalPoints) || 0;
+            pcs.forEach(p => { if ((Number(p.projectedFP) || 0) <= 0) score -= 12; });
+            const mode = window._buildMode || window._activeRecipe || activePreset || '';
+            const cash = /cash|chalk|optimal|floor|doubleup/i.test(mode);
+            const gpp = /gpp|milly|leverage|shootout|grind/i.test(mode);
+            if (isSd) {
+                const cap = lu.lineup.captain;
+                const flex = lu.lineup.flex || [];
+                const capPos = posOf(cap);
+                const capTeam = teamOf(cap);
+                const cptOwn = Number(cap._cptImpliedOwn ?? cap.ownership) || 0;
+                if (capPos === 'K' || capPos === 'DST') score -= cash ? 25 : 8;
+                if (capPos === 'QB') {
+                    const pcsN = flex.filter(p => ['WR','TE'].includes(posOf(p)) && teamOf(p) === capTeam).length;
+                    if (pcsN < 1) score -= 20;
+                    else score += 4;
+                }
+                flex.forEach(q => {
+                    if (posOf(q) === 'QB' && !pcs.concat([cap]).some(p => p !== q && ['WR','TE'].includes(posOf(p)) && teamOf(p) === teamOf(q))) score -= 18;
+                });
+                const left = 50000 - (Number(lu.totalSalary) || 0);
+                if (cash && left > 800) score -= Math.min(10, (left - 800) / 400);
+                if (gpp && cptOwn > 0) {
+                    const forced = Number(minExposures[cap.name] || minExposures[cap.baseName] || 0) > 0;
+                    if (!forced && cptOwn >= 30) score -= 6;
+                    if (cptOwn >= 8 && cptOwn <= 18) score += 3;
+                }
+                if (window._buildMode === 'chalk') score += cptOwn * 0.15;
+            } else {
+                const qb = pcs.find(p => posOf(p) === 'QB');
+                if (qb && !pcs.some(p => ['WR','TE'].includes(posOf(p)) && teamOf(p) === teamOf(qb))) score -= 15;
+            }
+            return score;
+        }
+        function rankAndTrimLineups() {
+            if (!generatedLineups || !generatedLineups.length) return;
+            const mode = window._buildMode || window._activeRecipe || activePreset || '';
+            const cashish = /cash|chalk|optimal|floor|doubleup|sd_cash/i.test(mode) || Number(multiEntryTarget) <= 1;
+            generatedLineups.forEach(lu => { lu._score = scoreBuiltLineup(lu); });
+            generatedLineups.sort((a,b) => (b._score - a._score) || ((b.totalPoints||0) - (a.totalPoints||0)));
+            const bestPts = Math.max(...generatedLineups.map(l => Number(l.totalPoints) || 0));
+            if (cashish && bestPts > 0) {
+                const floor = bestPts * 0.92;
+                const kept = generatedLineups.filter(l => (Number(l.totalPoints) || 0) >= floor && l._score > -100);
+                if (kept.length) generatedLineups = kept;
+            } else {
+                generatedLineups = generatedLineups.filter(l => l._score > -100);
+            }
+            if (generatedLineups.length > numLineups) generatedLineups = generatedLineups.slice(0, numLineups);
         }
 
         function updateLineupTable() {
@@ -10945,8 +11100,16 @@
                 if (prioKey) {
                     adjustedPoints *= (prioMeta.boost || 1);
                 }
-                if (leverageWeight > 0) {
+                if (window._buildMode === 'optimal') {
+                    adjustedPoints = Number(player.projectedFP) || 0;
+                } else if (leverageWeight > 0) {
                     adjustedPoints = adjustedPoints * (1 - leverageWeight * (player.ownership / 100));
+                }
+                if (window._buildMode === 'chalk') {
+                    const own = (isShowdown && (player.slotType === 'Captain' || String(player.displayName||'').endsWith(' (CPT)')))
+                        ? (Number(player._cptImpliedOwn ?? player.ownership) || 0)
+                        : (Number(player._flexOwn ?? player.ownership) || 0);
+                    adjustedPoints += own * 0.35;
                 }
 
                 // Boost players still needing min exposure (stronger for higher exposure tiers)
@@ -12324,6 +12487,11 @@
                     if (avail.length >= 2 && pcs < 2) return false;
                 }
             }
+            if (document.getElementById('sdQbAnywhereStack')?.checked !== false) {
+                const all = [cap, ...flex];
+                const naked = all.some(q => posOf(q) === 'QB' && !all.some(p => p !== q && (posOf(p) === 'WR' || posOf(p) === 'TE') && sdTeamOf(p) && sdTeamOf(p) === sdTeamOf(q)));
+                if (naked) return false;
+            }
             if (on('sdCptWrCapExtra') && (capPos === 'WR' || capPos === 'TE')) {
                 if (flex.filter(p => (posOf(p) === 'WR' || posOf(p) === 'TE') && sdTeamOf(p) === capTeam).length > 1) return false;
             }
@@ -12369,7 +12537,7 @@
                 lineup: { captain: toLu(cap), flex: flex.map(toLu) },
                 totalSalary,
                 totalPoints: (Number(cap.projectedFP)||0) + flex.reduce((s,p)=>s+(Number(p.projectedFP)||0),0),
-                totalOwnership: (Number(cap.ownership)||0) + flex.reduce((s,p)=>s+(Number(p.ownership)||0),0)
+                totalOwnership: ((window._buildMode === 'chalk' ? (Number(cap._cptImpliedOwn ?? cap.ownership)||0) : (Number(cap.ownership)||0)) + flex.reduce((s,p)=>s+(Number(p._flexOwn ?? p.ownership)||0),0))
             };
             if (window._softFillMode) {
                 if (!sdRosterLegal(lu)) return null;
@@ -12524,6 +12692,9 @@
                     if (showdownMaxDstCpt === 0 || (typeof dstCptCapReached === 'function' && dstCptCapReached())) s = -999;
                 }
                 if (typeof playerMaxAllowed === 'function' && playerMaxAllowed(p, playerCounts).leftover <= 0) s = -999;
+                const need = Math.ceil(((Number(minExposures[p.displayName] ?? minExposures[p.baseName] ?? minExposures[p.name]) || 0) / 100) * Math.max(1, numLineups) - 1e-9);
+                const used = playerCounts ? (playerCounts[p.displayName] || playerCounts[p.baseName] || playerCounts[p.name] || 0) : 0;
+                if (need > used) s += 40 + (need - used) * 18;
                 return s;
             };
             const ranked = caps.slice().sort((a,b) => scoreCpt(b) - scoreCpt(a)).filter(p => scoreCpt(p) > -100);
@@ -12612,7 +12783,19 @@
                     }
                     cand.sort((a,b) => ((Number(b.projectedFP)||0) - (Number(a.projectedFP)||0)) + (Math.random() - 0.5) * 1.8);
                     if (!cand.length) return null;
+                    const qbOpen = cand.filter(p => sdUnderlyingPos(p, pool) === 'QB');
+                    const pcOpen = cand.filter(p => sdUnderlyingPos(p, pool) === 'WR' || sdUnderlyingPos(p, pool) === 'TE');
+                    if (document.getElementById('sdQbAnywhereStack')?.checked !== false && qbOpen.length && slotsLeft === 1) {
+                        const havePc = (q) => [cap, ...flex].some(p => (sdUnderlyingPos(p, pool) === 'WR' || sdUnderlyingPos(p, pool) === 'TE') && sdTeamOf(p) === sdTeamOf(q));
+                        cand = cand.filter(p => sdUnderlyingPos(p, pool) !== 'QB' || havePc(p));
+                        if (!cand.length) return null;
+                    }
                     add(cand[0]);
+                }
+                if (document.getElementById('sdQbAnywhereStack')?.checked !== false) {
+                    const all = [cap, ...flex];
+                    const naked = all.some(q => sdUnderlyingPos(q, pool) === 'QB' && !all.some(p => p !== q && (sdUnderlyingPos(p, pool) === 'WR' || sdUnderlyingPos(p, pool) === 'TE') && sdTeamOf(p) === sdTeamOf(q)));
+                    if (naked) return null;
                 }
                 return packShowdownLineup(cap, flex, lineupSet);
             };
@@ -13221,7 +13404,23 @@
                     updatePlayerCounts(fb, playerCounts, isShowdown);
                     updateProgress((generatedLineups.length / numLineups) * 100, `Proper · ${generatedLineups.length}/${numLineups}`);
                 }
-                if (generatedLineups.length < numLineups && isShowdown) {
+                if (generatedLineups.length < numLineups && isShowdown && window._buildMode !== 'optimal' && window._buildMode !== 'chalk') {
+                    const under = (genPool() || []).filter(p => (p.slotType === 'Captain' || String(p.displayName||'').endsWith(' (CPT)')) && (() => {
+                        const need = Math.ceil(((Number(minExposures[p.displayName] ?? minExposures[p.baseName] ?? minExposures[p.name]) || 0) / 100) * Math.max(1, numLineups) - 1e-9);
+                        const used = playerCounts[p.displayName] || playerCounts[p.baseName] || playerCounts[p.name] || 0;
+                        return need > used && playerMaxAllowed(p, playerCounts).leftover > 0;
+                    })());
+                    for (const cap of under) {
+                        if (generatedLineups.length >= numLineups) break;
+                        for (let n = 0; n < 8 && generatedLineups.length < numLineups; n++) {
+                            const fb = buildShowdownByRules([cap].concat(genEligible(true, playerCounts) || []), lineupSet, playerCounts);
+                            if (!fb || !validLineup(fb) || !sdLineupOk(fb)) break;
+                            tagLineupQuality(fb);
+                            if (fb.proper === false) continue;
+                            generatedLineups.push(fb);
+                            updatePlayerCounts(fb, playerCounts, isShowdown);
+                        }
+                    }
                     window._softFillMode = true;
                     window._fillMaxBump = 35;
                     let softGuard = 0;
@@ -13305,6 +13504,10 @@
                 <div class="summary-card"><div class="value">${multiEntryTarget}</div><div class="label">Multi-Entry Target</div></div>
             `;
 
+            rankAndTrimLineups();
+            if (generatedLineups.length < numLineups) {
+                logMessages.push(`Kept ${generatedLineups.length} of ${numLineups}. Lineups more than 8% below the best projected build were not added.`);
+            }
             updateLineupTable();
             document.getElementById('lineupTableContainer').style.display = 'block';
             document.getElementById('lateSwapContainer').style.display = isShowdown ? 'none' : 'block';
@@ -16810,36 +17013,6 @@
         }
 
     </script>
-
-<script>
-(function () {
-  var params = new URLSearchParams(window.location.search);
-  var token = params.get("access");
-  var endpoint =
-    "https://www.ninetofivesports.com/_functions/checkAccess?token=" +
-    encodeURIComponent(token || "");
-
-  function deny() {
-    document.body.innerHTML =
-      '<div style="font-family:Inter,system-ui,sans-serif;background:#070b14;color:#e7ecf5;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center">' +
-      "<div><h1 style='margin:0 0 8px'>NineToFive Paid Members Only</h1>" +
-      "<p style='color:#8b93a7'>This builder is for active 925 members.</p>" +
-      "<p><a href='https://www.ninetofivesports.com/plans-pricing' style='color:#2E8DA1'>Become a Member</a></p></div></div>";
-  }
-
-  if (!token) {
-    deny();
-    return;
-  }
-
-  fetch(endpoint)
-    .then(function (r) { return r.json(); })
-    .then(function (data) {
-      if (!data || data.ok !== true) deny();
-    })
-    .catch(function () { deny(); });
-})();
-</script>
 
 </body>
 </html>
