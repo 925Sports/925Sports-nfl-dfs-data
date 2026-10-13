@@ -932,6 +932,42 @@
 .cs-toolbar { display:grid; grid-template-columns: minmax(220px,1.4fr) repeat(auto-fit,minmax(140px,1fr)); gap:0.7rem 0.8rem; align-items:end; margin:0.8rem 0 1rem; padding:0.8rem; border:1px solid var(--border-color); border-radius:12px; background:rgba(255,255,255,0.02); }
         .cs-toolbar label { display:block; margin-bottom:0.28rem; font-size:0.72rem; letter-spacing:0.03em; text-transform:uppercase; color:var(--muted); }
         #csSearch, #dvpTeamSearch { width:100%; }
+
+        .dvp-reverse { margin:0.6rem 0 0.8rem; padding:0.8rem; border:1px solid var(--border-color); border-radius:12px; background:rgba(255,255,255,0.03); }
+        .dvp-rev-head { display:flex; justify-content:space-between; align-items:center; gap:0.6rem; }
+        .dvp-rev-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:0.6rem; margin-top:0.5rem; }
+        .dvp-rev-team { padding:0.55rem 0.65rem; border:1px solid var(--border-color); border-radius:10px; }
+        .dvp-rev-team h5 { margin:0 0 0.35rem; }
+        .dvp-rev-player { display:flex; flex-wrap:wrap; gap:0.35rem 0.55rem; font-size:0.82rem; margin:0.2rem 0; }
+
+        .pool-name-row { display:inline-flex; align-items:center; gap:0.3rem; }
+        .pool-card-btn { margin-left:0.35rem; border:1px solid var(--border-color); background:transparent; color:var(--muted); border-radius:6px; padding:0 0.35rem; font-size:0.75rem; cursor:pointer; vertical-align:middle; }
+        .pool-card-btn:hover { color:var(--text); border-color:var(--brand-teal); }
+
+        .base-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; }
+        @media (max-width:800px) { .base-grid { grid-template-columns:1fr; } }
+        .base-list { max-height:320px; overflow:auto; border:1px solid var(--border-color); border-radius:10px; padding:0.4rem; margin:0.4rem 0; }
+        .base-row, .base-pivot { display:flex; justify-content:space-between; gap:0.4rem; width:100%; text-align:left; margin:0.15rem 0; padding:0.4rem 0.5rem; border:1px solid var(--border-color); border-radius:8px; background:transparent; color:inherit; }
+        .base-pivots { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:0.4rem; }
+        .base-pivot.active { border-color:var(--brand-teal); }
+
+        .pool-inj-toggle { display:flex; align-items:center; gap:0.35rem; font-size:0.78rem; color:var(--muted); margin-right:0.5rem; }
+        .dk-build { display:grid; grid-template-columns:1.2fr 1fr; gap:0.8rem; }
+        @media (max-width:860px) { .dk-build { grid-template-columns:1fr; } }
+        .dk-table, .dk-slots { border:1px solid var(--border-color); border-radius:10px; max-height:460px; overflow:auto; }
+        .dk-row, .dk-slot { display:grid; grid-template-columns:1.6fr 0.7fr 0.5fr 0.6fr 32px; gap:0.3rem; align-items:center; padding:0.35rem 0.5rem; border-bottom:1px solid var(--border-color); font-size:0.82rem; }
+        .dk-head { font-size:0.68rem; text-transform:uppercase; color:var(--muted); position:sticky; top:0; background:var(--card-bg); }
+        .dk-row.in { opacity:0.45; }
+        .dk-slot { grid-template-columns:52px 1.4fr 0.6fr 0.5fr 0.6fr 28px; cursor:pointer; }
+        .dk-slot .pos { font-weight:700; color:var(--brand-teal); }
+        .dk-slot.active { outline:1px solid var(--brand-teal); }
+        .dk-line-head, .dk-line-actions { display:flex; justify-content:space-between; align-items:center; gap:0.4rem; margin:0.35rem 0; }
+
+        .pivot-bar { display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap; margin:0.4rem 0; }
+        .pivot-bar input[type="text"] { min-width:160px; }
+        .pivot-list { max-height:240px; overflow:auto; border:1px solid var(--border-color); border-radius:10px; }
+        .pivot-row { display:grid; grid-template-columns:22px 1.6fr 0.5fr 0.7fr 0.5fr; gap:0.4rem; align-items:center; padding:0.32rem 0.5rem; border-bottom:1px solid var(--border-color); }
+        .pivot-row:hover { background:rgba(255,255,255,0.03); }
 .preset-btn.contest-classic { border-color: var(--brand-teal); }
         .preset-btn.contest-showdown { border-color: var(--brand-aqua); }
         .preset-group-label {
@@ -3097,6 +3133,7 @@
             <button type="button" class="workspace-tab" id="tabBtnStacks" onclick="switchWorkspace('stacks')">🔗 Stacks Lab</button>
             <button type="button" class="workspace-tab" id="tabBtnDvp" onclick="switchWorkspace('dvp')">🛡️ DVP</button>
             <button type="button" class="workspace-tab" id="tabBtnSnaps" onclick="switchWorkspace('snaps')">📊 Snaps</button>
+            <button type="button" class="workspace-tab" id="tabBtnBase" onclick="switchWorkspace('base')">🔁 Base + Swaps</button>
 
         </div>
 
@@ -3773,6 +3810,8 @@
             <div class="card-body">
                 <div class="pool-filter-bar" id="poolFilterBar">
                     <div class="pool-search-wrap">
+                        <label class="pool-inj-toggle" title="Hide Doubtful, Out, and IR."><input type="checkbox" id="excludeInjured" checked onchange="updateTable()"> Exclude D / OUT / IR</label>
+                        <label class="pool-inj-toggle" title="Keep Questionable players in the pool."><input type="checkbox" id="includeQuestionable" checked onchange="updateTable()"> Include Q</label>
                         <input type="search" id="poolSearchInput" placeholder="Search player…" autocomplete="off"
                                oninput="onPoolSearchInput(this.value)" data-tip="Filter the table by player name">
                         <label style="display:flex;align-items:center;gap:0.35rem;font-size:0.75rem;white-space:nowrap;margin:0;">
@@ -4092,6 +4131,17 @@
         </div>
 
 
+        <div class="cs-drawer-backdrop" id="dvpPopupBackdrop" onclick="closeDvpPopup()" hidden></div>
+        <div class="cs-drawer" id="dvpPopup" aria-hidden="true">
+            <div class="cs-drawer-head">
+                <div>
+                    <h3 style="margin:0;" id="dvpPopupTitle">DVP</h3>
+                    <p class="cs-note" style="margin:0.2rem 0 0;" id="dvpPopupSub">2026 matchup log</p>
+                </div>
+                <button type="button" class="ghost" onclick="closeDvpPopup()">Close</button>
+            </div>
+            <div class="cs-drawer-body" id="dvpPopupBody"></div>
+        </div>
         <div class="cs-drawer-backdrop" id="csDrawerBackdrop" onclick="closeCsDrawer()"></div>
         <div class="cs-drawer" id="csPlayerDrawer" aria-hidden="true">
             <div class="cs-drawer-head">
@@ -4144,6 +4194,62 @@
                 </div>
             </div>
         </div>
+        
+        <div id="panelBase" class="workspace-panel" hidden>
+            <div class="card">
+                <div class="card-body">
+                    <div class="cs-hero">
+                        <div>
+                            <h2>Base + Swaps</h2>
+                            <p class="cs-note" style="margin:0;">DraftKings-style base. Fill the slots, set pivots, generate small swaps.</p>
+                        </div>
+                    </div>
+                    <div class="dk-build">
+                        <div class="dk-left">
+                            <input type="text" id="baseSearch" placeholder="Player search" oninput="renderBaseLab()">
+                            <div class="cs-seg" id="basePosSeg">
+                                <button type="button" class="active" onclick="basePos='ALL';renderBaseLab()">ALL</button>
+                                <button type="button" onclick="basePos='QB';renderBaseLab()">QB</button>
+                                <button type="button" onclick="basePos='RB';renderBaseLab()">RB</button>
+                                <button type="button" onclick="basePos='WR';renderBaseLab()">WR</button>
+                                <button type="button" onclick="basePos='TE';renderBaseLab()">TE</button>
+                                <button type="button" onclick="basePos='DST';renderBaseLab()">DST</button>
+                            </div>
+                            <div id="baseAvail" class="dk-table"></div>
+                        </div>
+                        <div class="dk-right">
+                            <div class="dk-line-head">
+                                <strong>LINEUP</strong>
+                                <span id="baseSalaryNote">Rem. $50,000</span>
+                            </div>
+                            <div id="baseLineup" class="dk-slots"></div>
+                            <div class="dk-line-actions">
+                                <button type="button" class="ghost" onclick="clearBaseLineup()">Clear</button>
+                                <button type="button" onclick="loadTopBase()">Load top proj</button>
+                            </div>
+                        </div>
+                    </div>
+                    <details class="gp-dvp-drop" open style="margin-top:0.8rem;">
+                        <summary><strong>Swap-eligible pivots</strong></summary>
+                        <div class="pivot-bar">
+                            <label><input type="checkbox" id="basePivotOnly" checked> Only use configured pivots</label>
+                            <span id="pivotWho" class="cs-note">Click a filled slot.</span>
+                            <input type="text" id="pivotSearch" placeholder="Search pivots" oninput="renderBaseLab()">
+                        </div>
+                        <div id="basePivotCards" class="base-pivots"></div>
+                        <div id="basePivotList" class="pivot-list"></div>
+                        <div class="cs-toolbar">
+                            <div><label>Variations</label><input type="number" id="baseVarCount" value="20" min="1" max="150"></div>
+                            <div><label>Swaps</label><input type="number" id="baseSwapCount" value="1" min="1" max="3"></div>
+                            <div><label>Salary tolerance</label><input type="number" id="baseTol" value="1500" min="0" step="100"></div>
+                            <div><label>&nbsp;</label><button type="button" onclick="generateBaseVariations()">Generate</button></div>
+                        </div>
+                    </details>
+                    <div id="baseResults"></div>
+                </div>
+            </div>
+        </div>
+
         <div id="panelSnaps" class="workspace-panel" hidden>
             <div class="card">
                 <div class="card-body">
@@ -4730,11 +4836,11 @@
         };
 
         window.RECIPE_CORR = {
-            classic_cash_simple: { forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true },
-            cash_doubleup:        { forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true },
-            cash_floor_lock:     { forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true },
-            cash_3rb_floor:      { forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true },
-            cash_eat_chalk:      { forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true },
+            classic_cash_simple: { forcePc: true, twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true },
+            cash_doubleup:        { forcePc: true, twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true },
+            cash_floor_lock:     { forcePc: true, twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true },
+            cash_3rb_floor:      { forcePc: true, twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true },
+            cash_eat_chalk:      { forcePc: true, twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true },
             classic_cash_stack:  { forcePc: true,  twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true },
             classic_gpp_simple:  { forcePc: true,  twoPc: false, wrte: false, fadeDst: true,  bring: 'none', noOppDst: true },
             gpp_milly_winner:    { forcePc: true,  twoPc: true,  wrte: false, fadeDst: true,  bring: 'rb',   noOppDst: true },
@@ -5536,10 +5642,148 @@
         let dvpShowTotal = false;
         let dvpColorOn = true;
         let dvpWhyKey = "";
+        let dvpReverseAb = "";
 
         function showDvpWhy(ab, pos) {
             dvpWhyKey = String(ab || '');
             renderDvpLab();
+        }
+        function showDvpReverse(ab, pos) {
+            openDvpPopup(ab, pos || dvpPosView || 'QB');
+        }
+        function dvpStatGrid(info, pos) {
+            if (!info) return '<p class="cs-note">No 2026 DVP row.</p>';
+            const cells = pos === 'QB'
+                ? [['FP/g', info.avg], ['Cmp', info.passCmp], ['Att', info.passAtt], ['Pass yds', info.passYds], ['Pass TD', info.passTd], ['INT', info.ints], ['Rush att', info.rushAtt], ['Rush yds', info.rushYds]]
+                : pos === 'RB'
+                ? [['FP/g', info.avg], ['Rush att', info.rushAtt], ['Rush yds', info.rushYds], ['Rush TD', info.rushTd], ['Tgt', info.tgt], ['Rec', info.rec], ['Rec yds', info.recYds], ['Rec TD', info.recTd]]
+                : [['FP/g', info.avg], ['Tgt', info.tgt], ['Rec', info.rec], ['Rec yds', info.recYds], ['TD', info.td]];
+            return `<div class="cs-stat-grid">${cells.map(([k,v]) => `<div class="cs-stat"><div class="k">${k}</div><div class="v">${Number(v||0).toFixed(k==='FP/g'?1:2)}</div></div>`).join('')}</div>`;
+        }
+        function openDvpPopup(ab, pos) {
+            const pop = document.getElementById('dvpPopup');
+            const back = document.getElementById('dvpPopupBackdrop');
+            const body = document.getElementById('dvpPopupBody');
+            if (!pop || !body) return;
+            if (back && back.parentElement !== document.body) document.body.appendChild(back);
+            if (pop.parentElement !== document.body) document.body.appendChild(pop);
+            const nick = normalizeTeam(ab) || ab;
+            const info = dvpTable[ab + '|' + pos] || dvpTable[String(ab).toUpperCase() + '|' + pos] || dvpTable[nick + '|' + pos];
+            document.getElementById('dvpPopupTitle').textContent = nick + ' vs ' + pos;
+            document.getElementById('dvpPopupSub').textContent = info ? ('Rank #' + info.rank + ' · ' + info.avg.toFixed(1) + ' FP/g · ' + info.n + ' games') : '2026 matchup log';
+            body.innerHTML = `
+                <h4 style="margin:0.2rem 0 0.35rem;">Summary</h4>
+                ${dvpWhyHtml(ab, pos)}
+                <h4 style="margin:0.8rem 0 0.35rem;">Data points</h4>
+                ${dvpStatGrid(info, pos)}
+                <h4 style="margin:0.9rem 0 0.35rem;">Who faced them</h4>
+                ${reverseDvpHtml(ab, pos).replace(/onclick="dvpReverseAb='';renderDvpLab\(\);"/g, 'onclick="closeDvpPopup()"')}
+            `;
+            pop.classList.add('open');
+            pop.setAttribute('aria-hidden', 'false');
+            if (back) { back.hidden = false; back.classList.add('show'); }
+        }
+        function closeDvpPopup() {
+            document.getElementById('dvpPopup')?.classList.remove('open');
+            const back = document.getElementById('dvpPopupBackdrop');
+            if (back) { back.classList.remove('show'); back.hidden = true; }
+            const d = document.getElementById('dvpPopup');
+            if (d) d.setAttribute('aria-hidden', 'true');
+        }
+        function reverseDvpGames(ab, pos) {
+            const want = normalizeTeam(ab) || String(ab || '').toUpperCase();
+            const out = [];
+            if (!want || typeof gameLogIndex === 'undefined') return out;
+            gameLogIndex.forEach(list => {
+                (list || []).forEach(g => {
+                    if (!g || g.pos !== pos) return;
+                    if (Number(g.season) !== 2026) return;
+                    if (g.type && !/REG/i.test(String(g.type))) return;
+                    const opp = normalizeTeam(g.opp) || String(g.opp || '').toUpperCase();
+                    if (opp !== want && String(g.opp || '').toUpperCase() !== want) return;
+                    out.push(g);
+                });
+            });
+            out.sort((a,b) => (Number(a.week)-Number(b.week)) || String(a.team).localeCompare(String(b.team)) || ((Number(b.fp)||0)-(Number(a.fp)||0)));
+            return out;
+        }
+        function reverseDvpHtml(ab, pos) {
+            if (!ab) return '';
+            const nick = normalizeTeam(ab) || ab;
+            const games = reverseDvpGames(ab, pos);
+            if (!games.length) return '<p class="cs-note">No 2026 logs vs this defense yet.</p>';
+            if (typeof gameResultIndex !== 'undefined' && !gameResultIndex.size && typeof loadRecentGameResults === 'function') loadRecentGameResults();
+            const fmtPct = (a,b) => (!b ? '—' : ((100*a/b).toFixed(1)));
+            const avg = (yds,att) => (!att ? '—' : (yds/att).toFixed(1));
+            const resCell = (g) => {
+                const r = typeof gameResultFor === 'function' ? gameResultFor(g) : null;
+                if (!r) return '<td class="res">—</td>';
+                return `<td class="res">${csEsc(r.result)}</td>`;
+            };
+            const rowCls = (g) => {
+                const r = typeof gameResultFor === 'function' ? gameResultFor(g) : null;
+                return r ? (r.winner ? 'win' : 'loss') : '';
+            };
+            const mu = (g) => `${csEsc(normalizeTeam(g.team)||g.team)} @ ${csEsc(nick)}`;
+            let head, body;
+            if (pos === 'QB') {
+                head = `<tr>
+                    <th colspan="5" class="grp left g-game">FANTASY / GAME</th>
+                    <th colspan="8" class="grp g-pass">PASSING</th>
+                    <th colspan="4" class="grp g-rush">RUSHING</th>
+                    <th colspan="2" class="grp g-fum">FUMBLES</th>
+                </tr><tr>
+                    <th class="left">WEEK</th><th class="left">PLAYER</th><th>FPTS</th><th class="left">MATCHUP</th><th>RESULT</th>
+                    <th>CMP</th><th>ATT</th><th>PCT</th><th>YDS</th><th>AVG</th><th>TD</th><th>INT</th><th>RATE</th>
+                    <th>ATT</th><th>YDS</th><th>AVG</th><th>TD</th>
+                    <th>FUM</th><th>LOST</th>
+                </tr>`;
+                body = games.map(g => `<tr class="${rowCls(g)}">
+                    <td class="left">W${g.week}</td>
+                    <td class="left">${csEsc(g.name)}</td>
+                    <td class="num">${(Number(g.fp)||0).toFixed(1)}</td>
+                    <td class="left">${mu(g)}</td>
+                    ${resCell(g)}
+                    <td class="num">${g.cmp||0}</td><td class="num">${g.passAtt||0}</td><td class="num">${fmtPct(g.cmp||0,g.passAtt||0)}</td>
+                    <td class="num">${g.passYds||0}</td><td class="num">${avg(g.passYds,g.passAtt)}</td>
+                    <td class="num">${g.passTd||0}</td><td class="num">${g.ints||0}</td>
+                    <td class="num">${passerRating(g.cmp,g.passAtt,g.passYds,g.passTd,g.ints).toFixed(1)}</td>
+                    <td class="num">${g.rushAtt||0}</td><td class="num">${g.rushYds||0}</td><td class="num">${avg(g.rushYds,g.rushAtt)}</td>
+                    <td class="num">${g.rushTd||0}</td>
+                    <td class="num">${g.fum||0}</td><td class="num">${g.fumLost||0}</td>
+                </tr>`).join('');
+            } else {
+                head = `<tr>
+                    <th colspan="5" class="grp left g-game">FANTASY / GAME</th>
+                    <th colspan="4" class="grp g-rec">RECEIVING</th>
+                    <th colspan="4" class="grp g-rush">RUSHING</th>
+                    <th colspan="2" class="grp g-fum">FUMBLES</th>
+                </tr><tr>
+                    <th class="left">WEEK</th><th class="left">PLAYER</th><th>FPTS</th><th class="left">MATCHUP</th><th>RESULT</th>
+                    <th>REC</th><th>TAR</th><th>YDS</th><th>TD</th>
+                    <th>ATT</th><th>YDS</th><th>AVG</th><th>TD</th>
+                    <th>FUM</th><th>LOST</th>
+                </tr>`;
+                body = games.map(g => `<tr class="${rowCls(g)}">
+                    <td class="left">W${g.week}</td>
+                    <td class="left">${csEsc(g.name)}</td>
+                    <td class="num">${(Number(g.fp)||0).toFixed(1)}</td>
+                    <td class="left">${mu(g)}</td>
+                    ${resCell(g)}
+                    <td class="num">${g.rec||0}</td><td class="num">${g.tgt||0}</td><td class="num">${g.recYds||0}</td><td class="num">${g.recTd||0}</td>
+                    <td class="num">${g.rushAtt||0}</td><td class="num">${g.rushYds||0}</td><td class="num">${avg(g.rushYds,g.rushAtt)}</td><td class="num">${g.rushTd||0}</td>
+                    <td class="num">${g.fum||0}</td><td class="num">${g.fumLost||0}</td>
+                </tr>`).join('');
+            }
+            const names = [];
+            const seen = new Set();
+            games.forEach(g => { if (!seen.has(g.name)) { seen.add(g.name); names.push(g.name); } });
+            return `<div class="dvp-reverse">
+                <div class="dvp-rev-head"><strong>${csEsc(nick)} reverse DVP · ${pos}</strong></div>
+                <p class="cs-note">2026 games against ${csEsc(nick)}. Result is the offense's W/L.</p>
+                <div class="cs-log-wrap"><table class="cs-log-table"><thead>${head}</thead><tbody>${body}</tbody></table></div>
+                <p class="cs-note"><strong>All ${pos}s:</strong> ${names.map(csEsc).join(' · ')}</p>
+            </div>`;
         }
         function dvpWhyHtml(ab, pos) {
             if (!ab) return '<p class="cs-note">Click a defense above for a short why.</p>';
@@ -5717,7 +5961,7 @@
                     : `<td class="num">${paint(fmtVal(info,'tgt'), hTgt(info.tgt))}</td><td class="num">${paint(fmtVal(info,'rec'), hRec(info.rec))}</td><td class="num">${paint(fmtVal(info,'recYds',0), hRecY(info.recYds))}</td><td class="num">${paint(fmtVal(info,'td',2), hTd(info.td))}</td>`;
                 return `<tr class="dvp-row ${dvpColorOn ? band : ''}">
                     <td class="num">${i+1}</td>
-                    <td><strong>${csEsc(r.defNick)}</strong> <span class="cs-sub">${csEsc(r.defAb)}</span></td>
+                    <td><button type="button" class="cs-name-btn" onclick="showDvpReverse('${csArg(r.defAb)}')"><strong>${csEsc(r.defNick)}</strong></button> <span class="cs-sub">${csEsc(r.defAb)}</span></td>
                     <td>${r.face ? csEsc(r.face) : '—'}</td>
                     <td>${dvpPill(info)}</td>
                     <td class="num">${paint((dvpShowTotal ? (info.avg*(info.n||1)).toFixed(1) : info.avg.toFixed(1)), hFp(info.avg))}</td>
@@ -5729,7 +5973,7 @@
                 <button type="button" class="${dvpShowTotal?'':'active'}" onclick="dvpShowTotal=false;renderDvpLab();">Average</button>
                 <button type="button" class="${dvpShowTotal?'active':''}" onclick="dvpShowTotal=true;renderDvpLab();">Total</button>
                 <button type="button" class="${dvpColorOn?'active':''}" onclick="dvpColorOn=!dvpColorOn;renderDvpLab();">${dvpColorOn?'Colors on':'Colors off'}</button>
-            </div>` + summary + `<p class="cs-note">2026 regular season only. Click a header to sort. Green = smash DVP.</p>
+            </div>` + summary + `<p class="cs-note">2026 regular season only. Click a defense for the reverse game log. Click a header to sort. Green = smash DVP.</p>
                 <div class="cs-table-wrap"><table class="gp-dvp-table" id="dvpLabTable">
                     <thead><tr>${th('#')}${th('Defense')}${th('Faces')}${th('Rank')}${th('FP/g')}${th('G')}${head}</tr></thead>
                     <tbody>${body || '<tr><td colspan="16">No 2026 DVP rows yet.</td></tr>'}</tbody>
@@ -5901,6 +6145,138 @@
             root.innerHTML = blocks || '<p class="cs-note">No 2026 snap rows matched that team / position. Try All teams or All offense.</p>';
         }
 
+
+        async function loadHeadshots() {
+            if (headshotIndex.size) return;
+            try {
+                const res = await fetchWithRetry('https://github.com/nflverse/nflverse-data/releases/download/players/players.csv', 1, 25000, true);
+                const parsed = Papa.parse(await res.text(), { header: true, skipEmptyLines: true });
+                (parsed.data || []).forEach(r => {
+                    const url = String(r.headshot || '').trim();
+                    if (!url.startsWith('http')) return;
+                    const key = normalizeName(r.display_name || r.football_name || '');
+                    if (key && !headshotIndex.has(key)) headshotIndex.set(key, url);
+                });
+            } catch (e) { console.warn('headshots failed', e); }
+        }
+        let baseLineup = [];
+        let basePivots = {};
+        let baseActive = -1;
+        let basePos = 'ALL';
+        let baseVariations = [];
+        function baseNeed() { return (typeof isShowdownSlateName === 'function' && isShowdownSlateName(selectedSlate)) ? 6 : 9; }
+        function baseSlotNames() { return baseNeed() === 6 ? ['CPT','FLEX','FLEX','FLEX','FLEX','FLEX'] : ['QB','RB','RB','WR','WR','WR','TE','FLEX','DST']; }
+        function baseFits(slot, pos) {
+            if (slot === 'FLEX' || slot === 'CPT') return ['QB','RB','WR','TE','DST','K'].includes(pos) || slot === 'FLEX';
+            if (slot === 'DST') return pos === 'DST';
+            return slot === pos;
+        }
+        function basePool() {
+            return (typeof genPool === 'function' ? genPool() : (filteredData || [])).filter(p => p && !String(p.displayName||'').includes('(CPT)') && !deselectedPlayers.has(p.displayName));
+        }
+        function addToBase(name) {
+            const p = basePool().find(x => x.displayName === name || x.baseName === name);
+            if (!p || baseLineup.some(x => x && x.displayName === p.displayName)) return;
+            const slots = baseSlotNames();
+            while (baseLineup.length < slots.length) baseLineup.push(null);
+            const idx = slots.findIndex((s,i) => !baseLineup[i] && baseFits(s, p.Position));
+            if (idx < 0) return;
+            baseLineup[idx] = p;
+            renderBaseLab();
+        }
+        function removeFromBase(i) {
+            const p = baseLineup[i];
+            if (p) delete basePivots[p.displayName];
+            baseLineup[i] = null;
+            if (baseActive === i) baseActive = -1;
+            renderBaseLab();
+        }
+        function clearBaseLineup() { baseLineup = []; basePivots = {}; baseActive = -1; renderBaseLab(); }
+        function loadTopBase() {
+            const slots = baseSlotNames();
+            const pool = basePool().slice().sort((a,b) => (b.projectedFP||0) - (a.projectedFP||0));
+            const used = new Set();
+            baseLineup = slots.map(slot => {
+                const hit = pool.find(p => !used.has(p.displayName) && baseFits(slot, p.Position) && (slot !== 'FLEX' || ['RB','WR','TE'].includes(p.Position)));
+                if (hit) used.add(hit.displayName);
+                return hit || null;
+            });
+            renderBaseLab();
+        }
+        function toggleBasePivot(name) {
+            const p = baseLineup[baseActive];
+            if (!p) return;
+            const list = basePivots[p.displayName] || [];
+            basePivots[p.displayName] = list.includes(name) ? list.filter(n => n !== name) : list.concat(name);
+            renderBaseLab();
+        }
+        function renderBaseLab() {
+            const avail = document.getElementById('baseAvail');
+            if (!avail) return;
+            document.querySelectorAll('#basePosSeg button').forEach(b => b.classList.toggle('active', b.textContent === basePos));
+            const q = String(document.getElementById('baseSearch')?.value || '').toLowerCase();
+            const inBase = new Set(baseLineup.filter(Boolean).map(p => p.displayName));
+            const pool = basePool().filter(p => (basePos === 'ALL' || p.Position === basePos) && (!q || (p.displayName||'').toLowerCase().includes(q))).slice(0, 60);
+            avail.innerHTML = `<div class="dk-row dk-head"><span>Player</span><span>Opp</span><span>FP</span><span>Sal</span><span></span></div>` + pool.map(p => `<div class="dk-row ${inBase.has(p.displayName)?'in':''}"><span>${csEsc(p.displayName)} ${injAbbr(p)} <button type="button" class="pool-card-btn" onclick="event.stopPropagation();openCsDrawer('${csArg(p.baseName||p.displayName)}')">▣</button></span><span>${csEsc(p.Opponent||'')}</span><span>${(p.projectedFP||0).toFixed(1)}</span><span>$${p.salary}</span><button type="button" onclick="addToBase('${csArg(p.displayName)}')" ${inBase.has(p.displayName)?'disabled':''}>+</button></div>`).join('');
+            const slots = baseSlotNames();
+            while (baseLineup.length < slots.length) baseLineup.push(null);
+            const filled = baseLineup.filter(Boolean);
+            const sal = filled.reduce((s,p)=>s+(Number(p.salary)||0),0);
+            const fp = filled.reduce((s,p)=>s+(Number(p.projectedFP)||0),0);
+            document.getElementById('baseSalaryNote').textContent = `Rem. $${(50000-sal).toLocaleString()} · $${sal.toLocaleString()} · ${fp.toFixed(1)} FP · ${filled.length}/${slots.length}`;
+            document.getElementById('baseLineup').innerHTML = slots.map((slot,i) => {
+                const p = baseLineup[i];
+                return `<div class="dk-slot ${baseActive===i?'active':''}" onclick="baseActive=${i};renderBaseLab()"><span class="pos">${slot}</span>${p ? `<span>${csEsc(p.displayName)} ${injAbbr(p)} <button type="button" class="pool-card-btn" onclick="event.stopPropagation();openCsDrawer('${csArg(p.baseName||p.displayName)}')">▣</button></span><span>${csEsc(p.Opponent||'')}</span><span>${(p.projectedFP||0).toFixed(1)}</span><span>$${p.salary}</span><button type="button" onclick="event.stopPropagation();removeFromBase(${i})">✕</button>` : `<span class="cs-sub">Empty</span>`}</div>`;
+            }).join('');
+            document.getElementById('basePivotCards').innerHTML = baseLineup.map((p,i) => p ? `<button type="button" class="base-pivot ${baseActive===i?'active':''}" onclick="baseActive=${i};renderBaseLab()">${csEsc(p.displayName)}<span class="cs-sub">${(basePivots[p.displayName]||[]).length} pivots</span></button>` : '').join('');
+            const list = document.getElementById('basePivotList');
+            const who = document.getElementById('pivotWho');
+            const active = baseLineup[baseActive];
+            if (!active) { if (who) who.textContent = 'Click a filled slot.'; list.innerHTML = ''; return; }
+            const pq = String(document.getElementById('pivotSearch')?.value || '').toLowerCase();
+            const left = 50000 - sal;
+            const tol = Number(document.getElementById('baseTol')?.value) || 1500;
+            const chosen = basePivots[active.displayName] || [];
+            if (who) who.textContent = active.displayName + ' → ' + (chosen.length ? chosen.join(', ') : 'no pivots yet');
+            const cands = basePool().filter(p => p.displayName !== active.displayName && !inBase.has(p.displayName) && (p.Position === active.Position || (['RB','WR','TE'].includes(p.Position) && ['RB','WR','TE'].includes(active.Position))) && p.salary <= active.salary + left + tol && (!pq || p.displayName.toLowerCase().includes(pq))).slice(0, 30);
+            list.innerHTML = cands.map(p => `<label class="pivot-row"><input type="checkbox" ${chosen.includes(p.displayName)?'checked':''} onchange="toggleBasePivot('${csArg(p.displayName)}')"><span>${csEsc(p.displayName)} ${injAbbr(p)}</span><span class="cs-sub">${p.Position}</span><span>$${p.salary}</span><span>${(p.projectedFP||0).toFixed(1)}</span></label>`).join('') || '<p class="cs-note">No salary-legal pivots.</p>';
+        }
+        function generateBaseVariations() {
+            const slots = baseSlotNames();
+            const filled = baseLineup.filter(Boolean);
+            if (filled.length !== slots.length) { alert('Fill all ' + slots.length + ' slots first.'); return; }
+            const n = Math.min(150, Number(document.getElementById('baseVarCount')?.value) || 20);
+            const swaps = Math.max(1, Math.min(3, Number(document.getElementById('baseSwapCount')?.value) || 1));
+            const pivotOnly = document.getElementById('basePivotOnly')?.checked !== false;
+            const sal = filled.reduce((s,p)=>s+(Number(p.salary)||0),0);
+            const left = 50000 - sal;
+            const pivotSlots = baseLineup.map((p,i) => {
+                const names = basePivots[p.displayName] || [];
+                const options = (pivotOnly ? names : basePool().map(x => x.displayName)).map(nm => basePool().find(x => x.displayName === nm)).filter(x => x && x.displayName !== p.displayName && !filled.some(b => b.displayName === x.displayName) && x.salary <= p.salary + left);
+                return { i, options };
+            }).filter(s => s.options.length);
+            const out = []; const seen = new Set();
+            const commit = (cand) => {
+                const salary = cand.reduce((s,p)=>s+(Number(p.salary)||0),0);
+                if (salary > 50000) return;
+                const sig = cand.map(p => p.displayName).sort().join('|');
+                if (seen.has(sig)) return;
+                seen.add(sig);
+                out.push({ lineup: cand, salary, fp: cand.reduce((s,p)=>s+(Number(p.projectedFP)||0),0) });
+            };
+            if (swaps >= 1) pivotSlots.forEach(s => s.options.forEach(o => { if (out.length < n) { const c = baseLineup.slice(); c[s.i] = o; commit(c); } }));
+            if (swaps >= 2) for (let a=0;a<pivotSlots.length && out.length<n;a++) for (let b=a+1;b<pivotSlots.length && out.length<n;b++) for (const pa of pivotSlots[a].options) for (const pb of pivotSlots[b].options) { if (out.length>=n || pa.displayName===pb.displayName) continue; const c=baseLineup.slice(); c[pivotSlots[a].i]=pa; c[pivotSlots[b].i]=pb; commit(c); }
+            baseVariations = out.sort((a,b)=>b.fp-a.fp).slice(0, n);
+            document.getElementById('baseResults').innerHTML = `<p class="cs-note">${baseVariations.length} variations.</p>` + baseVariations.slice(0, 20).map((v,i) => `<div class="base-row"><span>${i+1}. ${v.lineup.map(p=>csEsc(p.displayName)).join(' · ')}</span><span class="cs-sub">$${v.salary.toLocaleString()} · ${v.fp.toFixed(1)}</span></div>`).join('') + (baseVariations.length? `<button type="button" onclick="downloadBaseVariations()">Download CSV</button>` : '');
+        }
+        function downloadBaseVariations() {
+            if (!baseVariations.length) return;
+            const header = baseNeed() === 6 ? 'CPT,FLEX,FLEX,FLEX,FLEX,FLEX' : 'QB,RB,RB,WR,WR,WR,TE,FLEX,DST';
+            const lines = [header].concat(baseVariations.map(v => v.lineup.map(p => '"'+String(p.displayName).replace(/"/g,'""')+'"').join(',')));
+            const blob = new Blob([lines.join('\n')], { type: 'text/csv' });
+            const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'base_swaps.csv'; a.click();
+        }
+
         function switchWorkspace(which) {
             const panels = {
                 builder: 'panelBuilder',
@@ -5910,7 +6286,8 @@
                 slate: 'panelSlate',
                 stacks: 'panelStacks',
                 dvp: 'panelDvp',
-                snaps: 'panelSnaps'
+                snaps: 'panelSnaps',
+                base: 'panelBase'
             };
             const buttons = {
                 builder: 'tabBtnBuilder',
@@ -5920,7 +6297,8 @@
                 slate: 'tabBtnSlate',
                 stacks: 'tabBtnStacks',
                 dvp: 'tabBtnDvp',
-                snaps: 'tabBtnSnaps'
+                snaps: 'tabBtnSnaps',
+                base: 'tabBtnBase'
             };
             if (!panels[which]) which = 'builder';
             Object.keys(panels).forEach(k => {
@@ -5939,7 +6317,8 @@
                 preview: renderGamePreview,
                 slate: renderSlatePreview,
                 dvp: renderDvpLab,
-                snaps: renderSnapsLab
+                snaps: renderSnapsLab,
+                base: renderBaseLab
             };
             const fn = paint[which];
             if (typeof fn === 'function') {
@@ -9321,6 +9700,20 @@
                 setShowdownKDst(0, 2);
             }
         }
+
+        function liveRbCount() {
+            const seen = new Map();
+            (allSlatePlayers || filteredData || []).forEach(p => {
+                if (!p || p.Position !== 'RB') return;
+                if (String(p.displayName || '').includes('(CPT)')) return;
+                const k = p.baseName || p['Player Name'];
+                if (!k) return;
+                const cur = seen.get(k);
+                if (!cur || (Number(p.projectedFP) || 0) > (Number(cur.projectedFP) || 0)) seen.set(k, p);
+            });
+            return [...seen.values()].filter(p => (Number(p.rushAtt || p['Proj Rush Att']) || 0) >= 12 || (Number(p.ownership) || 0) >= 12 || (Number(p.projectedFP) || 0) >= 12).length;
+        }
+
         function applyPreset(type) {
             const btn = event && event.target && event.target.closest ? event.target.closest('.preset-btn') : (event && event.target);
             // Toggle off if same preset clicked again
@@ -9379,18 +9772,22 @@
                 ensureClassicSlate();
                 setCount(1); setExp(80); setOwn(140, 280); setLev(5); setRand(10); setUnique(1); setMulti(1);
                 if (document.getElementById('autoStack')) document.getElementById('autoStack').checked = false;
-                resetClassicCorr({ forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true });
+                resetClassicCorr({ forcePc: true, twoPc: false, wrte: false, fadeDst: false, bring: 'none', noOppDst: true });
+                window._cashChalkBoost = true;
             } else if (type === 'classic_gpp') {
                 ensureClassicSlate();
                 setExp(40); setOwn(0, 220); setLev(45); setRand(40); setUnique(1); setMulti(20);
-                resetClassicCorr({ forcePc: true, twoPc: false, wrte: false, fadeDst: true, bring: 'none', noOppDst: true });
+                resetClassicCorr({ forcePc: true, twoPc: false, wrte: false, fadeDst: true, bring: 'rb', noOppDst: true });
+                window._cashChalkBoost = false;
+                window._gppShape = '20';
             } else if (type === 'leverage') {
                 ensureClassicSlate();
                 setExp(35); setOwn(0, 180); setLev(70); setRand(50); setUnique(1); setMulti(20);
             } else if (type === 'classic_3rb') {
                 ensureClassicSlate();
                 setExp(60); setOwn(100, 260); setLev(15); setRand(20); setUnique(2); setMulti(20);
-                setFlexEligible(['RB']);
+                if (typeof liveRbCount === 'function' && liveRbCount() >= 3) setFlexEligible(['RB']);
+                else { setFlexEligible(['RB','WR','TE']); setNextStep('3 RB skipped — fewer than 3 live backs (12+ rush att, 12+ own, or 12+ FP).'); }
                 if (document.getElementById('autoStack')) document.getElementById('autoStack').checked = false;
             } else if (type === 'favorite') {
                 ensureClassicSlate();
@@ -9454,18 +9851,21 @@
                 ensureClassicSlate();
                 setExp(80); setOwn(160, 300); setLev(0); setRand(6); setUnique(1); setMulti(1);
                 setSalaryLeftover(500);
-                resetClassicCorr({ forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none' });
+                resetClassicCorr({ forcePc: true, twoPc: false, wrte: false, fadeDst: false, bring: 'none' });
+                window._cashChalkBoost = true;
             } else if (type === 'cash_3rb') {
                 ensureClassicSlate();
                 setExp(75); setOwn(150, 290); setLev(5); setRand(8); setUnique(1); setMulti(1);
-                setFlexEligible(['RB']);
+                if (typeof liveRbCount === 'function' && liveRbCount() >= 3) setFlexEligible(['RB']);
+                else { setFlexEligible(['RB','WR','TE']); setNextStep('Cash 3RB skipped — fewer than 3 live backs.'); }
                 setSalaryLeftover(500);
                 resetClassicCorr({ forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none' });
             } else if (type === 'cash_eat_chalk') {
                 ensureClassicSlate();
                 setExp(80); setOwn(170, 310); setLev(0); setRand(5); setUnique(1); setMulti(1);
                 setSalaryLeftover(500);
-                resetClassicCorr({ forcePc: false, twoPc: false, wrte: false, fadeDst: false, bring: 'none' });
+                resetClassicCorr({ forcePc: true, twoPc: false, wrte: false, fadeDst: false, bring: 'none' });
+                window._cashChalkBoost = true;
                 tagChalkForCash();
             } else if (type === 'gpp_milly') {
                 ensureClassicSlate();
@@ -10119,7 +10519,11 @@
                 const playerOk = !selectedPlayers.length || selectedPlayers.includes(row.baseName);
                 const searchOk = !q || row.displayName.toLowerCase().includes(q) || row.baseName.toLowerCase().includes(q)
                     || (row.Team || '').toLowerCase().includes(q);
-                return posOk && teamOk && playerOk && searchOk;
+                const inj = typeof injuryFor === 'function' ? injuryFor(row) : null;
+                const st = String(inj && inj.status || '');
+                const hard = document.getElementById('excludeInjured')?.checked !== false && /out|doubt|injured reserve|\bir\b|pup/i.test(st);
+                const qOff = document.getElementById('includeQuestionable')?.checked === false && /question/i.test(st);
+                return posOk && teamOk && playerOk && searchOk && !hard && !qOff;
             });
 
             if (sortColumn) {
@@ -10188,7 +10592,10 @@
                     <td><span class="deselect-icon" style="color:${color}" onclick="toggleDeselect('${safeName}')">${icon}</span></td>
                     <td class="player-name-cell">
                         <div class="player-prio-wrap">
-                            <span onclick="openStackSuggest('${safeName}')" oncontextmenu="showPlayerMenu(event, '${safeName}')" title="Click = stack partners • Right-click = actions" style="cursor:pointer;">${row.displayName}${badges}</span>
+                            <span class="pool-name-row">
+                                <span onclick="openStackSuggest('${safeName}')" oncontextmenu="showPlayerMenu(event, '${safeName}')" title="Click = stack partners • Right-click = actions" style="cursor:pointer;">${row.displayName}${injAbbr(row)}${badges}</span>
+                                <button type="button" class="pool-card-btn" title="Open cheat sheet profile" onclick="event.stopPropagation();openCsDrawer('${(row.baseName||row.displayName).replace(/'/g,"\\'").replace(/ \(CPT\)$/,'')}')">▣</button>
+                            </span>
                             <select title="Exposure tier — boosts optimizer weight &amp; sets min/max exposure (works with 0 projection)" onchange="playerActionTarget='${safeName}'; setPlayerPriority(this.value)">
                                 <option value="" ${!prioKey?'selected':''}>— Exposure tier</option>
                                 <option value="core" ${prioKey==='core'?'selected':''}>Core Play 30–40%</option>
@@ -10632,23 +11039,24 @@
             } else {
                 const qb = pcs.find(p => posOf(p) === 'QB');
                 if (qb && !pcs.some(p => ['WR','TE'].includes(posOf(p)) && teamOf(p) === teamOf(qb))) score -= 15;
+                if (qb) {
+                    const opp = (pool.find(x => x.baseName === qb.baseName) || {}).Opponent;
+                    if (opp && pcs.some(p => posOf(p) === 'RB' && teamOf(p) === opp)) score += 2.5;
+                }
+                if (cash) {
+                    const chalkRb = pcs.filter(p => posOf(p) === 'RB' && (Number(p.ownership) || 0) >= 15).length;
+                    score += chalkRb * 1.2;
+                }
             }
             return score;
         }
         function rankAndTrimLineups() {
             if (!generatedLineups || !generatedLineups.length) return;
-            const mode = window._buildMode || window._activeRecipe || activePreset || '';
-            const cashish = /cash|chalk|optimal|floor|doubleup|sd_cash/i.test(mode) || Number(multiEntryTarget) <= 1;
             generatedLineups.forEach(lu => { lu._score = scoreBuiltLineup(lu); });
             generatedLineups.sort((a,b) => (b._score - a._score) || ((b.totalPoints||0) - (a.totalPoints||0)));
-            const bestPts = Math.max(...generatedLineups.map(l => Number(l.totalPoints) || 0));
-            if (cashish && bestPts > 0) {
-                const floor = bestPts * 0.92;
-                const kept = generatedLineups.filter(l => (Number(l.totalPoints) || 0) >= floor && l._score > -100);
-                if (kept.length) generatedLineups = kept;
-            } else {
-                generatedLineups = generatedLineups.filter(l => l._score > -100);
-            }
+            // Drop only illegal / junk builds. Do not cut a requested 150 down to stay near one optimal score.
+            const good = generatedLineups.filter(l => l._score > -100 && l.proper !== false);
+            generatedLineups = good.length ? good : generatedLineups.filter(l => l._score > -100);
             if (generatedLineups.length > numLineups) generatedLineups = generatedLineups.slice(0, numLineups);
         }
 
@@ -11111,6 +11519,10 @@
                         : (Number(player._flexOwn ?? player.ownership) || 0);
                     adjustedPoints += own * 0.35;
                 }
+                if (window._cashChalkBoost && !isShowdown && player.Position === 'RB') {
+                    const own = Number(player.ownership) || 0;
+                    if (own >= 12) adjustedPoints += Math.min(4, own * 0.08);
+                }
 
                 // Boost players still needing min exposure (stronger for higher exposure tiers)
                 if ((playerCounts[displayName] || 0) < minReq && currentGenerated < numLineups) {
@@ -11397,12 +11809,15 @@
 
             // Classic recipe rules: if QB is used, require extra same-team / same-game pieces
             if (!isShowdown) {
+                const wantForcePc = document.getElementById('classicForcePassStack')?.checked;
                 const wantWrTe = document.getElementById('classicQbWrTe')?.checked;
-                const wantTwoPc = document.getElementById('classicQbTwoPc')?.checked;
+                let wantTwoPc = document.getElementById('classicQbTwoPc')?.checked;
                 const fadeGame = document.getElementById('classicFadeGameDst')?.checked;
-                const bringKind = document.getElementById('classicBringBack')?.value || 'none';
+                let bringKind = document.getElementById('classicBringBack')?.value || 'none';
                 const bringMin = Math.max(1, Math.min(2, parseInt(document.getElementById('classicBringBackMin')?.value) || 1));
-                if (wantWrTe || wantTwoPc || fadeGame || (bringKind && bringKind !== 'none')) {
+                const bigField = !/cash|chalk|optimal|floor|doubleup/i.test(String(window._buildMode || window._activeRecipe || activePreset || '')) && ((Number(multiEntryTarget) || 0) >= 100 || (Number(numLineups) || 0) >= 100);
+                if (bigField) { wantTwoPc = true; if (!bringKind || bringKind === 'none') bringKind = 'rb'; }
+                if (wantForcePc || wantWrTe || wantTwoPc || fadeGame || (bringKind && bringKind !== 'none')) {
                     const teams = [...new Set(genPool().map(p => p.Team))];
                     teams.forEach(team => {
                         const qbVars = Object.keys(model.variables).filter(v => {
@@ -11425,6 +11840,11 @@
                             const cName = `classic_2pc_${team}`;
                             model.constraints[cName] = { min: 0 };
                             qbVars.forEach(v => model.variables[v][cName] = -2);
+                            pcVars.forEach(v => model.variables[v][cName] = 1);
+                        } else if (wantForcePc && pcVars.length) {
+                            const cName = `classic_1pc_${team}`;
+                            model.constraints[cName] = { min: 0 };
+                            qbVars.forEach(v => model.variables[v][cName] = -1);
                             pcVars.forEach(v => model.variables[v][cName] = 1);
                         }
                         if (wantWrTe) {
@@ -11454,6 +11874,10 @@
                                 model.constraints[cName] = { min: 0 };
                                 qbVars.forEach(v => model.variables[v][cName] = -bringMin);
                                 bbVars.forEach(v => model.variables[v][cName] = 1);
+                                bbVars.forEach(v => {
+                                    const p = genPool().find(x => x.baseName === v.replace(/_WR$|_FLEX$|_TE$|_RB$|_QB$|_DST$|_Captain$/, ''));
+                                    if (p && p.Position === 'RB' && model.variables[v]) model.variables[v].points = (Number(model.variables[v].points) || 0) + 2.5;
+                                });
                             }
                         }
                         if (fadeGame) {
@@ -11843,7 +12267,8 @@
                     else lineup.flex.push(toLu(player));
                 } else {
                     if (!selectedBySlot[slot]) selectedBySlot[slot] = [];
-                    selectedBySlot[slot].push({ name: player.displayName, id: player.id, baseName: player.baseName, salary: player.salary, projectedFP: player.projectedFP, ownership: player.ownership });
+                    const ts = player.gameStartTime && typeof player.gameStartTime.getTime === 'function' ? player.gameStartTime.getTime() : 0;
+                    selectedBySlot[slot].push({ name: player.displayName, id: player.id, baseName: player.baseName, salary: player.salary, projectedFP: player.projectedFP, ownership: player.ownership, position: player.Position, startTs: ts });
                 }
                 totalSalary += player.salary;
                 totalPoints += player.projectedFP;
@@ -11867,6 +12292,14 @@
                 if (selectedBySlot.TE?.[0]) lineup.TE = selectedBySlot.TE[0];
                 if (selectedBySlot.FLEX?.[0]) lineup.FLEX = selectedBySlot.FLEX[0];
                 if (selectedBySlot.DST?.[0]) lineup.DST = selectedBySlot.DST[0];
+                const skillSlots = ['RB1','RB2','WR1','WR2','WR3','TE','FLEX'];
+                const entries = skillSlots.map(s => ({ slot: s, p: lineup[s] })).filter(e => e.p && e.p.startTs);
+                const latest = entries.slice().sort((a,b) => (b.p.startTs||0) - (a.p.startTs||0))[0];
+                if (latest && latest.slot !== 'FLEX' && lineup.FLEX && ['RB','WR','TE'].includes(String(latest.p.position||'').toUpperCase())) {
+                    const flex = lineup.FLEX;
+                    lineup.FLEX = latest.p;
+                    lineup[latest.slot] = flex;
+                }
             } else {
                 lineup.flex.sort((a,b) => b.salary - a.salary);
             }
@@ -13506,7 +13939,7 @@
 
             rankAndTrimLineups();
             if (generatedLineups.length < numLineups) {
-                logMessages.push(`Kept ${generatedLineups.length} of ${numLineups}. Lineups more than 8% below the best projected build were not added.`);
+                logMessages.push(`Kept ${generatedLineups.length} of ${numLineups}. Junk builds were dropped. The field is ranked by score, not cut to one optimal.`);
             }
             updateLineupTable();
             document.getElementById('lineupTableContainer').style.display = 'block';
@@ -14569,8 +15002,11 @@
             if (!row.headshot) row.headshot = playerHeadshot(row);
             return row;
         }
+        let headshotIndex = new Map();
         function playerHeadshot(row) {
             if (!row) return '';
+            const cached = headshotIndex.get(normalizeName(csName(row) || row.baseName || row['Player Name'] || ''));
+            if (cached) return cached;
             const keys = ['headshot', 'Headshot URL', 'HeadshotURL', 'Player Image', 'Image', 'photo', 'Photo'];
             for (const k of keys) {
                 const v = row[k];
@@ -14722,6 +15158,7 @@
                 refreshViews();
             } catch (e) { console.warn('Game logs deferred load failed', e); }
             Promise.allSettled([
+                loadHeadshots(),
                 loadSnapCounts(),
                 loadRoutesOptional(),
                 loadPlayerNews(),
@@ -14757,6 +15194,16 @@
             ];
             for (const k of keys) if (gameResultIndex.has(k)) return gameResultIndex.get(k);
             return null;
+        }
+        function injAbbr(p) {
+            const inj = typeof injuryFor === 'function' ? injuryFor(p) : null;
+            if (!inj || !inj.status) return '';
+            const s = String(inj.status);
+            if (/active|probable/i.test(s)) return '';
+            const cls = /out/i.test(s) ? 'out' : /doubt/i.test(s) ? 'doubt' : /question/i.test(s) ? 'q' : 'out';
+            const tag = /out/i.test(s) ? 'O' : /doubt/i.test(s) ? 'D' : /question/i.test(s) ? 'Q' : (/\bir\b|reserve/i.test(s) ? 'IR' : '');
+            if (!tag) return '';
+            return `<span class="cs-inj ${cls}" title="${csEsc(s)}">${tag}</span>`;
         }
         function injuryFor(p) {
             const keys = [normalizeName(csName(p)), normalizeName(p.baseName || ''), normalizeName(p.displayName || '')];
@@ -16032,6 +16479,7 @@
                         <div class="cs-stat"><div class="k">DVP</div><div class="v">${dvp ? '#'+dvp.rank+' / '+dvp.of : '—'}</div></div>
                     </div>
                     <p class="dvp-detail">${dvp ? `${csEsc(csOpp(p)||'Opp')} allow <strong>${dvp.avg.toFixed(1)} DK FP/${pos}</strong> per game (#${dvp.rank} of ${dvp.of}, 1 = easiest). Avg line: ${dvp.tgt? dvp.tgt.toFixed(1)+' tgt · ':''}${dvp.rec? dvp.rec.toFixed(1)+' rec · ':''}${pos==='QB' ? (dvp.passYds||0).toFixed(0)+' pass yds · ' : (dvp.recYds||0).toFixed(0)+' rec yds · '}${(dvp.rushYds||0).toFixed(0)} rush yds · ${(dvp.td||0).toFixed(2)} TD.` : dvpTxt}</p>
+                    ${csOpp(p) ? `<button type="button" class="ghost" onclick="openDvpPopup('${csArg(csOpp(p))}','${pos}')">Open ${csEsc(csOpp(p))} DVP · who faced them</button>` : ''}
                     ${lv ? `<p class="cs-reason">${csEsc(lv.reason)}</p>` : ''}
                     ${inj ? `<p class="cs-reason"><strong>Injury:</strong> ${csEsc(inj.status)}${inj.comment ? ' — '+csEsc(inj.comment) : ''}</p>` : ''}
                     <h4 style="margin:0.7rem 0 0.3rem;">News</h4>
@@ -17013,6 +17461,36 @@
         }
 
     </script>
+
+<script>
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var token = params.get("access");
+  var endpoint =
+    "https://www.ninetofivesports.com/_functions/checkAccess?token=" +
+    encodeURIComponent(token || "");
+
+  function deny() {
+    document.body.innerHTML =
+      '<div style="font-family:Inter,system-ui,sans-serif;background:#070b14;color:#e7ecf5;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center">' +
+      "<div><h1 style='margin:0 0 8px'>NineToFive Paid Members Only</h1>" +
+      "<p style='color:#8b93a7'>This builder is for active 925 members.</p>" +
+      "<p><a href='https://www.ninetofivesports.com/plans-pricing' style='color:#2E8DA1'>Become a Member</a></p></div></div>";
+  }
+
+  if (!token) {
+    deny();
+    return;
+  }
+
+  fetch(endpoint)
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      if (!data || data.ok !== true) deny();
+    })
+    .catch(function () { deny(); });
+})();
+</script>
 
 </body>
 </html>
