@@ -1,56 +1,56 @@
 Player,Position,Team,Opp,FF Avg,FG Avg,FGA Avg,FPTS Avg,FR Avg,FUM_LOST Avg,INT Avg,PA Avg,PASS_ATT Avg,PASS_CMP Avg,PASS_TD Avg,PASS_YDS Avg,REC Avg,REC_TD Avg,REC_YDS Avg,RUSH_ATT Avg,RUSH_TD Avg,RUSH_YDS Avg,SACK Avg,SAFETY Avg,TD Avg,XPT Avg,YDS_AGN Avg,DraftKings,FanDuel,PrizePicks,Underdog,Fav,Spread,O/U,Match Title (Underdog),Game Short Title (Underdog),Venue Name (Underdog),Venue Type (Underdog),Broadcasts (Underdog),Player Salary,Player Image,Tournament,Game Start Time
-Josh Allen,QB,BUF,,,,,25.6,,0.2,0.7,,31,20.8,1.8,258.2,,,,7.7,0.9,41.4,,,,,,26.17,25.97,26.17,26.17,,,,,,,,,,,,
-Brock Purdy,QB,SF,,,,,22.2,,0.2,0.54,,30.62,21.285,2.255,248.65,,,,4.5,0.355,18.17,,,,,,22.17,21.97,22.17,22.17,,,,WAS @ SF,Commanders @ 49ers,Levi's Stadium,outdoor,ABC/ESPN,16200,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,WAS @ SF,10/19/2026
-Matthew Stafford,QB,LAR,,,,,20.9,,0.2,0.7,,36,23.3,2.4,292,,,,1.6,0,4.1,,,,,,20.79,20.59,20.79,20.79,,,,,,,,,,,,
-Drake Maye,QB,NE,,,,,20.7,,0.2,0.59,,31,20.595,1.48,237.99,,,,4.56,0.37,29.395,,,,,,19.81,19.61,19.81,19.81,,,,NE @ CHI,Patriots @ Bears,Soldier Field,outdoor,Prime,6500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,NE @ CHI,10/22/2026
-Jordan Love,QB,GB,,,,,20.5,,0.2,0.6,,35.5,23.5,2.2,288,,,,2.1,0.1,8.5,,,,,,20.97,20.77,20.97,20.97,,,,,,,,,,,,
-Jayden Daniels,QB,WAS,,,,,19,,0.1,0.52,,30.515,19.23,1.42,206.29,,,,6.71,0.38,37.35,,,,,,19.33,19.23,19.33,19.33,,,,WAS @ SF,Commanders @ 49ers,Levi's Stadium,outdoor,ABC/ESPN,15000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,WAS @ SF,10/19/2026
-Dak Prescott,QB,DAL,,,,,18.8,,0.2,0.6,,37,24.8,1.8,263.5,,,,2.9,0.1,12.8,,,,,,18.82,18.62,18.82,18.82,,,,,,,,,,,,
+Josh Allen,QB,BUF,,,,,25.6,,0.2,0.7,,31,20.8,1.8,258.2,,,,7.7,0.9,41.3,,,,,,26.16,25.96,26.16,26.16,,,,,,,,,,,,
+Brock Purdy,QB,SF,,,,,22,,0.2,0.545,,30.65,21.015,2.25,250.16,,,,4.505,0.355,17.99,,,,,,22.19,21.99,22.19,22.19,,,,WAS @ SF,Commanders @ 49ers,Levi's Stadium,outdoor,ABC/ESPN,16200,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,WAS @ SF,10/19/2026
+Matthew Stafford,QB,LAR,,,,,20.9,,0.2,0.7,,36,23.3,2.4,292,,,,1.6,0,4.1,,,,,,20.79,20.59,20.79,20.79,,,,,,,,,6400,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,LAR @ LV,
+Drake Maye,QB,NE,,,,,20.7,,0.2,0.595,,31.055,20.585,1.505,240.38,,,,4.67,0.36,29.54,,,,,,19.95,19.75,19.95,19.95,,,,NE @ CHI,Patriots @ Bears,Soldier Field,outdoor,Prime,6500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,NE @ CHI,10/22/2026
+Jordan Love,QB,GB,,,,,20.5,,0.2,0.6,,35.5,23.5,2.2,288,,,,2.1,0.1,8.5,,,,,,20.97,20.77,20.97,20.97,,,,,,,,,6000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,GB @ DET,
+Jayden Daniels,QB,WAS,,,,,19.1,,0.1,0.515,,30.62,19.24,1.4,207.39,,,,6.965,0.38,37.125,,,,,,19.27,19.17,19.27,19.27,,,,WAS @ SF,Commanders @ 49ers,Levi's Stadium,outdoor,ABC/ESPN,15000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,WAS @ SF,10/19/2026
+Dak Prescott,QB,DAL,,,,,18.8,,0.2,0.6,,37,24.8,1.8,263.7,,,,2.9,0.1,12.8,,,,,,18.83,18.63,18.83,18.83,,,,,,,,,,,,
 Patrick Mahomes II,QB,KC,,,,,18.5,,0.1,0.8,,32.1,20.4,1.7,237.5,,,,4,0.2,20.3,,,,,,18.63,18.53,18.63,18.63,,,,,,,,,,,,
-Caleb Williams,QB,CHI,,,,,17.9,,0.2,0.56,,32.57,20.575,1.55,243.1,,,,5.2,0.345,17.815,,,,,,19.02,18.82,19.02,19.02,,,,NE @ CHI,Patriots @ Bears,Soldier Field,outdoor,Prime,6300,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,NE @ CHI,10/22/2026
-Tyler Shough,QB,NO,,,,,17.7,,0.2,0.8,,35.5,24,1.5,239.9,,,,4.1,0.365,19.4,,,,,,18.73,18.53,18.73,18.73,,,,n/a,n/a,n/a,n/a,n/a,,,,10/25/2026
-Bijan Robinson,RB,ATL,,,,,19.3,,0.1,,,,,,,3.9,0.2,38.9,18.8,0.8,98.6,,,,,,23.55,21.5,23.55,23.55,,,,,,,,,,,,
-Jonathan Taylor,RB,IND,,,,,18.2,,0.1,,,,,,,2.8,0.1,22.7,21.3,1.1,90,,,,,,21.17,19.67,21.17,21.17,,,,,,,,,,,,
-Kenneth Walker III,RB,KC,,,,,17.9,,0.1,,,,,,,3.2,0.2,25.5,20.3,0.8,95.3,,,,,,21.18,19.48,21.18,21.18,,,,,,,,,,,,
-Kyren Williams,RB,LAR,,,,,16.8,,0.1,,,,,,,3.2,0.2,24.7,16.5,0.9,81.2,,,,,,20.29,18.59,20.29,20.29,,,,,,,,,,,,
-Derrick Henry,RB,BAL,,,,,16.5,,0.1,,,,,,,1.3,0.06222222222,11,20.8,0.4977777778,102.2,,,,,,15.88,15.13,15.88,15.88,,,,n/a,n/a,n/a,n/a,n/a,,,,10/25/2026
-Christian McCaffrey,RB,SF,,,,,15.9,,0.1,,,,,,,4.53,0.119,39.13,14.575,0.476,61.145,,,,,,18.03,15.66,18.03,18.03,,,,WAS @ SF,Commanders @ 49ers,Levi's Stadium,outdoor,ABC/ESPN,17700,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,WAS @ SF,10/19/2026
-James Cook III,RB,BUF,,,,,15.8,,0.1,,,,,,,1.7,0.1,13,18,0.7,97.1,,,,,,17.41,16.46,17.41,17.41,,,,,,,,,,,,
-Chuba Hubbard,RB,CAR,,,,,13.4,,0.1,,,,,,,2.3,0.2,14.9,19.1,0.5,78.7,,,,,,15.76,14.51,15.76,15.76,,,,,,,,,,,,
-Javonte Williams,RB,DAL,,,,,13.3,,0.1,,,,,,,2.6,0.1,13.6,16.7,0.8,65.4,,,,,,15.8,14.4,15.8,15.8,,,,,,,,,,,,
-Jaylen Warren,RB,PIT,,,,,12.6,,0.1,,,,,,,3.5,0.198,31,15.1,0.297,70,,,,,,16.47,14.62,16.47,16.47,,,,,,,,,,,,
-Puka Nacua,WR,LAR,,,,,16.1,,0,,,,,,,7.6,0.7,108.9,0.7,0.1,4.4,,,,,,23.73,19.93,23.73,23.73,,,,,,,,,,,,
-Jaxon Smith-Njigba,WR,SEA,,,,,14.2,,0,,,,,,,6.8,0.7,99.4,0.4,0,2.2,,,,,,21.16,17.76,21.16,21.16,,,,,,,,,,,,
-Christian Watson,WR,GB,,,,,13.1,,0,,,,,,,5.1,0.7,86,0.1,0,0.3,,,,,,17.93,15.38,17.93,17.93,,,,,,,,,,,,
-CeeDee Lamb,WR,DAL,,,,,12.4,,0,,,,,,,7.1,0.6,88.7,0.4,0,1.3,,,,,,19.7,16.15,19.7,19.7,,,,,,,,,,,,
-Drake London,WR,ATL,,,,,11.9,,0,,,,,,,5.7,0.4,95.3,0.3,0,1.1,,,,,,17.74,14.89,17.74,17.74,,,,,,,,,,,,
-Nico Collins,WR,HOU,,,,,11.7,,0,,,,,,,5.9,0.6,82.9,0.2,0,1.1,,,,,,17.9,14.95,17.9,17.9,,,,,,,,,,,,
-Davante Adams,WR,LAR,,,,,11.7,,0,,,,,,,4.5,0.7,74.5,0,0,0,,,,,,16.15,13.9,16.15,16.15,,,,,,,,,,,,
-Mike Evans,WR,SF,,,,,11.3,,0,,,,,,,5.515,0.51,72.15,0,0,0,,,,,,15.79,13.03,15.79,15.79,,,,WAS @ SF,Commanders @ 49ers,Levi's Stadium,outdoor,ABC/ESPN,14400,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,WAS @ SF,10/19/2026
-Chris Olave,WR,NO,,,,,10.9,,0,,,,,,,6.5,0.445,83.5,0.1,0,0.3,,,,,,17.55,14.3,17.55,17.55,,,,n/a,n/a,n/a,n/a,n/a,,,,10/25/2026
-Matthew Golden,WR,GB,,,,,10.1,,0,,,,,,,4.7,0.5,71.8,0.3,0,1.5,,,,,,15.03,12.68,15.03,15.03,,,,,,,,,,,,
-Brock Bowers,TE,LV,,,,,10.8,,0,,,,,,,6.2,0.6,69.5,,,,,,,,,16.75,13.65,16.75,16.75,,,,,,,,,,,,
-George Kittle,TE,SF,,,,,10.2,,0,,,,,,,5.835,0.475,65.675,,0,,,,,,,15.25,12.34,15.25,15.25,,,,n/a,n/a,n/a,n/a,n/a,12300,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,WAS @ SF,10/19/2026
-Trey McBride,TE,ARI,,,,,9.2,,0,,,,,,,7.3,0.5,62,,,,,,,,,16.5,12.85,16.5,16.5,,,,,,,,,,,,
-Isaiah Likely,TE,NYG,,,,,8.5,,0,,,,,,,5.4,0.5,52.6,,,,,,,,,13.66,10.96,13.66,13.66,,,,,,,,,,,,
-Travis Kelce,TE,KC,,,,,8.4,,0,,,,,,,4.9,0.4,61.6,,,,,,,,,13.46,11.01,13.46,13.46,,,,,,,,,,,,
-Tucker Kraft,TE,GB,,,,,8.3,,0,,,,,,,4.7,0.4,57.1,,,,,,,,,12.81,10.46,12.81,12.81,,,,,,,,,,,,
+Caleb Williams,QB,CHI,,,,,17.9,,0.2,0.555,,33.545,20.6,1.565,240.28,,,,4.375,0.35,17.92,,,,,,19.01,18.81,19.01,19.01,,,,NE @ CHI,Patriots @ Bears,Soldier Field,outdoor,Prime,6300,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,NE @ CHI,10/22/2026
+Tyler Shough,QB,NO,,,,,17.7,,0.2,0.8,,35.5,24,1.5,240.1,,,,4.1,0.385,19.4,,,,,,18.85,18.65,18.85,18.85,,,,n/a,n/a,n/a,n/a,n/a,,,,10/25/2026
+Bijan Robinson,RB,ATL,,,,,19.3,,0.1,,,,,,,3.9,0.2,38.9,18.8,0.8,98.6,,,,,,23.55,21.5,23.55,23.55,,,,,,,,,8500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,SF @ ATL,
+Jonathan Taylor,RB,IND,,,,,18.2,,0.1,,,,,,,2.8,0.04291666667,22.7,21.3,0.4720833333,90,,,,,,17.06,15.56,17.06,17.06,,,,n/a,n/a,n/a,n/a,n/a,8000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,IND @ MIN,10/25/2026
+Kenneth Walker III,RB,KC,,,,,17.9,,0.1,,,,,,,3.2,0.107,25.6,20.3,0.428,95.3,,,,,,18.4,16.7,18.4,18.4,,,,n/a,n/a,n/a,n/a,n/a,,,,10/25/2026
+Kyren Williams,RB,LAR,,,,,16.8,,0.1,,,,,,,3.2,0.1009090909,24.7,16.5,0.4540909091,81.1,,,,,,17.01,15.31,17.01,17.01,,,,n/a,n/a,n/a,n/a,n/a,7000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,LAR @ LV,10/25/2026
+Derrick Henry,RB,BAL,,,,,16.5,,0.1,,,,,,,1.3,0.06277777778,11,20.8,0.5022222222,102.2,,,,,,15.91,15.16,15.91,15.91,,,,n/a,n/a,n/a,n/a,n/a,7900,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ BAL,10/25/2026
+Christian McCaffrey,RB,SF,,,,,15.9,,0.1,,,,,,,4.995,0.118,39.13,14.58,0.472,61.09,,,,,,18.46,15.86,18.46,18.46,,,,WAS @ SF,Commanders @ 49ers,Levi's Stadium,outdoor,ABC/ESPN,17700,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,WAS @ SF,10/19/2026
+James Cook III,RB,BUF,,,,,15.8,,0.1,,,,,,,1.7,0.1,13,18,0.7,97,,,,,,17.4,16.45,17.4,17.4,,,,,,,,,,,,
+Chuba Hubbard,RB,CAR,,,,,13.4,,0.1,,,,,,,2.3,0.1571428571,14.9,19.1,0.3928571429,78.7,,,,,,14.86,13.61,14.86,14.86,,,,n/a,n/a,n/a,n/a,n/a,6700,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,TB @ CAR,10/25/2026
+Javonte Williams,RB,DAL,,,,,13.3,,0.1,,,,,,,2.6,0.06111111111,13.5,16.7,0.4888888889,65.4,,,,,,13.69,12.29,13.69,13.69,,,,n/a,n/a,n/a,n/a,n/a,,,,10/26/2026
+Jaylen Warren,RB,PIT,,,,,12.6,,0.1,,,,,,,3.5,0.198,31.1,15.1,0.297,70.1,,,,,,16.49,14.64,16.49,16.49,,,,n/a,n/a,n/a,n/a,n/a,,,,10/25/2026
+Puka Nacua,WR,LAR,,,,,16.1,,0,,,,,,,7.6,0.455,108.7,0.7,0.065,4.4,,,,,,22.03,18.23,22.03,22.03,,,,n/a,n/a,n/a,n/a,n/a,8400,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,LAR @ LV,10/25/2026
+Jaxon Smith-Njigba,WR,SEA,,,,,14.2,,0,,,,,,,6.8,0.465,99.4,0.4,0,2.2,,,,,,19.75,16.35,19.75,19.75,,,,n/a,n/a,n/a,n/a,n/a,,,,10/25/2026
+Christian Watson,WR,GB,,,,,13.1,,0,,,,,,,5.1,0.465,86,0.1,0,0.3,,,,,,16.52,13.97,16.52,16.52,,,,n/a,n/a,n/a,n/a,n/a,7000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,GB @ DET,10/25/2026
+CeeDee Lamb,WR,DAL,,,,,12.4,,0,,,,,,,7.1,0.46,88.7,0.4,0,1.3,,,,,,18.86,15.31,18.86,18.86,,,,n/a,n/a,n/a,n/a,n/a,,,,10/26/2026
+Drake London,WR,ATL,,,,,11.9,,0,,,,,,,5.7,0.4,95.3,0.3,0,1.1,,,,,,17.74,14.89,17.74,17.74,,,,,,,,,7500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,SF @ ATL,
+Nico Collins,WR,HOU,,,,,11.7,,0,,,,,,,5.9,0.465,82.9,0.2,0,1.1,,,,,,17.09,14.14,17.09,17.09,,,,n/a,n/a,n/a,n/a,n/a,7200,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,NYG @ HOU,10/25/2026
+Davante Adams,WR,LAR,,,,,11.7,,0,,,,,,,4.5,0.7,74.3,0,0,0,,,,,,16.13,13.88,16.13,16.13,,,,,,,,,6400,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,LAR @ LV,
+Mike Evans,WR,SF,,,,,11.3,,0,,,,,,,5.03,0.505,66.98,0,0,0,,,,,,14.76,12.24,14.76,14.76,,,,WAS @ SF,Commanders @ 49ers,Levi's Stadium,outdoor,ABC/ESPN,14400,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,WAS @ SF,10/19/2026
+Chris Olave,WR,NO,,,,,10.9,,0,,,,,,,6.5,0.465,83.5,0.1,0,0.3,,,,,,17.67,14.42,17.67,17.67,,,,n/a,n/a,n/a,n/a,n/a,,,,10/25/2026
+Matthew Golden,WR,GB,,,,,10.1,,0,,,,,,,4.7,0.45,71.9,0.3,0,1.5,,,,,,14.74,12.39,14.74,14.74,,,,n/a,n/a,n/a,n/a,n/a,6000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,GB @ DET,10/25/2026
+Brock Bowers,TE,LV,,,,,10.8,,0,,,,,,,6.2,0.46,69.4,,0,,,,,,,15.9,12.8,15.9,15.9,,,,n/a,n/a,n/a,n/a,n/a,7700,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,LAR @ LV,10/25/2026
+George Kittle,TE,SF,,,,,10.1,,0,,,,,,,5.515,0.47,66.23,,0,,,,,,,14.96,12.2,14.96,14.96,,,,WAS @ SF,Commanders @ 49ers,Levi's Stadium,outdoor,ABC/ESPN,12300,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,WAS @ SF,10/19/2026
+Trey McBride,TE,ARI,,,,,9.2,,0,,,,,,,7.3,0.465,62,,0,,,,,,,16.29,12.64,16.29,16.29,,,,n/a,n/a,n/a,n/a,n/a,7400,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,DEN @ ARI,10/25/2026
+Isaiah Likely,TE,NYG,,,,,8.5,,0,,,,,,,5.4,0.42,52.7,,0,,,,,,,13.19,10.49,13.19,13.19,,,,n/a,n/a,n/a,n/a,n/a,5300,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,NYG @ HOU,10/25/2026
+Travis Kelce,TE,KC,,,,,8.4,,0,,,,,,,5,0.425,61.9,,0,,,,,,,13.74,11.24,13.74,13.74,,,,n/a,n/a,n/a,n/a,n/a,,,,10/25/2026
+Tucker Kraft,TE,GB,,,,,8.3,,0,,,,,,,4.7,0.425,57.1,,0,,,,,,,12.96,10.61,12.96,12.96,,,,n/a,n/a,n/a,n/a,n/a,4700,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,GB @ DET,10/25/2026
 Dalton Kincaid,TE,BUF,,,,,7,,0,,,,,,,3.8,0.3,52.8,,,,,,,,,10.88,8.98,10.88,10.88,,,,,,,,,,,,
-Juwan Johnson,TE,NO,,,,,6.7,,0,,,,,,,4.3,0.4,44.2,,,,,,,,,11.12,8.97,11.12,11.12,,,,,,,,,,,,
-Harold Fannin Jr.,TE,CLE,,,,,6.3,,0,,,,,,,4.3,0.4,40.1,,,,,,,,,10.71,8.56,10.71,10.71,,,,,,,,,,,,
-Dallas Goedert,TE,PHI,,,,,6.2,,0,,,,,,,3.9,0.4,41,,,,,,,,,10.4,8.45,10.4,10.4,,,,,,,,,,,,
+Juwan Johnson,TE,NO,,,,,6.7,,0,,,,,,,4.3,0.37,44.2,,0,,,,,,,10.94,8.79,10.94,10.94,,,,,,,,,,,,
+Harold Fannin Jr.,TE,CLE,,,,,6.3,,0,,,,,,,4.3,0.42,39.9,,0,,,,,,,10.81,8.66,10.81,10.81,,,,n/a,n/a,n/a,n/a,n/a,4200,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CLE @ TEN,10/25/2026
+Dallas Goedert,TE,PHI,,,,,6.2,,0,,,,,,,3.9,0.385,41,,0,,,,,,,10.31,8.36,10.31,10.31,,,,n/a,n/a,n/a,n/a,n/a,,,,10/26/2026
 Spencer Shrader,K,IND,,,2.2,2.5,9.5,,,,,,,,,,,,,,,,,,3,,9.6,9.6,9.6,9.6,,,,,,,,,,,,
 Eddy Pineiro,K,SF,,,1.8,2.1,8.6,,,,,,,,,,,,,,,,,,3.2,,8.6,8.6,8.6,8.6,,,,n/a,n/a,n/a,n/a,n/a,7800,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,WAS @ SF,10/19/2026
 Matt Gay,K,LV,,,1.9,2.3,8.2,,,,,,,,,,,,,,,,,,2.5,,8.2,8.2,8.2,8.2,,,,,,,,,,,,
 Harrison Butker,K,KC,,,1.8,2.3,8.2,,,,,,,,,,,,,,,,,,2.7,,8.1,8.1,8.1,8.1,,,,,,,,,,,,
 Tyler Bass,K,BUF,,,1.7,2,8.2,,,,,,,,,,,,,,,,,,3.1,,8.2,8.2,8.2,8.2,,,,,,,,,,,,
 Blake Grupe,K,LAR,,,1.7,2.2,8.1,,,,,,,,,,,,,,,,,,2.9,,8,8,8,8,,,,,,,,,,,,
-Brandon Aubrey,K,DAL,,,1.8,2.1,8,,,,,,,,,,,,,,,,,,2.6,,8,8,8,8,,,,,,,,,,,,
 Nick Folk,K,ATL,,,1.9,2.2,8,,,,,,,,,,,,,,,,,,2.4,,8.1,8.1,8.1,8.1,,,,,,,,,,,,
+Brandon Aubrey,K,DAL,,,1.8,2.1,8,,,,,,,,,,,,,,,,,,2.6,,8,8,8,8,,,,,,,,,,,,
 Dominic Zvada,K,NYG,,,1.8,2.3,7.8,,,,,,,,,,,,,,,,,,2.4,,7.8,7.8,7.8,7.8,,,,,,,,,,,,
 Trey Smack,K,GB,,,1.7,2.1,7.8,,,,,,,,,,,,,,,,,,2.7,,7.8,7.8,7.8,7.8,,,,,,,,,,,,
 BAL,DST,BAL,,0.9,,,7.7,0.5,,0.8,18.9,,,,,,,,,,,2.9,0,0.2,,297.9,7.7,7.7,7.7,7.7,,,,,,,,,,,,
-KC,DST,KC,,0.9,,,7.5,0.5,,0.8,17,,,,,,,,,,,2.6,0,0.2,,307,6.4,6.4,6.4,6.4,,,,,,,,,,,,
+KC,DST,KC,,0.9,,,7.5,0.5,,0.8,17.1,,,,,,,,,,,2.6,0,0.2,,307,6.4,6.4,6.4,6.4,,,,,,,,,,,,
 NE,DST,NE,,0.9,,,7.4,0.6,,0.7,17.9,,,,,,,,,,,2.9,0,0.2,,303.9,6.7,6.7,6.7,6.7,,,,NE @ CHI,Patriots @ Bears,Soldier Field,outdoor,Prime,,,,
 PIT,DST,PIT,,1,,,7.3,0.6,,0.9,19.5,,,,,,,,,,,2.3,0,0.2,,321.3,6.5,6.5,6.5,6.5,,,,,,,,,,,,
 LAR,DST,LAR,,0.7,,,7.1,0.4,,0.8,19.8,,,,,,,,,,,2.5,0,0.2,,296.7,7.1,7.1,7.1,7.1,,,,,,,,,,,,
