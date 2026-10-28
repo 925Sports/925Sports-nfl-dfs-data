@@ -3634,7 +3634,7 @@
                             </div>
                             <div class="sd-field">
                                 <label>Max DST as CPT</label>
-                                <input type="number" id="sdMaxDstCpt" min="0" max="150" placeholder="No cap" onchange="onSdMaxDstCptChange()" title="Hard cap on how many lineups may use a DST captain. 0 = never DST CPT.">
+                                <input type="number" id="sdMaxDstCpt" min="0" max="150" value="0" onchange="onSdMaxDstCptChange()" title="Hard cap on DST captains. 0 means never. Type a number if you want some DST captains.">
                                 <span class="sd-field-hint">0 = no DST captains. Blank = no extra cap (player Max % still applies).</span>
                             </div>
                         </div>
@@ -3682,7 +3682,7 @@
                                     <input type="checkbox" id="sdCptPassBringBack">
                                     <span class="sd-rule-text">
                                         <strong>Pass CPT → one opposing skill</strong>
-                                        <small>GPP bring-back: opp QB/WR/TE</small>
+                                        <small>Bring-back is an opposing WR, TE, or RB. Not the other QB.</small>
                                     </span>
                                 </label>
                                 <label class="sd-rule">
@@ -3725,7 +3725,7 @@
 
                         <div class="sd-panel">
                             <div class="sd-panel-title">CPT / FLEX exposure (bulk)</div>
-                            <p class="sd-panel-hint">Apply min–max to every Captain or FLEX row at once, then tighten favorites with tiers in the Player Pool.</p>
+                            <p class="sd-panel-hint">Apply min–max to every Captain or FLEX row at once, then tighten favorites with tiers. CPT mins can add up past 100%. The builder starts with the highest CPT min (tie goes to the higher projection) and gives every requested captain at least one lineup before it uses anyone else.</p>
                             <div class="sd-exp-grid">
                                 <div class="sd-exp-block">
                                     <div class="sd-exp-row">
@@ -3920,7 +3920,7 @@
                     <button type="button" class="primary" style="font-size:0.78rem;padding:0.35rem 0.7rem;" onclick="applySelectedSuggestedFP()" data-tip="Update Projected FP for checked players to the suggested values, then re-run the optimizer to chase min exposure.">Apply selected suggested FP</button>
                     <button type="button" class="primary" onclick="runLineupGeneration()" data-tip="Run the optimizer again with current settings, exposures, and recipes.">Re-run lineups</button>
                 </div>
-                <p style="font-size:0.75rem;color:var(--muted);margin:0.25rem 0 0.5rem;">Suggested FP estimates a higher projection to help hit Min % when a player is under-exposed. Check the box and Apply, then Run again.</p>
+                <p style="font-size:0.75rem;color:var(--muted);margin:0.25rem 0 0.5rem;">On Showdown, CPT % is the captain spot only and FLEX % is the flex spot only. Total % adds them. A captain min is measured against CPT %, not flex. Suggested FP is a boost to help a short min. Check Apply, then Run again.</p>
                 <div class="table-wrapper">
                     <table id="exposureComparisonTable">
                         <thead>
@@ -5064,10 +5064,9 @@
             const el = document.getElementById('sdMaxDstCpt');
             if (!el) return;
             const raw = String(el.value || '').trim();
-            if (raw === '') { showdownMaxDstCpt = null; return; }
             const n = parseInt(raw, 10);
-            showdownMaxDstCpt = Number.isFinite(n) ? Math.max(0, Math.min(150, n)) : null;
-            if (el) el.value = showdownMaxDstCpt == null ? '' : showdownMaxDstCpt;
+            showdownMaxDstCpt = Number.isFinite(n) ? Math.max(0, Math.min(150, n)) : 0;
+            el.value = showdownMaxDstCpt;
         }
         function opponentImpliedTotal(p, rows) {
             if (!p) return null;
@@ -5265,7 +5264,7 @@
         let showdownMinTeamB = 0;
         let showdownMinKDst = 0; // min Kickers + DSTs combined (Showdown / preseason)
         let showdownMaxKDst = 2; // regular-season cap; 3+ is a 1.1% top-1% event
-        let showdownMaxDstCpt = null; // null = no cap; 0 = never DST CPT
+        let showdownMaxDstCpt = 0; // 0 = never a DST captain. Type a number to allow some.
         let lineupChecked = new Set();      // checked lineup indices for export
         let abortLineupGeneration = false;
             window._sdLooseRules = false;
@@ -6890,13 +6889,14 @@
             const items = [
                 (() => { const g=(generatedLineups||[]).filter(l=>l.proper!==false).length; const b=count-g; return `Generated <strong>${count}</strong> of ${numLineups}. <strong>${g} proper</strong>${b?`, <strong>${b} need review</strong>`:''}.`; })(),
                 top ? `Highest exposures: ${top}` : 'Open the exposure table to review player %.',
+                (isSd && window._cptPlanNote) ? window._cptPlanNote : '',
                 isSd
                     ? 'Showdown check: CPT vs FLEX mix, ≥1 from each team, and K/DST count if you set a minimum.'
                     : 'Classic check: no player above your max exposure; stacks look intentional.',
                 'Primary action: <strong>Download CSV</strong> for DraftKings.',
                 'Optional: run <strong>Simulation</strong> to rank by boom % / floor, then export only checked lineups.'
             ];
-            list.innerHTML = items.map(t => `<li>${t}</li>`).join('');
+            list.innerHTML = items.filter(Boolean).map(t => `<li>${t}</li>`).join('');
             if (typeof renderRunSuggestions === 'function') renderRunSuggestions();
             box.classList.add('show');
             markChecklist('run', true);
@@ -8753,10 +8753,10 @@
                 const kd = document.getElementById('sdMinKDst');
                 if (kd) kd.value = showdownMinKDst;
             }
-            if (session.showdownMaxDstCpt !== undefined) {
-                showdownMaxDstCpt = session.showdownMaxDstCpt;
+            if (session.showdownMaxDstCpt !== undefined && session.showdownMaxDstCpt !== null) {
+                showdownMaxDstCpt = Math.max(0, Math.min(150, parseInt(session.showdownMaxDstCpt, 10) || 0));
                 const dc = document.getElementById('sdMaxDstCpt');
-                if (dc) dc.value = showdownMaxDstCpt == null ? '' : showdownMaxDstCpt;
+                if (dc) dc.value = showdownMaxDstCpt;
             }
             if (session.showdownMaxKDst != null) {
                 showdownMaxKDst = session.showdownMaxKDst;
@@ -10863,7 +10863,7 @@
                 if (flex.some(p => pos(p) === 'QB' && tm(p) === capT)) issues.push('K CPT + same-team QB');
             }
             if (on('sdCptPassBringBack') && ['QB','WR','TE'].includes(capPos)) {
-                if (!flex.some(p => ['QB','WR','TE'].includes(pos(p)) && tm(p) && tm(p) !== capT)) issues.push('pass CPT missing bring-back');
+                if (!flex.some(p => ['WR','TE','RB'].includes(pos(p)) && tm(p) && tm(p) !== capT)) issues.push('pass CPT missing bring-back');
             }
             if (on('sdCptDstStackRb') && capPos === 'DST') {
                 if (!flex.some(p => pos(p) === 'RB' && tm(p) === capT)) issues.push('DST CPT missing RB');
@@ -11492,9 +11492,12 @@
 
                 const minReq = Math.ceil((lookupExposurePct(minExposures, player, 0) || 0) / 100 * numLineups);
                 const maxInfo = playerMaxAllowed(player, playerCounts);
+                const usedNow = (isShowdown && isShowdownCaptain(player) && typeof cptUsedCount === 'function')
+                    ? cptUsedCount(player)
+                    : maxInfo.used;
                 const effectiveMax = Math.max(lookupExposurePct(minExposures, player, 0) || 0, Math.min(maxInfo.pct, relaxedMax * 100));
                 const maxAllowed = Math.floor(effectiveMax / 100 * numLineups + 1e-9);
-                if (maxInfo.used >= maxAllowed) return;
+                if (usedNow >= maxAllowed && !(isShowdown && isShowdownCaptain(player) && cptExposurePct(player) > 0 && usedNow < Math.max(1, minReq))) return;
 
                 // Objective: points with optional leverage penalty
                 // Exposure-tier priority: if projection is 0/low, use a floor so preseason favorites still get weight
@@ -11575,6 +11578,26 @@
                 if (!model.constraints[name]) model.constraints[name] = {};
                 model.constraints[name].max = 1;
             });
+
+            // Showdown: if the user set CPT mins, lock the next requested captain
+            // (highest min, then highest projection) until that share is filled.
+            // Stack and group phases keep their own captain.
+            if (isShowdown && !enforceStack && !enforceGroup && typeof nextRequestedCaptain === 'function') {
+                window._cptForceBase = null;
+                const nextCpt = nextRequestedCaptain();
+                const vCap = nextCpt && (nextCpt.baseName + '_Captain');
+                const skipped = nextCpt && window._cptFail && (window._cptFail[nextCpt.baseName] || 0) >= 8;
+                if (nextCpt && vCap && model.variables[vCap] && !skipped) {
+                    window._cptForceBase = nextCpt.baseName;
+                    Object.keys(model.variables).forEach(v => {
+                        if (v === nextCpt.baseName + '_FLEX') delete model.variables[v];
+                        else if (/_Captain$/.test(v) && v !== vCap) delete model.variables[v];
+                    });
+                    if (!model.constraints[nextCpt.baseName]) model.constraints[nextCpt.baseName] = {};
+                    model.constraints[nextCpt.baseName].min = 1;
+                    model.variables[vCap].points += 800;
+                }
+            }
 
             // Game stack: at least N players from selected game(s)
             if (selectedGames.length && gameStackMinPlayers > 0) {
@@ -12154,7 +12177,7 @@
                 });
             }
 
-            // Pass-game CPT → one opposing QB/WR/TE
+            // Pass-game CPT → one opposing WR, TE, or RB. Not the other QB.
             if (isShowdown && document.getElementById('sdCptPassBringBack')?.checked) {
                 genPool().forEach(cpt => {
                     if (cpt.slotType !== 'Captain') return;
@@ -12164,7 +12187,7 @@
                     const opp = normalizeTeam(cpt.Opponent || '');
                     const backs = genPool().filter(p =>
                         p.slotType === 'FLEX' && normalizeTeam(p.Team) === opp
-                        && ['QB', 'WR', 'TE'].includes(getUnderlyingPos(p))
+                        && ['WR', 'TE', 'RB'].includes(getUnderlyingPos(p))
                         && model.variables[`${p.baseName}_FLEX`]
                     ).map(p => `${p.baseName}_FLEX`);
                     if (!backs.length) return;
@@ -12302,6 +12325,15 @@
                 }
             } else {
                 lineup.flex.sort((a,b) => b.salary - a.salary);
+            }
+
+            if (isShowdown && lineup.captain && Array.isArray(lineup.flex) && lineup.flex.length === 5 && typeof sdSpendLeftover === 'function') {
+                const spent = sdSpendLeftover(lineup.captain, lineup.flex);
+                if (spent && spent.length === 5) {
+                    lineup.flex = spent;
+                    totalSalary = (Number(lineup.captain.salary) || 0) + spent.reduce((s, p) => s + (Number(p.salary) || 0), 0);
+                    totalPoints = (Number(lineup.captain.projectedFP) || 0) + spent.reduce((s, p) => s + (Number(p.projectedFP) || 0), 0);
+                }
             }
 
             let signature;
@@ -12889,7 +12921,7 @@
             const capTeam = sdTeamOf(cap);
             const on = (id) => !!(document.getElementById(id) && document.getElementById(id).checked);
             if (lu.totalSalary != null && lu.totalSalary > maxSalary) return false;
-            if (lu.totalSalary != null && lu.totalSalary < Math.max(0, (minSalary || 0) - (window._sdLooseRules ? 4000 : 2000))) return false;
+            if (!window._sdSkipSalary && lu.totalSalary != null && lu.totalSalary < Math.max(0, (minSalary || 0) - (window._sdLooseRules ? 4000 : 500))) return false;
             if (showdownTeamA && showdownTeamB) {
                 const nA = all.filter(p => sdTeamOf(p) === normalizeTeam(showdownTeamA)).length;
                 const nB = all.filter(p => sdTeamOf(p) === normalizeTeam(showdownTeamB)).length;
@@ -12929,7 +12961,7 @@
                 if (flex.filter(p => (posOf(p) === 'WR' || posOf(p) === 'TE') && sdTeamOf(p) === capTeam).length > 1) return false;
             }
             if (on('sdCptPassBringBack') && (capPos === 'QB' || capPos === 'WR' || capPos === 'TE')) {
-                if (!flex.some(p => (posOf(p) === 'QB' || posOf(p) === 'WR' || posOf(p) === 'TE') && sdTeamOf(p) && sdTeamOf(p) !== capTeam)) return false;
+                if (!flex.some(p => ['WR','TE','RB'].includes(posOf(p)) && sdTeamOf(p) && sdTeamOf(p) !== capTeam)) return false;
             }
             if (on('sdCptRbStackDst') && capPos === 'RB') {
                 if (!flex.some(p => posOf(p) === 'DST' && sdTeamOf(p) === capTeam)) return false;
@@ -12963,8 +12995,80 @@
             if (showdownTeamA && showdownTeamB && teams.size < 2) return false;
             return true;
         }
+        function sdPickFromBand(cand) {
+            if (!cand || !cand.length) return null;
+            const sorted = cand.slice().sort((a, b) => (Number(b.projectedFP) || 0) - (Number(a.projectedFP) || 0));
+            const top = Number(sorted[0].projectedFP) || 0;
+            const band = sorted.filter(p => (Number(p.projectedFP) || 0) >= top - 2.2).slice(0, 6);
+            if (band.length < 2) return band[0];
+            const weights = band.map(p => Math.max(0.45, (Number(p.projectedFP) || 0) - (top - 2.6)));
+            let r = Math.random() * weights.reduce((s, w) => s + w, 0);
+            for (let i = 0; i < band.length; i++) {
+                r -= weights[i];
+                if (r <= 0) return band[i];
+            }
+            return band[0];
+        }
+        function sdSpendLeftover(cap, flex) {
+            if (!cap || !flex || flex.length !== 5 || window._sdUpgrading) return flex;
+            const pool = (typeof genPool === 'function' ? genPool() : null) || allSlatePlayers || filteredData || [];
+            const flexPool = pool.filter(p => p && (p.slotType === 'FLEX' || String(p.displayName || '').endsWith(' (FLEX)')) && Number(p.salary) > 0);
+            if (!flexPool.length) return flex;
+            let cur = flex.slice();
+            const salOf = (arr) => Number(cap.salary || 0) + arr.reduce((s, p) => s + (Number(p.salary) || 0), 0);
+            const ptsOf = (arr) => (Number(cap.projectedFP) || 0) + arr.reduce((s, p) => s + (Number(p.projectedFP) || 0), 0);
+            const floor = Math.max(0, minSalary || 0);
+            window._sdUpgrading = true;
+            try {
+                for (let pass = 0; pass < 4; pass++) {
+                    const sal = salOf(cur);
+                    const pts = ptsOf(cur);
+                    const room = maxSalary - sal;
+                    if (room < 300 && sal >= floor) break;
+                    const order = cur.map((p, i) => ({ p, i })).sort((a, b) => (Number(a.p.salary) || 0) - (Number(b.p.salary) || 0));
+                    let swapped = false;
+                    for (const slot of order) {
+                        const others = cur.filter((_, i) => i !== slot.i);
+                        const used = new Set(others.map(p => p.baseName || p.name));
+                        used.add(cap.baseName || cptBare(cap));
+                        const cands = flexPool.filter(p => {
+                            const bare = p.baseName || p.displayName;
+                            if (used.has(bare) || used.has(p.displayName)) return false;
+                            const gain = (Number(p.salary) || 0) - (Number(slot.p.salary) || 0);
+                            return gain >= 300 && gain <= room + 1;
+                        }).sort((a, b) => (Number(b.projectedFP) || 0) - (Number(a.projectedFP) || 0)).slice(0, 10);
+                        for (const repl of cands) {
+                            const next = cur.slice();
+                            next[slot.i] = toLu(repl);
+                            const lu = {
+                                lineup: { captain: cap, flex: next },
+                                totalSalary: salOf(next),
+                                totalPoints: ptsOf(next)
+                            };
+                            window._sdSkipSalary = true;
+                            let ok = false;
+                            try { ok = sdLineupOk(lu, pool); } finally { window._sdSkipSalary = false; }
+                            if (!ok) continue;
+                            const dPts = (Number(lu.totalPoints) || 0) - pts;
+                            if (sal < floor) { if (dPts < -4) continue; }
+                            else if (dPts < -1.2) continue;
+                            cur = lu.lineup.flex.slice();
+                            swapped = true;
+                            break;
+                        }
+                        if (swapped) break;
+                    }
+                    if (!swapped) break;
+                }
+            } finally {
+                window._sdUpgrading = false;
+            }
+            return cur;
+        }
         function packShowdownLineup(cap, flex, lineupSet) {
             if (!cap || !flex || flex.length !== 5) return null;
+            flex = sdSpendLeftover(cap, flex) || flex;
+            if (!flex || flex.length !== 5) return null;
             const totalSalary = cap.salary + flex.reduce((s,p)=>s+p.salary,0);
             const lu = {
                 lineup: { captain: toLu(cap), flex: flex.map(toLu) },
@@ -12995,15 +13099,16 @@
             ).filter(Boolean);
             if (!cap || flex.length !== 5) return greedyBuildLineup(true, lineupSet, playerCounts);
             const used = new Set([cap.displayName, cap.baseName, ...flex.map(p => p.displayName), ...flex.map(p => p.baseName)]);
-            const nSwap = 1 + Math.floor(Math.random() * 3);
-            if (Math.random() < 0.28 && caps.length) {
-                const alt = caps.filter(p => !used.has(p.displayName) || p.baseName === cap.baseName);
-                const pick = alt[Math.floor(Math.random() * alt.length)];
-                if (pick) {
+            const nextCpt = (typeof nextRequestedCaptain === 'function') ? nextRequestedCaptain() : null;
+            const swapCpt = !!(nextCpt && cptBare(nextCpt) !== cptBare(cap));
+            if (swapCpt || (Math.random() < 0.28 && caps.length && !requestedCaptains(caps).length)) {
+                const pick = swapCpt
+                    ? (caps.find(p => cptBare(p) === cptBare(nextCpt)) || nextCpt)
+                    : caps.filter(p => !used.has(p.displayName) || p.baseName === cap.baseName)[Math.floor(Math.random() * caps.length)];
+                if (pick && cptBare(pick) !== cptBare(cap)) {
                     used.delete(cap.displayName); used.delete(cap.baseName);
                     cap = pick;
                     used.add(cap.displayName); used.add(cap.baseName);
-                    // drop same-player flex if CPT changed to that player
                     for (let i = 0; i < flex.length; i++) {
                         if (flex[i].baseName === cap.baseName) {
                             const repl = flexes.find(p => !used.has(p.displayName) && !used.has(p.baseName) && p.baseName !== cap.baseName);
@@ -13012,6 +13117,7 @@
                     }
                 }
             }
+            const nSwap = 1 + Math.floor(Math.random() * 3);
             for (let s = 0; s < nSwap; s++) {
                 const i = Math.floor(Math.random() * flex.length);
                 const room = maxSalary - cap.salary - flex.reduce((sum,p,idx)=> sum + (idx===i ? 0 : p.salary), 0);
@@ -13090,6 +13196,118 @@
                 if (typeof onShowdownSplitChange === 'function') onShowdownSplitChange();
             }
         }
+        function cptBare(p) {
+            return String((p && (p.baseName || p.name || p.displayName)) || '').replace(/\s*\((CPT|FLEX)\)\s*$/i, '').trim();
+        }
+        function cptExposurePct(p) {
+            if (!p || typeof isShowdownCaptain !== 'function' || !isShowdownCaptain(p)) return 0;
+            const keys = [];
+            if (p.displayName) keys.push(p.displayName);
+            const bare = cptBare(p);
+            if (bare) keys.push(bare + ' (CPT)');
+            for (const k of keys) {
+                if (k && Object.prototype.hasOwnProperty.call(minExposures, k)) {
+                    const n = Number(minExposures[k]);
+                    if (Number.isFinite(n) && n > 0) return n;
+                }
+            }
+            return 0;
+        }
+        function cptUsedCount(p) {
+            const bare = cptBare(p);
+            if (!bare || !generatedLineups) return 0;
+            let n = 0;
+            generatedLineups.forEach(l => {
+                const c = l && l.lineup && l.lineup.captain;
+                if (c && cptBare(c) === bare) n++;
+            });
+            return n;
+        }
+        function cptSkip(p) {
+            return ((window._cptFail && window._cptFail[p && p.baseName]) || 0) >= 8;
+        }
+        function requestedCaptains(pool) {
+            const seen = new Set();
+            const out = [];
+            (pool || []).forEach(p => {
+                if (!p || !isShowdownCaptain(p)) return;
+                if (deselectedPlayers.has(p.displayName)) return;
+                if (!(cptExposurePct(p) > 0)) return;
+                const bare = cptBare(p);
+                if (!bare || seen.has(bare)) return;
+                seen.add(bare);
+                out.push(p);
+            });
+            out.sort((a, b) => {
+                const d = cptExposurePct(b) - cptExposurePct(a);
+                if (Math.abs(d) > 0.01) return d;
+                return (Number(b.projectedFP) || 0) - (Number(a.projectedFP) || 0);
+            });
+            return out;
+        }
+        function cptSlotPlan(requested, n) {
+            const N = Math.max(0, n | 0);
+            const list = requested || [];
+            const plan = new Map();
+            if (!list.length || N <= 0) return plan;
+            const key = (p) => p.baseName || cptBare(p);
+            if (list.length >= N) {
+                list.slice(0, N).forEach(p => plan.set(key(p), 1));
+                return plan;
+            }
+            const sumMin = list.reduce((s, p) => s + cptExposurePct(p), 0);
+            if (sumMin <= 100.5) {
+                list.forEach(p => plan.set(key(p), Math.max(1, Math.round((cptExposurePct(p) / 100) * N))));
+            } else {
+                const weights = list.map(p => Math.max(0.01, cptExposurePct(p)));
+                const wsum = weights.reduce((s, x) => s + x, 0);
+                const exact = weights.map(w => (w / wsum) * N);
+                const alloc = exact.map(x => Math.max(1, Math.floor(x)));
+                let total = alloc.reduce((s, x) => s + x, 0);
+                for (let i = alloc.length - 1; i >= 0 && total > N; i--) {
+                    const cut = Math.min(alloc[i] - 1, total - N);
+                    alloc[i] -= cut;
+                    total -= cut;
+                }
+                let left = N - alloc.reduce((s, x) => s + x, 0);
+                const order = exact.map((x, i) => ({ i, frac: x - Math.floor(x) })).sort((a, b) => b.frac - a.frac || a.i - b.i);
+                order.forEach(o => { if (left > 0) { alloc[o.i]++; left--; } });
+                list.forEach((p, i) => plan.set(key(p), alloc[i]));
+            }
+            let total = 0;
+            plan.forEach(v => { total += v; });
+            if (total > N) {
+                const ranked = list.slice().reverse();
+                ranked.forEach(p => {
+                    const k = key(p);
+                    while ((plan.get(k) || 0) > 1 && total > N) {
+                        plan.set(k, plan.get(k) - 1);
+                        total--;
+                    }
+                });
+            }
+            return plan;
+        }
+        function nextRequestedCaptain() {
+            const pool = (typeof genPool === 'function' ? genPool() : null) || allSlatePlayers || filteredData || [];
+            const req = requestedCaptains(pool);
+            if (!req.length) return null;
+            const plan = cptSlotPlan(req, numLineups);
+            const short = req.filter(p => !cptSkip(p) && cptUsedCount(p) < (plan.get(p.baseName || cptBare(p)) || 0));
+            return short[0] || null;
+        }
+        function describeCptPlan() {
+            const pool = (typeof genPool === 'function' ? genPool() : null) || allSlatePlayers || filteredData || [];
+            const req = requestedCaptains(pool);
+            if (!req.length) return '';
+            const sum = req.reduce((s, p) => s + cptExposurePct(p), 0);
+            const plan = cptSlotPlan(req, numLineups);
+            const bits = req.map(p => `${cptBare(p)} ${cptExposurePct(p)}% → ${plan.get(p.baseName || cptBare(p)) || 0}`);
+            const head = sum > 100.5
+                ? `CPT mins add up to ${Math.round(sum)}%, over 100%. Highest min goes first (tie → highest projection). Each requested captain gets at least 1 lineup when the field is large enough. Unrequested captains wait until those shares are filled.`
+                : 'CPT requests: highest min first, then highest projection. Unrequested captains wait until those shares are filled.';
+            return head + ' ' + bits.join(' · ');
+        }
         function buildShowdownByRules(pool, lineupSet, playerCounts) {
             const caps = (pool || []).filter(p => typeof isShowdownCaptain === 'function' ? isShowdownCaptain(p) : (p.slotType === 'Captain'));
             const flexes = (pool || []).filter(p => p.slotType === 'FLEX' || String(p.displayName || '').endsWith(' (FLEX)'));
@@ -13125,9 +13343,10 @@
                     if (showdownMaxDstCpt === 0 || (typeof dstCptCapReached === 'function' && dstCptCapReached())) s = -999;
                 }
                 if (typeof playerMaxAllowed === 'function' && playerMaxAllowed(p, playerCounts).leftover <= 0) s = -999;
-                const need = Math.ceil(((Number(minExposures[p.displayName] ?? minExposures[p.baseName] ?? minExposures[p.name]) || 0) / 100) * Math.max(1, numLineups) - 1e-9);
-                const used = playerCounts ? (playerCounts[p.displayName] || playerCounts[p.baseName] || playerCounts[p.name] || 0) : 0;
-                if (need > used) s += 40 + (need - used) * 18;
+                const need = Math.ceil((cptExposurePct(p) / 100) * Math.max(1, numLineups) - 1e-9);
+                const used = cptUsedCount(p);
+                if (need > used) s += 80 + (need - used) * 25;
+                else if (cptExposurePct(p) <= 0 && requestedCaptains(caps).length) s -= 30;
                 return s;
             };
             const ranked = caps.slice().sort((a,b) => scoreCpt(b) - scoreCpt(a)).filter(p => scoreCpt(p) > -100);
@@ -13162,7 +13381,8 @@
                     if (!sdQbIsRusher(cap, pool) && flex.filter(p => ['WR','TE'].includes(sdUnderlyingPos(p, pool)) && sdTeamOf(p) === capTeam).length < 2) return null;
                 }
                 if (sdRuleOn('sdCptPassBringBack') && ['QB','WR','TE'].includes(capPos)) {
-                    const bb = flexOf(p => ['QB','WR','TE'].includes(sdUnderlyingPos(p, pool)) && sdTeamOf(p) && sdTeamOf(p) !== capTeam)[0];
+                    const bbPool = flexOf(p => ['WR','TE','RB'].includes(sdUnderlyingPos(p, pool)) && sdTeamOf(p) && sdTeamOf(p) !== capTeam);
+                    const bb = sdPickFromBand(bbPool);
                     if (bb) add(bb);
                 }
                 if (!window._softFillMode && sdRuleOn('sdCptRbStackDst') && capPos === 'RB') {
@@ -13223,7 +13443,7 @@
                         cand = cand.filter(p => sdUnderlyingPos(p, pool) !== 'QB' || havePc(p));
                         if (!cand.length) return null;
                     }
-                    add(cand[0]);
+                    add(sdPickFromBand(cand) || cand[0]);
                 }
                 if (document.getElementById('sdQbAnywhereStack')?.checked !== false) {
                     const all = [cap, ...flex];
@@ -13232,6 +13452,24 @@
                 }
                 return packShowdownLineup(cap, flex, lineupSet);
             };
+            const shortReq = requestedCaptains(caps).filter(p => {
+                if (cptSkip(p)) return false;
+                const plan = cptSlotPlan(requestedCaptains(caps), numLineups);
+                return cptUsedCount(p) < (plan.get(p.baseName || cptBare(p)) || 0);
+            });
+            if (shortReq.length) {
+                for (const cap of shortReq.slice(0, 6)) {
+                    const lu = tryCap(cap);
+                    if (lu) {
+                        window._cptFail = window._cptFail || {};
+                        window._cptFail[cap.baseName] = 0;
+                        return lu;
+                    }
+                    window._cptFail = window._cptFail || {};
+                    window._cptFail[cap.baseName] = (window._cptFail[cap.baseName] || 0) + 1;
+                }
+                return null;
+            }
             for (const cap of seeds) {
                 const lu = tryCap(cap);
                 if (lu) return lu;
@@ -13593,6 +13831,10 @@
             let globalRelaxed = maxExposure;
             let globalRand = Math.min(0.28, Math.max(0.12, randomnessFactorBase || 0.22));
             window._softGroups = false;
+            window._cptFail = {};
+            window._cptForceBase = null;
+            window._cptPlanNote = (isShowdown && typeof describeCptPlan === 'function') ? describeCptPlan() : '';
+            if (window._cptPlanNote) logMessages.push(window._cptPlanNote);
 
             const yieldToUI = () => new Promise(r => setTimeout(r, 0));
 
@@ -13657,6 +13899,11 @@
                     const result = solver.Solve(model);
                     if (totalAttempts % 2 === 0) await yieldToUI();
                     if (!result || !result.feasible) {
+                        if (window._cptForceBase) {
+                            window._cptFail = window._cptFail || {};
+                            window._cptFail[window._cptForceBase] = (window._cptFail[window._cptForceBase] || 0) + 1;
+                            window._cptForceBase = null;
+                        }
                         if (allowGreedy) {
                             const fb = greedyBuildLineup(isShowdown, lineupSet, playerCounts, group)
                                 || (typeof swapFillLineup === 'function' ? swapFillLineup(isShowdown, lineupSet, playerCounts) : null);
@@ -13672,7 +13919,14 @@
                     }
                     const lineup = buildLineup(result, lineupSet, isShowdown);
                     if (!validLineup(lineup)) return null;
-                    if (isShowdown && typeof sdLineupOk === 'function' && !sdLineupOk(lineup)) return null;
+                    if (isShowdown && typeof sdLineupOk === 'function' && !sdLineupOk(lineup)) {
+                        if (window._cptForceBase) {
+                            window._cptFail = window._cptFail || {};
+                            window._cptFail[window._cptForceBase] = (window._cptFail[window._cptForceBase] || 0) + 1;
+                            window._cptForceBase = null;
+                        }
+                        return null;
+                    }
                     if (enforceStack && stackCap && stackRec) {
                         const names = isShowdown
                             ? [lineup.lineup.captain?.name, ...(lineup.lineup.flex || []).map(f => f.name)]
@@ -13684,6 +13938,11 @@
                     }
                     generatedLineups.push(lineup);
                     updatePlayerCounts(lineup, playerCounts, isShowdown);
+                    if (window._cptForceBase) {
+                        window._cptFail = window._cptFail || {};
+                        window._cptFail[window._cptForceBase] = 0;
+                        window._cptForceBase = null;
+                    }
                     // Slight re-tighten after success so we don't stay fully relaxed forever
                     globalTempMin = Math.min(minSalary, globalTempMin + 500);
                     globalRand = Math.max(randomnessFactorBase, globalRand - 0.03);
@@ -13838,11 +14097,9 @@
                     updateProgress((generatedLineups.length / numLineups) * 100, `Proper · ${generatedLineups.length}/${numLineups}`);
                 }
                 if (generatedLineups.length < numLineups && isShowdown && window._buildMode !== 'optimal' && window._buildMode !== 'chalk') {
-                    const under = (genPool() || []).filter(p => (p.slotType === 'Captain' || String(p.displayName||'').endsWith(' (CPT)')) && (() => {
-                        const need = Math.ceil(((Number(minExposures[p.displayName] ?? minExposures[p.baseName] ?? minExposures[p.name]) || 0) / 100) * Math.max(1, numLineups) - 1e-9);
-                        const used = playerCounts[p.displayName] || playerCounts[p.baseName] || playerCounts[p.name] || 0;
-                        return need > used && playerMaxAllowed(p, playerCounts).leftover > 0;
-                    })());
+                    const req = requestedCaptains(genPool() || []);
+                    const plan = cptSlotPlan(req, numLineups);
+                    const under = req.filter(p => !cptSkip(p) && cptUsedCount(p) < (plan.get(p.baseName || cptBare(p)) || 0));
                     for (const cap of under) {
                         if (generatedLineups.length >= numLineups) break;
                         for (let n = 0; n < 8 && generatedLineups.length < numLineups; n++) {
@@ -14125,11 +14382,142 @@
             return { suggested, needsBoost: suggested > cur + 0.05 };
         }
 
+        function updateShowdownExposure(baseName, type, value, slot) {
+            const val = Math.min(100, Math.max(0, parseInt(value) || 0));
+            const rows = (filteredData || []).filter(p => p.baseName === baseName);
+            rows.forEach(p => {
+                const isCpt = p.slotType === 'Captain' || String(p.displayName || '').endsWith(' (CPT)');
+                if (slot === 'cpt' && !isCpt) return;
+                if (slot === 'flex' && isCpt) return;
+                if (type === 'min') minExposures[p.displayName] = val;
+                else maxExposures[p.displayName] = val;
+                p[`${type}Exposure`] = val;
+            });
+            updateTable();
+            queueSessionSave();
+            if (document.getElementById('lineupTableContainer').style.display !== 'none') {
+                const playerCounts = {};
+                filteredData.forEach(p => playerCounts[p.displayName] = 0);
+                generatedLineups.forEach(l => updatePlayerCounts(l, playerCounts, true));
+                updateExposureComparison(playerCounts, [], groupList, true, exposurePositionFilter);
+            }
+        }
+        function renderShowdownExposure(body, nLineups, position) {
+            const headRow = document.querySelector('#exposureComparisonTable thead tr');
+            if (headRow) {
+                headRow.innerHTML = '<th>Player</th><th>CPT</th><th>CPT %</th><th>FLEX</th><th>FLEX %</th><th>Total %</th><th>CPT Min</th><th>FLEX Min</th><th>Max %</th><th>Cur FP</th><th>Suggested FP</th><th>Apply</th><th>Stack Request</th><th>Stack Met</th>';
+            }
+            const bare = (n) => String(n || '').replace(/\s*\((CPT|FLEX)\)\s*$/i, '').trim();
+            const cptCounts = {};
+            const flexCounts = {};
+            (generatedLineups || []).forEach(l => {
+                const c = l && l.lineup && l.lineup.captain;
+                if (c) {
+                    const k = bare(c.baseName || c.name);
+                    if (k) cptCounts[k] = (cptCounts[k] || 0) + 1;
+                }
+                ((l && l.lineup && l.lineup.flex) || []).forEach(f => {
+                    const k = bare(f.baseName || f.name);
+                    if (k) flexCounts[k] = (flexCounts[k] || 0) + 1;
+                });
+            });
+            const byBase = new Map();
+            (filteredData || []).forEach(p => {
+                if (!p || !p.baseName) return;
+                if (!byBase.has(p.baseName)) byBase.set(p.baseName, { flex: null, cpt: null });
+                const row = byBase.get(p.baseName);
+                if (p.slotType === 'Captain' || String(p.displayName || '').endsWith(' (CPT)')) row.cpt = p;
+                else row.flex = p;
+            });
+            const rows = [];
+            byBase.forEach((pair, base) => {
+                const flex = pair.flex || pair.cpt;
+                const cpt = pair.cpt;
+                if (!flex) return;
+                const pos = String(flex.Position || (cpt && cpt.Position) || '').toUpperCase();
+                const cptN = cptCounts[base] || 0;
+                const flexN = flexCounts[base] || 0;
+                const cptMin = cpt ? (Number(minExposures[cpt.displayName] ?? cpt.minExposure) || 0) : 0;
+                const flexMin = pair.flex ? (Number(minExposures[pair.flex.displayName] ?? pair.flex.minExposure) || 0) : 0;
+                if (!cptN && !flexN && cptMin <= 0 && flexMin <= 0) return;
+                if (position === 'CPT' && !cptN && cptMin <= 0) return;
+                if (position && position !== 'CPT' && pos !== position && !(position === 'DST' && (pos === 'DEF' || pos === 'D/ST'))) return;
+                rows.push({ base, flex: pair.flex || flex, cpt, cptN, flexN, cptMin, flexMin, pos });
+            });
+            rows.sort((a, b) => (b.cptN + b.flexN) - (a.cptN + a.flexN) || b.cptN - a.cptN);
+            const esc = (s) => String(s).replace(/'/g, "\\'");
+            rows.forEach(r => {
+                const cptPct = (r.cptN / nLineups) * 100;
+                const flexPct = (r.flexN / nLineups) * 100;
+                const totalPct = cptPct + flexPct;
+                const cptShort = r.cptMin > 0 && cptPct + 0.25 < r.cptMin;
+                const flexShort = r.flexMin > 0 && flexPct + 0.25 < r.flexMin;
+                const fpRow = (cptShort && r.cpt) ? r.cpt : (r.flex || r.cpt);
+                const curFP = Math.round((Number(fpRow.projectedFP) || 0) * 10) / 10;
+                const shortPct = cptShort ? cptPct : flexPct;
+                const shortMin = cptShort ? r.cptMin : r.flexMin;
+                const { suggested, needsBoost } = (cptShort || flexShort)
+                    ? suggestFPForExposure(curFP, shortPct, shortMin)
+                    : { suggested: curFP, needsBoost: false };
+                const applyName = fpRow.displayName;
+                if (needsBoost) window._exposureFPSuggestions[applyName] = suggested;
+                const maxRow = r.flex || r.cpt;
+                const maxExp = Number(maxExposures[maxRow.displayName] ?? maxRow.maxExposure ?? 100);
+                const namesOf = (l) => {
+                    const pcs = l.lineup.captain ? [l.lineup.captain, ...(l.lineup.flex || [])] : Object.values(l.lineup || {});
+                    return pcs.map(p => bare(p && (p.baseName || p.name))).filter(Boolean);
+                };
+                const requests = [];
+                const mets = [];
+                (groupList || []).forEach(g => {
+                    const labels = [g.conditionPlayer, ...(g.players || [])].filter(Boolean).map(bare);
+                    if (!labels.includes(r.base)) return;
+                    const cond = g.conditionPlayer ? `When ${bare(g.conditionPlayer)}, ` : '';
+                    const t = g.type === 'min' ? 'At Least' : g.type === 'exact' ? 'Exactly' : 'At Most';
+                    requests.push(`${cond}${t} ${g.numPlayers} of (${(g.players || []).map(bare).join(', ')}) @${g.percentage}%`);
+                    const actual = (generatedLineups || []).filter(l => {
+                        const names = namesOf(l);
+                        if (g.conditionPlayer && !names.includes(bare(g.conditionPlayer))) return true;
+                        const c = (g.players || []).filter(pl => names.includes(bare(pl))).length;
+                        return (g.type === 'min' && c >= g.numPlayers) || (g.type === 'max' && c <= g.numPlayers) || (g.type === 'exact' && c === g.numPlayers);
+                    }).length;
+                    mets.push(actual);
+                });
+                const rowStyle = (cptShort || flexShort) ? 'background:rgba(245,158,11,0.08);' : '';
+                const flag = cptShort ? ' <span style="color:var(--warning);font-size:0.7rem;">CPT under min</span>' : (flexShort ? ' <span style="color:var(--warning);font-size:0.7rem;">FLEX under min</span>' : '');
+                const sugCell = needsBoost
+                    ? `<span style="font-weight:700;color:var(--brand-teal);">${suggested.toFixed(1)}</span>`
+                    : `<span style="color:var(--muted);">${curFP.toFixed(1)}</span>`;
+                const applyCell = needsBoost
+                    ? `<input type="checkbox" class="suggest-fp-cb" data-player="${esc(applyName)}" data-fp="${suggested}" title="Update Projected FP">`
+                    : '—';
+                body.innerHTML += `<tr style="${rowStyle}">
+                    <td>${String(r.base).replace(/&/g,'&').replace(/</g,'<')}${flag}</td>
+                    <td>${r.cptN}</td>
+                    <td>${cptPct.toFixed(1)}%</td>
+                    <td>${r.flexN}</td>
+                    <td>${flexPct.toFixed(1)}%</td>
+                    <td>${totalPct.toFixed(1)}%</td>
+                    <td><input type="number" min="0" max="100" value="${r.cptMin}" onchange="updateShowdownExposure('${esc(r.base)}','min',this.value,'cpt')"></td>
+                    <td><input type="number" min="0" max="100" value="${r.flexMin}" onchange="updateShowdownExposure('${esc(r.base)}','min',this.value,'flex')"></td>
+                    <td><input type="number" min="0" max="100" value="${maxExp}" title="Max for both CPT and FLEX" onchange="updateShowdownExposure('${esc(r.base)}','max',this.value,'both')"></td>
+                    <td>${curFP.toFixed(1)}</td>
+                    <td>${sugCell}</td>
+                    <td>${applyCell}</td>
+                    <td>${requests.length ? requests.join('; ') : '—'}</td>
+                    <td>${mets.join('; ') || '—'}</td>
+                </tr>`;
+            });
+        }
         function updateExposureComparison(playerCounts, stacks, groups, isShowdown, position = '') {
             const body = document.getElementById('exposureComparisonBody');
             body.innerHTML = '';
             window._exposureFPSuggestions = {};
             const nLineups = Math.max(1, generatedLineups.length);
+            if (isShowdown) {
+                renderShowdownExposure(body, nLineups, position);
+                return;
+            }
 
             // Dynamic headers for Showdown CPT vs FLEX
             const headRow = document.querySelector('#exposureComparisonTable thead tr');
@@ -15187,10 +15575,13 @@
         }
         function gameResultFor(g) {
             if (!g) return null;
-            const tm = String(g.team || '').toUpperCase();
+            const raw = String(g.team || '').toUpperCase();
+            const tm = (typeof TEAM_CANON !== 'undefined' && TEAM_CANON[raw]) || raw;
             const keys = [
                 [g.season, g.week, tm].join('|'),
-                [g.week, tm].join('|')
+                [g.season, g.week, raw].join('|'),
+                [g.week, tm].join('|'),
+                [g.week, raw].join('|')
             ];
             for (const k of keys) if (gameResultIndex.has(k)) return gameResultIndex.get(k);
             return null;
@@ -15328,35 +15719,57 @@
                 });
             } catch (e) { console.warn('espn injuries failed', e); }
         }
-        async function loadRecentGameResults() {
-            const year = 2026;
-            for (let week = 1; week <= 4; week++) {
-                try {
-                    const url = `https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?seasontype=2&week=${week}&dates=${year}`;
-                    const res = await fetchWithRetry(url, 1, 8000, true);
-                    const data = await res.json();
-                    (data.events || []).forEach(ev => {
-                        const comp = (ev.competitions || [])[0];
-                        if (!comp) return;
-                        const wk = Number((ev.week && ev.week.number) || week);
-                        const comps = comp.competitors || [];
-                        if (comps.length < 2) return;
-                        const rows = comps.map(c => ({
-                            team: teamAbbr(c.team && (c.team.abbreviation || c.team.displayName)) || String(c.team && c.team.abbreviation || '').toUpperCase(),
-                            score: Number(c.score) || 0,
-                            home: c.homeAway === 'home',
-                            winner: !!c.winner
-                        }));
-                        rows.forEach(r => {
-                            const opp = rows.find(x => x.team !== r.team);
-                            if (!r.team || !opp) return;
-                            const resStr = `${r.winner ? 'W' : 'L'} ${r.score}-${opp.score}`;
-                            const pack = { result: resStr, score: r.score, oppScore: opp.score, opp: opp.team, winner: r.winner };
-                            gameResultIndex.set([year, wk, r.team].join('|'), pack);
-                            gameResultIndex.set([wk, r.team].join('|'), pack);
-                        });
+        function nflRegWeekNow(year) {
+            const openers = { 2025: Date.UTC(2025, 8, 4), 2026: Date.UTC(2026, 8, 10), 2027: Date.UTC(2027, 8, 9) };
+            const start = openers[year];
+            if (!start) return 18;
+            const days = (Date.now() - start) / 86400000;
+            if (days < 0) return 0;
+            return Math.max(1, Math.min(18, Math.floor(days / 7) + 1));
+        }
+        async function ingestScoreboardWeek(year, week) {
+            const url = `https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?seasontype=2&week=${week}&dates=${year}`;
+            const res = await fetchWithRetry(url, 1, 8000, true);
+            const data = await res.json();
+            (data.events || []).forEach(ev => {
+                const comp = (ev.competitions || [])[0];
+                if (!comp) return;
+                const st = comp.status && comp.status.type;
+                if (!st || !(st.completed || st.state === 'post')) return;
+                const wk = Number((ev.week && ev.week.number) || week);
+                const comps = comp.competitors || [];
+                if (comps.length < 2) return;
+                const rows = comps.map(c => ({
+                    team: teamAbbr(c.team && (c.team.abbreviation || c.team.displayName)) || String(c.team && c.team.abbreviation || '').toUpperCase(),
+                    score: Number(c.score),
+                    winner: !!c.winner
+                })).filter(r => r.team && Number.isFinite(r.score));
+                if (rows.length < 2) return;
+                rows.forEach(r => {
+                    const opp = rows.find(x => x.team !== r.team);
+                    if (!opp) return;
+                    const won = r.score === opp.score ? null : (r.winner || r.score > opp.score);
+                    const tag = won == null ? 'T' : (won ? 'W' : 'L');
+                    const pack = { result: `${tag} ${r.score}-${opp.score}`, score: r.score, oppScore: opp.score, opp: opp.team, winner: !!won };
+                    const names = new Set([r.team, (TEAM_CANON && TEAM_CANON[r.team]) || r.team]);
+                    names.forEach(tm => {
+                        if (!tm) return;
+                        gameResultIndex.set([year, wk, tm].join('|'), pack);
+                        gameResultIndex.set([wk, tm].join('|'), pack);
                     });
-                } catch (e) { console.warn('scoreboard week failed', week, e); }
+                });
+            });
+        }
+        async function loadRecentGameResults() {
+            const jobs = [];
+            const thisYear = nflRegWeekNow(2026);
+            for (let week = 1; week <= thisYear; week++) jobs.push({ year: 2026, week });
+            for (let week = 1; week <= 18; week++) jobs.push({ year: 2025, week });
+            for (let i = 0; i < jobs.length; i += 6) {
+                const slice = jobs.slice(i, i + 6);
+                await Promise.all(slice.map(({ year, week }) => ingestScoreboardWeek(year, week).catch(e => {
+                    console.warn('scoreboard week failed', year, week, e);
+                })));
             }
         }
         function ingestGameLogs(csvText, append) {
