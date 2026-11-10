@@ -2603,7 +2603,7 @@
         .cs-dk-kpi { background: #151c2e; border: 1px solid #2a3350; border-radius: 12px; padding: 0.55rem 0.25rem; text-align: center; }
         .cs-dk-kpi .v { font-size: 1rem; font-weight: 800; }
         .cs-dk-kpi .k { font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-top: 0.15rem; }
-        .cs-dk-tabs { display: flex; gap: 0; margin: 0.35rem 0 0.85rem; border-bottom: 1px solid #2a3350; }
+        .cs-dk-tabs { display: flex; flex-wrap: wrap; gap: 0; margin: 0.35rem 0 0.85rem; border-bottom: 1px solid #2a3350; }
         .cs-dk-tabs button {
             background: transparent; border: 0; border-bottom: 2px solid transparent;
             color: #9aa6c3; border-radius: 0; padding: 0.55rem 0.85rem; font-weight: 700; cursor: pointer;
@@ -3810,8 +3810,9 @@
             <div class="card-body">
                 <div class="pool-filter-bar" id="poolFilterBar">
                     <div class="pool-search-wrap">
-                        <label class="pool-inj-toggle" title="Hide Doubtful, Out, and IR."><input type="checkbox" id="excludeInjured" checked onchange="updateTable()"> Exclude D / OUT / IR</label>
+                        <label class="pool-inj-toggle" title="Hide Doubtful, Out, and IR from the ESPN injury report."><input type="checkbox" id="excludeInjured" checked onchange="updateTable()"> Exclude D / OUT / IR</label>
                         <label class="pool-inj-toggle" title="Keep Questionable players in the pool."><input type="checkbox" id="includeQuestionable" checked onchange="updateTable()"> Include Q</label>
+                        <span id="poolHiddenNote" style="font-size:0.72rem;color:var(--warning);"></span>
                         <input type="search" id="poolSearchInput" placeholder="Search player…" autocomplete="off"
                                oninput="onPoolSearchInput(this.value)" data-tip="Filter the table by player name">
                         <label style="display:flex;align-items:center;gap:0.35rem;font-size:0.75rem;white-space:nowrap;margin:0;">
@@ -5120,16 +5121,18 @@
                     if (customProjections && customProjections[norm] && customProjections[norm]._userEdited) userEdited = true;
                 } catch (e) {}
                 if (userEdited) return;
-                const cur = Number(r.projectedFP != null ? r.projectedFP : r['Projected FP']);
-                const alreadyReal = Number.isFinite(cur) && cur > 0 && !r._dstBaseline;
-                if (alreadyReal) return;
+                const isCpt = r.slotType === 'Captain'
+                    || String(r.displayName || '').endsWith(' (CPT)')
+                    || String(r.Position || '') === 'CPT';
+                let cur = Number(r.projectedFP != null ? r.projectedFP : r['Projected FP']);
+                if (isCpt && Number.isFinite(cur) && cur > 0) cur = cur / 1.5;
+                // Sheet often leaves DST at 0 or 1. That is a placeholder, not a real projection.
+                const placeholder = !Number.isFinite(cur) || cur <= 1.05;
+                if (!placeholder && !r._dstBaseline) return;
                 const opp = normalizeTeam(r.Opponent || '');
                 let oppImpl = opp ? teamImpl.get(opp) : null;
                 if (oppImpl == null) oppImpl = opponentImpliedTotal(r, rows);
                 const base = dstBaselineFromOppImplied(oppImpl);
-                const isCpt = r.slotType === 'Captain'
-                    || String(r.displayName || '').endsWith(' (CPT)')
-                    || String(r.Position || '') === 'CPT';
                 const fp = isCpt ? Math.round(base * 15) / 10 : base;
                 r.projectedFP = fp;
                 r['Projected FP'] = isCpt ? base : fp;
@@ -5156,6 +5159,64 @@
                 applied++;
             });
             return applied;
+        }
+        function draftRoleMatches(role, slateType, game, header, date) {
+            const r = String(role || '');
+            const st = String(slateType || '');
+            const showdown = /showdown/i.test(st);
+            if (showdown !== /showdown/i.test(r)) return false;
+            if (showdown) {
+                const half = /2nd half|2h|4th|q4/i.test(st + ' ' + header);
+                const roleHalf = /2nd half|2h|4th|q4/i.test(r);
+                if (half !== roleHalf) return false;
+                const flat = r.replace(/\s+/g, '');
+                const g = String(game || '').replace(/\s+/g, '');
+                if (g && flat.includes(g)) return true;
+                const parts = String(game || '').split('@').map(s => s.trim()).filter(Boolean);
+                return parts.length === 2 && parts.every(t => r.includes(t));
+            }
+            return !!(date && r.includes(date));
+        }
+        function backfillMissingDraftables(rows, draftRows) {
+            if (!rows || !draftRows || !draftRows.length) return 0;
+            const have = new Set(rows.map(r => String(r.id || r['Draftable ID'] || '')).filter(Boolean));
+            const roles = [...new Set(rows.map(r => r.Role || r['Role']).filter(Boolean))];
+            let added = 0;
+            draftRows.forEach(d => {
+                const id = String(d['Draftable ID'] || '').trim();
+                const name = d['Player Name'] || d.Player || '';
+                if (!id || !name || have.has(id)) return;
+                const role = roles.find(r => draftRoleMatches(
+                    r,
+                    d['Slate Type'] || '',
+                    d.Game || d.Tournament || '',
+                    d['Slate Header'] || '',
+                    d.Date || ''
+                ));
+                if (!role) return;
+                const sal = parseFloat(d.Salary) || 0;
+                if (!(sal > 0)) return;
+                rows.push({
+                    'Player Name': name,
+                    Position: d.Position || '',
+                    Team: normalizeTeam(d.Team || ''),
+                    Opponent: '',
+                    Role: role,
+                    salary: sal,
+                    id,
+                    'Draftable ID': id,
+                    'Projected FP': 0,
+                    sourceProjectedFP: 0,
+                    ownership: 0,
+                    Game: d.Game || d.Tournament || '',
+                    gameStartTime: new Date(0),
+                    _draftBackfill: true
+                });
+                have.add(id);
+                added++;
+            });
+            if (added) console.log('Added', added, 'DK players missing from the sheet');
+            return added;
         }
 
         let rawData = [];
@@ -8230,10 +8291,12 @@
                 const draftCsv = draftCsvText || '';
                 const draftGameByName = new Map();
                 const draftGameByTeam = new Map();
+                window._draftRows = [];
                 if (draftCsv) {
                     Papa.parse(draftCsv, {
                         header: true, skipEmptyLines: true, dynamicTyping: true,
                         complete: (r) => {
+                            window._draftRows = r.data || [];
                             r.data.forEach(row => {
                                 const name = row['Player Name'] || row.Player || '';
                                 const rawGame = row.Tournament || row.Game || row['Match Title (Underdog)'] || '';
@@ -8418,6 +8481,7 @@
                                 }
                             });
 
+                            try { backfillMissingDraftables(rawData, window._draftRows || []); } catch (e) { console.warn('draft backfill', e); }
                             rebuildSlateRoles(rawData);
 
                             adjustedProjections = {};
@@ -10521,10 +10585,20 @@
                     || (row.Team || '').toLowerCase().includes(q);
                 const inj = typeof injuryFor === 'function' ? injuryFor(row) : null;
                 const st = String(inj && inj.status || '');
-                const hard = document.getElementById('excludeInjured')?.checked !== false && /out|doubt|injured reserve|\bir\b|pup/i.test(st);
+                const fromEspn = !inj || inj.source === 'espn' || !inj.source;
+                const hard = document.getElementById('excludeInjured')?.checked !== false && fromEspn && /\bout\b|doubt|injured reserve|\bir\b|\bpup\b/i.test(st);
                 const qOff = document.getElementById('includeQuestionable')?.checked === false && /question/i.test(st);
                 return posOk && teamOk && playerOk && searchOk && !hard && !qOff;
             });
+            const hiddenNote = document.getElementById('poolHiddenNote');
+            if (hiddenNote) {
+                const hiddenN = tempData.filter(row => {
+                    const inj = typeof injuryFor === 'function' ? injuryFor(row) : null;
+                    const st = String(inj && inj.status || '');
+                    return inj && inj.source !== 'news' && /\bout\b|doubt|injured reserve|\bir\b|\bpup\b/i.test(st);
+                }).length;
+                hiddenNote.textContent = hiddenN ? `${hiddenN} hidden (D/OUT/IR)` : '';
+            }
 
             if (sortColumn) {
                 filteredData.sort((a, b) => {
@@ -15694,9 +15768,10 @@
                         url: row.web_url || ''
                     });
                     const low = hl.toLowerCase();
-                    if (/out|doubtful|questionable|injured|ir\b|pup\b|groin|hamstring|ankle|knee|concussion/.test(low) && !injuryIndex.has(key)) {
-                        let status = /out\b/.test(low) ? 'Out' : /doubtful/.test(low) ? 'Doubtful' : /questionable/.test(low) ? 'Questionable' : 'News';
-                        injuryIndex.set(key, { status, comment: hl, date: row.published || '' });
+                    // News is display-only. Do not hide a player from a headline —
+                    // "without", "show out", and old notes were marking healthy players Out.
+                    if (/ruled out|declared out|will not play|inactive\b/.test(low) && !injuryIndex.has(key)) {
+                        injuryIndex.set(key, { status: 'News', comment: hl, date: row.published || '', source: 'news' });
                     }
                 });
             } catch (e) { console.warn('news load failed', e); }
@@ -15713,7 +15788,8 @@
                             status: item.status || (item.type && item.type.description) || 'Injured',
                             comment: item.longComment || item.shortComment || '',
                             date: item.date || '',
-                            team: team.displayName || ''
+                            team: team.displayName || '',
+                            source: 'espn'
                         });
                     });
                 });
@@ -16658,7 +16734,7 @@
         window.addEventListener('load', () => { try { luRender(); if (luState.open) luOpen(true); } catch (e) {} });
 
         function setCsDrawerTab(tab) {
-            ['ov','log','mu','ai'].forEach(id => {
+            ['ov','log','mu','news','ai'].forEach(id => {
                 const el = document.getElementById('csTab-' + id);
                 if (el) el.hidden = id !== tab;
             });
@@ -16858,6 +16934,7 @@
                     <button type="button" class="active" data-tab="ov" onclick="setCsDrawerTab('ov')">Overview</button>
                     <button type="button" data-tab="log" onclick="setCsDrawerTab('log')">Game Log</button>
                     <button type="button" data-tab="mu" onclick="setCsDrawerTab('mu')">Matchup</button>
+                    <button type="button" data-tab="news" onclick="setCsDrawerTab('news')">News</button>
                     <button type="button" data-tab="ai" onclick="setCsDrawerTab('ai')">Summary</button>
                 </div>
                 <div id="csTab-ov">
@@ -16895,10 +16972,13 @@
                     ${csOpp(p) ? `<button type="button" class="ghost" onclick="openDvpPopup('${csArg(csOpp(p))}','${pos}')">Open ${csEsc(csOpp(p))} DVP · who faced them</button>` : ''}
                     ${lv ? `<p class="cs-reason">${csEsc(lv.reason)}</p>` : ''}
                     ${inj ? `<p class="cs-reason"><strong>Injury:</strong> ${csEsc(inj.status)}${inj.comment ? ' — '+csEsc(inj.comment) : ''}</p>` : ''}
-                    <h4 style="margin:0.7rem 0 0.3rem;">News</h4>
-                    ${newsFor(p).length ? newsFor(p).map(n => `<div class="cs-news-item"><div>${csEsc(n.headline)}</div><div class="when">${csEsc(n.when)}</div>${n.desc ? `<div class="cs-note">${csEsc(n.desc).slice(0,280)}</div>` : ''}</div>`).join('') : '<p class="cs-note">No recent player news in the feed.</p>'}
                     <h4 style="margin:0.7rem 0 0.3rem;">Vs ${csEsc(csOpp(p)||'opp')}</h4>
                     ${vs.length ? logTable(vs) + `<p class="cs-note">Avg ${(vs.reduce((s,g)=>s+g.fp,0)/vs.length).toFixed(1)} DK FP in ${vs.length} game(s).</p>` : '<p class="cs-note">No logged games against this opponent.</p>'}
+                </div>
+                <div id="csTab-news" hidden>
+                    ${inj ? `<p class="cs-reason"><strong>Injury:</strong> ${csEsc(inj.status)}${inj.comment ? ' — '+csEsc(inj.comment) : ''}</p>` : '<p class="cs-note">No injury tag on the ESPN report.</p>'}
+                    <h4 style="margin:0.7rem 0 0.3rem;">News</h4>
+                    ${newsFor(p).length ? newsFor(p).map(n => `<div class="cs-news-item"><div>${n.url ? `<a href="${csEsc(n.url)}" target="_blank" rel="noopener">${csEsc(n.headline)}</a>` : csEsc(n.headline)}</div><div class="when">${csEsc(n.when)}</div>${n.desc ? `<div class="cs-note">${csEsc(n.desc)}</div>` : ''}</div>`).join('') : '<p class="cs-note">No recent player news in the feed.</p>'}
                 </div>
                 <div id="csTab-ai" hidden>
                     <h4 style="margin:0.2rem 0 0.35rem;">Summary</h4>
