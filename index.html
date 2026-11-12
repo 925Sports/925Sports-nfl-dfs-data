@@ -5175,11 +5175,17 @@
                 const parts = String(game || '').split('@').map(s => s.trim()).filter(Boolean);
                 return parts.length === 2 && parts.every(t => r.includes(t));
             }
-            return !!(date && r.includes(date));
+            // Classic: date alone is not enough. "11/15" matches the 10-game,
+            // Early, and Late roles. Only fill a role that names this game.
+            if (!(date && r.includes(date))) return false;
+            const g = String(game || '').replace(/\s+/g, '');
+            if (!g) return false;
+            return r.replace(/\s+/g, '').includes(g);
         }
         function backfillMissingDraftables(rows, draftRows) {
             if (!rows || !draftRows || !draftRows.length) return 0;
             const have = new Set(rows.map(r => String(r.id || r['Draftable ID'] || '')).filter(Boolean));
+            const haveName = new Set(rows.map(r => (r.Role || r['Role'] || '') + '|' + normalizeName(r['Player Name'] || '')));
             const roles = [...new Set(rows.map(r => r.Role || r['Role']).filter(Boolean))];
             let added = 0;
             draftRows.forEach(d => {
@@ -5194,6 +5200,8 @@
                     d.Date || ''
                 ));
                 if (!role) return;
+                const nameKey = role + '|' + normalizeName(name);
+                if (haveName.has(nameKey)) return;
                 const sal = parseFloat(d.Salary) || 0;
                 if (!(sal > 0)) return;
                 rows.push({
@@ -5213,6 +5221,7 @@
                     _draftBackfill: true
                 });
                 have.add(id);
+                haveName.add(nameKey);
                 added++;
             });
             if (added) console.log('Added', added, 'DK players missing from the sheet');
@@ -8491,7 +8500,12 @@
                             adjustedProjections = {};
                             rawData.forEach(row => {
                                 if (!adjustedProjections[row['Role']]) adjustedProjections[row['Role']] = {};
-                                adjustedProjections[row['Role']][row['Player Name']] = row['Projected FP'];
+                                const name = row['Player Name'];
+                                const fp = Number(row['Projected FP']) || 0;
+                                const prev = Number(adjustedProjections[row['Role']][name]);
+                                // A later 0-projection duplicate must not wipe a real number.
+                                if (!(fp > 1.05) && prev > 1.05) return;
+                                adjustedProjections[row['Role']][name] = fp;
                             });
                             try { overlayEspnOddsOnRows(rawData, { requireOppOnSameRows: false }); } catch (e) {}
                             try { applyDstBaselineProjections(rawData); } catch (e) { console.warn('DST baseline ingest', e); }
