@@ -8007,6 +8007,7 @@
                 if (!player || /^player$/i.test(player)) return;
                 const rec = {
                     own: pickOwnValue(row),
+                    fpts: Number(row.FPTS || row.fpts || row['Proj FP'] || 0) || 0,
                     opp: row.OPP || row.Opp || row.Opponent || '',
                     spread: row.SPRD != null && row.SPRD !== '' ? row.SPRD : (row.Spread != null ? row.Spread : ''),
                     ou: row['O/U'] != null && row['O/U'] !== '' ? row['O/U'] : '',
@@ -8382,8 +8383,11 @@
 
                                 // Keep original source projection so Reset can restore it
                                 const sourceProj = parseFloat(row['Projected FP']) || 0;
-                                // Apply custom projections if present
+                                // Ownership FPTS is a fallback when the sheet left a 0 or 1 placeholder
+                                const ownFp = Number(ownRow && (ownRow.fpts != null ? ownRow.fpts : ownRow.FPTS)) || 0;
                                 let proj = sourceProj;
+                                if (!(proj > 1.05) && ownFp > 1.05) proj = ownFp;
+                                // Apply custom projections if present
                                 let own = (ownRow && ownRow.own != null) ? ownRow.own : 0;
                                 if (typeof own !== 'number') own = parseFloat(own) || 0;
                                 if (customProjections[norm]) {
@@ -8540,7 +8544,8 @@
                             if (silent && selectedSlate && availableSlates.includes(selectedSlate)) {
                                 preferred = selectedSlate;
                             }
-                            selectedSlate = preferred || (slatesWithDates.length ? slatesWithDates[0].slate : null);
+                            const classicMain = slatesWithDates.find(s => /classic/i.test(s.slate) && !/early|late/i.test(s.slate));
+                            selectedSlate = preferred || (classicMain ? classicMain.slate : (slatesWithDates.length ? slatesWithDates[0].slate : null));
                             document.getElementById('slateDropdown').textContent = selectedSlate
                                 ? prettySlateLine(selectedSlate)
                                 : 'Select Slate';
@@ -8569,7 +8574,8 @@
                             lastDataUpdated = new Date();
                             applyOwnershipToPlayers(rawData);
                             applyOwnershipToPlayers(allSlatePlayers);
-                            setDataStatus('', `Updated ${lastDataUpdated.toLocaleTimeString()} • ${rawData.length} rows`);
+                            const withProj = rawData.filter(r => Number(r['Projected FP']) > 1.05).length;
+                            setDataStatus('', `Updated ${lastDataUpdated.toLocaleTimeString()} • ${rawData.length} rows • ${withProj} with projections`);
                         }
                         } finally {
                             clearTimeout(_fetchLoadingTimer);
@@ -15767,6 +15773,7 @@
                         when: row.published || '',
                         url: row.web_url || ''
                     });
+                    if (row.pulled_at && (!window._newsPulled || row.pulled_at > window._newsPulled)) window._newsPulled = row.pulled_at;
                     const low = hl.toLowerCase();
                     // News is display-only. Do not hide a player from a headline —
                     // "without", "show out", and old notes were marking healthy players Out.
@@ -16977,6 +16984,7 @@
                 </div>
                 <div id="csTab-news" hidden>
                     ${inj ? `<p class="cs-reason"><strong>Injury:</strong> ${csEsc(inj.status)}${inj.comment ? ' — '+csEsc(inj.comment) : ''}</p>` : '<p class="cs-note">No injury tag on the ESPN report.</p>'}
+                    <p class="cs-note">News feed pulled ${window._newsPulled ? new Date(window._newsPulled).toLocaleString() : 'live'}.</p>
                     <h4 style="margin:0.7rem 0 0.3rem;">News</h4>
                     ${newsFor(p).length ? newsFor(p).map(n => `<div class="cs-news-item"><div>${n.url ? `<a href="${csEsc(n.url)}" target="_blank" rel="noopener">${csEsc(n.headline)}</a>` : csEsc(n.headline)}</div><div class="when">${csEsc(n.when)}</div>${n.desc ? `<div class="cs-note">${csEsc(n.desc)}</div>` : ''}</div>`).join('') : '<p class="cs-note">No recent player news in the feed.</p>'}
                 </div>
