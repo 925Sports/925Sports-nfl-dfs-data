@@ -4829,7 +4829,9 @@
             snaps2025: 'https://corsproxy.io/?https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2025.csv',
             snaps2026: 'https://corsproxy.io/?https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_2026.csv',
             playerNews: 'https://raw.githubusercontent.com/925Sports/NFL-Player-Log/main/data/news.csv',
+            currentInjuries: 'https://raw.githubusercontent.com/925Sports/NFL-Player-Log/main/data/current_injuries.csv',
             espnInjuries: 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/injuries',
+            espnInjuriesProxy: 'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://site.api.espn.com/apis/site/v2/sports/football/nfl/injuries'),
 
             gameOdds: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR5CGYxMTghCulNtsHaMDKjkkbbYKaEWt0tJ2ie7iu-Mx2YpBClXzIZaZeYRdkg7LJlt8r_6nrxdqYa/pub?gid=485904050&single=true&output=csv',
             espnScoreboard: 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard',
@@ -8021,12 +8023,16 @@
                     spread: row.SPRD != null && row.SPRD !== '' ? row.SPRD : (row.Spread != null ? row.Spread : ''),
                     ou: row['O/U'] != null && row['O/U'] !== '' ? row['O/U'] : '',
                     implied: row['TM/P'] != null && row['TM/P'] !== '' ? row['TM/P'] : '',
-                    team: normalizeTeam(row.TEAM || row.Team || '')
+                    team: normalizeTeam(row.TEAM || row.Team || ''),
+                    pos: String(row.POS || row.Pos || row.Position || '').toUpperCase()
                 };
                 const tm = rec.team;
                 map.set(normalizeName(player), rec);
                 if (tm) map.set(normalizeName(player) + '|' + tm, rec);
-                if (tm && !byTeam.has(tm)) byTeam.set(tm, rec);
+                if (tm) {
+                    const isDst = /^d$|dst|def|d\/st/i.test(rec.pos);
+                    if (isDst || !byTeam.has(tm)) byTeam.set(tm, rec);
+                }
             });
             window._ownershipMap = map;
             window._ownershipByTeam = byTeam;
@@ -8038,7 +8044,19 @@
             const norm = normalizeName(name);
             const tm = normalizeTeam(team || '');
             if (tm && map.has(norm + '|' + tm)) return map.get(norm + '|' + tm);
-            return map.get(norm) || {};
+            const hit = map.get(norm);
+            if (hit && hit.own != null) return hit;
+            // Sheet DST is "Seahawks". Ownership file is "Seattle Seahawks" under POS D.
+            if (tm) {
+                const byTeam = window._ownershipByTeam;
+                const teamHit = byTeam && byTeam.get(tm);
+                if (teamHit && teamHit.own != null && /dst|def|d\/st|^d$/i.test(String(teamHit.pos || ''))) return teamHit;
+                for (const [k, rec] of map) {
+                    if (!k.endsWith('|' + tm)) continue;
+                    if (/dst|def|d\/st|^d$/i.test(String(rec.pos || ''))) return rec;
+                }
+            }
+            return hit || {};
         }
 
         function applyShowdownCptOwnership(players) {
@@ -15798,23 +15816,52 @@
             } catch (e) { console.warn('news load failed', e); }
         }
         async function loadEspnInjuries() {
+            injuryIndex.clear();
+            // Prefer the GitHub file (CORS-friendly). ESPN direct is blocked in the browser.
             try {
-                const res = await fetchWithRetry(DATA_SOURCES.espnInjuries, 1, 10000, true);
-                const data = await res.json();
-                (data.injuries || []).forEach(team => {
-                    (team.injuries || []).forEach(item => {
-                        const name = item.athlete && item.athlete.displayName;
-                        if (!name) return;
-                        injuryIndex.set(normalizeName(name), {
-                            status: item.status || (item.type && item.type.description) || 'Injured',
-                            comment: item.longComment || item.shortComment || '',
-                            date: item.date || '',
-                            team: team.displayName || '',
-                            source: 'espn'
+                const res = await fetchWithRetry(DATA_SOURCES.currentInjuries + '?t=' + Date.now(), 1, 8000, false);
+                const parsed = Papa.parse(await res.text(), { header: true, skipEmptyLines: true });
+                let n = 0;
+                (parsed.data || []).forEach(row => {
+                    const name = row.player || row.name || '';
+                    const status = String(row.status || '').trim();
+                    if (!name || !status || /active|probable/i.test(status)) return;
+                    injuryIndex.set(normalizeName(name), {
+                        status,
+                        comment: row.comment || '',
+                        date: row.date || '',
+                        team: row.team || '',
+                        source: 'github'
+                    });
+                    n++;
+                });
+                if (n) { window._injurySource = 'github'; return; }
+            } catch (e) { /* file may not exist yet */ }
+            const urls = [DATA_SOURCES.espnInjuries, DATA_SOURCES.espnInjuriesProxy];
+            for (const url of urls) {
+                try {
+                    const res = await fetchWithRetry(url, 1, 10000, true);
+                    const data = await res.json();
+                    let n = 0;
+                    (data.injuries || []).forEach(team => {
+                        (team.injuries || []).forEach(item => {
+                            const name = item.athlete && item.athlete.displayName;
+                            if (!name) return;
+                            const status = String(item.status || (item.type && item.type.description) || '').trim();
+                            if (!status || /active|probable/i.test(status)) return;
+                            injuryIndex.set(normalizeName(name), {
+                                status,
+                                comment: item.longComment || item.shortComment || '',
+                                date: item.date || '',
+                                team: team.displayName || '',
+                                source: 'espn'
+                            });
+                            n++;
                         });
                     });
-                });
-            } catch (e) { console.warn('espn injuries failed', e); }
+                    if (n) { window._injurySource = 'espn'; return; }
+                } catch (e) { console.warn('espn injuries failed', url, e); }
+            }
         }
         function nflRegWeekNow(year) {
             const openers = { 2025: Date.UTC(2025, 8, 4), 2026: Date.UTC(2026, 8, 10), 2027: Date.UTC(2027, 8, 9) };
