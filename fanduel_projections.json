@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-14T02:39:19.100472Z",
+  "updated": "2026-11-14T03:47:39.815532Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -7994,7 +7994,7 @@
       },
       "stats": {
         "fpts": 8.98,
-        "fg": 2.21,
+        "fg": 2.22,
         "xpt": 1.8
       }
     },
@@ -8084,9 +8084,9 @@
         "opp": "CIN"
       },
       "stats": {
-        "fpts": 8.03,
+        "fpts": 8.04,
         "fg": 1.64,
-        "xpt": 2.65
+        "xpt": 2.66
       }
     },
     "trey smack_k": {
@@ -8206,19 +8206,6 @@
         "xpt": 1.46
       }
     },
-    "andy borregales_k": {
-      "info": {
-        "player": "Andy Borregales",
-        "position": "K",
-        "team": "NE",
-        "opp": "DET"
-      },
-      "stats": {
-        "fpts": 7.12,
-        "fg": 1.42,
-        "xpt": 2.38
-      }
-    },
     "drew stevens_k": {
       "info": {
         "player": "Drew Stevens",
@@ -8230,6 +8217,19 @@
         "fpts": 7.11,
         "fg": 1.43,
         "xpt": 2.22
+      }
+    },
+    "andy borregales_k": {
+      "info": {
+        "player": "Andy Borregales",
+        "position": "K",
+        "team": "NE",
+        "opp": "DET"
+      },
+      "stats": {
+        "fpts": 7.11,
+        "fg": 1.42,
+        "xpt": 2.37
       }
     },
     "houston d/st_dst": {
