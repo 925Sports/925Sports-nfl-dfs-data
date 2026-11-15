@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-14T20:52:41.333846Z",
+  "updated": "2026-11-15T00:51:20.537535Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -807,29 +807,6 @@
         "rec_td": 0.0
       }
     },
-    "deshaun watson_qb": {
-      "info": {
-        "player": "Deshaun Watson",
-        "position": "QB",
-        "team": "CLE",
-        "opp": "HOU"
-      },
-      "stats": {
-        "fpts": 14.7,
-        "pass_cmp": 19.64,
-        "pass_att": 29.35,
-        "pass_yds": 194.56,
-        "pass_td": 0.99,
-        "int": 0.58,
-        "rush_att": 5.75,
-        "rush_yds": 27.96,
-        "rush_td": 0.23,
-        "rec": 0.0,
-        "tgts": 0.0,
-        "rec_yds": 0.0,
-        "rec_td": 0.0
-      }
-    },
     "kirk cousins_qb": {
       "info": {
         "player": "Kirk Cousins",
@@ -847,6 +824,29 @@
         "rush_att": 2.69,
         "rush_yds": 9.39,
         "rush_td": 0.13,
+        "rec": 0.0,
+        "tgts": 0.0,
+        "rec_yds": 0.0,
+        "rec_td": 0.0
+      }
+    },
+    "deshaun watson_qb": {
+      "info": {
+        "player": "Deshaun Watson",
+        "position": "QB",
+        "team": "CLE",
+        "opp": "HOU"
+      },
+      "stats": {
+        "fpts": 14.62,
+        "pass_cmp": 19.64,
+        "pass_att": 29.35,
+        "pass_yds": 194.56,
+        "pass_td": 0.97,
+        "int": 0.58,
+        "rush_att": 5.75,
+        "rush_yds": 27.96,
+        "rush_td": 0.23,
         "rec": 0.0,
         "tgts": 0.0,
         "rec_yds": 0.0,
@@ -1712,7 +1712,7 @@
         "opp": "HOU"
       },
       "stats": {
-        "fpts": 9.89,
+        "fpts": 9.83,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -1720,7 +1720,7 @@
         "int": 0.0,
         "rush_att": 14.07,
         "rush_yds": 55.45,
-        "rush_td": 0.4,
+        "rush_td": 0.39,
         "rec": 1.49,
         "tgts": 1.92,
         "rec_yds": 9.4,
@@ -2233,29 +2233,6 @@
         "rec_td": 0.04
       }
     },
-    "kc concepcion_wr": {
-      "info": {
-        "player": "KC Concepcion",
-        "position": "WR",
-        "team": "CLE",
-        "opp": "HOU"
-      },
-      "stats": {
-        "fpts": 8.34,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 4.38,
-        "tgts": 6.78,
-        "rec_yds": 47.85,
-        "rec_td": 0.24
-      }
-    },
     "eli raridon_te": {
       "info": {
         "player": "Eli Raridon",
@@ -2323,6 +2300,29 @@
         "tgts": 1.61,
         "rec_yds": 8.2,
         "rec_td": 0.03
+      }
+    },
+    "kc concepcion_wr": {
+      "info": {
+        "player": "KC Concepcion",
+        "position": "WR",
+        "team": "CLE",
+        "opp": "HOU"
+      },
+      "stats": {
+        "fpts": 8.28,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 4.38,
+        "tgts": 6.78,
+        "rec_yds": 47.85,
+        "rec_td": 0.23
       }
     },
     "tyler warren_te": {
@@ -5660,6 +5660,29 @@
         "rec_td": 0.08
       }
     },
+    "michael burton_rb": {
+      "info": {
+        "player": "Michael Burton",
+        "position": "RB",
+        "team": "CLE",
+        "opp": "HOU"
+      },
+      "stats": {
+        "fpts": 1.39,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 2.2,
+        "rush_yds": 7.89,
+        "rush_td": 0.05,
+        "rec": 0.25,
+        "tgts": 0.34,
+        "rec_yds": 1.58,
+        "rec_td": 0.01
+      }
+    },
     "harrison wallace iii_wr": {
       "info": {
         "player": "Harrison Wallace III",
@@ -6833,29 +6856,6 @@
         "rec_td": 0.0
       }
     },
-    "michael burton_rb": {
-      "info": {
-        "player": "Michael Burton",
-        "position": "RB",
-        "team": "CLE",
-        "opp": "HOU"
-      },
-      "stats": {
-        "fpts": 0.38,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.1,
-        "rush_yds": 0.37,
-        "rush_td": 0.0,
-        "rec": 0.25,
-        "tgts": 0.34,
-        "rec_yds": 1.58,
-        "rec_td": 0.01
-      }
-    },
     "elijah sarratt_wr": {
       "info": {
         "player": "Elijah Sarratt",
@@ -7827,7 +7827,7 @@
       },
       "stats": {
         "fpts": 9.49,
-        "fg": 2.26,
+        "fg": 2.3,
         "xpt": 1.73
       }
     },
@@ -7879,7 +7879,7 @@
       },
       "stats": {
         "fpts": 8.98,
-        "fg": 2.3,
+        "fg": 2.32,
         "xpt": 1.8
       }
     },
@@ -8125,12 +8125,12 @@
         "opp": "CLE"
       },
       "stats": {
-        "fpts": 9.22,
+        "fpts": 9.24,
         "pa": 18.0,
-        "yds_agn": 283.33,
+        "yds_agn": 290.85,
         "sack": 3.87,
         "int": 0.6,
-        "fr": 0.55,
+        "fr": 0.56,
         "td": 0.2
       }
     },
@@ -8236,6 +8236,23 @@
         "td": 0.18
       }
     },
+    "minnesota d/st_dst": {
+      "info": {
+        "player": "Minnesota D/ST",
+        "position": "DST",
+        "team": "MIN",
+        "opp": "GB"
+      },
+      "stats": {
+        "fpts": 7.13,
+        "pa": 22.5,
+        "yds_agn": 350.89,
+        "sack": 2.76,
+        "int": 0.7,
+        "fr": 0.65,
+        "td": 0.16
+      }
+    },
     "washington d/st_dst": {
       "info": {
         "player": "Washington D/ST",
@@ -8253,23 +8270,6 @@
         "td": 0.17
       }
     },
-    "minnesota d/st_dst": {
-      "info": {
-        "player": "Minnesota D/ST",
-        "position": "DST",
-        "team": "MIN",
-        "opp": "GB"
-      },
-      "stats": {
-        "fpts": 7.01,
-        "pa": 22.75,
-        "yds_agn": 351.01,
-        "sack": 2.76,
-        "int": 0.7,
-        "fr": 0.65,
-        "td": 0.16
-      }
-    },
     "indianapolis d/st_dst": {
       "info": {
         "player": "Indianapolis D/ST",
@@ -8284,23 +8284,6 @@
         "sack": 1.46,
         "int": 0.74,
         "fr": 0.43,
-        "td": 0.19
-      }
-    },
-    "green bay d/st_dst": {
-      "info": {
-        "player": "Green Bay D/ST",
-        "position": "DST",
-        "team": "GB",
-        "opp": "MIN"
-      },
-      "stats": {
-        "fpts": 6.51,
-        "pa": 19.75,
-        "yds_agn": 337.87,
-        "sack": 1.26,
-        "int": 0.69,
-        "fr": 0.66,
         "td": 0.19
       }
     },
@@ -8336,6 +8319,23 @@
         "int": 0.77,
         "fr": 0.54,
         "td": 0.16
+      }
+    },
+    "green bay d/st_dst": {
+      "info": {
+        "player": "Green Bay D/ST",
+        "position": "DST",
+        "team": "GB",
+        "opp": "MIN"
+      },
+      "stats": {
+        "fpts": 6.44,
+        "pa": 20.0,
+        "yds_agn": 338.05,
+        "sack": 1.26,
+        "int": 0.69,
+        "fr": 0.66,
+        "td": 0.19
       }
     },
     "jacksonville d/st_dst": {
