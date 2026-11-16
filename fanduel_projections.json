@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-16T07:43:48.945750Z",
+  "updated": "2026-11-16T18:03:39.003425Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -1221,29 +1221,6 @@
         "rec_td": 0.49
       }
     },
-    "carson beck_qb": {
-      "info": {
-        "player": "Carson Beck",
-        "position": "QB",
-        "team": "ARI",
-        "opp": "LA"
-      },
-      "stats": {
-        "fpts": 12.6,
-        "pass_cmp": 21.08,
-        "pass_att": 33.56,
-        "pass_yds": 213.45,
-        "pass_td": 0.82,
-        "int": 0.89,
-        "rush_att": 3.05,
-        "rush_yds": 13.1,
-        "rush_td": 0.1,
-        "rec": 0.0,
-        "tgts": 0.0,
-        "rec_yds": 0.0,
-        "rec_td": 0.0
-      }
-    },
     "malik nabers_wr": {
       "info": {
         "player": "Malik Nabers",
@@ -1635,52 +1612,6 @@
         "rec_td": 0.04
       }
     },
-    "tyler allgeier_rb": {
-      "info": {
-        "player": "Tyler Allgeier",
-        "position": "RB",
-        "team": "ARI",
-        "opp": "LA"
-      },
-      "stats": {
-        "fpts": 10.25,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 12.67,
-        "rush_yds": 53.95,
-        "rush_td": 0.24,
-        "rec": 2.35,
-        "tgts": 3.25,
-        "rec_yds": 19.19,
-        "rec_td": 0.05
-      }
-    },
-    "trey mcbride_te": {
-      "info": {
-        "player": "Trey McBride",
-        "position": "TE",
-        "team": "ARI",
-        "opp": "LA"
-      },
-      "stats": {
-        "fpts": 10.12,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 6.4,
-        "tgts": 9.61,
-        "rec_yds": 56.17,
-        "rec_td": 0.22
-      }
-    },
     "jameson williams_wr": {
       "info": {
         "player": "Jameson Williams",
@@ -1702,6 +1633,29 @@
         "tgts": 6.29,
         "rec_yds": 60.69,
         "rec_td": 0.32
+      }
+    },
+    "tyler allgeier_rb": {
+      "info": {
+        "player": "Tyler Allgeier",
+        "position": "RB",
+        "team": "ARI",
+        "opp": "LA"
+      },
+      "stats": {
+        "fpts": 9.92,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 12.67,
+        "rush_yds": 53.95,
+        "rush_td": 0.75,
+        "rec": 0.0,
+        "tgts": 0.0,
+        "rec_yds": 0.0,
+        "rec_td": 0.0
       }
     },
     "germie bernard_wr": {
@@ -2417,29 +2371,6 @@
         "rec_td": 0.18
       }
     },
-    "zonovan knight_rb": {
-      "info": {
-        "player": "Zonovan Knight",
-        "position": "RB",
-        "team": "ARI",
-        "opp": "LA"
-      },
-      "stats": {
-        "fpts": 7.87,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 10.5,
-        "rush_yds": 42.83,
-        "rush_td": 0.2,
-        "rec": 1.88,
-        "tgts": 2.69,
-        "rec_yds": 14.66,
-        "rec_td": 0.04
-      }
-    },
     "antonio williams_wr": {
       "info": {
         "player": "Antonio Williams",
@@ -2484,6 +2415,29 @@
         "tgts": 3.86,
         "rec_yds": 20.19,
         "rec_td": 0.17
+      }
+    },
+    "zonovan knight_rb": {
+      "info": {
+        "player": "Zonovan Knight",
+        "position": "RB",
+        "team": "ARI",
+        "opp": "LA"
+      },
+      "stats": {
+        "fpts": 7.66,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 10.5,
+        "rush_yds": 42.83,
+        "rush_td": 0.6,
+        "rec": 0.0,
+        "tgts": 0.0,
+        "rec_yds": 0.0,
+        "rec_td": 0.0
       }
     },
     "tutu atwell_wr": {
@@ -2829,29 +2783,6 @@
         "tgts": 3.02,
         "rec_yds": 15.63,
         "rec_td": 0.05
-      }
-    },
-    "reggie virgil_wr": {
-      "info": {
-        "player": "Reggie Virgil",
-        "position": "WR",
-        "team": "ARI",
-        "opp": "LA"
-      },
-      "stats": {
-        "fpts": 6.62,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 2.71,
-        "tgts": 5.15,
-        "rec_yds": 39.49,
-        "rec_td": 0.22
       }
     },
     "tyler higbee_te": {
@@ -4441,29 +4372,6 @@
         "rec_td": 0.12
       }
     },
-    "elijah higgins_te": {
-      "info": {
-        "player": "Elijah Higgins",
-        "position": "TE",
-        "team": "ARI",
-        "opp": "LA"
-      },
-      "stats": {
-        "fpts": 3.76,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 2.02,
-        "tgts": 3.03,
-        "rec_yds": 21.06,
-        "rec_td": 0.11
-      }
-    },
     "emari demercado_rb": {
       "info": {
         "player": "Emari Demercado",
@@ -4646,29 +4554,6 @@
         "tgts": 1.52,
         "rec_yds": 6.74,
         "rec_td": 0.03
-      }
-    },
-    "simi fehoko_wr": {
-      "info": {
-        "player": "Simi Fehoko",
-        "position": "WR",
-        "team": "ARI",
-        "opp": "LA"
-      },
-      "stats": {
-        "fpts": 3.07,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 1.51,
-        "tgts": 2.7,
-        "rec_yds": 19.74,
-        "rec_td": 0.06
       }
     },
     "cyrus allen_wr": {
@@ -5016,29 +4901,6 @@
         "rec_td": 0.1
       }
     },
-    "harrison wallace iii_wr": {
-      "info": {
-        "player": "Harrison Wallace III",
-        "position": "WR",
-        "team": "ARI",
-        "opp": "LA"
-      },
-      "stats": {
-        "fpts": 2.53,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 1.61,
-        "tgts": 2.92,
-        "rec_yds": 17.49,
-        "rec_td": 0.0
-      }
-    },
     "john metchie iii_wr": {
       "info": {
         "player": "John Metchie III",
@@ -5106,29 +4968,6 @@
         "tgts": 1.71,
         "rec_yds": 12.97,
         "rec_td": 0.08
-      }
-    },
-    "devin duvernay_wr": {
-      "info": {
-        "player": "Devin Duvernay",
-        "position": "WR",
-        "team": "ARI",
-        "opp": "LA"
-      },
-      "stats": {
-        "fpts": 2.41,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 1.46,
-        "tgts": 2.43,
-        "rec_yds": 14.16,
-        "rec_td": 0.05
       }
     },
     "puka nacua_wr": {
@@ -5474,29 +5313,6 @@
         "tgts": 1.19,
         "rec_yds": 7.75,
         "rec_td": 0.09
-      }
-    },
-    "teagan quitoriano_te": {
-      "info": {
-        "player": "Teagan Quitoriano",
-        "position": "TE",
-        "team": "ARI",
-        "opp": "LA"
-      },
-      "stats": {
-        "fpts": 1.72,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 0.85,
-        "tgts": 1.34,
-        "rec_yds": 9.36,
-        "rec_td": 0.06
       }
     },
     "efton chism iii_wr": {
@@ -6534,29 +6350,6 @@
         "rec_td": 0.01
       }
     },
-    "evan hull_rb": {
-      "info": {
-        "player": "Evan Hull",
-        "position": "RB",
-        "team": "ARI",
-        "opp": "LA"
-      },
-      "stats": {
-        "fpts": 0.54,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.41,
-        "rush_yds": 1.49,
-        "rush_td": 0.01,
-        "rec": 0.28,
-        "tgts": 0.43,
-        "rec_yds": 2.13,
-        "rec_td": 0.0
-      }
-    },
     "travis homer_rb": {
       "info": {
         "player": "Travis Homer",
@@ -7224,6 +7017,29 @@
         "rec_td": 0.01
       }
     },
+    "evan hull_rb": {
+      "info": {
+        "player": "Evan Hull",
+        "position": "RB",
+        "team": "ARI",
+        "opp": "LA"
+      },
+      "stats": {
+        "fpts": 0.27,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.41,
+        "rush_yds": 1.49,
+        "rush_td": 0.02,
+        "rec": 0.0,
+        "tgts": 0.0,
+        "rec_yds": 0.0,
+        "rec_td": 0.0
+      }
+    },
     "davis mills_qb": {
       "info": {
         "player": "Davis Mills",
@@ -7873,7 +7689,7 @@
       },
       "stats": {
         "fpts": 9.53,
-        "fg": 2.54,
+        "fg": 2.59,
         "xpt": 1.77
       }
     },
@@ -7925,7 +7741,7 @@
       },
       "stats": {
         "fpts": 9.03,
-        "fg": 2.49,
+        "fg": 2.54,
         "xpt": 1.81
       }
     },
