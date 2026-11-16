@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-16T00:49:20.609727Z",
+  "updated": "2026-11-16T07:43:48.945750Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -7873,7 +7873,7 @@
       },
       "stats": {
         "fpts": 9.53,
-        "fg": 2.51,
+        "fg": 2.54,
         "xpt": 1.77
       }
     },
@@ -7925,7 +7925,7 @@
       },
       "stats": {
         "fpts": 9.03,
-        "fg": 2.46,
+        "fg": 2.49,
         "xpt": 1.81
       }
     },
@@ -7976,9 +7976,9 @@
         "opp": "DAL"
       },
       "stats": {
-        "fpts": 8.46,
+        "fpts": 8.47,
         "fg": 1.54,
-        "xpt": 2.84
+        "xpt": 2.85
       }
     },
     "daniel carlson_k": {
@@ -8015,9 +8015,9 @@
         "opp": "SF"
       },
       "stats": {
-        "fpts": 8.07,
-        "fg": 1.58,
-        "xpt": 2.22
+        "fpts": 8.05,
+        "fg": 1.57,
+        "xpt": 2.2
       }
     },
     "chris boswell_k": {
@@ -8178,23 +8178,6 @@
         "int": 0.61,
         "fr": 0.56,
         "td": 0.2
-      }
-    },
-    "los angeles rams d/st_dst": {
-      "info": {
-        "player": "Los Angeles Rams D/ST",
-        "position": "DST",
-        "team": "LA",
-        "opp": "ARI"
-      },
-      "stats": {
-        "fpts": 8.89,
-        "pa": 14.5,
-        "yds_agn": 310.9,
-        "sack": 2.08,
-        "int": 0.89,
-        "fr": 0.4,
-        "td": 0.23
       }
     },
     "seattle d/st_dst": {
@@ -8569,6 +8552,23 @@
         "int": 0.78,
         "fr": 0.54,
         "td": 0.14
+      }
+    },
+    "los angeles rams d/st_dst": {
+      "info": {
+        "player": "Los Angeles Rams D/ST",
+        "position": "DST",
+        "team": "LA",
+        "opp": "ARI"
+      },
+      "stats": {
+        "fpts": 4.47,
+        "pa": 14.5,
+        "yds_agn": 98.28,
+        "sack": 0.0,
+        "int": 0.0,
+        "fr": 0.12,
+        "td": 0.23
       }
     },
     "new york jets d/st_dst": {
