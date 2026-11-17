@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-16T21:46:50.339879Z",
+  "updated": "2026-11-17T01:57:20.475948Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -230,29 +230,6 @@
         "tgts": 0.0,
         "rec_yds": 0.0,
         "rec_td": 0.0
-      }
-    },
-    "derrick henry_rb": {
-      "info": {
-        "player": "Derrick Henry",
-        "position": "RB",
-        "team": "BAL",
-        "opp": "LAC"
-      },
-      "stats": {
-        "fpts": 18.46,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 22.16,
-        "rush_yds": 115.87,
-        "rush_td": 0.93,
-        "rec": 1.05,
-        "tgts": 1.47,
-        "rec_yds": 7.69,
-        "rec_td": 0.02
       }
     },
     "kenneth walker iii_rb": {
@@ -715,6 +692,29 @@
         "rec_td": 0.66
       }
     },
+    "derrick henry_rb": {
+      "info": {
+        "player": "Derrick Henry",
+        "position": "RB",
+        "team": "BAL",
+        "opp": "LAC"
+      },
+      "stats": {
+        "fpts": 15.42,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 17.76,
+        "rush_yds": 92.89,
+        "rush_td": 0.79,
+        "rec": 1.05,
+        "tgts": 1.46,
+        "rec_yds": 7.67,
+        "rec_td": 0.03
+      }
+    },
     "javonte williams_rb": {
       "info": {
         "player": "Javonte Williams",
@@ -755,29 +755,6 @@
         "rush_att": 3.24,
         "rush_yds": 14.05,
         "rush_td": 0.14,
-        "rec": 0.0,
-        "tgts": 0.0,
-        "rec_yds": 0.0,
-        "rec_td": 0.0
-      }
-    },
-    "justin herbert_qb": {
-      "info": {
-        "player": "Justin Herbert",
-        "position": "QB",
-        "team": "LAC",
-        "opp": "BAL"
-      },
-      "stats": {
-        "fpts": 15.0,
-        "pass_cmp": 19.21,
-        "pass_att": 31.09,
-        "pass_yds": 215.73,
-        "pass_td": 1.01,
-        "int": 0.56,
-        "rush_att": 5.02,
-        "rush_yds": 22.5,
-        "rush_td": 0.16,
         "rec": 0.0,
         "tgts": 0.0,
         "rec_yds": 0.0,
@@ -1014,6 +991,29 @@
         "rec_td": 0.54
       }
     },
+    "justin herbert_qb": {
+      "info": {
+        "player": "Justin Herbert",
+        "position": "QB",
+        "team": "LAC",
+        "opp": "BAL"
+      },
+      "stats": {
+        "fpts": 13.79,
+        "pass_cmp": 19.02,
+        "pass_att": 30.78,
+        "pass_yds": 213.62,
+        "pass_td": 1.0,
+        "int": 0.55,
+        "rush_att": 3.13,
+        "rush_yds": 14.0,
+        "rush_td": 0.1,
+        "rec": 0.0,
+        "tgts": 0.0,
+        "rec_yds": 0.0,
+        "rec_td": 0.0
+      }
+    },
     "chase brown_rb": {
       "info": {
         "player": "Chase Brown",
@@ -1221,6 +1221,29 @@
         "rec_td": 0.49
       }
     },
+    "zay flowers_wr": {
+      "info": {
+        "player": "Zay Flowers",
+        "position": "WR",
+        "team": "BAL",
+        "opp": "LAC"
+      },
+      "stats": {
+        "fpts": 12.55,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 1.53,
+        "rush_yds": 7.7,
+        "rush_td": 0.07,
+        "rec": 6.06,
+        "tgts": 9.58,
+        "rec_yds": 67.73,
+        "rec_td": 0.28
+      }
+    },
     "malik nabers_wr": {
       "info": {
         "player": "Malik Nabers",
@@ -1242,29 +1265,6 @@
         "tgts": 9.55,
         "rec_yds": 78.14,
         "rec_td": 0.34
-      }
-    },
-    "jacoby brissett_qb": {
-      "info": {
-        "player": "Jacoby Brissett",
-        "position": "QB",
-        "team": "BAL",
-        "opp": "LAC"
-      },
-      "stats": {
-        "fpts": 12.51,
-        "pass_cmp": 18.83,
-        "pass_att": 29.76,
-        "pass_yds": 174.97,
-        "pass_td": 1.01,
-        "int": 0.46,
-        "rush_att": 3.05,
-        "rush_yds": 12.55,
-        "rush_td": 0.14,
-        "rec": 0.0,
-        "tgts": 0.0,
-        "rec_yds": 0.0,
-        "rec_td": 0.0
       }
     },
     "woody marks_rb": {
@@ -1290,29 +1290,6 @@
         "rec_td": 0.06
       }
     },
-    "zay flowers_wr": {
-      "info": {
-        "player": "Zay Flowers",
-        "position": "WR",
-        "team": "BAL",
-        "opp": "LAC"
-      },
-      "stats": {
-        "fpts": 12.22,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 1.27,
-        "rush_yds": 6.38,
-        "rush_td": 0.05,
-        "rec": 6.07,
-        "tgts": 9.6,
-        "rec_yds": 67.88,
-        "rec_td": 0.26
-      }
-    },
     "brock bowers_te": {
       "info": {
         "player": "Brock Bowers",
@@ -1334,6 +1311,29 @@
         "tgts": 9.78,
         "rec_yds": 69.64,
         "rec_td": 0.33
+      }
+    },
+    "jacoby brissett_qb": {
+      "info": {
+        "player": "Jacoby Brissett",
+        "position": "QB",
+        "team": "BAL",
+        "opp": "LAC"
+      },
+      "stats": {
+        "fpts": 12.0,
+        "pass_cmp": 18.79,
+        "pass_att": 29.69,
+        "pass_yds": 174.59,
+        "pass_td": 1.07,
+        "int": 0.46,
+        "rush_att": 1.84,
+        "rush_yds": 7.57,
+        "rush_td": 0.09,
+        "rec": 0.0,
+        "tgts": 0.0,
+        "rec_yds": 0.0,
+        "rec_td": 0.0
       }
     },
     "justin jefferson_wr": {
@@ -1842,6 +1842,29 @@
         "rec_td": 0.09
       }
     },
+    "omarion hampton_rb": {
+      "info": {
+        "player": "Omarion Hampton",
+        "position": "RB",
+        "team": "LAC",
+        "opp": "BAL"
+      },
+      "stats": {
+        "fpts": 9.48,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 13.82,
+        "rush_yds": 58.48,
+        "rush_td": 0.37,
+        "rec": 1.16,
+        "tgts": 1.6,
+        "rec_yds": 8.17,
+        "rec_td": 0.03
+      }
+    },
     "isaiah likely_te": {
       "info": {
         "player": "Isaiah Likely",
@@ -2187,29 +2210,6 @@
         "rec_td": 0.24
       }
     },
-    "omarion hampton_rb": {
-      "info": {
-        "player": "Omarion Hampton",
-        "position": "RB",
-        "team": "LAC",
-        "opp": "BAL"
-      },
-      "stats": {
-        "fpts": 8.36,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 11.94,
-        "rush_yds": 50.49,
-        "rush_td": 0.31,
-        "rec": 1.17,
-        "tgts": 1.62,
-        "rec_yds": 8.25,
-        "rec_td": 0.03
-      }
-    },
     "brenton strange_te": {
       "info": {
         "player": "Brenton Strange",
@@ -2417,6 +2417,29 @@
         "rec_td": 0.17
       }
     },
+    "justice hill_rb": {
+      "info": {
+        "player": "Justice Hill",
+        "position": "RB",
+        "team": "BAL",
+        "opp": "LAC"
+      },
+      "stats": {
+        "fpts": 7.69,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 7.96,
+        "rush_yds": 35.83,
+        "rush_td": 0.21,
+        "rec": 2.26,
+        "tgts": 3.14,
+        "rec_yds": 14.19,
+        "rec_td": 0.06
+      }
+    },
     "zonovan knight_rb": {
       "info": {
         "player": "Zonovan Knight",
@@ -2530,6 +2553,29 @@
         "tgts": 5.29,
         "rec_yds": 43.58,
         "rec_td": 0.23
+      }
+    },
+    "keaton mitchell_rb": {
+      "info": {
+        "player": "Keaton Mitchell",
+        "position": "RB",
+        "team": "LAC",
+        "opp": "BAL"
+      },
+      "stats": {
+        "fpts": 7.23,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 6.7,
+        "rush_yds": 30.29,
+        "rush_td": 0.13,
+        "rec": 2.41,
+        "tgts": 3.36,
+        "rec_yds": 18.96,
+        "rec_td": 0.07
       }
     },
     "dylan sampson_rb": {
@@ -2739,29 +2785,6 @@
         "rec_td": 0.23
       }
     },
-    "kimani vidal_rb": {
-      "info": {
-        "player": "Kimani Vidal",
-        "position": "RB",
-        "team": "LAC",
-        "opp": "BAL"
-      },
-      "stats": {
-        "fpts": 6.67,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 7.96,
-        "rush_yds": 30.32,
-        "rush_td": 0.14,
-        "rec": 1.97,
-        "tgts": 3.04,
-        "rec_yds": 15.73,
-        "rec_td": 0.05
-      }
-    },
     "braelon allen_rb": {
       "info": {
         "player": "Braelon Allen",
@@ -2816,7 +2839,7 @@
         "opp": "BAL"
       },
       "stats": {
-        "fpts": 6.59,
+        "fpts": 6.54,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -2825,9 +2848,9 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 3.26,
-        "tgts": 5.55,
-        "rec_yds": 40.22,
+        "rec": 3.23,
+        "tgts": 5.5,
+        "rec_yds": 39.83,
         "rec_td": 0.16
       }
     },
@@ -2954,7 +2977,7 @@
         "opp": "BAL"
       },
       "stats": {
-        "fpts": 6.37,
+        "fpts": 6.31,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -2963,9 +2986,9 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 2.87,
-        "tgts": 4.72,
-        "rec_yds": 39.92,
+        "rec": 2.84,
+        "tgts": 4.67,
+        "rec_yds": 39.52,
         "rec_td": 0.16
       }
     },
@@ -3013,29 +3036,6 @@
         "tgts": 1.63,
         "rec_yds": 12.26,
         "rec_td": 0.06
-      }
-    },
-    "keaton mitchell_rb": {
-      "info": {
-        "player": "Keaton Mitchell",
-        "position": "RB",
-        "team": "LAC",
-        "opp": "BAL"
-      },
-      "stats": {
-        "fpts": 6.26,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 4.97,
-        "rush_yds": 22.48,
-        "rush_td": 0.09,
-        "rec": 2.44,
-        "tgts": 3.39,
-        "rec_yds": 19.15,
-        "rec_td": 0.07
       }
     },
     "chigoziem okonkwo_te": {
@@ -3243,6 +3243,29 @@
         "tgts": 4.43,
         "rec_yds": 33.3,
         "rec_td": 0.21
+      }
+    },
+    "kimani vidal_rb": {
+      "info": {
+        "player": "Kimani Vidal",
+        "position": "RB",
+        "team": "LAC",
+        "opp": "BAL"
+      },
+      "stats": {
+        "fpts": 5.78,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 6.1,
+        "rush_yds": 23.24,
+        "rush_td": 0.11,
+        "rec": 1.95,
+        "tgts": 3.01,
+        "rec_yds": 15.58,
+        "rec_td": 0.05
       }
     },
     "michael mayer_te": {
@@ -3519,29 +3542,6 @@
         "tgts": 0.33,
         "rec_yds": 1.51,
         "rec_td": 0.01
-      }
-    },
-    "justice hill_rb": {
-      "info": {
-        "player": "Justice Hill",
-        "position": "RB",
-        "team": "BAL",
-        "opp": "LAC"
-      },
-      "stats": {
-        "fpts": 5.45,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 4.25,
-        "rush_yds": 19.11,
-        "rush_td": 0.11,
-        "rec": 2.27,
-        "tgts": 3.15,
-        "rec_yds": 14.22,
-        "rec_td": 0.06
       }
     },
     "treylon burks_wr": {
@@ -4004,6 +4004,29 @@
         "rec_td": 0.02
       }
     },
+    "quentin johnston_wr": {
+      "info": {
+        "player": "Quentin Johnston",
+        "position": "WR",
+        "team": "LAC",
+        "opp": "BAL"
+      },
+      "stats": {
+        "fpts": 4.54,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.3,
+        "rush_yds": 1.48,
+        "rush_td": 0.01,
+        "rec": 1.77,
+        "tgts": 3.37,
+        "rec_yds": 26.87,
+        "rec_td": 0.13
+      }
+    },
     "jalen nailor_wr": {
       "info": {
         "player": "Jalen Nailor",
@@ -4025,29 +4048,6 @@
         "tgts": 3.81,
         "rec_yds": 27.37,
         "rec_td": 0.12
-      }
-    },
-    "quentin johnston_wr": {
-      "info": {
-        "player": "Quentin Johnston",
-        "position": "WR",
-        "team": "LAC",
-        "opp": "BAL"
-      },
-      "stats": {
-        "fpts": 4.37,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 1.79,
-        "tgts": 3.4,
-        "rec_yds": 27.13,
-        "rec_td": 0.13
       }
     },
     "calvin ridley_wr": {
@@ -4073,6 +4073,29 @@
         "rec_td": 0.15
       }
     },
+    "ja'kobi lane_wr": {
+      "info": {
+        "player": "Ja'Kobi Lane",
+        "position": "WR",
+        "team": "BAL",
+        "opp": "LAC"
+      },
+      "stats": {
+        "fpts": 4.32,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 2.1,
+        "tgts": 3.71,
+        "rec_yds": 20.86,
+        "rec_td": 0.2
+      }
+    },
     "dawson knox_te": {
       "info": {
         "player": "Dawson Knox",
@@ -4094,29 +4117,6 @@
         "tgts": 2.72,
         "rec_yds": 19.45,
         "rec_td": 0.22
-      }
-    },
-    "ja'kobi lane_wr": {
-      "info": {
-        "player": "Ja'Kobi Lane",
-        "position": "WR",
-        "team": "BAL",
-        "opp": "LAC"
-      },
-      "stats": {
-        "fpts": 4.27,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 2.11,
-        "tgts": 3.72,
-        "rec_yds": 20.91,
-        "rec_td": 0.19
       }
     },
     "kevin coleman_wr": {
@@ -4173,7 +4173,7 @@
         "opp": "LAC"
       },
       "stats": {
-        "fpts": 4.21,
+        "fpts": 4.2,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -4183,31 +4183,8 @@
         "rush_yds": 0.0,
         "rush_td": 0.0,
         "rec": 2.13,
-        "tgts": 3.81,
-        "rec_yds": 24.22,
-        "rec_td": 0.12
-      }
-    },
-    "charlie kolar_te": {
-      "info": {
-        "player": "Charlie Kolar",
-        "position": "TE",
-        "team": "LAC",
-        "opp": "BAL"
-      },
-      "stats": {
-        "fpts": 4.17,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 2.06,
-        "tgts": 3.23,
-        "rec_yds": 24.59,
+        "tgts": 3.8,
+        "rec_yds": 24.17,
         "rec_td": 0.12
       }
     },
@@ -4232,6 +4209,29 @@
         "tgts": 1.98,
         "rec_yds": 16.27,
         "rec_td": 0.07
+      }
+    },
+    "charlie kolar_te": {
+      "info": {
+        "player": "Charlie Kolar",
+        "position": "TE",
+        "team": "LAC",
+        "opp": "BAL"
+      },
+      "stats": {
+        "fpts": 4.14,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 2.04,
+        "tgts": 3.2,
+        "rec_yds": 24.35,
+        "rec_td": 0.12
       }
     },
     "noah gray_te": {
@@ -4288,7 +4288,7 @@
         "opp": "LAC"
       },
       "stats": {
-        "fpts": 3.97,
+        "fpts": 4.02,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -4297,10 +4297,10 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 2.49,
-        "tgts": 3.8,
-        "rec_yds": 17.45,
-        "rec_td": 0.17
+        "rec": 2.48,
+        "tgts": 3.79,
+        "rec_yds": 17.41,
+        "rec_td": 0.18
       }
     },
     "t.j. hockenson_te": {
@@ -4817,7 +4817,7 @@
         "opp": "BAL"
       },
       "stats": {
-        "fpts": 2.58,
+        "fpts": 2.56,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -4826,9 +4826,9 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 1.45,
-        "tgts": 2.43,
-        "rec_yds": 12.74,
+        "rec": 1.43,
+        "tgts": 2.41,
+        "rec_yds": 12.62,
         "rec_td": 0.1
       }
     },
@@ -4840,7 +4840,7 @@
         "opp": "BAL"
       },
       "stats": {
-        "fpts": 2.56,
+        "fpts": 2.55,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -4849,9 +4849,9 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 1.18,
-        "tgts": 1.83,
-        "rec_yds": 14.54,
+        "rec": 1.17,
+        "tgts": 1.81,
+        "rec_yds": 14.4,
         "rec_td": 0.09
       }
     },
@@ -5070,7 +5070,7 @@
         "opp": "LAC"
       },
       "stats": {
-        "fpts": 2.14,
+        "fpts": 2.2,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -5081,8 +5081,8 @@
         "rush_td": 0.0,
         "rec": 1.26,
         "tgts": 1.87,
-        "rec_yds": 9.71,
-        "rec_td": 0.09
+        "rec_yds": 9.69,
+        "rec_td": 0.1
       }
     },
     "audric estime_rb": {
@@ -5185,7 +5185,7 @@
         "opp": "BAL"
       },
       "stats": {
-        "fpts": 1.87,
+        "fpts": 1.86,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -5194,9 +5194,9 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 0.74,
-        "tgts": 1.38,
-        "rec_yds": 10.41,
+        "rec": 0.73,
+        "tgts": 1.37,
+        "rec_yds": 10.31,
         "rec_td": 0.08
       }
     },
@@ -5890,6 +5890,29 @@
         "rec_td": 0.04
       }
     },
+    "matthew hibner_te": {
+      "info": {
+        "player": "Matthew Hibner",
+        "position": "TE",
+        "team": "BAL",
+        "opp": "LAC"
+      },
+      "stats": {
+        "fpts": 1.04,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 0.59,
+        "tgts": 0.88,
+        "rec_yds": 4.45,
+        "rec_td": 0.05
+      }
+    },
     "jalen royals_wr": {
       "info": {
         "player": "Jalen Royals",
@@ -5959,29 +5982,6 @@
         "rec_td": 0.04
       }
     },
-    "matthew hibner_te": {
-      "info": {
-        "player": "Matthew Hibner",
-        "position": "TE",
-        "team": "BAL",
-        "opp": "LAC"
-      },
-      "stats": {
-        "fpts": 0.98,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 0.59,
-        "tgts": 0.88,
-        "rec_yds": 4.46,
-        "rec_td": 0.04
-      }
-    },
     "george holani_rb": {
       "info": {
         "player": "George Holani",
@@ -6047,7 +6047,7 @@
         "rush_td": 0.0,
         "rec": 0.49,
         "tgts": 0.82,
-        "rec_yds": 4.86,
+        "rec_yds": 4.85,
         "rec_td": 0.03
       }
     },
@@ -6232,6 +6232,29 @@
         "rec": 0.02,
         "tgts": 0.03,
         "rec_yds": 0.14,
+        "rec_td": 0.0
+      }
+    },
+    "rasheen ali_rb": {
+      "info": {
+        "player": "Rasheen Ali",
+        "position": "RB",
+        "team": "BAL",
+        "opp": "LAC"
+      },
+      "stats": {
+        "fpts": 0.78,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 1.53,
+        "rush_yds": 5.62,
+        "rush_td": 0.04,
+        "rec": 0.0,
+        "tgts": 0.0,
+        "rec_yds": 0.0,
         "rec_td": 0.0
       }
     },
@@ -6442,29 +6465,6 @@
         "rec_td": 0.0
       }
     },
-    "derius davis_wr": {
-      "info": {
-        "player": "Derius Davis",
-        "position": "WR",
-        "team": "LAC",
-        "opp": "BAL"
-      },
-      "stats": {
-        "fpts": 0.49,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 0.29,
-        "tgts": 0.48,
-        "rec_yds": 3.05,
-        "rec_td": 0.01
-      }
-    },
     "isaiah davis_rb": {
       "info": {
         "player": "Isaiah Davis",
@@ -6488,12 +6488,12 @@
         "rec_td": 0.01
       }
     },
-    "rasheen ali_rb": {
+    "derius davis_wr": {
       "info": {
-        "player": "Rasheen Ali",
-        "position": "RB",
-        "team": "BAL",
-        "opp": "LAC"
+        "player": "Derius Davis",
+        "position": "WR",
+        "team": "LAC",
+        "opp": "BAL"
       },
       "stats": {
         "fpts": 0.48,
@@ -6502,13 +6502,13 @@
         "pass_yds": 0.0,
         "pass_td": 0.0,
         "int": 0.0,
-        "rush_att": 1.03,
-        "rush_yds": 3.79,
-        "rush_td": 0.02,
-        "rec": 0.0,
-        "tgts": 0.0,
-        "rec_yds": 0.0,
-        "rec_td": 0.0
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 0.28,
+        "tgts": 0.48,
+        "rec_yds": 3.02,
+        "rec_td": 0.01
       }
     },
     "jacob cowing_wr": {
@@ -6668,7 +6668,7 @@
         "rush_td": 0.0,
         "rec": 0.17,
         "tgts": 0.3,
-        "rec_yds": 1.75,
+        "rec_yds": 1.74,
         "rec_td": 0.02
       }
     },
@@ -7689,7 +7689,7 @@
       },
       "stats": {
         "fpts": 9.53,
-        "fg": 2.61,
+        "fg": 2.63,
         "xpt": 1.77
       }
     },
@@ -7741,7 +7741,7 @@
       },
       "stats": {
         "fpts": 9.03,
-        "fg": 2.56,
+        "fg": 2.58,
         "xpt": 1.81
       }
     },
@@ -7779,9 +7779,9 @@
         "opp": "LAC"
       },
       "stats": {
-        "fpts": 8.49,
-        "fg": 1.8,
-        "xpt": 2.52
+        "fpts": 8.51,
+        "fg": 1.81,
+        "xpt": 2.54
       }
     },
     "eddy pineiro_k": {
@@ -7922,9 +7922,9 @@
         "opp": "BAL"
       },
       "stats": {
-        "fpts": 7.24,
-        "fg": 1.43,
-        "xpt": 2.54
+        "fpts": 7.26,
+        "fg": 1.44,
+        "xpt": 2.56
       }
     },
     "nick folk_k": {
