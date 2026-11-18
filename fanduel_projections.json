@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-18T01:47:36.499427Z",
+  "updated": "2026-11-18T09:51:31.185355Z",
   "slateId": "WEEKLY",
   "players": {
     "josh allen_qb": {
@@ -7429,9 +7429,9 @@
         "opp": "IND"
       },
       "stats": {
-        "fpts": 10.76,
-        "fg": 2.53,
-        "xpt": 2.26
+        "fpts": 10.75,
+        "fg": 2.52,
+        "xpt": 2.25
       }
     },
     "cam little_k": {
@@ -7468,9 +7468,9 @@
         "opp": "TB"
       },
       "stats": {
-        "fpts": 9.91,
-        "fg": 1.83,
-        "xpt": 3.57
+        "fpts": 9.93,
+        "fg": 1.84,
+        "xpt": 3.59
       }
     },
     "brandon aubrey_k": {
@@ -7611,9 +7611,9 @@
         "opp": "CIN"
       },
       "stats": {
-        "fpts": 8.4,
-        "fg": 1.8,
-        "xpt": 2.28
+        "fpts": 8.41,
+        "fg": 1.81,
+        "xpt": 2.29
       }
     },
     "eddy pineiro_k": {
@@ -7663,9 +7663,9 @@
         "opp": "HOU"
       },
       "stats": {
-        "fpts": 8.11,
+        "fpts": 8.1,
         "fg": 1.58,
-        "xpt": 2.42
+        "xpt": 2.41
       }
     },
     "dominic zvada_k": {
