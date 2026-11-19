@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T18:01:31.563836Z",
+  "updated": "2026-11-19T18:26:25.919275Z",
   "slateId": "WEEKLY",
   "players": {
     "josh allen_qb": {
@@ -8040,12 +8040,12 @@
         "opp": "TB"
       },
       "stats": {
-        "fpts": 7.92,
-        "pa": 18.75,
-        "yds_agn": 307.43,
-        "sack": 2.31,
-        "int": 0.79,
-        "fr": 0.58,
+        "fpts": 8.2,
+        "pa": 19.5,
+        "yds_agn": 306.35,
+        "sack": 2.75,
+        "int": 0.69,
+        "fr": 0.73,
         "td": 0.19
       }
     },
@@ -8100,23 +8100,6 @@
         "td": 0.18
       }
     },
-    "minnesota d/st_dst": {
-      "info": {
-        "player": "Minnesota D/ST",
-        "position": "DST",
-        "team": "MIN",
-        "opp": "SF"
-      },
-      "stats": {
-        "fpts": 6.3,
-        "pa": 24.75,
-        "yds_agn": 378.0,
-        "sack": 2.7,
-        "int": 0.78,
-        "fr": 0.5,
-        "td": 0.14
-      }
-    },
     "new york jets d/st_dst": {
       "info": {
         "player": "New York Jets D/ST",
@@ -8132,6 +8115,23 @@
         "int": 0.52,
         "fr": 0.52,
         "td": 0.16
+      }
+    },
+    "minnesota d/st_dst": {
+      "info": {
+        "player": "Minnesota D/ST",
+        "position": "DST",
+        "team": "MIN",
+        "opp": "SF"
+      },
+      "stats": {
+        "fpts": 6.14,
+        "pa": 24.75,
+        "yds_agn": 375.78,
+        "sack": 2.7,
+        "int": 0.78,
+        "fr": 0.42,
+        "td": 0.15
       }
     },
     "san francisco d/st_dst": {
@@ -8210,11 +8210,11 @@
         "opp": "DET"
       },
       "stats": {
-        "fpts": 5.09,
-        "pa": 25.75,
-        "yds_agn": 392.45,
-        "sack": 2.36,
-        "int": 0.57,
+        "fpts": 5.07,
+        "pa": 26.0,
+        "yds_agn": 393.19,
+        "sack": 2.38,
+        "int": 0.58,
         "fr": 0.43,
         "td": 0.13
       }
