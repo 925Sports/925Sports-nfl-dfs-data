@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-22T19:06:09.086317Z",
+  "updated": "2026-11-22T21:36:28.324108Z",
   "slateId": "WEEKLY",
   "players": {
     "ceedee lamb_wr": {
@@ -7877,7 +7877,7 @@
       },
       "stats": {
         "fpts": 10.97,
-        "fg": 2.98,
+        "fg": 2.99,
         "xpt": 2.28
       }
     },
@@ -7902,9 +7902,9 @@
         "opp": "NYG"
       },
       "stats": {
-        "fpts": 10.18,
-        "fg": 2.01,
-        "xpt": 3.41
+        "fpts": 10.19,
+        "fg": 2.02,
+        "xpt": 3.42
       }
     },
     "evan mcpherson_k": {
@@ -7928,9 +7928,9 @@
         "opp": "TB"
       },
       "stats": {
-        "fpts": 9.68,
+        "fpts": 9.69,
         "fg": 1.76,
-        "xpt": 3.47
+        "xpt": 3.48
       }
     },
     "chase mclaughlin_k": {
@@ -7941,9 +7941,9 @@
         "opp": "DET"
       },
       "stats": {
-        "fpts": 9.42,
-        "fg": 2.03,
-        "xpt": 2.49
+        "fpts": 9.43,
+        "fg": 2.04,
+        "xpt": 2.5
       }
     },
     "brandon aubrey_k": {
@@ -7967,9 +7967,9 @@
         "opp": "SF"
       },
       "stats": {
-        "fpts": 9.07,
+        "fpts": 9.06,
         "fg": 2.13,
-        "xpt": 1.42
+        "xpt": 1.41
       }
     },
     "ryan fitzgerald_k": {
@@ -7980,9 +7980,9 @@
         "opp": "BAL"
       },
       "stats": {
-        "fpts": 8.96,
-        "fg": 1.87,
-        "xpt": 2.86
+        "fpts": 8.97,
+        "fg": 1.88,
+        "xpt": 2.87
       }
     },
     "wil lutz_k": {
@@ -7993,9 +7993,9 @@
         "opp": "LV"
       },
       "stats": {
-        "fpts": 8.89,
+        "fpts": 8.88,
         "fg": 1.67,
-        "xpt": 3.19
+        "xpt": 3.18
       }
     },
     "cairo santos_k": {
@@ -8037,19 +8037,6 @@
         "xpt": 2.17
       }
     },
-    "eddy pineiro_k": {
-      "info": {
-        "player": "Eddy Pineiro",
-        "position": "K",
-        "team": "SF",
-        "opp": "MIN"
-      },
-      "stats": {
-        "fpts": 8.38,
-        "fg": 1.73,
-        "xpt": 2.86
-      }
-    },
     "chris boswell_k": {
       "info": {
         "player": "Chris Boswell",
@@ -8059,8 +8046,21 @@
       },
       "stats": {
         "fpts": 8.37,
-        "fg": 2.13,
+        "fg": 2.15,
         "xpt": 1.66
+      }
+    },
+    "eddy pineiro_k": {
+      "info": {
+        "player": "Eddy Pineiro",
+        "position": "K",
+        "team": "SF",
+        "opp": "MIN"
+      },
+      "stats": {
+        "fpts": 8.36,
+        "fg": 1.72,
+        "xpt": 2.84
       }
     },
     "harrison butker_k": {
@@ -8149,9 +8149,9 @@
         "opp": "JAC"
       },
       "stats": {
-        "fpts": 7.68,
-        "fg": 1.61,
-        "xpt": 2.2
+        "fpts": 7.69,
+        "fg": 1.62,
+        "xpt": 2.21
       }
     },
     "jake elliott_k": {
@@ -8350,12 +8350,12 @@
         "opp": "NYG"
       },
       "stats": {
-        "fpts": 6.92,
+        "fpts": 6.93,
         "pa": 20.0,
-        "yds_agn": 355.82,
-        "sack": 1.46,
+        "yds_agn": 355.35,
+        "sack": 1.45,
         "int": 0.8,
-        "fr": 0.69,
+        "fr": 0.7,
         "td": 0.18
       }
     },
@@ -8554,11 +8554,11 @@
         "opp": "JAC"
       },
       "stats": {
-        "fpts": 4.42,
+        "fpts": 4.39,
         "pa": 25.5,
-        "yds_agn": 388.42,
-        "sack": 1.37,
-        "int": 0.69,
+        "yds_agn": 387.68,
+        "sack": 1.36,
+        "int": 0.68,
         "fr": 0.41,
         "td": 0.14
       }
