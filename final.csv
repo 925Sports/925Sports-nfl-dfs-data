@@ -1,22 +1,22 @@
 Player,Position,Team,Opp,FF Avg,FG Avg,FGA Avg,FPTS Avg,FR Avg,FUM_LOST Avg,INT Avg,PA Avg,PASS_ATT Avg,PASS_CMP Avg,PASS_TD Avg,PASS_YDS Avg,REC Avg,REC_TD Avg,REC_YDS Avg,RUSH_ATT Avg,RUSH_TD Avg,RUSH_YDS Avg,SACK Avg,SAFETY Avg,TD Avg,XPT Avg,YDS_AGN Avg,DraftKings,FanDuel,PrizePicks,Underdog,Fav,Spread,O/U,Match Title (Underdog),Game Short Title (Underdog),Venue Name (Underdog),Venue Type (Underdog),Broadcasts (Underdog),Player Salary,Player Image,Tournament,Game Start Time
-Joe Burrow,QB,CIN,,,,,26.24,,,0.525,,37.665,27.995,2.57,304.68,0,0,0,2.595,0.335,8.25,,,,,,24.78,24.78,24.78,24.78,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,16500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
-Jayden Daniels,QB,WAS,CIN,,,,23.07,,,0.54,,31.455,20.79,1.54,225.19,0,0,0,6.6,0.39,40.775,,,,,,21.05,21.05,21.05,21.05,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,15000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
-Josh Allen,QB,BUF,MIA,,,,22.41,,,0.73,,31.18,20.26,1.5,237.54,0,0,0,5.54,0.555,31.45,,,,,,21.25,21.25,21.25,21.25,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
-Dak Prescott,QB,DAL,TEN,,,,20,,,0.74,,36.51,23.39,2.17,263.505,0,0,0,2.9,0.375,12.68,,,,,,22,22,22,22,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
-Patrick Mahomes,QB,KC,ARI,,,,19.78,,,0.66,,32.32,21.59,1.84,244.425,0,0,0,2.86,0.375,10.015,,,,,,19.73,19.73,19.73,19.73,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
-Brock Purdy,QB,SF,MIN,,,,19.77,,,0.49,,29.535,20.54,2.92,269.22,0,0,0,2.74,0.315,9.58,,,,,,24.81,24.81,24.81,24.81,,,,,,,,,16200,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
-Caleb Williams,QB,CHI,NO,,,,19.63,,,0.58,,32.67,21.655,1.87,258.4,0,0,0,4.21,0.425,22.5,,,,,,22.04,22.04,22.04,22.04,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Joe Burrow,QB,CIN,,,,,26.18,,,0.535,,38.21,28.055,2.59,304.345,0,0,0,2.56,0.34,8.49,,,,,,24.89,24.89,24.89,24.89,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,16500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+Jayden Daniels,QB,WAS,CIN,,,,22.91,,,0.545,,31.525,20.58,1.53,225.01,0,0,0,6.855,0.39,40.97,,,,,,21.01,21.01,21.01,21.01,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,15000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+Josh Allen,QB,BUF,MIA,,,,22.41,,,0.59,,30.58,19.68,1.49,243.875,0,0,0,6.655,0.505,28.715,,,,,,21.03,21.03,21.03,21.03,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Dak Prescott,QB,DAL,TEN,,,,20,,,0.55,,34.45,22.565,2.15,259.755,0,0,0,2.9,0.315,9.245,,,,,,21.25,21.25,21.25,21.25,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Patrick Mahomes,QB,KC,ARI,,,,19.78,,,0.545,,33.68,21.97,1.565,247.05,0,0,0,3.515,0.31,11.965,,,,,,18.65,18.65,18.65,18.65,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Brock Purdy,QB,SF,MIN,,,,19.67,,,0.76,,31.33,21.95,1.78,267.22,0,0,0,3.92,0.19,16.64,,,,,,19.85,19.85,19.85,19.85,,,,,,,,,,,,
+Caleb Williams,QB,CHI,NO,,,,19.63,,,0.58,,32.575,21.66,1.71,257.775,0,0,0,4.615,0.365,20.525,,,,,,20.81,20.81,20.81,20.81,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 C.J. Stroud,QB,HOU,IND,,,,19.34,,,0.61,,34.94,21.95,1.76,263.44,0,0,0,3.43,0.17,14.73,,,,,,19.46,19.46,19.46,19.46,,,,,,,,,,,,
 Trevor Lawrence,QB,JAC,NYG,,,,19.26,,,0.68,,32,21.13,1.69,275.84,0,0,0,2.93,0.16,12.88,,,,,,19.36,19.36,19.36,19.36,,,,,,,,,,,,
-Jared Goff,QB,DET,TB,,,,17.76,,,0.58,,34.585,23.585,1.7,278.66,0,0,0,1.56,0.355,1.5,,,,,,19.65,19.65,19.65,19.65,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Jared Goff,QB,DET,TB,,,,17.76,,,0.515,,34.565,23.545,1.695,274.045,0,0,0,1.56,0.29,0.065,,,,,,18.97,18.97,18.97,18.97,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Bryce Young,QB,CAR,BAL,,,,17.6,,,0.77,,36.7,22.04,1.81,248.85,0,0,0,1.63,0.09,7.2,,,,,,17.68,17.68,17.68,17.68,,,,,,,,,,,,
-Bo Nix,QB,DEN,LV,,,,16.92,,,0.61,,31.31,18.98,1.72,197.57,0,0,0,3.92,0.335,16.64,,,,,,17.85,17.85,17.85,17.85,,,,,,,,,,,,
+Bo Nix,QB,DEN,LV,,,,16.92,,,0.61,,31.31,18.98,1.72,197.57,0,0,0,3.92,0.33,16.64,,,,,,17.82,17.82,17.82,17.82,,,,,,,,,,,,
 J.J. McCarthy,QB,NYG,JAC,,,,16.55,,,0.8,,33.43,19.99,1.17,244.71,0,0,0,4.75,0.19,20.46,,,,,,16.85,16.85,16.85,16.85,,,,,,,,,,,,
 Tyler Shough,QB,NO,CHI,,,,16.53,,,0.73,,35.28,23.55,1.17,240.96,0,0,0,5.05,0.2,21.58,,,,,,16.95,16.95,16.95,16.95,,,,,,,,,,,,
 Cam Ward,QB,TEN,DAL,,,,16.34,,,0.65,,33.41,21.3,1.55,203.81,0,0,0,3.5,0.24,14.96,,,,,,16.64,16.64,16.64,16.64,,,,,,,,,,,,
 Justin Herbert,QB,LAC,NYJ,,,,15.86,,,0.51,,28.22,17.44,1.27,195.84,0,0,0,5.5,0.23,24.61,,,,,,16.24,16.24,16.24,16.24,,,,,,,,,,,,
-Kirk Cousins,QB,MIN,SF,,,,15.36,,,0.605,,42.69,25.43,0.97,290.425,0,0,0,2.375,0.285,-6.485,,,,,,15.95,15.95,15.95,15.95,,,,,,,,,14100,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
-Joe Milton III,QB,PHI,PIT,,,,15.35,,,0.65,,30.16,19.28,1.12,195.85,0,0,0,6.83,0.34,27.565,,,,,,16.46,16.46,16.46,16.46,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Kirk Cousins,QB,MIN,SF,,,,15.46,,,0.73,,32.62,21.03,1.43,229.67,0,0,0,2.59,0.13,9.04,,,,,,15.86,15.86,15.86,15.86,,,,,,,,,,,,
+Joe Milton III,QB,PHI,PIT,,,,15.35,,,0.655,,30.59,18.965,1.245,192.65,0,0,0,6.83,0.385,29.7,,,,,,17.31,17.31,17.31,17.31,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Geno Smith,QB,NYJ,LAC,,,,15.25,,,0.7,,31.53,21.17,1.35,231.78,0,0,0,2.23,0.09,9.6,,,,,,15.47,15.47,15.47,15.47,,,,,,,,,,,,
 Aaron Rodgers,QB,PIT,PHI,,,,14.27,,,0.52,,32.03,19.2,1.47,196.65,0,0,0,1.74,0.27,8.2,,,,,,15.67,15.67,15.67,15.67,,,,,,,,,,,,
 Baker Mayfield,QB,TB,DET,,,,14.08,,,0.69,,29.14,18.7,1.45,188.82,0,0,0,3.15,0.11,13.54,,,,,,14.68,14.68,14.68,14.68,,,,,,,,,,,,
@@ -33,77 +33,77 @@ Luke Altmyer,QB,DET,TB,,,,0.24,,,0.02,,0.71,0.44,0.02,4.51,0,0,0,0,0,0,,,,,,0.24
 Mason Rudolph,QB,PIT,PHI,,,,0.24,,,0.02,,0.68,0.45,0.02,4.62,0,0,0,0,0,0,,,,,,0.24,0.24,0.24,0.24,,,,,,,,,,,,
 Trey Lance,QB,LAC,NYJ,,,,0.23,,,0.02,,0.66,0.37,0.02,4.24,0,0,0,0,0,0,,,,,,0.23,0.23,0.23,0.23,,,,,,,,,,,,
 Anthony Richardson,QB,IND,HOU,,,,0.14,,,0,,0,0,0,0.02,0,0,0,0.22,0.01,0.96,,,,,,0.16,0.16,0.16,0.16,,,,,,,,,,,,
-Jahmyr Gibbs,RB,DET,TB,,,,23.89,,,0,,0,0,0,0,4.585,0.1,37.5,20.59,0.485,89.155,,,,,,20.76,18.47,20.76,20.76,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
-Emmett Johnson,RB,KC,ARI,,,,18.41,,,0,,0,0,0,0,3.43,0.10125,32.81,20.04,0.39375,84.15,,,,,,18.1,16.38,18.1,18.1,,,,,,,,,,,,
+Jahmyr Gibbs,RB,DET,TB,,,,23.89,,,0,,0,0,0,0,4.55,0.1,36.165,19.435,0.485,88.835,,,,,,20.56,18.29,20.56,20.56,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Emmett Johnson,RB,KC,ARI,,,,18.41,,,0,,0,0,0,0,3.43,0.1032954545,32.81,20.04,0.4017045455,84.15,,,,,,18.16,16.44,18.16,18.16,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Derrick Henry,RB,BAL,CAR,,,,17.32,,,0,,0,0,0,0,1.54,0.04,11.75,19.5,0.84,101.98,,,,,,18.19,17.42,18.19,18.19,,,,,,,,,,,,
-James Cook,RB,BUF,MIA,,,,16.91,,,0,,0,0,0,0,1.58,0.05235849057,8.08,17.32,0.5026415094,85.655,,,,,,14.28,13.49,14.28,14.28,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+James Cook,RB,BUF,MIA,,,,16.91,,,0,,0,0,0,0,1.47,0.04811320755,7.16,18.605,0.4618867925,83.085,,,,,,13.55,12.82,13.55,13.55,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Christian McCaffrey,RB,SF,MIN,,,,16.06,,,0,,0,0,0,0,3.98,0.24,40.93,12.33,0.5,55.74,,,,,,18.09,16.1,18.09,18.09,,,,,,,,,,,,
 Bucky Irving,RB,TB,DET,,,,15.76,,,0,,0,0,0,0,2.83,0.13,21.76,19.14,0.53,86.71,,,,,,17.64,16.22,17.64,17.64,,,,,,,,,,,,
-Jonah Coleman,RB,DEN,LV,,,,15.76,,,0,,0,0,0,0,3.37,0.1092857143,24.84,17,0.3857142857,70.87,,,,,,15.91,14.23,15.91,15.91,,,,,,,,,,,,
+Jonah Coleman,RB,DEN,LV,,,,15.76,,,0,,0,0,0,0,3.37,0.1114935065,24.84,17,0.3935064935,70.87,,,,,,15.97,14.29,15.97,15.97,,,,,,,,,,,,
 David Montgomery,RB,HOU,IND,,,,15.71,,,0,,0,0,0,0,2.4,0.08,20.01,15.6,0.93,66.31,,,,,,17.09,15.89,17.09,17.09,,,,,,,,,,,,
-Christian McCaffrey,RB,SF,MIN,,,,15.09,,,0,,0,0,0,0,2.485,0.1508108108,18.955,12.88,0.3141891892,49.09,,,,,,12.08,10.84,12.08,12.08,,,,,,,,,17700,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
 Tony Pollard,RB,TEN,DAL,,,,14.84,,,0,,0,0,0,0,2.55,0.11,15,18.15,0.62,77.84,,,,,,16.21,14.94,16.21,16.21,,,,,,,,,,,,
 Bhayshul Tuten,RB,JAC,NYG,,,,14.83,,,0,,0,0,0,0,2.33,0.12,20.89,17.3,0.64,72.16,,,,,,16.2,15.03,16.2,16.2,,,,,,,,,,,,
-D'Andre Swift,RB,CHI,NO,,,,14.42,,,0,,0,0,0,0,2.495,0.06701149425,15.5,15.12,0.4629885057,52.76,,,,,,12.5,11.25,12.5,12.5,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+D'Andre Swift,RB,CHI,NO,,,,14.42,,,0,,0,0,0,0,2.45,0.0632183908,14.53,13.655,0.4367816092,51.56,,,,,,12.06,10.83,12.06,12.06,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Ollie Gordon II,RB,MIA,BUF,,,,14.12,,,0,,0,0,0,0,2.38,0.06,15.96,19.69,0.47,81.31,,,,,,15.29,14.1,15.29,15.29,,,,,,,,,,,,
 Jonathan Taylor,RB,IND,HOU,,,,13.64,,,0,,0,0,0,0,3.15,0.06,24.21,14.5,0.5,67.41,,,,,,15.67,14.1,15.67,15.67,,,,,,,,,,,,
 Cam Skattebo,RB,NYG,JAC,,,,13.33,,,0,,0,0,0,0,1.91,0.06,15.88,18.12,0.54,76.83,,,,,,14.78,13.83,14.78,14.78,,,,,,,,,,,,
 Jaylen Warren,RB,PIT,PHI,,,,13.14,,,0,,0,0,0,0,2.88,0.1205128205,25.31,14.83,0.3494871795,71.93,,,,,,15.42,13.98,15.42,15.42,,,,,,,,,,,,
 Omarion Hampton,RB,LAC,NYJ,,,,12.82,,,0,,0,0,0,0,1.63,0.07,11.59,16.77,0.6,70.26,,,,,,13.84,13.02,13.84,13.84,,,,,,,,,,,,
 Breece Hall,RB,NYJ,LAC,,,,12.77,,,0,,0,0,0,0,2.9,0.11,28.22,14.22,0.31,60.58,,,,,,14.3,12.85,14.3,14.3,,,,,,,,,,,,
-Chase Brown,RB,CIN,,,,,12.71,,,0,,0,0,0,0,4.45,0.2529824561,26.26,11.9,0.2620175439,44.905,,,,,,14.66,12.43,14.66,14.66,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,14100,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
-Saquon Barkley,RB,PHI,PIT,,,,12.05,,,0,,0,0,0,0,1.92,0.06158536585,15.53,15.1,0.4434146341,72.35,,,,,,13.74,12.78,13.74,13.74,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Chase Brown,RB,CIN,,,,,12.65,,,0,,0,0,0,0,4.8,0.2529824561,26.545,11.845,0.2620175439,44.73,,,,,,15.02,12.62,15.02,15.02,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,14100,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+Saquon Barkley,RB,PHI,PIT,,,,12.05,,,0,,0,0,0,0,1.92,0.05731707317,15.53,15.1,0.4126829268,72.35,,,,,,13.53,12.57,13.53,13.53,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Ashton Jeanty,RB,LV,DEN,,,,11.15,,,0,,0,0,0,0,3.87,0.11,27.86,11.42,0.22,44.07,,,,,,13.04,11.11,13.04,13.04,,,,,,,,,,,,
 Chuba Hubbard,RB,CAR,BAL,,,,11.03,,,0,,0,0,0,0,0,0,0,18.27,0.58,77.28,,,,,,11.21,11.21,11.21,11.21,,,,,,,,,,,,
+Jordan Mason,RB,MIN,SF,,,,10.12,,,0,,0,0,0,0,1.02,0.03,7.58,14.14,0.39,65.74,,,,,,10.87,10.36,10.87,10.87,,,,,,,,,,,,
 Travis Etienne,RB,NO,CHI,,,,10.09,,,0,,0,0,0,0,3.04,0.12,21.12,10.61,0.24,42.56,,,,,,11.57,10.05,11.57,11.57,,,,,,,,,,,,
 Tyler Allgeier,RB,ARI,KC,,,,9.27,,,0,,0,0,0,0,2.39,0.06,20.31,10.65,0.19,45.25,,,,,,10.45,9.25,10.45,10.45,,,,,,,,,,,,
-Jordan Mason,RB,MIN,SF,,,,8.34,,,0,,0,0,0,0,1.63,0.02464285714,0.915,11.475,0.3203571429,34.79,,,,,,7.27,6.46,7.27,7.27,,,,,,,,,10500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
 Rico Dowdle,RB,PIT,PHI,,,,7.98,,,0,,0,0,0,0,2.06,0.1296,13.31,9.6,0.2754,42.16,,,,,,10.04,9.01,10.04,10.04,,,,,,,,,,,,
-Kyle Monangai,RB,CHI,NO,,,,7.91,,,0,,0,0,0,0,1.02,0.04465116279,7.2,9.31,0.4353488372,34.565,,,,,,8.08,7.57,8.08,8.08,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
-Jacory Croskey-Merritt,RB,WAS,CIN,,,,7.62,,,0,,0,0,0,0,1.36,0.03034090909,4.79,10.44,0.4146590909,39.33,,,,,,8.44,7.76,8.44,8.44,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,8700,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
-Aaron Jones,RB,MIN,SF,,,,7.24,,,0,,0,0,0,0,2.495,0.1467391304,20.125,9.695,0.2282608696,36.515,,,,,,10.41,9.16,10.41,10.41,,,,,,,,,10800,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
+Kyle Monangai,RB,CHI,NO,,,,7.91,,,0,,0,0,0,0,1.02,0.04046511628,7.2,8.585,0.3945348837,32.06,,,,,,7.56,7.05,7.56,7.56,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Aaron Jones,RB,MIN,SF,,,,7.8,,,0,,0,0,0,0,2,0.09,15.97,9.04,0.14,40.22,,,,,,9,8,9,9,,,,,,,,,,,,
+Jacory Croskey-Merritt,RB,WAS,CIN,,,,7.63,,,0,,0,0,0,0,0.8,0.03,4.655,10.11,0.41,38.33,,,,,,7.74,7.34,7.74,7.74,,,,n/a,n/a,n/a,n/a,n/a,8700,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
 Zonovan Knight,RB,ARI,KC,,,,7.11,,,0,,0,0,0,0,2.1,0.04,17.17,8.47,0.15,34.47,,,,,,8.4,7.35,8.4,8.4,,,,,,,,,,,,
 Braelon Allen,RB,NYJ,LAC,,,,6.87,,,0,,0,0,0,0,1.23,0.04,8.63,8.97,0.25,38.13,,,,,,7.65,7.03,7.65,7.65,,,,,,,,,,,,
 Kenneth Gainwell,RB,TB,DET,,,,6.82,,,0,,0,0,0,0,2.23,0.08,14.67,6.13,0.19,26.59,,,,,,7.98,6.86,7.98,7.98,,,,,,,,,,,,
 Justice Hill,RB,BAL,CAR,,,,6.52,,,0,,0,0,0,0,2.88,0.07,18.85,4.61,0.12,20.75,,,,,,7.98,6.54,7.98,7.98,,,,,,,,,,,,
-Rachaad White,RB,WAS,CIN,,,,6.42,,,0,,0,0,0,0,2.15,0.1891304348,13.22,6.35,0.2458695652,29.04,,,,,,8.99,7.91,8.99,8.99,,,,n/a,n/a,n/a,n/a,n/a,9300,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
-Samaje Perine,RB,CIN,,,,,5.86,,,0,,0,0,0,0,1.38,0.0948,5.025,6.45,0.3002,20.465,,,,,,6.3,5.61,6.3,6.3,,,,n/a,n/a,n/a,n/a,n/a,6600,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+Rachaad White,RB,WAS,CIN,,,,6.4,,,0,,0,0,0,0,1.685,0.1891304348,10.505,6.625,0.2458695652,26.33,,,,,,7.98,7.14,7.98,7.98,,,,n/a,n/a,n/a,n/a,n/a,9300,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+Samaje Perine,RB,CIN,,,,,5.83,,,0,,0,0,0,0,1.38,0.0948,5.1,6.42,0.3002,20.575,,,,,,6.32,5.63,6.32,6.32,,,,n/a,n/a,n/a,n/a,n/a,6600,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
 J.K. Dobbins,RB,DEN,LV,,,,5.71,,,0,,0,0,0,0,0.36,0.02205882353,1.81,6.89,0.3529411765,33.5,,,,,,6.14,5.96,6.14,6.14,,,,,,,,,,,,
 Mike Washington,RB,LV,DEN,,,,5.52,,,0,,0,0,0,0,0.63,0.01,4.14,8.97,0.18,37.15,,,,,,5.9,5.58,5.9,5.9,,,,,,,,,,,,
+Kaelon Black,RB,SF,MIN,,,,5.29,,,0,,0,0,0,0,0.59,0.02,4.55,8.04,0.2,33.84,,,,,,5.75,5.45,5.75,5.75,,,,,,,,,,,,
 Alvin Kamara,RB,NO,CHI,,,,5.15,,,0,,0,0,0,0,2.74,0.11,18.52,2.58,0.05,10.03,,,,,,6.56,5.19,6.56,6.56,,,,,,,,,,,,
-Kaelon Black,RB,SF,MIN,,,,5.14,,,0,,0,0,0,0,0.59,0.02954545455,3.77,4.545,0.2954545455,17.38,,,,,,4.66,4.36,4.66,4.66,,,,,,,,,7200,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
 Keaton Mitchell,RB,LAC,NYJ,,,,5.1,,,0,,0,0,0,0,1.61,0.06,12.85,4.46,0.12,20.13,,,,,,5.99,5.18,5.99,5.99,,,,,,,,,,,,
 Chris Rodriguez Jr.,RB,JAC,NYG,,,,5.08,,,0,,0,0,0,0,0.66,0.03,5.43,6.18,0.23,26.44,,,,,,5.41,5.08,5.41,5.41,,,,,,,,,,,,
 Emari Demercado,RB,HOU,IND,,,,5.03,,,0,,0,0,0,0,0.7,0.02,4.62,7.03,0.2,29.38,,,,,,5.42,5.07,5.42,5.42,,,,,,,,,,,,
-Ty Johnson,RB,BUF,MIA,,,,4.97,,,0,,0,0,0,0,2,0.2578125,23.28,1.68,0.1171875,7.2,,,,,,7.3,6.3,7.3,7.3,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Ty Johnson,RB,BUF,MIA,,,,4.97,,,0,,0,0,0,0,2.045,0.226875,16.73,1.68,0.103125,7.2,,,,,,6.42,5.4,6.42,6.42,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Kimani Vidal,RB,LAC,NYJ,,,,4.91,,,0,,0,0,0,0,1.74,0.06,14.15,4.27,0.11,16.47,,,,,,5.82,4.95,5.82,5.82,,,,,,,,,,,,
 Seth McGowan,RB,IND,HOU,,,,4.88,,,0,,0,0,0,0,0.67,0.01,4.49,7.37,0.16,31.34,,,,,,5.27,4.94,5.27,5.27,,,,,,,,,,,,
-Austin Ekeler,RB,WAS,CIN,,,,4.11,,,0,,0,0,0,0,1.55,0.135,14.09,3.28,0.24,14.38,,,,,,6.65,5.87,6.65,6.65,,,,n/a,n/a,n/a,n/a,n/a,7800,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+Austin Ekeler,RB,WAS,CIN,,,,4.12,,,0,,0,0,0,0,1.435,0.135,5.735,3.69,0.24,13.515,,,,,,5.61,4.89,5.61,5.61,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,7800,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
 Audric Estime,RB,NO,CHI,,,,3.87,,,0,,0,0,0,0,0.65,0.02,4.79,5.82,0.14,22.07,,,,,,4.3,3.97,4.3,4.3,,,,,,,,,,,,
-Will Shipley,RB,PHI,PIT,,,,3.75,,,0,,0,0,0,0,1.45,0.0885,10.81,3.88,0.2065,14.28,,,,,,5.73,5,5.73,5.73,,,,,,,,,,,,
+Will Shipley,RB,PHI,PIT,,,,3.75,,,0,,0,0,0,0,1.45,0.1275,10.81,3.88,0.2975,14.28,,,,,,6.51,5.78,6.51,6.51,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Devin Singletary,RB,NYG,JAC,,,,3.59,,,0,,0,0,0,0,1.12,0.03,7.91,3.68,0.09,15.19,,,,,,4.15,3.59,4.15,4.15,,,,,,,,,,,,
-Ray Davis,RB,BUF,MIA,,,,3.38,,,0,,0,0,0,0,0.45,0.04666666667,3.94,4.86,0.3033333333,18.64,,,,,,4.81,4.58,4.81,4.81,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
-Sione Vaki,RB,DET,TB,,,,3.09,,,0,,0,0,0,0,0.6,0.07272727273,4.55,4.11,0.3272727273,9.5,,,,,,4.41,4.11,4.41,4.41,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Ray Davis,RB,BUF,MIA,,,,3.38,,,0,,0,0,0,0,0.45,0.04,3.94,4.86,0.26,18.64,,,,,,4.51,4.28,4.51,4.51,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Sione Vaki,RB,DET,TB,,,,3.09,,,0,,0,0,0,0,0.6,0.06090909091,4.55,4.11,0.2740909091,9.5,,,,,,4.01,3.72,4.01,4.01,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Jaylen Wright,RB,MIA,BUF,,,,2.98,,,0,,0,0,0,0,0.78,0.02,5.5,4.01,0.07,16.2,,,,,,3.49,3.1,3.49,3.49,,,,,,,,,,,,
 Tyjae Spears,RB,TEN,DAL,,,,2.87,,,0,,0,0,0,0,2.04,0.08,12.19,0.31,0.01,1.29,,,,,,3.93,2.91,3.93,3.93,,,,,,,,,,,,
-Jaydn Ott,RB,KC,ARI,,,,2.81,,,0,,0,0,0,0,0.57,0.045,4.36,3.54,0.27,13.32,,,,,,4.23,3.94,4.23,4.23,,,,,,,,,,,,
-Javonte Williams,RB,DAL,TEN,,,,2.46,,,0,,0,0,0,0,1.73,0.565,9.54,0,0,80.34,,,,,,14.11,13.24,14.11,14.11,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Jaydn Ott,RB,KC,ARI,,,,2.81,,,0,,0,0,0,0,0.57,0.04285714286,4.36,3.54,0.2571428571,13.32,,,,,,4.14,3.85,4.14,4.14,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Javonte Williams,RB,DAL,TEN,,,,2.46,,,0,,0,0,0,0,1.665,0.55,7.895,18.625,0,76.685,,,,,,13.42,12.59,13.42,13.42,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Michael Carter,RB,TEN,DAL,,,,2.34,,,0,,0,0,0,0,0.73,0.02,4.47,2.38,0.08,9.31,,,,,,2.71,2.34,2.71,2.71,,,,,,,,,,,,
-Kyle Juszczyk,RB,SF,MIN,,,,1.67,,,0,,0,0,0,0,0.86,0.224,8.95,0.18,0.056,0.67,,,,,,3.5,3.07,3.5,3.5,,,,,,,,,4000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
+Kyle Juszczyk,RB,SF,MIN,,,,1.67,,,0,,0,0,0,0,0.86,0.04,8.95,0.18,0.01,0.67,,,,,,2.12,1.69,2.12,2.12,,,,,,,,,,,,
 Trevor Etienne,RB,CAR,BAL,,,,1.46,,,0,,0,0,0,0,0.72,0.03,4.9,0.84,0.02,3.49,,,,,,1.86,1.5,1.86,1.86,,,,,,,,,,,,
 Sean Tucker,RB,TB,DET,,,,1.17,,,0,,0,0,0,0,0,0,0,2.03,0.07,7.91,,,,,,1.21,1.21,1.21,1.21,,,,,,,,,,,,
 Ameer Abdullah,RB,JAC,NYG,,,,1.17,,,0,,0,0,0,0,0.08,0,0.59,2.2,0.04,8.7,,,,,,1.25,1.21,1.25,1.25,,,,,,,,,,,,
 LeQuint Allen Jr.,RB,JAC,NYG,,,,0.99,,,0,,0,0,0,0,0.6,0.02,4.58,0.2,0.01,0.75,,,,,,1.31,1.01,1.31,1.31,,,,,,,,,,,,
-Jaydon Blue,RB,PHI,PIT,,,,0.96,,,0,,0,0,0,0,0.3,0.09,2.24,1.03,0.18,4.25,,,,,,2.57,2.42,2.57,2.57,,,,,,,,,,,,
+Jaydon Blue,RB,PHI,PIT,,,,0.96,,,0,,0,0,0,0,0.3,0.09166666667,2.24,1.03,0.1833333333,4.25,,,,,,2.6,2.45,2.6,2.6,,,,,,,,,,,,
 Alec Ingold,RB,LAC,NYJ,,,,0.95,,,0,,0,0,0,0,0.16,0.01,1.35,1.24,0.04,4.54,,,,,,1.05,0.97,1.05,1.05,,,,,,,,,,,,
 Nicholas Singleton,RB,TEN,DAL,,,,0.92,,,0,,0,0,0,0,0.18,0.01,1.27,1.13,0.04,4.23,,,,,,1.03,0.94,1.03,1.03,,,,,,,,,,,,
 Kaytron Allen,RB,MIA,BUF,,,,0.89,,,0,,0,0,0,0,0.16,0,1.18,1.43,0.03,5.34,,,,,,0.99,0.91,0.99,0.99,,,,,,,,,,,,
-DeeJay Dallas,RB,MIN,SF,,,,0.76,,,0,,0,0,0,0,0.3,0.09,2.17,0.6,0.18,2.33,,,,,,2.37,2.22,2.37,2.37,,,,,,,,,4000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
+DeeJay Dallas,RB,MIN,SF,,,,0.76,,,0,,0,0,0,0,0.3,0.01,2.17,0.6,0.02,2.33,,,,,,0.93,0.78,0.93,0.93,,,,,,,,,,,,
 Dare Ogunbowale,RB,HOU,IND,,,,0.71,,,0,,0,0,0,0,0,0,0,1.28,0.04,4.68,,,,,,0.71,0.71,0.71,0.71,,,,,,,,,,,,
 Kendre Miller,RB,NO,CHI,,,,0.59,,,0,,0,0,0,0,0,0,0.02,1.03,0.03,4.23,,,,,,0.61,0.61,0.61,0.61,,,,,,,,,,,,
-Hunter Luepke,RB,DAL,TEN,,,,0.59,,,0,,0,0,0,0,0.44,0.345,3.1,0,0,0,,,,,,2.82,2.6,2.82,2.82,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Hunter Luepke,RB,DAL,TEN,,,,0.59,,,0,,0,0,0,0,0.44,0.305,3.1,0,0,0,,,,,,2.58,2.36,2.58,2.58,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Rasheen Ali,RB,BAL,CAR,,,,0.58,,,0,,0,0,0,0,0.17,0,1,0.8,0.02,2.98,,,,,,0.69,0.6,0.69,0.69,,,,,,,,,,,,
-Jordan James,RB,SF,MIN,,,,0.55,,,0,,0,0,0,0,0.07,0,0.55,0.96,0.02,3.59,,,,,,0.6,0.57,0.6,0.6,,,,,,,,,4000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
-Roschon Johnson,RB,CHI,NO,,,,0.53,,,0,,0,0,0,0,0.18,0.095,1.16,0.4,0.19,1.49,,,,,,2.16,2.07,2.16,2.16,,,,,,,,,,,,
+Jordan James,RB,SF,MIN,,,,0.55,,,0,,0,0,0,0,0.07,0,0.55,0.96,0.02,3.59,,,,,,0.6,0.57,0.6,0.6,,,,,,,,,,,,
+Roschon Johnson,RB,CHI,NO,,,,0.53,,,0,,0,0,0,0,0.18,0.09666666667,1.16,0.4,0.1933333333,1.49,,,,,,2.19,2.09,2.19,2.19,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Travis Homer,RB,PIT,PHI,,,,0.51,,,0,,0,0,0,0,0.03,0,0.21,0.91,0.265,3.57,,,,,,2,1.98,2,2,,,,,,,,,,,,
 Evan Hull,RB,ARI,KC,,,,0.47,,,0,,0,0,0,0,0.23,0,1.84,0.29,0.01,1.07,,,,,,0.58,0.47,0.58,0.58,,,,,,,,,,,,
 DJ Herman,RB,MIA,BUF,,,,0.42,,,0,,0,0,0,0,0.2,0,1.41,0.36,0.01,1.35,,,,,,0.54,0.44,0.54,0.54,,,,,,,,,,,,
@@ -111,252 +111,252 @@ Isaiah Davis,RB,NYJ,LAC,,,,0.39,,,0,,0,0,0,0,0.17,0,1.36,0.28,0.01,1.12,,,,,,0.4
 Lew Nichols,RB,PIT,PHI,,,,0.39,,,0,,0,0,0,0,0.12,0,0.8,0.5,0.265,1.9,,,,,,1.98,1.92,1.98,1.98,,,,,,,,,,,,
 Tahj Brooks,RB,CIN,WSH,,,,0.37,,,0,,0,0,0,0,0,0,0,0.74,0.27,2.74,,,,,,1.89,1.89,1.89,1.89,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,4000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,
 Adam Prentice,RB,DEN,LV,,,,0.34,,,0,,0,0,0,0,0.2,0.01,1.35,0.11,0,0.41,,,,,,0.44,0.34,0.44,0.44,,,,,,,,,,,,
-Max Bredeson,RB,MIN,SF,,,,0.32,,,0,,0,0,0,0,0.2,0.265,1.62,0,0,0,,,,,,1.95,1.85,1.95,1.95,,,,,,,,,4000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
+Max Bredeson,RB,MIN,SF,,,,0.32,,,0,,0,0,0,0,0.2,0.01,1.62,0,0,0,,,,,,0.42,0.32,0.42,0.42,,,,,,,,,,,,
 Dylan Laube,RB,LV,DEN,,,,0.21,,,0,,0,0,0,0,0,0,0,0.45,0.01,1.67,,,,,,0.23,0.23,0.23,0.23,,,,,,,,,,,,
-Robert Henry Jr.,RB,WSH,CIN,,,,0.21,,,0,,0,0,0,0,0,0,0,0.4,0.285,1.49,,,,,,1.86,1.86,1.86,1.86,,,,,,,,,4000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,
-Demond Claiborne,RB,MIN,SF,,,,0.2,,,0,,0,0,0,0,0,0,0,0.39,0.01,1.45,,,,,,0.21,0.21,0.21,0.21,,,,,,,,,4000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
+Robert Henry Jr.,RB,WSH,CIN,,,,0.21,,,0,,0,0,0,0,0,0,0,0.4,0.28,1.49,,,,,,1.83,1.83,1.83,1.83,,,,n/a,n/a,n/a,n/a,n/a,4000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+Demond Claiborne,RB,MIN,SF,,,,0.2,,,0,,0,0,0,0,0,0,0,0.39,0.01,1.45,,,,,,0.21,0.21,0.21,0.21,,,,,,,,,,,,
 Patrick Ricard,RB,NYG,JAC,,,,0.19,,,0,,0,0,0,0,0.15,0,1.11,0,0,0,,,,,,0.26,0.19,0.26,0.26,,,,,,,,,,,,
 DJ Giddens,RB,IND,HOU,,,,0.17,,,0,,0,0,0,0,0.1,0,0.69,0.13,0,0.47,,,,,,0.22,0.17,0.22,0.22,,,,,,,,,,,,
 Woody Marks,RB,HOU,IND,,,,0.15,,,0,,0,0,0,0,0,0,0.02,0.23,0.01,0.9,,,,,,0.15,0.15,0.15,0.15,,,,,,,,,,,,
 Andrew Beck,RB,NYJ,LAC,,,,0.1,,,0,,0,0,0,0,0.08,0,0.63,0,0,0,,,,,,0.14,0.1,0.14,0.14,,,,,,,,,,,,
-Jacob Saylors,RB,DET,TB,,,,0.04,,,0,,0,0,0,0,0,0,0,0.1,0.345,0.37,,,,,,2.11,2.11,2.11,2.11,,,,,,,,,,,,
+Jacob Saylors,RB,DET,TB,,,,0.04,,,0,,0,0,0,0,0,0,0,0.1,0.27,0.37,,,,,,1.66,1.66,1.66,1.66,,,,,,,,,,,,
 C.J. Ham,RB,MIN,SF,,,,0.03,,,0,,0,0,0,0,0,0,0,0.09,0,0.32,,,,,,0.03,0.03,0.03,0.03,,,,,,,,,,,,
 A.J. Dillon,RB,CAR,BAL,,,,0.02,,,0,,0,0,0,0,0,0,0,0.06,0,0.22,,,,,,0.02,0.02,0.02,0.02,,,,,,,,,,,,
 Julius Chestnut,RB,TEN,DAL,,,,0.01,,,0,,0,0,0,0,0,0,0,0.02,0,0.06,,,,,,0.01,0.01,0.01,0.01,,,,,,,,,,,,
-CeeDee Lamb,WR,DAL,TEN,,,,35.86,,,0,,0,0,0,0,6.765,0.1623880597,85.99,24.35,0.3476119403,118.08,,,,,,30.23,26.85,30.23,30.23,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
-Ja'Marr Chase,WR,CIN,WSH,,,,19.74,,,0,,0,0,0,0,8.285,0.535,95.875,0,0,0,,,,,,21.08,16.94,21.08,21.08,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,17400,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
-Amon-Ra St. Brown,WR,DET,TB,,,,16.7,,,0,,0,0,0,0,7.465,0.535,89.5,0,0,0,,,,,,19.63,15.89,19.63,19.63,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+CeeDee Lamb,WR,DAL,TEN,,,,35.86,,,0,,0,0,0,0,6.435,0.1623880597,83.14,24.35,0.3476119403,118.08,,,,,,29.62,26.4,29.62,29.62,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Ja'Marr Chase,WR,CIN,WSH,,,,19.74,,,0,,0,0,0,0,8.35,0.54,97.06,0,0,0,,,,,,21.3,17.12,21.3,21.3,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,17400,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+Amon-Ra St. Brown,WR,DET,TB,,,,16.7,,,0,,0,0,0,0,7.405,0.515,87.205,0,0,0,,,,,,19.22,15.51,19.22,19.22,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Nico Collins,WR,HOU,IND,,,,14.4,,,0,,0,0,0,0,5.87,0.49,84.4,0.13,0.01,0.62,,,,,,17.37,14.44,17.37,17.37,,,,,,,,,,,,
-Tee Higgins,WR,CIN,,,,,14.13,,,0,,0,0,0,0,5.515,0.49,75.38,0,0,0,,,,,,15.99,13.24,15.99,15.99,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,15900,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
-Ja`Marr Chase,WR,CIN,,,,,13.83,,,,,,,,0,,,96,,,1,,,,,,9.7,9.7,9.7,9.7,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,,,,
+Justin Jefferson,WR,MIN,SF,,,,14.18,,,0,,0,0,0,0,6.71,0.48,79.62,0,0,0,,,,,,17.55,14.2,17.55,17.55,,,,,,,,,,,,
+Tee Higgins,WR,CIN,,,,,14.12,,,0,,0,0,0,0,5.515,0.49,75.735,0,0,0,,,,,,16.03,13.27,16.03,16.03,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,15900,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+Ja`Marr Chase,WR,CIN,,,,,13.8,,,,,,,,0,,,96,,,1,,,,,,9.7,9.7,9.7,9.7,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,,,,
 Parker Washington,WR,JAC,NYG,,,,13.53,,,0,,0,0,0,0,4.91,0.46,84.9,0,0,0,,,,,,16.16,13.71,16.16,16.16,,,,,,,,,,,,
 Tetairoa McMillan,WR,CAR,BAL,,,,13.14,,,0,,0,0,0,0,5.73,0.46,76.39,0,0,0,,,,,,16.13,13.26,16.13,16.13,,,,,,,,,,,,
-Justin Jefferson,WR,MIN,SF,,,,12.81,,,0,,0,0,0,0,7.14,0.415,95.715,0,0,0,,,,,,19.2,15.63,19.2,19.2,,,,,,,,,15600,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
-George Pickens,WR,DAL,TEN,,,,12.41,,,0,,0,0,0,0,4.615,0.49,66.44,0,0,0,,,,,,14.2,11.89,14.2,14.2,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+George Pickens,WR,DAL,TEN,,,,12.41,,,0,,0,0,0,0,4.69,0.475,65.07,0,0,0,,,,,,14.05,11.7,14.05,14.05,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Malik Nabers,WR,NYG,JAC,,,,12.25,,,0,,0,0,0,0,5.52,0.3,77.69,0,0,0,,,,,,15.09,12.33,15.09,15.09,,,,,,,,,,,,
 Jalen Coker,WR,CAR,BAL,,,,11.77,,,0,,0,0,0,0,5.44,0.41,67.11,0,0,0,,,,,,14.61,11.89,14.61,14.61,,,,,,,,,,,,
-Luther Burden III,WR,CHI,NO,,,,11.7,,,0,,0,0,0,0,4.835,0.49,63.5,0,0,0,,,,,,14.13,11.71,14.13,14.13,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Luther Burden III,WR,CHI,NO,,,,11.7,,,0,,0,0,0,0,5.21,0.46,57.475,0,0,0,,,,,,13.72,11.11,13.72,13.72,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Chris Olave,WR,NO,CHI,,,,11.58,,,0,,0,0,0,0,5.26,0.32,70.34,0,0,0,,,,,,14.21,11.58,14.21,14.21,,,,,,,,,,,,
-DeVonta Smith,WR,PHI,PIT,,,,10.8,,,0,,0,0,0,0,5.615,0.465,66.045,0,0,0,,,,,,15.01,12.2,15.01,15.01,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+DeVonta Smith,WR,PHI,PIT,,,,10.8,,,0,,0,0,0,0,5.16,0.395,63.16,0,0,0,,,,,,13.85,11.27,13.85,13.85,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Garrett Wilson,WR,NYJ,LAC,,,,10.54,,,0,,0,0,0,0,5.22,0.29,62.7,0,0,0,,,,,,13.23,10.62,13.23,13.23,,,,,,,,,,,,
 Carnell Tate,WR,TEN,DAL,,,,10.13,,,0,,0,0,0,0,4.7,0.41,54.63,0,0,0,,,,,,12.62,10.27,12.62,12.62,,,,,,,,,,,,
-Stefon Diggs,WR,WAS,CIN,,,,9.91,,,0,,0,0,0,0,4.56,0.42,46.71,0,0,0,,,,,,11.75,9.47,11.75,11.75,,,,n/a,n/a,n/a,n/a,n/a,12600,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
-Jaylen Waddle,WR,DEN,LV,,,,9.71,,,0,,0,0,0,0,4,0.35,51.85,0,0,0,,,,,,11.29,9.29,11.29,11.29,,,,,,,,,,,,
-D.J. Moore,WR,BUF,MIA,,,,9.53,,,0,,0,0,0,0,3.76,0.44,48.38,0,0,0,,,,,,11.24,9.36,11.24,11.24,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
-Rashee Rice,WR,KC,ARI,,,,9.52,,,0,,0,0,0,0,5.44,0.455,55.46,0,0,0,,,,,,13.72,11,13.72,13.72,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
-Jameson Williams,WR,DET,TB,,,,9.47,,,0,,0,0,0,0,3.685,0.44,57.5,0,0,0,,,,,,12.08,10.23,12.08,12.08,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Stefon Diggs,WR,WAS,CIN,,,,9.87,,,0,,0,0,0,0,4.55,0.42,46.59,0,0,0,,,,,,11.73,9.45,11.73,11.73,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,12600,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+Jaylen Waddle,WR,DEN,LV,,,,9.71,,,0,,0,0,0,0,4,0.355,51.85,0,0,0,,,,,,11.32,9.32,11.32,11.32,,,,,,,,,,,,
+D.J. Moore,WR,BUF,MIA,,,,9.53,,,0,,0,0,0,0,3.94,0.405,44.835,0,0,0,,,,,,10.85,8.88,10.85,10.85,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Rashee Rice,WR,KC,ARI,,,,9.52,,,0,,0,0,0,0,4.59,0.41,46.54,0,0,0,,,,,,11.7,9.41,11.7,11.7,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Jameson Williams,WR,DET,TB,,,,9.47,,,0,,0,0,0,0,3.635,0.405,53.945,0,0,0,,,,,,11.46,9.64,11.46,11.46,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Jakobi Meyers,WR,JAC,NYG,,,,9.04,,,0,,0,0,0,0,4.21,0.24,54.91,0,0,0,,,,,,11.14,9.04,11.14,11.14,,,,,,,,,,,,
 Zay Flowers,WR,BAL,CAR,,,,8.99,,,0,,0,0,0,0,4.71,0.2,54.99,0,0,0,,,,,,11.41,9.05,11.41,11.41,,,,,,,,,,,,
 D.K. Metcalf,WR,PIT,PHI,,,,8.89,,,0,,0,0,0,0,3.68,0.35,46.28,0,0,0,,,,,,10.41,8.57,10.41,10.41,,,,,,,,,,,,
+Mike Evans,WR,SF,MIN,,,,8.88,,,0,,0,0,0,0,3.11,0.44,46.66,0,0,0,,,,,,10.42,8.86,10.42,10.42,,,,,,,,,,,,
 Emeka Egbuka,WR,TB,DET,,,,8.87,,,0,,0,0,0,0,3.93,0.35,48.27,0,0,0,,,,,,10.86,8.89,10.86,10.86,,,,,,,,,,,,
-Mike Evans,WR,SF,MIN,,,,8.25,,,0,,0,0,0,0,4.505,0.37,77.795,0,0,0,,,,,,14.5,12.25,14.5,14.5,,,,,,,,,12000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
-Khalil Shakir,WR,BUF,MIA,,,,8.07,,,0,,0,0,0,0,3.615,0.415,37.5,0,0,0,,,,,,9.86,8.05,9.86,9.86,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
-Rome Odunze,WR,CHI,NO,,,,7.93,,,0,,0,0,0,0,3.435,0.47,48.5,0,0,0,,,,,,11.11,9.39,11.11,11.11,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Khalil Shakir,WR,BUF,MIA,,,,8.07,,,0,,0,0,0,0,3.515,0.385,34.18,0,0,0,,,,,,9.24,7.49,9.24,9.24,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Rome Odunze,WR,CHI,NO,,,,7.93,,,0,,0,0,0,0,3.415,0.425,41.15,0,0,0,,,,,,10.08,8.37,10.08,10.08,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Tank Dell,WR,HOU,IND,,,,7.73,,,0,,0,0,0,0,3.08,0.26,42.47,0.51,0.03,2.41,,,,,,9.31,7.77,9.31,9.31,,,,,,,,,,,,
-Ryan Flournoy,WR,DAL,TEN,,,,7.67,,,0,,0,0,0,0,2.7,0.365,30.5,0,0,0,,,,,,7.94,6.59,7.94,7.94,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Ryan Flournoy,WR,DAL,TEN,,,,7.67,,,0,,0,0,0,0,3.24,0.39,29.09,0,0,0,,,,,,8.49,6.87,8.49,8.49,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Caleb Douglas,WR,MIA,BUF,,,,7.41,,,0,,0,0,0,0,3.66,0.16,46.64,0,0,0,,,,,,9.28,7.45,9.28,9.28,,,,,,,,,,,,
-Keon Coleman,WR,BUF,MIA,,,,7.29,,,0,,0,0,0,0,2.82,0.41,41.01,0,0,0,,,,,,9.38,7.97,9.38,9.38,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Keon Coleman,WR,BUF,MIA,,,,7.29,,,0,,0,0,0,0,2.16,0.355,24.33,0,0,0,,,,,,6.72,5.64,6.72,6.72,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Xavier Hutchinson,WR,HOU,IND,,,,7.2,,,0,,0,0,0,0,3.34,0.27,38.31,0.13,0.01,0.6,,,,,,8.91,7.24,8.91,8.91,,,,,,,,,,,,
 Adonai Mitchell,WR,NYJ,LAC,,,,7.16,,,0,,0,0,0,0,3.09,0.22,43.59,0,0,0,,,,,,8.77,7.22,8.77,8.77,,,,,,,,,,,,
 Courtland Sutton,WR,DEN,LV,,,,7.09,,,0,,0,0,0,0,2.79,0.355,35.37,0,0,0,,,,,,8.46,7.06,8.46,8.46,,,,,,,,,,,,
-Antonio Williams,WR,WAS,CIN,,,,6.95,,,0,,0,0,0,0,3.52,0.375,35.895,0,0,0,,,,,,9.36,7.6,9.36,9.36,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,10200,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+Antonio Williams,WR,WAS,CIN,,,,6.94,,,0,,0,0,0,0,3.5,0.375,35.66,0,0,0,,,,,,9.32,7.57,9.32,9.32,,,,n/a,n/a,n/a,n/a,n/a,10200,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
 Jordyn Tyson,WR,NO,CHI,,,,6.54,,,0,,0,0,0,0,4.49,0,43.8,0,0,0,,,,,,8.87,6.63,8.87,8.87,,,,,,,,,,,,
 Tre Harris,WR,LAC,NYJ,,,,6.53,,,0,,0,0,0,0,3.02,0.21,37.8,0,0,0,,,,,,8.06,6.55,8.06,8.06,,,,,,,,,,,,
 Malachi Fields,WR,NYG,JAC,,,,6.36,,,0,,0,0,0,0,2.87,0.17,39.41,0,0,0,,,,,,7.83,6.4,7.83,7.83,,,,,,,,,,,,
 Tre Tucker,WR,LV,DEN,,,,6.34,,,0,,0,0,0,0,3.12,0.15,38.56,0,0,0,,,,,,7.88,6.32,7.88,7.88,,,,,,,,,,,,
 Germie Bernard,WR,PIT,PHI,,,,6.25,,,0,,0,0,0,0,3.21,0.34,33.08,0,0,0,,,,,,8.56,6.95,8.56,8.56,,,,,,,,,,,,
-Deebo Samuel,WR,SF,MIN,,,,6.23,,,0,,0,0,0,0,2.56,0.33,31.44,1.82,0,7.95,,,,,,8.48,7.2,8.48,8.48,,,,,,,,,11400,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
-Treylon Burks,WR,WAS,CIN,,,,6.17,,,0,,0,0,0,0,2.405,0.365,29.075,0,0,0,,,,,,7.5,6.3,7.5,7.5,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,7200,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
-Makai Lemon,WR,PHI,PIT,,,,6,,,0,,0,0,0,0,3.27,0.385,35.66,0,0,0,,,,,,9.15,7.51,9.15,9.15,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Treylon Burks,WR,WAS,CIN,,,,6.14,,,0,,0,0,0,0,2.385,0.365,28.795,0,0,0,,,,,,7.45,6.26,7.45,7.45,,,,n/a,n/a,n/a,n/a,n/a,7200,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+Makai Lemon,WR,PHI,PIT,,,,6,,,0,,0,0,0,0,3.145,0.355,28.67,0,0,0,,,,,,8.14,6.57,8.14,8.14,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Chris Godwin,WR,TB,DET,,,,5.95,,,0,,0,0,0,0,3.1,0.22,30.79,0,0,0,,,,,,7.5,5.95,7.5,7.5,,,,,,,,,,,,
 Anthony Gould,WR,IND,HOU,,,,5.87,,,0,,0,0,0,0,3.3,0.09,38.38,0,0,0,,,,,,7.68,6.03,7.68,7.68,,,,,,,,,,,,
-Josh Downs,WR,KC,ARI,,,,5.68,,,0,,0,0,0,0,2.71,0.4,29.41,0,0,0,,,,,,8.05,6.7,8.05,8.05,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Josh Downs,WR,KC,ARI,,,,5.68,,,0,,0,0,0,0,3.425,0.385,34.055,0,0,0,,,,,,9.14,7.43,9.14,9.14,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Quentin Johnston,WR,LAC,NYJ,,,,5.61,,,0,,0,0,0,0,2.14,0.21,32.82,0,0,0,,,,,,6.68,5.61,6.68,6.68,,,,,,,,,,,,
 Ja'Kobi Lane,WR,BAL,CAR,,,,5.59,,,0,,0,0,0,0,2.66,0.25,27.64,0,0,0,,,,,,6.92,5.59,6.92,6.92,,,,,,,,,,,,
 Laquon Treadwell,WR,IND,HOU,,,,5.42,,,0,,0,0,0,0,2.92,0.1,33.81,0,0,0,,,,,,6.9,5.44,6.9,6.9,,,,,,,,,,,,
-Kalif Raymond,WR,CHI,NO,,,,5.33,,,0,,0,0,0,0,2.505,0.42,22.5,0,0,0,,,,,,7.28,6.02,7.28,7.28,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Kalif Raymond,WR,CHI,NO,,,,5.33,,,0,,0,0,0,0,2.465,0.36,21.9,0,0,0,,,,,,6.82,5.58,6.82,6.82,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Elic Ayomanor,WR,TEN,DAL,,,,5.33,,,0,,0,0,0,0,2.25,0.23,28.41,0,0,0,,,,,,6.47,5.35,6.47,6.47,,,,,,,,,,,,
+Deebo Samuel,WR,SF,MIN,,,,5.29,,,0,,0,0,0,0,2.6,0.18,29.87,0,0,0,,,,,,6.67,5.37,6.67,6.67,,,,,,,,,,,,
 Tez Johnson,WR,TB,DET,,,,5.14,,,0,,0,0,0,0,1.85,0.29,24.92,0,0,0,,,,,,6.08,5.16,6.08,6.08,,,,,,,,,,,,
-Xavier Worthy,WR,KC,ARI,,,,4.98,,,0,,0,0,0,0,2.65,0.415,26.58,0,0,0,,,,,,7.8,6.47,7.8,7.8,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Xavier Worthy,WR,KC,ARI,,,,4.98,,,0,,0,0,0,0,2.56,0.35,24.62,0,0,0,,,,,,7.12,5.84,7.12,7.12,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Simi Fehoko,WR,ARI,KC,,,,4.95,,,0,,0,0,0,0,2.33,0.1,32.08,0,0,0,,,,,,6.14,4.97,6.14,6.14,,,,,,,,,,,,
 Ladd McConkey,WR,LAC,NYJ,,,,4.92,,,0,,0,0,0,0,2.09,0.16,29.39,0,0,0,,,,,,5.99,4.94,5.99,5.99,,,,,,,,,,,,
 Malik Washington,WR,MIA,BUF,,,,4.87,,,0,,0,0,0,0,3.11,0.11,26.97,0,0,0,,,,,,6.47,4.91,6.47,6.47,,,,,,,,,,,,
-Jauan Jennings,WR,MIN,SF,,,,4.83,,,0,,0,0,0,0,2.615,0.32,23.615,0,0,0,,,,,,6.9,5.59,6.9,6.9,,,,,,,,,4800,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
+Jauan Jennings,WR,MIN,SF,,,,4.83,,,0,,0,0,0,0,2.21,0.17,27.45,0,0,0,,,,,,5.98,4.87,5.98,5.98,,,,,,,,,,,,
 Kayshon Boutte,WR,HOU,IND,,,,4.79,,,0,,0,0,0,0,1.67,0.24,25.16,0,0,0,,,,,,5.63,4.79,5.63,5.63,,,,,,,,,,,,
 Pat Bryant,WR,DEN,LV,,,,4.77,,,0,,0,0,0,0,2.06,0.315,24.65,0,0,0,,,,,,6.42,5.39,6.42,6.42,,,,,,,,,,,,
-Darius Cooper,WR,PHI,PIT,,,,4.61,,,0,,0,0,0,0,1.88,0.38,26.06,0,0,0,,,,,,6.77,5.83,6.77,6.77,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Darius Cooper,WR,PHI,PIT,,,,4.61,,,0,,0,0,0,0,2.43,0.33,24.415,0,0,0,,,,,,6.85,5.64,6.85,6.85,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Jalen Nailor,WR,LV,DEN,,,,4.58,,,0,,0,0,0,0,2.22,0.11,28.32,0,0,0,,,,,,5.71,4.6,5.71,5.71,,,,,,,,,,,,
 Deion Burks,WR,IND,HOU,,,,4.48,,,0,,0,0,0,0,1.96,0.14,24.94,0.26,0.01,1.21,,,,,,5.48,4.5,5.48,5.48,,,,,,,,,,,,
 Ashton Dulin,WR,IND,HOU,,,,4.38,,,0,,0,0,0,0,1.75,0.12,25,0.39,0.02,1.88,,,,,,5.28,4.4,5.28,5.28,,,,,,,,,,,,
-Keenan Allen,WR,SF,MIN,,,,4.34,,,0,,0,0,0,0,1.85,0.325,15.22,0,0,0,,,,,,5.32,4.4,5.32,5.32,,,,,,,,,9900,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
 Roman Wilson,WR,PIT,PHI,,,,4.31,,,0,,0,0,0,0,2.02,0.32,23.81,0,0,0,,,,,,6.32,5.31,6.32,6.32,,,,,,,,,,,,
+Keenan Allen,WR,SF,MIN,,,,4.17,,,0,,0,0,0,0,2.18,0.15,22.19,0,0,0,,,,,,5.3,4.21,5.3,5.3,,,,,,,,,,,,
 Darnell Mooney,WR,NYG,JAC,,,,4.09,,,0,,0,0,0,0,1.75,0.09,26.91,0,0,0,,,,,,4.98,4.11,4.98,4.98,,,,,,,,,,,,
 Devaughn Vele,WR,NO,CHI,,,,4.03,,,0,,0,0,0,0,1.97,0.14,22.28,0,0,0,,,,,,5.04,4.05,5.04,5.04,,,,,,,,,,,,
-Dohnte Meyers,WR,CIN,,,,,4.02,,,0,,0,0,0,0,2.4,0.3333333333,21.36,0.22,0.01666666667,1.52,,,,,,6.79,5.59,6.79,6.79,,,,n/a,n/a,n/a,n/a,n/a,5400,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+Dohnte Meyers,WR,CIN,,,,,4.02,,,0,,0,0,0,0,2.405,0.3285714286,21.035,0.22,0.01642857143,1.52,,,,,,6.73,5.53,6.73,6.73,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,5400,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
 Brian Thomas Jr.,WR,JAC,NYG,,,,4.02,,,0,,0,0,0,0,1.43,0.2,21.21,0,0,0,,,,,,4.75,4.04,4.75,4.75,,,,,,,,,,,,
-Tai Felton,WR,MIN,SF,,,,4.01,,,0,,0,0,0,0,4.385,0.305,36.72,0,0,0,,,,,,9.89,7.69,9.89,9.89,,,,,,,,,4200,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
-Andrei Iosivas,WR,CIN,,,,,3.97,,,,,,,,0,,0.33,26,,0,0,,,,,,4.58,4.58,4.58,4.58,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,4500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,
+Tai Felton,WR,MIN,SF,,,,4.01,,,0,,0,0,0,0,1.5,0.19,21.42,0,0,0,,,,,,4.78,4.03,4.78,4.78,,,,,,,,,,,,
+Andrei Iosivas,WR,CIN,,,,,3.98,,,,,,,,0,,0.33,26,,0,0,,,,,,4.58,4.58,4.58,4.58,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,4500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,
 Reggie Virgil,WR,ARI,KC,,,,3.93,,,0,,0,0,0,0,1.57,0.13,23.81,0,0,0,,,,,,4.73,3.95,4.73,4.73,,,,,,,,,,,,
 Chris Bell,WR,MIA,BUF,,,,3.93,,,0,,0,0,0,0,2.05,0.09,24.02,0,0,0,,,,,,4.99,3.97,4.99,4.99,,,,,,,,,,,,
 Rashod Bateman,WR,BAL,CAR,,,,3.78,,,0,,0,0,0,0,1.9,0.1,22.54,0,0,0,,,,,,4.75,3.8,4.75,4.75,,,,,,,,,,,,
-Cyrus Allen,WR,KC,ARI,,,,3.76,,,0,,0,0,0,0,1.24,0.35,17.75,0,0,0,,,,,,5.12,4.5,5.12,5.12,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Cyrus Allen,WR,KC,ARI,,,,3.76,,,0,,0,0,0,0,1.24,0.325,17.75,0,0,0,,,,,,4.97,4.35,4.97,4.97,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Chimere Dike,WR,TEN,DAL,,,,3.66,,,0,,0,0,0,0,1.99,0.14,19.48,0,0,0,,,,,,4.78,3.78,4.78,4.78,,,,,,,,,,,,
 Isaiah Williams,WR,NYJ,LAC,,,,3.42,,,0,,0,0,0,0,1.93,0.09,20.37,0,0,0,,,,,,4.51,3.54,4.51,4.51,,,,,,,,,,,,
 Devin Duvernay,WR,ARI,KC,,,,3.39,,,0,,0,0,0,0,1.97,0.07,20.21,0,0,0,,,,,,4.41,3.43,4.41,4.41,,,,,,,,,,,,
-Isaac TeSlaa,WR,DET,TB,,,,3.02,,,0,,0,0,0,0,1.465,0.41,19.5,0,0,0,,,,,,5.88,5.14,5.88,5.88,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Isaac TeSlaa,WR,DET,TB,,,,3.02,,,0,,0,0,0,0,1.45,0.34,16.98,0,0,0,,,,,,5.19,4.46,5.19,5.19,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Marvin Mims,WR,DEN,LV,,,,2.94,,,0,,0,0,0,0,1.46,0.305,15.54,0,0,0,,,,,,4.84,4.11,4.84,4.84,,,,,,,,,,,,
-Myles Price,WR,MIN,SF,,,,2.92,,,0,,0,0,0,0,0.975,0.305,4.9,0,0,1,,,,,,3.4,2.91,3.4,3.4,,,,,,,,,4500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
-Van Jefferson,WR,WSH,CIN,,,,2.83,,,0,,0,0,0,0,0.765,0.3,8.635,0,0,0,,,,,,3.43,3.05,3.43,3.43,,,,n/a,n/a,n/a,n/a,n/a,4200,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+Van Jefferson,WR,WSH,CIN,,,,2.83,,,0,,0,0,0,0,0.755,0.3,8.635,0,0,0,,,,,,3.42,3.04,3.42,3.42,,,,n/a,n/a,n/a,n/a,n/a,4200,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
 Jack Bech,WR,LV,DEN,,,,2.66,,,0,,0,0,0,0,1.51,0.06,15.84,0,0,0,,,,,,3.45,2.7,3.45,3.45,,,,,,,,,,,,
 Tim Patrick,WR,NYJ,LAC,,,,2.6,,,0,,0,0,0,0,1.06,0.12,13.66,0,0,0,,,,,,3.15,2.62,3.15,3.15,,,,,,,,,,,,
-Demarcus Robinson,WR,SF,MIN,,,,2.58,,,0,,0,0,0,0,1.01,0.09,15.75,0,0,0,,,,,,3.13,2.62,3.13,3.13,,,,,,,,,4100,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
+Demarcus Robinson,WR,SF,MIN,,,,2.58,,,0,,0,0,0,0,1.01,0.09,15.75,0,0,0,,,,,,3.13,2.62,3.13,3.13,,,,,,,,,,,,
 Kevin Coleman,WR,MIA,BUF,,,,2.55,,,0,,0,0,0,0,1.41,0.05,16.22,0,0,0,,,,,,3.33,2.63,3.33,3.33,,,,,,,,,,,,
-Zavion Thomas,WR,CHI,NO,,,,2.51,,,0,,0,0,0,0,1.3,0.37,14.01,0,0,0,,,,,,4.92,4.27,4.92,4.92,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Zavion Thomas,WR,CHI,NO,,,,2.51,,,0,,0,0,0,0,1.3,0.305,14.01,0,0,0,,,,,,4.53,3.88,4.53,4.53,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Xavier Restrepo,WR,TEN,DAL,,,,2.47,,,0,,0,0,0,0,1.67,0,16.52,0,0,0,,,,,,3.32,2.49,3.32,3.32,,,,,,,,,,,,
-Jordan Watkins,WR,SF,MIN,,,,2.41,,,0,,0,0,0,0,1.545,0.3,23.47,0,0,0,,,,,,5.69,4.92,5.69,5.69,,,,,,,,,5100,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
 Calvin Ridley,WR,TEN,DAL,,,,2.34,,,0,,0,0,0,0,0.78,0.12,12.29,0,0,0,,,,,,2.73,2.34,2.73,2.73,,,,,,,,,,,,
 Josh Cameron,WR,JAC,NYG,,,,2.33,,,0,,0,0,0,0,1,0.08,13.72,0,0,0,,,,,,2.85,2.35,2.85,2.85,,,,,,,,,,,,
+Myles Price,WR,MIN,SF,,,,2.33,,,0,,0,0,0,0,1.17,0.06,14.81,0,0,0,,,,,,3.01,2.43,3.01,3.01,,,,,,,,,,,,
 Ted Hurst,WR,TB,DET,,,,2.19,,,0,,0,0,0,0,1.02,0.08,12.17,0,0,0,,,,,,2.72,2.21,2.72,2.72,,,,,,,,,,,,
 Troy Franklin,WR,DEN,LV,,,,1.91,,,0,,0,0,0,0,0.87,0.3,8.96,0,0,0,,,,,,3.57,3.13,3.57,3.57,,,,,,,,,,,,
 Jalen Tolbert,WR,MIA,BUF,,,,1.84,,,0,,0,0,0,0,0.82,0.07,10.13,0,0,0,,,,,,2.25,1.84,2.25,2.25,,,,,,,,,,,,
-KaVontae Turpin,WR,DAL,TEN,,,,1.76,,,0,,0,0,0,0,0.83,0.31,10.45,0,0,0,,,,,,3.74,3.32,3.74,3.74,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
-Jalen Royals,WR,KC,ARI,,,,1.66,,,0,,0,0,0,0,0.74,0.345,8.92,0,0,0,,,,,,3.7,3.33,3.7,3.7,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+KaVontae Turpin,WR,DAL,TEN,,,,1.76,,,0,,0,0,0,0,0.83,0.31,10.45,0,0,0,,,,,,3.73,3.32,3.73,3.73,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Jalen Royals,WR,KC,ARI,,,,1.66,,,0,,0,0,0,0,0.74,0.28,8.92,0,0,0,,,,,,3.31,2.94,3.31,3.31,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Nikko Remigio,WR,KC,ARI,,,,1.48,,,0,,0,0,0,0,0.49,0.09,7.16,0,0,0,,,,,,1.75,1.5,1.75,1.75,,,,,,,,,,,,
 Xavier Legette,WR,CAR,BAL,,,,1.47,,,0,,0,0,0,0,0.74,0.06,7.57,0,0,0,,,,,,1.86,1.49,1.86,1.86,,,,,,,,,,,,
-Colbie Young,WR,CIN,WSH,,,,1.36,,,0,,0,0,0,0,0.5,0.29,6.31,0,0,0,,,,,,2.87,2.62,2.87,2.87,,,,n/a,n/a,n/a,n/a,n/a,3600,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+Jordan Watkins,WR,SF,MIN,,,,1.37,,,0,,0,0,0,0,0.62,0.03,9.18,0,0,0,,,,,,1.72,1.41,1.72,1.72,,,,,,,,,,,,
+Colbie Young,WR,CIN,WSH,,,,1.36,,,0,,0,0,0,0,0.5,0.285,6.31,0,0,0,,,,,,2.84,2.59,2.84,2.84,,,,n/a,n/a,n/a,n/a,n/a,3600,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
 Jackson Meeks,WR,DET,TB,,,,1.24,,,0,,0,0,0,0,0.84,0,8.37,0,0,0,,,,,,1.68,1.26,1.68,1.68,,,,,,,,,,,,
 John Metchie III,WR,CAR,BAL,,,,1.24,,,0,,0,0,0,0,0.72,0.04,6.57,0,0,0,,,,,,1.62,1.26,1.62,1.62,,,,,,,,,,,,
 Bryce Lance,WR,NO,CHI,,,,1.23,,,0,,0,0,0,0,0.6,0.04,7.06,0,0,0,,,,,,1.55,1.25,1.55,1.55,,,,,,,,,,,,
-Tyrell Shavers,WR,BUF,MIA,,,,1.19,,,0,,0,0,0,0,0.7,0.36,8.6,0,0,0,,,,,,3.72,3.37,3.72,3.72,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
-Elijah Moore,WR,PHI,PIT,,,,1.18,,,0,,0,0,0,0,0.71,0.49,7.29,0,0,0,,,,,,4.38,4.02,4.38,4.38,,,,,,,,,,,,
-Andrew Armstrong,WR,KC,ARI,,,,1.11,,,0,,0,0,0,0,0.49,0.335,6.41,0,0,0,,,,,,3.14,2.9,3.14,3.14,,,,,,,,,,,,
+Tyrell Shavers,WR,BUF,MIA,,,,1.19,,,0,,0,0,0,0,0.7,0.295,8.6,0,0,0,,,,,,3.33,2.98,3.33,3.33,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Elijah Moore,WR,PHI,PIT,,,,1.18,,,0,,0,0,0,0,0.71,0.28,7.29,0,0,0,,,,,,3.12,2.76,3.12,3.12,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Andrew Armstrong,WR,KC,ARI,,,,1.11,,,0,,0,0,0,0,0.49,0.275,6.41,0,0,0,,,,,,2.78,2.54,2.78,2.78,,,,,,,,,,,,
 Malik McClain,WR,NYJ,LAC,,,,0.97,,,0,,0,0,0,0,0.36,0.05,4.87,0,0,0,,,,,,1.15,0.97,1.15,1.15,,,,,,,,,,,,
 Brycen Tremayne,WR,CAR,BAL,,,,0.94,,,0,,0,0,0,0,0.47,0.03,5.47,0,0,0,,,,,,1.2,0.96,1.2,1.2,,,,,,,,,,,,
-Ben Skowronek,WR,PIT,PHI,,,,0.92,,,0,,0,0,0,0,0.49,0.27,5,0,0,0,,,,,,2.61,2.37,2.61,2.61,,,,,,,,,,,,
+Ben Skowronek,WR,PIT,PHI,,,,0.92,,,0,,0,0,0,0,0.49,0.265,5,0,0,0,,,,,,2.58,2.34,2.58,2.58,,,,,,,,,,,,
 Harrison Wallace III,WR,ARI,KC,,,,0.89,,,0,,0,0,0,0,0.55,0,6.16,0,0,0,,,,,,1.17,0.89,1.17,1.17,,,,,,,,,,,,
 Barion Brown,WR,NO,CHI,,,,0.81,,,0,,0,0,0,0,0.3,0.04,4.2,0,0,0,,,,,,0.96,0.81,0.96,0.96,,,,,,,,,,,,
 KeAndre Lambert-Smith,WR,LAC,NYJ,,,,0.78,,,0,,0,0,0,0,0.28,0.04,4,0,0,0,,,,,,0.92,0.78,0.92,0.92,,,,,,,,,,,,
-Jacob Cowing,WR,SF,MIN,,,,0.71,,,0,,0,0,0,0,0.33,0.275,4.42,0,0,0,,,,,,2.42,2.26,2.42,2.42,,,,,,,,,3000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
-Tay Martin,WR,DET,TB,,,,0.57,,,0,,0,0,0,0,0.21,0.34,2.85,0,0,0,,,,,,2.53,2.43,2.53,2.53,,,,,,,,,,,,
+Jacob Cowing,WR,SF,MIN,,,,0.71,,,0,,0,0,0,0,0.33,0.02,4.42,0,0,0,,,,,,0.89,0.73,0.89,0.89,,,,,,,,,,,,
+Tay Martin,WR,DET,TB,,,,0.57,,,0,,0,0,0,0,0.21,0.27,2.85,0,0,0,,,,,,2.12,2.01,2.12,2.12,,,,,,,,,,,,
 David Moore,WR,CAR,BAL,,,,0.56,,,0,,0,0,0,0,0.22,0.03,2.67,0,0,0,,,,,,0.67,0.56,0.67,0.67,,,,,,,,,,,,
 Derius Davis,WR,LAC,NYJ,,,,0.52,,,0,,0,0,0,0,0.26,0.02,2.86,0,0,0,,,,,,0.67,0.54,0.67,0.67,,,,,,,,,,,,
 Mitchell Tinsley,WR,CIN,WSH,,,,0.52,,,0,,0,0,0,0,0.25,0.285,2.97,0,0,0,,,,,,2.26,2.13,2.26,2.26,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,,,,
 Cody White,WR,LV,DEN,,,,0.5,,,0,,0,0,0,0,0.22,0.02,2.74,0,0,0,,,,,,0.61,0.5,0.61,0.61,,,,,,,,,,,,
-Jahdae Walker,WR,CHI,NO,,,,0.49,,,0,,0,0,0,0,0.18,0.355,2.25,0,0,0,,,,,,2.54,2.44,2.54,2.54,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
-Camden Brown,WR,DAL,TEN,,,,0.49,,,0,,0,0,0,0,0.17,0.27,2.23,0,0,0,,,,,,2.01,1.93,2.01,2.01,,,,,,,,,,,,
+Jahdae Walker,WR,CHI,NO,,,,0.49,,,0,,0,0,0,0,0.18,0.29,2.25,0,0,0,,,,,,2.15,2.05,2.15,2.15,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Camden Brown,WR,DAL,TEN,,,,0.49,,,0,,0,0,0,0,0.17,0.275,2.23,0,0,0,,,,,,2.04,1.96,2.04,2.04,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Elijah Sarratt,WR,BAL,CAR,,,,0.48,,,0,,0,0,0,0,0.23,0.02,2.49,0,0,0,,,,,,0.6,0.48,0.6,0.6,,,,,,,,,,,,
 Kameron Johnson,WR,TB,DET,,,,0.44,,,0,,0,0,0,0,0.24,0.01,2.84,0,0,0,,,,,,0.58,0.46,0.58,0.58,,,,,,,,,,,,
 Malik Benson,WR,LV,DEN,,,,0.42,,,0,,0,0,0,0,0.23,0.01,2.47,0,0,0,,,,,,0.54,0.42,0.54,0.54,,,,,,,,,,,,
 Kaden Wetjen,WR,PIT,PHI,,,,0.4,,,0,,0,0,0,0,0.22,0.275,2.49,0,0,0,,,,,,2.12,2.01,2.12,2.12,,,,,,,,,,,,
 Devontez Walker,WR,BAL,CAR,,,,0.36,,,0,,0,0,0,0,0.19,0.01,2,0,0,0,,,,,,0.45,0.36,0.45,0.45,,,,,,,,,,,,
-Greg Dortch,WR,BUF,MIA,,,,0.32,,,0,,0,0,0,0,0.18,0.33,1.73,0,0,0,,,,,,2.33,2.24,2.33,2.33,,,,,,,,,,,,
+Greg Dortch,WR,BUF,MIA,,,,0.32,,,0,,0,0,0,0,0.18,0.275,1.73,0,0,0,,,,,,2,1.91,2,2,,,,,,,,,,,,
 Theo Wease Jr.,WR,LAC,NYJ,,,,0.28,,,0,,0,0,0,0,0.17,0,1.96,0,0,0,,,,,,0.37,0.28,0.37,0.37,,,,,,,,,,,,
-DeAndre Carter,WR,DET,TB,,,,0.23,,,0,,0,0,0,0,0.12,0.35,1.3,0,0,0,,,,,,2.35,2.29,2.35,2.35,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
-Jonathan Mingo,WR,DAL,TEN,,,,0.21,,,0,,0,0,0,0,0.1,0.365,1.04,0,0,0,,,,,,2.39,2.34,2.39,2.39,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
-Luke McCaffrey,WR,WSH,CIN,,,,0.15,,,0,,0,0,0,0,0.08,0.295,1.05,0,0,0,,,,,,1.96,1.92,1.96,1.96,,,,n/a,n/a,n/a,n/a,n/a,3000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+DeAndre Carter,WR,DET,TB,,,,0.23,,,0,,0,0,0,0,0.12,0.28,1.3,0,0,0,,,,,,1.93,1.87,1.93,1.93,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Jonathan Mingo,WR,DAL,TEN,,,,0.21,,,0,,0,0,0,0,0.1,0.285,1.04,0,0,0,,,,,,1.91,1.86,1.91,1.91,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Luke McCaffrey,WR,WSH,CIN,,,,0.15,,,0,,0,0,0,0,0.08,0.29,1.05,0,0,0,,,,,,1.92,1.88,1.92,1.92,,,,n/a,n/a,n/a,n/a,n/a,3000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
 Ryan Miller,WR,MIA,BUF,,,,0.13,,,0,,0,0,0,0,0.07,0,0.91,0,0,0,,,,,,0.16,0.13,0.16,0.16,,,,,,,,,,,,
 Dareke Young,WR,LV,DEN,,,,0.12,,,0,,0,0,0,0,0.07,0,0.84,0,0,0,,,,,,0.15,0.12,0.15,0.15,,,,,,,,,,,,
 Jalen McMillan,WR,TB,DET,,,,0.09,,,0,,0,0,0,0,0.05,0,0.61,0,0,0,,,,,,0.11,0.09,0.11,0.11,,,,,,,,,,,,
 LaJohntay Wester,WR,BAL,CAR,,,,0.07,,,0,,0,0,0,0,0.05,0,0.49,0,0,0,,,,,,0.1,0.07,0.1,0.1,,,,,,,,,,,,
 David Sills V,WR,TB,DET,,,,0.02,,,0,,0,0,0,0,0.01,0,0.1,0,0,0,,,,,,0.02,0.02,0.02,0.02,,,,,,,,,,,,
 Wan'Dale Robinson,WR,TEN,DAL,,,,0.01,,,0,,0,0,0,0,0,0,0,0.02,0,0.07,,,,,,0.01,0.01,0.01,0.01,,,,,,,,,,,,
-Colston Loveland,TE,CHI,NO,,,,12.75,,,0,,0,0,0,0,5.505,0.49,54.5,0,0,0,,,,,,13.9,11.14,13.9,13.9,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+George Kittle,TE,SF,MIN,,,,13.8,,,0,,0,0,0,0,5.97,0.51,77.73,0,0,0,,,,,,16.8,13.82,16.8,16.8,,,,,,,,,,,,
+Colston Loveland,TE,CHI,NO,,,,12.75,,,0,,0,0,0,0,5.49,0.455,53.45,0,0,0,,,,,,13.57,10.82,13.57,13.57,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Isaiah Likely,TE,NYG,JAC,,,,11.01,,,0,,0,0,0,0,5.35,0.4,60.54,0,0,0,,,,,,13.8,11.13,13.8,13.8,,,,,,,,,,,,
 Trey McBride,TE,ARI,KC,,,,10.82,,,0,,0,0,0,0,6.72,0.23,60.99,0,0,0,,,,,,14.2,10.84,14.2,14.2,,,,,,,,,,,,
-George Kittle,TE,SF,MIN,,,,10.48,,,0,,0,0,0,0,4.57,0.315,52.51,0,0,0,,,,,,11.71,9.43,11.71,11.71,,,,,,,,,12600,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
 Brock Bowers,TE,LV,DEN,,,,9.99,,,0,,0,0,0,0,5.38,0.25,58.4,0,0,0,,,,,,12.72,10.03,12.72,12.72,,,,,,,,,,,,
-Sam LaPorta,TE,DET,TB,,,,8.87,,,0,,0,0,0,0,4.44,0.46,44.5,0,0,0,,,,,,11.65,9.43,11.65,11.65,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Sam LaPorta,TE,DET,TB,,,,8.87,,,0,,0,0,0,0,4.365,0.405,42.71,0,0,0,,,,,,11.07,8.88,11.07,11.07,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+T.J. Hockenson,TE,MIN,SF,,,,8.38,,,0,,0,0,0,0,4.6,0.26,45.05,0,0,0,,,,,,10.67,8.36,10.67,10.67,,,,,,,,,,,,
 Brenton Strange,TE,JAC,NYG,,,,8.22,,,0,,0,0,0,0,3.77,0.3,45.79,0,0,0,,,,,,10.15,8.26,10.15,10.15,,,,,,,,,,,,
-T.J. Hockenson,TE,MIN,SF,,,,7.68,,,0,,0,0,0,0,6.53,0.365,70.525,0,0,0,,,,,,15.77,12.51,15.77,15.77,,,,,,,,,8100,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
 Tyler Warren,TE,IND,HOU,,,,7.46,,,0,,0,0,0,0,4.67,0.17,37.87,0.52,0.02,2.41,,,,,,9.84,7.5,9.84,9.84,,,,,,,,,,,,
-Travis Kelce,TE,KC,ARI,,,,7.44,,,0,,0,0,0,0,4.47,0.445,47.46,0,0,0,,,,,,11.89,9.65,11.89,11.89,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
-Dalton Kincaid,TE,BUF,MIA,,,,6.98,,,0,,0,0,0,0,2.86,0.415,40.29,0,0,0,,,,,,9.38,7.95,9.38,9.38,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Travis Kelce,TE,KC,ARI,,,,7.44,,,0,,0,0,0,0,4.425,0.395,40.83,0,0,0,,,,,,10.88,8.67,10.88,10.88,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Dalton Kincaid,TE,BUF,MIA,,,,6.98,,,0,,0,0,0,0,2.86,0.365,40.29,0,0,0,,,,,,9.08,7.65,9.08,9.08,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Darren Waller,TE,CAR,BAL,,,,6.9,,,0,,0,0,0,0,3.23,0.3,34.85,0,0,0,,,,,,8.52,6.9,8.52,8.52,,,,,,,,,,,,
-Chigoziem Okonkwo,TE,WAS,CIN,,,,6.59,,,0,,0,0,0,0,4.2,0.27,40.23,0,0,0,,,,,,9.84,7.74,9.84,9.84,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,,,,
+Chigoziem Okonkwo,TE,WAS,CIN,,,,6.57,,,0,,0,0,0,0,4.2,0.27,40.23,0,0,0,,,,,,9.84,7.74,9.84,9.84,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,,,,
 Dalton Schultz,TE,HOU,IND,,,,6.55,,,0,,0,0,0,0,3.5,0.24,33.78,0,0,0,,,,,,8.32,6.57,8.32,8.32,,,,,,,,,,,,
 Tommy Tremble,TE,CAR,BAL,,,,6.48,,,0,,0,0,0,0,3.41,0.3,30.4,0,0,0,,,,,,8.25,6.55,8.25,8.25,,,,,,,,,,,,
-Brevyn Spann-Ford,TE,DAL,TEN,,,,6.18,,,0,,0,0,0,0,2.92,0.355,27.41,0,0,0,,,,,,7.79,6.33,7.79,7.79,,,,,,,,,,,,
-Dallas Goedert,TE,PHI,PIT,,,,6.16,,,0,,0,0,0,0,3.565,0.36,33.89,0,0,0,,,,,,9.11,7.33,9.11,9.11,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Brevyn Spann-Ford,TE,DAL,TEN,,,,6.18,,,0,,0,0,0,0,2.92,0.36,27.41,0,0,0,,,,,,7.82,6.36,7.82,7.82,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Dallas Goedert,TE,PHI,PIT,,,,6.16,,,0,,0,0,0,0,3.56,0.37,33.29,0,0,0,,,,,,9.11,7.33,9.11,9.11,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Cade Otton,TE,TB,DET,,,,5.95,,,0,,0,0,0,0,3.14,0.24,29.77,0,0,0,,,,,,7.56,5.99,7.56,7.56,,,,,,,,,,,,
 Juwan Johnson,TE,NO,CHI,,,,5.9,,,0,,0,0,0,0,2.76,0.23,32.03,0,0,0,,,,,,7.34,5.96,7.34,7.34,,,,,,,,,,,,
-Mike Gesicki,TE,CIN,,,,,5.87,,,0,,0,0,0,0,2.505,0.41,25.305,0,0,0,,,,,,7.5,6.24,7.5,7.5,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,6900,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+Mike Gesicki,TE,CIN,,,,,5.84,,,0,,0,0,0,0,2.505,0.405,25.17,0,0,0,,,,,,7.45,6.2,7.45,7.45,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,6900,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
 Gunnar Helm,TE,TEN,DAL,,,,5.64,,,0,,0,0,0,0,2.99,0.27,25.49,0,0,0,,,,,,7.16,5.66,7.16,7.16,,,,,,,,,,,,
 Darnell Washington,TE,PIT,PHI,,,,5.49,,,0,,0,0,0,0,2.53,0.335,26.84,0,0,0,,,,,,7.22,5.96,7.22,7.22,,,,,,,,,,,,
 Evan Engram,TE,DEN,LV,,,,5.45,,,0,,0,0,0,0,3.17,0.325,26.43,0,0,0,,,,,,7.76,6.18,7.76,7.76,,,,,,,,,,,,
 Greg Dulcich,TE,MIA,BUF,,,,5.17,,,0,,0,0,0,0,2.73,0.12,31.03,0,0,0,,,,,,6.55,5.19,6.55,6.55,,,,,,,,,,,,
 Mark Andrews,TE,BAL,CAR,,,,5.1,,,0,,0,0,0,0,3.1,0.22,22.69,0,0,0,,,,,,6.69,5.14,6.69,6.69,,,,,,,,,,,,
-Pat Freiermuth,TE,PIT,PHI,,,,4.58,,,0,,0,0,0,0,2.26,0.355,22.85,0,0,0,,,,,,6.68,5.55,6.68,6.68,,,,,,,,,,,,
+Pat Freiermuth,TE,PIT,PHI,,,,4.58,,,0,,0,0,0,0,2.26,0.35,22.85,0,0,0,,,,,,6.65,5.52,6.65,6.65,,,,,,,,,,,,
 Mason Taylor,TE,NYJ,LAC,,,,4.42,,,0,,0,0,0,0,2.51,0.17,21.8,0,0,0,,,,,,5.71,4.46,5.71,5.71,,,,,,,,,,,,
 Kenyon Sadiq,TE,NYJ,LAC,,,,4.21,,,0,,0,0,0,0,2.05,0.19,20.63,0,0,0,,,,,,5.25,4.23,5.25,5.25,,,,,,,,,,,,
 Michael Mayer,TE,LV,DEN,,,,4.12,,,0,,0,0,0,0,2.47,0.13,21.27,0,0,0,,,,,,5.38,4.14,5.38,5.38,,,,,,,,,,,,
 Elijah Higgins,TE,ARI,KC,,,,4.05,,,0,,0,0,0,0,2.12,0.12,22.88,0,0,0,,,,,,5.13,4.07,5.13,5.13,,,,,,,,,,,,
-Noah Gray,TE,KC,ARI,,,,3.92,,,0,,0,0,0,0,1.68,0.305,18.2,0,0,0,,,,,,5.33,4.49,5.33,5.33,,,,,,,,,,,,
-Dawson Knox,TE,BUF,MIA,,,,3.77,,,0,,0,0,0,0,1.52,0.375,16.92,0,0,0,,,,,,5.46,4.7,5.46,5.46,,,,,,,,,,,,
+Noah Gray,TE,KC,ARI,,,,3.92,,,0,,0,0,0,0,1.68,0.335,18.2,0,0,0,,,,,,5.51,4.67,5.51,5.51,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Dawson Knox,TE,BUF,MIA,,,,3.77,,,0,,0,0,0,0,1.52,0.365,16.92,0,0,0,,,,,,5.4,4.64,5.4,5.4,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 David Njoku,TE,LAC,NYJ,,,,3.76,,,0,,0,0,0,0,1.9,0.19,16.91,0,0,0,,,,,,4.73,3.78,4.73,4.73,,,,,,,,,,,,
 Nate Boerkircher,TE,JAC,NYG,,,,3.42,,,0,,0,0,0,0,1.47,0.17,16.8,0,0,0,,,,,,4.17,3.44,4.17,4.17,,,,,,,,,,,,
 Charlie Kolar,TE,LAC,NYJ,,,,3.32,,,0,,0,0,0,0,1.51,0.13,18.23,0,0,0,,,,,,4.11,3.36,4.11,4.11,,,,,,,,,,,,
 Oronde Gadsden,TE,LAC,NYJ,,,,3.09,,,0,,0,0,0,0,1.3,0.14,16.17,0,0,0,,,,,,3.76,3.11,3.76,3.76,,,,,,,,,,,,
 Foster Moreau,TE,HOU,IND,,,,2.9,,,0,,0,0,0,0,1.28,0.15,13.77,0,0,0,,,,,,3.56,2.92,3.56,3.56,,,,,,,,,,,,
 Mitchell Evans,TE,CAR,BAL,,,,2.82,,,0,,0,0,0,0,1.37,0.14,12.92,0,0,0,,,,,,3.5,2.82,3.5,3.5,,,,,,,,,,,,
-Gavin Bartholomew,TE,MIN,SF,,,,2.71,,,0,,0,0,0,0,0.85,0.285,15.5,0,0,0,,,,,,4.11,3.69,4.11,4.11,,,,,,,,,3600,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
 Daniel Bellinger,TE,TEN,DAL,,,,2.58,,,0,,0,0,0,0,1.19,0.14,11.7,0,0,0,,,,,,3.2,2.6,3.2,3.2,,,,,,,,,,,,
 Noah Fant,TE,NO,CHI,,,,2.56,,,0,,0,0,0,0,1.36,0.1,12.97,0,0,0,,,,,,3.26,2.58,3.26,3.26,,,,,,,,,,,,
 Josh Cuevas,TE,BAL,CAR,,,,2.43,,,0,,0,0,0,0,1.41,0.1,11.44,0,0,0,,,,,,3.15,2.45,3.15,3.15,,,,,,,,,,,,
-Ben Sinnott,TE,WSH,CIN,,,,2.3,,,0,,0,0,0,0,0.665,0.3,3.875,0,0,0,,,,,,2.85,2.52,2.85,2.85,,,,n/a,n/a,n/a,n/a,n/a,3000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
-Drew Sample,TE,CIN,,,,,2.27,,,0,,0,0,0,0,1.385,0.32,6.025,0,0,0,,,,,,3.91,3.22,3.91,3.91,,,,n/a,n/a,n/a,n/a,n/a,2500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+Ben Sinnott,TE,WSH,CIN,,,,2.3,,,0,,0,0,0,0,0.66,0.3,3.33,0,0,0,,,,,,2.79,2.46,2.79,2.79,,,,n/a,n/a,n/a,n/a,n/a,3000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+Drew Sample,TE,CIN,,,,,2.27,,,0,,0,0,0,0,1.385,0.32,6.045,0,0,0,,,,,,3.91,3.22,3.91,3.91,,,,n/a,n/a,n/a,n/a,n/a,2500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
 Theo Johnson,TE,NYG,JAC,,,,2.13,,,0,,0,0,0,0,0.97,0.08,11.7,0,0,0,,,,,,2.62,2.13,2.62,2.62,,,,,,,,,,,,
-Luke Schoonmaker,TE,DAL,TEN,,,,1.97,,,0,,0,0,0,0,0.94,0.29,8.4,0,0,0,,,,,,3.52,3.05,3.52,3.52,,,,,,,,,,,,
-Eli Stowers,TE,PHI,PIT,,,,1.81,,,0,,0,0,0,0,0.94,0.275,9.81,0,0,0,,,,,,3.57,3.1,3.57,3.57,,,,,,,,,,,,
+Luke Schoonmaker,TE,DAL,TEN,,,,1.97,,,0,,0,0,0,0,0.94,0.31,8.4,0,0,0,,,,,,3.64,3.17,3.64,3.64,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Eli Stowers,TE,PHI,PIT,,,,1.81,,,0,,0,0,0,0,0.94,0.28,9.81,0,0,0,,,,,,3.6,3.13,3.6,3.6,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Gavin Bartholomew,TE,MIN,SF,,,,1.8,,,0,,0,0,0,0,0.85,0.08,8.99,0,0,0,,,,,,2.23,1.8,2.23,2.23,,,,,,,,,,,,
 Jack Endries,TE,CIN,WSH,,,,1.78,,,0,,0,0,0,0,0.83,0.31,7.6,0,0,0,,,,,,3.45,3.03,3.45,3.45,,,,n/a,n/a,n/a,n/a,n/a,2500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
 Hunter Long,TE,ARI,KC,,,,1.67,,,0,,0,0,0,0,0.91,0.05,9.31,0,0,0,,,,,,2.14,1.69,2.14,2.14,,,,,,,,,,,,
 Will Kacmarek,TE,MIA,BUF,,,,1.29,,,0,,0,0,0,0,0.73,0.04,6.82,0,0,0,,,,,,1.65,1.29,1.65,1.65,,,,,,,,,,,,
-Jake Briningstool,TE,KC,ARI,,,,1.23,,,0,,0,0,0,0,0.53,0.27,5.42,0,0,0,,,,,,2.69,2.43,2.69,2.69,,,,,,,,,,,,
-Luke Farrell,TE,SF,MIN,,,,1.23,,,0,,0,0,0,0,0.59,0.275,5.92,0,0,0,,,,,,2.83,2.54,2.83,2.83,,,,,,,,,2500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
+Jake Briningstool,TE,KC,ARI,,,,1.23,,,0,,0,0,0,0,0.53,0.295,5.42,0,0,0,,,,,,2.84,2.58,2.84,2.84,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Luke Farrell,TE,SF,MIN,,,,1.23,,,0,,0,0,0,0,0.59,0.06,5.92,0,0,0,,,,,,1.54,1.25,1.54,1.54,,,,,,,,,,,,
 Tanner Koziol,TE,JAC,NYG,,,,1.17,,,0,,0,0,0,0,0.52,0.06,5.48,0,0,0,,,,,,1.43,1.17,1.43,1.43,,,,,,,,,,,,
 Adam Trautman,TE,DEN,LV,,,,1.17,,,0,,0,0,0,0,0.49,0.285,5,0,0,0,,,,,,2.7,2.46,2.7,2.7,,,,,,,,,,,,
-Brock Wright,TE,DET,TB,,,,1.14,,,0,,0,0,0,0,0.57,0.36,4.96,0,0,0,,,,,,3.23,2.94,3.23,3.23,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Brock Wright,TE,DET,TB,,,,1.14,,,0,,0,0,0,0,0.57,0.295,4.96,0,0,0,,,,,,2.84,2.55,2.84,2.84,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Matthew Hibner,TE,BAL,CAR,,,,0.97,,,0,,0,0,0,0,0.56,0.04,4.47,0,0,0,,,,,,1.25,0.97,1.25,1.25,,,,,,,,,,,,
-Ben Yurosek,TE,MIN,SF,,,,0.97,,,0,,0,0,0,0,0.47,0.28,4.98,0,0,0,,,,,,2.65,2.41,2.65,2.65,,,,,,,,,2500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
-Sam Roush,TE,CHI,NO,,,,0.86,,,0,,0,0,0,0,0.4,0.37,3.6,0,0,0,,,,,,2.98,2.78,2.98,2.98,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Ben Yurosek,TE,MIN,SF,,,,0.97,,,0,,0,0,0,0,0.47,0.04,4.98,0,0,0,,,,,,1.21,0.97,1.21,1.21,,,,,,,,,,,,
+Sam Roush,TE,CHI,NO,,,,0.86,,,0,,0,0,0,0,0.4,0.3,3.6,0,0,0,,,,,,2.56,2.36,2.56,2.56,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Oscar Delp,TE,NO,CHI,,,,0.82,,,0,,0,0,0,0,0.39,0.04,3.81,0,0,0,,,,,,1.01,0.82,1.01,1.01,,,,,,,,,,,,
 Andrew Ogletree,TE,IND,HOU,,,,0.73,,,0,,0,0,0,0,0.41,0.02,4.03,0,0,0,,,,,,0.93,0.73,0.93,0.93,,,,,,,,,,,,
 Chris Manhertz,TE,NYG,JAC,,,,0.71,,,0,,0,0,0,0,0.34,0.03,3.57,0,0,0,,,,,,0.88,0.71,0.88,0.88,,,,,,,,,,,,
-John Bates,TE,WSH,CIN,,,,0.68,,,0,,0,0,0,0,0.34,0.285,3.27,0,0,0,,,,,,2.38,2.21,2.38,2.38,,,,n/a,n/a,n/a,n/a,n/a,2500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+John Bates,TE,WSH,CIN,,,,0.68,,,0,,0,0,0,0,0.34,0.29,3.27,0,0,0,,,,,,2.41,2.24,2.41,2.41,,,,n/a,n/a,n/a,n/a,n/a,2500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
 Jelani Woods,TE,NYJ,LAC,,,,0.62,,,0,,0,0,0,0,0.28,0.03,2.97,0,0,0,,,,,,0.76,0.62,0.76,0.76,,,,,,,,,,,,
-Tyler Conklin,TE,DET,TB,,,,0.59,,,0,,0,0,0,0,0.33,0.35,3.02,0,0,0,,,,,,2.73,2.57,2.73,2.73,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
-Jackson Hawes,TE,BUF,MIA,,,,0.57,,,0,,0,0,0,0,0.25,0.295,2.67,0,0,0,,,,,,2.29,2.16,2.29,2.29,,,,,,,,,,,,
+Tyler Conklin,TE,DET,TB,,,,0.59,,,0,,0,0,0,0,0.33,0.28,3.02,0,0,0,,,,,,2.31,2.15,2.31,2.31,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
+Jackson Hawes,TE,BUF,MIA,,,,0.57,,,0,,0,0,0,0,0.25,0.295,2.67,0,0,0,,,,,,2.29,2.16,2.29,2.29,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Jeremy Ruckert,TE,NYJ,LAC,,,,0.56,,,0,,0,0,0,0,0.29,0.03,2.35,0,0,0,,,,,,0.71,0.56,0.71,0.71,,,,,,,,,,,,
 Ian Thomas,TE,LV,DEN,,,,0.54,,,0,,0,0,0,0,0.32,0.02,2.58,0,0,0,,,,,,0.7,0.54,0.7,0.7,,,,,,,,,,,,
 Kylen Granson,TE,TEN,DAL,,,,0.53,,,0,,0,0,0,0,0.23,0.03,2.37,0,0,0,,,,,,0.65,0.53,0.65,0.65,,,,,,,,,,,,
 Payne Durham,TE,TB,DET,,,,0.51,,,0,,0,0,0,0,0.23,0.03,2.18,0,0,0,,,,,,0.63,0.51,0.63,0.63,,,,,,,,,,,,
 Nate Adkins,TE,DEN,LV,,,,0.46,,,0,,0,0,0,0,0.2,0.28,1.76,0,0,0,,,,,,2.06,1.96,2.06,2.06,,,,,,,,,,,,
-Grant Calcaterra,TE,PHI,PIT,,,,0.43,,,0,,0,0,0,0,0.23,0.305,2.51,0,0,0,,,,,,2.31,2.2,2.31,2.31,,,,,,,,,,,,
+Grant Calcaterra,TE,PHI,PIT,,,,0.43,,,0,,0,0,0,0,0.23,0.27,2.51,0,0,0,,,,,,2.1,1.99,2.1,2.1,,,,,,,,,,,,
 Teagan Quitoriano,TE,ARI,KC,,,,0.42,,,0,,0,0,0,0,0.22,0.01,2.48,0,0,0,,,,,,0.53,0.42,0.53,0.53,,,,,,,,,,,,
 Cade Stover,TE,HOU,IND,,,,0.38,,,0,,0,0,0,0,0.1,0.01,0.9,0.26,0.01,1.2,,,,,,0.43,0.38,0.43,0.43,,,,,,,,,,,,
 Mo Alie-Cox,TE,IND,HOU,,,,0.36,,,0,,0,0,0,0,0.19,0.01,2.04,0,0,0,,,,,,0.45,0.36,0.45,0.45,,,,,,,,,,,,
 Quintin Morris,TE,JAC,NYG,,,,0.35,,,0,,0,0,0,0,0.15,0.02,1.54,0,0,0,,,,,,0.42,0.35,0.42,0.42,,,,,,,,,,,,
 Robert Tonyan,TE,PIT,PHI,,,,0.32,,,0,,0,0,0,0,0.14,0.265,1.28,0,0,0,,,,,,1.86,1.79,1.86,1.86,,,,,,,,,,,,
-Johnny Mundt,TE,PHI,PIT,,,,0.26,,,0,,0,0,0,0,0.14,0.265,1.28,0,0,0,,,,,,1.86,1.79,1.86,1.86,,,,,,,,,,,,
+Johnny Mundt,TE,PHI,PIT,,,,0.26,,,0,,0,0,0,0,0.14,0.27,1.28,0,0,0,,,,,,1.89,1.82,1.89,1.89,,,,,,,,,,,,
 Pharaoh Brown,TE,IND,HOU,,,,0.22,,,0,,0,0,0,0,0.11,0.01,1.03,0,0,0,,,,,,0.27,0.22,0.27,0.27,,,,,,,,,,,,
 Bauer Sharp,TE,TB,DET,,,,0.16,,,0,,0,0,0,0,0.07,0.01,0.64,0,0,0,,,,,,0.19,0.16,0.19,0.19,,,,,,,,,,,,
-Keleki Latu,TE,BUF,MIA,,,,0.16,,,0,,0,0,0,0,0.06,0.275,0.66,0,0,0,,,,,,1.78,1.75,1.78,1.78,,,,,,,,,,,,
+Keleki Latu,TE,BUF,MIA,,,,0.16,,,0,,0,0,0,0,0.06,0.285,0.66,0,0,0,,,,,,1.84,1.81,1.84,1.84,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Seydou Traore,TE,MIA,BUF,,,,0.1,,,0,,0,0,0,0,0.07,0,0.7,0,0,0,,,,,,0.14,0.11,0.14,0.14,,,,,,,,,,,,
-Brayden Willis,TE,SF,MIN,,,,0.08,,,0,,0,0,0,0,0.05,0.265,0.52,0,0,0,,,,,,1.69,1.67,1.69,1.69,,,,,,,,,2500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
+Brayden Willis,TE,SF,MIN,,,,0.08,,,0,,0,0,0,0,0.05,0,0.52,0,0,0,,,,,,0.1,0.08,0.1,0.1,,,,,,,,,,,,
 Ko Kieft,TE,TB,DET,,,,0.01,,,0,,0,0,0,0,0.01,0,0.09,0,0,0,,,,,,0.02,0.01,0.02,0.02,,,,,,,,,,,,
 Ka'imi Fairbairn,K,HOU,IND,,,,10.97,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
-Eddy Pineiro,K,SF,MIN,,,,7.92,,,,,,,,0,,,0,,,0,,,,,,0,0,0,0,,,,,,,,,6900,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
+Eddy Pineiro,K,SF,MIN,,,,8.43,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
 Blake Grupe,K,NYJ,LAC,,,,7.77,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
 Tyler Loop,K,BAL,CAR,,,,7.69,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
 Evan McPherson,K,CIN,,,,,6.46,,,,,,,,0,,,0,,,0,,,,,,0,0,0,0,,,,n/a,n/a,n/a,n/a,n/a,8100,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
-Will Reichard,K,MIN,SF,,,,5.73,,,,,,,,0,,,0,,,0,,,,,,0,0,0,0,,,,,,,,,7500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
 Tyler Bass,K,BUF,MIA,,,,5.36,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
-Drew Stevens,K,WAS,CIN,,,,5.25,,,,,,,,0,,,0,,,0,,,,,,0,0,0,0,,,,n/a,n/a,n/a,n/a,n/a,7500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
+Drew Stevens,K,WAS,CIN,,,,5.26,,,,,,,,0,,,0,,,0,,,,,,0,0,0,0,,,,n/a,n/a,n/a,n/a,n/a,7500,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,CIN @ WAS,11/23/2026
 Cam Little,K,JAC,NYG,,,,5.11,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
 Jake Bates,K,DET,TB,,,,4.84,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
 Chase McLaughlin,K,TB,DET,,,,4.72,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
 Brandon Aubrey,K,DAL,TEN,,,,4.67,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
 Ryan Fitzgerald,K,CAR,BAL,,,,4.49,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
 Wil Lutz,K,DEN,LV,,,,4.49,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
+Will Reichard,K,MIN,SF,,,,4.45,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
 Cairo Santos,K,CHI,NO,,,,4.42,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
 Joey Slye,K,TEN,DAL,,,,4.33,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
 Cameron Dicker,K,LAC,NYJ,,,,4.25,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
@@ -365,7 +365,7 @@ Harrison Butker,K,KC,ARI,,,,4.17,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
 Spencer Shrader,K,IND,HOU,,,,4.16,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
 Matt Gay,K,LV,DEN,,,,3.97,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
 Dominic Zvada,K,NYG,JAC,,,,3.85,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
-Jake Elliott,K,PHI,PIT,,,,3.58,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
+Jake Elliott,K,PHI,PIT,,,,3.58,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,n/a,n/a,n/a,n/a,n/a,,,,11/26/2026
 Riley Patterson,K,MIA,BUF,,,,3.37,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
 Chad Ryland,K,ARI,KC,,,,3.36,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
 Daniel Carlson,K,NO,CHI,,,,3.04,,,,,,,,,,,,,,,,,,,,0,0,0,0,,,,,,,,,,,,
@@ -398,8 +398,5 @@ Arizona D/ST,DST,ARI,KC,,,,4.05,,,0.66,,,,,,,,,,,,,,,,,2.32,2.32,2.32,2.32,,,,,,
 Washington D/ST,DST,WSH,CIN,,,,3.89,,,0.67,,,,,,,,,,,,,,,,,2.34,2.34,2.34,2.34,,,,,,,,,,,,
 Tennessee D/ST,DST,TEN,DAL,,,,3.79,,,0.74,,,,,,,,,,,,,,,,,2.48,2.48,2.48,2.48,,,,,,,,,,,,
 Indianapolis D/ST,DST,IND,HOU,,,,3.52,,,0.61,,,,,,,,,,,,,,,,,2.22,2.22,2.22,2.22,,,,,,,,,,,,
-MIN DST,DEF,MIN,,,,,11.17,,,,,,,,0,,,0,,,0,,,,,,1,1,1,1,,,,,,,,,,,,
-SF DST,DEF,SF,,,,,11.12,,,,,,,,0,,,0,,,0,,,,,,1,1,1,1,,,,,,,,,,,,
-CIN DST,DEF,CIN,,,,,9.01,,,,,,,,0,,,0,,,0,,,,,,1,1,1,1,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,,,,
-WAS DST,DEF,WAS,,,,,7.33,,,,,,,,0,,,0,,,0,,,,,,1,1,1,1,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,,,,
-Kyle Juszczyk,FB,SF,,,,,2.48,,,,,,,,0,,,12,,,1,,,,,,,,,,,,,,,,,,4000,https://png.pngtree.com/png-vector/20220809/ourmid/pngtree-businessman-icon-from-commerce-set-administrator-clerk-male-vector-png-image_19450674.png,MIN @ SF,
+CIN DST,DEF,CIN,,,,,9.1,,,,,,,,0,,,0,,,0,,,,,,1,1,1,1,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,,,,
+WAS DST,DEF,WAS,,,,,7.32,,,,,,,,0,,,0,,,0,,,,,,1,1,1,1,,,,CIN @ WAS,Bengals @ Commanders,Northwest Stadium,outdoor,ESPN,,,,
