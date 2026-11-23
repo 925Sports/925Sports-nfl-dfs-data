@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-23T22:54:25.417221Z",
+  "updated": "2026-11-23T23:09:29.804963Z",
   "slateId": "WEEKLY",
   "players": {
     "ceedee lamb_wr": {
@@ -7877,7 +7877,7 @@
       },
       "stats": {
         "fpts": 10.97,
-        "fg": 3.11,
+        "fg": 3.12,
         "xpt": 2.28
       }
     },
@@ -8059,7 +8059,7 @@
       },
       "stats": {
         "fpts": 8.37,
-        "fg": 2.39,
+        "fg": 2.41,
         "xpt": 1.66
       }
     },
@@ -8089,19 +8089,6 @@
         "xpt": 2.47
       }
     },
-    "drew stevens_k": {
-      "info": {
-        "player": "Drew Stevens",
-        "position": "K",
-        "team": "WSH",
-        "opp": "CIN"
-      },
-      "stats": {
-        "fpts": 8.06,
-        "fg": 1.76,
-        "xpt": 2.2
-      }
-    },
     "matt gay_k": {
       "info": {
         "player": "Matt Gay",
@@ -8113,6 +8100,19 @@
         "fpts": 7.94,
         "fg": 1.65,
         "xpt": 1.8
+      }
+    },
+    "drew stevens_k": {
+      "info": {
+        "player": "Drew Stevens",
+        "position": "K",
+        "team": "WSH",
+        "opp": "CIN"
+      },
+      "stats": {
+        "fpts": 7.91,
+        "fg": 1.72,
+        "xpt": 2.15
       }
     },
     "blake grupe_k": {
