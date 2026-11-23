@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-23T02:21:31.587787Z",
+  "updated": "2026-11-23T03:17:20.322870Z",
   "slateId": "WEEKLY",
   "players": {
     "ceedee lamb_wr": {
@@ -7877,7 +7877,7 @@
       },
       "stats": {
         "fpts": 10.97,
-        "fg": 3.01,
+        "fg": 3.02,
         "xpt": 2.28
       }
     },
@@ -7915,9 +7915,9 @@
         "opp": "WSH"
       },
       "stats": {
-        "fpts": 9.91,
+        "fpts": 9.9,
         "fg": 2.07,
-        "xpt": 2.59
+        "xpt": 2.58
       }
     },
     "jake bates_k": {
@@ -7993,9 +7993,9 @@
         "opp": "SF"
       },
       "stats": {
-        "fpts": 8.97,
-        "fg": 2.12,
-        "xpt": 1.39
+        "fpts": 8.89,
+        "fg": 2.1,
+        "xpt": 1.38
       }
     },
     "cairo santos_k": {
@@ -8037,6 +8037,19 @@
         "xpt": 2.17
       }
     },
+    "eddy pineiro_k": {
+      "info": {
+        "player": "Eddy Pineiro",
+        "position": "K",
+        "team": "SF",
+        "opp": "MIN"
+      },
+      "stats": {
+        "fpts": 8.43,
+        "fg": 1.7,
+        "xpt": 2.81
+      }
+    },
     "chris boswell_k": {
       "info": {
         "player": "Chris Boswell",
@@ -8046,7 +8059,7 @@
       },
       "stats": {
         "fpts": 8.37,
-        "fg": 2.19,
+        "fg": 2.21,
         "xpt": 1.66
       }
     },
@@ -8076,19 +8089,6 @@
         "xpt": 2.47
       }
     },
-    "eddy pineiro_k": {
-      "info": {
-        "player": "Eddy Pineiro",
-        "position": "K",
-        "team": "SF",
-        "opp": "MIN"
-      },
-      "stats": {
-        "fpts": 8.31,
-        "fg": 1.69,
-        "xpt": 2.79
-      }
-    },
     "drew stevens_k": {
       "info": {
         "player": "Drew Stevens",
@@ -8097,9 +8097,9 @@
         "opp": "CIN"
       },
       "stats": {
-        "fpts": 8.08,
-        "fg": 1.78,
-        "xpt": 2.22
+        "fpts": 8.07,
+        "fg": 1.77,
+        "xpt": 2.21
       }
     },
     "matt gay_k": {
@@ -8376,23 +8376,6 @@
         "td": 0.17
       }
     },
-    "minnesota d/st_dst": {
-      "info": {
-        "player": "Minnesota D/ST",
-        "position": "DST",
-        "team": "MIN",
-        "opp": "SF"
-      },
-      "stats": {
-        "fpts": 6.04,
-        "pa": 24.5,
-        "yds_agn": 359.97,
-        "sack": 2.62,
-        "int": 0.76,
-        "fr": 0.4,
-        "td": 0.15
-      }
-    },
     "san francisco d/st_dst": {
       "info": {
         "player": "San Francisco D/ST",
@@ -8401,9 +8384,9 @@
         "opp": "MIN"
       },
       "stats": {
-        "fpts": 6.02,
-        "pa": 21.0,
-        "yds_agn": 340.9,
+        "fpts": 6.17,
+        "pa": 20.5,
+        "yds_agn": 340.5,
         "sack": 1.23,
         "int": 0.73,
         "fr": 0.59,
@@ -8425,6 +8408,23 @@
         "int": 0.53,
         "fr": 0.5,
         "td": 0.16
+      }
+    },
+    "minnesota d/st_dst": {
+      "info": {
+        "player": "Minnesota D/ST",
+        "position": "DST",
+        "team": "MIN",
+        "opp": "SF"
+      },
+      "stats": {
+        "fpts": 5.92,
+        "pa": 25.0,
+        "yds_agn": 360.15,
+        "sack": 2.62,
+        "int": 0.76,
+        "fr": 0.4,
+        "td": 0.13
       }
     },
     "carolina d/st_dst": {
