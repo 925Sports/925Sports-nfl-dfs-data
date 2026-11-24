@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-24T00:09:29.289998Z",
+  "updated": "2026-11-24T00:24:23.217293Z",
   "slateId": "WEEKLY",
   "players": {
     "ceedee lamb_wr": {
@@ -36,7 +36,7 @@
         "fpts": 24.99,
         "pass_cmp": 28.58,
         "pass_att": 38.26,
-        "pass_yds": 311.43,
+        "pass_yds": 311.41,
         "pass_td": 2.75,
         "int": 0.67,
         "rush_att": 3.36,
@@ -128,7 +128,7 @@
         "fpts": 20.0,
         "pass_cmp": 22.47,
         "pass_att": 35.15,
-        "pass_yds": 242.21,
+        "pass_yds": 242.18,
         "pass_td": 1.61,
         "int": 0.68,
         "rush_att": 6.39,
@@ -217,7 +217,7 @@
         "opp": "WSH"
       },
       "stats": {
-        "fpts": 19.59,
+        "fpts": 19.58,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -226,9 +226,9 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 8.12,
+        "rec": 8.11,
         "tgts": 11.07,
-        "rec_yds": 100.65,
+        "rec_yds": 100.64,
         "rec_td": 0.92
       }
     },
@@ -527,7 +527,7 @@
         "rush_td": 0.0,
         "rec": 6.0,
         "tgts": 8.67,
-        "rec_yds": 88.24,
+        "rec_yds": 88.23,
         "rec_td": 0.74
       }
     },
@@ -907,18 +907,18 @@
         "opp": "WSH"
       },
       "stats": {
-        "fpts": 13.96,
+        "fpts": 13.95,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
         "pass_td": 0.0,
         "int": 0.0,
         "rush_att": 11.84,
-        "rush_yds": 50.44,
+        "rush_yds": 50.45,
         "rush_td": 0.29,
-        "rec": 5.22,
+        "rec": 5.21,
         "tgts": 6.01,
-        "rec_yds": 30.43,
+        "rec_yds": 30.42,
         "rec_td": 0.28
       }
     },
@@ -1528,7 +1528,7 @@
         "opp": "CIN"
       },
       "stats": {
-        "fpts": 10.51,
+        "fpts": 10.5,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -1538,8 +1538,8 @@
         "rush_yds": 0.0,
         "rush_td": 0.0,
         "rec": 4.92,
-        "tgts": 7.51,
-        "rec_yds": 56.25,
+        "tgts": 7.5,
+        "rec_yds": 56.24,
         "rec_td": 0.4
       }
     },
@@ -2041,7 +2041,7 @@
         "pass_td": 0.0,
         "int": 0.0,
         "rush_att": 10.91,
-        "rush_yds": 46.7,
+        "rush_yds": 46.71,
         "rush_td": 0.39,
         "rec": 0.77,
         "tgts": 1.08,
@@ -2114,7 +2114,7 @@
         "rush_td": 0.0,
         "rec": 4.19,
         "tgts": 6.39,
-        "rec_yds": 41.31,
+        "rec_yds": 41.3,
         "rec_td": 0.26
       }
     },
@@ -2873,7 +2873,7 @@
         "rush_td": 0.0,
         "rec": 2.68,
         "tgts": 3.75,
-        "rec_yds": 28.33,
+        "rec_yds": 28.32,
         "rec_td": 0.27
       }
     },
@@ -3149,7 +3149,7 @@
         "rush_td": 0.01,
         "rec": 2.44,
         "tgts": 3.51,
-        "rec_yds": 28.07,
+        "rec_yds": 28.06,
         "rec_td": 0.2
       }
     },
@@ -3540,7 +3540,7 @@
         "rush_td": 0.15,
         "rec": 1.55,
         "tgts": 2.15,
-        "rec_yds": 14.14,
+        "rec_yds": 14.13,
         "rec_td": 0.09
       }
     },
@@ -4897,7 +4897,7 @@
         "rush_td": 0.0,
         "rec": 1.06,
         "tgts": 1.57,
-        "rec_yds": 10.38,
+        "rec_yds": 10.37,
         "rec_td": 0.11
       }
     },
