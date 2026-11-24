@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-24T01:39:21.821729Z",
+  "updated": "2026-11-24T01:54:25.485991Z",
   "slateId": "WEEKLY",
   "players": {
     "ceedee lamb_wr": {
@@ -8503,13 +8503,13 @@
         "opp": "WSH"
       },
       "stats": {
-        "fpts": 5.18,
-        "pa": 23.5,
-        "yds_agn": 350.26,
+        "fpts": 5.08,
+        "pa": 24.0,
+        "yds_agn": 351.19,
         "sack": 1.41,
-        "int": 0.68,
+        "int": 0.69,
         "fr": 0.47,
-        "td": 0.16
+        "td": 0.15
       }
     },
     "new orleans d/st_dst": {
@@ -8597,23 +8597,6 @@
         "td": 0.12
       }
     },
-    "washington d/st_dst": {
-      "info": {
-        "player": "Washington D/ST",
-        "position": "DST",
-        "team": "WSH",
-        "opp": "CIN"
-      },
-      "stats": {
-        "fpts": 3.88,
-        "pa": 30.0,
-        "yds_agn": 398.94,
-        "sack": 1.89,
-        "int": 0.67,
-        "fr": 0.46,
-        "td": 0.12
-      }
-    },
     "tennessee d/st_dst": {
       "info": {
         "player": "Tennessee D/ST",
@@ -8628,6 +8611,23 @@
         "sack": 2.0,
         "int": 0.74,
         "fr": 0.4,
+        "td": 0.12
+      }
+    },
+    "washington d/st_dst": {
+      "info": {
+        "player": "Washington D/ST",
+        "position": "DST",
+        "team": "WSH",
+        "opp": "CIN"
+      },
+      "stats": {
+        "fpts": 3.78,
+        "pa": 30.5,
+        "yds_agn": 400.09,
+        "sack": 1.9,
+        "int": 0.67,
+        "fr": 0.46,
         "td": 0.12
       }
     },
