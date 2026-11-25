@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-25T19:24:25.909682Z",
+  "updated": "2026-11-25T19:39:29.526643Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -9137,9 +9137,9 @@
         "opp": "GB"
       },
       "stats": {
-        "fpts": 9.48,
+        "fpts": 9.47,
         "fg": 1.81,
-        "xpt": 3.28
+        "xpt": 3.27
       }
     },
     "drew stevens_k": {
@@ -9306,9 +9306,9 @@
         "opp": "NYJ"
       },
       "stats": {
-        "fpts": 8.1,
-        "fg": 1.63,
-        "xpt": 2.07
+        "fpts": 8.09,
+        "fg": 1.62,
+        "xpt": 2.06
       }
     },
     "chad ryland_k": {
@@ -9345,9 +9345,9 @@
         "opp": "SEA"
       },
       "stats": {
-        "fpts": 7.96,
+        "fpts": 7.95,
         "fg": 1.54,
-        "xpt": 2.41
+        "xpt": 2.4
       }
     },
     "jason myers_k": {
@@ -9384,9 +9384,9 @@
         "opp": "LA"
       },
       "stats": {
-        "fpts": 7.59,
-        "fg": 1.61,
-        "xpt": 1.94
+        "fpts": 7.58,
+        "fg": 1.6,
+        "xpt": 1.93
       }
     },
     "wil lutz_k": {
@@ -9599,23 +9599,6 @@
         "td": 0.2
       }
     },
-    "new york jets d/st_dst": {
-      "info": {
-        "player": "New York Jets D/ST",
-        "position": "DST",
-        "team": "NYJ",
-        "opp": "MIA"
-      },
-      "stats": {
-        "fpts": 7.51,
-        "pa": 18.5,
-        "yds_agn": 325.18,
-        "sack": 2.08,
-        "int": 0.62,
-        "fr": 0.63,
-        "td": 0.19
-      }
-    },
     "tampa bay d/st_dst": {
       "info": {
         "player": "Tampa Bay D/ST",
@@ -9633,6 +9616,23 @@
         "td": 0.18
       }
     },
+    "new york jets d/st_dst": {
+      "info": {
+        "player": "New York Jets D/ST",
+        "position": "DST",
+        "team": "NYJ",
+        "opp": "MIA"
+      },
+      "stats": {
+        "fpts": 7.18,
+        "pa": 18.5,
+        "yds_agn": 293.25,
+        "sack": 1.73,
+        "int": 0.79,
+        "fr": 0.47,
+        "td": 0.19
+      }
+    },
     "dallas d/st_dst": {
       "info": {
         "player": "Dallas D/ST",
@@ -9641,12 +9641,12 @@
         "opp": "PHI"
       },
       "stats": {
-        "fpts": 7.14,
+        "fpts": 7.07,
         "pa": 19.5,
-        "yds_agn": 344.77,
-        "sack": 2.15,
-        "int": 0.72,
-        "fr": 0.47,
+        "yds_agn": 340.16,
+        "sack": 2.12,
+        "int": 0.71,
+        "fr": 0.46,
         "td": 0.19
       }
     },
@@ -9684,23 +9684,6 @@
         "td": 0.16
       }
     },
-    "los angeles rams d/st_dst": {
-      "info": {
-        "player": "Los Angeles Rams D/ST",
-        "position": "DST",
-        "team": "LA",
-        "opp": "GB"
-      },
-      "stats": {
-        "fpts": 6.94,
-        "pa": 20.5,
-        "yds_agn": 355.88,
-        "sack": 2.04,
-        "int": 0.73,
-        "fr": 0.58,
-        "td": 0.18
-      }
-    },
     "miami d/st_dst": {
       "info": {
         "player": "Miami D/ST",
@@ -9709,13 +9692,30 @@
         "opp": "NYJ"
       },
       "stats": {
-        "fpts": 6.91,
+        "fpts": 6.99,
         "pa": 22.0,
-        "yds_agn": 332.43,
+        "yds_agn": 332.53,
         "sack": 2.9,
         "int": 0.7,
-        "fr": 0.41,
+        "fr": 0.45,
         "td": 0.16
+      }
+    },
+    "los angeles rams d/st_dst": {
+      "info": {
+        "player": "Los Angeles Rams D/ST",
+        "position": "DST",
+        "team": "LA",
+        "opp": "GB"
+      },
+      "stats": {
+        "fpts": 6.92,
+        "pa": 20.5,
+        "yds_agn": 356.76,
+        "sack": 2.04,
+        "int": 0.73,
+        "fr": 0.57,
+        "td": 0.18
       }
     },
     "jacksonville d/st_dst": {
@@ -9862,12 +9862,12 @@
         "opp": "BUF"
       },
       "stats": {
-        "fpts": 5.6,
+        "fpts": 5.59,
         "pa": 24.5,
-        "yds_agn": 377.86,
-        "sack": 2.0,
+        "yds_agn": 383.56,
+        "sack": 2.01,
         "int": 0.67,
-        "fr": 0.58,
+        "fr": 0.57,
         "td": 0.14
       }
     },
@@ -9964,13 +9964,13 @@
         "opp": "DAL"
       },
       "stats": {
-        "fpts": 4.71,
+        "fpts": 4.58,
         "pa": 28.0,
-        "yds_agn": 363.9,
-        "sack": 1.99,
+        "yds_agn": 361.43,
+        "sack": 1.98,
         "int": 0.72,
-        "fr": 0.56,
-        "td": 0.12
+        "fr": 0.5,
+        "td": 0.13
       }
     },
     "new orleans d/st_dst": {
