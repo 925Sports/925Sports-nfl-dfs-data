@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-25T11:09:24.443577Z",
+  "updated": "2026-11-25T11:24:25.435059Z",
   "slateId": "WEEKLY",
   "players": {
     "joe burrow_qb": {
@@ -9200,9 +9200,9 @@
         "opp": "BAL"
       },
       "stats": {
-        "fpts": 10.06,
-        "fg": 2.4,
-        "xpt": 2.17
+        "fpts": 10.07,
+        "fg": 2.41,
+        "xpt": 2.18
       }
     },
     "evan mcpherson_k": {
@@ -9330,9 +9330,9 @@
         "opp": "LV"
       },
       "stats": {
-        "fpts": 8.67,
-        "fg": 1.9,
-        "xpt": 1.9
+        "fpts": 8.66,
+        "fg": 1.89,
+        "xpt": 1.89
       }
     },
     "jake elliott_k": {
@@ -9343,9 +9343,9 @@
         "opp": "DAL"
       },
       "stats": {
-        "fpts": 8.29,
+        "fpts": 8.3,
         "fg": 1.51,
-        "xpt": 2.97
+        "xpt": 2.98
       }
     },
     "tyler bass_k": {
@@ -9387,6 +9387,19 @@
         "xpt": 2.04
       }
     },
+    "dominic zvada_k": {
+      "info": {
+        "player": "Dominic Zvada",
+        "position": "K",
+        "team": "NYG",
+        "opp": "IND"
+      },
+      "stats": {
+        "fpts": 8.22,
+        "fg": 1.77,
+        "xpt": 2.34
+      }
+    },
     "joey slye_k": {
       "info": {
         "player": "Joey Slye",
@@ -9398,19 +9411,6 @@
         "fpts": 8.22,
         "fg": 1.99,
         "xpt": 1.21
-      }
-    },
-    "dominic zvada_k": {
-      "info": {
-        "player": "Dominic Zvada",
-        "position": "K",
-        "team": "NYG",
-        "opp": "IND"
-      },
-      "stats": {
-        "fpts": 8.21,
-        "fg": 1.76,
-        "xpt": 2.33
       }
     },
     "riley patterson_k": {
@@ -9434,9 +9434,9 @@
         "opp": "CLE"
       },
       "stats": {
-        "fpts": 8.13,
-        "fg": 1.71,
-        "xpt": 1.82
+        "fpts": 8.12,
+        "fg": 1.7,
+        "xpt": 1.81
       }
     },
     "chad ryland_k": {
@@ -9447,9 +9447,9 @@
         "opp": "WSH"
       },
       "stats": {
-        "fpts": 8.1,
+        "fpts": 8.09,
         "fg": 1.55,
-        "xpt": 2.77
+        "xpt": 2.76
       }
     },
     "eddy pineiro_k": {
@@ -9460,9 +9460,9 @@
         "opp": "SEA"
       },
       "stats": {
-        "fpts": 8.01,
+        "fpts": 8.0,
         "fg": 1.57,
-        "xpt": 2.46
+        "xpt": 2.45
       }
     },
     "jason myers_k": {
@@ -9473,9 +9473,9 @@
         "opp": "SF"
       },
       "stats": {
-        "fpts": 7.72,
-        "fg": 1.55,
-        "xpt": 2.34
+        "fpts": 7.71,
+        "fg": 1.54,
+        "xpt": 2.33
       }
     },
     "spencer shrader_k": {
@@ -9486,9 +9486,9 @@
         "opp": "NYG"
       },
       "stats": {
-        "fpts": 7.67,
+        "fpts": 7.66,
         "fg": 1.4,
-        "xpt": 2.85
+        "xpt": 2.84
       }
     },
     "trey smack_k": {
@@ -9578,7 +9578,7 @@
       },
       "stats": {
         "fpts": 6.82,
-        "fg": 1.44,
+        "fg": 1.42,
         "xpt": 1.26
       }
     },
@@ -9590,9 +9590,9 @@
         "opp": "BUF"
       },
       "stats": {
-        "fpts": 6.32,
-        "fg": 1.31,
-        "xpt": 1.77
+        "fpts": 6.33,
+        "fg": 1.32,
+        "xpt": 1.78
       }
     },
     "denver d/st_dst": {
