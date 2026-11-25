@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-25T21:24:27.207621Z",
+  "updated": "2026-11-25T21:39:32.352059Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -9108,9 +9108,9 @@
         "opp": "BAL"
       },
       "stats": {
-        "fpts": 10.07,
-        "fg": 2.41,
-        "xpt": 2.18
+        "fpts": 10.08,
+        "fg": 2.42,
+        "xpt": 2.19
       }
     },
     "evan mcpherson_k": {
@@ -9147,9 +9147,9 @@
         "opp": "CAR"
       },
       "stats": {
-        "fpts": 9.56,
-        "fg": 2.03,
-        "xpt": 2.51
+        "fpts": 9.57,
+        "fg": 2.04,
+        "xpt": 2.52
       }
     },
     "harrison mevis_k": {
@@ -9173,9 +9173,9 @@
         "opp": "ARI"
       },
       "stats": {
-        "fpts": 9.36,
+        "fpts": 9.37,
         "fg": 1.74,
-        "xpt": 3.12
+        "xpt": 3.13
       }
     },
     "jake bates_k": {
@@ -9225,9 +9225,9 @@
         "opp": "LV"
       },
       "stats": {
-        "fpts": 8.61,
-        "fg": 1.87,
-        "xpt": 1.87
+        "fpts": 8.74,
+        "fg": 1.9,
+        "xpt": 1.9
       }
     },
     "ryan fitzgerald_k": {
@@ -9238,9 +9238,9 @@
         "opp": "TB"
       },
       "stats": {
-        "fpts": 8.51,
-        "fg": 1.79,
-        "xpt": 2.26
+        "fpts": 8.52,
+        "fg": 1.8,
+        "xpt": 2.27
       }
     },
     "jake elliott_k": {
@@ -9264,9 +9264,35 @@
         "opp": "KC"
       },
       "stats": {
-        "fpts": 8.26,
-        "fg": 1.76,
-        "xpt": 2.4
+        "fpts": 8.25,
+        "fg": 1.75,
+        "xpt": 2.39
+      }
+    },
+    "matt gay_k": {
+      "info": {
+        "player": "Matt Gay",
+        "position": "K",
+        "team": "LV",
+        "opp": "CLE"
+      },
+      "stats": {
+        "fpts": 8.25,
+        "fg": 1.71,
+        "xpt": 1.83
+      }
+    },
+    "dominic zvada_k": {
+      "info": {
+        "player": "Dominic Zvada",
+        "position": "K",
+        "team": "NYG",
+        "opp": "IND"
+      },
+      "stats": {
+        "fpts": 8.23,
+        "fg": 1.78,
+        "xpt": 2.35
       }
     },
     "cameron dicker_k": {
@@ -9280,19 +9306,6 @@
         "fpts": 8.23,
         "fg": 1.73,
         "xpt": 2.04
-      }
-    },
-    "dominic zvada_k": {
-      "info": {
-        "player": "Dominic Zvada",
-        "position": "K",
-        "team": "NYG",
-        "opp": "IND"
-      },
-      "stats": {
-        "fpts": 8.22,
-        "fg": 1.77,
-        "xpt": 2.34
       }
     },
     "joey slye_k": {
@@ -9316,9 +9329,9 @@
         "opp": "MIA"
       },
       "stats": {
-        "fpts": 8.2,
+        "fpts": 8.21,
         "fg": 1.65,
-        "xpt": 2.54
+        "xpt": 2.55
       }
     },
     "riley patterson_k": {
@@ -9347,19 +9360,6 @@
         "xpt": 2.75
       }
     },
-    "matt gay_k": {
-      "info": {
-        "player": "Matt Gay",
-        "position": "K",
-        "team": "LV",
-        "opp": "CLE"
-      },
-      "stats": {
-        "fpts": 8.06,
-        "fg": 1.68,
-        "xpt": 1.79
-      }
-    },
     "eddy pineiro_k": {
       "info": {
         "player": "Eddy Pineiro",
@@ -9368,22 +9368,9 @@
         "opp": "SEA"
       },
       "stats": {
-        "fpts": 7.95,
-        "fg": 1.54,
-        "xpt": 2.4
-      }
-    },
-    "jason myers_k": {
-      "info": {
-        "player": "Jason Myers",
-        "position": "K",
-        "team": "SEA",
-        "opp": "SF"
-      },
-      "stats": {
-        "fpts": 7.64,
-        "fg": 1.52,
-        "xpt": 2.29
+        "fpts": 7.79,
+        "fg": 1.5,
+        "xpt": 2.34
       }
     },
     "spencer shrader_k": {
@@ -9394,9 +9381,22 @@
         "opp": "NYG"
       },
       "stats": {
-        "fpts": 7.63,
+        "fpts": 7.64,
         "fg": 1.39,
-        "xpt": 2.81
+        "xpt": 2.82
+      }
+    },
+    "jason myers_k": {
+      "info": {
+        "player": "Jason Myers",
+        "position": "K",
+        "team": "SEA",
+        "opp": "SF"
+      },
+      "stats": {
+        "fpts": 7.59,
+        "fg": 1.5,
+        "xpt": 2.27
       }
     },
     "trey smack_k": {
@@ -9407,9 +9407,9 @@
         "opp": "LA"
       },
       "stats": {
-        "fpts": 7.58,
-        "fg": 1.6,
-        "xpt": 1.93
+        "fpts": 7.57,
+        "fg": 1.59,
+        "xpt": 1.92
       }
     },
     "wil lutz_k": {
@@ -9420,9 +9420,9 @@
         "opp": "PIT"
       },
       "stats": {
-        "fpts": 7.54,
+        "fpts": 7.55,
         "fg": 1.53,
-        "xpt": 2.51
+        "xpt": 2.52
       }
     },
     "tyler loop_k": {
@@ -9433,9 +9433,9 @@
         "opp": "HOU"
       },
       "stats": {
-        "fpts": 7.52,
-        "fg": 1.63,
-        "xpt": 2.04
+        "fpts": 7.53,
+        "fg": 1.64,
+        "xpt": 2.05
       }
     },
     "chris boswell_k": {
@@ -9498,9 +9498,9 @@
         "opp": "BUF"
       },
       "stats": {
-        "fpts": 6.32,
-        "fg": 1.32,
-        "xpt": 1.77
+        "fpts": 6.3,
+        "fg": 1.3,
+        "xpt": 1.75
       }
     },
     "denver d/st_dst": {
@@ -9511,11 +9511,11 @@
         "opp": "PIT"
       },
       "stats": {
-        "fpts": 8.94,
+        "fpts": 8.97,
         "pa": 16.5,
-        "yds_agn": 330.83,
-        "sack": 2.46,
-        "int": 0.92,
+        "yds_agn": 330.95,
+        "sack": 2.47,
+        "int": 0.93,
         "fr": 0.6,
         "td": 0.2
       }
@@ -9528,10 +9528,10 @@
         "opp": "LV"
       },
       "stats": {
-        "fpts": 8.58,
+        "fpts": 8.55,
         "pa": 18.0,
-        "yds_agn": 283.47,
-        "sack": 3.11,
+        "yds_agn": 283.3,
+        "sack": 3.1,
         "int": 0.85,
         "fr": 0.35,
         "td": 0.2
@@ -9615,7 +9615,7 @@
       "stats": {
         "fpts": 7.57,
         "pa": 18.0,
-        "yds_agn": 333.46,
+        "yds_agn": 333.48,
         "sack": 1.4,
         "int": 0.92,
         "fr": 0.64,
@@ -9632,7 +9632,7 @@
       "stats": {
         "fpts": 7.38,
         "pa": 20.25,
-        "yds_agn": 329.86,
+        "yds_agn": 329.91,
         "sack": 2.76,
         "int": 0.76,
         "fr": 0.38,
@@ -9656,23 +9656,6 @@
         "td": 0.19
       }
     },
-    "dallas d/st_dst": {
-      "info": {
-        "player": "Dallas D/ST",
-        "position": "DST",
-        "team": "DAL",
-        "opp": "PHI"
-      },
-      "stats": {
-        "fpts": 7.07,
-        "pa": 19.5,
-        "yds_agn": 340.16,
-        "sack": 2.12,
-        "int": 0.71,
-        "fr": 0.46,
-        "td": 0.19
-      }
-    },
     "carolina d/st_dst": {
       "info": {
         "player": "Carolina D/ST",
@@ -9683,7 +9666,7 @@
       "stats": {
         "fpts": 7.06,
         "pa": 23.25,
-        "yds_agn": 306.71,
+        "yds_agn": 306.72,
         "sack": 2.81,
         "int": 0.65,
         "fr": 0.76,
@@ -9698,11 +9681,11 @@
         "opp": "CLE"
       },
       "stats": {
-        "fpts": 7.03,
+        "fpts": 6.99,
         "pa": 22.5,
-        "yds_agn": 312.27,
-        "sack": 3.06,
-        "int": 0.59,
+        "yds_agn": 312.05,
+        "sack": 3.04,
+        "int": 0.58,
         "fr": 0.56,
         "td": 0.16
       }
@@ -9751,7 +9734,7 @@
       "stats": {
         "fpts": 6.83,
         "pa": 17.0,
-        "yds_agn": 313.81,
+        "yds_agn": 313.82,
         "sack": 1.17,
         "int": 0.66,
         "fr": 0.46,
@@ -9766,12 +9749,12 @@
         "opp": "BAL"
       },
       "stats": {
-        "fpts": 6.59,
+        "fpts": 6.6,
         "pa": 20.5,
-        "yds_agn": 316.47,
-        "sack": 2.45,
-        "int": 0.51,
-        "fr": 0.41,
+        "yds_agn": 316.46,
+        "sack": 2.46,
+        "int": 0.52,
+        "fr": 0.4,
         "td": 0.18
       }
     },
@@ -9783,10 +9766,10 @@
         "opp": "DEN"
       },
       "stats": {
-        "fpts": 6.45,
+        "fpts": 6.46,
         "pa": 20.0,
-        "yds_agn": 299.29,
-        "sack": 2.03,
+        "yds_agn": 299.38,
+        "sack": 2.04,
         "int": 0.61,
         "fr": 0.4,
         "td": 0.17
@@ -9800,29 +9783,29 @@
         "opp": "SEA"
       },
       "stats": {
-        "fpts": 6.29,
-        "pa": 21.25,
-        "yds_agn": 339.47,
+        "fpts": 6.35,
+        "pa": 21.0,
+        "yds_agn": 339.17,
         "sack": 1.64,
         "int": 0.87,
         "fr": 0.41,
         "td": 0.18
       }
     },
-    "cincinnati d/st_dst": {
+    "dallas d/st_dst": {
       "info": {
-        "player": "Cincinnati D/ST",
+        "player": "Dallas D/ST",
         "position": "DST",
-        "team": "CIN",
-        "opp": "NO"
+        "team": "DAL",
+        "opp": "PHI"
       },
       "stats": {
-        "fpts": 5.98,
-        "pa": 20.5,
-        "yds_agn": 324.76,
-        "sack": 1.36,
-        "int": 0.74,
-        "fr": 0.41,
+        "fpts": 6.25,
+        "pa": 19.5,
+        "yds_agn": 350.95,
+        "sack": 1.32,
+        "int": 0.73,
+        "fr": 0.43,
         "td": 0.19
       }
     },
@@ -9834,13 +9817,30 @@
         "opp": "SF"
       },
       "stats": {
-        "fpts": 5.95,
-        "pa": 24.25,
-        "yds_agn": 391.79,
-        "sack": 2.42,
+        "fpts": 6.18,
+        "pa": 23.5,
+        "yds_agn": 391.18,
+        "sack": 2.41,
         "int": 0.76,
         "fr": 0.43,
         "td": 0.15
+      }
+    },
+    "cincinnati d/st_dst": {
+      "info": {
+        "player": "Cincinnati D/ST",
+        "position": "DST",
+        "team": "CIN",
+        "opp": "NO"
+      },
+      "stats": {
+        "fpts": 6.09,
+        "pa": 20.0,
+        "yds_agn": 323.01,
+        "sack": 1.33,
+        "int": 0.73,
+        "fr": 0.41,
+        "td": 0.19
       }
     },
     "arizona d/st_dst": {
@@ -9860,6 +9860,23 @@
         "td": 0.15
       }
     },
+    "kansas city d/st_dst": {
+      "info": {
+        "player": "Kansas City D/ST",
+        "position": "DST",
+        "team": "KC",
+        "opp": "BUF"
+      },
+      "stats": {
+        "fpts": 5.67,
+        "pa": 24.5,
+        "yds_agn": 385.08,
+        "sack": 2.05,
+        "int": 0.69,
+        "fr": 0.57,
+        "td": 0.14
+      }
+    },
     "indianapolis d/st_dst": {
       "info": {
         "player": "Indianapolis D/ST",
@@ -9870,27 +9887,10 @@
       "stats": {
         "fpts": 5.62,
         "pa": 24.5,
-        "yds_agn": 348.22,
+        "yds_agn": 348.24,
         "sack": 1.58,
         "int": 0.76,
         "fr": 0.72,
-        "td": 0.14
-      }
-    },
-    "kansas city d/st_dst": {
-      "info": {
-        "player": "Kansas City D/ST",
-        "position": "DST",
-        "team": "KC",
-        "opp": "BUF"
-      },
-      "stats": {
-        "fpts": 5.59,
-        "pa": 24.5,
-        "yds_agn": 383.56,
-        "sack": 2.01,
-        "int": 0.67,
-        "fr": 0.57,
         "td": 0.14
       }
     },
@@ -9909,6 +9909,23 @@
         "int": 0.64,
         "fr": 0.6,
         "td": 0.13
+      }
+    },
+    "buffalo d/st_dst": {
+      "info": {
+        "player": "Buffalo D/ST",
+        "position": "DST",
+        "team": "BUF",
+        "opp": "KC"
+      },
+      "stats": {
+        "fpts": 5.16,
+        "pa": 22.0,
+        "yds_agn": 363.17,
+        "sack": 1.57,
+        "int": 0.63,
+        "fr": 0.24,
+        "td": 0.17
       }
     },
     "atlanta d/st_dst": {
@@ -9945,23 +9962,6 @@
         "td": 0.15
       }
     },
-    "buffalo d/st_dst": {
-      "info": {
-        "player": "Buffalo D/ST",
-        "position": "DST",
-        "team": "BUF",
-        "opp": "KC"
-      },
-      "stats": {
-        "fpts": 5.11,
-        "pa": 22.0,
-        "yds_agn": 361.61,
-        "sack": 1.54,
-        "int": 0.62,
-        "fr": 0.24,
-        "td": 0.17
-      }
-    },
     "chicago d/st_dst": {
       "info": {
         "player": "Chicago D/ST",
@@ -9979,23 +9979,6 @@
         "td": 0.14
       }
     },
-    "philadelphia d/st_dst": {
-      "info": {
-        "player": "Philadelphia D/ST",
-        "position": "DST",
-        "team": "PHI",
-        "opp": "DAL"
-      },
-      "stats": {
-        "fpts": 4.58,
-        "pa": 28.0,
-        "yds_agn": 361.43,
-        "sack": 1.98,
-        "int": 0.72,
-        "fr": 0.5,
-        "td": 0.13
-      }
-    },
     "new orleans d/st_dst": {
       "info": {
         "player": "New Orleans D/ST",
@@ -10004,13 +9987,30 @@
         "opp": "CIN"
       },
       "stats": {
-        "fpts": 4.2,
-        "pa": 30.0,
-        "yds_agn": 380.55,
-        "sack": 2.39,
-        "int": 0.61,
+        "fpts": 4.22,
+        "pa": 29.5,
+        "yds_agn": 377.94,
+        "sack": 2.34,
+        "int": 0.6,
         "fr": 0.46,
-        "td": 0.11
+        "td": 0.12
+      }
+    },
+    "philadelphia d/st_dst": {
+      "info": {
+        "player": "Philadelphia D/ST",
+        "position": "DST",
+        "team": "PHI",
+        "opp": "DAL"
+      },
+      "stats": {
+        "fpts": 3.64,
+        "pa": 28.0,
+        "yds_agn": 369.59,
+        "sack": 1.04,
+        "int": 0.74,
+        "fr": 0.48,
+        "td": 0.12
       }
     },
     "baltimore d/st_dst": {
@@ -10021,10 +10021,10 @@
         "opp": "HOU"
       },
       "stats": {
-        "fpts": 3.59,
+        "fpts": 3.6,
         "pa": 27.0,
-        "yds_agn": 383.64,
-        "sack": 1.15,
+        "yds_agn": 378.39,
+        "sack": 1.16,
         "int": 0.64,
         "fr": 0.35,
         "td": 0.13
@@ -10040,7 +10040,7 @@
       "stats": {
         "fpts": 3.55,
         "pa": 31.5,
-        "yds_agn": 382.85,
+        "yds_agn": 382.86,
         "sack": 2.03,
         "int": 0.72,
         "fr": 0.41,
