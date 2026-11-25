@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-25T23:24:35.335167Z",
+  "updated": "2026-11-25T23:39:25.585637Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -9085,9 +9085,9 @@
         "opp": "BAL"
       },
       "stats": {
-        "fpts": 10.08,
-        "fg": 2.42,
-        "xpt": 2.19
+        "fpts": 10.09,
+        "fg": 2.43,
+        "xpt": 2.2
       }
     },
     "evan mcpherson_k": {
@@ -9202,9 +9202,9 @@
         "opp": "LV"
       },
       "stats": {
-        "fpts": 8.74,
-        "fg": 1.9,
-        "xpt": 1.9
+        "fpts": 8.75,
+        "fg": 1.91,
+        "xpt": 1.91
       }
     },
     "ryan fitzgerald_k": {
@@ -9233,6 +9233,19 @@
         "xpt": 2.99
       }
     },
+    "blake grupe_k": {
+      "info": {
+        "player": "Blake Grupe",
+        "position": "K",
+        "team": "NYJ",
+        "opp": "MIA"
+      },
+      "stats": {
+        "fpts": 8.3,
+        "fg": 1.67,
+        "xpt": 2.58
+      }
+    },
     "tyler bass_k": {
       "info": {
         "player": "Tyler Bass",
@@ -9241,9 +9254,9 @@
         "opp": "KC"
       },
       "stats": {
-        "fpts": 8.25,
-        "fg": 1.75,
-        "xpt": 2.39
+        "fpts": 8.24,
+        "fg": 1.74,
+        "xpt": 2.38
       }
     },
     "matt gay_k": {
@@ -9254,9 +9267,9 @@
         "opp": "CLE"
       },
       "stats": {
-        "fpts": 8.25,
-        "fg": 1.71,
-        "xpt": 1.83
+        "fpts": 8.24,
+        "fg": 1.7,
+        "xpt": 1.82
       }
     },
     "dominic zvada_k": {
@@ -9272,19 +9285,6 @@
         "xpt": 2.35
       }
     },
-    "cameron dicker_k": {
-      "info": {
-        "player": "Cameron Dicker",
-        "position": "K",
-        "team": "LAC",
-        "opp": "NE"
-      },
-      "stats": {
-        "fpts": 8.23,
-        "fg": 1.73,
-        "xpt": 2.04
-      }
-    },
     "joey slye_k": {
       "info": {
         "player": "Joey Slye",
@@ -9296,32 +9296,6 @@
         "fpts": 8.22,
         "fg": 1.97,
         "xpt": 1.21
-      }
-    },
-    "blake grupe_k": {
-      "info": {
-        "player": "Blake Grupe",
-        "position": "K",
-        "team": "NYJ",
-        "opp": "MIA"
-      },
-      "stats": {
-        "fpts": 8.21,
-        "fg": 1.65,
-        "xpt": 2.55
-      }
-    },
-    "riley patterson_k": {
-      "info": {
-        "player": "Riley Patterson",
-        "position": "K",
-        "team": "MIA",
-        "opp": "NYJ"
-      },
-      "stats": {
-        "fpts": 8.09,
-        "fg": 1.62,
-        "xpt": 2.06
       }
     },
     "chad ryland_k": {
@@ -9337,6 +9311,32 @@
         "xpt": 2.75
       }
     },
+    "riley patterson_k": {
+      "info": {
+        "player": "Riley Patterson",
+        "position": "K",
+        "team": "MIA",
+        "opp": "NYJ"
+      },
+      "stats": {
+        "fpts": 7.99,
+        "fg": 1.6,
+        "xpt": 2.03
+      }
+    },
+    "cameron dicker_k": {
+      "info": {
+        "player": "Cameron Dicker",
+        "position": "K",
+        "team": "LAC",
+        "opp": "NE"
+      },
+      "stats": {
+        "fpts": 7.9,
+        "fg": 1.65,
+        "xpt": 1.95
+      }
+    },
     "eddy pineiro_k": {
       "info": {
         "player": "Eddy Pineiro",
@@ -9345,9 +9345,9 @@
         "opp": "SEA"
       },
       "stats": {
-        "fpts": 7.79,
-        "fg": 1.5,
-        "xpt": 2.34
+        "fpts": 7.78,
+        "fg": 1.49,
+        "xpt": 2.33
       }
     },
     "spencer shrader_k": {
@@ -9371,9 +9371,9 @@
         "opp": "SF"
       },
       "stats": {
-        "fpts": 7.59,
-        "fg": 1.5,
-        "xpt": 2.27
+        "fpts": 7.58,
+        "fg": 1.49,
+        "xpt": 2.26
       }
     },
     "trey smack_k": {
@@ -9384,9 +9384,9 @@
         "opp": "LA"
       },
       "stats": {
-        "fpts": 7.57,
-        "fg": 1.59,
-        "xpt": 1.92
+        "fpts": 7.56,
+        "fg": 1.58,
+        "xpt": 1.91
       }
     },
     "wil lutz_k": {
@@ -9410,9 +9410,22 @@
         "opp": "HOU"
       },
       "stats": {
-        "fpts": 7.53,
-        "fg": 1.64,
-        "xpt": 2.05
+        "fpts": 7.54,
+        "fg": 1.65,
+        "xpt": 2.06
+      }
+    },
+    "andy borregales_k": {
+      "info": {
+        "player": "Andy Borregales",
+        "position": "K",
+        "team": "NE",
+        "opp": "LAC"
+      },
+      "stats": {
+        "fpts": 7.23,
+        "fg": 1.48,
+        "xpt": 2.38
       }
     },
     "chris boswell_k": {
@@ -9441,19 +9454,6 @@
         "xpt": 1.57
       }
     },
-    "andy borregales_k": {
-      "info": {
-        "player": "Andy Borregales",
-        "position": "K",
-        "team": "NE",
-        "opp": "LAC"
-      },
-      "stats": {
-        "fpts": 6.97,
-        "fg": 1.42,
-        "xpt": 2.28
-      }
-    },
     "nick folk_k": {
       "info": {
         "player": "Nick Folk",
@@ -9475,9 +9475,9 @@
         "opp": "BUF"
       },
       "stats": {
-        "fpts": 6.3,
+        "fpts": 6.28,
         "fg": 1.3,
-        "xpt": 1.75
+        "xpt": 1.73
       }
     },
     "denver d/st_dst": {
