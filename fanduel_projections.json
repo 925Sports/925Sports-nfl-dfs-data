@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-25T02:57:24.336578Z",
+  "updated": "2026-11-25T03:09:28.145305Z",
   "slateId": "WEEKLY",
   "players": {
     "joe burrow_qb": {
@@ -9188,7 +9188,7 @@
       },
       "stats": {
         "fpts": 11.2,
-        "fg": 2.34,
+        "fg": 2.33,
         "xpt": 3.1
       }
     },
@@ -9213,9 +9213,9 @@
         "opp": "BAL"
       },
       "stats": {
-        "fpts": 10.0,
-        "fg": 2.31,
-        "xpt": 2.11
+        "fpts": 10.02,
+        "fg": 2.33,
+        "xpt": 2.13
       }
     },
     "will reichard_k": {
@@ -9240,7 +9240,7 @@
       },
       "stats": {
         "fpts": 9.58,
-        "fg": 2.05,
+        "fg": 2.04,
         "xpt": 2.53
       }
     },
@@ -9265,9 +9265,9 @@
         "opp": "ARI"
       },
       "stats": {
-        "fpts": 9.41,
-        "fg": 1.76,
-        "xpt": 3.17
+        "fpts": 9.4,
+        "fg": 1.75,
+        "xpt": 3.16
       }
     },
     "brandon aubrey_k": {
@@ -9278,9 +9278,9 @@
         "opp": "PHI"
       },
       "stats": {
-        "fpts": 9.4,
-        "fg": 2.01,
-        "xpt": 2.58
+        "fpts": 9.39,
+        "fg": 2.0,
+        "xpt": 2.57
       }
     },
     "cairo santos_k": {
@@ -9330,9 +9330,9 @@
         "opp": "TB"
       },
       "stats": {
-        "fpts": 8.52,
+        "fpts": 8.51,
         "fg": 1.79,
-        "xpt": 2.27
+        "xpt": 2.26
       }
     },
     "jake elliott_k": {
@@ -9343,9 +9343,9 @@
         "opp": "DAL"
       },
       "stats": {
-        "fpts": 8.42,
-        "fg": 1.52,
-        "xpt": 3.0
+        "fpts": 8.41,
+        "fg": 1.51,
+        "xpt": 2.99
       }
     },
     "tyler bass_k": {
@@ -9435,7 +9435,7 @@
       },
       "stats": {
         "fpts": 8.1,
-        "fg": 1.55,
+        "fg": 1.56,
         "xpt": 2.77
       }
     },
@@ -9473,9 +9473,9 @@
         "opp": "NYG"
       },
       "stats": {
-        "fpts": 7.74,
+        "fpts": 7.73,
         "fg": 1.41,
-        "xpt": 2.89
+        "xpt": 2.88
       }
     },
     "jason myers_k": {
@@ -9504,6 +9504,19 @@
         "xpt": 1.95
       }
     },
+    "tyler loop_k": {
+      "info": {
+        "player": "Tyler Loop",
+        "position": "K",
+        "team": "BAL",
+        "opp": "HOU"
+      },
+      "stats": {
+        "fpts": 7.51,
+        "fg": 1.62,
+        "xpt": 2.03
+      }
+    },
     "wil lutz_k": {
       "info": {
         "player": "Wil Lutz",
@@ -9517,19 +9530,6 @@
         "xpt": 2.47
       }
     },
-    "tyler loop_k": {
-      "info": {
-        "player": "Tyler Loop",
-        "position": "K",
-        "team": "BAL",
-        "opp": "HOU"
-      },
-      "stats": {
-        "fpts": 7.5,
-        "fg": 1.61,
-        "xpt": 2.02
-      }
-    },
     "chris boswell_k": {
       "info": {
         "player": "Chris Boswell",
@@ -9539,7 +9539,7 @@
       },
       "stats": {
         "fpts": 7.35,
-        "fg": 1.63,
+        "fg": 1.62,
         "xpt": 1.48
       }
     },
@@ -9551,9 +9551,9 @@
         "opp": "CIN"
       },
       "stats": {
-        "fpts": 7.19,
-        "fg": 1.57,
-        "xpt": 1.63
+        "fpts": 7.18,
+        "fg": 1.56,
+        "xpt": 1.62
       }
     },
     "andy borregales_k": {
@@ -9577,9 +9577,9 @@
         "opp": "MIN"
       },
       "stats": {
-        "fpts": 6.84,
-        "fg": 1.53,
-        "xpt": 1.28
+        "fpts": 6.83,
+        "fg": 1.51,
+        "xpt": 1.27
       }
     },
     "harrison butker_k": {
