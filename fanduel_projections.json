@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-26T03:39:28.304872Z",
+  "updated": "2026-11-26T03:54:27.904966Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -9118,9 +9118,9 @@
         "opp": "TEN"
       },
       "stats": {
-        "fpts": 11.18,
-        "fg": 2.33,
-        "xpt": 3.08
+        "fpts": 11.19,
+        "fg": 2.34,
+        "xpt": 3.09
       }
     },
     "ka'imi fairbairn_k": {
@@ -9131,9 +9131,9 @@
         "opp": "BAL"
       },
       "stats": {
-        "fpts": 10.08,
-        "fg": 2.42,
-        "xpt": 2.19
+        "fpts": 10.07,
+        "fg": 2.41,
+        "xpt": 2.18
       }
     },
     "evan mcpherson_k": {
@@ -9248,9 +9248,9 @@
         "opp": "LV"
       },
       "stats": {
-        "fpts": 8.7,
-        "fg": 1.89,
-        "xpt": 1.89
+        "fpts": 8.69,
+        "fg": 1.88,
+        "xpt": 1.88
       }
     },
     "ryan fitzgerald_k": {
@@ -9274,9 +9274,9 @@
         "opp": "MIA"
       },
       "stats": {
-        "fpts": 8.35,
-        "fg": 1.69,
-        "xpt": 2.6
+        "fpts": 8.36,
+        "fg": 1.7,
+        "xpt": 2.61
       }
     },
     "jake elliott_k": {
@@ -9305,19 +9305,6 @@
         "xpt": 2.36
       }
     },
-    "tyler bass_k": {
-      "info": {
-        "player": "Tyler Bass",
-        "position": "K",
-        "team": "BUF",
-        "opp": "KC"
-      },
-      "stats": {
-        "fpts": 8.22,
-        "fg": 1.73,
-        "xpt": 2.36
-      }
-    },
     "joey slye_k": {
       "info": {
         "player": "Joey Slye",
@@ -9327,8 +9314,21 @@
       },
       "stats": {
         "fpts": 8.22,
-        "fg": 1.96,
+        "fg": 1.97,
         "xpt": 1.21
+      }
+    },
+    "tyler bass_k": {
+      "info": {
+        "player": "Tyler Bass",
+        "position": "K",
+        "team": "BUF",
+        "opp": "KC"
+      },
+      "stats": {
+        "fpts": 8.21,
+        "fg": 1.73,
+        "xpt": 2.35
       }
     },
     "matt gay_k": {
@@ -9344,19 +9344,6 @@
         "xpt": 1.79
       }
     },
-    "eddy pineiro_k": {
-      "info": {
-        "player": "Eddy Pineiro",
-        "position": "K",
-        "team": "SF",
-        "opp": "SEA"
-      },
-      "stats": {
-        "fpts": 8.08,
-        "fg": 1.54,
-        "xpt": 2.41
-      }
-    },
     "chad ryland_k": {
       "info": {
         "player": "Chad Ryland",
@@ -9368,6 +9355,19 @@
         "fpts": 8.08,
         "fg": 1.55,
         "xpt": 2.75
+      }
+    },
+    "eddy pineiro_k": {
+      "info": {
+        "player": "Eddy Pineiro",
+        "position": "K",
+        "team": "SF",
+        "opp": "SEA"
+      },
+      "stats": {
+        "fpts": 8.07,
+        "fg": 1.54,
+        "xpt": 2.4
       }
     },
     "riley patterson_k": {
@@ -9404,9 +9404,9 @@
         "opp": "SF"
       },
       "stats": {
-        "fpts": 7.87,
+        "fpts": 7.86,
         "fg": 1.54,
-        "xpt": 2.34
+        "xpt": 2.33
       }
     },
     "spencer shrader_k": {
@@ -9456,9 +9456,9 @@
         "opp": "HOU"
       },
       "stats": {
-        "fpts": 7.53,
-        "fg": 1.64,
-        "xpt": 2.05
+        "fpts": 7.52,
+        "fg": 1.63,
+        "xpt": 2.04
       }
     },
     "andy borregales_k": {
@@ -9469,9 +9469,9 @@
         "opp": "LAC"
       },
       "stats": {
-        "fpts": 7.25,
-        "fg": 1.49,
-        "xpt": 2.4
+        "fpts": 7.26,
+        "fg": 1.5,
+        "xpt": 2.41
       }
     },
     "chris boswell_k": {
@@ -9772,13 +9772,13 @@
         "opp": "TEN"
       },
       "stats": {
-        "fpts": 6.83,
-        "pa": 17.0,
-        "yds_agn": 313.82,
+        "fpts": 6.69,
+        "pa": 17.5,
+        "yds_agn": 314.67,
         "sack": 1.17,
         "int": 0.66,
         "fr": 0.46,
-        "td": 0.21
+        "td": 0.2
       }
     },
     "houston d/st_dst": {
@@ -9874,12 +9874,12 @@
         "opp": "BUF"
       },
       "stats": {
-        "fpts": 5.78,
+        "fpts": 5.8,
         "pa": 24.5,
-        "yds_agn": 389.54,
+        "yds_agn": 389.82,
         "sack": 2.12,
         "int": 0.71,
-        "fr": 0.57,
+        "fr": 0.58,
         "td": 0.15
       }
     },
@@ -10061,12 +10061,12 @@
         "opp": "JAC"
       },
       "stats": {
-        "fpts": 3.55,
-        "pa": 31.5,
-        "yds_agn": 382.86,
-        "sack": 2.03,
+        "fpts": 3.48,
+        "pa": 32.0,
+        "yds_agn": 384.0,
+        "sack": 2.05,
         "int": 0.72,
-        "fr": 0.41,
+        "fr": 0.42,
         "td": 0.11
       }
     }
