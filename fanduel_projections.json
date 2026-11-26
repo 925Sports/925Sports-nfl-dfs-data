@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-26T19:54:27.258702Z",
+  "updated": "2026-11-26T20:09:26.389863Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -9203,9 +9203,9 @@
         "opp": "NO"
       },
       "stats": {
-        "fpts": 9.79,
-        "fg": 2.23,
-        "xpt": 1.96
+        "fpts": 9.8,
+        "fg": 2.24,
+        "xpt": 1.97
       }
     },
     "harrison mevis_k": {
@@ -9294,9 +9294,9 @@
         "opp": "LV"
       },
       "stats": {
-        "fpts": 8.61,
-        "fg": 1.87,
-        "xpt": 1.87
+        "fpts": 8.62,
+        "fg": 1.88,
+        "xpt": 1.88
       }
     },
     "blake grupe_k": {
@@ -9346,9 +9346,9 @@
         "opp": "IND"
       },
       "stats": {
-        "fpts": 8.23,
+        "fpts": 8.22,
         "fg": 1.77,
-        "xpt": 2.35
+        "xpt": 2.34
       }
     },
     "joey slye_k": {
@@ -9360,7 +9360,7 @@
       },
       "stats": {
         "fpts": 8.22,
-        "fg": 2.05,
+        "fg": 2.07,
         "xpt": 1.21
       }
     },
@@ -9372,9 +9372,9 @@
         "opp": "KC"
       },
       "stats": {
-        "fpts": 8.19,
-        "fg": 1.7,
-        "xpt": 2.33
+        "fpts": 8.2,
+        "fg": 1.71,
+        "xpt": 2.34
       }
     },
     "eddy pineiro_k": {
@@ -9411,9 +9411,9 @@
         "opp": "CLE"
       },
       "stats": {
-        "fpts": 8.05,
-        "fg": 1.69,
-        "xpt": 1.8
+        "fpts": 8.06,
+        "fg": 1.7,
+        "xpt": 1.81
       }
     },
     "riley patterson_k": {
@@ -9463,9 +9463,9 @@
         "opp": "NYG"
       },
       "stats": {
-        "fpts": 7.63,
+        "fpts": 7.62,
         "fg": 1.38,
-        "xpt": 2.81
+        "xpt": 2.8
       }
     },
     "wil lutz_k": {
@@ -9476,9 +9476,9 @@
         "opp": "PIT"
       },
       "stats": {
-        "fpts": 7.59,
+        "fpts": 7.6,
         "fg": 1.53,
-        "xpt": 2.53
+        "xpt": 2.54
       }
     },
     "trey smack_k": {
@@ -9528,9 +9528,9 @@
         "opp": "DEN"
       },
       "stats": {
-        "fpts": 6.98,
-        "fg": 1.53,
-        "xpt": 1.41
+        "fpts": 6.99,
+        "fg": 1.54,
+        "xpt": 1.42
       }
     },
     "daniel carlson_k": {
@@ -9567,9 +9567,9 @@
         "opp": "BUF"
       },
       "stats": {
-        "fpts": 6.15,
-        "fg": 1.27,
-        "xpt": 1.67
+        "fpts": 6.16,
+        "fg": 1.28,
+        "xpt": 1.68
       }
     },
     "los angeles chargers d/st_dst": {
