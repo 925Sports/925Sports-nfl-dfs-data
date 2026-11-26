@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-26T15:54:31.546342Z",
+  "updated": "2026-11-26T16:09:27.376303Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -9733,11 +9733,11 @@
         "opp": "PHI"
       },
       "stats": {
-        "fpts": 7.17,
-        "pa": 19.5,
-        "yds_agn": 340.78,
-        "sack": 2.12,
-        "int": 0.71,
+        "fpts": 7.07,
+        "pa": 20.0,
+        "yds_agn": 341.66,
+        "sack": 2.13,
+        "int": 0.72,
         "fr": 0.51,
         "td": 0.19
       }
@@ -10056,13 +10056,13 @@
         "opp": "DAL"
       },
       "stats": {
-        "fpts": 4.56,
-        "pa": 28.0,
-        "yds_agn": 361.48,
-        "sack": 1.98,
-        "int": 0.72,
+        "fpts": 4.49,
+        "pa": 28.5,
+        "yds_agn": 362.45,
+        "sack": 2.0,
+        "int": 0.73,
         "fr": 0.49,
-        "td": 0.13
+        "td": 0.11
       }
     },
     "new orleans d/st_dst": {
