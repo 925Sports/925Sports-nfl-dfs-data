@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-26T17:54:28.298052Z",
+  "updated": "2026-11-26T18:09:36.978039Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -9203,9 +9203,9 @@
         "opp": "NO"
       },
       "stats": {
-        "fpts": 9.78,
-        "fg": 2.22,
-        "xpt": 1.95
+        "fpts": 9.79,
+        "fg": 2.23,
+        "xpt": 1.96
       }
     },
     "harrison mevis_k": {
@@ -9281,9 +9281,9 @@
         "opp": "DET"
       },
       "stats": {
-        "fpts": 9.18,
+        "fpts": 9.17,
         "fg": 1.81,
-        "xpt": 2.84
+        "xpt": 2.83
       }
     },
     "andre szmyt_k": {
@@ -9294,9 +9294,9 @@
         "opp": "LV"
       },
       "stats": {
-        "fpts": 8.6,
-        "fg": 1.86,
-        "xpt": 1.86
+        "fpts": 8.61,
+        "fg": 1.87,
+        "xpt": 1.87
       }
     },
     "blake grupe_k": {
@@ -9346,9 +9346,9 @@
         "opp": "IND"
       },
       "stats": {
-        "fpts": 8.24,
-        "fg": 1.78,
-        "xpt": 2.36
+        "fpts": 8.23,
+        "fg": 1.77,
+        "xpt": 2.35
       }
     },
     "joey slye_k": {
@@ -9360,7 +9360,7 @@
       },
       "stats": {
         "fpts": 8.22,
-        "fg": 2.03,
+        "fg": 2.05,
         "xpt": 1.21
       }
     },
@@ -9372,9 +9372,9 @@
         "opp": "KC"
       },
       "stats": {
-        "fpts": 8.17,
-        "fg": 1.69,
-        "xpt": 2.31
+        "fpts": 8.19,
+        "fg": 1.7,
+        "xpt": 2.33
       }
     },
     "eddy pineiro_k": {
@@ -9411,9 +9411,9 @@
         "opp": "CLE"
       },
       "stats": {
-        "fpts": 8.04,
-        "fg": 1.68,
-        "xpt": 1.79
+        "fpts": 8.05,
+        "fg": 1.69,
+        "xpt": 1.8
       }
     },
     "riley patterson_k": {
@@ -9463,9 +9463,22 @@
         "opp": "NYG"
       },
       "stats": {
-        "fpts": 7.64,
-        "fg": 1.39,
-        "xpt": 2.82
+        "fpts": 7.63,
+        "fg": 1.38,
+        "xpt": 2.81
+      }
+    },
+    "wil lutz_k": {
+      "info": {
+        "player": "Wil Lutz",
+        "position": "K",
+        "team": "DEN",
+        "opp": "PIT"
+      },
+      "stats": {
+        "fpts": 7.59,
+        "fg": 1.53,
+        "xpt": 2.53
       }
     },
     "trey smack_k": {
@@ -9479,19 +9492,6 @@
         "fpts": 7.56,
         "fg": 1.58,
         "xpt": 1.91
-      }
-    },
-    "wil lutz_k": {
-      "info": {
-        "player": "Wil Lutz",
-        "position": "K",
-        "team": "DEN",
-        "opp": "PIT"
-      },
-      "stats": {
-        "fpts": 7.54,
-        "fg": 1.51,
-        "xpt": 2.51
       }
     },
     "tyler loop_k": {
@@ -9528,9 +9528,9 @@
         "opp": "DEN"
       },
       "stats": {
-        "fpts": 6.97,
-        "fg": 1.52,
-        "xpt": 1.4
+        "fpts": 6.98,
+        "fg": 1.53,
+        "xpt": 1.41
       }
     },
     "daniel carlson_k": {
@@ -9541,9 +9541,9 @@
         "opp": "CIN"
       },
       "stats": {
-        "fpts": 6.9,
-        "fg": 1.49,
-        "xpt": 1.55
+        "fpts": 6.91,
+        "fg": 1.5,
+        "xpt": 1.56
       }
     },
     "nick folk_k": {
@@ -9567,9 +9567,9 @@
         "opp": "BUF"
       },
       "stats": {
-        "fpts": 6.1,
-        "fg": 1.25,
-        "xpt": 1.65
+        "fpts": 6.15,
+        "fg": 1.27,
+        "xpt": 1.67
       }
     },
     "los angeles chargers d/st_dst": {
@@ -9597,10 +9597,10 @@
         "opp": "PIT"
       },
       "stats": {
-        "fpts": 9.15,
+        "fpts": 9.17,
         "pa": 16.0,
-        "yds_agn": 330.08,
-        "sack": 2.44,
+        "yds_agn": 330.37,
+        "sack": 2.46,
         "int": 0.92,
         "fr": 0.6,
         "td": 0.21
@@ -9631,9 +9631,9 @@
         "opp": "LV"
       },
       "stats": {
-        "fpts": 8.58,
+        "fpts": 8.56,
         "pa": 18.0,
-        "yds_agn": 283.48,
+        "yds_agn": 283.4,
         "sack": 3.11,
         "int": 0.85,
         "fr": 0.35,
@@ -9674,6 +9674,23 @@
         "td": 0.2
       }
     },
+    "new york giants d/st_dst": {
+      "info": {
+        "player": "New York Giants D/ST",
+        "position": "DST",
+        "team": "NYG",
+        "opp": "IND"
+      },
+      "stats": {
+        "fpts": 7.5,
+        "pa": 18.0,
+        "yds_agn": 332.06,
+        "sack": 1.37,
+        "int": 0.89,
+        "fr": 0.65,
+        "td": 0.2
+      }
+    },
     "new york jets d/st_dst": {
       "info": {
         "player": "New York Jets D/ST",
@@ -9691,23 +9708,6 @@
         "td": 0.21
       }
     },
-    "new york giants d/st_dst": {
-      "info": {
-        "player": "New York Giants D/ST",
-        "position": "DST",
-        "team": "NYG",
-        "opp": "IND"
-      },
-      "stats": {
-        "fpts": 7.49,
-        "pa": 18.0,
-        "yds_agn": 332.0,
-        "sack": 1.36,
-        "int": 0.89,
-        "fr": 0.65,
-        "td": 0.2
-      }
-    },
     "tampa bay d/st_dst": {
       "info": {
         "player": "Tampa Bay D/ST",
@@ -9718,7 +9718,7 @@
       "stats": {
         "fpts": 7.39,
         "pa": 20.25,
-        "yds_agn": 330.22,
+        "yds_agn": 330.21,
         "sack": 2.77,
         "int": 0.76,
         "fr": 0.38,
@@ -9752,7 +9752,7 @@
       "stats": {
         "fpts": 7.07,
         "pa": 23.25,
-        "yds_agn": 306.82,
+        "yds_agn": 306.81,
         "sack": 2.82,
         "int": 0.65,
         "fr": 0.76,
@@ -9767,10 +9767,10 @@
         "opp": "CLE"
       },
       "stats": {
-        "fpts": 7.03,
+        "fpts": 7.02,
         "pa": 22.5,
-        "yds_agn": 312.27,
-        "sack": 3.06,
+        "yds_agn": 312.18,
+        "sack": 3.05,
         "int": 0.59,
         "fr": 0.56,
         "td": 0.16
@@ -9852,10 +9852,10 @@
         "opp": "SEA"
       },
       "stats": {
-        "fpts": 6.5,
+        "fpts": 6.49,
         "pa": 21.0,
-        "yds_agn": 341.31,
-        "sack": 1.69,
+        "yds_agn": 341.09,
+        "sack": 1.68,
         "int": 0.9,
         "fr": 0.42,
         "td": 0.18
@@ -9869,10 +9869,10 @@
         "opp": "SF"
       },
       "stats": {
-        "fpts": 6.29,
+        "fpts": 6.28,
         "pa": 23.5,
-        "yds_agn": 393.97,
-        "sack": 2.48,
+        "yds_agn": 393.68,
+        "sack": 2.47,
         "int": 0.78,
         "fr": 0.43,
         "td": 0.15
@@ -9886,11 +9886,11 @@
         "opp": "DEN"
       },
       "stats": {
-        "fpts": 6.24,
+        "fpts": 6.27,
         "pa": 20.5,
-        "yds_agn": 299.38,
-        "sack": 2.02,
-        "int": 0.6,
+        "yds_agn": 299.64,
+        "sack": 2.03,
+        "int": 0.61,
         "fr": 0.4,
         "td": 0.17
       }
@@ -9903,12 +9903,12 @@
         "opp": "NO"
       },
       "stats": {
-        "fpts": 6.1,
+        "fpts": 6.05,
         "pa": 20.0,
-        "yds_agn": 323.31,
-        "sack": 1.34,
-        "int": 0.73,
-        "fr": 0.41,
+        "yds_agn": 321.74,
+        "sack": 1.31,
+        "int": 0.71,
+        "fr": 0.42,
         "td": 0.19
       }
     },
@@ -9920,11 +9920,11 @@
         "opp": "BUF"
       },
       "stats": {
-        "fpts": 5.79,
+        "fpts": 5.74,
         "pa": 24.25,
-        "yds_agn": 380.64,
-        "sack": 2.08,
-        "int": 0.7,
+        "yds_agn": 379.44,
+        "sack": 2.05,
+        "int": 0.69,
         "fr": 0.58,
         "td": 0.15
       }
@@ -9956,7 +9956,7 @@
       "stats": {
         "fpts": 5.55,
         "pa": 24.5,
-        "yds_agn": 346.19,
+        "yds_agn": 346.28,
         "sack": 1.53,
         "int": 0.74,
         "fr": 0.73,
@@ -9971,11 +9971,11 @@
         "opp": "KC"
       },
       "stats": {
-        "fpts": 5.45,
+        "fpts": 5.41,
         "pa": 21.25,
-        "yds_agn": 364.42,
-        "sack": 1.6,
-        "int": 0.64,
+        "yds_agn": 363.24,
+        "sack": 1.58,
+        "int": 0.63,
         "fr": 0.24,
         "td": 0.17
       }
@@ -10073,12 +10073,12 @@
         "opp": "CIN"
       },
       "stats": {
-        "fpts": 4.23,
+        "fpts": 4.18,
         "pa": 29.5,
-        "yds_agn": 378.45,
-        "sack": 2.35,
-        "int": 0.6,
-        "fr": 0.46,
+        "yds_agn": 375.8,
+        "sack": 2.3,
+        "int": 0.59,
+        "fr": 0.47,
         "td": 0.12
       }
     },
