@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-26T05:39:28.161457Z",
+  "updated": "2026-11-26T05:54:28.427563Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -9118,9 +9118,9 @@
         "opp": "TEN"
       },
       "stats": {
-        "fpts": 11.19,
+        "fpts": 11.2,
         "fg": 2.34,
-        "xpt": 3.09
+        "xpt": 3.1
       }
     },
     "ka'imi fairbairn_k": {
@@ -9248,9 +9248,9 @@
         "opp": "LV"
       },
       "stats": {
-        "fpts": 8.69,
-        "fg": 1.88,
-        "xpt": 1.88
+        "fpts": 8.68,
+        "fg": 1.87,
+        "xpt": 1.87
       }
     },
     "ryan fitzgerald_k": {
@@ -9305,6 +9305,19 @@
         "xpt": 2.36
       }
     },
+    "tyler bass_k": {
+      "info": {
+        "player": "Tyler Bass",
+        "position": "K",
+        "team": "BUF",
+        "opp": "KC"
+      },
+      "stats": {
+        "fpts": 8.22,
+        "fg": 1.73,
+        "xpt": 2.36
+      }
+    },
     "joey slye_k": {
       "info": {
         "player": "Joey Slye",
@@ -9316,19 +9329,6 @@
         "fpts": 8.22,
         "fg": 1.97,
         "xpt": 1.21
-      }
-    },
-    "tyler bass_k": {
-      "info": {
-        "player": "Tyler Bass",
-        "position": "K",
-        "team": "BUF",
-        "opp": "KC"
-      },
-      "stats": {
-        "fpts": 8.21,
-        "fg": 1.73,
-        "xpt": 2.35
       }
     },
     "matt gay_k": {
@@ -9435,19 +9435,6 @@
         "xpt": 1.91
       }
     },
-    "wil lutz_k": {
-      "info": {
-        "player": "Wil Lutz",
-        "position": "K",
-        "team": "DEN",
-        "opp": "PIT"
-      },
-      "stats": {
-        "fpts": 7.55,
-        "fg": 1.53,
-        "xpt": 2.52
-      }
-    },
     "tyler loop_k": {
       "info": {
         "player": "Tyler Loop",
@@ -9456,9 +9443,22 @@
         "opp": "HOU"
       },
       "stats": {
-        "fpts": 7.52,
-        "fg": 1.63,
-        "xpt": 2.04
+        "fpts": 7.51,
+        "fg": 1.62,
+        "xpt": 2.03
+      }
+    },
+    "wil lutz_k": {
+      "info": {
+        "player": "Wil Lutz",
+        "position": "K",
+        "team": "DEN",
+        "opp": "PIT"
+      },
+      "stats": {
+        "fpts": 7.41,
+        "fg": 1.5,
+        "xpt": 2.48
       }
     },
     "andy borregales_k": {
@@ -9469,22 +9469,9 @@
         "opp": "LAC"
       },
       "stats": {
-        "fpts": 7.26,
+        "fpts": 7.27,
         "fg": 1.5,
-        "xpt": 2.41
-      }
-    },
-    "chris boswell_k": {
-      "info": {
-        "player": "Chris Boswell",
-        "position": "K",
-        "team": "PIT",
-        "opp": "DEN"
-      },
-      "stats": {
-        "fpts": 7.22,
-        "fg": 1.59,
-        "xpt": 1.45
+        "xpt": 2.42
       }
     },
     "daniel carlson_k": {
@@ -9498,6 +9485,19 @@
         "fpts": 7.1,
         "fg": 1.51,
         "xpt": 1.57
+      }
+    },
+    "chris boswell_k": {
+      "info": {
+        "player": "Chris Boswell",
+        "position": "K",
+        "team": "PIT",
+        "opp": "DEN"
+      },
+      "stats": {
+        "fpts": 7.09,
+        "fg": 1.56,
+        "xpt": 1.42
       }
     },
     "nick folk_k": {
@@ -9553,7 +9553,7 @@
       "stats": {
         "fpts": 8.93,
         "pa": 16.5,
-        "yds_agn": 330.66,
+        "yds_agn": 330.65,
         "sack": 2.45,
         "int": 0.92,
         "fr": 0.6,
@@ -9585,10 +9585,10 @@
         "opp": "LV"
       },
       "stats": {
-        "fpts": 8.64,
+        "fpts": 8.63,
         "pa": 17.5,
-        "yds_agn": 282.17,
-        "sack": 3.04,
+        "yds_agn": 282.01,
+        "sack": 3.03,
         "int": 0.83,
         "fr": 0.35,
         "td": 0.2
@@ -9636,10 +9636,10 @@
         "opp": "IND"
       },
       "stats": {
-        "fpts": 7.55,
+        "fpts": 7.56,
         "pa": 18.0,
-        "yds_agn": 332.77,
-        "sack": 1.38,
+        "yds_agn": 332.83,
+        "sack": 1.39,
         "int": 0.91,
         "fr": 0.65,
         "td": 0.2
@@ -9655,7 +9655,7 @@
       "stats": {
         "fpts": 7.38,
         "pa": 20.25,
-        "yds_agn": 329.96,
+        "yds_agn": 330.13,
         "sack": 2.76,
         "int": 0.76,
         "fr": 0.38,
@@ -9704,10 +9704,10 @@
         "opp": "TB"
       },
       "stats": {
-        "fpts": 7.06,
+        "fpts": 7.07,
         "pa": 23.25,
-        "yds_agn": 306.74,
-        "sack": 2.81,
+        "yds_agn": 306.79,
+        "sack": 2.82,
         "int": 0.65,
         "fr": 0.76,
         "td": 0.15
@@ -9721,10 +9721,10 @@
         "opp": "CLE"
       },
       "stats": {
-        "fpts": 7.03,
+        "fpts": 7.02,
         "pa": 22.0,
-        "yds_agn": 310.72,
-        "sack": 2.98,
+        "yds_agn": 310.52,
+        "sack": 2.97,
         "int": 0.57,
         "fr": 0.56,
         "td": 0.16
@@ -9808,7 +9808,7 @@
       "stats": {
         "fpts": 6.45,
         "pa": 20.0,
-        "yds_agn": 299.14,
+        "yds_agn": 299.13,
         "sack": 2.03,
         "int": 0.61,
         "fr": 0.4,
@@ -9825,7 +9825,7 @@
       "stats": {
         "fpts": 6.44,
         "pa": 21.0,
-        "yds_agn": 340.43,
+        "yds_agn": 340.52,
         "sack": 1.67,
         "int": 0.89,
         "fr": 0.41,
@@ -9840,10 +9840,10 @@
         "opp": "SF"
       },
       "stats": {
-        "fpts": 6.24,
+        "fpts": 6.25,
         "pa": 23.5,
-        "yds_agn": 392.82,
-        "sack": 2.45,
+        "yds_agn": 392.94,
+        "sack": 2.46,
         "int": 0.77,
         "fr": 0.43,
         "td": 0.15
@@ -9859,7 +9859,7 @@
       "stats": {
         "fpts": 6.18,
         "pa": 20.0,
-        "yds_agn": 325.51,
+        "yds_agn": 325.46,
         "sack": 1.38,
         "int": 0.75,
         "fr": 0.41,
@@ -9874,13 +9874,13 @@
         "opp": "BUF"
       },
       "stats": {
-        "fpts": 5.8,
+        "fpts": 5.76,
         "pa": 24.5,
-        "yds_agn": 389.82,
-        "sack": 2.12,
-        "int": 0.71,
+        "yds_agn": 388.98,
+        "sack": 2.1,
+        "int": 0.7,
         "fr": 0.58,
-        "td": 0.15
+        "td": 0.14
       }
     },
     "arizona d/st_dst": {
@@ -9908,10 +9908,10 @@
         "opp": "NYG"
       },
       "stats": {
-        "fpts": 5.57,
+        "fpts": 5.58,
         "pa": 24.5,
-        "yds_agn": 347.26,
-        "sack": 1.55,
+        "yds_agn": 347.35,
+        "sack": 1.56,
         "int": 0.75,
         "fr": 0.72,
         "td": 0.14
@@ -9925,12 +9925,12 @@
         "opp": "CHI"
       },
       "stats": {
-        "fpts": 5.4,
+        "fpts": 5.38,
         "pa": 28.5,
-        "yds_agn": 367.12,
+        "yds_agn": 363.47,
         "sack": 2.78,
         "int": 0.64,
-        "fr": 0.6,
+        "fr": 0.59,
         "td": 0.13
       }
     },
@@ -9942,11 +9942,11 @@
         "opp": "KC"
       },
       "stats": {
-        "fpts": 5.25,
+        "fpts": 5.22,
         "pa": 22.0,
-        "yds_agn": 366.14,
-        "sack": 1.62,
-        "int": 0.65,
+        "yds_agn": 365.58,
+        "sack": 1.61,
+        "int": 0.64,
         "fr": 0.24,
         "td": 0.17
       }
@@ -9961,7 +9961,7 @@
       "stats": {
         "fpts": 5.16,
         "pa": 24.25,
-        "yds_agn": 348.59,
+        "yds_agn": 348.6,
         "sack": 1.41,
         "int": 0.74,
         "fr": 0.57,
@@ -10029,7 +10029,7 @@
       "stats": {
         "fpts": 4.35,
         "pa": 29.5,
-        "yds_agn": 382.17,
+        "yds_agn": 382.09,
         "sack": 2.43,
         "int": 0.62,
         "fr": 0.46,
