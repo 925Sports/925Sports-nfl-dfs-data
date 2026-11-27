@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-27T07:54:20.887853Z",
+  "updated": "2026-11-27T08:09:23.901543Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -9164,9 +9164,9 @@
         "opp": "TEN"
       },
       "stats": {
-        "fpts": 11.2,
-        "fg": 2.34,
-        "xpt": 3.1
+        "fpts": 11.21,
+        "fg": 2.35,
+        "xpt": 3.11
       }
     },
     "ka'imi fairbairn_k": {
@@ -9346,9 +9346,9 @@
         "opp": "JAC"
       },
       "stats": {
-        "fpts": 8.23,
-        "fg": 2.12,
-        "xpt": 1.22
+        "fpts": 8.24,
+        "fg": 2.13,
+        "xpt": 1.23
       }
     },
     "dominic zvada_k": {
@@ -9359,9 +9359,9 @@
         "opp": "IND"
       },
       "stats": {
-        "fpts": 8.19,
-        "fg": 1.74,
-        "xpt": 2.31
+        "fpts": 8.18,
+        "fg": 1.73,
+        "xpt": 2.3
       }
     },
     "chad ryland_k": {
@@ -9398,9 +9398,9 @@
         "opp": "KC"
       },
       "stats": {
-        "fpts": 8.02,
+        "fpts": 8.01,
         "fg": 1.65,
-        "xpt": 2.26
+        "xpt": 2.25
       }
     },
     "riley patterson_k": {
@@ -9450,9 +9450,9 @@
         "opp": "NYG"
       },
       "stats": {
-        "fpts": 7.59,
+        "fpts": 7.58,
         "fg": 1.36,
-        "xpt": 2.77
+        "xpt": 2.76
       }
     },
     "trey smack_k": {
@@ -9476,9 +9476,22 @@
         "opp": "PIT"
       },
       "stats": {
-        "fpts": 7.55,
+        "fpts": 7.54,
+        "fg": 1.49,
+        "xpt": 2.48
+      }
+    },
+    "jason myers_k": {
+      "info": {
+        "player": "Jason Myers",
+        "position": "K",
+        "team": "SEA",
+        "opp": "SF"
+      },
+      "stats": {
+        "fpts": 7.52,
         "fg": 1.5,
-        "xpt": 2.49
+        "xpt": 2.27
       }
     },
     "tyler loop_k": {
@@ -9492,19 +9505,6 @@
         "fpts": 7.51,
         "fg": 1.63,
         "xpt": 2.03
-      }
-    },
-    "jason myers_k": {
-      "info": {
-        "player": "Jason Myers",
-        "position": "K",
-        "team": "SEA",
-        "opp": "SF"
-      },
-      "stats": {
-        "fpts": 7.51,
-        "fg": 1.49,
-        "xpt": 2.26
       }
     },
     "andy borregales_k": {
@@ -9528,9 +9528,9 @@
         "opp": "DEN"
       },
       "stats": {
-        "fpts": 6.97,
-        "fg": 1.52,
-        "xpt": 1.4
+        "fpts": 6.96,
+        "fg": 1.51,
+        "xpt": 1.39
       }
     },
     "nick folk_k": {
