@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-27T22:09:24.727005Z",
+  "updated": "2026-11-27T22:24:24.577253Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -9164,9 +9164,9 @@
         "opp": "TEN"
       },
       "stats": {
-        "fpts": 11.19,
-        "fg": 2.33,
-        "xpt": 3.09
+        "fpts": 11.18,
+        "fg": 2.32,
+        "xpt": 3.08
       }
     },
     "ka'imi fairbairn_k": {
@@ -9178,7 +9178,7 @@
       },
       "stats": {
         "fpts": 10.04,
-        "fg": 2.4,
+        "fg": 2.39,
         "xpt": 2.15
       }
     },
@@ -9204,7 +9204,7 @@
       },
       "stats": {
         "fpts": 9.69,
-        "fg": 2.26,
+        "fg": 2.27,
         "xpt": 1.96
       }
     },
@@ -9320,9 +9320,9 @@
         "opp": "LV"
       },
       "stats": {
-        "fpts": 8.45,
-        "fg": 1.81,
-        "xpt": 1.81
+        "fpts": 8.46,
+        "fg": 1.82,
+        "xpt": 1.82
       }
     },
     "jake elliott_k": {
@@ -9346,9 +9346,9 @@
         "opp": "JAC"
       },
       "stats": {
-        "fpts": 8.22,
+        "fpts": 8.21,
         "fg": 2.1,
-        "xpt": 1.21
+        "xpt": 1.2
       }
     },
     "chad ryland_k": {
@@ -9390,19 +9390,6 @@
         "xpt": 2.25
       }
     },
-    "riley patterson_k": {
-      "info": {
-        "player": "Riley Patterson",
-        "position": "K",
-        "team": "MIA",
-        "opp": "NYJ"
-      },
-      "stats": {
-        "fpts": 7.99,
-        "fg": 1.63,
-        "xpt": 2.06
-      }
-    },
     "dominic zvada_k": {
       "info": {
         "player": "Dominic Zvada",
@@ -9411,9 +9398,22 @@
         "opp": "IND"
       },
       "stats": {
-        "fpts": 7.96,
-        "fg": 1.71,
-        "xpt": 2.28
+        "fpts": 7.98,
+        "fg": 1.73,
+        "xpt": 2.3
+      }
+    },
+    "riley patterson_k": {
+      "info": {
+        "player": "Riley Patterson",
+        "position": "K",
+        "team": "MIA",
+        "opp": "NYJ"
+      },
+      "stats": {
+        "fpts": 7.98,
+        "fg": 1.62,
+        "xpt": 2.05
       }
     },
     "matt gay_k": {
@@ -9424,9 +9424,9 @@
         "opp": "CLE"
       },
       "stats": {
-        "fpts": 7.93,
-        "fg": 1.67,
-        "xpt": 1.78
+        "fpts": 7.94,
+        "fg": 1.68,
+        "xpt": 1.79
       }
     },
     "cameron dicker_k": {
@@ -9463,9 +9463,9 @@
         "opp": "NYG"
       },
       "stats": {
-        "fpts": 7.63,
+        "fpts": 7.62,
         "fg": 1.39,
-        "xpt": 2.81
+        "xpt": 2.8
       }
     },
     "wil lutz_k": {
@@ -9502,9 +9502,9 @@
         "opp": "HOU"
       },
       "stats": {
-        "fpts": 7.49,
-        "fg": 1.62,
-        "xpt": 2.01
+        "fpts": 7.48,
+        "fg": 1.61,
+        "xpt": 2.0
       }
     },
     "andy borregales_k": {
@@ -9603,23 +9603,6 @@
         "sack": 2.42,
         "int": 0.91,
         "fr": 0.6,
-        "td": 0.21
-      }
-    },
-    "washington d/st_dst": {
-      "info": {
-        "player": "Washington D/ST",
-        "position": "DST",
-        "team": "WSH",
-        "opp": "ARI"
-      },
-      "stats": {
-        "fpts": 8.72,
-        "pa": 17.25,
-        "yds_agn": 300.03,
-        "sack": 2.65,
-        "int": 0.95,
-        "fr": 0.43,
         "td": 0.21
       }
     },
@@ -9852,12 +9835,12 @@
         "opp": "SEA"
       },
       "stats": {
-        "fpts": 6.49,
+        "fpts": 6.47,
         "pa": 21.0,
-        "yds_agn": 341.14,
+        "yds_agn": 341.26,
         "sack": 1.68,
         "int": 0.9,
-        "fr": 0.42,
+        "fr": 0.41,
         "td": 0.18
       }
     },
@@ -9903,12 +9886,12 @@
         "opp": "NO"
       },
       "stats": {
-        "fpts": 6.11,
+        "fpts": 6.09,
         "pa": 19.5,
         "yds_agn": 319.82,
         "sack": 1.28,
         "int": 0.69,
-        "fr": 0.42,
+        "fr": 0.41,
         "td": 0.19
       }
     },
@@ -10048,6 +10031,23 @@
         "td": 0.14
       }
     },
+    "washington d/st_dst": {
+      "info": {
+        "player": "Washington D/ST",
+        "position": "DST",
+        "team": "WSH",
+        "opp": "ARI"
+      },
+      "stats": {
+        "fpts": 4.73,
+        "pa": 17.25,
+        "yds_agn": 99.31,
+        "sack": 1.14,
+        "int": 0.0,
+        "fr": 0.14,
+        "td": 0.21
+      }
+    },
     "philadelphia d/st_dst": {
       "info": {
         "player": "Philadelphia D/ST",
@@ -10092,7 +10092,7 @@
       "stats": {
         "fpts": 3.61,
         "pa": 31.5,
-        "yds_agn": 382.82,
+        "yds_agn": 382.56,
         "sack": 2.05,
         "int": 0.72,
         "fr": 0.43,
