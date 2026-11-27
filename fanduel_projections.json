@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-27T11:54:21.917579Z",
+  "updated": "2026-11-27T12:09:26.292785Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -9203,9 +9203,9 @@
         "opp": "NO"
       },
       "stats": {
-        "fpts": 9.68,
-        "fg": 2.22,
-        "xpt": 1.95
+        "fpts": 9.69,
+        "fg": 2.23,
+        "xpt": 1.96
       }
     },
     "chase mclaughlin_k": {
@@ -9216,9 +9216,9 @@
         "opp": "CAR"
       },
       "stats": {
-        "fpts": 9.56,
-        "fg": 2.04,
-        "xpt": 2.51
+        "fpts": 9.57,
+        "fg": 2.05,
+        "xpt": 2.52
       }
     },
     "harrison mevis_k": {
@@ -9299,6 +9299,19 @@
         "xpt": 1.84
       }
     },
+    "ryan fitzgerald_k": {
+      "info": {
+        "player": "Ryan Fitzgerald",
+        "position": "K",
+        "team": "CAR",
+        "opp": "TB"
+      },
+      "stats": {
+        "fpts": 8.52,
+        "fg": 1.81,
+        "xpt": 2.27
+      }
+    },
     "blake grupe_k": {
       "info": {
         "player": "Blake Grupe",
@@ -9310,19 +9323,6 @@
         "fpts": 8.51,
         "fg": 1.73,
         "xpt": 2.66
-      }
-    },
-    "ryan fitzgerald_k": {
-      "info": {
-        "player": "Ryan Fitzgerald",
-        "position": "K",
-        "team": "CAR",
-        "opp": "TB"
-      },
-      "stats": {
-        "fpts": 8.51,
-        "fg": 1.8,
-        "xpt": 2.26
       }
     },
     "jake elliott_k": {
@@ -9347,7 +9347,7 @@
       },
       "stats": {
         "fpts": 8.24,
-        "fg": 2.12,
+        "fg": 2.11,
         "xpt": 1.23
       }
     },
@@ -9359,9 +9359,9 @@
         "opp": "IND"
       },
       "stats": {
-        "fpts": 8.2,
-        "fg": 1.74,
-        "xpt": 2.32
+        "fpts": 8.21,
+        "fg": 1.75,
+        "xpt": 2.33
       }
     },
     "chad ryland_k": {
@@ -9450,9 +9450,9 @@
         "opp": "NYG"
       },
       "stats": {
-        "fpts": 7.6,
-        "fg": 1.37,
-        "xpt": 2.78
+        "fpts": 7.62,
+        "fg": 1.38,
+        "xpt": 2.8
       }
     },
     "trey smack_k": {
@@ -9489,9 +9489,9 @@
         "opp": "PIT"
       },
       "stats": {
-        "fpts": 7.52,
-        "fg": 1.48,
-        "xpt": 2.46
+        "fpts": 7.51,
+        "fg": 1.47,
+        "xpt": 2.45
       }
     },
     "tyler loop_k": {
@@ -9554,9 +9554,9 @@
         "opp": "CIN"
       },
       "stats": {
-        "fpts": 6.78,
-        "fg": 1.47,
-        "xpt": 1.53
+        "fpts": 6.79,
+        "fg": 1.48,
+        "xpt": 1.54
       }
     },
     "harrison butker_k": {
