@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-27T17:54:29.513184Z",
+  "updated": "2026-11-27T18:09:27.256751Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -33,14 +33,14 @@
         "opp": "NO"
       },
       "stats": {
-        "fpts": 21.83,
-        "pass_cmp": 24.32,
-        "pass_att": 32.55,
-        "pass_yds": 264.97,
-        "pass_td": 2.5,
-        "int": 0.57,
-        "rush_att": 2.71,
-        "rush_yds": 10.84,
+        "fpts": 22.09,
+        "pass_cmp": 24.75,
+        "pass_att": 33.13,
+        "pass_yds": 269.66,
+        "pass_td": 2.52,
+        "int": 0.58,
+        "rush_att": 2.65,
+        "rush_yds": 10.61,
         "rush_td": 0.15,
         "rec": 0.0,
         "tgts": 0.0,
@@ -217,14 +217,14 @@
         "opp": "SEA"
       },
       "stats": {
-        "fpts": 18.56,
-        "pass_cmp": 22.86,
-        "pass_att": 32.18,
-        "pass_yds": 283.18,
+        "fpts": 18.53,
+        "pass_cmp": 22.79,
+        "pass_att": 32.08,
+        "pass_yds": 282.31,
         "pass_td": 1.54,
         "int": 0.78,
-        "rush_att": 3.0,
-        "rush_yds": 12.74,
+        "rush_att": 3.02,
+        "rush_yds": 12.79,
         "rush_td": 0.12,
         "rec": 0.0,
         "tgts": 0.0,
@@ -240,7 +240,7 @@
         "opp": "NO"
       },
       "stats": {
-        "fpts": 18.22,
+        "fpts": 18.51,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -249,10 +249,33 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 7.37,
-        "tgts": 10.12,
-        "rec_yds": 92.56,
-        "rec_td": 0.89
+        "rec": 7.5,
+        "tgts": 10.3,
+        "rec_yds": 94.2,
+        "rec_td": 0.9
+      }
+    },
+    "christian mccaffrey_rb": {
+      "info": {
+        "player": "Christian McCaffrey",
+        "position": "RB",
+        "team": "SF",
+        "opp": "SEA"
+      },
+      "stats": {
+        "fpts": 17.81,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 15.95,
+        "rush_yds": 71.94,
+        "rush_td": 0.56,
+        "rec": 4.03,
+        "tgts": 5.07,
+        "rec_yds": 41.76,
+        "rec_td": 0.19
       }
     },
     "joe milton iii_qb": {
@@ -278,29 +301,6 @@
         "rec_td": 0.0
       }
     },
-    "christian mccaffrey_rb": {
-      "info": {
-        "player": "Christian McCaffrey",
-        "position": "RB",
-        "team": "SF",
-        "opp": "SEA"
-      },
-      "stats": {
-        "fpts": 17.8,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 15.89,
-        "rush_yds": 71.66,
-        "rush_td": 0.56,
-        "rec": 4.05,
-        "tgts": 5.08,
-        "rec_yds": 41.89,
-        "rec_td": 0.19
-      }
-    },
     "bucky irving_rb": {
       "info": {
         "player": "Bucky Irving",
@@ -322,29 +322,6 @@
         "tgts": 3.85,
         "rec_yds": 22.88,
         "rec_td": 0.14
-      }
-    },
-    "cam skattebo_rb": {
-      "info": {
-        "player": "Cam Skattebo",
-        "position": "RB",
-        "team": "NYG",
-        "opp": "IND"
-      },
-      "stats": {
-        "fpts": 17.45,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 22.74,
-        "rush_yds": 95.29,
-        "rush_td": 0.86,
-        "rec": 2.27,
-        "tgts": 3.22,
-        "rec_yds": 18.23,
-        "rec_td": 0.1
       }
     },
     "jayden daniels_qb": {
@@ -391,6 +368,29 @@
         "tgts": 1.78,
         "rec_yds": 12.18,
         "rec_td": 0.06
+      }
+    },
+    "cam skattebo_rb": {
+      "info": {
+        "player": "Cam Skattebo",
+        "position": "RB",
+        "team": "NYG",
+        "opp": "IND"
+      },
+      "stats": {
+        "fpts": 17.1,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 22.06,
+        "rush_yds": 92.44,
+        "rush_td": 0.83,
+        "rec": 2.34,
+        "tgts": 3.33,
+        "rec_yds": 18.82,
+        "rec_td": 0.1
       }
     },
     "amon-ra st. brown_wr": {
@@ -447,7 +447,7 @@
         "opp": "SF"
       },
       "stats": {
-        "fpts": 16.78,
+        "fpts": 16.67,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -456,33 +456,10 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 7.24,
-        "tgts": 11.23,
-        "rec_yds": 103.16,
-        "rec_td": 0.49
-      }
-    },
-    "jonah coleman_rb": {
-      "info": {
-        "player": "Jonah Coleman",
-        "position": "RB",
-        "team": "DEN",
-        "opp": "PIT"
-      },
-      "stats": {
-        "fpts": 16.76,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 21.47,
-        "rush_yds": 89.74,
-        "rush_td": 0.61,
-        "rec": 2.98,
-        "tgts": 4.22,
-        "rec_yds": 20.92,
-        "rec_td": 0.11
+        "rec": 7.21,
+        "tgts": 11.19,
+        "rec_yds": 102.82,
+        "rec_td": 0.48
       }
     },
     "ceedee lamb_wr": {
@@ -600,6 +577,29 @@
         "rec_td": 0.05
       }
     },
+    "j.j. mccarthy_qb": {
+      "info": {
+        "player": "J.J. McCarthy",
+        "position": "QB",
+        "team": "NYG",
+        "opp": "IND"
+      },
+      "stats": {
+        "fpts": 16.22,
+        "pass_cmp": 18.44,
+        "pass_att": 30.77,
+        "pass_yds": 217.57,
+        "pass_td": 1.35,
+        "int": 0.73,
+        "rush_att": 4.23,
+        "rush_yds": 18.25,
+        "rush_td": 0.21,
+        "rec": 0.0,
+        "tgts": 0.0,
+        "rec_yds": 0.0,
+        "rec_td": 0.0
+      }
+    },
     "kirk cousins_qb": {
       "info": {
         "player": "Kirk Cousins",
@@ -617,6 +617,52 @@
         "rush_att": 1.71,
         "rush_yds": 5.95,
         "rush_td": 0.11,
+        "rec": 0.0,
+        "tgts": 0.0,
+        "rec_yds": 0.0,
+        "rec_td": 0.0
+      }
+    },
+    "jonah coleman_rb": {
+      "info": {
+        "player": "Jonah Coleman",
+        "position": "RB",
+        "team": "DEN",
+        "opp": "PIT"
+      },
+      "stats": {
+        "fpts": 16.17,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 20.91,
+        "rush_yds": 87.39,
+        "rush_td": 0.6,
+        "rec": 2.79,
+        "tgts": 3.95,
+        "rec_yds": 19.6,
+        "rec_td": 0.1
+      }
+    },
+    "tyler shough_qb": {
+      "info": {
+        "player": "Tyler Shough",
+        "position": "QB",
+        "team": "NO",
+        "opp": "CIN"
+      },
+      "stats": {
+        "fpts": 16.17,
+        "pass_cmp": 21.9,
+        "pass_att": 33.2,
+        "pass_yds": 209.81,
+        "pass_td": 1.24,
+        "int": 0.7,
+        "rush_att": 5.5,
+        "rush_yds": 23.58,
+        "rush_td": 0.25,
         "rec": 0.0,
         "tgts": 0.0,
         "rec_yds": 0.0,
@@ -669,29 +715,6 @@
         "rec_td": 0.0
       }
     },
-    "tyler shough_qb": {
-      "info": {
-        "player": "Tyler Shough",
-        "position": "QB",
-        "team": "NO",
-        "opp": "CIN"
-      },
-      "stats": {
-        "fpts": 16.05,
-        "pass_cmp": 21.51,
-        "pass_att": 32.6,
-        "pass_yds": 206.06,
-        "pass_td": 1.22,
-        "int": 0.68,
-        "rush_att": 5.61,
-        "rush_yds": 24.08,
-        "rush_td": 0.26,
-        "rec": 0.0,
-        "tgts": 0.0,
-        "rec_yds": 0.0,
-        "rec_td": 0.0
-      }
-    },
     "deshaun watson_qb": {
       "info": {
         "player": "Deshaun Watson",
@@ -702,59 +725,13 @@
       "stats": {
         "fpts": 16.03,
         "pass_cmp": 18.2,
-        "pass_att": 27.99,
-        "pass_yds": 191.14,
+        "pass_att": 27.98,
+        "pass_yds": 191.1,
         "pass_td": 1.08,
         "int": 0.55,
         "rush_att": 6.75,
-        "rush_yds": 32.78,
+        "rush_yds": 32.79,
         "rush_td": 0.33,
-        "rec": 0.0,
-        "tgts": 0.0,
-        "rec_yds": 0.0,
-        "rec_td": 0.0
-      }
-    },
-    "jonathan taylor_rb": {
-      "info": {
-        "player": "Jonathan Taylor",
-        "position": "RB",
-        "team": "IND",
-        "opp": "NYG"
-      },
-      "stats": {
-        "fpts": 16.03,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 19.24,
-        "rush_yds": 88.72,
-        "rush_td": 0.65,
-        "rec": 2.3,
-        "tgts": 4.14,
-        "rec_yds": 22.86,
-        "rec_td": 0.06
-      }
-    },
-    "j.j. mccarthy_qb": {
-      "info": {
-        "player": "J.J. McCarthy",
-        "position": "QB",
-        "team": "NYG",
-        "opp": "IND"
-      },
-      "stats": {
-        "fpts": 15.88,
-        "pass_cmp": 17.86,
-        "pass_att": 29.8,
-        "pass_yds": 210.67,
-        "pass_td": 1.31,
-        "int": 0.71,
-        "rush_att": 4.37,
-        "rush_yds": 18.82,
-        "rush_td": 0.22,
         "rec": 0.0,
         "tgts": 0.0,
         "rec_yds": 0.0,
@@ -782,6 +759,29 @@
         "tgts": 0.0,
         "rec_yds": 0.0,
         "rec_td": 0.0
+      }
+    },
+    "jonathan taylor_rb": {
+      "info": {
+        "player": "Jonathan Taylor",
+        "position": "RB",
+        "team": "IND",
+        "opp": "NYG"
+      },
+      "stats": {
+        "fpts": 15.3,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 17.43,
+        "rush_yds": 80.35,
+        "rush_td": 0.64,
+        "rec": 2.39,
+        "tgts": 4.3,
+        "rec_yds": 23.53,
+        "rec_td": 0.06
       }
     },
     "kyren williams_rb": {
@@ -853,52 +853,6 @@
         "rec_td": 0.1
       }
     },
-    "chase brown_rb": {
-      "info": {
-        "player": "Chase Brown",
-        "position": "RB",
-        "team": "CIN",
-        "opp": "NO"
-      },
-      "stats": {
-        "fpts": 14.95,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 15.05,
-        "rush_yds": 63.95,
-        "rush_td": 0.39,
-        "rec": 4.43,
-        "tgts": 5.14,
-        "rec_yds": 26.18,
-        "rec_td": 0.26
-      }
-    },
-    "anthony richardson_qb": {
-      "info": {
-        "player": "Anthony Richardson",
-        "position": "QB",
-        "team": "IND",
-        "opp": "NYG"
-      },
-      "stats": {
-        "fpts": 14.89,
-        "pass_cmp": 14.23,
-        "pass_att": 29.76,
-        "pass_yds": 200.59,
-        "pass_td": 0.75,
-        "int": 0.86,
-        "rush_att": 7.64,
-        "rush_yds": 33.83,
-        "rush_td": 0.31,
-        "rec": 0.0,
-        "tgts": 0.0,
-        "rec_yds": 0.0,
-        "rec_td": 0.0
-      }
-    },
     "parker washington_wr": {
       "info": {
         "player": "Parker Washington",
@@ -920,6 +874,29 @@
         "tgts": 8.47,
         "rec_yds": 87.65,
         "rec_td": 0.62
+      }
+    },
+    "chase brown_rb": {
+      "info": {
+        "player": "Chase Brown",
+        "position": "RB",
+        "team": "CIN",
+        "opp": "NO"
+      },
+      "stats": {
+        "fpts": 14.84,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 14.73,
+        "rush_yds": 62.61,
+        "rush_td": 0.38,
+        "rec": 4.51,
+        "tgts": 5.23,
+        "rec_yds": 26.64,
+        "rec_td": 0.26
       }
     },
     "bhayshul tuten_rb": {
@@ -945,23 +922,23 @@
         "rec_td": 0.11
       }
     },
-    "bo nix_qb": {
+    "anthony richardson_qb": {
       "info": {
-        "player": "Bo Nix",
+        "player": "Anthony Richardson",
         "position": "QB",
-        "team": "DEN",
-        "opp": "PIT"
+        "team": "IND",
+        "opp": "NYG"
       },
       "stats": {
-        "fpts": 14.51,
-        "pass_cmp": 18.43,
-        "pass_att": 30.75,
-        "pass_yds": 188.22,
-        "pass_td": 1.16,
-        "int": 0.61,
-        "rush_att": 5.0,
-        "rush_yds": 21.1,
-        "rush_td": 0.2,
+        "fpts": 14.67,
+        "pass_cmp": 14.76,
+        "pass_att": 30.88,
+        "pass_yds": 208.14,
+        "pass_td": 0.84,
+        "int": 0.89,
+        "rush_att": 6.04,
+        "rush_yds": 26.77,
+        "rush_td": 0.27,
         "rec": 0.0,
         "tgts": 0.0,
         "rec_yds": 0.0,
@@ -1014,6 +991,29 @@
         "rec_td": 0.0
       }
     },
+    "bo nix_qb": {
+      "info": {
+        "player": "Bo Nix",
+        "position": "QB",
+        "team": "DEN",
+        "opp": "PIT"
+      },
+      "stats": {
+        "fpts": 14.15,
+        "pass_cmp": 18.5,
+        "pass_att": 30.87,
+        "pass_yds": 188.91,
+        "pass_td": 1.18,
+        "int": 0.61,
+        "rush_att": 4.22,
+        "rush_yds": 17.82,
+        "rush_td": 0.17,
+        "rec": 0.0,
+        "tgts": 0.0,
+        "rec_yds": 0.0,
+        "rec_td": 0.0
+      }
+    },
     "michael penix jr._qb": {
       "info": {
         "player": "Michael Penix Jr.",
@@ -1060,29 +1060,6 @@
         "rec_td": 0.0
       }
     },
-    "sam darnold_qb": {
-      "info": {
-        "player": "Sam Darnold",
-        "position": "QB",
-        "team": "SEA",
-        "opp": "SF"
-      },
-      "stats": {
-        "fpts": 13.79,
-        "pass_cmp": 19.87,
-        "pass_att": 31.8,
-        "pass_yds": 228.32,
-        "pass_td": 1.28,
-        "int": 0.89,
-        "rush_att": 0.89,
-        "rush_yds": 3.52,
-        "rush_td": 0.03,
-        "rec": 0.0,
-        "tgts": 0.0,
-        "rec_yds": 0.0,
-        "rec_td": 0.0
-      }
-    },
     "carson beck_qb": {
       "info": {
         "player": "Carson Beck",
@@ -1100,6 +1077,29 @@
         "rush_att": 3.67,
         "rush_yds": 15.59,
         "rush_td": 0.16,
+        "rec": 0.0,
+        "tgts": 0.0,
+        "rec_yds": 0.0,
+        "rec_td": 0.0
+      }
+    },
+    "sam darnold_qb": {
+      "info": {
+        "player": "Sam Darnold",
+        "position": "QB",
+        "team": "SEA",
+        "opp": "SF"
+      },
+      "stats": {
+        "fpts": 13.73,
+        "pass_cmp": 19.81,
+        "pass_att": 31.69,
+        "pass_yds": 227.57,
+        "pass_td": 1.27,
+        "int": 0.89,
+        "rush_att": 0.89,
+        "rush_yds": 3.53,
+        "rush_td": 0.03,
         "rec": 0.0,
         "tgts": 0.0,
         "rec_yds": 0.0,
@@ -1244,29 +1244,6 @@
         "rec_td": 0.13
       }
     },
-    "travis etienne_rb": {
-      "info": {
-        "player": "Travis Etienne",
-        "position": "RB",
-        "team": "NO",
-        "opp": "CIN"
-      },
-      "stats": {
-        "fpts": 13.25,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 18.13,
-        "rush_yds": 73.26,
-        "rush_td": 0.45,
-        "rec": 2.21,
-        "tgts": 3.1,
-        "rec_yds": 14.34,
-        "rec_td": 0.11
-      }
-    },
     "jacoby brissett_qb": {
       "info": {
         "player": "Jacoby Brissett",
@@ -1290,29 +1267,6 @@
         "rec_td": 0.0
       }
     },
-    "jaylen warren_rb": {
-      "info": {
-        "player": "Jaylen Warren",
-        "position": "RB",
-        "team": "PIT",
-        "opp": "DEN"
-      },
-      "stats": {
-        "fpts": 13.12,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 14.91,
-        "rush_yds": 71.99,
-        "rush_td": 0.25,
-        "rec": 3.13,
-        "tgts": 4.01,
-        "rec_yds": 27.96,
-        "rec_td": 0.07
-      }
-    },
     "mason rudolph_qb": {
       "info": {
         "player": "Mason Rudolph",
@@ -1321,19 +1275,42 @@
         "opp": "DEN"
       },
       "stats": {
-        "fpts": 13.11,
-        "pass_cmp": 21.69,
-        "pass_att": 32.9,
-        "pass_yds": 224.41,
+        "fpts": 13.15,
+        "pass_cmp": 21.76,
+        "pass_att": 33.01,
+        "pass_yds": 225.14,
         "pass_td": 1.04,
-        "int": 0.92,
-        "rush_att": 1.85,
-        "rush_yds": 7.57,
+        "int": 0.93,
+        "rush_att": 1.84,
+        "rush_yds": 7.54,
         "rush_td": 0.07,
         "rec": 0.0,
         "tgts": 0.0,
         "rec_yds": 0.0,
         "rec_td": 0.0
+      }
+    },
+    "jaylen warren_rb": {
+      "info": {
+        "player": "Jaylen Warren",
+        "position": "RB",
+        "team": "PIT",
+        "opp": "DEN"
+      },
+      "stats": {
+        "fpts": 13.1,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 14.84,
+        "rush_yds": 71.68,
+        "rush_td": 0.25,
+        "rec": 3.14,
+        "tgts": 4.03,
+        "rec_yds": 28.05,
+        "rec_td": 0.07
       }
     },
     "fernando mendoza_qb": {
@@ -1346,8 +1323,8 @@
       "stats": {
         "fpts": 13.08,
         "pass_cmp": 17.54,
-        "pass_att": 29.41,
-        "pass_yds": 184.1,
+        "pass_att": 29.4,
+        "pass_yds": 184.07,
         "pass_td": 0.94,
         "int": 0.8,
         "rush_att": 4.42,
@@ -1357,6 +1334,29 @@
         "tgts": 0.0,
         "rec_yds": 0.0,
         "rec_td": 0.0
+      }
+    },
+    "travis etienne_rb": {
+      "info": {
+        "player": "Travis Etienne",
+        "position": "RB",
+        "team": "NO",
+        "opp": "CIN"
+      },
+      "stats": {
+        "fpts": 13.08,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 17.76,
+        "rush_yds": 71.77,
+        "rush_td": 0.44,
+        "rec": 2.25,
+        "tgts": 3.15,
+        "rec_yds": 14.6,
+        "rec_td": 0.11
       }
     },
     "tommy devito_qb": {
@@ -1380,6 +1380,52 @@
         "tgts": 0.0,
         "rec_yds": 0.0,
         "rec_td": 0.0
+      }
+    },
+    "chris olave_wr": {
+      "info": {
+        "player": "Chris Olave",
+        "position": "WR",
+        "team": "NO",
+        "opp": "CIN"
+      },
+      "stats": {
+        "fpts": 12.91,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 5.93,
+        "tgts": 9.56,
+        "rec_yds": 73.86,
+        "rec_td": 0.43
+      }
+    },
+    "tee higgins_wr": {
+      "info": {
+        "player": "Tee Higgins",
+        "position": "WR",
+        "team": "CIN",
+        "opp": "NO"
+      },
+      "stats": {
+        "fpts": 12.85,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 4.62,
+        "tgts": 6.73,
+        "rec_yds": 68.84,
+        "rec_td": 0.61
       }
     },
     "david montgomery_rb": {
@@ -1413,18 +1459,18 @@
         "opp": "SF"
       },
       "stats": {
-        "fpts": 12.77,
+        "fpts": 12.79,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
         "pass_td": 0.0,
         "int": 0.0,
-        "rush_att": 17.92,
-        "rush_yds": 75.25,
+        "rush_att": 17.98,
+        "rush_yds": 75.53,
         "rush_td": 0.58,
-        "rec": 1.24,
-        "tgts": 1.75,
-        "rec_yds": 8.86,
+        "rec": 1.23,
+        "tgts": 1.74,
+        "rec_yds": 8.83,
         "rec_td": 0.04
       }
     },
@@ -1449,52 +1495,6 @@
         "tgts": 9.06,
         "rec_yds": 78.59,
         "rec_td": 0.38
-      }
-    },
-    "chris olave_wr": {
-      "info": {
-        "player": "Chris Olave",
-        "position": "WR",
-        "team": "NO",
-        "opp": "CIN"
-      },
-      "stats": {
-        "fpts": 12.67,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 5.82,
-        "tgts": 9.39,
-        "rec_yds": 72.55,
-        "rec_td": 0.42
-      }
-    },
-    "tee higgins_wr": {
-      "info": {
-        "player": "Tee Higgins",
-        "position": "WR",
-        "team": "CIN",
-        "opp": "NO"
-      },
-      "stats": {
-        "fpts": 12.63,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 4.54,
-        "tgts": 6.61,
-        "rec_yds": 67.64,
-        "rec_td": 0.6
       }
     },
     "trey mcbride_te": {
@@ -1604,7 +1604,7 @@
         "pass_td": 0.0,
         "int": 0.0,
         "rush_att": 17.57,
-        "rush_yds": 68.51,
+        "rush_yds": 68.53,
         "rush_td": 0.6,
         "rec": 1.3,
         "tgts": 1.72,
@@ -1620,16 +1620,16 @@
         "opp": "CLE"
       },
       "stats": {
-        "fpts": 12.19,
+        "fpts": 12.18,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
         "pass_td": 0.0,
         "int": 0.0,
         "rush_att": 12.9,
-        "rush_yds": 50.29,
+        "rush_yds": 50.3,
         "rush_td": 0.29,
-        "rec": 3.55,
+        "rec": 3.54,
         "tgts": 5.23,
         "rec_yds": 28.23,
         "rec_td": 0.13
@@ -1704,29 +1704,6 @@
         "rec_td": 0.55
       }
     },
-    "george kittle_te": {
-      "info": {
-        "player": "George Kittle",
-        "position": "TE",
-        "team": "SF",
-        "opp": "SEA"
-      },
-      "stats": {
-        "fpts": 11.98,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 5.29,
-        "tgts": 6.79,
-        "rec_yds": 71.15,
-        "rec_td": 0.37
-      }
-    },
     "saquon barkley_rb": {
       "info": {
         "player": "Saquon Barkley",
@@ -1750,10 +1727,10 @@
         "rec_td": 0.06
       }
     },
-    "mike evans_wr": {
+    "george kittle_te": {
       "info": {
-        "player": "Mike Evans",
-        "position": "WR",
+        "player": "George Kittle",
+        "position": "TE",
         "team": "SF",
         "opp": "SEA"
       },
@@ -1767,9 +1744,32 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 4.37,
-        "tgts": 7.18,
-        "rec_yds": 67.44,
+        "rec": 5.27,
+        "tgts": 6.77,
+        "rec_yds": 70.93,
+        "rec_td": 0.37
+      }
+    },
+    "mike evans_wr": {
+      "info": {
+        "player": "Mike Evans",
+        "position": "WR",
+        "team": "SF",
+        "opp": "SEA"
+      },
+      "stats": {
+        "fpts": 11.92,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 4.36,
+        "tgts": 7.15,
+        "rec_yds": 67.23,
         "rec_td": 0.5
       }
     },
@@ -1911,6 +1911,29 @@
         "rec_td": 0.1
       }
     },
+    "malik nabers_wr": {
+      "info": {
+        "player": "Malik Nabers",
+        "position": "WR",
+        "team": "NYG",
+        "opp": "IND"
+      },
+      "stats": {
+        "fpts": 11.18,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 4.98,
+        "tgts": 8.65,
+        "rec_yds": 66.46,
+        "rec_td": 0.35
+      }
+    },
     "jordan mason_rb": {
       "info": {
         "player": "Jordan Mason",
@@ -1932,29 +1955,6 @@
         "tgts": 0.81,
         "rec_yds": 4.49,
         "rec_td": 0.02
-      }
-    },
-    "malik nabers_wr": {
-      "info": {
-        "player": "Malik Nabers",
-        "position": "WR",
-        "team": "NYG",
-        "opp": "IND"
-      },
-      "stats": {
-        "fpts": 10.82,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 4.82,
-        "tgts": 8.38,
-        "rec_yds": 64.35,
-        "rec_td": 0.34
       }
     },
     "jacory croskey-merritt_rb": {
@@ -2026,6 +2026,29 @@
         "rec_td": 0.3
       }
     },
+    "isaiah likely_te": {
+      "info": {
+        "player": "Isaiah Likely",
+        "position": "TE",
+        "team": "NYG",
+        "opp": "IND"
+      },
+      "stats": {
+        "fpts": 9.96,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 4.67,
+        "tgts": 7.46,
+        "rec_yds": 52.07,
+        "rec_td": 0.42
+      }
+    },
     "travis kelce_te": {
       "info": {
         "player": "Travis Kelce",
@@ -2072,29 +2095,6 @@
         "rec_td": 0.27
       }
     },
-    "isaiah likely_te": {
-      "info": {
-        "player": "Isaiah Likely",
-        "position": "TE",
-        "team": "NYG",
-        "opp": "IND"
-      },
-      "stats": {
-        "fpts": 9.6,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 4.52,
-        "tgts": 7.22,
-        "rec_yds": 50.42,
-        "rec_td": 0.4
-      }
-    },
     "brock bowers_te": {
       "info": {
         "player": "Brock Bowers",
@@ -2114,7 +2114,7 @@
         "rush_td": 0.01,
         "rec": 4.8,
         "tgts": 7.54,
-        "rec_yds": 53.99,
+        "rec_yds": 53.98,
         "rec_td": 0.26
       }
     },
@@ -2275,7 +2275,7 @@
         "rush_td": 0.09,
         "rec": 3.84,
         "tgts": 6.15,
-        "rec_yds": 43.06,
+        "rec_yds": 43.05,
         "rec_td": 0.24
       }
     },
@@ -2287,18 +2287,18 @@
         "opp": "NO"
       },
       "stats": {
-        "fpts": 8.71,
+        "fpts": 8.59,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
         "pass_td": 0.0,
         "int": 0.0,
-        "rush_att": 10.81,
-        "rush_yds": 44.42,
-        "rush_td": 0.28,
-        "rec": 1.73,
-        "tgts": 1.99,
-        "rec_yds": 14.39,
+        "rush_att": 10.58,
+        "rush_yds": 43.49,
+        "rush_td": 0.27,
+        "rec": 1.76,
+        "tgts": 2.02,
+        "rec_yds": 14.65,
         "rec_td": 0.08
       }
     },
@@ -2371,29 +2371,6 @@
         "rec_td": 0.28
       }
     },
-    "jaylen waddle_wr": {
-      "info": {
-        "player": "Jaylen Waddle",
-        "position": "WR",
-        "team": "DEN",
-        "opp": "PIT"
-      },
-      "stats": {
-        "fpts": 8.43,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.29,
-        "rush_yds": 1.55,
-        "rush_td": 0.01,
-        "rec": 3.75,
-        "tgts": 6.52,
-        "rec_yds": 47.81,
-        "rec_td": 0.26
-      }
-    },
     "harold fannin jr._te": {
       "info": {
         "player": "Harold Fannin Jr.",
@@ -2413,7 +2390,7 @@
         "rush_td": 0.0,
         "rec": 4.23,
         "tgts": 6.3,
-        "rec_yds": 46.53,
+        "rec_yds": 46.52,
         "rec_td": 0.29
       }
     },
@@ -2463,6 +2440,29 @@
         "rec_td": 0.33
       }
     },
+    "jaylen waddle_wr": {
+      "info": {
+        "player": "Jaylen Waddle",
+        "position": "WR",
+        "team": "DEN",
+        "opp": "PIT"
+      },
+      "stats": {
+        "fpts": 8.24,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 3.76,
+        "tgts": 6.54,
+        "rec_yds": 47.99,
+        "rec_td": 0.26
+      }
+    },
     "rashee rice_wr": {
       "info": {
         "player": "Rashee Rice",
@@ -2509,6 +2509,29 @@
         "rec_td": 0.21
       }
     },
+    "d.k. metcalf_wr": {
+      "info": {
+        "player": "D.K. Metcalf",
+        "position": "WR",
+        "team": "PIT",
+        "opp": "DEN"
+      },
+      "stats": {
+        "fpts": 8.01,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 3.62,
+        "tgts": 6.64,
+        "rec_yds": 46.81,
+        "rec_td": 0.26
+      }
+    },
     "braelon allen_rb": {
       "info": {
         "player": "Braelon Allen",
@@ -2530,29 +2553,6 @@
         "tgts": 1.49,
         "rec_yds": 8.56,
         "rec_td": 0.05
-      }
-    },
-    "d.k. metcalf_wr": {
-      "info": {
-        "player": "D.K. Metcalf",
-        "position": "WR",
-        "team": "PIT",
-        "opp": "DEN"
-      },
-      "stats": {
-        "fpts": 7.99,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 3.61,
-        "tgts": 6.61,
-        "rec_yds": 46.65,
-        "rec_td": 0.26
       }
     },
     "carnell tate_wr": {
@@ -2601,29 +2601,6 @@
         "rec_td": 0.2
       }
     },
-    "deebo samuel_wr": {
-      "info": {
-        "player": "Deebo Samuel",
-        "position": "WR",
-        "team": "SF",
-        "opp": "SEA"
-      },
-      "stats": {
-        "fpts": 7.84,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 2.18,
-        "rush_yds": 11.96,
-        "rush_td": 0.12,
-        "rec": 3.08,
-        "tgts": 4.44,
-        "rec_yds": 35.63,
-        "rec_td": 0.17
-      }
-    },
     "tank dell_wr": {
       "info": {
         "player": "Tank Dell",
@@ -2647,6 +2624,29 @@
         "rec_td": 0.26
       }
     },
+    "deebo samuel_wr": {
+      "info": {
+        "player": "Deebo Samuel",
+        "position": "WR",
+        "team": "SF",
+        "opp": "SEA"
+      },
+      "stats": {
+        "fpts": 7.83,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 2.19,
+        "rush_yds": 12.01,
+        "rush_td": 0.12,
+        "rec": 3.07,
+        "tgts": 4.42,
+        "rec_yds": 35.52,
+        "rec_td": 0.17
+      }
+    },
     "zonovan knight_rb": {
       "info": {
         "player": "Zonovan Knight",
@@ -2668,29 +2668,6 @@
         "tgts": 2.79,
         "rec_yds": 15.45,
         "rec_td": 0.06
-      }
-    },
-    "tyler warren_te": {
-      "info": {
-        "player": "Tyler Warren",
-        "position": "TE",
-        "team": "IND",
-        "opp": "NYG"
-      },
-      "stats": {
-        "fpts": 7.57,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.61,
-        "rush_yds": 3.18,
-        "rush_td": 0.03,
-        "rec": 3.71,
-        "tgts": 7.44,
-        "rec_yds": 41.79,
-        "rec_td": 0.18
       }
     },
     "dalton kincaid_te": {
@@ -2724,18 +2701,18 @@
         "opp": "DEN"
       },
       "stats": {
-        "fpts": 7.46,
+        "fpts": 7.45,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
         "pass_td": 0.0,
         "int": 0.0,
-        "rush_att": 8.88,
-        "rush_yds": 38.91,
+        "rush_att": 8.84,
+        "rush_yds": 38.74,
         "rush_td": 0.14,
-        "rec": 2.14,
-        "tgts": 2.83,
-        "rec_yds": 14.14,
+        "rec": 2.15,
+        "tgts": 2.84,
+        "rec_yds": 14.19,
         "rec_td": 0.06
       }
     },
@@ -2804,7 +2781,7 @@
         "rush_td": 0.0,
         "rec": 3.38,
         "tgts": 5.62,
-        "rec_yds": 43.26,
+        "rec_yds": 43.25,
         "rec_td": 0.23
       }
     },
@@ -2992,6 +2969,29 @@
         "rec_td": 0.21
       }
     },
+    "tyler warren_te": {
+      "info": {
+        "player": "Tyler Warren",
+        "position": "TE",
+        "team": "IND",
+        "opp": "NYG"
+      },
+      "stats": {
+        "fpts": 6.92,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.29,
+        "rush_yds": 1.51,
+        "rush_td": 0.01,
+        "rec": 3.53,
+        "tgts": 7.08,
+        "rec_yds": 39.44,
+        "rec_td": 0.17
+      }
+    },
     "kalif raymond_wr": {
       "info": {
         "player": "Kalif Raymond",
@@ -3069,18 +3069,18 @@
         "opp": "SF"
       },
       "stats": {
-        "fpts": 6.83,
+        "fpts": 6.84,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
         "pass_td": 0.0,
         "int": 0.0,
-        "rush_att": 8.16,
-        "rush_yds": 34.37,
+        "rush_att": 8.19,
+        "rush_yds": 34.49,
         "rush_td": 0.22,
         "rec": 1.52,
         "tgts": 2.19,
-        "rec_yds": 11.54,
+        "rec_yds": 11.5,
         "rec_td": 0.06
       }
     },
@@ -3199,6 +3199,29 @@
         "rec_td": 0.25
       }
     },
+    "devaughn vele_wr": {
+      "info": {
+        "player": "Devaughn Vele",
+        "position": "WR",
+        "team": "NO",
+        "opp": "CIN"
+      },
+      "stats": {
+        "fpts": 6.36,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 3.06,
+        "tgts": 4.78,
+        "rec_yds": 32.74,
+        "rec_td": 0.26
+      }
+    },
     "mike washington_rb": {
       "info": {
         "player": "Mike Washington",
@@ -3214,7 +3237,7 @@
         "pass_td": 0.0,
         "int": 0.0,
         "rush_att": 10.53,
-        "rush_yds": 43.5,
+        "rush_yds": 43.51,
         "rush_td": 0.25,
         "rec": 0.44,
         "tgts": 0.64,
@@ -3245,6 +3268,29 @@
         "rec_td": 0.24
       }
     },
+    "germie bernard_wr": {
+      "info": {
+        "player": "Germie Bernard",
+        "position": "WR",
+        "team": "PIT",
+        "opp": "DEN"
+      },
+      "stats": {
+        "fpts": 6.25,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 3.46,
+        "tgts": 5.48,
+        "rec_yds": 36.02,
+        "rec_td": 0.16
+      }
+    },
     "kyle pitts_te": {
       "info": {
         "player": "Kyle Pitts",
@@ -3266,52 +3312,6 @@
         "tgts": 5.25,
         "rec_yds": 35.85,
         "rec_td": 0.16
-      }
-    },
-    "germie bernard_wr": {
-      "info": {
-        "player": "Germie Bernard",
-        "position": "WR",
-        "team": "PIT",
-        "opp": "DEN"
-      },
-      "stats": {
-        "fpts": 6.23,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 3.45,
-        "tgts": 5.46,
-        "rec_yds": 35.9,
-        "rec_td": 0.16
-      }
-    },
-    "devaughn vele_wr": {
-      "info": {
-        "player": "Devaughn Vele",
-        "position": "WR",
-        "team": "NO",
-        "opp": "CIN"
-      },
-      "stats": {
-        "fpts": 6.21,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 3.0,
-        "tgts": 4.7,
-        "rec_yds": 32.15,
-        "rec_td": 0.25
       }
     },
     "jauan jennings_wr": {
@@ -3414,7 +3414,7 @@
         "opp": "PIT"
       },
       "stats": {
-        "fpts": 5.83,
+        "fpts": 5.84,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -3423,21 +3423,21 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 2.61,
-        "tgts": 5.01,
-        "rec_yds": 32.0,
+        "rec": 2.62,
+        "tgts": 5.03,
+        "rec_yds": 32.12,
         "rec_td": 0.22
       }
     },
-    "keenan allen_wr": {
+    "jordyn tyson_wr": {
       "info": {
-        "player": "Keenan Allen",
+        "player": "Jordyn Tyson",
         "position": "WR",
-        "team": "SF",
-        "opp": "SEA"
+        "team": "NO",
+        "opp": "CIN"
       },
       "stats": {
-        "fpts": 5.78,
+        "fpts": 5.8,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -3446,10 +3446,10 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 3.12,
-        "tgts": 4.83,
-        "rec_yds": 32.78,
-        "rec_td": 0.16
+        "rec": 4.31,
+        "tgts": 6.64,
+        "rec_yds": 37.04,
+        "rec_td": 0.0
       }
     },
     "colby parkinson_te": {
@@ -3475,15 +3475,15 @@
         "rec_td": 0.25
       }
     },
-    "aj barner_te": {
+    "keenan allen_wr": {
       "info": {
-        "player": "AJ Barner",
-        "position": "TE",
-        "team": "SEA",
-        "opp": "SF"
+        "player": "Keenan Allen",
+        "position": "WR",
+        "team": "SF",
+        "opp": "SEA"
       },
       "stats": {
-        "fpts": 5.75,
+        "fpts": 5.76,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -3492,9 +3492,32 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 3.18,
-        "tgts": 4.96,
-        "rec_yds": 28.76,
+        "rec": 3.11,
+        "tgts": 4.81,
+        "rec_yds": 32.68,
+        "rec_td": 0.16
+      }
+    },
+    "aj barner_te": {
+      "info": {
+        "player": "AJ Barner",
+        "position": "TE",
+        "team": "SEA",
+        "opp": "SF"
+      },
+      "stats": {
+        "fpts": 5.73,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 3.17,
+        "tgts": 4.94,
+        "rec_yds": 28.66,
         "rec_td": 0.22
       }
     },
@@ -3542,29 +3565,6 @@
         "tgts": 5.04,
         "rec_yds": 32.98,
         "rec_td": 0.16
-      }
-    },
-    "jordyn tyson_wr": {
-      "info": {
-        "player": "Jordyn Tyson",
-        "position": "WR",
-        "team": "NO",
-        "opp": "CIN"
-      },
-      "stats": {
-        "fpts": 5.7,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 4.24,
-        "tgts": 6.52,
-        "rec_yds": 36.38,
-        "rec_td": 0.0
       }
     },
     "brevyn spann-ford_te": {
@@ -3690,7 +3690,7 @@
         "opp": "DEN"
       },
       "stats": {
-        "fpts": 5.34,
+        "fpts": 5.35,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -3700,8 +3700,8 @@
         "rush_yds": 0.0,
         "rush_td": 0.0,
         "rec": 2.88,
-        "tgts": 4.05,
-        "rec_yds": 29.58,
+        "tgts": 4.06,
+        "rec_yds": 29.68,
         "rec_td": 0.16
       }
     },
@@ -3943,29 +3943,6 @@
         "opp": "SF"
       },
       "stats": {
-        "fpts": 5.06,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 2.32,
-        "tgts": 4.01,
-        "rec_yds": 27.59,
-        "rec_td": 0.19
-      }
-    },
-    "deion burks_wr": {
-      "info": {
-        "player": "Deion Burks",
-        "position": "WR",
-        "team": "IND",
-        "opp": "NYG"
-      },
-      "stats": {
         "fpts": 5.05,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
@@ -3975,32 +3952,32 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 1.82,
-        "tgts": 4.17,
-        "rec_yds": 31.75,
-        "rec_td": 0.16
+        "rec": 2.32,
+        "tgts": 3.99,
+        "rec_yds": 27.5,
+        "rec_td": 0.19
       }
     },
-    "pat bryant_wr": {
+    "malachi fields_wr": {
       "info": {
-        "player": "Pat Bryant",
+        "player": "Malachi Fields",
         "position": "WR",
-        "team": "DEN",
-        "opp": "PIT"
+        "team": "NYG",
+        "opp": "IND"
       },
       "stats": {
-        "fpts": 4.97,
+        "fpts": 5.0,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
         "pass_td": 0.0,
         "int": 0.0,
-        "rush_att": 0.29,
-        "rush_yds": 1.55,
-        "rush_td": 0.01,
-        "rec": 2.3,
-        "tgts": 3.97,
-        "rec_yds": 26.68,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 2.23,
+        "tgts": 3.88,
+        "rec_yds": 29.48,
         "rec_td": 0.16
       }
     },
@@ -4119,29 +4096,6 @@
         "rec_td": 0.09
       }
     },
-    "malachi fields_wr": {
-      "info": {
-        "player": "Malachi Fields",
-        "position": "WR",
-        "team": "NYG",
-        "opp": "IND"
-      },
-      "stats": {
-        "fpts": 4.85,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 2.16,
-        "tgts": 3.75,
-        "rec_yds": 28.54,
-        "rec_td": 0.16
-      }
-    },
     "josh cameron_wr": {
       "info": {
         "player": "Josh Cameron",
@@ -4211,6 +4165,29 @@
         "rec_td": 0.23
       }
     },
+    "pat bryant_wr": {
+      "info": {
+        "player": "Pat Bryant",
+        "position": "WR",
+        "team": "DEN",
+        "opp": "PIT"
+      },
+      "stats": {
+        "fpts": 4.77,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 2.31,
+        "tgts": 3.98,
+        "rec_yds": 26.78,
+        "rec_td": 0.16
+      }
+    },
     "jahan dotson_wr": {
       "info": {
         "player": "Jahan Dotson",
@@ -4232,29 +4209,6 @@
         "tgts": 3.75,
         "rec_yds": 29.66,
         "rec_td": 0.13
-      }
-    },
-    "anthony gould_wr": {
-      "info": {
-        "player": "Anthony Gould",
-        "position": "WR",
-        "team": "IND",
-        "opp": "NYG"
-      },
-      "stats": {
-        "fpts": 4.73,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 2.06,
-        "tgts": 4.46,
-        "rec_yds": 33.59,
-        "rec_td": 0.07
       }
     },
     "hunter henry_te": {
@@ -4303,6 +4257,29 @@
         "rec_td": 0.13
       }
     },
+    "deion burks_wr": {
+      "info": {
+        "player": "Deion Burks",
+        "position": "WR",
+        "team": "IND",
+        "opp": "NYG"
+      },
+      "stats": {
+        "fpts": 4.64,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 1.65,
+        "tgts": 3.77,
+        "rec_yds": 28.52,
+        "rec_td": 0.16
+      }
+    },
     "ted hurst_wr": {
       "info": {
         "player": "Ted Hurst",
@@ -4334,18 +4311,18 @@
         "opp": "SF"
       },
       "stats": {
-        "fpts": 4.58,
+        "fpts": 4.57,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
         "pass_td": 0.0,
         "int": 0.0,
         "rush_att": 0.46,
-        "rush_yds": 2.46,
+        "rush_yds": 2.47,
         "rush_td": 0.02,
-        "rec": 2.06,
-        "tgts": 3.72,
-        "rec_yds": 24.65,
+        "rec": 2.05,
+        "tgts": 3.71,
+        "rec_yds": 24.57,
         "rec_td": 0.14
       }
     },
@@ -4380,7 +4357,7 @@
         "opp": "NO"
       },
       "stats": {
-        "fpts": 4.49,
+        "fpts": 4.55,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -4389,10 +4366,56 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 2.03,
-        "tgts": 2.86,
-        "rec_yds": 21.77,
+        "rec": 2.07,
+        "tgts": 2.92,
+        "rec_yds": 22.15,
         "rec_td": 0.22
+      }
+    },
+    "ashton dulin_wr": {
+      "info": {
+        "player": "Ashton Dulin",
+        "position": "WR",
+        "team": "IND",
+        "opp": "NYG"
+      },
+      "stats": {
+        "fpts": 4.53,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 1.51,
+        "tgts": 3.52,
+        "rec_yds": 29.51,
+        "rec_td": 0.14
+      }
+    },
+    "laquon treadwell_wr": {
+      "info": {
+        "player": "Laquon Treadwell",
+        "position": "WR",
+        "team": "IND",
+        "opp": "NYG"
+      },
+      "stats": {
+        "fpts": 4.52,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 1.92,
+        "tgts": 4.26,
+        "rec_yds": 30.17,
+        "rec_td": 0.09
       }
     },
     "tre harris_wr": {
@@ -4418,6 +4441,29 @@
         "rec_td": 0.1
       }
     },
+    "noah fant_te": {
+      "info": {
+        "player": "Noah Fant",
+        "position": "TE",
+        "team": "NO",
+        "opp": "CIN"
+      },
+      "stats": {
+        "fpts": 4.48,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 2.39,
+        "tgts": 3.35,
+        "rec_yds": 21.26,
+        "rec_td": 0.2
+      }
+    },
     "michael mayer_te": {
       "info": {
         "player": "Michael Mayer",
@@ -4437,31 +4483,31 @@
         "rush_td": 0.01,
         "rec": 2.48,
         "tgts": 3.96,
-        "rec_yds": 22.13,
+        "rec_yds": 22.12,
         "rec_td": 0.15
       }
     },
-    "laquon treadwell_wr": {
+    "kaelon black_rb": {
       "info": {
-        "player": "Laquon Treadwell",
-        "position": "WR",
-        "team": "IND",
-        "opp": "NYG"
+        "player": "Kaelon Black",
+        "position": "RB",
+        "team": "SF",
+        "opp": "SEA"
       },
       "stats": {
-        "fpts": 4.46,
+        "fpts": 4.45,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
         "pass_td": 0.0,
         "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 1.88,
-        "tgts": 4.17,
-        "rec_yds": 29.78,
-        "rec_td": 0.09
+        "rush_att": 6.6,
+        "rush_yds": 27.57,
+        "rush_td": 0.14,
+        "rec": 0.68,
+        "tgts": 0.87,
+        "rec_yds": 5.34,
+        "rec_td": 0.02
       }
     },
     "chris godwin_wr": {
@@ -4533,29 +4579,6 @@
         "rec_td": 0.19
       }
     },
-    "kaelon black_rb": {
-      "info": {
-        "player": "Kaelon Black",
-        "position": "RB",
-        "team": "SF",
-        "opp": "SEA"
-      },
-      "stats": {
-        "fpts": 4.44,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 6.57,
-        "rush_yds": 27.47,
-        "rush_td": 0.14,
-        "rec": 0.68,
-        "tgts": 0.87,
-        "rec_yds": 5.36,
-        "rec_td": 0.02
-      }
-    },
     "mark andrews_te": {
       "info": {
         "player": "Mark Andrews",
@@ -4579,35 +4602,12 @@
         "rec_td": 0.19
       }
     },
-    "noah fant_te": {
+    "darnell washington_te": {
       "info": {
-        "player": "Noah Fant",
+        "player": "Darnell Washington",
         "position": "TE",
-        "team": "NO",
-        "opp": "CIN"
-      },
-      "stats": {
-        "fpts": 4.42,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 2.35,
-        "tgts": 3.29,
-        "rec_yds": 20.88,
-        "rec_td": 0.2
-      }
-    },
-    "devin singletary_rb": {
-      "info": {
-        "player": "Devin Singletary",
-        "position": "RB",
-        "team": "NYG",
-        "opp": "IND"
+        "team": "PIT",
+        "opp": "DEN"
       },
       "stats": {
         "fpts": 4.34,
@@ -4616,13 +4616,36 @@
         "pass_yds": 0.0,
         "pass_td": 0.0,
         "int": 0.0,
-        "rush_att": 6.71,
-        "rush_yds": 27.72,
-        "rush_td": 0.21,
-        "rec": 0.21,
-        "tgts": 0.29,
-        "rec_yds": 1.39,
-        "rec_td": 0.01
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 2.22,
+        "tgts": 3.24,
+        "rec_yds": 24.25,
+        "rec_td": 0.14
+      }
+    },
+    "anthony gould_wr": {
+      "info": {
+        "player": "Anthony Gould",
+        "position": "WR",
+        "team": "IND",
+        "opp": "NYG"
+      },
+      "stats": {
+        "fpts": 4.34,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 1.89,
+        "tgts": 4.09,
+        "rec_yds": 30.57,
+        "rec_td": 0.07
       }
     },
     "evan engram_te": {
@@ -4633,7 +4656,7 @@
         "opp": "PIT"
       },
       "stats": {
-        "fpts": 4.32,
+        "fpts": 4.33,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -4642,33 +4665,10 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 2.77,
-        "tgts": 4.34,
-        "rec_yds": 22.91,
+        "rec": 2.78,
+        "tgts": 4.35,
+        "rec_yds": 23.0,
         "rec_td": 0.11
-      }
-    },
-    "darnell washington_te": {
-      "info": {
-        "player": "Darnell Washington",
-        "position": "TE",
-        "team": "PIT",
-        "opp": "DEN"
-      },
-      "stats": {
-        "fpts": 4.32,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 2.21,
-        "tgts": 3.22,
-        "rec_yds": 24.17,
-        "rec_td": 0.14
       }
     },
     "roman wilson_wr": {
@@ -4679,7 +4679,7 @@
         "opp": "DEN"
       },
       "stats": {
-        "fpts": 4.28,
+        "fpts": 4.29,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -4688,9 +4688,9 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 2.1,
-        "tgts": 3.45,
-        "rec_yds": 26.06,
+        "rec": 2.11,
+        "tgts": 3.47,
+        "rec_yds": 26.14,
         "rec_td": 0.11
       }
     },
@@ -4717,27 +4717,27 @@
         "rec_td": 0.0
       }
     },
-    "ashton dulin_wr": {
+    "devin singletary_rb": {
       "info": {
-        "player": "Ashton Dulin",
-        "position": "WR",
-        "team": "IND",
-        "opp": "NYG"
+        "player": "Devin Singletary",
+        "position": "RB",
+        "team": "NYG",
+        "opp": "IND"
       },
       "stats": {
-        "fpts": 4.23,
+        "fpts": 4.2,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
         "pass_td": 0.0,
         "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 1.41,
-        "tgts": 3.27,
-        "rec_yds": 27.69,
-        "rec_td": 0.13
+        "rush_att": 6.51,
+        "rush_yds": 26.89,
+        "rush_td": 0.2,
+        "rec": 0.21,
+        "tgts": 0.3,
+        "rec_yds": 1.44,
+        "rec_td": 0.01
       }
     },
     "chris bell_wr": {
@@ -4832,6 +4832,29 @@
         "rec_td": 0.18
       }
     },
+    "dohnte meyers_wr": {
+      "info": {
+        "player": "Dohnte Meyers",
+        "position": "WR",
+        "team": "CIN",
+        "opp": "NO"
+      },
+      "stats": {
+        "fpts": 3.9,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 1.78,
+        "tgts": 2.58,
+        "rec_yds": 20.94,
+        "rec_td": 0.16
+      }
+    },
     "ty johnson_rb": {
       "info": {
         "player": "Ty Johnson",
@@ -4892,36 +4915,13 @@
         "pass_yds": 0.0,
         "pass_td": 0.0,
         "int": 0.0,
-        "rush_att": 4.22,
-        "rush_yds": 15.79,
+        "rush_att": 4.14,
+        "rush_yds": 15.46,
         "rush_td": 0.1,
-        "rec": 1.35,
-        "tgts": 1.99,
-        "rec_yds": 8.54,
+        "rec": 1.38,
+        "tgts": 2.03,
+        "rec_yds": 8.69,
         "rec_td": 0.05
-      }
-    },
-    "dohnte meyers_wr": {
-      "info": {
-        "player": "Dohnte Meyers",
-        "position": "WR",
-        "team": "CIN",
-        "opp": "NO"
-      },
-      "stats": {
-        "fpts": 3.85,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 1.75,
-        "tgts": 2.54,
-        "rec_yds": 20.58,
-        "rec_td": 0.16
       }
     },
     "harrison wallace iii_wr": {
@@ -4968,6 +4968,52 @@
         "tgts": 3.22,
         "rec_yds": 18.36,
         "rec_td": 0.15
+      }
+    },
+    "darnell mooney_wr": {
+      "info": {
+        "player": "Darnell Mooney",
+        "position": "WR",
+        "team": "NYG",
+        "opp": "IND"
+      },
+      "stats": {
+        "fpts": 3.76,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 1.61,
+        "tgts": 3.28,
+        "rec_yds": 23.79,
+        "rec_td": 0.1
+      }
+    },
+    "theo johnson_te": {
+      "info": {
+        "player": "Theo Johnson",
+        "position": "TE",
+        "team": "NYG",
+        "opp": "IND"
+      },
+      "stats": {
+        "fpts": 3.74,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 1.63,
+        "tgts": 2.69,
+        "rec_yds": 19.01,
+        "rec_td": 0.17
       }
     },
     "teagan quitoriano_te": {
@@ -5062,29 +5108,6 @@
         "rec_td": 0.13
       }
     },
-    "darnell mooney_wr": {
-      "info": {
-        "player": "Darnell Mooney",
-        "position": "WR",
-        "team": "NYG",
-        "opp": "IND"
-      },
-      "stats": {
-        "fpts": 3.66,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 1.56,
-        "tgts": 3.18,
-        "rec_yds": 23.04,
-        "rec_td": 0.1
-      }
-    },
     "keaton mitchell_rb": {
       "info": {
         "player": "Keaton Mitchell",
@@ -5106,29 +5129,6 @@
         "tgts": 1.5,
         "rec_yds": 7.61,
         "rec_td": 0.03
-      }
-    },
-    "theo johnson_te": {
-      "info": {
-        "player": "Theo Johnson",
-        "position": "TE",
-        "team": "NYG",
-        "opp": "IND"
-      },
-      "stats": {
-        "fpts": 3.59,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 1.58,
-        "tgts": 2.6,
-        "rec_yds": 18.41,
-        "rec_td": 0.16
       }
     },
     "david njoku_te": {
@@ -5246,6 +5246,29 @@
         "rec_td": 0.15
       }
     },
+    "jack endries_te": {
+      "info": {
+        "player": "Jack Endries",
+        "position": "TE",
+        "team": "CIN",
+        "opp": "NO"
+      },
+      "stats": {
+        "fpts": 3.15,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 1.47,
+        "tgts": 1.95,
+        "rec_yds": 13.57,
+        "rec_td": 0.18
+      }
+    },
     "noah gray_te": {
       "info": {
         "player": "Noah Gray",
@@ -5267,29 +5290,6 @@
         "tgts": 2.15,
         "rec_yds": 16.12,
         "rec_td": 0.13
-      }
-    },
-    "jack endries_te": {
-      "info": {
-        "player": "Jack Endries",
-        "position": "TE",
-        "team": "CIN",
-        "opp": "NO"
-      },
-      "stats": {
-        "fpts": 3.12,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 1.45,
-        "tgts": 1.92,
-        "rec_yds": 13.33,
-        "rec_td": 0.18
       }
     },
     "rachaad white_rb": {
@@ -5359,6 +5359,29 @@
         "tgts": 2.12,
         "rec_yds": 15.38,
         "rec_td": 0.13
+      }
+    },
+    "mo alie-cox_te": {
+      "info": {
+        "player": "Mo Alie-Cox",
+        "position": "TE",
+        "team": "IND",
+        "opp": "NYG"
+      },
+      "stats": {
+        "fpts": 3.0,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 1.24,
+        "tgts": 2.6,
+        "rec_yds": 18.01,
+        "rec_td": 0.1
       }
     },
     "marshawn lloyd_rb": {
@@ -5472,7 +5495,7 @@
         "rush_td": 0.0,
         "rec": 1.26,
         "tgts": 1.96,
-        "rec_yds": 19.12,
+        "rec_yds": 19.06,
         "rec_td": 0.06
       }
     },
@@ -5576,18 +5599,18 @@
         "opp": "CIN"
       },
       "stats": {
-        "fpts": 2.73,
+        "fpts": 2.74,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
         "pass_td": 0.0,
         "int": 0.0,
-        "rush_att": 1.91,
-        "rush_yds": 7.4,
+        "rush_att": 1.87,
+        "rush_yds": 7.25,
         "rush_td": 0.04,
-        "rec": 1.27,
-        "tgts": 1.66,
-        "rec_yds": 7.73,
+        "rec": 1.29,
+        "tgts": 1.69,
+        "rec_yds": 7.87,
         "rec_td": 0.06
       }
     },
@@ -5645,7 +5668,7 @@
         "opp": "DEN"
       },
       "stats": {
-        "fpts": 2.69,
+        "fpts": 2.7,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -5654,9 +5677,9 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 1.57,
-        "tgts": 2.4,
-        "rec_yds": 15.63,
+        "rec": 1.58,
+        "tgts": 2.41,
+        "rec_yds": 15.68,
         "rec_td": 0.06
       }
     },
@@ -5701,8 +5724,8 @@
         "rush_yds": 0.0,
         "rush_td": 0.0,
         "rec": 1.27,
-        "tgts": 2.29,
-        "rec_yds": 15.18,
+        "tgts": 2.28,
+        "rec_yds": 15.13,
         "rec_td": 0.07
       }
     },
@@ -6036,7 +6059,7 @@
         "opp": "PIT"
       },
       "stats": {
-        "fpts": 2.14,
+        "fpts": 2.15,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -6046,8 +6069,8 @@
         "rush_yds": 0.0,
         "rush_td": 0.0,
         "rec": 1.05,
-        "tgts": 1.66,
-        "rec_yds": 10.18,
+        "tgts": 1.67,
+        "rec_yds": 10.22,
         "rec_td": 0.1
       }
     },
@@ -6072,29 +6095,6 @@
         "tgts": 2.07,
         "rec_yds": 13.01,
         "rec_td": 0.05
-      }
-    },
-    "dj giddens_rb": {
-      "info": {
-        "player": "DJ Giddens",
-        "position": "RB",
-        "team": "IND",
-        "opp": "NYG"
-      },
-      "stats": {
-        "fpts": 1.95,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 3.05,
-        "rush_yds": 11.42,
-        "rush_td": 0.06,
-        "rec": 0.31,
-        "tgts": 0.6,
-        "rec_yds": 2.88,
-        "rec_td": 0.01
       }
     },
     "xavier restrepo_wr": {
@@ -6277,7 +6277,7 @@
         "rush_td": 0.0,
         "rec": 0.9,
         "tgts": 1.51,
-        "rec_yds": 9.48,
+        "rec_yds": 9.51,
         "rec_td": 0.05
       }
     },
@@ -6323,7 +6323,7 @@
         "rush_td": 0.0,
         "rec": 0.86,
         "tgts": 1.19,
-        "rec_yds": 8.71,
+        "rec_yds": 8.68,
         "rec_td": 0.06
       }
     },
@@ -6358,7 +6358,7 @@
         "opp": "PIT"
       },
       "stats": {
-        "fpts": 1.61,
+        "fpts": 1.62,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -6367,9 +6367,9 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 0.85,
+        "rec": 0.86,
         "tgts": 1.57,
-        "rec_yds": 8.46,
+        "rec_yds": 8.5,
         "rec_td": 0.06
       }
     },
@@ -6396,6 +6396,29 @@
         "rec_td": 0.08
       }
     },
+    "juwan johnson_te": {
+      "info": {
+        "player": "Juwan Johnson",
+        "position": "TE",
+        "team": "NO",
+        "opp": "CIN"
+      },
+      "stats": {
+        "fpts": 1.58,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 0.74,
+        "tgts": 1.11,
+        "rec_yds": 8.05,
+        "rec_td": 0.07
+      }
+    },
     "austin hooper_te": {
       "info": {
         "player": "Austin Hooper",
@@ -6419,15 +6442,38 @@
         "rec_td": 0.05
       }
     },
-    "juwan johnson_te": {
+    "tyler badie_rb": {
       "info": {
-        "player": "Juwan Johnson",
-        "position": "TE",
-        "team": "NO",
-        "opp": "CIN"
+        "player": "Tyler Badie",
+        "position": "RB",
+        "team": "DEN",
+        "opp": "PIT"
       },
       "stats": {
-        "fpts": 1.56,
+        "fpts": 1.53,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 3.12,
+        "rush_yds": 11.73,
+        "rush_td": 0.07,
+        "rec": 0.0,
+        "tgts": 0.0,
+        "rec_yds": 0.0,
+        "rec_td": 0.0
+      }
+    },
+    "andrew ogletree_te": {
+      "info": {
+        "player": "Andrew Ogletree",
+        "position": "TE",
+        "team": "IND",
+        "opp": "NYG"
+      },
+      "stats": {
+        "fpts": 1.46,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -6436,10 +6482,10 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 0.73,
-        "tgts": 1.09,
-        "rec_yds": 7.91,
-        "rec_td": 0.07
+        "rec": 0.63,
+        "tgts": 1.26,
+        "rec_yds": 8.41,
+        "rec_td": 0.05
       }
     },
     "malik willis_qb": {
@@ -6488,29 +6534,6 @@
         "rec_td": 0.04
       }
     },
-    "andrew ogletree_te": {
-      "info": {
-        "player": "Andrew Ogletree",
-        "position": "TE",
-        "team": "IND",
-        "opp": "NYG"
-      },
-      "stats": {
-        "fpts": 1.36,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 0.6,
-        "tgts": 1.22,
-        "rec_yds": 8.17,
-        "rec_td": 0.04
-      }
-    },
     "tanner koziol_te": {
       "info": {
         "player": "Tanner Koziol",
@@ -6532,6 +6555,29 @@
         "tgts": 0.78,
         "rec_yds": 5.66,
         "rec_td": 0.08
+      }
+    },
+    "adam prentice_rb": {
+      "info": {
+        "player": "Adam Prentice",
+        "position": "RB",
+        "team": "DEN",
+        "opp": "PIT"
+      },
+      "stats": {
+        "fpts": 1.3,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 1.04,
+        "rush_yds": 3.86,
+        "rush_td": 0.02,
+        "rec": 0.62,
+        "tgts": 0.97,
+        "rec_yds": 3.99,
+        "rec_td": 0.02
       }
     },
     "jalen tolbert_wr": {
@@ -6576,7 +6622,7 @@
         "rush_td": 0.0,
         "rec": 0.65,
         "tgts": 1.05,
-        "rec_yds": 5.64,
+        "rec_yds": 5.62,
         "rec_td": 0.06
       }
     },
@@ -6598,8 +6644,31 @@
         "rush_yds": 0.0,
         "rush_td": 0.0,
         "rec": 0.51,
-        "tgts": 0.85,
+        "tgts": 0.84,
         "rec_yds": 5.98,
+        "rec_td": 0.06
+      }
+    },
+    "nate adkins_te": {
+      "info": {
+        "player": "Nate Adkins",
+        "position": "TE",
+        "team": "DEN",
+        "opp": "PIT"
+      },
+      "stats": {
+        "fpts": 1.19,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 0.62,
+        "tgts": 0.97,
+        "rec_yds": 5.17,
         "rec_td": 0.06
       }
     },
@@ -6672,29 +6741,6 @@
         "rec_td": 0.01
       }
     },
-    "nate adkins_te": {
-      "info": {
-        "player": "Nate Adkins",
-        "position": "TE",
-        "team": "DEN",
-        "opp": "PIT"
-      },
-      "stats": {
-        "fpts": 1.08,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 0.54,
-        "tgts": 0.84,
-        "rec_yds": 4.51,
-        "rec_td": 0.06
-      }
-    },
     "drew sample_te": {
       "info": {
         "player": "Drew Sample",
@@ -6703,7 +6749,7 @@
         "opp": "NO"
       },
       "stats": {
-        "fpts": 1.08,
+        "fpts": 1.09,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -6712,9 +6758,9 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 0.65,
-        "tgts": 0.81,
-        "rec_yds": 4.11,
+        "rec": 0.66,
+        "tgts": 0.83,
+        "rec_yds": 4.19,
         "rec_td": 0.06
       }
     },
@@ -6831,29 +6877,6 @@
         "tgts": 0.77,
         "rec_yds": 5.81,
         "rec_td": 0.03
-      }
-    },
-    "adam prentice_rb": {
-      "info": {
-        "player": "Adam Prentice",
-        "position": "RB",
-        "team": "DEN",
-        "opp": "PIT"
-      },
-      "stats": {
-        "fpts": 1.0,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.59,
-        "rush_yds": 2.18,
-        "rush_td": 0.01,
-        "rec": 0.54,
-        "tgts": 0.84,
-        "rec_yds": 3.48,
-        "rec_td": 0.02
       }
     },
     "ben yurosek_te": {
@@ -7040,29 +7063,6 @@
         "rec_td": 0.0
       }
     },
-    "tyler badie_rb": {
-      "info": {
-        "player": "Tyler Badie",
-        "position": "RB",
-        "team": "DEN",
-        "opp": "PIT"
-      },
-      "stats": {
-        "fpts": 0.86,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 1.76,
-        "rush_yds": 6.63,
-        "rush_td": 0.04,
-        "rec": 0.0,
-        "tgts": 0.0,
-        "rec_yds": 0.0,
-        "rec_td": 0.0
-      }
-    },
     "jonnu smith_te": {
       "info": {
         "player": "Jonnu Smith",
@@ -7100,8 +7100,8 @@
         "pass_yds": 0.0,
         "pass_td": 0.0,
         "int": 0.0,
-        "rush_att": 1.39,
-        "rush_yds": 5.84,
+        "rush_att": 1.4,
+        "rush_yds": 5.86,
         "rush_td": 0.03,
         "rec": 0.07,
         "tgts": 0.1,
@@ -7186,6 +7186,29 @@
         "opp": "IND"
       },
       "stats": {
+        "fpts": 0.81,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 0.38,
+        "tgts": 0.6,
+        "rec_yds": 3.84,
+        "rec_td": 0.04
+      }
+    },
+    "colbie young_wr": {
+      "info": {
+        "player": "Colbie Young",
+        "position": "WR",
+        "team": "CIN",
+        "opp": "NO"
+      },
+      "stats": {
         "fpts": 0.8,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
@@ -7195,10 +7218,10 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 0.37,
-        "tgts": 0.58,
-        "rec_yds": 3.72,
-        "rec_td": 0.04
+        "rec": 0.28,
+        "tgts": 0.43,
+        "rec_yds": 3.61,
+        "rec_td": 0.05
       }
     },
     "dyami brown_wr": {
@@ -7224,29 +7247,6 @@
         "rec_td": 0.04
       }
     },
-    "colbie young_wr": {
-      "info": {
-        "player": "Colbie Young",
-        "position": "WR",
-        "team": "CIN",
-        "opp": "NO"
-      },
-      "stats": {
-        "fpts": 0.79,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 0.27,
-        "tgts": 0.42,
-        "rec_yds": 3.54,
-        "rec_td": 0.05
-      }
-    },
     "max hurleman_rb": {
       "info": {
         "player": "Max Hurleman",
@@ -7255,7 +7255,7 @@
         "opp": "DEN"
       },
       "stats": {
-        "fpts": 0.75,
+        "fpts": 0.76,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -7264,9 +7264,9 @@
         "rush_att": 0.0,
         "rush_yds": 0.0,
         "rush_td": 0.0,
-        "rec": 0.57,
-        "tgts": 0.82,
-        "rec_yds": 4.1,
+        "rec": 0.58,
+        "tgts": 0.83,
+        "rec_yds": 4.11,
         "rec_td": 0.01
       }
     },
@@ -7477,6 +7477,29 @@
         "rec_td": 0.01
       }
     },
+    "patrick ricard_rb": {
+      "info": {
+        "player": "Patrick Ricard",
+        "position": "RB",
+        "team": "NYG",
+        "opp": "IND"
+      },
+      "stats": {
+        "fpts": 0.58,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 0.39,
+        "tgts": 0.6,
+        "rec_yds": 2.66,
+        "rec_td": 0.02
+      }
+    },
     "jordan james_rb": {
       "info": {
         "player": "Jordan James",
@@ -7492,7 +7515,7 @@
         "pass_td": 0.0,
         "int": 0.0,
         "rush_att": 0.81,
-        "rush_yds": 2.99,
+        "rush_yds": 3.0,
         "rush_td": 0.02,
         "rec": 0.14,
         "tgts": 0.19,
@@ -7523,29 +7546,6 @@
         "rec_td": 0.02
       }
     },
-    "patrick ricard_rb": {
-      "info": {
-        "player": "Patrick Ricard",
-        "position": "RB",
-        "team": "NYG",
-        "opp": "IND"
-      },
-      "stats": {
-        "fpts": 0.57,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 0.38,
-        "tgts": 0.58,
-        "rec_yds": 2.58,
-        "rec_td": 0.02
-      }
-    },
     "reggie gilliam_rb": {
       "info": {
         "player": "Reggie Gilliam",
@@ -7569,6 +7569,29 @@
         "rec_td": 0.01
       }
     },
+    "dj giddens_rb": {
+      "info": {
+        "player": "DJ Giddens",
+        "position": "RB",
+        "team": "IND",
+        "opp": "NYG"
+      },
+      "stats": {
+        "fpts": 0.54,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 1.18,
+        "rush_yds": 4.43,
+        "rush_td": 0.02,
+        "rec": 0.0,
+        "tgts": 0.0,
+        "rec_yds": 0.0,
+        "rec_td": 0.0
+      }
+    },
     "bryce lance_wr": {
       "info": {
         "player": "Bryce Lance",
@@ -7577,7 +7600,7 @@
         "opp": "CIN"
       },
       "stats": {
-        "fpts": 0.53,
+        "fpts": 0.54,
         "pass_cmp": 0.0,
         "pass_att": 0.0,
         "pass_yds": 0.0,
@@ -7587,8 +7610,8 @@
         "rush_yds": 0.0,
         "rush_td": 0.0,
         "rec": 0.26,
-        "tgts": 0.43,
-        "rec_yds": 2.84,
+        "tgts": 0.44,
+        "rec_yds": 2.89,
         "rec_td": 0.02
       }
     },
@@ -7753,29 +7776,6 @@
         "rec_td": 0.01
       }
     },
-    "tahj brooks_rb": {
-      "info": {
-        "player": "Tahj Brooks",
-        "position": "RB",
-        "team": "CIN",
-        "opp": "NO"
-      },
-      "stats": {
-        "fpts": 0.44,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.88,
-        "rush_yds": 3.26,
-        "rush_td": 0.02,
-        "rec": 0.01,
-        "tgts": 0.01,
-        "rec_yds": 0.07,
-        "rec_td": 0.0
-      }
-    },
     "emari demercado_rb": {
       "info": {
         "player": "Emari Demercado",
@@ -7820,6 +7820,52 @@
         "tgts": 0.0,
         "rec_yds": 0.0,
         "rec_td": 0.0
+      }
+    },
+    "tahj brooks_rb": {
+      "info": {
+        "player": "Tahj Brooks",
+        "position": "RB",
+        "team": "CIN",
+        "opp": "NO"
+      },
+      "stats": {
+        "fpts": 0.43,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.86,
+        "rush_yds": 3.19,
+        "rush_td": 0.02,
+        "rec": 0.01,
+        "tgts": 0.01,
+        "rec_yds": 0.07,
+        "rec_td": 0.0
+      }
+    },
+    "lil'jordan humphrey_wr": {
+      "info": {
+        "player": "Lil'Jordan Humphrey",
+        "position": "WR",
+        "team": "DEN",
+        "opp": "PIT"
+      },
+      "stats": {
+        "fpts": 0.41,
+        "pass_cmp": 0.0,
+        "pass_att": 0.0,
+        "pass_yds": 0.0,
+        "pass_td": 0.0,
+        "int": 0.0,
+        "rush_att": 0.0,
+        "rush_yds": 0.0,
+        "rush_td": 0.0,
+        "rec": 0.18,
+        "tgts": 0.32,
+        "rec_yds": 2.04,
+        "rec_td": 0.02
       }
     },
     "ameer abdullah_rb": {
@@ -7937,29 +7983,6 @@
         "rec_td": 0.01
       }
     },
-    "lil'jordan humphrey_wr": {
-      "info": {
-        "player": "Lil'Jordan Humphrey",
-        "position": "WR",
-        "team": "DEN",
-        "opp": "PIT"
-      },
-      "stats": {
-        "fpts": 0.37,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 0.15,
-        "tgts": 0.28,
-        "rec_yds": 1.78,
-        "rec_td": 0.02
-      }
-    },
     "aaron rodgers_qb": {
       "info": {
         "player": "Aaron Rodgers",
@@ -7975,7 +7998,7 @@
         "pass_td": 0.0,
         "int": 0.0,
         "rush_att": 0.57,
-        "rush_yds": 2.69,
+        "rush_yds": 2.68,
         "rush_td": 0.02,
         "rec": 0.0,
         "tgts": 0.0,
@@ -8052,29 +8075,6 @@
         "rec_td": 0.01
       }
     },
-    "mo alie-cox_te": {
-      "info": {
-        "player": "Mo Alie-Cox",
-        "position": "TE",
-        "team": "IND",
-        "opp": "NYG"
-      },
-      "stats": {
-        "fpts": 0.34,
-        "pass_cmp": 0.0,
-        "pass_att": 0.0,
-        "pass_yds": 0.0,
-        "pass_td": 0.0,
-        "int": 0.0,
-        "rush_att": 0.0,
-        "rush_yds": 0.0,
-        "rush_td": 0.0,
-        "rec": 0.14,
-        "tgts": 0.3,
-        "rec_yds": 2.08,
-        "rec_td": 0.01
-      }
-    },
     "cade stover_te": {
       "info": {
         "player": "Cade Stover",
@@ -8117,7 +8117,7 @@
         "rush_td": 0.0,
         "rec": 0.15,
         "tgts": 0.22,
-        "rec_yds": 1.32,
+        "rec_yds": 1.35,
         "rec_td": 0.02
       }
     },
@@ -8182,11 +8182,11 @@
         "pass_td": 0.0,
         "int": 0.0,
         "rush_att": 0.47,
-        "rush_yds": 1.71,
+        "rush_yds": 1.72,
         "rush_td": 0.01,
         "rec": 0.07,
         "tgts": 0.1,
-        "rec_yds": 0.46,
+        "rec_yds": 0.45,
         "rec_td": 0.0
       }
     },
@@ -8365,12 +8365,12 @@
         "pass_yds": 0.0,
         "pass_td": 0.0,
         "int": 0.0,
-        "rush_att": 0.29,
-        "rush_yds": 1.17,
+        "rush_att": 0.28,
+        "rush_yds": 1.15,
         "rush_td": 0.01,
         "rec": 0.05,
         "tgts": 0.07,
-        "rec_yds": 0.38,
+        "rec_yds": 0.39,
         "rec_td": 0.0
       }
     },
@@ -8480,8 +8480,8 @@
         "pass_yds": 0.0,
         "pass_td": 0.0,
         "int": 0.0,
-        "rush_att": 0.32,
-        "rush_yds": 1.23,
+        "rush_att": 0.31,
+        "rush_yds": 1.22,
         "rush_td": 0.01,
         "rec": 0.0,
         "tgts": 0.0,
@@ -8599,8 +8599,8 @@
         "rush_yds": 0.0,
         "rush_td": 0.0,
         "rec": 0.08,
-        "tgts": 0.1,
-        "rec_yds": 0.71,
+        "tgts": 0.11,
+        "rec_yds": 0.72,
         "rec_td": 0.01
       }
     },
@@ -8761,7 +8761,7 @@
         "rush_td": 0.0,
         "rec": 0.04,
         "tgts": 0.07,
-        "rec_yds": 0.55,
+        "rec_yds": 0.56,
         "rec_td": 0.01
       }
     },
@@ -8802,8 +8802,8 @@
         "pass_yds": 0.0,
         "pass_td": 0.0,
         "int": 0.0,
-        "rush_att": 0.23,
-        "rush_yds": 0.95,
+        "rush_att": 0.22,
+        "rush_yds": 0.92,
         "rush_td": 0.01,
         "rec": 0.0,
         "tgts": 0.0,
@@ -8830,7 +8830,7 @@
         "rush_td": 0.0,
         "rec": 0.04,
         "tgts": 0.07,
-        "rec_yds": 0.5,
+        "rec_yds": 0.51,
         "rec_td": 0.01
       }
     },
@@ -8876,7 +8876,7 @@
         "rush_td": 0.0,
         "rec": 0.06,
         "tgts": 0.1,
-        "rec_yds": 0.48,
+        "rec_yds": 0.47,
         "rec_td": 0.0
       }
     },
