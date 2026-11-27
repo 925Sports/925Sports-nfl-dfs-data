@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-26T23:54:33.851582Z",
+  "updated": "2026-11-27T00:09:23.210325Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -9164,9 +9164,9 @@
         "opp": "TEN"
       },
       "stats": {
-        "fpts": 11.2,
+        "fpts": 11.19,
         "fg": 2.33,
-        "xpt": 3.1
+        "xpt": 3.09
       }
     },
     "ka'imi fairbairn_k": {
@@ -9178,7 +9178,7 @@
       },
       "stats": {
         "fpts": 10.04,
-        "fg": 2.39,
+        "fg": 2.4,
         "xpt": 2.15
       }
     },
@@ -9203,9 +9203,9 @@
         "opp": "NO"
       },
       "stats": {
-        "fpts": 9.68,
-        "fg": 2.22,
-        "xpt": 1.95
+        "fpts": 9.69,
+        "fg": 2.23,
+        "xpt": 1.96
       }
     },
     "harrison mevis_k": {
@@ -9360,7 +9360,7 @@
       },
       "stats": {
         "fpts": 8.22,
-        "fg": 2.08,
+        "fg": 2.09,
         "xpt": 1.21
       }
     },
@@ -9489,9 +9489,9 @@
         "opp": "SF"
       },
       "stats": {
-        "fpts": 7.49,
-        "fg": 1.47,
-        "xpt": 2.24
+        "fpts": 7.5,
+        "fg": 1.48,
+        "xpt": 2.25
       }
     },
     "tyler loop_k": {
@@ -9502,9 +9502,9 @@
         "opp": "HOU"
       },
       "stats": {
-        "fpts": 7.48,
+        "fpts": 7.49,
         "fg": 1.61,
-        "xpt": 2.0
+        "xpt": 2.01
       }
     },
     "andy borregales_k": {
