@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-28T14:54:25.255461Z",
+  "updated": "2026-11-28T15:09:21.415757Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -8957,9 +8957,9 @@
         "opp": "TEN"
       },
       "stats": {
-        "fpts": 11.17,
-        "fg": 2.31,
-        "xpt": 3.07
+        "fpts": 11.18,
+        "fg": 2.32,
+        "xpt": 3.08
       }
     },
     "ka'imi fairbairn_k": {
@@ -9100,9 +9100,9 @@
         "opp": "MIA"
       },
       "stats": {
-        "fpts": 8.47,
-        "fg": 1.73,
-        "xpt": 2.65
+        "fpts": 8.46,
+        "fg": 1.72,
+        "xpt": 2.64
       }
     },
     "andre szmyt_k": {
@@ -9140,7 +9140,7 @@
       },
       "stats": {
         "fpts": 8.19,
-        "fg": 2.12,
+        "fg": 2.14,
         "xpt": 1.18
       }
     },
@@ -9157,19 +9157,6 @@
         "xpt": 2.47
       }
     },
-    "dominic zvada_k": {
-      "info": {
-        "player": "Dominic Zvada",
-        "position": "K",
-        "team": "NYG",
-        "opp": "IND"
-      },
-      "stats": {
-        "fpts": 8.1,
-        "fg": 1.75,
-        "xpt": 2.32
-      }
-    },
     "chad ryland_k": {
       "info": {
         "player": "Chad Ryland",
@@ -9181,6 +9168,19 @@
         "fpts": 8.1,
         "fg": 1.56,
         "xpt": 2.77
+      }
+    },
+    "dominic zvada_k": {
+      "info": {
+        "player": "Dominic Zvada",
+        "position": "K",
+        "team": "NYG",
+        "opp": "IND"
+      },
+      "stats": {
+        "fpts": 8.09,
+        "fg": 1.74,
+        "xpt": 2.31
       }
     },
     "tyler bass_k": {
@@ -9204,9 +9204,9 @@
         "opp": "NYJ"
       },
       "stats": {
-        "fpts": 7.95,
-        "fg": 1.59,
-        "xpt": 2.02
+        "fpts": 7.94,
+        "fg": 1.58,
+        "xpt": 2.01
       }
     },
     "matt gay_k": {
@@ -9230,9 +9230,9 @@
         "opp": "NYG"
       },
       "stats": {
-        "fpts": 7.74,
+        "fpts": 7.73,
         "fg": 1.4,
-        "xpt": 2.82
+        "xpt": 2.81
       }
     },
     "cameron dicker_k": {
