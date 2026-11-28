@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-28T02:09:43.778454Z",
+  "updated": "2026-11-28T02:24:30.054642Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -8980,9 +8980,9 @@
         "opp": "TEN"
       },
       "stats": {
-        "fpts": 11.17,
-        "fg": 2.31,
-        "xpt": 3.07
+        "fpts": 11.16,
+        "fg": 2.3,
+        "xpt": 3.06
       }
     },
     "ka'imi fairbairn_k": {
@@ -8993,9 +8993,9 @@
         "opp": "BAL"
       },
       "stats": {
-        "fpts": 10.03,
-        "fg": 2.38,
-        "xpt": 2.14
+        "fpts": 10.02,
+        "fg": 2.37,
+        "xpt": 2.13
       }
     },
     "will reichard_k": {
@@ -9033,7 +9033,7 @@
       },
       "stats": {
         "fpts": 9.7,
-        "fg": 2.28,
+        "fg": 2.29,
         "xpt": 1.97
       }
     },
@@ -9110,9 +9110,9 @@
         "opp": "TB"
       },
       "stats": {
-        "fpts": 8.65,
-        "fg": 1.83,
-        "xpt": 2.3
+        "fpts": 8.66,
+        "fg": 1.84,
+        "xpt": 2.31
       }
     },
     "blake grupe_k": {
@@ -9162,9 +9162,9 @@
         "opp": "JAC"
       },
       "stats": {
-        "fpts": 8.2,
+        "fpts": 8.19,
         "fg": 2.1,
-        "xpt": 1.19
+        "xpt": 1.18
       }
     },
     "jason myers_k": {
@@ -9214,9 +9214,9 @@
         "opp": "IND"
       },
       "stats": {
-        "fpts": 8.0,
-        "fg": 1.74,
-        "xpt": 2.32
+        "fpts": 8.01,
+        "fg": 1.75,
+        "xpt": 2.33
       }
     },
     "riley patterson_k": {
@@ -9227,9 +9227,9 @@
         "opp": "NYJ"
       },
       "stats": {
-        "fpts": 7.97,
-        "fg": 1.61,
-        "xpt": 2.04
+        "fpts": 7.96,
+        "fg": 1.6,
+        "xpt": 2.03
       }
     },
     "matt gay_k": {
@@ -9266,9 +9266,9 @@
         "opp": "NYG"
       },
       "stats": {
-        "fpts": 7.64,
-        "fg": 1.4,
-        "xpt": 2.82
+        "fpts": 7.66,
+        "fg": 1.41,
+        "xpt": 2.84
       }
     },
     "wil lutz_k": {
@@ -9284,19 +9284,6 @@
         "xpt": 2.45
       }
     },
-    "eddy pineiro_k": {
-      "info": {
-        "player": "Eddy Pineiro",
-        "position": "K",
-        "team": "SF",
-        "opp": "SEA"
-      },
-      "stats": {
-        "fpts": 7.57,
-        "fg": 1.42,
-        "xpt": 2.22
-      }
-    },
     "trey smack_k": {
       "info": {
         "player": "Trey Smack",
@@ -9310,6 +9297,19 @@
         "xpt": 1.91
       }
     },
+    "eddy pineiro_k": {
+      "info": {
+        "player": "Eddy Pineiro",
+        "position": "K",
+        "team": "SF",
+        "opp": "SEA"
+      },
+      "stats": {
+        "fpts": 7.56,
+        "fg": 1.41,
+        "xpt": 2.21
+      }
+    },
     "tyler loop_k": {
       "info": {
         "player": "Tyler Loop",
@@ -9318,9 +9318,9 @@
         "opp": "HOU"
       },
       "stats": {
-        "fpts": 7.47,
-        "fg": 1.6,
-        "xpt": 1.99
+        "fpts": 7.46,
+        "fg": 1.59,
+        "xpt": 1.98
       }
     },
     "andy borregales_k": {
