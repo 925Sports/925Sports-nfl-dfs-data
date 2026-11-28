@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-28T10:39:23.500716Z",
+  "updated": "2026-11-28T10:54:23.698191Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -8980,9 +8980,9 @@
         "opp": "TEN"
       },
       "stats": {
-        "fpts": 11.15,
+        "fpts": 11.16,
         "fg": 2.3,
-        "xpt": 3.05
+        "xpt": 3.06
       }
     },
     "ka'imi fairbairn_k": {
@@ -8994,7 +8994,7 @@
       },
       "stats": {
         "fpts": 10.0,
-        "fg": 2.34,
+        "fg": 2.33,
         "xpt": 2.11
       }
     },
@@ -9019,9 +9019,9 @@
         "opp": "NO"
       },
       "stats": {
-        "fpts": 9.71,
-        "fg": 2.3,
-        "xpt": 1.98
+        "fpts": 9.72,
+        "fg": 2.31,
+        "xpt": 1.99
       }
     },
     "chase mclaughlin_k": {
@@ -9110,9 +9110,9 @@
         "opp": "TB"
       },
       "stats": {
-        "fpts": 8.53,
-        "fg": 1.82,
-        "xpt": 2.28
+        "fpts": 8.52,
+        "fg": 1.81,
+        "xpt": 2.27
       }
     },
     "blake grupe_k": {
@@ -9175,9 +9175,9 @@
         "opp": "IND"
       },
       "stats": {
-        "fpts": 8.12,
+        "fpts": 8.11,
         "fg": 1.76,
-        "xpt": 2.34
+        "xpt": 2.33
       }
     },
     "chad ryland_k": {
@@ -9240,9 +9240,9 @@
         "opp": "SF"
       },
       "stats": {
-        "fpts": 7.86,
+        "fpts": 7.87,
         "fg": 1.56,
-        "xpt": 2.37
+        "xpt": 2.38
       }
     },
     "spencer shrader_k": {
@@ -9253,9 +9253,9 @@
         "opp": "NYG"
       },
       "stats": {
-        "fpts": 7.77,
+        "fpts": 7.76,
         "fg": 1.41,
-        "xpt": 2.85
+        "xpt": 2.84
       }
     },
     "cameron dicker_k": {
@@ -9331,9 +9331,9 @@
         "opp": "SEA"
       },
       "stats": {
-        "fpts": 7.21,
-        "fg": 1.32,
-        "xpt": 2.08
+        "fpts": 7.22,
+        "fg": 1.33,
+        "xpt": 2.09
       }
     },
     "chris boswell_k": {
@@ -9370,9 +9370,9 @@
         "opp": "CIN"
       },
       "stats": {
-        "fpts": 6.81,
-        "fg": 1.5,
-        "xpt": 1.56
+        "fpts": 6.82,
+        "fg": 1.51,
+        "xpt": 1.57
       }
     },
     "harrison butker_k": {
