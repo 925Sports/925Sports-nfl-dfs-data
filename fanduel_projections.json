@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-28T14:24:37.565024Z",
+  "updated": "2026-11-28T14:39:29.239667Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -9577,12 +9577,12 @@
         "opp": "TEN"
       },
       "stats": {
-        "fpts": 6.84,
+        "fpts": 6.85,
         "pa": 17.0,
-        "yds_agn": 310.61,
-        "sack": 1.14,
-        "int": 0.65,
-        "fr": 0.49,
+        "yds_agn": 313.77,
+        "sack": 1.17,
+        "int": 0.66,
+        "fr": 0.47,
         "td": 0.21
       }
     },
@@ -9671,6 +9671,23 @@
         "td": 0.19
       }
     },
+    "arizona d/st_dst": {
+      "info": {
+        "player": "Arizona D/ST",
+        "position": "DST",
+        "team": "ARI",
+        "opp": "WSH"
+      },
+      "stats": {
+        "fpts": 5.83,
+        "pa": 24.25,
+        "yds_agn": 331.1,
+        "sack": 2.38,
+        "int": 0.61,
+        "fr": 0.55,
+        "td": 0.14
+      }
+    },
     "kansas city d/st_dst": {
       "info": {
         "player": "Kansas City D/ST",
@@ -9720,23 +9737,6 @@
         "int": 0.8,
         "fr": 0.4,
         "td": 0.16
-      }
-    },
-    "arizona d/st_dst": {
-      "info": {
-        "player": "Arizona D/ST",
-        "position": "DST",
-        "team": "ARI",
-        "opp": "WSH"
-      },
-      "stats": {
-        "fpts": 5.67,
-        "pa": 24.25,
-        "yds_agn": 321.55,
-        "sack": 2.28,
-        "int": 0.59,
-        "fr": 0.54,
-        "td": 0.14
       }
     },
     "buffalo d/st_dst": {
