@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-28T12:24:27.637821Z",
+  "updated": "2026-11-28T12:39:34.746211Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -9430,10 +9430,10 @@
         "opp": "LV"
       },
       "stats": {
-        "fpts": 8.58,
+        "fpts": 8.56,
         "pa": 17.5,
-        "yds_agn": 281.72,
-        "sack": 3.0,
+        "yds_agn": 281.44,
+        "sack": 2.98,
         "int": 0.82,
         "fr": 0.35,
         "td": 0.2
@@ -9500,7 +9500,7 @@
       "stats": {
         "fpts": 7.39,
         "pa": 20.25,
-        "yds_agn": 330.25,
+        "yds_agn": 330.24,
         "sack": 2.77,
         "int": 0.76,
         "fr": 0.38,
@@ -9515,13 +9515,13 @@
         "opp": "IND"
       },
       "stats": {
-        "fpts": 7.12,
+        "fpts": 7.36,
         "pa": 18.5,
-        "yds_agn": 306.39,
-        "sack": 1.25,
-        "int": 0.82,
-        "fr": 0.66,
-        "td": 0.19
+        "yds_agn": 313.25,
+        "sack": 1.37,
+        "int": 0.9,
+        "fr": 0.64,
+        "td": 0.2
       }
     },
     "dallas d/st_dst": {
@@ -9541,23 +9541,6 @@
         "td": 0.19
       }
     },
-    "seattle d/st_dst": {
-      "info": {
-        "player": "Seattle D/ST",
-        "position": "DST",
-        "team": "SEA",
-        "opp": "SF"
-      },
-      "stats": {
-        "fpts": 7.07,
-        "pa": 20.5,
-        "yds_agn": 390.08,
-        "sack": 2.43,
-        "int": 0.78,
-        "fr": 0.43,
-        "td": 0.18
-      }
-    },
     "carolina d/st_dst": {
       "info": {
         "player": "Carolina D/ST",
@@ -9568,7 +9551,7 @@
       "stats": {
         "fpts": 7.07,
         "pa": 23.25,
-        "yds_agn": 306.83,
+        "yds_agn": 306.82,
         "sack": 2.82,
         "int": 0.65,
         "fr": 0.76,
@@ -9583,11 +9566,11 @@
         "opp": "CLE"
       },
       "stats": {
-        "fpts": 6.99,
+        "fpts": 6.95,
         "pa": 22.0,
-        "yds_agn": 310.16,
-        "sack": 2.94,
-        "int": 0.57,
+        "yds_agn": 309.81,
+        "sack": 2.92,
+        "int": 0.56,
         "fr": 0.56,
         "td": 0.16
       }
@@ -9624,6 +9607,23 @@
         "int": 0.65,
         "fr": 0.49,
         "td": 0.21
+      }
+    },
+    "seattle d/st_dst": {
+      "info": {
+        "player": "Seattle D/ST",
+        "position": "DST",
+        "team": "SEA",
+        "opp": "SF"
+      },
+      "stats": {
+        "fpts": 6.76,
+        "pa": 20.5,
+        "yds_agn": 381.87,
+        "sack": 2.24,
+        "int": 0.72,
+        "fr": 0.43,
+        "td": 0.17
       }
     },
     "miami d/st_dst": {
@@ -9687,28 +9687,11 @@
       "stats": {
         "fpts": 6.23,
         "pa": 19.5,
-        "yds_agn": 323.06,
+        "yds_agn": 322.85,
         "sack": 1.34,
         "int": 0.73,
         "fr": 0.41,
         "td": 0.19
-      }
-    },
-    "san francisco d/st_dst": {
-      "info": {
-        "player": "San Francisco D/ST",
-        "position": "DST",
-        "team": "SF",
-        "opp": "SEA"
-      },
-      "stats": {
-        "fpts": 6.02,
-        "pa": 22.0,
-        "yds_agn": 340.42,
-        "sack": 1.65,
-        "int": 0.87,
-        "fr": 0.41,
-        "td": 0.16
       }
     },
     "kansas city d/st_dst": {
@@ -9728,6 +9711,40 @@
         "td": 0.15
       }
     },
+    "indianapolis d/st_dst": {
+      "info": {
+        "player": "Indianapolis D/ST",
+        "position": "DST",
+        "team": "IND",
+        "opp": "NYG"
+      },
+      "stats": {
+        "fpts": 5.72,
+        "pa": 24.0,
+        "yds_agn": 346.43,
+        "sack": 1.55,
+        "int": 0.74,
+        "fr": 0.72,
+        "td": 0.14
+      }
+    },
+    "san francisco d/st_dst": {
+      "info": {
+        "player": "San Francisco D/ST",
+        "position": "DST",
+        "team": "SF",
+        "opp": "SEA"
+      },
+      "stats": {
+        "fpts": 5.72,
+        "pa": 22.0,
+        "yds_agn": 334.08,
+        "sack": 1.51,
+        "int": 0.8,
+        "fr": 0.4,
+        "td": 0.16
+      }
+    },
     "arizona d/st_dst": {
       "info": {
         "player": "Arizona D/ST",
@@ -9743,23 +9760,6 @@
         "int": 0.59,
         "fr": 0.54,
         "td": 0.14
-      }
-    },
-    "indianapolis d/st_dst": {
-      "info": {
-        "player": "Indianapolis D/ST",
-        "position": "DST",
-        "team": "IND",
-        "opp": "NYG"
-      },
-      "stats": {
-        "fpts": 5.49,
-        "pa": 24.0,
-        "yds_agn": 339.61,
-        "sack": 1.4,
-        "int": 0.67,
-        "fr": 0.75,
-        "td": 0.15
       }
     },
     "buffalo d/st_dst": {
@@ -9855,12 +9855,12 @@
         "opp": "ARI"
       },
       "stats": {
-        "fpts": 4.73,
+        "fpts": 4.71,
         "pa": 17.25,
-        "yds_agn": 99.31,
+        "yds_agn": 82.91,
         "sack": 1.14,
         "int": 0.0,
-        "fr": 0.14,
+        "fr": 0.13,
         "td": 0.21
       }
     },
@@ -9889,10 +9889,10 @@
         "opp": "CIN"
       },
       "stats": {
-        "fpts": 4.41,
+        "fpts": 4.4,
         "pa": 29.0,
-        "yds_agn": 379.11,
-        "sack": 2.36,
+        "yds_agn": 378.76,
+        "sack": 2.35,
         "int": 0.6,
         "fr": 0.46,
         "td": 0.12
@@ -9908,7 +9908,7 @@
       "stats": {
         "fpts": 3.61,
         "pa": 31.5,
-        "yds_agn": 382.54,
+        "yds_agn": 382.56,
         "sack": 2.05,
         "int": 0.72,
         "fr": 0.43,
