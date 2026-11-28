@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-28T12:39:34.746211Z",
+  "updated": "2026-11-28T12:54:29.802349Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -8980,9 +8980,9 @@
         "opp": "TEN"
       },
       "stats": {
-        "fpts": 11.16,
-        "fg": 2.3,
-        "xpt": 3.06
+        "fpts": 11.17,
+        "fg": 2.31,
+        "xpt": 3.07
       }
     },
     "ka'imi fairbairn_k": {
@@ -8993,9 +8993,9 @@
         "opp": "BAL"
       },
       "stats": {
-        "fpts": 10.0,
-        "fg": 2.33,
-        "xpt": 2.11
+        "fpts": 9.99,
+        "fg": 2.32,
+        "xpt": 2.1
       }
     },
     "will reichard_k": {
@@ -9019,9 +9019,9 @@
         "opp": "NO"
       },
       "stats": {
-        "fpts": 9.72,
-        "fg": 2.31,
-        "xpt": 1.99
+        "fpts": 9.73,
+        "fg": 2.32,
+        "xpt": 2.0
       }
     },
     "chase mclaughlin_k": {
@@ -9123,9 +9123,9 @@
         "opp": "MIA"
       },
       "stats": {
-        "fpts": 8.48,
-        "fg": 1.74,
-        "xpt": 2.66
+        "fpts": 8.47,
+        "fg": 1.73,
+        "xpt": 2.65
       }
     },
     "andre szmyt_k": {
@@ -9162,9 +9162,22 @@
         "opp": "JAC"
       },
       "stats": {
-        "fpts": 8.18,
-        "fg": 2.11,
-        "xpt": 1.17
+        "fpts": 8.19,
+        "fg": 2.12,
+        "xpt": 1.18
+      }
+    },
+    "jason myers_k": {
+      "info": {
+        "player": "Jason Myers",
+        "position": "K",
+        "team": "SEA",
+        "opp": "SF"
+      },
+      "stats": {
+        "fpts": 8.17,
+        "fg": 1.62,
+        "xpt": 2.47
       }
     },
     "dominic zvada_k": {
@@ -9175,9 +9188,9 @@
         "opp": "IND"
       },
       "stats": {
-        "fpts": 8.11,
-        "fg": 1.76,
-        "xpt": 2.33
+        "fpts": 8.1,
+        "fg": 1.75,
+        "xpt": 2.32
       }
     },
     "chad ryland_k": {
@@ -9214,9 +9227,9 @@
         "opp": "NYJ"
       },
       "stats": {
-        "fpts": 7.96,
-        "fg": 1.6,
-        "xpt": 2.03
+        "fpts": 7.95,
+        "fg": 1.59,
+        "xpt": 2.02
       }
     },
     "matt gay_k": {
@@ -9232,19 +9245,6 @@
         "xpt": 1.78
       }
     },
-    "jason myers_k": {
-      "info": {
-        "player": "Jason Myers",
-        "position": "K",
-        "team": "SEA",
-        "opp": "SF"
-      },
-      "stats": {
-        "fpts": 7.87,
-        "fg": 1.56,
-        "xpt": 2.38
-      }
-    },
     "spencer shrader_k": {
       "info": {
         "player": "Spencer Shrader",
@@ -9253,9 +9253,9 @@
         "opp": "NYG"
       },
       "stats": {
-        "fpts": 7.76,
-        "fg": 1.41,
-        "xpt": 2.84
+        "fpts": 7.74,
+        "fg": 1.4,
+        "xpt": 2.82
       }
     },
     "cameron dicker_k": {
@@ -9297,17 +9297,17 @@
         "xpt": 1.91
       }
     },
-    "tyler loop_k": {
+    "eddy pineiro_k": {
       "info": {
-        "player": "Tyler Loop",
+        "player": "Eddy Pineiro",
         "position": "K",
-        "team": "BAL",
-        "opp": "HOU"
+        "team": "SF",
+        "opp": "SEA"
       },
       "stats": {
-        "fpts": 7.43,
-        "fg": 1.57,
-        "xpt": 1.95
+        "fpts": 7.53,
+        "fg": 1.39,
+        "xpt": 2.18
       }
     },
     "andy borregales_k": {
@@ -9323,17 +9323,17 @@
         "xpt": 2.48
       }
     },
-    "eddy pineiro_k": {
+    "tyler loop_k": {
       "info": {
-        "player": "Eddy Pineiro",
+        "player": "Tyler Loop",
         "position": "K",
-        "team": "SF",
-        "opp": "SEA"
+        "team": "BAL",
+        "opp": "HOU"
       },
       "stats": {
-        "fpts": 7.22,
-        "fg": 1.33,
-        "xpt": 2.09
+        "fpts": 7.42,
+        "fg": 1.57,
+        "xpt": 1.94
       }
     },
     "chris boswell_k": {
@@ -9349,6 +9349,19 @@
         "xpt": 1.39
       }
     },
+    "daniel carlson_k": {
+      "info": {
+        "player": "Daniel Carlson",
+        "position": "K",
+        "team": "NO",
+        "opp": "CIN"
+      },
+      "stats": {
+        "fpts": 6.83,
+        "fg": 1.52,
+        "xpt": 1.58
+      }
+    },
     "nick folk_k": {
       "info": {
         "player": "Nick Folk",
@@ -9360,19 +9373,6 @@
         "fpts": 6.82,
         "fg": 1.38,
         "xpt": 1.26
-      }
-    },
-    "daniel carlson_k": {
-      "info": {
-        "player": "Daniel Carlson",
-        "position": "K",
-        "team": "NO",
-        "opp": "CIN"
-      },
-      "stats": {
-        "fpts": 6.82,
-        "fg": 1.51,
-        "xpt": 1.57
       }
     },
     "harrison butker_k": {
