@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-28T08:24:28.654744Z",
+  "updated": "2026-11-28T08:39:26.416793Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -8980,9 +8980,9 @@
         "opp": "TEN"
       },
       "stats": {
-        "fpts": 11.14,
-        "fg": 2.29,
-        "xpt": 3.04
+        "fpts": 11.15,
+        "fg": 2.3,
+        "xpt": 3.05
       }
     },
     "ka'imi fairbairn_k": {
@@ -8994,7 +8994,7 @@
       },
       "stats": {
         "fpts": 10.0,
-        "fg": 2.35,
+        "fg": 2.34,
         "xpt": 2.11
       }
     },
@@ -9011,19 +9011,6 @@
         "xpt": 2.11
       }
     },
-    "chase mclaughlin_k": {
-      "info": {
-        "player": "Chase McLaughlin",
-        "position": "K",
-        "team": "TB",
-        "opp": "CAR"
-      },
-      "stats": {
-        "fpts": 9.74,
-        "fg": 2.08,
-        "xpt": 2.56
-      }
-    },
     "evan mcpherson_k": {
       "info": {
         "player": "Evan McPherson",
@@ -9032,9 +9019,22 @@
         "opp": "NO"
       },
       "stats": {
-        "fpts": 9.7,
-        "fg": 2.29,
-        "xpt": 1.97
+        "fpts": 9.71,
+        "fg": 2.3,
+        "xpt": 1.98
+      }
+    },
+    "chase mclaughlin_k": {
+      "info": {
+        "player": "Chase McLaughlin",
+        "position": "K",
+        "team": "TB",
+        "opp": "CAR"
+      },
+      "stats": {
+        "fpts": 9.56,
+        "fg": 2.04,
+        "xpt": 2.51
       }
     },
     "harrison mevis_k": {
@@ -9110,9 +9110,9 @@
         "opp": "TB"
       },
       "stats": {
-        "fpts": 8.68,
-        "fg": 1.86,
-        "xpt": 2.33
+        "fpts": 8.53,
+        "fg": 1.82,
+        "xpt": 2.28
       }
     },
     "blake grupe_k": {
@@ -9163,21 +9163,8 @@
       },
       "stats": {
         "fpts": 8.18,
-        "fg": 2.1,
+        "fg": 2.11,
         "xpt": 1.17
-      }
-    },
-    "jason myers_k": {
-      "info": {
-        "player": "Jason Myers",
-        "position": "K",
-        "team": "SEA",
-        "opp": "SF"
-      },
-      "stats": {
-        "fpts": 8.15,
-        "fg": 1.61,
-        "xpt": 2.45
       }
     },
     "dominic zvada_k": {
@@ -9188,9 +9175,9 @@
         "opp": "IND"
       },
       "stats": {
-        "fpts": 8.13,
-        "fg": 1.77,
-        "xpt": 2.35
+        "fpts": 8.12,
+        "fg": 1.76,
+        "xpt": 2.34
       }
     },
     "chad ryland_k": {
@@ -9245,6 +9232,19 @@
         "xpt": 1.78
       }
     },
+    "jason myers_k": {
+      "info": {
+        "player": "Jason Myers",
+        "position": "K",
+        "team": "SEA",
+        "opp": "SF"
+      },
+      "stats": {
+        "fpts": 7.86,
+        "fg": 1.56,
+        "xpt": 2.37
+      }
+    },
     "spencer shrader_k": {
       "info": {
         "player": "Spencer Shrader",
@@ -9253,9 +9253,9 @@
         "opp": "NYG"
       },
       "stats": {
-        "fpts": 7.79,
-        "fg": 1.42,
-        "xpt": 2.87
+        "fpts": 7.77,
+        "fg": 1.41,
+        "xpt": 2.85
       }
     },
     "cameron dicker_k": {
@@ -9297,19 +9297,6 @@
         "xpt": 1.91
       }
     },
-    "eddy pineiro_k": {
-      "info": {
-        "player": "Eddy Pineiro",
-        "position": "K",
-        "team": "SF",
-        "opp": "SEA"
-      },
-      "stats": {
-        "fpts": 7.52,
-        "fg": 1.37,
-        "xpt": 2.17
-      }
-    },
     "tyler loop_k": {
       "info": {
         "player": "Tyler Loop",
@@ -9318,9 +9305,9 @@
         "opp": "HOU"
       },
       "stats": {
-        "fpts": 7.44,
+        "fpts": 7.43,
         "fg": 1.57,
-        "xpt": 1.96
+        "xpt": 1.95
       }
     },
     "andy borregales_k": {
@@ -9334,6 +9321,19 @@
         "fpts": 7.43,
         "fg": 1.53,
         "xpt": 2.48
+      }
+    },
+    "eddy pineiro_k": {
+      "info": {
+        "player": "Eddy Pineiro",
+        "position": "K",
+        "team": "SF",
+        "opp": "SEA"
+      },
+      "stats": {
+        "fpts": 7.21,
+        "fg": 1.32,
+        "xpt": 2.08
       }
     },
     "chris boswell_k": {
@@ -9370,9 +9370,9 @@
         "opp": "CIN"
       },
       "stats": {
-        "fpts": 6.8,
-        "fg": 1.49,
-        "xpt": 1.55
+        "fpts": 6.81,
+        "fg": 1.5,
+        "xpt": 1.56
       }
     },
     "harrison butker_k": {
