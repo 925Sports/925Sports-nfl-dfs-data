@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-28T06:24:22.788787Z",
+  "updated": "2026-11-28T06:39:27.664049Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -8980,9 +8980,9 @@
         "opp": "TEN"
       },
       "stats": {
-        "fpts": 11.15,
+        "fpts": 11.14,
         "fg": 2.29,
-        "xpt": 3.05
+        "xpt": 3.04
       }
     },
     "ka'imi fairbairn_k": {
@@ -8993,9 +8993,9 @@
         "opp": "BAL"
       },
       "stats": {
-        "fpts": 10.01,
-        "fg": 2.36,
-        "xpt": 2.12
+        "fpts": 10.0,
+        "fg": 2.35,
+        "xpt": 2.11
       }
     },
     "will reichard_k": {
@@ -9110,9 +9110,9 @@
         "opp": "TB"
       },
       "stats": {
-        "fpts": 8.67,
-        "fg": 1.85,
-        "xpt": 2.32
+        "fpts": 8.68,
+        "fg": 1.86,
+        "xpt": 2.33
       }
     },
     "blake grupe_k": {
@@ -9136,9 +9136,9 @@
         "opp": "LV"
       },
       "stats": {
-        "fpts": 8.46,
-        "fg": 1.82,
-        "xpt": 1.82
+        "fpts": 8.45,
+        "fg": 1.81,
+        "xpt": 1.81
       }
     },
     "jake elliott_k": {
@@ -9175,9 +9175,9 @@
         "opp": "SF"
       },
       "stats": {
-        "fpts": 8.16,
-        "fg": 1.62,
-        "xpt": 2.46
+        "fpts": 8.15,
+        "fg": 1.61,
+        "xpt": 2.45
       }
     },
     "dominic zvada_k": {
@@ -9188,9 +9188,9 @@
         "opp": "IND"
       },
       "stats": {
-        "fpts": 8.14,
+        "fpts": 8.13,
         "fg": 1.77,
-        "xpt": 2.36
+        "xpt": 2.35
       }
     },
     "chad ryland_k": {
@@ -9201,9 +9201,9 @@
         "opp": "WSH"
       },
       "stats": {
-        "fpts": 8.09,
+        "fpts": 8.1,
         "fg": 1.56,
-        "xpt": 2.76
+        "xpt": 2.77
       }
     },
     "tyler bass_k": {
@@ -9240,9 +9240,9 @@
         "opp": "CLE"
       },
       "stats": {
-        "fpts": 7.94,
-        "fg": 1.68,
-        "xpt": 1.79
+        "fpts": 7.93,
+        "fg": 1.67,
+        "xpt": 1.78
       }
     },
     "spencer shrader_k": {
@@ -9253,9 +9253,9 @@
         "opp": "NYG"
       },
       "stats": {
-        "fpts": 7.8,
-        "fg": 1.43,
-        "xpt": 2.88
+        "fpts": 7.79,
+        "fg": 1.42,
+        "xpt": 2.87
       }
     },
     "cameron dicker_k": {
@@ -9305,9 +9305,9 @@
         "opp": "SEA"
       },
       "stats": {
-        "fpts": 7.54,
-        "fg": 1.39,
-        "xpt": 2.19
+        "fpts": 7.52,
+        "fg": 1.37,
+        "xpt": 2.17
       }
     },
     "tyler loop_k": {
@@ -9318,9 +9318,9 @@
         "opp": "HOU"
       },
       "stats": {
-        "fpts": 7.45,
-        "fg": 1.58,
-        "xpt": 1.97
+        "fpts": 7.44,
+        "fg": 1.57,
+        "xpt": 1.96
       }
     },
     "andy borregales_k": {
