@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-28T04:24:27.565193Z",
+  "updated": "2026-11-28T04:39:22.699157Z",
   "slateId": "WEEKLY",
   "players": {
     "jahmyr gibbs_rb": {
@@ -8980,9 +8980,9 @@
         "opp": "TEN"
       },
       "stats": {
-        "fpts": 11.16,
-        "fg": 2.3,
-        "xpt": 3.06
+        "fpts": 11.15,
+        "fg": 2.29,
+        "xpt": 3.05
       }
     },
     "ka'imi fairbairn_k": {
@@ -8993,9 +8993,9 @@
         "opp": "BAL"
       },
       "stats": {
-        "fpts": 10.02,
-        "fg": 2.37,
-        "xpt": 2.13
+        "fpts": 10.01,
+        "fg": 2.36,
+        "xpt": 2.12
       }
     },
     "will reichard_k": {
@@ -9019,9 +9019,9 @@
         "opp": "CAR"
       },
       "stats": {
-        "fpts": 9.73,
-        "fg": 2.07,
-        "xpt": 2.55
+        "fpts": 9.74,
+        "fg": 2.08,
+        "xpt": 2.56
       }
     },
     "evan mcpherson_k": {
@@ -9110,9 +9110,9 @@
         "opp": "TB"
       },
       "stats": {
-        "fpts": 8.66,
-        "fg": 1.84,
-        "xpt": 2.31
+        "fpts": 8.67,
+        "fg": 1.85,
+        "xpt": 2.32
       }
     },
     "blake grupe_k": {
@@ -9136,9 +9136,9 @@
         "opp": "LV"
       },
       "stats": {
-        "fpts": 8.47,
-        "fg": 1.83,
-        "xpt": 1.83
+        "fpts": 8.46,
+        "fg": 1.82,
+        "xpt": 1.82
       }
     },
     "jake elliott_k": {
@@ -9162,9 +9162,9 @@
         "opp": "JAC"
       },
       "stats": {
-        "fpts": 8.19,
+        "fpts": 8.18,
         "fg": 2.1,
-        "xpt": 1.18
+        "xpt": 1.17
       }
     },
     "jason myers_k": {
@@ -9175,9 +9175,22 @@
         "opp": "SF"
       },
       "stats": {
-        "fpts": 8.17,
-        "fg": 1.63,
-        "xpt": 2.47
+        "fpts": 8.16,
+        "fg": 1.62,
+        "xpt": 2.46
+      }
+    },
+    "dominic zvada_k": {
+      "info": {
+        "player": "Dominic Zvada",
+        "position": "K",
+        "team": "NYG",
+        "opp": "IND"
+      },
+      "stats": {
+        "fpts": 8.14,
+        "fg": 1.77,
+        "xpt": 2.36
       }
     },
     "chad ryland_k": {
@@ -9206,19 +9219,6 @@
         "xpt": 2.25
       }
     },
-    "dominic zvada_k": {
-      "info": {
-        "player": "Dominic Zvada",
-        "position": "K",
-        "team": "NYG",
-        "opp": "IND"
-      },
-      "stats": {
-        "fpts": 8.01,
-        "fg": 1.75,
-        "xpt": 2.33
-      }
-    },
     "riley patterson_k": {
       "info": {
         "player": "Riley Patterson",
@@ -9240,9 +9240,22 @@
         "opp": "CLE"
       },
       "stats": {
-        "fpts": 7.95,
-        "fg": 1.69,
-        "xpt": 1.8
+        "fpts": 7.94,
+        "fg": 1.68,
+        "xpt": 1.79
+      }
+    },
+    "spencer shrader_k": {
+      "info": {
+        "player": "Spencer Shrader",
+        "position": "K",
+        "team": "IND",
+        "opp": "NYG"
+      },
+      "stats": {
+        "fpts": 7.8,
+        "fg": 1.43,
+        "xpt": 2.88
       }
     },
     "cameron dicker_k": {
@@ -9256,19 +9269,6 @@
         "fpts": 7.71,
         "fg": 1.61,
         "xpt": 1.91
-      }
-    },
-    "spencer shrader_k": {
-      "info": {
-        "player": "Spencer Shrader",
-        "position": "K",
-        "team": "IND",
-        "opp": "NYG"
-      },
-      "stats": {
-        "fpts": 7.66,
-        "fg": 1.41,
-        "xpt": 2.84
       }
     },
     "wil lutz_k": {
@@ -9305,9 +9305,9 @@
         "opp": "SEA"
       },
       "stats": {
-        "fpts": 7.56,
-        "fg": 1.41,
-        "xpt": 2.21
+        "fpts": 7.54,
+        "fg": 1.39,
+        "xpt": 2.19
       }
     },
     "tyler loop_k": {
@@ -9318,9 +9318,9 @@
         "opp": "HOU"
       },
       "stats": {
-        "fpts": 7.46,
-        "fg": 1.59,
-        "xpt": 1.98
+        "fpts": 7.45,
+        "fg": 1.58,
+        "xpt": 1.97
       }
     },
     "andy borregales_k": {
